@@ -1,0 +1,133 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Template that initialzes all of our AWS accounts & monitoring to S3 on said accounts.
+Parameters:
+  DefaultPassword:
+    Type: String
+    Description: "Password to assign to each user"
+    NoEcho: true
+Resources:
+  CapstoneDeveloper:
+    Type: AWS::IAM::Group
+    Properties:
+      GroupName: "Capstone3-Developers"
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AWSLambda_FullAccess
+        - arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess
+        - arn:aws:iam::aws:policy/AWSCloudFormationFullAccess
+        - arn:aws:iam::aws:policy/AWSAppSyncAdministrator
+        - arn:aws:iam::aws:policy/job-function/Billing
+
+  Jonathan:
+    Type: AWS::IAM::User
+    Properties:
+      Groups:
+        - !Ref CapstoneDeveloper
+      LoginProfile:
+        Password: !Ref DefaultPassword
+        PasswordResetRequired: true
+      UserName: JonathanWright-Capstone3
+  
+  JonathansAccessKey:
+    Type: AWS::IAM::AccessKey
+    Properties:
+      UserName: !Ref Jonathan
+
+  Reuben:
+    Type: AWS::IAM::User
+    Properties:
+      Groups:
+        - !Ref CapstoneDeveloper
+      LoginProfile:
+        Password: !Ref DefaultPassword
+        PasswordResetRequired: true
+      UserName: Reuben-Capstone3
+  
+  ReubensAccessKey:
+    Type: AWS::IAM::AccessKey
+    Properties:
+      UserName: !Ref Reuben
+
+  Andrew:
+    Type: AWS::IAM::User
+    Properties:
+      Groups:
+        - !Ref CapstoneDeveloper
+      LoginProfile:
+        Password: !Ref DefaultPassword
+        PasswordResetRequired: true
+      UserName: Andrew-Capstone3
+  
+  AndrewsAccessKey:
+    Type: AWS::IAM::AccessKey
+    Properties:
+      UserName: !Ref Andrew
+
+  Matthew:
+    Type: AWS::IAM::User
+    Properties:
+      Groups:
+        - !Ref CapstoneDeveloper
+      LoginProfile:
+        Password: !Ref DefaultPassword
+        PasswordResetRequired: true
+      UserName: Matthew-Capstone3
+  
+  MatthewsAccessKey:
+    Type: AWS::IAM::AccessKey
+    Properties:
+      UserName: !Ref Matthew
+  
+  Max:
+    Type: AWS::IAM::User
+    Properties:
+      Groups:
+        - !Ref CapstoneDeveloper
+      LoginProfile:
+        Password: !Ref DefaultPassword
+        PasswordResetRequired: true
+      UserName: Max-Capstone3
+  
+  MaxsAccessKey:
+    Type: AWS::IAM::AccessKey
+    Properties:
+      UserName: !Ref Max
+
+Outputs:
+  DevGroup:
+    Description: "Capstone Dev Group (IAM) Name & Arn"
+    Value:
+      !Join
+        - ''
+        - - !Ref CapstoneDeveloper
+          - " : "
+          - !GetAtt CapstoneDeveloper.Arn
+  JonathansAccountUsername:
+    Description: "Jonathan's Account"
+    Value: !Ref Jonathan
+  JonathansAccountAccesskey:
+    Description: "Jonathan's Acccess Key"
+    Value: !GetAtt JonathansAccessKey.SecretAccessKey
+  AndrewsAccountUsername:
+    Description: "Andrew's Account"
+    Value: !Ref Andrew
+  AndrewsAccountAccesskey:
+    Description: "Andrew's Acccess Key"
+    Value: !GetAtt AndrewsAccessKey.SecretAccessKey
+  MaxAccountUsername:
+    Description: "Max's Account"
+    Value: !Ref Max
+  MaxsAccountAccesskey:
+    Description: "Max's Acccess Key"
+    Value: !GetAtt MaxsAccessKey.SecretAccessKey
+  MatthewsAccountUsername:
+    Description: "Matthew's Account"
+    Value: !Ref Matthew
+  MatthewAccountAccesskey:
+    Description: "Matthew's Acccess Key"
+    Value: !GetAtt MatthewsAccessKey.SecretAccessKey
+  ReubensAccountUsername:
+    Description: "Reuben's Account"
+    Value: !Ref Reuben
+  ReubensAccountAccesskey:
+    Description: "Reuben's Acccess Key"
+    Value: !GetAtt ReubensAccessKey.SecretAccessKey

@@ -1,3 +1,9 @@
+# Capstone Group 3 - Ricky's Course Planner
+
+## Infrastructure Templates
+
+Any changes to infrastructure via CloudFormation should be done here, RootTemplate is what created all of our accounts.
+
 **Edit a file, create a new file, and clone from Bitbucket in under 2 minutes**
 
 When you're done, you can delete the content in this README and update the file with details for others getting started with your repository.
