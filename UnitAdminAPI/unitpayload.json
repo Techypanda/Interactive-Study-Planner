@@ -1,0 +1,10 @@
+{
+    "unitCode": "COMP7001",
+    "unitName": "Introduction To GoLang",
+    "unitDescription": "A very long unit description",
+    "credits": 12.5,
+    "delivery": "In Person",
+    "prerequistes": [ "aaa", "bb" ],
+    "antirequistes": [ "aaa", "bb" ],
+    "corequistes": [ "aaaaa", "bbbb" ]
+}
