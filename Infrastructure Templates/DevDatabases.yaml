@@ -1,0 +1,36 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Template that creates Dev DBs.
+Resources:
+  DevUnitsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "UnitCode"
+          AttributeType: "S"
+        - AttributeName: "Name"
+          AttributeType: "S"
+        - AttributeName: "Description"
+          AttributeType: "S"
+        - AttributeName: "Credits"
+          AttributeType: "N"
+        - AttributeName: "Delivery"
+          AttributeType: "S"
+        - AttributeName: "Prerequistes" # CSV
+          AttributeType: "S"
+        - AttributeName: "Corequistes" # CSV
+          AttributeType: "S"
+        - AttributeName: "Antirequistes" # CSV
+          AttributeType: "S"
+      BillingMode: "PROVISIONED"
+      KeySchema:
+        - AttributeName: "UnitCode"
+          KeyType: "HASH"
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+      TableName: "DevUnits"
+
+Outputs:
+  DevDB:
+    Description: "Dev Units"
+    Value: !Ref DevUnitsTable
