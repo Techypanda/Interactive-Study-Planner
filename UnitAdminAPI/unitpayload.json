@@ -1,10 +1,10 @@
 {
-    "unitCode": "COMP7001",
-    "unitName": "Introduction To GoLang",
-    "unitDescription": "A very long unit description",
-    "credits": 12.5,
+    "unitCode": "COMP81051",
+    "unitName": "Introduction To Gamer Theory",
+    "unitDescription": "A very long unit description 2.0",
+    "credits": 50,
     "delivery": "In Person",
-    "prerequistes": [ "aaa", "bb" ],
-    "antirequistes": [ "aaa", "bb" ],
-    "corequistes": [ "aaaaa", "bbbb" ]
+    "prerequistes": [ "COMP7001"],
+    "antirequistes": [""],
+    "corequistes": [""]
 }

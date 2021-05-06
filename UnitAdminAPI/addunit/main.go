@@ -6,7 +6,11 @@ import (
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
+	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/aws/aws-sdk-go/service/dynamodb"
 )
+
+var db *dynamodb.DynamoDB
 
 type Unit struct {
 	UnitCode      string   `json:"unitCode"`
@@ -19,25 +23,34 @@ type Unit struct {
 	Antirequistes []string `json:"antirequistes"`
 }
 
-func addToDatabase(unit Unit) error {
-	return nil
-}
-
 func handler(ctx context.Context, payload Unit) (events.APIGatewayProxyResponse, error) {
 	fmt.Printf("Recieved Payload: %+v\n", payload) // redirect to logs
-	err := addToDatabase(payload)
-	if err != nil {
+
+	inDBError := checkInDatabase(payload, db)
+	if inDBError == nil {
+		addDBError := addToDatabase(payload, db)
+		if addDBError != nil {
+			return events.APIGatewayProxyResponse{
+				Body:       "Failure To Add Unit To DB!",
+				StatusCode: 400,
+			}, addDBError
+		} else {
+			return events.APIGatewayProxyResponse{
+				Body:       "Successfully Added Unit",
+				StatusCode: 200,
+			}, nil
+		}
+	} else {
 		return events.APIGatewayProxyResponse{
-			Body:       "Failure To Add Unit To DB!",
+			Body:       inDBError.Error(),
 			StatusCode: 400,
-		}, err
+		}, inDBError
 	}
-	return events.APIGatewayProxyResponse{
-		Body:       fmt.Sprintf("%v", payload),
-		StatusCode: 200,
-	}, nil
 }
 
 func main() {
+	session := session.Must(session.NewSession())
+	db = dynamodb.New(session)
+	db.Config.WithRegion("ap-southeast-2")
 	lambda.Start(handler)
 }
