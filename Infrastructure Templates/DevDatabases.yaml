@@ -7,20 +7,6 @@ Resources:
       AttributeDefinitions:
         - AttributeName: "UnitCode"
           AttributeType: "S"
-        - AttributeName: "Name"
-          AttributeType: "S"
-        - AttributeName: "Description"
-          AttributeType: "S"
-        - AttributeName: "Credits"
-          AttributeType: "N"
-        - AttributeName: "Delivery"
-          AttributeType: "S"
-        - AttributeName: "Prerequistes" # CSV
-          AttributeType: "S"
-        - AttributeName: "Corequistes" # CSV
-          AttributeType: "S"
-        - AttributeName: "Antirequistes" # CSV
-          AttributeType: "S"
       BillingMode: "PROVISIONED"
       KeySchema:
         - AttributeName: "UnitCode"
