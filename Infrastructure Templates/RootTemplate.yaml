@@ -16,6 +16,7 @@ Resources:
         - arn:aws:iam::aws:policy/AWSCloudFormationFullAccess
         - arn:aws:iam::aws:policy/AWSAppSyncAdministrator
         - arn:aws:iam::aws:policy/job-function/Billing
+        - arn:aws:iam::aws:policy/AmazonS3FullAccess
 
   Jonathan:
     Type: AWS::IAM::User
