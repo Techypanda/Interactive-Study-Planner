@@ -24,6 +24,21 @@ Resources:
       DockerTag: go1.x-v1
       DockerContext: ./addunit
       Dockerfile: Dockerfile
+  RemoveUnitFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Events:
+        CatchAll:
+          Type: Api
+          Properties:
+            Path: /removeunit
+            Method: POST
+      ImageUri: removeunitfunction:go1.x-v1
+    Metadata:
+      DockerTag: go1.x-v1
+      DockerContext: ./removeunit
+      Dockerfile: Dockerfile
 Outputs:
   HelloWorldAPI:
     Description: API Gateway endpoint URL for Prod environment for First Function
