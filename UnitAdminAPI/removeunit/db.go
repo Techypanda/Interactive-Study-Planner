@@ -1,8 +1,10 @@
 package main
 
 import (
+	"encoding/json"
 	"errors"
 
+	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go/aws/awserr"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -15,11 +17,20 @@ func initializeDB(db **dynamodb.DynamoDB) {
 	(*db).Config.WithRegion("ap-southeast-2")
 }
 
+func interpretPayload(payload events.APIGatewayProxyRequest) (Payload, error) {
+	var unit Payload
+	err := json.Unmarshal([]byte(payload.Body), &unit)
+	if err != nil {
+		return unit, err
+	}
+	return unit, nil
+}
+
 /*
 	Purpose: Return a error if the unit doesnt exists in DB, else return nil
 	TODO: (Maybe make use of panic here)
 */
-func checkInDatabase(unit Unit, db *dynamodb.DynamoDB) error {
+func checkInDatabase(unit Payload, db *dynamodb.DynamoDB) error {
 	input := &dynamodb.GetItemInput{
 		TableName: aws.String("DevUnits"),
 		Key: map[string]*dynamodb.AttributeValue{
@@ -59,7 +70,7 @@ func checkInDatabase(unit Unit, db *dynamodb.DynamoDB) error {
 	Purpose: Delete unit from the database
 	TODO: panic in this probably
 */
-func deleteFromDatabase(item Unit, db *dynamodb.DynamoDB) error {
+func deleteFromDatabase(item Payload, db *dynamodb.DynamoDB) error {
 	input := &dynamodb.DeleteItemInput{
 		Key: map[string]*dynamodb.AttributeValue{
 			"UnitCode": {
