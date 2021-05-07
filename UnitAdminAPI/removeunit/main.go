@@ -7,7 +7,6 @@ import (
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
-	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
 )
 
@@ -69,8 +68,6 @@ func handler(ctx context.Context, payload Unit) (events.APIGatewayProxyResponse,
 }
 
 func main() {
-	session := session.Must(session.NewSession())
-	db = dynamodb.New(session)
-	db.Config.WithRegion("ap-southeast-2")
+	initializeDB(&db)
 	lambda.Start(handler)
 }

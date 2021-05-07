@@ -6,8 +6,15 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go/aws/awserr"
+	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
 )
+
+func initializeDB(db **dynamodb.DynamoDB) {
+	session := session.Must(session.NewSession())
+	*db = dynamodb.New(session)
+	(*db).Config.WithRegion("ap-southeast-2")
+}
 
 /*
 	Purpose: Return a error if the unit doesnt exists in DB, else return nil
