@@ -23,28 +23,34 @@ type Unit struct {
 	Antirequistes []string `json:"antirequistes"`
 }
 
-func handler(ctx context.Context, payload Unit) (events.APIGatewayProxyResponse, error) {
-	fmt.Printf("Recieved Payload: %+v\n", payload) // redirect to logs
-
-	inDBError := checkInDatabase(payload, db)
-	if inDBError == nil {
-		addDBError := addToDatabase(payload, db)
-		if addDBError != nil {
-			return events.APIGatewayProxyResponse{
-				Body:       "Failure To Add Unit To DB!",
-				StatusCode: 400,
-			}, addDBError
+func handler(ctx context.Context, payload events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+	unitPayload, err := retrieveUnit(payload)
+	if err == nil {
+		inDBError := checkInDatabase(unitPayload, db)
+		if inDBError == nil {
+			addDBError := addToDatabase(unitPayload, db)
+			if addDBError == nil {
+				return events.APIGatewayProxyResponse{
+					Body:       fmt.Sprintf("Successfully Updated Unit With ID: %s", unitPayload.UnitCode),
+					StatusCode: 200,
+				}, nil
+			} else {
+				return events.APIGatewayProxyResponse{
+					Body:       fmt.Sprintf("Bad Request: %s", addDBError.Error()),
+					StatusCode: 400,
+				}, nil
+			}
 		} else {
 			return events.APIGatewayProxyResponse{
-				Body:       "Successfully Updated Unit",
-				StatusCode: 200,
+				Body:       fmt.Sprintf("Bad Request: %s", inDBError.Error()),
+				StatusCode: 400,
 			}, nil
 		}
 	} else {
 		return events.APIGatewayProxyResponse{
-			Body:       inDBError.Error(),
+			Body:       fmt.Sprintf("Bad Request: %s", err.Error()),
 			StatusCode: 400,
-		}, inDBError
+		}, nil
 	}
 }
 

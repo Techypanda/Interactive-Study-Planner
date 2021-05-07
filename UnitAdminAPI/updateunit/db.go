@@ -1,9 +1,11 @@
 package main
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 
+	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go/aws/awserr"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -14,6 +16,15 @@ func initializeDB(db **dynamodb.DynamoDB) {
 	session := session.Must(session.NewSession())
 	*db = dynamodb.New(session)
 	(*db).Config.WithRegion("ap-southeast-2")
+}
+
+func retrieveUnit(payload events.APIGatewayProxyRequest) (Unit, error) {
+	var unit Unit
+	err := json.Unmarshal([]byte(payload.Body), &unit)
+	if err != nil {
+		return unit, err
+	}
+	return unit, nil
 }
 
 /*
