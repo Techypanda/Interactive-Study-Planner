@@ -23,28 +23,35 @@ type Unit struct {
 	Antirequistes []string `json:"antirequistes"`
 }
 
-func handler(ctx context.Context, payload Unit) (events.APIGatewayProxyResponse, error) {
-	fmt.Printf("Recieved Payload: %+v\n", payload) // redirect to logs
-
-	inDBError := checkInDatabase(payload, db)
-	if inDBError == nil {
-		addDBError := addToDatabase(payload, db)
-		if addDBError != nil {
-			return events.APIGatewayProxyResponse{
-				Body:       "Failure To Add Unit To DB!",
-				StatusCode: 400,
-			}, addDBError
+func handler(ctx context.Context, payload events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+	// fmt.Printf("Recieved Payload: %+v\n", payload) // redirect to logs
+	unit, err := retrieveUnit(payload)
+	if err == nil {
+		inDBError := checkInDatabase(unit, db)
+		if inDBError == nil {
+			addDBError := addToDatabase(unit, db)
+			if addDBError == nil {
+				return events.APIGatewayProxyResponse{
+					Body:       fmt.Sprintf("Successfully Added Unit: %s", unit.UnitCode),
+					StatusCode: 200,
+				}, nil
+			} else {
+				return events.APIGatewayProxyResponse{
+					Body:       fmt.Sprintf("Bad Request: %s", addDBError.Error()),
+					StatusCode: 400,
+				}, nil
+			}
 		} else {
 			return events.APIGatewayProxyResponse{
-				Body:       "Successfully Added Unit",
-				StatusCode: 200,
+				Body:       fmt.Sprintf("Bad Request: %s", inDBError.Error()),
+				StatusCode: 400,
 			}, nil
 		}
 	} else {
 		return events.APIGatewayProxyResponse{
-			Body:       inDBError.Error(),
+			Body:       "Invalid payload recieved, please refer to the AddUnit documentation for correct payload",
 			StatusCode: 400,
-		}, inDBError
+		}, nil
 	}
 }
 
