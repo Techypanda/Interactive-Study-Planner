@@ -1,0 +1,48 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Master stack: PathToMasterStackFile'
+
+Resources:
+  DevUserPool:
+    Type: AWS::Cognito::UserPool
+    Properties:
+      AccountRecoverySetting:
+        RecoveryMechanisms:
+          - Name: admin_only
+            Priority: 1
+      AdminCreateUserConfig:
+        AllowAdminCreateUserOnly: True
+      AliasAttributes:
+        - phone_number
+        - email
+        - preferred_username
+      DeviceConfiguration:
+        ChallengeRequiredOnNewDevice: True
+        DeviceOnlyRememberedOnUserPrompt: True
+      MfaConfiguration: "OFF" # MFA cost money, we can suggest it at the end of the capstone
+      UserPoolName: "DevStaffUserPool"
+  ProdUserPool:
+    Type: AWS::Cognito::UserPool
+    Properties:
+      AccountRecoverySetting:
+        RecoveryMechanisms:
+          - Name: admin_only
+            Priority: 1
+      AdminCreateUserConfig:
+        AllowAdminCreateUserOnly: True
+      AliasAttributes:
+        - phone_number
+        - email
+        - preferred_username
+      DeviceConfiguration:
+        ChallengeRequiredOnNewDevice: True
+        DeviceOnlyRememberedOnUserPrompt: True
+      MfaConfiguration: "OFF" # MFA cost money, we can suggest it at the end of the capstone
+      UserPoolName: "ProdStaffUserPool"
+
+Outputs:
+  DevUserPool:
+    Description: "Dev Pool"
+    Value: !Ref DevUserPool
+  ProdUserPool:
+    Description: "Prod Pool"
+    Value: !Ref ProdUserPool
