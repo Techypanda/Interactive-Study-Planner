@@ -99,6 +99,36 @@ Resources:
       DockerTag: go1.x-v1
       DockerContext: ./removemajor
       Dockerfile: Dockerfile
+  AddSpecFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Events:
+        CatchAll:
+          Type: Api
+          Properties:
+            Path: /addspec
+            Method: POST
+      ImageUri: addspecfunction:go1.x-v1
+    Metadata:
+      DockerTag: go1.x-v1
+      DockerContext: ./addspec
+      Dockerfile: Dockerfile
+  UpdateSpecFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Events:
+        CatchAll:
+          Type: Api
+          Properties:
+            Path: /updatespec
+            Method: POST
+      ImageUri: updatespecfunction:go1.x-v1
+    Metadata:
+      DockerTag: go1.x-v1
+      DockerContext: ./updatespec
+      Dockerfile: Dockerfile
 Outputs:
   HelloWorldAPI:
     Description: API Gateway endpoint URL for Prod environment for First Function

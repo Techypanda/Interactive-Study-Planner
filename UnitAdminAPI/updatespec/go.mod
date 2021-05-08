@@ -1,4 +1,4 @@
-module addspec
+module updatespec
 
 go 1.16
 

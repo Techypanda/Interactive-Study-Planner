@@ -31,9 +31,9 @@ func checkInDatabase(spec Specialization, db *dynamodb.DynamoDB) error {
 	item, getErr := db.GetItem(input)
 	if getErr == nil {
 		if item.Item == nil {
-			return nil
+			return errors.New("that specialization doesnt exists in db")
 		} else {
-			return errors.New("that specialization exists in db")
+			return nil
 		}
 	} else {
 		if aerr, ok := getErr.(awserr.Error); ok {

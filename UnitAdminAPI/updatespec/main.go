@@ -16,7 +16,7 @@ func handler(ctx context.Context, payload events.APIGatewayProxyRequest) (events
 		if inDBError == nil {
 			addDBError := addToDatabase(spec, db)
 			if addDBError == nil {
-				return OkResponse("Specialization has been updated in database"), nil
+				return OkResponse("Specialization has been added to database"), nil
 			} else {
 				return BadRequest(addDBError.Error()), nil
 			}
