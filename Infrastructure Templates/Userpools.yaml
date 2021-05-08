@@ -38,6 +38,28 @@ Resources:
         DeviceOnlyRememberedOnUserPrompt: True
       MfaConfiguration: "OFF" # MFA cost money, we can suggest it at the end of the capstone
       UserPoolName: "ProdStaffUserPool"
+  DevLoginClient:
+    Type: AWS::Cognito::UserPoolClient
+    Properties:
+      UserPoolId: !Ref DevUserPool
+      CallbackURLs:
+        - http://localhost:3000
+      AllowedOAuthFlows:
+        - code
+        - implicit
+      AllowedOAuthScopes:
+        - phone
+        - email
+        - profile
+        - openid
+      ClientName: CapstoneDevLogin
+      SupportedIdentityProviders:
+        - COGNITO
+  DevLoginPage:
+    Type: AWS::Cognito::UserPoolDomain
+    Properties:
+      Domain: curtincapstone3dev
+      UserPoolId: !Ref DevUserPool
 
 Outputs:
   DevUserPool:
