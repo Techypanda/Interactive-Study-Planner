@@ -84,6 +84,21 @@ Resources:
       DockerTag: go1.x-v1
       DockerContext: ./updatemajor
       Dockerfile: Dockerfile
+  DeleteMajorFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Events:
+        CatchAll:
+          Type: Api
+          Properties:
+            Path: /removemajor
+            Method: POST
+      ImageUri: deletemajorfunction:go1.x-v1
+    Metadata:
+      DockerTag: go1.x-v1
+      DockerContext: ./removemajor
+      Dockerfile: Dockerfile
 Outputs:
   HelloWorldAPI:
     Description: API Gateway endpoint URL for Prod environment for First Function
