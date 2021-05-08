@@ -54,6 +54,21 @@ Resources:
       DockerTag: go1.x-v1
       DockerContext: ./updateunit
       Dockerfile: Dockerfile
+  AddMajorFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Events:
+        CatchAll:
+          Type: Api
+          Properties:
+            Path: /addmajor
+            Method: POST
+      ImageUri: addmajorfunction:go1.x-v1
+    Metadata:
+      DockerTag: go1.x-v1
+      DockerContext: ./addmajor
+      Dockerfile: Dockerfile
 Outputs:
   HelloWorldAPI:
     Description: API Gateway endpoint URL for Prod environment for First Function
