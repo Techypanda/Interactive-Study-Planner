@@ -24,6 +24,126 @@ Resources:
       DockerTag: go1.x-v1
       DockerContext: ./addunit
       Dockerfile: Dockerfile
+  RemoveUnitFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Events:
+        CatchAll:
+          Type: Api
+          Properties:
+            Path: /removeunit
+            Method: POST
+      ImageUri: removeunitfunction:go1.x-v1
+    Metadata:
+      DockerTag: go1.x-v1
+      DockerContext: ./removeunit
+      Dockerfile: Dockerfile
+  UpdateUnitFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Events:
+        CatchAll:
+          Type: Api
+          Properties:
+            Path: /updateunit
+            Method: POST
+      ImageUri: updateunitfunction:go1.x-v1
+    Metadata:
+      DockerTag: go1.x-v1
+      DockerContext: ./updateunit
+      Dockerfile: Dockerfile
+  AddMajorFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Events:
+        CatchAll:
+          Type: Api
+          Properties:
+            Path: /addmajor
+            Method: POST
+      ImageUri: addmajorfunction:go1.x-v1
+    Metadata:
+      DockerTag: go1.x-v1
+      DockerContext: ./addmajor
+      Dockerfile: Dockerfile
+  UpdateMajorFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Events:
+        CatchAll:
+          Type: Api
+          Properties:
+            Path: /updatemajor
+            Method: POST
+      ImageUri: updatemajorfunction:go1.x-v1
+    Metadata:
+      DockerTag: go1.x-v1
+      DockerContext: ./updatemajor
+      Dockerfile: Dockerfile
+  DeleteMajorFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Events:
+        CatchAll:
+          Type: Api
+          Properties:
+            Path: /removemajor
+            Method: POST
+      ImageUri: deletemajorfunction:go1.x-v1
+    Metadata:
+      DockerTag: go1.x-v1
+      DockerContext: ./removemajor
+      Dockerfile: Dockerfile
+  AddSpecFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Events:
+        CatchAll:
+          Type: Api
+          Properties:
+            Path: /addspec
+            Method: POST
+      ImageUri: addspecfunction:go1.x-v1
+    Metadata:
+      DockerTag: go1.x-v1
+      DockerContext: ./addspec
+      Dockerfile: Dockerfile
+  UpdateSpecFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Events:
+        CatchAll:
+          Type: Api
+          Properties:
+            Path: /updatespec
+            Method: POST
+      ImageUri: updatespecfunction:go1.x-v1
+    Metadata:
+      DockerTag: go1.x-v1
+      DockerContext: ./updatespec
+      Dockerfile: Dockerfile
+  RemoveSpecFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Events:
+        CatchAll:
+          Type: Api
+          Properties:
+            Path: /removespec
+            Method: POST
+      ImageUri: removespecfunction:go1.x-v1
+    Metadata:
+      DockerTag: go1.x-v1
+      DockerContext: ./removespec
+      Dockerfile: Dockerfile
 Outputs:
   HelloWorldAPI:
     Description: API Gateway endpoint URL for Prod environment for First Function

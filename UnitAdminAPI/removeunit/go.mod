@@ -1,4 +1,4 @@
-module addunit
+module removeunit
 
 go 1.16
 

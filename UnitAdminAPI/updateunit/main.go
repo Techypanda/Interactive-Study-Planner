@@ -24,15 +24,14 @@ type Unit struct {
 }
 
 func handler(ctx context.Context, payload events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	// fmt.Printf("Recieved Payload: %+v\n", payload) // redirect to logs
-	unit, err := retrieveUnit(payload)
+	unitPayload, err := retrieveUnit(payload)
 	if err == nil {
-		inDBError := checkInDatabase(unit, db)
+		inDBError := checkInDatabase(unitPayload, db)
 		if inDBError == nil {
-			addDBError := addToDatabase(unit, db)
+			addDBError := addToDatabase(unitPayload, db)
 			if addDBError == nil {
 				return events.APIGatewayProxyResponse{
-					Body:       fmt.Sprintf("Successfully Added Unit: %s", unit.UnitCode),
+					Body:       fmt.Sprintf("Successfully Updated Unit With ID: %s", unitPayload.UnitCode),
 					StatusCode: 200,
 				}, nil
 			} else {
@@ -49,7 +48,7 @@ func handler(ctx context.Context, payload events.APIGatewayProxyRequest) (events
 		}
 	} else {
 		return events.APIGatewayProxyResponse{
-			Body:       "Invalid payload recieved, please refer to the AddUnit documentation for correct payload",
+			Body:       fmt.Sprintf("Bad Request: %s", err.Error()),
 			StatusCode: 400,
 		}, nil
 	}

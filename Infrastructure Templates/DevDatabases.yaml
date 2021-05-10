@@ -7,20 +7,6 @@ Resources:
       AttributeDefinitions:
         - AttributeName: "UnitCode"
           AttributeType: "S"
-        - AttributeName: "Name"
-          AttributeType: "S"
-        - AttributeName: "Description"
-          AttributeType: "S"
-        - AttributeName: "Credits"
-          AttributeType: "N"
-        - AttributeName: "Delivery"
-          AttributeType: "S"
-        - AttributeName: "Prerequistes" # CSV
-          AttributeType: "S"
-        - AttributeName: "Corequistes" # CSV
-          AttributeType: "S"
-        - AttributeName: "Antirequistes" # CSV
-          AttributeType: "S"
       BillingMode: "PROVISIONED"
       KeySchema:
         - AttributeName: "UnitCode"
@@ -29,8 +15,42 @@ Resources:
         ReadCapacityUnits: 1
         WriteCapacityUnits: 1
       TableName: "DevUnits"
+  DevMajorTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "MajorCode"
+          AttributeType: "S"
+      BillingMode: "PROVISIONED"
+      KeySchema:
+        - AttributeName: "MajorCode"
+          KeyType: "HASH"
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+      TableName: "DevMajors"
+  DevSpecializationTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "SpecializationCode"
+          AttributeType: "S"
+      BillingMode: "PROVISIONED"
+      KeySchema:
+        - AttributeName: "SpecializationCode"
+          KeyType: "HASH"
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+      TableName: "DevSpecializations"
 
 Outputs:
-  DevDB:
-    Description: "Dev Units"
+  DevUnitsTable:
+    Description: "Dev Units (1 R/W Unit - SLOW)"
     Value: !Ref DevUnitsTable
+  DevMajorTable:
+    Description: "Dev Majors (1 R/W Unit - SLOW)"
+    Value: !Ref DevMajorTable
+  DevSpecializationTable:
+    Description: "Dev Specializations (1 R/W Unit - SLOW)"
+    Value: !Ref DevSpecializationTable

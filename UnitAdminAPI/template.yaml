@@ -11,23 +11,6 @@ Globals:
     Timeout: 5
 
 Resources:
-  #HelloWorldFunction:
-  #  Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
-  ##  Properties:
-  #    PackageType: Image
-  #    Events:
-  #      CatchAll:
-  #        Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
-  #        Properties:
-  #          Path: /hello
-  #          Method: GET
-  #    Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
-  #      Variables:
-  #        PARAM1: VALUE
-  #  Metadata:
-  #    DockerTag: go1.x-v1
-  #    DockerContext: ./hello-world
-  #    Dockerfile: Dockerfile
   AddUnitFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
@@ -41,6 +24,118 @@ Resources:
     Metadata:
       DockerTag: go1.x-v1
       DockerContext: ./addunit
+      Dockerfile: Dockerfile
+  RemoveUnitFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      PackageType: Image
+      Events:
+        CatchAll:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /removeunit
+            Method: POST
+    Metadata:
+      DockerTag: go1.x-v1
+      DockerContext: ./removeunit
+      Dockerfile: Dockerfile
+  UpdateUnitFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      PackageType: Image
+      Events:
+        CatchAll:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /updateunit
+            Method: POST
+    Metadata:
+      DockerTag: go1.x-v1
+      DockerContext: ./updateunit
+      Dockerfile: Dockerfile
+  AddMajorFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      PackageType: Image
+      Events:
+        CatchAll:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /addmajor
+            Method: POST
+    Metadata:
+      DockerTag: go1.x-v1
+      DockerContext: ./addmajor
+      Dockerfile: Dockerfile
+  UpdateMajorFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      PackageType: Image
+      Events:
+        CatchAll:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /updatemajor
+            Method: POST
+    Metadata:
+      DockerTag: go1.x-v1
+      DockerContext: ./updatemajor
+      Dockerfile: Dockerfile
+  DeleteMajorFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      PackageType: Image
+      Events:
+        CatchAll:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /removemajor
+            Method: POST
+    Metadata:
+      DockerTag: go1.x-v1
+      DockerContext: ./removemajor
+      Dockerfile: Dockerfile
+  AddSpecFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      PackageType: Image
+      Events:
+        CatchAll:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /addspec
+            Method: POST
+    Metadata:
+      DockerTag: go1.x-v1
+      DockerContext: ./addspec
+      Dockerfile: Dockerfile
+  UpdateSpecFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      PackageType: Image
+      Events:
+        CatchAll:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /updatespec
+            Method: POST
+    Metadata:
+      DockerTag: go1.x-v1
+      DockerContext: ./updatespec
+      Dockerfile: Dockerfile
+  RemoveSpecFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      PackageType: Image
+      Events:
+        CatchAll:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /removespec
+            Method: POST
+    Metadata:
+      DockerTag: go1.x-v1
+      DockerContext: ./removespec
       Dockerfile: Dockerfile
 
 Outputs:
