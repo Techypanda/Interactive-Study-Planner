@@ -1,7 +1,7 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
-  UnitAPI
+  python3.8
 
   Sample SAM Template for UnitAPI
 
@@ -14,16 +14,62 @@ Resources:
   HelloWorldFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      CodeUri: hello_world/
-      Handler: app.lambda_handler
-      Runtime: python3.8
+      PackageType: Image
       Events:
         HelloWorld:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /hello
             Method: get
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./hello_world
+      DockerTag: python3.8-v1
+  
+  GetAllSpecializations:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Events:
+        GetAllSpecializations:
+          Type: Api
+          Properties:
+            Path: /getAllSpecializations
+            Method: get
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./GetAllSpecializations
+      DockerTag: python3.8-v1
+  
+  GetAllMajors:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Events:
+        GetAllMajors:
+          Type: Api
+          Properties:
+            Path: /getAllMajors
+            Method: get
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./GetAllMajors
+      DockerTag: python3.8-v1
 
+  GetAllUnits:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Events: 
+        GetAllUnits:
+          Type: Api
+          Properties:
+            Path: /getAllUnits
+            Method: get
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./GetAllUnits
+      DockerTag: python3.8-v1
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
   # Find out more about other implicit resources you can reference within SAM
