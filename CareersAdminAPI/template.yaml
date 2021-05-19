@@ -8,9 +8,10 @@ Description: >
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
-    Timeout: 3
+    Timeout: 5
 
 Resources:
+  #Example
   HelloWorldFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
@@ -24,10 +25,116 @@ Resources:
             Path: /hello
             Method: get
 
+    AddCareerFunction:
+      Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+      Properties:
+        CodeUri: addcareer/
+        Handler: app.lambda_handler
+        Runtime: python3.8
+        Events:
+          AddCareer:
+            Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+            Properties:
+              Path: /addcareer
+              Method: POST
+
+    AddTraitFunction:
+      Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+      Properties:
+        CodeUri: addtrait/
+        Handler: app.lambda_handler
+        Runtime: python3.8
+        Events:
+          AddTrait:
+            Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+            Properties:
+              Path: /addtrait
+              Method: POST
+
+    CareerCSVFunction:
+      Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+      Properties:
+        CodeUri: careerCSV/
+        Handler: app.lambda_handler
+        Runtime: python3.8
+        Events:
+          CareerCSV:
+            Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+            Properties:
+              Path: /careerCSV
+              Method: POST
+
+    DeleteCareerFunction:
+      Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+      Properties:
+        CodeUri: deletecareer/
+        Handler: app.lambda_handler
+        Runtime: python3.8
+        Events:
+          DeleteCareer:
+            Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+            Properties:
+              Path: /deletecareer
+              Method: POST
+
+    DeleteTraitFunction:
+      Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+      Properties:
+        CodeUri: deletetrait/
+        Handler: app.lambda_handler
+        Runtime: python3.8
+        Events:
+          DeleteTrait:
+            Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+            Properties:
+              Path: /deletetrait
+              Method: POST
+
+    TraitCSVFunction:
+      Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+      Properties:
+        CodeUri: traitCSV/
+        Handler: app.lambda_handler
+        Runtime: python3.8
+        Events:
+          TraitCSV:
+            Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+            Properties:
+              Path: /traitCSV
+              Method: POST
+
+    UpdateCareerFunction:
+      Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+      Properties:
+        CodeUri: updatecareer/
+        Handler: app.lambda_handler
+        Runtime: python3.8
+        Events:
+          UpdateCareer:
+            Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+            Properties:
+              Path: /updatecareer
+              Method: POST
+
+    UpdateTraitFunction:
+      Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+      Properties:
+        CodeUri: updatetrait/
+        Handler: app.lambda_handler
+        Runtime: python3.8
+        Events:
+          UpdateTrait:
+            Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+            Properties:
+              Path: /updatetrait
+              Method: POST
+
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
   # Find out more about other implicit resources you can reference within SAM
   # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
+
+  #Example
   HelloWorldApi:
     Description: "API Gateway endpoint URL for Prod stage for Hello World function"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
@@ -37,3 +144,82 @@ Outputs:
   HelloWorldFunctionIamRole:
     Description: "Implicit IAM Role created for Hello World function"
     Value: !GetAtt HelloWorldFunctionRole.Arn
+
+  #APIs
+  AddCareerApi:
+    Description: "API Gateway endpoint URL for Prod stage for Add Career function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/addcareer/"
+  AddTraitApi:
+    Description: "API Gateway endpoint URL for Prod stage for Add Trait function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/addtrait/"
+  CareerCSVApi:
+    Description: "API Gateway endpoint URL for Prod stage for Career CSV function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/careercsv/"
+  DeleteCareerApi:
+    Description: "API Gateway endpoint URL for Prod stage for Delete Career function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/deletecareer/"
+  DeleteTraitApi:
+    Description: "API Gateway endpoint URL for Prod stage for Delete Trait function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/deletetrait/"
+  TraitCSVApi:
+    Description: "API Gateway endpoint URL for Prod stage for Trait CSV function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/traitcsv/"
+  UpdateCareerApi:
+    Description: "API Gateway endpoint URL for Prod stage for Update Career function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/updatecareer/"
+  UpdateTraitApi:
+    Description: "API Gateway endpoint URL for Prod stage for Update Trait function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/updatetrait/"
+
+  #Functions
+  AddCareerFunction:
+    Description: "Add Career Lambda Function ARN"
+    Value: !GetAtt AddCareerFunction.Arn
+  AddTraitFunction:
+    Description: "Add Trait Lambda Function ARN"
+    Value: !GetAtt AddTraitFunction.Arn
+  CareerCSVFunction:
+    Description: "Career CSV Lambda Function ARN"
+    Value: !GetAtt CareerCSVFunction.Arn
+  DeleteCareerFunction:
+    Description: "Delete Career Lambda Function ARN"
+    Value: !GetAtt DeleteCareerFunction.Arn
+  DeleteTraitFunction:
+    Description: "Delete Trait Lambda Function ARN"
+    Value: !GetAtt DeleteTraitFunction.Arn
+  TraitCSVFunction:
+    Description: "Trait CSV Lambda Function ARN"
+    Value: !GetAtt TraitCSVFunction.Arn
+  UpdateCareerFunction:
+    Description: "Update Career Lambda Function ARN"
+    Value: !GetAtt UpdateCareerFunction.Arn
+  UpdateTraitFunction:
+    Description: "Upate Trait Lambda Function ARN"
+    Value: !GetAtt Update TraitFunction.Arn
+
+  #Function IAM Roles
+  AddCareerFunctionIamRole:
+    Description: "Implicit IAM Role created for Add Career function"
+    Value: !GetAtt AddCareerFunction.Arn
+  AddTraitFunctionIamRole:
+    Description: "Implicit IAM Role created for Add Trait function"
+    Value: !GetAtt AddTraitFunction.Arn
+  CareerCSVFunctionIamRole:
+    Description: "Implicit IAM Role created for Career CSV function"
+    Value: !GetAtt CareerCSVFunction.Arn
+  DeleteCareerFunctionIamRole:
+    Description: "Implicit IAM Role created for Delete Career function"
+    Value: !GetAtt DeleteCareerFunction.Arn
+  DeleteTraitFunctionIamRole:
+    Description: "Implicit IAM Role created for Delete Trait function"
+    Value: !GetAtt DeleteTraitFunction.Arn
+  TraitCSVFunctionIamRole:
+    Description: "Implicit IAM Role created for Trait CSV function"
+    Value: !GetAtt TraitCSVFunction.Arn
+  UpdateCareerFunctionIamRole:
+    Description: "Implicit IAM Role created for Update Career function"
+    Value: !GetAtt UpdateCareerFunction.Arn
+  UpdateTraitFunctionIamRole:
+    Description: "Implicit IAM Role created for Update Trait function"
+    Value: !GetAtt UpdateTraitFunction.Arn
+  
