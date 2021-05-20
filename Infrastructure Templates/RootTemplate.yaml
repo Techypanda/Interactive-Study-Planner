@@ -18,6 +18,7 @@ Resources:
         - arn:aws:iam::aws:policy/job-function/Billing
         - arn:aws:iam::aws:policy/AmazonS3FullAccess
         - arn:aws:iam::aws:policy/IAMUserChangePassword
+        - arn:aws:iam::aws:policy/AmazonCognitoDeveloperAuthenticatedIdentities
         
   Jonathan:
     Type: AWS::IAM::User
