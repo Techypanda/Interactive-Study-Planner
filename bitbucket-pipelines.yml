@@ -13,7 +13,7 @@ pipelines:
                 - aws configure set default.region ap-southeast-2
                 - aws configure set region ap-southeast-2
                 - echo "Deploying User Accounts"
-                - aws cloudformation deploy --template-file "./Infrastructure Templates/RootTemplate.yaml" --stack-name Capstone-3-Developers --no-fail-on-empty-changeset
+                - aws cloudformation deploy --template-file "./Infrastructure Templates/RootTemplate.yaml" --stack-name Capstone-3-Developers --no-fail-on-empty-changeset --capabilities CAPABILITY_NAMED_IAM
           - step:
               name: "Deploy Databases"
               image: atlassian/pipelines-awscli
