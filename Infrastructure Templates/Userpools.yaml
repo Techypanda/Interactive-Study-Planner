@@ -20,6 +20,30 @@ Resources:
         DeviceOnlyRememberedOnUserPrompt: True
       MfaConfiguration: "OFF" # MFA cost money, we can suggest it at the end of the capstone
       UserPoolName: "DevStaffUserPool"
+  DevLoginClient:
+    Type: AWS::Cognito::UserPoolClient
+    Properties:
+      UserPoolId: !Ref DevUserPool
+      CallbackURLs:
+        - http://localhost:3000
+      AllowedOAuthFlows:
+        - code
+        - implicit
+      AllowedOAuthFlowsUserPoolClient: true
+      AllowedOAuthScopes:
+        - phone
+        - email
+        - profile
+        - openid
+      ClientName: CapstoneDevLogin
+      SupportedIdentityProviders:
+        - COGNITO
+  DevLoginPage:
+    Type: AWS::Cognito::UserPoolDomain
+    Properties:
+      Domain: curtincapstone3dev
+      UserPoolId: !Ref DevUserPool
+
   ProdUserPool:
     Type: AWS::Cognito::UserPool
     Properties:
@@ -38,33 +62,46 @@ Resources:
         DeviceOnlyRememberedOnUserPrompt: True
       MfaConfiguration: "OFF" # MFA cost money, we can suggest it at the end of the capstone
       UserPoolName: "ProdStaffUserPool"
-  DevLoginClient:
+  ProdLoginClient:
     Type: AWS::Cognito::UserPoolClient
     Properties:
-      UserPoolId: !Ref DevUserPool
+      UserPoolId: !Ref ProdUserPool
       CallbackURLs:
         - http://localhost:3000
       AllowedOAuthFlows:
         - code
         - implicit
+      AllowedOAuthFlowsUserPoolClient: true
       AllowedOAuthScopes:
         - phone
         - email
         - profile
         - openid
-      ClientName: CapstoneDevLogin
+      ClientName: CapstoneProdLogin
       SupportedIdentityProviders:
         - COGNITO
-  DevLoginPage:
+  ProdLoginPage:
     Type: AWS::Cognito::UserPoolDomain
     Properties:
-      Domain: curtincapstone3dev
-      UserPoolId: !Ref DevUserPool
+      Domain: curtincapstone3prod
+      UserPoolId: !Ref ProdUserPool
 
 Outputs:
   DevUserPool:
-    Description: "Dev Pool"
+    Description: "The Dev Pool"
     Value: !Ref DevUserPool
+  DevUserClient:
+    Description: "The Dev User Client"
+    Value: !Ref DevLoginClient
+  DevLoginPage:
+    Description: "The Dev Login Page"
+    Value: !Ref DevLoginPage
   ProdUserPool:
     Description: "Prod Pool"
     Value: !Ref ProdUserPool
+  ProdUserClient:
+    Description: "The Prod User Client"
+    Value: !Ref ProdLoginClient
+  ProdLoginPage:
+    Description: "The Prod Login Page"
+    Value: !Ref ProdLoginPage
