@@ -3,30 +3,9 @@ package UnitAdminAPI_test
 // aws cognito-idp admin-initiate-auth --user-pool-id ap-southeast-2_gn4KIEkx0 --client-id 5ou2dj6rrbrs53vh4kh3uknk6b --auth-flow ADMIN_NO_SRP_AUTH --auth-parameters "USERNAME=$USERNAME,PASSWORD=$PASSWORD"
 
 import (
-	"context"
-	"errors"
-	"fmt"
 	"os"
 	"testing"
-
-	"github.com/dgrijalva/jwt-go"
-	"github.com/lestrrat-go/jwx/jwk"
 )
-
-func parseToken(token *jwt.Token) (interface{}, error) {
-	set, err := jwk.Fetch(context.Background(), "https://cognito-idp.ap-southeast-2.amazonaws.com/ap-southeast-2_gn4KIEkx0/.well-known/jwks.json")
-	if err != nil {
-		return nil, err
-	}
-	keyID, ok := token.Header["kid"].(string)
-	if !ok {
-		return nil, errors.New("expecting JWT header to have string kid")
-	}
-	if key := set.LookupKeyID(keyID); len(key) == 1 {
-		return key[0].Materialize()
-	}
-	return nil, fmt.Errorf("unable to find key %q", keyID)
-}
 
 /*
 	The Assumption Is Made API is running on localhost.
@@ -34,11 +13,7 @@ func parseToken(token *jwt.Token) (interface{}, error) {
 func TestAddEndpoint(t *testing.T) {
 	token := os.Getenv("token")
 	if token != "" {
-		jwToken, err := jwt.Parse(token, parseToken)
-		if err != nil {
-			t.Fatalf("JWT Passing Error: %v", err)
-		}
-		fmt.Println(jwToken)
+
 	} else {
 		t.Fatalf("Missing Token Environment Variable!")
 	}
