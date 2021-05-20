@@ -5,3 +5,7 @@ pipelines:
       - step:
           script:
             - echo "hello world"
+    master:
+      - step:
+          image: atlassian/pipelines-awscli
+          script:
