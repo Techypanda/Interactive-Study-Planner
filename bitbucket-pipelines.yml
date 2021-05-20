@@ -1,7 +1,7 @@
 image: atlassian/default-image:2
 pipelines:
   pull-requests:
-    dev_sprint:
+    '**':
       - step:
           image: atlassian/pipelines-awscli
           script:
@@ -11,15 +11,4 @@ pipelines:
             - aws configure set default.region ap-southeast-2
             - aws configure set region ap-southeast-2
             - echo "Deploying Dev Database"
-            - aws cloudformation deploy --template-file "./Infrastructure Templates/DevDatabases.yaml" --stack-name DevDB
-    master:
-      - step:
-          image: atlassian/pipelines-awscli
-          script:
-            - echo "Setting Up AWS CLI"
-            - aws configure set aws_access_key_id $PipelineAccessKey
-            - aws configure set aws_secret_access_key $PipelineSecretKey
-            - aws configure set default.region ap-southeast-2
-            - aws configure set region ap-southeast-2
-            - echo "Deploying Dev Database"
-            - aws cloudformation deploy --template-file "./Infrastructure Templates/DevDatabases.yaml" --stack-name DevDB
+            - aws cloudformation deploy --template-file "./Infrastructure Templates/DevDatabases.yaml" --stack-name DevDB --no-fail-on-empty-changeset
