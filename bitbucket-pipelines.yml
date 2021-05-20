@@ -1,7 +1,7 @@
 image: atlassian/default-image:2
 pipelines:
   pull-requests:
-    dev-sprint:
+    dev_sprint:
       - step:
           image: atlassian/pipelines-awscli
           script:
