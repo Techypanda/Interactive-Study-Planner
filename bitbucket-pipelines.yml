@@ -11,7 +11,7 @@ pipelines:
             - aws configure set default.region ap-southeast-2
             - aws configure set region ap-southeast-2
             - echo "Deploying Dev Database"
-            - aws cloudformation deploy --template-file "./Infrastructure Templates/DevDatabases.yaml" --stack-name DevDB
+            - aws cloudformation deploy --template-file "./Infrastructure Templates/DevDatabases.yaml" --stack-name DevDB --no-fail-on-empty-changeset
     master:
       - step:
           image: atlassian/pipelines-awscli
@@ -22,4 +22,4 @@ pipelines:
             - aws configure set default.region ap-southeast-2
             - aws configure set region ap-southeast-2
             - echo "Deploying Dev Database"
-            - aws cloudformation deploy --template-file "./Infrastructure Templates/DevDatabases.yaml" --stack-name DevDB
+            - aws cloudformation deploy --template-file "./Infrastructure Templates/DevDatabases.yaml" --stack-name DevDB --no-fail-on-empty-changeset
