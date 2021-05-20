@@ -1,5 +1,7 @@
 package UnitAdminAPI_test
 
+// aws cognito-idp admin-initiate-auth --user-pool-id ap-southeast-2_gn4KIEkx0 --client-id 5ou2dj6rrbrs53vh4kh3uknk6b --auth-flow ADMIN_NO_SRP_AUTH --auth-parameters "USERNAME=$USERNAME,PASSWORD=$PASSWORD"
+
 import (
 	"net/http"
 	"testing"
