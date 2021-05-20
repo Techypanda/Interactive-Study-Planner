@@ -1,0 +1,7 @@
+image: atlassian/default-image:2
+pipelines:
+  pull-requests:
+    dev-sprint:
+      - step:
+          script:
+            - echo "hello world"
