@@ -3,17 +3,46 @@ package UnitAdminAPI_test
 // aws cognito-idp admin-initiate-auth --user-pool-id ap-southeast-2_gn4KIEkx0 --client-id 5ou2dj6rrbrs53vh4kh3uknk6b --auth-flow ADMIN_NO_SRP_AUTH --auth-parameters "USERNAME=$USERNAME,PASSWORD=$PASSWORD"
 
 import (
-	"net/http"
+	"context"
+	"errors"
+	"fmt"
+	"os"
 	"testing"
 
-	"github.com/go-resty/resty/v2"
+	"github.com/dgrijalva/jwt-go"
+	"github.com/lestrrat-go/jwx/jwk"
 )
+
+func parseToken(token *jwt.Token) (interface{}, error) {
+	set, err := jwk.Fetch(context.Background(), "https://cognito-idp.ap-southeast-2.amazonaws.com/ap-southeast-2_gn4KIEkx0/.well-known/jwks.json")
+	if err != nil {
+		return nil, err
+	}
+	keyID, ok := token.Header["kid"].(string)
+	if !ok {
+		return nil, errors.New("expecting JWT header to have string kid")
+	}
+	if key := set.LookupKeyID(keyID); len(key) == 1 {
+		return key[0].Materialize()
+	}
+	return nil, fmt.Errorf("unable to find key %q", keyID)
+}
 
 /*
 	The Assumption Is Made API is running on localhost.
 */
 func TestAddEndpoint(t *testing.T) {
-	client := resty.New()
+	token := os.Getenv("token")
+	if token != "" {
+		jwToken, err := jwt.Parse(token, parseToken)
+		if err != nil {
+			t.Fatalf("JWT Passing Error: %v", err)
+		}
+		fmt.Println(jwToken)
+	} else {
+		t.Fatalf("Missing Token Environment Variable!")
+	}
+	/* client := resty.New()
 	resp, err := client.R().
 		SetHeader("Content-Type", "application/json").
 		SetBody(`{"unitCode": "COMP7001","unitName": "This was updated","unitDescription": "A very long unit description 2.0","credits": 50,"delivery": "In Person","prerequistes": [ "COMP7001"],"antirequistes": [""],"corequistes": [""]}`).
@@ -40,11 +69,17 @@ func TestAddEndpoint(t *testing.T) {
 		}
 	} else {
 		t.Fatalf("Failed Addition (Expected Success): %s", err.Error())
-	}
+	} */
 }
 
 func TestUpdateEndpoint(t *testing.T) {
-	client := resty.New()
+	token := os.Getenv("token")
+	if token != "" {
+
+	} else {
+		t.Fatalf("Missing Token Environment Variable!")
+	}
+	/* client := resty.New()
 	resp, err := client.R().
 		SetHeader("Content-Type", "application/json").
 		SetBody(`{"unitCode": "COMPZZZZZ","unitName": "This was updated","unitDescription": "A very long unit description 2.0","credits": 50,"delivery": "In Person","prerequistes": [ "COMP7001"],"antirequistes": [""],"corequistes": [""]}`).
@@ -77,11 +112,17 @@ func TestUpdateEndpoint(t *testing.T) {
 		}
 	} else {
 		t.Fatalf("Failed Update - Couldn't Create Unit To Update (Expected Success): %s", err.Error())
-	}
+	} */
 }
 
 func TestRemoveEndpoint(t *testing.T) {
-	client := resty.New()
+	token := os.Getenv("token")
+	if token != "" {
+
+	} else {
+		t.Fatalf("Missing Token Environment Variable!")
+	}
+	/* client := resty.New()
 	resp, err := client.R().
 		SetHeader("Content-Type", "application/json").
 		SetBody(`{"unitCode": "COMP90101010101","unitName": "This was updated","unitDescription": "A very long unit description 2.0","credits": 50,"delivery": "In Person","prerequistes": [ "COMP7001"],"antirequistes": [""],"corequistes": [""]}`).
@@ -114,5 +155,5 @@ func TestRemoveEndpoint(t *testing.T) {
 		}
 	} else {
 		t.Fatalf("Failed Delete - Couldn't Create Unit To Delete (Expected Success): %s", err.Error())
-	}
+	} */
 }
