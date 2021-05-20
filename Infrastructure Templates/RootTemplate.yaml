@@ -19,7 +19,16 @@ Resources:
         - arn:aws:iam::aws:policy/AmazonS3FullAccess
         - arn:aws:iam::aws:policy/IAMUserChangePassword
         - arn:aws:iam::aws:policy/AmazonCognitoDeveloperAuthenticatedIdentities
-        
+      Policies:
+        - PolicyName: CognitoDev
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+            - Effect: Allow
+              Action:
+                - cognito-idp:AdminInitiateAuth
+              Resource: arn:aws:cognito-idp:ap-southeast-2:363837338544:userpool/ap-southeast-2_gn4KIEkx0
+
   Jonathan:
     Type: AWS::IAM::User
     Properties:
