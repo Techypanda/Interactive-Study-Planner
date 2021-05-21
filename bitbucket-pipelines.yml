@@ -38,7 +38,7 @@ pipelines:
                 - aws cloudformation deploy --template-file "./Infrastructure Templates/Userpools.yaml" --stack-name Userpools --no-fail-on-empty-changeset
       - step:
           name: "Build, Test, Deploy Unit Admin API"
-          image: atlassian/default-image:2
+          image: python:3.7.2
           script:
             - echo "Build Unit Admin API"
             - cd UnitAdminAPI
