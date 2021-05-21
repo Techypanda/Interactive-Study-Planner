@@ -49,4 +49,4 @@ pipelines:
             - aws configure set default.region ap-southeast-2
             - aws configure set region ap-southeast-2
             #- sam build --region ap-southeast-2 --build-dir .aws-sam/build
-            - sam deploy --template ./bitbucket-pipelines.yml --stack-name UnitAdminAPIDev --region ap-southeast-2 --capabilities CAPABILITY_IAM
+            - sam deploy --template ./template.yml --stack-name UnitAdminAPIDev --region ap-southeast-2 --capabilities CAPABILITY_IAM
