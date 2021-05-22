@@ -11,6 +11,7 @@ Resources:
   AdminUnitAPI:
     Type: AWS::Serverless::Api
     Properties:
+      StageName: Dev
       Cors: "'*'" # Need to change this to the relevant domain we pruchase/get assigned
       Auth:
         DefaultAuthorizer: DevUserPool
