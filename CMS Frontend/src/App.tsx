@@ -10,7 +10,16 @@ import { DefaultProps, RefreshToken } from './types';
 import Authenticated from './pages/Authenticated';
 import Authenticate from './pages/Authenticate';
 
-function TokenExpired(refreshToken: RefreshToken | null) {
+function TokenExpired() {
+  if (localStorage.getItem('rToken') && localStorage.getItem('rTokenExpiry')) {
+    try {
+      return !(new Date(new Date().getTime()+(2*24*60*60*1000)) < new Date(localStorage.getItem('rTokenExpiry')!)); // if theres atleast 2 days left on token were ok
+    } catch {
+      localStorage.removeItem('rToken');
+      localStorage.removeItem('rTokenExpiry');
+      return true;
+    }
+  }
   return true;
 }
 
@@ -19,10 +28,10 @@ function App(props: DefaultProps) {
     <Router>
       <Switch>
         <Route exact path="/">
-          { !TokenExpired(localStorage.getItem('rToken')) 
+          { !TokenExpired() 
           && <Authenticated />
           }
-          { TokenExpired(localStorage.getItem('rToken')) 
+          { TokenExpired()
           && <Authenticate />
           }
         </Route>
