@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, IconButton, Button, Typography, Box } from "@material-ui/core";
+import { AppBar, Toolbar, IconButton, Typography, Box } from "@material-ui/core";
 import { Menu } from "@material-ui/icons";
 import { CognitoJWT, DefaultProps } from "../../types";
 import styled from 'styled-components';
