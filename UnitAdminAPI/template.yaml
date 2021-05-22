@@ -30,7 +30,7 @@ Resources:
             Path: /addunit
             Method: POST
             RestApiId: !Ref AdminUnitAPI
-        ImageUri: !GetAtt AddUnitECR.RepositoryUri
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/unitadmin
     Metadata:
       DockerTag: go1.x-v1
       DockerContext: ./addunit
