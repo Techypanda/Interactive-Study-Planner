@@ -19,6 +19,11 @@ Resources:
           DevUserPool:
             UserPoolArn: arn:aws:cognito-idp:ap-southeast-2:363837338544:userpool/ap-southeast-2_gn4KIEkx0
 
+  AddUnitECR:
+    Type: AWS::ECR::Repository
+    Properties:
+      RepositoryName: curtinmedicalcourseplanner/addunit
+
   AddUnitFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -30,130 +35,131 @@ Resources:
             Path: /addunit
             Method: POST
             RestApiId: !Ref AdminUnitAPI
+        ImageUri: !GetAtt AddUnitECR.RepositoryUri
     Metadata:
       DockerTag: go1.x-v1
       DockerContext: ./addunit
       Dockerfile: Dockerfile
-  RemoveUnitFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      PackageType: Image
-      Events:
-        CatchAll:
-          Type: Api
-          Properties:
-            Path: /removeunit
-            Method: POST
-            RestApiId: !Ref AdminUnitAPI
-    Metadata:
-      DockerTag: go1.x-v1
-      DockerContext: ./removeunit
-      Dockerfile: Dockerfile
-  UpdateUnitFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      PackageType: Image
-      Events:
-        CatchAll:
-          Type: Api
-          Properties:
-            Path: /updateunit
-            Method: POST
-            RestApiId: !Ref AdminUnitAPI
-    Metadata:
-      DockerTag: go1.x-v1
-      DockerContext: ./updateunit
-      Dockerfile: Dockerfile
-  AddMajorFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      PackageType: Image
-      Events:
-        CatchAll:
-          Type: Api
-          Properties:
-            Path: /addmajor
-            Method: POST
-            RestApiId: !Ref AdminUnitAPI
-    Metadata:
-      DockerTag: go1.x-v1
-      DockerContext: ./addmajor
-      Dockerfile: Dockerfile
-  UpdateMajorFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      PackageType: Image
-      Events:
-        CatchAll:
-          Type: Api
-          Properties:
-            Path: /updatemajor
-            Method: POST
-            RestApiId: !Ref AdminUnitAPI
-    Metadata:
-      DockerTag: go1.x-v1
-      DockerContext: ./updatemajor
-      Dockerfile: Dockerfile
-  DeleteMajorFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      PackageType: Image
-      Events:
-        CatchAll:
-          Type: Api
-          Properties:
-            Path: /removemajor
-            Method: POST
-            RestApiId: !Ref AdminUnitAPI
-    Metadata:
-      DockerTag: go1.x-v1
-      DockerContext: ./removemajor
-      Dockerfile: Dockerfile
-  AddSpecFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      PackageType: Image
-      Events:
-        CatchAll:
-          Type: Api
-          Properties:
-            Path: /addspec
-            Method: POST
-            RestApiId: !Ref AdminUnitAPI
-    Metadata:
-      DockerTag: go1.x-v1
-      DockerContext: ./addspec
-      Dockerfile: Dockerfile
-  UpdateSpecFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      PackageType: Image
-      Events:
-        CatchAll:
-          Type: Api
-          Properties:
-            Path: /updatespec
-            Method: POST
-            RestApiId: !Ref AdminUnitAPI
-    Metadata:
-      DockerTag: go1.x-v1
-      DockerContext: ./updatespec
-      Dockerfile: Dockerfile
-  RemoveSpecFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      PackageType: Image
-      Events:
-        CatchAll:
-          Type: Api
-          Properties:
-            Path: /removespec
-            Method: POST
-            RestApiId: !Ref AdminUnitAPI
-    Metadata:
-      DockerTag: go1.x-v1
-      DockerContext: ./removespec
-      Dockerfile: Dockerfile
+  # RemoveUnitFunction:
+  #   Type: AWS::Serverless::Function
+  #   Properties:
+  #     PackageType: Image
+  #     Events:
+  #       CatchAll:
+  #         Type: Api
+  #         Properties:
+  #           Path: /removeunit
+  #           Method: POST
+  #           RestApiId: !Ref AdminUnitAPI
+  #   Metadata:
+  #     DockerTag: go1.x-v1
+  #     DockerContext: ./removeunit
+  #     Dockerfile: Dockerfile
+  # UpdateUnitFunction:
+  #   Type: AWS::Serverless::Function
+  #   Properties:
+  #     PackageType: Image
+  #     Events:
+  #       CatchAll:
+  #         Type: Api
+  #         Properties:
+  #           Path: /updateunit
+  #           Method: POST
+  #           RestApiId: !Ref AdminUnitAPI
+  #   Metadata:
+  #     DockerTag: go1.x-v1
+  #     DockerContext: ./updateunit
+  #     Dockerfile: Dockerfile
+  # AddMajorFunction:
+  #   Type: AWS::Serverless::Function
+  #   Properties:
+  #     PackageType: Image
+  #     Events:
+  #       CatchAll:
+  #         Type: Api
+  #         Properties:
+  #           Path: /addmajor
+  #           Method: POST
+  #           RestApiId: !Ref AdminUnitAPI
+  #   Metadata:
+  #     DockerTag: go1.x-v1
+  #     DockerContext: ./addmajor
+  #     Dockerfile: Dockerfile
+  # UpdateMajorFunction:
+  #   Type: AWS::Serverless::Function
+  #   Properties:
+  #     PackageType: Image
+  #     Events:
+  #       CatchAll:
+  #         Type: Api
+  #         Properties:
+  #           Path: /updatemajor
+  #           Method: POST
+  #           RestApiId: !Ref AdminUnitAPI
+  #   Metadata:
+  #     DockerTag: go1.x-v1
+  #     DockerContext: ./updatemajor
+  #     Dockerfile: Dockerfile
+  # DeleteMajorFunction:
+  #   Type: AWS::Serverless::Function
+  #   Properties:
+  #     PackageType: Image
+  #     Events:
+  #       CatchAll:
+  #         Type: Api
+  #         Properties:
+  #           Path: /removemajor
+  #           Method: POST
+  #           RestApiId: !Ref AdminUnitAPI
+  #   Metadata:
+  #     DockerTag: go1.x-v1
+  #     DockerContext: ./removemajor
+  #     Dockerfile: Dockerfile
+  # AddSpecFunction:
+  #   Type: AWS::Serverless::Function
+  #   Properties:
+  #     PackageType: Image
+  #     Events:
+  #       CatchAll:
+  #         Type: Api
+  #         Properties:
+  #           Path: /addspec
+  #           Method: POST
+  #           RestApiId: !Ref AdminUnitAPI
+  #   Metadata:
+  #     DockerTag: go1.x-v1
+  #     DockerContext: ./addspec
+  #     Dockerfile: Dockerfile
+  # UpdateSpecFunction:
+  #   Type: AWS::Serverless::Function
+  #   Properties:
+  #     PackageType: Image
+  #     Events:
+  #       CatchAll:
+  #         Type: Api
+  #         Properties:
+  #           Path: /updatespec
+  #           Method: POST
+  #           RestApiId: !Ref AdminUnitAPI
+  #   Metadata:
+  #     DockerTag: go1.x-v1
+  #     DockerContext: ./updatespec
+  #     Dockerfile: Dockerfile
+  # RemoveSpecFunction:
+  #   Type: AWS::Serverless::Function
+  #   Properties:
+  #     PackageType: Image
+  #     Events:
+  #       CatchAll:
+  #         Type: Api
+  #         Properties:
+  #           Path: /removespec
+  #           Method: POST
+  #           RestApiId: !Ref AdminUnitAPI
+  #   Metadata:
+  #     DockerTag: go1.x-v1
+  #     DockerContext: ./removespec
+  #     Dockerfile: Dockerfile
 
 Outputs:
   AdminUnitAPI:
