@@ -21,6 +21,7 @@ export default function Authenticate(props: DefaultProps) {
         localStorage.setItem('rToken', resp.data['refresh_token']);
         localStorage.setItem('rTokenExpiry', new Date(new Date().getTime()+(30*24*60*60*1000)).toString()); // After 60 days the refresh token no longer works
         localStorage.setItem('idToken', resp.data['id_token']);
+        window.location.replace('/')
       })
       .catch((err: AxiosError) => {
         if (err.response?.status === 400) {
@@ -35,7 +36,7 @@ export default function Authenticate(props: DefaultProps) {
   }, []);
   return (
     <Box id="authenticating">
-      <Typography variant="h2">Hey G</Typography>
+      <Typography variant="h4">Sorry - This Site Requires A Staff Account!</Typography>
     </Box>
   )
 }

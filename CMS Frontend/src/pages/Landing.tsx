@@ -1,9 +1,11 @@
 import { Box, Grid, Paper, Typography } from "@material-ui/core";
 import { decode } from "jsonwebtoken";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { CognitoJWT, DefaultProps } from "../types";
 
 function Landing(props: DefaultProps) {
+  const history = useHistory();
   // @ts-ignore
   const decodedToken: CognitoJWT = decode(localStorage.getItem('idToken')!);
   return (
@@ -13,7 +15,7 @@ function Landing(props: DefaultProps) {
       <Box marginTop={5}>
         <Grid container justify="space-evenly">
           <Grid item xs={4}>
-            <Paper className="fullHeight">
+            <Paper className="cardEntry" onClick={() => history.push('/units')}>
               <Box padding={2}>
                 <Typography variant="h6" align="center">Manage Units</Typography>
                 <Typography variant="body1" align="center">Create/Delete/Update/View Units available to the general user</Typography>
@@ -21,7 +23,7 @@ function Landing(props: DefaultProps) {
             </Paper>
           </Grid>
           <Grid item xs={4}>
-            <Paper className="fullHeight">
+            <Paper className="cardEntry" onClick={() => history.push('/majors')}>
               <Box padding={2}>
                 <Typography variant="h6" align="center">Manage Majors</Typography>
                 <Typography variant="body1" align="center">Create/Delete/Update/View Majors available to the general user</Typography>
@@ -33,7 +35,7 @@ function Landing(props: DefaultProps) {
       <Box marginTop={5}>
         <Grid container justify="space-evenly">
           <Grid item xs={4}>
-            <Paper className="fullHeight">
+            <Paper className="cardEntry" onClick={() => history.push('/careers')}>
               <Box padding={2}>
                 <Typography variant="h6" align="center">Manage Careers</Typography>
                 <Typography variant="body1" align="center">Create/Delete/Update/View Careers available to the general user</Typography>
@@ -41,7 +43,7 @@ function Landing(props: DefaultProps) {
             </Paper>
           </Grid>
           <Grid item xs={4}>
-            <Paper className="fullHeight">
+            <Paper className="cardEntry" onClick={() => history.push('/specializations')}>
               <Box padding={2}>
                 <Typography variant="h6" align="center">Manage Specializations</Typography>
                 <Typography variant="body1" align="center">Create/Delete/Update/View Specializations available to the general user</Typography>
@@ -56,7 +58,8 @@ function Landing(props: DefaultProps) {
 
 export default styled(Landing)`
   word-wrap: break-word;
-  .fullHeight {
+  .cardEntry {
     height: 100% !important;
+    cursor: pointer;
   }
 `;
