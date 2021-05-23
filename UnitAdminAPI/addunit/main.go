@@ -32,6 +32,9 @@ func handler(ctx context.Context, payload events.APIGatewayProxyRequest) (events
 			addDBError := addToDatabase(unit, db)
 			if addDBError == nil {
 				return events.APIGatewayProxyResponse{
+					Headers: map[string]string{
+						"Access-Control-Allow-Origin": "*",
+					},
 					Body:       fmt.Sprintf("Successfully Added Unit: %s", unit.UnitCode),
 					StatusCode: 200,
 				}, nil
