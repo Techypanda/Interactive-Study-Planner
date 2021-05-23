@@ -8,7 +8,7 @@ import useCognitoToken from "../api/cognito";
 import { QueryClient, useQueryClient } from "react-query";
 import { decode } from "jsonwebtoken";
 import { useEffect, useState } from "react";
-import UnitManagement from "./UnitManagement";
+import UnitRouter from "./UnitRouter";
 import MajorManagement from "./MajorManagement";
 import SpecializationManagement from "./SpecializationManagement";
 import CareerManagement from "./CareerManagement";
@@ -31,7 +31,7 @@ export default function Authenticated(props: DefaultProps) {
     window.setTimeout(() => {
       decodeLoop(setUsername, client);
     }, 300); // takes a bit before id token is ready
-  }, [ client ])
+  }, [client])
   return (
     <>
       <Router>
@@ -41,7 +41,7 @@ export default function Authenticated(props: DefaultProps) {
             <Landing username={username} />
           </Route>
           <Route path="/units">
-            <UnitManagement username={username} />
+            <UnitRouter username={username} />
           </Route>
           <Route path="/majors">
             <MajorManagement />

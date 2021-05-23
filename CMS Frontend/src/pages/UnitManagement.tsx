@@ -2,13 +2,14 @@ import { DefaultProps } from "../types";
 import { Box, Button, Container, Paper, TextField, Typography } from "@material-ui/core";
 import styled from "styled-components";
 import UnitEntry from "../components/units/UnitEntry";
+import { useHistory } from "react-router-dom";
 
 function UnitManagement(props: DefaultProps) {
-
+  const history = useHistory();
   return (
     <Container id="unitmanagement" className={props.className}>
       <Box id="titlebar" display="flex" justifyContent="center" alignItems="center" marginY={2}>
-        <Button variant="outlined">CREATE</Button>
+        <Button variant="outlined" onClick={() => history.push("/units/create")}>CREATE</Button>
         <Typography display="inline" variant="h4">{props.username} - Unit Management</Typography>
       </Box>
       <Box id="searchcontainer">
