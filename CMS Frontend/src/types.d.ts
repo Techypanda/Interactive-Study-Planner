@@ -19,9 +19,9 @@ export interface UnitEntryProps extends DefaultProps {
 }
 export interface CreateUnitForm {
   unitCode: string
-	name: string
-	description: string
-	credits: number
+	unitName: string
+	unitDescription: string
+	unitCredits: number
 	delivery: string
 	prerequistes: string[]
 	corequistes: string[]

@@ -24,16 +24,17 @@ function CreateUnit(props: DefaultProps) {
     const parsedPrereq = prerequistes.split(',');
     const pasredAntireq = antiRequistes.split(',');
     const payload: CreateUnitForm = {
-      name,
+      unitName: name,
       unitCode,
-      description,
-      credits: Number.isNaN(credits) ? 0 : credits,
+      unitDescription: description,
+      unitCredits: Number.isNaN(credits) ? 0 : credits,
       delivery,
       corequistes: parsedCoreq,
       prerequistes: parsedPrereq,
       antirequistes: pasredAntireq
     };
-    axios.post(`${process.env.REACT_APP_API_URI}/addunit`, payload, { headers: { "Authorization": client.getQueryData("token") }}).then((resp) => {
+    console.log(payload);
+    axios.post(`${process.env.REACT_APP_API_URI}/addunit`, payload, { headers: { "Authorization": `Bearer ${client.getQueryData("token")}` }}).then((resp) => {
       console.log(resp);
     }).catch((err: AxiosError) => {
       console.error(err.response);
