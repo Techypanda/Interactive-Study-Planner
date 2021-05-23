@@ -1,13 +1,10 @@
 import { AppBar, Toolbar, IconButton, Typography, Box } from "@material-ui/core";
 import { Menu } from "@material-ui/icons";
-import { CognitoJWT, DefaultProps } from "../../types";
+import { DefaultProps } from "../../types";
 import styled from 'styled-components';
-import { decode } from "jsonwebtoken";
 import CurtinLogo from "../../static/curtinlogo.png";
 
 function Navbar(props: DefaultProps) {
-  // @ts-ignore
-  const decodedToken: CognitoJWT = decode(localStorage.getItem('idToken')!);
   return (
     <AppBar position="static" className={props.className}>
       <Toolbar className="flexit">
@@ -18,7 +15,7 @@ function Navbar(props: DefaultProps) {
           Curtin Course Planner - Medical Content Management System
         </Typography>
         <Box id="LogoSection">
-          <Typography variant="subtitle1">{ decodedToken["cognito:username"] }</Typography>
+          <Typography variant="subtitle1">{ props.username }</Typography>
           <img src={CurtinLogo} alt="curtin logo" />
         </Box>
       </Toolbar>

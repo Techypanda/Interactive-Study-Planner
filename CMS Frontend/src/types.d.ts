@@ -1,5 +1,6 @@
 export interface DefaultProps {
   className?: string;
+  username?: string;
 }
 export interface CognitoJWT {
   at_hash: string

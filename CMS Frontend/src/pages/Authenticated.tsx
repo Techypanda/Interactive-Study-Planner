@@ -1,23 +1,40 @@
 import { Box, Typography } from "@material-ui/core";
-import { useEffect } from "react";
-import { useQuery, useQueryClient } from "react-query";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navbar from "../components/shared/Navbar";
-import { DefaultProps } from "../types";
+import { CognitoJWT, DefaultProps } from "../types";
 import Landing from "./Landing";
 import NotFound from "./NotFound";
-import axios, { AxiosError } from 'axios';
 import useCognitoToken from "../api/cognito";
+import { QueryClient, useQueryClient } from "react-query";
+import { decode } from "jsonwebtoken";
+import { useEffect, useState } from "react";
+
+function decodeLoop(setFunc: React.Dispatch<React.SetStateAction<string>>, client: QueryClient) { // recursive algorithm that just keeps going until it has a username.
+  const token = client.getQueryData('token') as string;
+  const decoded = decode(token) as CognitoJWT;
+  if (decoded) {
+    setFunc(decoded["cognito:username"]);
+  } else {
+    window.setTimeout(() => decodeLoop(setFunc, client), 300);
+  }
+}
 
 export default function Authenticated(props: DefaultProps) {
+  const client = useQueryClient();
+  const [username, setUsername] = useState("");
   useCognitoToken();
+  useEffect(() => {
+    window.setTimeout(() => {
+      decodeLoop(setUsername, client);
+    }, 300); // takes a bit before id token is ready
+  }, [ client ])
   return (
     <>
-      <Navbar />
+      <Navbar username={username} />
       <Router>
         <Switch>
           <Route exact path="/">
-            <Landing />
+            <Landing username={username} />
           </Route>
           <Route>
             <NotFound />

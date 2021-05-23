@@ -1,16 +1,13 @@
 import { Box, Grid, Paper, Typography } from "@material-ui/core";
-import { decode } from "jsonwebtoken";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { CognitoJWT, DefaultProps } from "../types";
+import { DefaultProps } from "../types";
 
 function Landing(props: DefaultProps) {
   const history = useHistory();
-  // @ts-ignore
-  const decodedToken: CognitoJWT = decode(localStorage.getItem('idToken')!);
   return (
     <Box id="landing" className={props.className} paddingTop={4}>
-      <Typography variant="h4" align="center">Hi {decodedToken["cognito:username"]} - Welcome To The Content Management System</Typography>
+      <Typography variant="h4" align="center">Hi {props.username} - Welcome To The Content Management System</Typography>
       <Typography variant="h5" align="center">What would you like to do?</Typography>
       <Box marginTop={5}>
         <Grid container justify="space-evenly">
