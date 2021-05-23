@@ -41,7 +41,7 @@ export default function Authenticated(props: DefaultProps) {
             <Landing username={username} />
           </Route>
           <Route path="/units">
-            <UnitManagement />
+            <UnitManagement username={username} />
           </Route>
           <Route path="/majors">
             <MajorManagement />

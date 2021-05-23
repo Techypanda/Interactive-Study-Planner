@@ -13,3 +13,7 @@ export interface CognitoJWT {
   sub: string
   token_use: string
 }
+export interface UnitEntryProps extends DefaultProps {
+  unitTitle: string;
+  unitContent: string;
+}
