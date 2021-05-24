@@ -18,15 +18,79 @@ Resources:
           ResponseParameters:
             Headers:
               Access-Control-Allow-Origin: "'*'"
-        DEFAULT_3XX:
-          ResponseParameters:
-            Headers:
-              Access-Control-Allow-Origin: "'*'"
-        DEFAULT_2XX:
-          ResponseParameters:
-            Headers:
-              Access-Control-Allow-Origin: "'*'"
         DEFAULT_5XX:
+          ResponseParameters:
+            Headers:
+              Access-Control-Allow-Origin: "'*'"
+        UNAUTHORIZED:
+          ResponseParameters:
+            Headers:
+              Access-Control-Allow-Origin: "'*'"
+        ACCESS_DENIED:
+          ResponseParameters:
+            Headers:
+              Access-Control-Allow-Origin: "'*'"
+        API_CONFIGURATION_ERROR:
+          ResponseParameters:
+            Headers:
+              Access-Control-Allow-Origin: "'*'"
+        AUTHORIZER_CONFIGURATION_ERROR:
+          ResponseParameters:
+            Headers:
+              Access-Control-Allow-Origin: "'*'"
+        AUTHORIZER_FAILURE:
+          ResponseParameters:
+            Headers:
+              Access-Control-Allow-Origin: "'*'"
+        BAD_REQUEST_BODY:
+          ResponseParameters:
+            Headers:
+              Access-Control-Allow-Origin: "'*'"
+        BAD_REQUEST_PARAMETERS:
+          ResponseParameters:
+            Headers:
+              Access-Control-Allow-Origin: "'*'"
+        EXPIRED_TOKEN:
+          ResponseParameters:
+            Headers:
+              Access-Control-Allow-Origin: "'*'"
+        INTEGRATION_FAILURE:
+          ResponseParameters:
+            Headers:
+              Access-Control-Allow-Origin: "'*'"
+        INTEGRATION_TIMEOUT:
+          ResponseParameters:
+            Headers:
+              Access-Control-Allow-Origin: "'*'"
+        INVALID_API_KEY:
+          ResponseParameters:
+            Headers:
+              Access-Control-Allow-Origin: "'*'"
+        INVALID_SIGNATURE:
+          ResponseParameters:
+            Headers:
+              Access-Control-Allow-Origin: "'*'"
+        MISSING_AUTHENTICATION_TOKEN:
+          ResponseParameters:
+            Headers:
+              Access-Control-Allow-Origin: "'*'"
+        QUOTA_EXCEEDED:
+          ResponseParameters:
+            Headers:
+              Access-Control-Allow-Origin: "'*'"
+        REQUEST_TOO_LARGE:
+          ResponseParameters:
+            Headers:
+              Access-Control-Allow-Origin: "'*'"
+        RESOURCE_NOT_FOUND:
+          ResponseParameters:
+            Headers:
+              Access-Control-Allow-Origin: "'*'"
+        THROTTLED:
+          ResponseParameters:
+            Headers:
+              Access-Control-Allow-Origin: "'*'"
+        UNSUPPORTED_MEDIA_TYPE:
           ResponseParameters:
             Headers:
               Access-Control-Allow-Origin: "'*'"
