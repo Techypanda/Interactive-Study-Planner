@@ -15,29 +15,26 @@ Resources:
       Cors:
         AllowMethods: "'POST, OPTIONS'"
         AllowHeaders: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-        AllowOrigin: "'http://localhost:3000'"
-        AllowCredentials: true
+        AllowOrigin: "'*'"
       GatewayResponses:
         DEFAULT_4XX:
           ResponseParameters:
             Headers:
-              Access-Control-Allow-Origin: "'http://localhost:3000'"
+              Access-Control-Allow-Origin: "'*'"
               Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
               Access-Control-Allow-Methods: "'OPTIONS,POST'"
-              Access-Control-Allow-Credentials: "'true'"
         DEFAULT_5XX:
           ResponseParameters:
             Headers:
-              Access-Control-Allow-Origin: "'http://localhost:3000'"
+              Access-Control-Allow-Origin: "'*'"
               Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
               Access-Control-Allow-Methods: "'OPTIONS,POST'"
-              Access-Control-Allow-Credentials: "'true'"
-      Auth:
-       AddDefaultAuthorizerToCorsPreflight: true # doesnt work zzzz
-       DefaultAuthorizer: DevUserPool
-       Authorizers:
-         DevUserPool:
-           UserPoolArn: arn:aws:cognito-idp:ap-southeast-2:363837338544:userpool/ap-southeast-2_gn4KIEkx0
+      # Auth: doing it manually fk this
+      #  AddDefaultAuthorizerToCorsPreflight: true # doesnt work zzzz
+      #  DefaultAuthorizer: DevUserPool
+      #  Authorizers:
+      #    DevUserPool:
+      #      UserPoolArn: arn:aws:cognito-idp:ap-southeast-2:363837338544:userpool/ap-southeast-2_gn4KIEkx0
 
   AddUnitFunction:
     Type: AWS::Serverless::Function
