@@ -16,6 +16,7 @@ Resources:
         AllowMethods: "'POST, OPTIONS'"
         AllowHeaders: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
         AllowOrigin: "'http://localhost:3000'"
+        AllowCredentials: true
       GatewayResponses:
         DEFAULT_4XX:
           ResponseParameters:
@@ -23,12 +24,14 @@ Resources:
               Access-Control-Allow-Origin: "'http://localhost:3000'"
               Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
               Access-Control-Allow-Methods: "'OPTIONS,POST'"
+              Access-Control-Allow-Credentials: "'true'"
         DEFAULT_5XX:
           ResponseParameters:
             Headers:
               Access-Control-Allow-Origin: "'http://localhost:3000'"
               Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
               Access-Control-Allow-Methods: "'OPTIONS,POST'"
+              Access-Control-Allow-Credentials: "'true'"
       Auth:
        AddDefaultAuthorizerToCorsPreflight: true # doesnt work zzzz
        DefaultAuthorizer: DevUserPool
