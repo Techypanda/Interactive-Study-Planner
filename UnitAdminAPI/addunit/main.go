@@ -27,9 +27,9 @@ func handler(ctx context.Context, payload events.APIGatewayProxyRequest) (events
 	// fmt.Printf("Recieved Payload: %+v\n", payload) // redirect to logs
 	return events.APIGatewayProxyResponse{
 		Headers: map[string]string{
-			"Access-Control-Allow-Headers": "Content-Type",
+			"Access-Control-Allow-Headers": "*",
 			"Access-Control-Allow-Origin":  "*",
-			"Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+			"Access-Control-Allow-Methods": "*",
 		},
 		Body:       fmt.Sprintf("WORKING"),
 		StatusCode: 200,

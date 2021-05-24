@@ -34,8 +34,8 @@ function CreateUnit(props: DefaultProps) {
       antirequistes: pasredAntireq
     };
     console.log(payload);
-    console.log({ headers: { "Authorization": `Bearer ${client.getQueryData("token")}` }});
-    axios.post(`${process.env.REACT_APP_API_URI}/addunit`, payload, { headers: { "Authorization": `Bearer ${client.getQueryData("token")}` }}).then((resp) => {
+    //console.log({ headers: { "Authorization": `Bearer ${client.getQueryData("token")}` }});
+    axios.post(`${process.env.REACT_APP_API_URI}/addunit`, payload, /* { headers: { "Authorization": `Bearer ${client.getQueryData("token")}` }} */).then((resp) => {
       console.log(resp);
     }).catch((err: AxiosError) => {
       console.error(err.response);
