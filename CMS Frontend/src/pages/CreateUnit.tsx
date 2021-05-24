@@ -37,9 +37,14 @@ function CreateUnit(props: DefaultProps) {
     // console.log({ headers: { "Authorization": `Bearer ${client.getQueryData("token")}` }});
     const headers = {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${client.getQueryData("token")}`
+      'Authorization': `${client.getQueryData("token")}`
     }
-    axios.post(`${process.env.REACT_APP_API_URI}/addunit`, JSON.stringify(payload), { headers: headers }).then((resp) => {
+    console.log(JSON.stringify(headers));
+    axios.post(`${process.env.REACT_APP_API_URI}/addunit`, JSON.stringify(payload), {
+      headers: {
+        'Authorization': `${client.getQueryData("token")}`
+      }
+    }).then((resp) => {
       console.log(resp);
     }).catch((err: AxiosError) => {
       console.error(err.response);
