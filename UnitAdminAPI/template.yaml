@@ -13,8 +13,25 @@ Resources:
     Properties:
       StageName: Dev
       Cors: "'*'" # Need to change this to the relevant domain we pruchase/get assigned
+      GatewayResponses:
+        DEFAULT_4XX:
+          ResponseParameters:
+            Headers:
+              Access-Control-Allow-Origin: "'*'"
+        DEFAULT_3XX:
+          ResponseParameters:
+            Headers:
+              Access-Control-Allow-Origin: "'*'"
+        DEFAULT_2XX:
+          ResponseParameters:
+            Headers:
+              Access-Control-Allow-Origin: "'*'"
+        DEFAULT_5XX:
+          ResponseParameters:
+            Headers:
+              Access-Control-Allow-Origin: "'*'"
       Auth:
-       AddDefaultAuthorizerToCorsPreflight: true # CORS?????????
+       AddDefaultAuthorizerToCorsPreflight: true # doesnt work zzzz
        DefaultAuthorizer: DevUserPool
        Authorizers:
          DevUserPool:

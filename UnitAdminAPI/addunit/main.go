@@ -39,7 +39,7 @@ func handler(ctx context.Context, payload events.APIGatewayProxyRequest) (events
 						"Access-Control-Allow-Methods": "OPTIONS,POST",
 					},
 					Body:       fmt.Sprintf("Successfully added unit: %s", unit.UnitCode),
-					StatusCode: 400,
+					StatusCode: 200,
 				}, nil
 			} else {
 				return events.APIGatewayProxyResponse{
