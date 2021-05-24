@@ -13,11 +13,12 @@ Resources:
     Properties:
       StageName: Dev
       Cors: "'*'" # Need to change this to the relevant domain we pruchase/get assigned
-      #Auth:
-      #  DefaultAuthorizer: DevUserPool
-      #  Authorizers:
-      #    DevUserPool:
-      #      UserPoolArn: arn:aws:cognito-idp:ap-southeast-2:363837338544:userpool/ap-southeast-2_gn4KIEkx0
+      Auth:
+       AddDefaultAuthorizerToCorsPreflight: true # CORS?????????
+       DefaultAuthorizer: DevUserPool
+       Authorizers:
+         DevUserPool:
+           UserPoolArn: arn:aws:cognito-idp:ap-southeast-2:363837338544:userpool/ap-southeast-2_gn4KIEkx0
 
   AddUnitFunction:
     Type: AWS::Serverless::Function
