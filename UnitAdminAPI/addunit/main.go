@@ -34,10 +34,9 @@ func handler(ctx context.Context, payload events.APIGatewayProxyRequest) (events
 			if addDBError == nil {
 				return events.APIGatewayProxyResponse{
 					Headers: map[string]string{
-						"Access-Control-Allow-Headers":     "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token",
-						"Access-Control-Allow-Origin":      "http://localhost:3000",
-						"Access-Control-Allow-Methods":     "OPTIONS,POST",
-						"Access-Control-Allow-Credentials": "true",
+						"Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers",
+						"Access-Control-Allow-Origin":  "*",
+						"Access-Control-Allow-Methods": "OPTIONS,POST",
 					},
 					Body:       fmt.Sprintf("Successfully added unit: %s", unit.UnitCode),
 					StatusCode: 200,
@@ -45,10 +44,9 @@ func handler(ctx context.Context, payload events.APIGatewayProxyRequest) (events
 			} else {
 				return events.APIGatewayProxyResponse{
 					Headers: map[string]string{
-						"Access-Control-Allow-Headers":     "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token",
-						"Access-Control-Allow-Origin":      "http://localhost:3000",
-						"Access-Control-Allow-Methods":     "OPTIONS,POST",
-						"Access-Control-Allow-Credentials": "true",
+						"Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers",
+						"Access-Control-Allow-Origin":  "*",
+						"Access-Control-Allow-Methods": "OPTIONS,POST",
 					},
 					Body:       fmt.Sprintf("Bad Request: %s", addDBError.Error()),
 					StatusCode: 400,
@@ -57,10 +55,9 @@ func handler(ctx context.Context, payload events.APIGatewayProxyRequest) (events
 		} else {
 			return events.APIGatewayProxyResponse{
 				Headers: map[string]string{
-					"Access-Control-Allow-Headers":     "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token",
-					"Access-Control-Allow-Origin":      "http://localhost:3000",
-					"Access-Control-Allow-Methods":     "OPTIONS,POST",
-					"Access-Control-Allow-Credentials": "true",
+					"Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers",
+					"Access-Control-Allow-Origin":  "*",
+					"Access-Control-Allow-Methods": "OPTIONS,POST",
 				},
 				Body:       fmt.Sprintf("Bad Request: %s", inDBError.Error()),
 				StatusCode: 400,
@@ -69,10 +66,9 @@ func handler(ctx context.Context, payload events.APIGatewayProxyRequest) (events
 	} else {
 		return events.APIGatewayProxyResponse{
 			Headers: map[string]string{
-				"Access-Control-Allow-Headers":     "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token",
-				"Access-Control-Allow-Origin":      "http://localhost:3000",
-				"Access-Control-Allow-Methods":     "OPTIONS,POST",
-				"Access-Control-Allow-Credentials": "true",
+				"Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers",
+				"Access-Control-Allow-Origin":  "*",
+				"Access-Control-Allow-Methods": "OPTIONS,POST",
 			},
 			Body:       "Invalid payload recieved, please refer to the AddUnit documentation for correct payload",
 			StatusCode: 400,

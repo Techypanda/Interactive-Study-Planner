@@ -42,7 +42,8 @@ function CreateUnit(props: DefaultProps) {
     console.log(JSON.stringify(headers));
     axios.post(`${process.env.REACT_APP_API_URI}/addunit`, JSON.stringify(payload), {
       headers: {
-        'Authorization': `${client.getQueryData("token")}`
+        'Authorization': client.getQueryData("token"),
+        'Content-Type': 'application/json'
       }
     }).then((resp) => {
       console.log(resp);
