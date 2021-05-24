@@ -25,6 +25,16 @@ type Unit struct {
 
 func handler(ctx context.Context, payload events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	// fmt.Printf("Recieved Payload: %+v\n", payload) // redirect to logs
+	return events.APIGatewayProxyResponse{
+		Headers: map[string]string{
+			"Access-Control-Allow-Headers": "Content-Type",
+			"Access-Control-Allow-Origin":  "*",
+			"Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+		},
+		Body:       fmt.Sprintf("WORKING"),
+		StatusCode: 200,
+	}, nil
+
 	unit, err := retrieveUnit(payload)
 	if err == nil {
 		inDBError := checkInDatabase(unit, db)
@@ -33,8 +43,8 @@ func handler(ctx context.Context, payload events.APIGatewayProxyRequest) (events
 			if addDBError == nil {
 				return events.APIGatewayProxyResponse{
 					Headers: map[string]string{
-						"Access-Control-Allow-Headers" : "Content-Type",
-						"Access-Control-Allow-Origin": "*",
+						"Access-Control-Allow-Headers": "Content-Type",
+						"Access-Control-Allow-Origin":  "*",
 						"Access-Control-Allow-Methods": "OPTIONS,POST,GET",
 					},
 					Body:       fmt.Sprintf("Successfully Added Unit: %s", unit.UnitCode),
@@ -43,8 +53,8 @@ func handler(ctx context.Context, payload events.APIGatewayProxyRequest) (events
 			} else {
 				return events.APIGatewayProxyResponse{
 					Headers: map[string]string{
-						"Access-Control-Allow-Headers" : "Content-Type",
-						"Access-Control-Allow-Origin": "*",
+						"Access-Control-Allow-Headers": "Content-Type",
+						"Access-Control-Allow-Origin":  "*",
 						"Access-Control-Allow-Methods": "OPTIONS,POST,GET",
 					},
 					Body:       fmt.Sprintf("Bad Request: %s", addDBError.Error()),
@@ -54,8 +64,8 @@ func handler(ctx context.Context, payload events.APIGatewayProxyRequest) (events
 		} else {
 			return events.APIGatewayProxyResponse{
 				Headers: map[string]string{
-					"Access-Control-Allow-Headers" : "Content-Type",
-					"Access-Control-Allow-Origin": "*",
+					"Access-Control-Allow-Headers": "Content-Type",
+					"Access-Control-Allow-Origin":  "*",
 					"Access-Control-Allow-Methods": "OPTIONS,POST,GET",
 				},
 				Body:       fmt.Sprintf("Bad Request: %s", inDBError.Error()),
@@ -65,8 +75,8 @@ func handler(ctx context.Context, payload events.APIGatewayProxyRequest) (events
 	} else {
 		return events.APIGatewayProxyResponse{
 			Headers: map[string]string{
-				"Access-Control-Allow-Headers" : "Content-Type",
-				"Access-Control-Allow-Origin": "*",
+				"Access-Control-Allow-Headers": "Content-Type",
+				"Access-Control-Allow-Origin":  "*",
 				"Access-Control-Allow-Methods": "OPTIONS,POST,GET",
 			},
 			Body:       "Invalid payload recieved, please refer to the AddUnit documentation for correct payload",
