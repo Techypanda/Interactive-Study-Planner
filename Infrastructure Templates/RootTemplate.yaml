@@ -19,7 +19,7 @@ Resources:
         - arn:aws:iam::aws:policy/AmazonS3FullAccess
         - arn:aws:iam::aws:policy/IAMUserChangePassword
         - arn:aws:iam::aws:policy/AmazonCognitoDeveloperAuthenticatedIdentities
-        - arn:aws:iam::aws:policy/AmazonElasticContainerRegistryPublicReadOnly
+        - arn:aws:iam::aws:policy/AmazonElasticContainerRegistryPublicFullAccess
       Policies:
         - PolicyName: CognitoDev
           PolicyDocument:

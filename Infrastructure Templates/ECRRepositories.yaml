@@ -1,7 +1,11 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Description: Template that creates Dev DBs.
 Resources:
-  UnitAdminRepository: # make public ecr as its cheaper
-    Type: AWS::ECR::PublicRepository
+  UnitAdminRepository:
+    Type: AWS::ECR::Repository
     Properties:
       RepositoryName: curtinmedicalcourseplanner/unitadmin
+Outputs:
+  UnitAdminRepository:
+    Description: Arn Value For Repository
+    Value: !GetAtt UnitAdminRepository.Arn
