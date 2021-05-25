@@ -80,12 +80,12 @@ function CreateMajor(props: DefaultProps) {
       <Grid container spacing={1}>
         <Grid item sm={6} xs={12}>
           <Box marginTop={2}>
-            <TextField error={!unitCode} label="Unitcode Of Unit - Required" fullWidth placeholder="Enter Unitcode" variant="outlined" required onChange={(e) => setUnitCode(e.target.value)} value={unitCode} />
+            <TextField error={!unitCode} label="Majorcode Of Major - Required" fullWidth placeholder="Enter Majorcode" variant="outlined" required onChange={(e) => setUnitCode(e.target.value)} value={unitCode} />
           </Box>
         </Grid>
         <Grid item sm={6} xs={12}>
           <Box marginTop={2}>
-            <TextField error={!name} label="Name Of Unit - Required" fullWidth placeholder="Enter Unitname" variant="outlined" required onChange={(e) => setName(e.target.value)} value={name} />
+            <TextField error={!name} label="Name Of Major - Required" fullWidth placeholder="Enter Major Name" variant="outlined" required onChange={(e) => setName(e.target.value)} value={name} />
           </Box>
         </Grid>
       </Grid>
