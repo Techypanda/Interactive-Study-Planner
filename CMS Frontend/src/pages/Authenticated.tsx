@@ -1,4 +1,3 @@
-import { Box, Typography } from "@material-ui/core";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navbar from "../components/shared/Navbar";
 import { CognitoJWT, DefaultProps } from "../types";
@@ -9,9 +8,9 @@ import { QueryClient, useQueryClient } from "react-query";
 import { decode } from "jsonwebtoken";
 import { useEffect, useState } from "react";
 import UnitRouter from "./UnitRouter";
-import MajorManagement from "./MajorManagement";
-import SpecializationManagement from "./SpecializationManagement";
-import CareerManagement from "./CareerManagement";
+import CareerRouter from "./CareerRouter";
+import MajorRouter from "./MajorRouter";
+import SpecializationRouter from "./SpecializationRouter";
 
 function decodeLoop(setFunc: React.Dispatch<React.SetStateAction<string>>, client: QueryClient) { // recursive algorithm that just keeps going until it has a username.
   const token = client.getQueryData('token') as string;
@@ -44,13 +43,13 @@ export default function Authenticated(props: DefaultProps) {
             <UnitRouter username={username} />
           </Route>
           <Route path="/majors">
-            <MajorManagement />
+            <MajorRouter username={username} />
           </Route>
           <Route path="/specializations">
-            <SpecializationManagement />
+            <SpecializationRouter username={username} />
           </Route>
           <Route path="/careers">
-            <CareerManagement />
+            <CareerRouter username={username} />
           </Route>
           <Route>
             <NotFound />

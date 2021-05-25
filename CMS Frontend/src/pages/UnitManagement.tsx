@@ -12,7 +12,7 @@ function UnitManagement(props: DefaultProps) {
         <Button variant="outlined" onClick={() => history.push("/units/create")}>CREATE</Button>
         <Typography display="inline" variant="h4">{props.username} - Unit Management</Typography>
       </Box>
-      <Box id="searchcontainer">
+      <Box id="searchcontainer" display="flex">
         <TextField variant="outlined" placeholder="Search Units..." className="searchbar" />
         <Button color="primary" variant='contained' className="searchbtn">GO</Button>
       </Box>
