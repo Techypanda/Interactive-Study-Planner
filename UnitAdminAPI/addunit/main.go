@@ -4,7 +4,6 @@ package main
 import (
 	"context"
 	"fmt"
-
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
@@ -25,22 +24,45 @@ type Unit struct {
 
 func handler(ctx context.Context, payload events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	// fmt.Printf("Recieved Payload: %+v\n", payload) // redirect to logs
-
-	unit, err := retrieveUnit(payload)
-	if err == nil {
-		inDBError := checkInDatabase(unit, db)
-		if inDBError == nil {
-			addDBError := addToDatabase(unit, db)
-			if addDBError == nil {
-				return events.APIGatewayProxyResponse{
-					Headers: map[string]string{
-						"Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers",
-						"Access-Control-Allow-Origin":  "*",
-						"Access-Control-Allow-Methods": "OPTIONS,POST",
-					},
-					Body:       fmt.Sprintf("Successfully added unit: %s", unit.UnitCode),
-					StatusCode: 200,
-				}, nil
+	token := payload.Headers["Authorization"]
+	valid, err := validateJWT(token)
+	if !valid {
+		return events.APIGatewayProxyResponse{
+			Headers: map[string]string{
+				"Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers",
+				"Access-Control-Allow-Origin":  "*",
+				"Access-Control-Allow-Methods": "OPTIONS,POST",
+			},
+			Body:       fmt.Sprintf("you have failed authorization: %v", err),
+			StatusCode: 401,
+		}, nil
+	} else {
+		unit, err := retrieveUnit(payload)
+		if err == nil {
+			inDBError := checkInDatabase(unit, db)
+			if inDBError == nil {
+				addDBError := addToDatabase(unit, db)
+				if addDBError == nil {
+					return events.APIGatewayProxyResponse{
+						Headers: map[string]string{
+							"Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers",
+							"Access-Control-Allow-Origin":  "*",
+							"Access-Control-Allow-Methods": "OPTIONS,POST",
+						},
+						Body:       fmt.Sprintf("Successfully added unit: %s", unit.UnitCode),
+						StatusCode: 200,
+					}, nil
+				} else {
+					return events.APIGatewayProxyResponse{
+						Headers: map[string]string{
+							"Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers",
+							"Access-Control-Allow-Origin":  "*",
+							"Access-Control-Allow-Methods": "OPTIONS,POST",
+						},
+						Body:       fmt.Sprintf("Bad Request: %s", addDBError.Error()),
+						StatusCode: 400,
+					}, nil
+				}
 			} else {
 				return events.APIGatewayProxyResponse{
 					Headers: map[string]string{
@@ -48,7 +70,7 @@ func handler(ctx context.Context, payload events.APIGatewayProxyRequest) (events
 						"Access-Control-Allow-Origin":  "*",
 						"Access-Control-Allow-Methods": "OPTIONS,POST",
 					},
-					Body:       fmt.Sprintf("Bad Request: %s", addDBError.Error()),
+					Body:       fmt.Sprintf("Bad Request: %s", inDBError.Error()),
 					StatusCode: 400,
 				}, nil
 			}
@@ -59,20 +81,10 @@ func handler(ctx context.Context, payload events.APIGatewayProxyRequest) (events
 					"Access-Control-Allow-Origin":  "*",
 					"Access-Control-Allow-Methods": "OPTIONS,POST",
 				},
-				Body:       fmt.Sprintf("Bad Request: %s", inDBError.Error()),
+				Body:       "Invalid payload recieved, please refer to the AddUnit documentation for correct payload",
 				StatusCode: 400,
 			}, nil
 		}
-	} else {
-		return events.APIGatewayProxyResponse{
-			Headers: map[string]string{
-				"Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers",
-				"Access-Control-Allow-Origin":  "*",
-				"Access-Control-Allow-Methods": "OPTIONS,POST",
-			},
-			Body:       "Invalid payload recieved, please refer to the AddUnit documentation for correct payload",
-			StatusCode: 400,
-		}, nil
 	}
 }
 

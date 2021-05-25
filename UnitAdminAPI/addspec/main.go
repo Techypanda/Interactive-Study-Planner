@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
@@ -10,21 +11,35 @@ import (
 var db *dynamodb.DynamoDB
 
 func handler(ctx context.Context, payload events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	spec, err := interpretCUPayload(payload)
-	if err == nil {
-		inDBError := checkInDatabase(spec, db)
-		if inDBError == nil {
-			addDBError := addToDatabase(spec, db)
-			if addDBError == nil {
-				return OkResponse("Specialization has been updated in database"), nil
+	token := payload.Headers["Authorization"]
+	valid, err := validateJWT(token)
+	if valid {
+		spec, err := interpretCUPayload(payload)
+		if err == nil {
+			inDBError := checkInDatabase(spec, db)
+			if inDBError == nil {
+				addDBError := addToDatabase(spec, db)
+				if addDBError == nil {
+					return OkResponse("Specialization has been updated in database"), nil
+				} else {
+					return BadRequest(addDBError.Error()), nil
+				}
 			} else {
-				return BadRequest(addDBError.Error()), nil
+				return BadRequest(inDBError.Error()), nil
 			}
 		} else {
-			return BadRequest(inDBError.Error()), nil
+			return BadRequest("Payload is incorrect, refer to Add Specialization documentation"), nil
 		}
 	} else {
-		return BadRequest("Payload is incorrect, refer to Add Specialization documentation"), nil
+		return events.APIGatewayProxyResponse{
+			Headers: map[string]string{
+				"Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers",
+				"Access-Control-Allow-Origin":  "*",
+				"Access-Control-Allow-Methods": "OPTIONS,POST",
+			},
+			Body:       fmt.Sprintf("you have failed authorization: %v", err),
+			StatusCode: 401,
+		}, nil
 	}
 }
 
