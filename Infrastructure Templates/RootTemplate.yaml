@@ -10,16 +10,16 @@ Resources:
     Type: AWS::IAM::Group
     Properties:
       GroupName: "Capstone3-Developers"
-      ManagedPolicyArns:
+      ManagedPolicyArns: # At some point i should swap these out for READ only, as i'm worried someone will do clickops...
         - arn:aws:iam::aws:policy/AWSLambda_FullAccess
         - arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess
         - arn:aws:iam::aws:policy/AWSCloudFormationFullAccess
-        - arn:aws:iam::aws:policy/AWSAppSyncAdministrator
+        - arn:aws:iam::aws:policy/AmazonAPIGatewayAdministrator
         - arn:aws:iam::aws:policy/job-function/Billing
         - arn:aws:iam::aws:policy/AmazonS3FullAccess
         - arn:aws:iam::aws:policy/IAMUserChangePassword
         - arn:aws:iam::aws:policy/AmazonCognitoDeveloperAuthenticatedIdentities
-        - arn:aws:iam::aws:policy/AmazonElasticContainerRegistryPublicReadOnly
+        - arn:aws:iam::aws:policy/AmazonElasticContainerRegistryPublicFullAccess
       Policies:
         - PolicyName: CognitoDev
           PolicyDocument:

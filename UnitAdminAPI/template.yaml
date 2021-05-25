@@ -12,12 +12,29 @@ Resources:
     Type: AWS::Serverless::Api
     Properties:
       StageName: Dev
-      Cors: "'*'" # Need to change this to the relevant domain we pruchase/get assigned
-      Auth:
-        DefaultAuthorizer: DevUserPool
-        Authorizers:
-          DevUserPool:
-            UserPoolArn: arn:aws:cognito-idp:ap-southeast-2:363837338544:userpool/ap-southeast-2_gn4KIEkx0
+      Cors:
+        AllowMethods: "'POST, OPTIONS'"
+        AllowHeaders: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
+        AllowOrigin: "'*'"
+      GatewayResponses:
+        DEFAULT_4XX:
+          ResponseParameters:
+            Headers:
+              Access-Control-Allow-Origin: "'*'"
+              Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
+              Access-Control-Allow-Methods: "'OPTIONS,POST'"
+        DEFAULT_5XX:
+          ResponseParameters:
+            Headers:
+              Access-Control-Allow-Origin: "'*'"
+              Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
+              Access-Control-Allow-Methods: "'OPTIONS,POST'"
+      # Auth: doing it manually fk this
+      #  AddDefaultAuthorizerToCorsPreflight: true # doesnt work zzzz
+      #  DefaultAuthorizer: DevUserPool
+      #  Authorizers:
+      #    DevUserPool:
+      #      UserPoolArn: arn:aws:cognito-idp:ap-southeast-2:363837338544:userpool/ap-southeast-2_gn4KIEkx0
 
   AddUnitFunction:
     Type: AWS::Serverless::Function

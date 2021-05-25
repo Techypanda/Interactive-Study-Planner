@@ -37,7 +37,7 @@ pipelines:
                 - echo "Deploying Userpools"
                 - aws cloudformation deploy --template-file "./Infrastructure Templates/Userpools.yaml" --stack-name Userpools --no-fail-on-empty-changeset
           - step:
-              name: "Deploy Repositories"
+              name: "Deploy Public Repositories"
               image: atlassian/pipelines-awscli
               script:
                 - echo "Setting Up AWS CLI"
