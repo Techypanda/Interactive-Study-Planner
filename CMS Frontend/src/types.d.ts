@@ -27,3 +27,14 @@ export interface CreateUnitForm {
 	corequistes: string[]
 	antirequistes: string[]
 }
+export interface PromptData {
+  promptTitle: string
+  promptContent: string
+  showPrompt: bool
+}
+export interface ErrorProps extends DefaultProps {
+  promptTitle: string
+  promptContent: string
+  showPrompt: bool
+  onAccept: Function
+}

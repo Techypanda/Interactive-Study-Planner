@@ -1,10 +1,12 @@
 import { Box, Button, Container, Dialog, Grid, TextField, Typography } from "@material-ui/core";
-import axios, { AxiosError } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import { useState } from "react";
-import { useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { CreateUnitForm, DefaultProps } from "../types";
+import { CreateUnitForm, DefaultProps, PromptData } from "../types";
+import Error from "../components/shared/Error";
+import { BounceLoader } from "react-spinners";
 
 function CreateUnit(props: DefaultProps) {
   const history = useHistory();
@@ -16,10 +18,11 @@ function CreateUnit(props: DefaultProps) {
   const [corequistes, setCorequistes] = useState("");
   const [prerequistes, setPrerequistes] = useState("");
   const [antiRequistes, setAntirequistes] = useState("");
-  const [showError, setError] = useState(false);
+  const [error, setError] = useState<PromptData>({ promptTitle: "", promptContent: "", showPrompt: false });
+  const [loading, setLoading] = useState(false);
   const client = useQueryClient();
 
-  function SubmitForm() {
+  const mutation = useMutation(() => {
     const parsedCoreq = corequistes.split(',');
     const parsedPrereq = prerequistes.split(',');
     const pasredAntireq = antiRequistes.split(',');
@@ -33,30 +36,44 @@ function CreateUnit(props: DefaultProps) {
       prerequistes: parsedPrereq,
       antirequistes: pasredAntireq
     };
-    // console.log(payload);
-    // console.log({ headers: { "Authorization": `Bearer ${client.getQueryData("token")}` }});
-    const headers = {
-      'Content-Type': 'application/json',
-      'Authorization': `${client.getQueryData("token")}`
-    }
-    console.log(JSON.stringify(headers));
-    axios.post(`${process.env.REACT_APP_API_URI}/addunit`, JSON.stringify(payload), {
+    setLoading(true);
+    return axios.post(`${process.env.REACT_APP_API_URI}/addunit`, JSON.stringify(payload), {
       headers: {
-        'Authorization': client.getQueryData("token"),
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${client.getQueryData("token")}`
       }
-    }).then((resp) => {
-      console.log(resp);
-    }).catch((err: AxiosError) => {
-      console.error(err.response);
     })
+  }, {
+    onMutate: () => {
+    },
+    onError: (error: AxiosError, variables, context) => {
+      if (error.response!.status === 401) {
+        client.invalidateQueries("token")
+        mutation.mutate() // try again
+      } else {
+        setLoading(false)
+        setError({ promptTitle: "Unable To Create Unit", promptContent: error.response!.data, showPrompt: true })
+      }
+    },
+    onSuccess: (data: AxiosResponse) => {
+      setLoading(false)
+      // Need to refetch the units list
+      history.push('/units')
+    }
+  })
+
+  function SubmitForm() {
+    mutation.mutate();
   }
 
   return (
-    <Container id="createunit">
-      <Dialog onClose={() => setError(false)} aria-labelledby="error" open={showError}>
-        <h1>ERROR</h1>
-      </Dialog>
+    <Container id="createunit" className={props.className}>
+      <Box className="background" display={loading ? "initial" : "none"}>
+        <div className="loader">
+          <BounceLoader color="#1473AB" loading={true} size={150} />
+        </div>
+      </Box>
+      <Error onAccept={() => setError({ promptTitle: error.promptTitle, promptContent: error.promptContent, showPrompt: false })} promptTitle={error.promptTitle} promptContent={error.promptContent} showPrompt={error.showPrompt} />
       <Box marginTop={3}>
         <Typography variant="h4" align="center">Add A Unit</Typography>
       </Box>
@@ -125,4 +142,19 @@ function CreateUnit(props: DefaultProps) {
 }
 
 export default styled(CreateUnit)`
+.background {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  background-color: rgba(0,0,0,0.25);
+  top: 0;
+  left: 0;
+  z-index: 99;
+}
+.loader {
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-75px, -75px);
+}
 `;
