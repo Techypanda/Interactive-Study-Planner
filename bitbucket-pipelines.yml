@@ -7,6 +7,7 @@ pipelines:
               name: "Deploy User Accounts"
               image: atlassian/pipelines-awscli
               script:
+                - chmod +x ./SetupAWSPipeline.sh
                 - ./SetupAWSPipeline.sh
                 - echo "Deploying User Accounts"
                 - aws cloudformation deploy --template-file "./Infrastructure Templates/RootTemplate.yaml" --stack-name Capstone-3-Developers --no-fail-on-empty-changeset --capabilities CAPABILITY_NAMED_IAM
@@ -14,6 +15,7 @@ pipelines:
               name: "Deploy Databases"
               image: atlassian/pipelines-awscli
               script:
+                - chmod +x ./SetupAWSPipeline.sh
                 - ./SetupAWSPipeline.sh
                 - echo "Deploying Developer Databases"
                 - aws cloudformation deploy --template-file "./Infrastructure Templates/DevDatabases.yaml" --stack-name DevDB --no-fail-on-empty-changeset
@@ -21,6 +23,7 @@ pipelines:
               name: "Deploy Userpools"
               image: atlassian/pipelines-awscli
               script:
+                - chmod +x ./SetupAWSPipeline.sh
                 - ./SetupAWSPipeline.sh
                 - echo "Deploying Userpools"
                 - aws cloudformation deploy --template-file "./Infrastructure Templates/Userpools.yaml" --stack-name Userpools --no-fail-on-empty-changeset
@@ -28,6 +31,7 @@ pipelines:
               name: "Deploy Public Repositories"
               image: atlassian/pipelines-awscli
               script:
+                - chmod +x ./SetupAWSPipeline.sh
                 - ./SetupAWSPipeline.sh
                 - echo "Deploying Userpools"
                 - aws cloudformation deploy --template-file "./Infrastructure Templates/ECRRepositories.yaml" --stack-name ECRRepositories --no-fail-on-empty-changeset
