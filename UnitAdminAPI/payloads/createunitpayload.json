@@ -1,15 +1,124 @@
 {
-  "Headers": {
-
+  "body": "eyJ0ZXN0IjoiYm9keSJ9",
+  "resource": "/{proxy+}",
+  "path": "/path/to/resource",
+  "httpMethod": "POST",
+  "isBase64Encoded": true,
+  "queryStringParameters": {
+    "foo": "bar"
   },
-  "Body": {
-    "unitCode": "new unitb",
-    "unitName": "Test One With Real API",
-    "unitDescription": "could be a description",
-    "unitCredits": 25.25,
-    "delivery": "22222223123 Online",
-    "prerequistes": ["aa"],
-    "corequistes": ["bb"],
-    "antirequistes": ["cc"]
+  "multiValueQueryStringParameters": {
+    "foo": [
+      "bar"
+    ]
+  },
+  "pathParameters": {
+    "proxy": "/path/to/resource"
+  },
+  "stageVariables": {
+    "baz": "qux"
+  },
+  "headers": {
+    "Authorization": "eyJraWQiOiIzRXhMTVBDV0FXcGNIZnlHZjQwSEJ1bVU2XC80QnlpVFVwOGR2VVwvaG15cVU9IiwiYWxnIjoiUlMyNTYifQ.eyJhdF9oYXNoIjoiY09qVmZ1Z1ZVV1VvYlAxdHFfYVNOdyIsInN1YiI6IjZiYzMyOTk1LTU0ZTctNGFhMi1hMzZmLTNlNmY5ZjA3YTZkMyIsImF1ZCI6IjVvdTJkajZycmJyczUzdmg0a2gzdWtuazZiIiwiZXZlbnRfaWQiOiJhOWNhY2QyMy1mYjA5LTRjZjMtYTE1Yi05Mjc2ZmQ3ZDA0MTciLCJ0b2tlbl91c2UiOiJpZCIsImF1dGhfdGltZSI6MTYyMTc1MDMyNCwiaXNzIjoiaHR0cHM6XC9cL2NvZ25pdG8taWRwLmFwLXNvdXRoZWFzdC0yLmFtYXpvbmF3cy5jb21cL2FwLXNvdXRoZWFzdC0yX2duNEtJRWt4MCIsImNvZ25pdG86dXNlcm5hbWUiOiJkZXYtdGVzdCIsImV4cCI6MTYyMjM4NDU4OSwiaWF0IjoxNjIyMzgwOTg5fQ.SHGGaDypWE-RtT911tQZrs-cYR_m1SFWX7LuFrvjxMdTDrKLfO458Ju0QtiBczKdOwjNeQTTvqkreD95oxUoGZ_Xnwg4x_nyX1cLGPqolym4FowtdnQHIDxmpNytcIKE00Y47dgStQkaTnsMl6VMgPExfW-HcgxCEmeF1jFrVCgQljfpyz9jRCp2TcHjj-EL9kY7MiezyHus78YysNsulk6BiKrnXsNrxct_Shhi9WgPCMxtyryhEKq-9gWsooLlxSj_HtpaTZYtJ8sXKaXuTUAMxbUd2bH18q1S6CSjO7nrL46I_kss8ryNhfYvBPhnfz2TYXfOkl-_ds7jBqjQ7w",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+    "Accept-Encoding": "gzip, deflate, sdch",
+    "Accept-Language": "en-US,en;q=0.8",
+    "Cache-Control": "max-age=0",
+    "CloudFront-Forwarded-Proto": "https",
+    "CloudFront-Is-Desktop-Viewer": "true",
+    "CloudFront-Is-Mobile-Viewer": "false",
+    "CloudFront-Is-SmartTV-Viewer": "false",
+    "CloudFront-Is-Tablet-Viewer": "false",
+    "CloudFront-Viewer-Country": "US",
+    "Host": "1234567890.execute-api.us-east-1.amazonaws.com",
+    "Upgrade-Insecure-Requests": "1",
+    "User-Agent": "Custom User Agent String",
+    "Via": "1.1 08f323deadbeefa7af34d5feb414ce27.cloudfront.net (CloudFront)",
+    "X-Amz-Cf-Id": "cDehVQoZnx43VYQb9j2-nvCh-9z396Uhbp027Y2JvkCPNLmGJHqlaA==",
+    "X-Forwarded-For": "127.0.0.1, 127.0.0.2",
+    "X-Forwarded-Port": "443",
+    "X-Forwarded-Proto": "https"
+  },
+  "multiValueHeaders": {
+    "Accept": [
+      "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
+    ],
+    "Accept-Encoding": [
+      "gzip, deflate, sdch"
+    ],
+    "Accept-Language": [
+      "en-US,en;q=0.8"
+    ],
+    "Cache-Control": [
+      "max-age=0"
+    ],
+    "CloudFront-Forwarded-Proto": [
+      "https"
+    ],
+    "CloudFront-Is-Desktop-Viewer": [
+      "true"
+    ],
+    "CloudFront-Is-Mobile-Viewer": [
+      "false"
+    ],
+    "CloudFront-Is-SmartTV-Viewer": [
+      "false"
+    ],
+    "CloudFront-Is-Tablet-Viewer": [
+      "false"
+    ],
+    "CloudFront-Viewer-Country": [
+      "US"
+    ],
+    "Host": [
+      "0123456789.execute-api.us-east-1.amazonaws.com"
+    ],
+    "Upgrade-Insecure-Requests": [
+      "1"
+    ],
+    "User-Agent": [
+      "Custom User Agent String"
+    ],
+    "Via": [
+      "1.1 08f323deadbeefa7af34d5feb414ce27.cloudfront.net (CloudFront)"
+    ],
+    "X-Amz-Cf-Id": [
+      "cDehVQoZnx43VYQb9j2-nvCh-9z396Uhbp027Y2JvkCPNLmGJHqlaA=="
+    ],
+    "X-Forwarded-For": [
+      "127.0.0.1, 127.0.0.2"
+    ],
+    "X-Forwarded-Port": [
+      "443"
+    ],
+    "X-Forwarded-Proto": [
+      "https"
+    ]
+  },
+  "requestContext": {
+    "accountId": "123456789012",
+    "resourceId": "123456",
+    "stage": "prod",
+    "requestId": "c6af9ac6-7b61-11e6-9a41-93e8deadbeef",
+    "requestTime": "09/Apr/2015:12:34:56 +0000",
+    "requestTimeEpoch": 1428582896000,
+    "identity": {
+      "cognitoIdentityPoolId": null,
+      "accountId": null,
+      "cognitoIdentityId": null,
+      "caller": null,
+      "accessKey": null,
+      "sourceIp": "127.0.0.1",
+      "cognitoAuthenticationType": null,
+      "cognitoAuthenticationProvider": null,
+      "userArn": null,
+      "userAgent": "Custom User Agent String",
+      "user": null
+    },
+    "path": "/prod/path/to/resource",
+    "resourcePath": "/{proxy+}",
+    "httpMethod": "POST",
+    "apiId": "1234567890",
+    "protocol": "HTTP/1.1"
   }
 }
