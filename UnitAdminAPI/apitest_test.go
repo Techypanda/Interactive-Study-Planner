@@ -44,7 +44,7 @@ func deepCompare(file1, file2 string) (bool, error) {
 		}
 
 		if !bytes.Equal(b1, b2) {
-			return false, errors.New(fmt.Sprintf("Files not the same: %s & %s\nContents of File 1: %v\nContents of File 2: %v", file1, file2, b1, b2))
+			return false, errors.New(fmt.Sprintf("Files not the same: %s & %s\nContents of File 1: %s\nContents of File 2: %s", file1, file2, b1, b2))
 		}
 	}
 }
