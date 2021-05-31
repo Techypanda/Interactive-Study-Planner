@@ -39,7 +39,7 @@ pipelines:
           name: "Build, Test, Deploy Unit Admin API"
           image: python:3.7.2
           script:
-            - apt-get install golang-stable
+            - apt-get install golang
             - pip install awscli
             - pip install aws-sam-cli
             - chmod +x ./SetupAWSPipeline.sh
