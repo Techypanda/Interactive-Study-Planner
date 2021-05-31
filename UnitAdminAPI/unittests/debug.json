@@ -1,29 +1,29 @@
 {
   "AddUnitFunction": {
-    "DisableAuthentication": true
+    "DisableAuthentication": "true"
   },
   "RemoveUnitFunction": {
-    "DisableAuthentication": true
+    "DisableAuthentication": "true"
   },
   "UpdateUnitFunction": {
-    "DisableAuthentication": true
+    "DisableAuthentication": "true"
   },
   "AddMajorFunction": {
-    "DisableAuthentication": true
+    "DisableAuthentication": "true"
   },
   "UpdateMajorFunction": {
-    "DisableAuthentication": true
+    "DisableAuthentication": "true"
   },
   "RemoveMajorFunction": {
-    "DisableAuthentication": true
+    "DisableAuthentication": "true"
   },
   "AddSpecFunction": {
-    "DisableAuthentication": true
+    "DisableAuthentication": "true"
   },
   "UpdateSpecFunction": {
-    "DisableAuthentication": true
+    "DisableAuthentication": "true"
   },
   "RemoveSpecFunction": {
-    "DisableAuthentication": true
+    "DisableAuthentication": "true"
   }
 }

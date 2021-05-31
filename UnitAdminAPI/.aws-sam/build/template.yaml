@@ -6,6 +6,11 @@ Description: 'Unit Admin API - Secured from DevUserPool
 Globals:
   Function:
     Timeout: 5
+Parameters:
+  Authentication:
+    Type: String
+    Description: Disable Authentication (True) or Leave It (False)
+    Default: 'false'
 Resources:
   AdminUnitAPI:
     Type: AWS::Serverless::Api
@@ -42,7 +47,8 @@ Resources:
               Ref: AdminUnitAPI
       Environment:
         Variables:
-          DisableAuthentication: false
+          DisableAuthentication:
+            Ref: Authentication
       Policies:
       - DynamoDBCrudPolicy:
           TableName: DevUnits
@@ -65,7 +71,8 @@ Resources:
               Ref: AdminUnitAPI
       Environment:
         Variables:
-          DisableAuthentication: false
+          DisableAuthentication:
+            Ref: Authentication
       Policies:
       - DynamoDBCrudPolicy:
           TableName: DevUnits
@@ -88,7 +95,8 @@ Resources:
               Ref: AdminUnitAPI
       Environment:
         Variables:
-          DisableAuthentication: false
+          DisableAuthentication:
+            Ref: Authentication
       Policies:
       - DynamoDBCrudPolicy:
           TableName: DevUnits
@@ -111,7 +119,8 @@ Resources:
               Ref: AdminUnitAPI
       Environment:
         Variables:
-          DisableAuthentication: false
+          DisableAuthentication:
+            Ref: Authentication
       Policies:
       - DynamoDBCrudPolicy:
           TableName: DevMajors
@@ -134,7 +143,8 @@ Resources:
               Ref: AdminUnitAPI
       Environment:
         Variables:
-          DisableAuthentication: false
+          DisableAuthentication:
+            Ref: Authentication
       Policies:
       - DynamoDBCrudPolicy:
           TableName: DevMajors
@@ -157,7 +167,8 @@ Resources:
               Ref: AdminUnitAPI
       Environment:
         Variables:
-          DisableAuthentication: false
+          DisableAuthentication:
+            Ref: Authentication
       Policies:
       - DynamoDBCrudPolicy:
           TableName: DevMajors
@@ -180,7 +191,8 @@ Resources:
               Ref: AdminUnitAPI
       Environment:
         Variables:
-          DisableAuthentication: false
+          DisableAuthentication:
+            Ref: Authentication
       Policies:
       - DynamoDBCrudPolicy:
           TableName: DevSpecializations
@@ -203,7 +215,8 @@ Resources:
               Ref: AdminUnitAPI
       Environment:
         Variables:
-          DisableAuthentication: false
+          DisableAuthentication:
+            Ref: Authentication
       Policies:
       - DynamoDBCrudPolicy:
           TableName: DevSpecializations
@@ -226,7 +239,8 @@ Resources:
               Ref: AdminUnitAPI
       Environment:
         Variables:
-          DisableAuthentication: false
+          DisableAuthentication:
+            Ref: Authentication
       Policies:
       - DynamoDBCrudPolicy:
           TableName: DevSpecializations

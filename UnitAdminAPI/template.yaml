@@ -7,6 +7,13 @@ Globals:
   Function:
     Timeout: 5
 
+Parameters:
+
+  Authentication:
+    Type: String
+    Description: Disable Authentication (True) or Leave It (False)
+    Default: "false"
+    
 Resources:
   AdminUnitAPI:
     Type: AWS::Serverless::Api
@@ -29,13 +36,6 @@ Resources:
               Access-Control-Allow-Origin: "'*'"
               Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
               Access-Control-Allow-Methods: "'OPTIONS,POST'"
-      # Auth: doing it manually fk this
-      #  AddDefaultAuthorizerToCorsPreflight: true # doesnt work zzzz
-      #  DefaultAuthorizer: DevUserPool
-      #  Authorizers:
-      #    DevUserPool:
-      #      UserPoolArn: arn:aws:cognito-idp:ap-southeast-2:363837338544:userpool/ap-southeast-2_gn4KIEkx0
-
   AddUnitFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -49,7 +49,7 @@ Resources:
             RestApiId: !Ref AdminUnitAPI
       Environment:
         Variables:
-          DisableAuthentication: false
+          DisableAuthentication: !Ref Authentication
       Policies:
         - DynamoDBCrudPolicy:
             TableName: DevUnits
@@ -70,7 +70,7 @@ Resources:
             RestApiId: !Ref AdminUnitAPI
       Environment:
         Variables:
-          DisableAuthentication: false
+          DisableAuthentication: !Ref Authentication
       Policies:
         - DynamoDBCrudPolicy:
             TableName: DevUnits
@@ -91,7 +91,7 @@ Resources:
             RestApiId: !Ref AdminUnitAPI
       Environment:
         Variables:
-          DisableAuthentication: false
+          DisableAuthentication: !Ref Authentication
       Policies:
         - DynamoDBCrudPolicy:
             TableName: DevUnits
@@ -112,7 +112,7 @@ Resources:
             RestApiId: !Ref AdminUnitAPI
       Environment:
         Variables:
-          DisableAuthentication: false
+          DisableAuthentication: !Ref Authentication
       Policies:
         - DynamoDBCrudPolicy:
             TableName: DevMajors
@@ -133,7 +133,7 @@ Resources:
             RestApiId: !Ref AdminUnitAPI
       Environment:
         Variables:
-          DisableAuthentication: false
+          DisableAuthentication: !Ref Authentication
       Policies:
         - DynamoDBCrudPolicy:
             TableName: DevMajors
@@ -154,7 +154,7 @@ Resources:
             RestApiId: !Ref AdminUnitAPI
       Environment:
         Variables:
-          DisableAuthentication: false
+          DisableAuthentication: !Ref Authentication
       Policies:
         - DynamoDBCrudPolicy:
             TableName: DevMajors
@@ -175,7 +175,7 @@ Resources:
             RestApiId: !Ref AdminUnitAPI
       Environment:
         Variables:
-          DisableAuthentication: false
+          DisableAuthentication: !Ref Authentication
       Policies:
         - DynamoDBCrudPolicy:
             TableName: DevSpecializations
@@ -196,7 +196,7 @@ Resources:
             RestApiId: !Ref AdminUnitAPI
       Environment:
         Variables:
-          DisableAuthentication: false
+          DisableAuthentication: !Ref Authentication
       Policies:
         - DynamoDBCrudPolicy:
             TableName: DevSpecializations
@@ -217,7 +217,7 @@ Resources:
             RestApiId: !Ref AdminUnitAPI
       Environment:
         Variables:
-          DisableAuthentication: false
+          DisableAuthentication: !Ref Authentication
       Policies:
         - DynamoDBCrudPolicy:
             TableName: DevSpecializations
