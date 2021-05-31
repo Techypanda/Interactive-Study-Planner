@@ -40,13 +40,14 @@ pipelines:
           image: python:3.7.2
           script:
             - apt-get update
-            - apt-get install golang-go
+            - apt-get install -y golang-go
             - pip install awscli
             - pip install aws-sam-cli
             - chmod +x ./SetupAWSPipeline.sh
             - ./SetupAWSPipeline.sh
             - cd UnitAdminAPI
             - chmod +x ./BuildTestDeploy.sh
+            - chmod +x ./RunSamTests.sh
             - ./BuildTestDeploy.sh
             #- echo "Build Unit Admin API"
             #- cd UnitAdminAPI
