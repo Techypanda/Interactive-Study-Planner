@@ -3,8 +3,8 @@ package main
 // TODO: main_test.go
 import (
 	"context"
-	"encoding/json"
 	"fmt"
+	"os"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
@@ -26,18 +26,15 @@ type Unit struct {
 
 func handler(ctx context.Context, payload events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	// fmt.Printf("Recieved Payload: %+v\n", payload) // redirect to logs
-	b, _ := json.Marshal(payload)
-	return events.APIGatewayProxyResponse{
-		Headers: map[string]string{
-			"Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers",
-			"Access-Control-Allow-Origin":  "*",
-			"Access-Control-Allow-Methods": "OPTIONS,POST",
-		},
-		Body:       string(b),
-		StatusCode: 200,
-	}, nil
-	token := payload.Headers["Authorization"]
-	valid, err := validateJWT(token)
+	var valid bool
+	var err error
+	if os.Getenv("DisableAuthentication") == "true" {
+		fmt.Println("Running With No Authentication")
+		valid = true
+	} else {
+		token := payload.Headers["Authorization"]
+		valid, err = validateJWT(token)
+	}
 	if !valid {
 		return events.APIGatewayProxyResponse{
 			Headers: map[string]string{
