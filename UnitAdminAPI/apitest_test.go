@@ -3,132 +3,105 @@ package UnitAdminAPI_test
 // aws cognito-idp admin-initiate-auth --user-pool-id ap-southeast-2_gn4KIEkx0 --client-id 5ou2dj6rrbrs53vh4kh3uknk6b --auth-flow ADMIN_NO_SRP_AUTH --auth-parameters "USERNAME=$USERNAME,PASSWORD=$PASSWORD"
 
 import (
+	"bytes"
+	"errors"
+	"fmt"
+	"io"
 	"os"
 	"testing"
 )
 
-/*
-	The Assumption Is Made API is running on localhost.
-*/
-func TestAddEndpoint(t *testing.T) {
-	token := os.Getenv("token")
-	if token != "" {
-
-	} else {
-		t.Fatalf("Missing Token Environment Variable!")
+func deepCompare(file1, file2 string) (bool, error) {
+	const chunkSize = 64000
+	// Check file size ...
+	f1, err := os.Open(file1)
+	if err != nil {
+		return false, err
 	}
-	/* client := resty.New()
-	resp, err := client.R().
-		SetHeader("Content-Type", "application/json").
-		SetBody(`{"unitCode": "COMP7001","unitName": "This was updated","unitDescription": "A very long unit description 2.0","credits": 50,"delivery": "In Person","prerequistes": [ "COMP7001"],"antirequistes": [""],"corequistes": [""]}`).
-		Post("http://localhost:3000/addunit")
-	if err == nil {
-		if resp.StatusCode() != http.StatusOK {
-			t.Fatalf("Failed Addition (Expected Success) Status Code: %d, resp: %s", resp.StatusCode(), resp)
-		}
-		resp2, err2 := client.R().
-			SetHeader("Content-Type", "application/json").
-			SetBody(`{"unitCode": "COMP7001","unitName": "This was updated","unitDescription": "A very long unit description 2.0","credits": 50,"delivery": "In Person","prerequistes": [ "COMP7001"],"antirequistes": [""],"corequistes": [""]}`).
-			Post("http://localhost:3000/addunit")
-		if err2 == nil {
-			if resp2.StatusCode() != http.StatusBadRequest {
-				t.Fatalf("Failed To Fail Addition (Expected Failure) Status Code: %d, resp: %s", resp2.StatusCode(), resp2)
+	defer f1.Close()
+
+	f2, err := os.Open(file2)
+	if err != nil {
+		return false, err
+	}
+	defer f2.Close()
+
+	for {
+		b1 := make([]byte, chunkSize)
+		_, err1 := f1.Read(b1)
+
+		b2 := make([]byte, chunkSize)
+		_, err2 := f2.Read(b2)
+
+		if err1 != nil || err2 != nil {
+			if err1 == io.EOF && err2 == io.EOF {
+				return true, nil
+			} else if err1 == io.EOF || err2 == io.EOF {
+				return false, err1
+			} else {
+				return false, err1
 			}
-			// cleanup, we can assume it will pass
-			client.R().
-				SetHeader("Content-Type", "application/json").
-				SetBody(`{"unitCode": "COMP7001","unitName": "This was updated","unitDescription": "A very long unit description 2.0","credits": 50,"delivery": "In Person","prerequistes": [ "COMP7001"],"antirequistes": [""],"corequistes": [""]}`).
-				Post("http://localhost:3000/removeunit")
-		} else {
-			t.Fatalf("Failed To Fail Addition (Expected Failure): %s", err2.Error())
 		}
-	} else {
-		t.Fatalf("Failed Addition (Expected Success): %s", err.Error())
-	} */
+
+		if !bytes.Equal(b1, b2) {
+			return false, errors.New(fmt.Sprintf("Files not the same: %s & %s\nContents of File 1: %s\nContents of File 2: %s", file1, file2, b1, b2))
+		}
+	}
 }
 
-func TestUpdateEndpoint(t *testing.T) {
-	token := os.Getenv("token")
-	if token != "" {
-
-	} else {
-		t.Fatalf("Missing Token Environment Variable!")
+func TestAddUnitEndpoint(t *testing.T) {
+	_, err := deepCompare("./unittests/responses/actualaddunitresponse.json", "./unittests/responses/expectedaddunitresponse.json")
+	if err != nil {
+		t.Fatalf("%v", err)
 	}
-	/* client := resty.New()
-	resp, err := client.R().
-		SetHeader("Content-Type", "application/json").
-		SetBody(`{"unitCode": "COMPZZZZZ","unitName": "This was updated","unitDescription": "A very long unit description 2.0","credits": 50,"delivery": "In Person","prerequistes": [ "COMP7001"],"antirequistes": [""],"corequistes": [""]}`).
-		Post("http://localhost:3000/addunit")
-	if err == nil {
-		if resp.StatusCode() != http.StatusOK {
-			t.Fatalf("Failed Update - Couldn't Create Unit To Update (Expected Success) Status Code: %d, resp: %s", resp.StatusCode(), resp)
-		}
-		updateResp, updateErr := client.R().
-			SetHeader("Content-Type", "application/json").
-			SetBody(`{"unitCode": "COMPZZZZZ","unitName": "test update","unitDescription": "A very long unit description 2.0","credits": 50,"delivery": "In Person","prerequistes": [ "COMP7001"],"antirequistes": [""],"corequistes": [""]}`).
-			Post("http://localhost:3000/removeunit")
-		if updateErr == nil {
-			if updateResp.StatusCode() != http.StatusOK {
-				t.Fatalf("Failed Update (Expected Success) Status Code: %d, resp: %s", updateResp.StatusCode(), updateResp)
-			}
-			updateFailResp, updateFailErr := client.R().
-				SetHeader("Content-Type", "application/json").
-				SetBody(`{"unitCode": "THISDOESNOTEXISTINTHEDEVDB","unitName": "test update","unitDescription": "A very long unit description 2.0","credits": 50,"delivery": "In Person","prerequistes": [ "COMP7001"],"antirequistes": [""],"corequistes": [""]}`).
-				Post("http://localhost:3000/removeunit")
-			if updateFailErr == nil {
-				if updateFailResp.StatusCode() != http.StatusBadRequest {
-					t.Fatalf("Failed To Fail Update (Expected Failure) Status Code: %d, resp: %s", updateFailResp.StatusCode(), updateFailResp)
-				}
-			} else {
-				t.Fatalf("Failed To Fail Update (Expected Failure): %s", updateErr.Error())
-			}
-		} else {
-			t.Fatalf("Failed Update (Expected Success): %s", updateErr.Error())
-		}
-	} else {
-		t.Fatalf("Failed Update - Couldn't Create Unit To Update (Expected Success): %s", err.Error())
-	} */
+}
+func TestAddMajorEndpoint(t *testing.T) {
+	_, err := deepCompare("./unittests/responses/actualaddmajorresponse.json", "./unittests/responses/expectedaddmajorresponse.json")
+	if err != nil {
+		t.Fatalf("%v", err)
+	}
+}
+func TestAddSpecEndpoint(t *testing.T) {
+	_, err := deepCompare("./unittests/responses/actualaddspecresponse.json", "./unittests/responses/expectedaddspecresponse.json")
+	if err != nil {
+		t.Fatalf("%v", err)
+	}
 }
 
-func TestRemoveEndpoint(t *testing.T) {
-	token := os.Getenv("token")
-	if token != "" {
-
-	} else {
-		t.Fatalf("Missing Token Environment Variable!")
+func TestUpdateUnitEndpoint(t *testing.T) {
+	_, err := deepCompare("./unittests/responses/actualupdateunitresponse.json", "./unittests/responses/expectedupdateunitresponse.json")
+	if err != nil {
+		t.Fatalf("%v", err)
 	}
-	/* client := resty.New()
-	resp, err := client.R().
-		SetHeader("Content-Type", "application/json").
-		SetBody(`{"unitCode": "COMP90101010101","unitName": "This was updated","unitDescription": "A very long unit description 2.0","credits": 50,"delivery": "In Person","prerequistes": [ "COMP7001"],"antirequistes": [""],"corequistes": [""]}`).
-		Post("http://localhost:3000/addunit")
-	if err == nil {
-		if resp.StatusCode() != http.StatusOK {
-			t.Fatalf("Failed Delete - Couldn't Create Unit To Delete (Expected Success) Status Code: %d, resp: %s", resp.StatusCode(), resp)
-		}
-		deleteResp, deleteErr := client.R().
-			SetHeader("Content-Type", "application/json").
-			SetBody(`{ "unitCode": "COMP90101010101" }`).
-			Post("http://localhost:3000/removeunit")
-		if deleteErr == nil {
-			if deleteResp.StatusCode() != http.StatusOK {
-				t.Fatalf("Failed Delete (Expected Success) Status Code: %d, resp: %s", deleteResp.StatusCode(), deleteResp)
-			}
-			deleteFailResp, deleteFailErr := client.R().
-				SetHeader("Content-Type", "application/json").
-				SetBody(`{ "unitCode": "COMP90101010101" }`).
-				Post("http://localhost:3000/removeunit")
-			if deleteFailErr == nil {
-				if deleteFailResp.StatusCode() != http.StatusBadRequest {
-					t.Fatalf("Failed To Fail Delete (Expected Failure) Status Code: %d, resp: %s", deleteFailResp.StatusCode(), deleteFailResp)
-				}
-			} else {
-				t.Fatalf("Failed To Fail Delete (Expected Failure): %s", deleteFailErr.Error())
-			}
-		} else {
-			t.Fatalf("Failed Delete (Expected Success): %s", deleteErr.Error())
-		}
-	} else {
-		t.Fatalf("Failed Delete - Couldn't Create Unit To Delete (Expected Success): %s", err.Error())
-	} */
+}
+func TestUpdateSpecEndpoint(t *testing.T) {
+	_, err := deepCompare("./unittests/responses/actualupdatespecresponse.json", "./unittests/responses/expectedupdatespecresponse.json")
+	if err != nil {
+		t.Fatalf("%v", err)
+	}
+}
+func TestUpdateMajorEndpoint(t *testing.T) {
+	_, err := deepCompare("./unittests/responses/actualupdatemajorresponse.json", "./unittests/responses/expectedupdatemajorresponse.json")
+	if err != nil {
+		t.Fatalf("%v", err)
+	}
+}
+
+func TestRemoveUnitEndpoint(t *testing.T) {
+	_, err := deepCompare("./unittests/responses/actualremoveunitresponse.json", "./unittests/responses/expectedremoveunitresponse.json")
+	if err != nil {
+		t.Fatalf("%v", err)
+	}
+}
+func TestRemoveMajorEndpoint(t *testing.T) {
+	_, err := deepCompare("./unittests/responses/actualremovemajorresponse.json", "./unittests/responses/expectedremovemajorresponse.json")
+	if err != nil {
+		t.Fatalf("%v", err)
+	}
+}
+func TestRemoveSpecEndpoint(t *testing.T) {
+	_, err := deepCompare("./unittests/responses/actualremovespecresponse.json", "./unittests/responses/expectedremovespecresponse.json")
+	if err != nil {
+		t.Fatalf("%v", err)
+	}
 }

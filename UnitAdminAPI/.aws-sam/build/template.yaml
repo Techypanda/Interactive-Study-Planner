@@ -1,41 +1,38 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: >
-  Unit Admin API - Secured from DevUserPool
+Description: 'Unit Admin API - Secured from DevUserPool
 
+  '
 Globals:
   Function:
     Timeout: 5
-
 Parameters:
-
   Authentication:
     Type: String
     Description: Disable Authentication (True) or Leave It (False)
-    Default: "false"
-    
+    Default: 'false'
 Resources:
   AdminUnitAPI:
     Type: AWS::Serverless::Api
     Properties:
       StageName: Dev
       Cors:
-        AllowMethods: "'POST, OPTIONS'"
-        AllowHeaders: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-        AllowOrigin: "'*'"
+        AllowMethods: '''POST, OPTIONS'''
+        AllowHeaders: '''Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'''
+        AllowOrigin: '''*'''
       GatewayResponses:
         DEFAULT_4XX:
           ResponseParameters:
             Headers:
-              Access-Control-Allow-Origin: "'*'"
-              Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-              Access-Control-Allow-Methods: "'OPTIONS,POST'"
+              Access-Control-Allow-Origin: '''*'''
+              Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'''
+              Access-Control-Allow-Methods: '''OPTIONS,POST'''
         DEFAULT_5XX:
           ResponseParameters:
             Headers:
-              Access-Control-Allow-Origin: "'*'"
-              Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-              Access-Control-Allow-Methods: "'OPTIONS,POST'"
+              Access-Control-Allow-Origin: '''*'''
+              Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'''
+              Access-Control-Allow-Methods: '''OPTIONS,POST'''
   AddUnitFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -46,13 +43,16 @@ Resources:
           Properties:
             Path: /addunit
             Method: POST
-            RestApiId: !Ref AdminUnitAPI
+            RestApiId:
+              Ref: AdminUnitAPI
       Environment:
         Variables:
-          DisableAuthentication: !Ref Authentication
+          DisableAuthentication:
+            Ref: Authentication
       Policies:
-        - DynamoDBCrudPolicy:
-            TableName: DevUnits
+      - DynamoDBCrudPolicy:
+          TableName: DevUnits
+      ImageUri: addunitfunction:go1.x-v1
     Metadata:
       DockerTag: go1.x-v1
       DockerContext: ./addunit
@@ -67,13 +67,16 @@ Resources:
           Properties:
             Path: /removeunit
             Method: POST
-            RestApiId: !Ref AdminUnitAPI
+            RestApiId:
+              Ref: AdminUnitAPI
       Environment:
         Variables:
-          DisableAuthentication: !Ref Authentication
+          DisableAuthentication:
+            Ref: Authentication
       Policies:
-        - DynamoDBCrudPolicy:
-            TableName: DevUnits
+      - DynamoDBCrudPolicy:
+          TableName: DevUnits
+      ImageUri: removeunitfunction:go1.x-v1
     Metadata:
       DockerTag: go1.x-v1
       DockerContext: ./removeunit
@@ -88,13 +91,16 @@ Resources:
           Properties:
             Path: /updateunit
             Method: POST
-            RestApiId: !Ref AdminUnitAPI
+            RestApiId:
+              Ref: AdminUnitAPI
       Environment:
         Variables:
-          DisableAuthentication: !Ref Authentication
+          DisableAuthentication:
+            Ref: Authentication
       Policies:
-        - DynamoDBCrudPolicy:
-            TableName: DevUnits
+      - DynamoDBCrudPolicy:
+          TableName: DevUnits
+      ImageUri: updateunitfunction:go1.x-v1
     Metadata:
       DockerTag: go1.x-v1
       DockerContext: ./updateunit
@@ -109,13 +115,16 @@ Resources:
           Properties:
             Path: /addmajor
             Method: POST
-            RestApiId: !Ref AdminUnitAPI
+            RestApiId:
+              Ref: AdminUnitAPI
       Environment:
         Variables:
-          DisableAuthentication: !Ref Authentication
+          DisableAuthentication:
+            Ref: Authentication
       Policies:
-        - DynamoDBCrudPolicy:
-            TableName: DevMajors
+      - DynamoDBCrudPolicy:
+          TableName: DevMajors
+      ImageUri: addmajorfunction:go1.x-v1
     Metadata:
       DockerTag: go1.x-v1
       DockerContext: ./addmajor
@@ -130,13 +139,16 @@ Resources:
           Properties:
             Path: /updatemajor
             Method: POST
-            RestApiId: !Ref AdminUnitAPI
+            RestApiId:
+              Ref: AdminUnitAPI
       Environment:
         Variables:
-          DisableAuthentication: !Ref Authentication
+          DisableAuthentication:
+            Ref: Authentication
       Policies:
-        - DynamoDBCrudPolicy:
-            TableName: DevMajors
+      - DynamoDBCrudPolicy:
+          TableName: DevMajors
+      ImageUri: updatemajorfunction:go1.x-v1
     Metadata:
       DockerTag: go1.x-v1
       DockerContext: ./updatemajor
@@ -151,13 +163,16 @@ Resources:
           Properties:
             Path: /removemajor
             Method: POST
-            RestApiId: !Ref AdminUnitAPI
+            RestApiId:
+              Ref: AdminUnitAPI
       Environment:
         Variables:
-          DisableAuthentication: !Ref Authentication
+          DisableAuthentication:
+            Ref: Authentication
       Policies:
-        - DynamoDBCrudPolicy:
-            TableName: DevMajors
+      - DynamoDBCrudPolicy:
+          TableName: DevMajors
+      ImageUri: removemajorfunction:go1.x-v1
     Metadata:
       DockerTag: go1.x-v1
       DockerContext: ./removemajor
@@ -172,13 +187,16 @@ Resources:
           Properties:
             Path: /addspec
             Method: POST
-            RestApiId: !Ref AdminUnitAPI
+            RestApiId:
+              Ref: AdminUnitAPI
       Environment:
         Variables:
-          DisableAuthentication: !Ref Authentication
+          DisableAuthentication:
+            Ref: Authentication
       Policies:
-        - DynamoDBCrudPolicy:
-            TableName: DevSpecializations
+      - DynamoDBCrudPolicy:
+          TableName: DevSpecializations
+      ImageUri: addspecfunction:go1.x-v1
     Metadata:
       DockerTag: go1.x-v1
       DockerContext: ./addspec
@@ -193,13 +211,16 @@ Resources:
           Properties:
             Path: /updatespec
             Method: POST
-            RestApiId: !Ref AdminUnitAPI
+            RestApiId:
+              Ref: AdminUnitAPI
       Environment:
         Variables:
-          DisableAuthentication: !Ref Authentication
+          DisableAuthentication:
+            Ref: Authentication
       Policies:
-        - DynamoDBCrudPolicy:
-            TableName: DevSpecializations
+      - DynamoDBCrudPolicy:
+          TableName: DevSpecializations
+      ImageUri: updatespecfunction:go1.x-v1
     Metadata:
       DockerTag: go1.x-v1
       DockerContext: ./updatespec
@@ -214,19 +235,22 @@ Resources:
           Properties:
             Path: /removespec
             Method: POST
-            RestApiId: !Ref AdminUnitAPI
+            RestApiId:
+              Ref: AdminUnitAPI
       Environment:
         Variables:
-          DisableAuthentication: !Ref Authentication
+          DisableAuthentication:
+            Ref: Authentication
       Policies:
-        - DynamoDBCrudPolicy:
-            TableName: DevSpecializations
+      - DynamoDBCrudPolicy:
+          TableName: DevSpecializations
+      ImageUri: removespecfunction:go1.x-v1
     Metadata:
       DockerTag: go1.x-v1
       DockerContext: ./removespec
       Dockerfile: Dockerfile
-
 Outputs:
   AdminUnitAPI:
     Description: Admin unit api
-    Value: !Ref AdminUnitAPI
+    Value:
+      Ref: AdminUnitAPI

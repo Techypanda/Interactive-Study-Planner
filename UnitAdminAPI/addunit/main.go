@@ -4,6 +4,8 @@ package main
 import (
 	"context"
 	"fmt"
+	"os"
+
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
@@ -24,8 +26,15 @@ type Unit struct {
 
 func handler(ctx context.Context, payload events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	// fmt.Printf("Recieved Payload: %+v\n", payload) // redirect to logs
-	token := payload.Headers["Authorization"]
-	valid, err := validateJWT(token)
+	var valid bool
+	var err error
+	if os.Getenv("DisableAuthentication") == "true" {
+		fmt.Println("Running With No Authentication")
+		valid = true
+	} else {
+		token := payload.Headers["Authorization"]
+		valid, err = validateJWT(token)
+	}
 	if !valid {
 		return events.APIGatewayProxyResponse{
 			Headers: map[string]string{

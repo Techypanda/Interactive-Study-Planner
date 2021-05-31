@@ -7,60 +7,47 @@ pipelines:
               name: "Deploy User Accounts"
               image: atlassian/pipelines-awscli
               script:
-                - echo "Setting Up AWS CLI"
-                - aws configure set aws_access_key_id $PipelineAccessKey
-                - aws configure set aws_secret_access_key $PipelineSecretKey
-                - aws configure set default.region ap-southeast-2
-                - aws configure set region ap-southeast-2
+                - chmod +x ./SetupAWSPipeline.sh
+                - ./SetupAWSPipeline.sh
                 - echo "Deploying User Accounts"
                 - aws cloudformation deploy --template-file "./Infrastructure Templates/RootTemplate.yaml" --stack-name Capstone-3-Developers --no-fail-on-empty-changeset --capabilities CAPABILITY_NAMED_IAM
           - step:
               name: "Deploy Databases"
               image: atlassian/pipelines-awscli
               script:
-                - echo "Setting Up AWS CLI"
-                - aws configure set aws_access_key_id $PipelineAccessKey
-                - aws configure set aws_secret_access_key $PipelineSecretKey
-                - aws configure set default.region ap-southeast-2
-                - aws configure set region ap-southeast-2
+                - chmod +x ./SetupAWSPipeline.sh
+                - ./SetupAWSPipeline.sh
                 - echo "Deploying Developer Databases"
                 - aws cloudformation deploy --template-file "./Infrastructure Templates/DevDatabases.yaml" --stack-name DevDB --no-fail-on-empty-changeset
           - step:
               name: "Deploy Userpools"
               image: atlassian/pipelines-awscli
               script:
-                - echo "Setting Up AWS CLI"
-                - aws configure set aws_access_key_id $PipelineAccessKey
-                - aws configure set aws_secret_access_key $PipelineSecretKey
-                - aws configure set default.region ap-southeast-2
-                - aws configure set region ap-southeast-2
+                - chmod +x ./SetupAWSPipeline.sh
+                - ./SetupAWSPipeline.sh
                 - echo "Deploying Userpools"
                 - aws cloudformation deploy --template-file "./Infrastructure Templates/Userpools.yaml" --stack-name Userpools --no-fail-on-empty-changeset
           - step:
               name: "Deploy Public Repositories"
               image: atlassian/pipelines-awscli
               script:
-                - echo "Setting Up AWS CLI"
-                - aws configure set aws_access_key_id $PipelineAccessKey
-                - aws configure set aws_secret_access_key $PipelineSecretKey
-                - aws configure set default.region ap-southeast-2
-                - aws configure set region ap-southeast-2
+                - chmod +x ./SetupAWSPipeline.sh
+                - ./SetupAWSPipeline.sh
                 - echo "Deploying Userpools"
                 - aws cloudformation deploy --template-file "./Infrastructure Templates/ECRRepositories.yaml" --stack-name ECRRepositories --no-fail-on-empty-changeset
       - step: # TESTING/BUILDING/DEPLOY STAGES
           name: "Build, Test, Deploy Unit Admin API"
           image: python:3.7.2
           script:
-            - echo "Build Unit Admin API"
-            - cd UnitAdminAPI
+            - apt-get update
+            - apt-get install -y golang-go
             - pip install awscli
             - pip install aws-sam-cli
-            - aws configure set aws_access_key_id $PipelineAccessKey
-            - aws configure set aws_secret_access_key $PipelineSecretKey
-            - aws configure set default.region ap-southeast-2
-            - aws configure set region ap-southeast-2
-            - sam build
-            - sam package --output-template-file packaged-template.yaml --image-repository 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/unitadmin --no-progressbar
-            - sam deploy --template ./packaged-template.yaml --stack-name UnitAdminAPIDev --region ap-southeast-2 --capabilities CAPABILITY_IAM --image-repository 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/unitadmin
+            - chmod +x ./SetupAWSPipeline.sh
+            - ./SetupAWSPipeline.sh
+            - cd UnitAdminAPI
+            - chmod +x ./BuildTestDeploy.sh
+            - chmod +x ./RunSamTests.sh
+            - ./BuildTestDeploy.sh
           services:
             - docker
