@@ -1,3 +1,4 @@
+#!/bin/bash
 echo "Running Add Events"
 sam local invoke AddSpecFunction --env-vars ./unittests/debug.json -e ./unittests/payloads/addspecpayload.json > ./unittests/responses/actualaddspecresponse.json
 sam local invoke AddMajorFunction --env-vars ./unittests/debug.json -e ./unittests/payloads/addmajorpayload.json > ./unittests/responses/actualaddmajorresponse.json
