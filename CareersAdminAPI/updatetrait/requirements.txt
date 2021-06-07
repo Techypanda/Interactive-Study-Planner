@@ -1,1 +1,3 @@
 requests
+boto3
+boto3.dynamodb.conditions
