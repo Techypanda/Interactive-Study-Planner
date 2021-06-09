@@ -1,6 +1,8 @@
 import boto3
 from boto3.dynamodb.conditions import Key
 
+client = boto3.client("dynamodb")
+
 #Http request data parsing
 def parseData(data):
     print("Data parsing")
@@ -11,14 +13,14 @@ def validateJWTToken(token):
 
 #Database interactions
 def checkInDatabase(name):
-    client = boto3.client("dynamodb")
+    
     response = client.query(
         TableName = '',
         KeyConditionExpression = Key('name').eq(name)
     )
 
 def deleteFromDatabase(name):
-    client = boto3.client("dynamodb")
+    
     response = client.delete_item(
         TableName = '',
         KeyConditionExpression = Key('name').eq(name)
