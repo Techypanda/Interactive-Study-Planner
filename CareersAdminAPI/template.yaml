@@ -27,6 +27,7 @@ Resources:
       DockerContext: ./hello_world
       DockerTag: python3.8-v1
 
+    #API and Functions
     AddCareerFunction:
       Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
       Properties:
@@ -37,6 +38,11 @@ Resources:
             Properties:
               Path: /addcareer
               Method: POST
+            Auth:
+              DefaultAuthorizer: TokenAuthorizer
+              Authorizers:
+                JWTAuthorizer:
+                  FunctionArn: !GetAtt JWTAuthorizer.Arn
       Metadata:
         Dockerfile: Dockerfile
         DockerContext: ./addcareer
