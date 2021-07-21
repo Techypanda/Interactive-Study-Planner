@@ -1,5 +1,2 @@
-os
 requests
 boto3
-boto3.dynamodb.conditions
-https://github.com/mpdavis/python-jose.git
