@@ -43,6 +43,34 @@ Resources:
         ReadCapacityUnits: 1
         WriteCapacityUnits: 1
       TableName: "DevSpecializations"
+  DevTraitTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "Name"
+          AttributeType: "S"
+      BillingMode: "PROVISIONED"
+      KeySchema:
+        - AttributeName: "Name"
+          KeyType: "HASH"
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+      TableName: "DevTraits"
+  DevCareerTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "CareerName"
+          AttributeType: "S"
+      BillingMode: "PROVISIONED"
+      KeySchema:
+        - AttributeName: "CareerName"
+          KeyType: "HASH"
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+      TableName: "DevCareers"
 
 Outputs:
   DevUnitsTable:
@@ -54,3 +82,9 @@ Outputs:
   DevSpecializationTable:
     Description: "Dev Specializations (1 R/W Unit - SLOW)"
     Value: !Ref DevSpecializationTable
+  DevTraitTable:
+    Description: "Dev Traits (1 R/W Unit - SLOW)"
+    Value: !Ref DevTraitTable
+  DevCareerTable:
+    Description: "Dev Careers (1 R/W Unit - SLOW)"
+    Value: !Ref DevCareerTable
