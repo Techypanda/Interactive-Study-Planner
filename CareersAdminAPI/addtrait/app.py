@@ -1,31 +1,105 @@
 import json
+import boto3
+import requests
+from botocore.exceptions import ClientError
+
+#JWT token validation
+# Link: https://github.com/awslabs/aws-support-tools/blob/master/Cognito/decode-verify-jwt/decode-verify-jwt.py
+def validateJWTToken(self, token):
+    keys_url = "https://cognito-idp.ap-southeast-2.amazonaws.com/ap-southeast-2_gn4KIEkx0/.well-known/jwks.json"
+
+    response = requests.get(keys_url)
+    keys = json.loads(response.decode("utf-8"))["keys"]
+
+    #headers = jwt.get_unverified_headers(token)
+    #kid = headers["kid"]
+
+    #return valid, error
+
+class Trait:
+    def __init__(self, traitId, name):
+        self.id = traitId
+        self.name = name
 
 def lambda_handler(event, context):
-    """Sample pure Lambda function
+    #Setup link to database and table
+    db = boto3.resource('dynamodb', region_name='ap-southeast-2')
+    table = db.Table("DevTraits")
 
-    Parameters
-    ----------
-    event: dict, required
-        API Gateway Lambda Proxy Input Format
+    try:
+        #Attempt to load table - checks if table exists
+        table.load()
+    except Exception:   #TODO - Find out import for ResourceNotFoundException
+        #Create table
+        table = db.create_table(
+            TableName='DevTraits',
+            KeySchema=[
+                {
+                    'AttributeName': 'Id',
+                    'KeyType': 'HASH'
+                }
+            ],
+            AttributeDefinitions=[
+                {
+                    'AttributeName': 'Id',
+                    'AttributeType': 'S'
+                },
+                {
+                    'AttributeName': 'Name',
+                    'AttributeType': 'S'
+                }
+            ],
+            ProvisionedThroughput={
+                'ReadCapacityUnits': 1,
+                'WriteCapacityUnits': 1
+            }
+        )
 
-        Event doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html#api-gateway-simple-proxy-for-lambda-input-format
+        #Return bad request indicating table does not exist and is being created
+        return badRequest("Table does not exist. Table is now being created. Please try again.")
+    else:
+        #Retrieve data
+        body = json.loads(event["body"])
+        trait = Trait(body["Id"], body["Name"])
 
-    context: object, required
-        Lambda Context runtime methods and attributes
+        #Add to table
+        try:
+            response = table.put_item(
+                Item={
+                    "Id": trait.id,
+                    "Name": trait.name
+                },
+                ConditionExpression=Attr("Id").ne(trait.id)   #Check not in table already
+            )
+        except ClientError as err:
+            #Check if error was due to item already existing in table
+            if err.response['Error']['Code'] == 'ConditionalCheckFailedException':
+                return badRequest("Item already exists in table.")
+            else:
+                return badRequest("Unknown error occured.")
+        else:
+            #Return ok response
+            return okResponse("Trait added to database.")
 
-        Context doc: https://docs.aws.amazon.com/lambda/latest/dg/python-context-object.html
-
-    Returns
-    ------
-    API Gateway Lambda Proxy Output Format: dict
-
-        Return doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html
-    """
-
+#Http responses
+#Badrequest response
+def badRequest(reason):
     return {
-        "statusCode": 200,
-        "body": json.dumps(
-        {
-            "message": "hello world",
-        }),
+        "statusCode" : 400,
+        "body" : "Bad request: " + reason,
+        "headers": { 
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*"
+            },
     }
+
+#Ok response
+def okResponse(reason):
+    return {
+        "statusCode" : 200,
+        "body" : "Success: " + reason,
+        "headers": { 
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*"
+            },
+    }    

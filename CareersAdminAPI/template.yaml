@@ -27,125 +27,131 @@ Resources:
       DockerContext: ./hello_world
       DockerTag: python3.8-v1
 
-    AddCareerFunction:
-      Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
-      Properties:
-        PackageType: Image
-        Events:
-          AddCareer:
-            Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
-            Properties:
-              Path: /addcareer
-              Method: POST
-      Metadata:
-        Dockerfile: Dockerfile
-        DockerContext: ./addcareer
-        DockerTag: python3.8-v1
+  #API and Functions
+  AddCareerFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      PackageType: Image
+      Events:
+        AddCareer:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /addcareer
+            Method: POST     
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./addcareer
+      DockerTag: python3.8-v1
 
-    AddTraitFunction:
-      Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
-      Properties:
-        PackageType: Image
-        Events:
-          AddTrait:
-            Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
-            Properties:
-              Path: /addtrait
-              Method: POST
-      Metadata:
-        Dockerfile: Dockerfile
-        DockerContext: ./addtrait
-        DockerTag: python3.8-v1
+  AddTraitFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      PackageType: Image
+      Events:
+        AddTrait:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /addtrait
+            Method: POST
+          # Auth:
+          # DefaultAuthorizer: TokenAuthorizer
+          # Authorizers:
+          #   JWTAuthorizer:
+          #     FunctionArn: !GetAtt JWTAuthorizer.Arn
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./addtrait
+      DockerTag: python3.8-v1
 
-    CareerCSVFunction:
-      Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
-      Properties:
-        PackageType: Image
-        Events:
-          CareerCSV:
-            Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
-            Properties:
-              Path: /careerCSV
-              Method: POST
-      Metadata:
-        Dockerfile: Dockerfile
-        DockerContext: ./careercsv
-        DockerTag: python3.8-v1
+  CareerCSVFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      PackageType: Image
+      Events:
+        CareerCSV:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /careerCSV
+            Method: POST
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./careercsv
+      DockerTag: python3.8-v1
 
-    DeleteCareerFunction:
-      Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
-      Properties:
-        PackageType: Image
-        Events:
-          DeleteCareer:
-            Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
-            Properties:
-              Path: /deletecareer
-              Method: POST
-      Metadata:
-        Dockerfile: Dockerfile
-        DockerContext: ./deletecareer
-        DockerTag: python3.8-v1
-              
-    DeleteTraitFunction:
-      Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
-      Properties:
-        PackageType: Image
-        Events:
-          DeleteTrait:
-            Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
-            Properties:
-              Path: /deletetrait
-              Method: POST
-      Metadata:
-        Dockerfile: Dockerfile
-        DockerContext: ./deletetrait
-        DockerTag: python3.8-v1
+  DeleteCareerFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      PackageType: Image
+      Events:
+        DeleteCareer:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /deletecareer
+            Method: POST
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./deletecareer
+      DockerTag: python3.8-v1
+            
+  DeleteTraitFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      PackageType: Image
+      Events:
+        DeleteTrait:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /deletetrait
+            Method: POST
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./deletetrait
+      DockerTag: python3.8-v1
 
-    TraitCSVFunction:
-      Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
-      Properties:
-        PackageType: Image
-        Events:
-          TraitCSV:
-            Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
-            Properties:
-              Path: /traitCSV
-              Method: POST
-      Metadata:
-        Dockerfile: Dockerfile
-        DockerContext: ./traitcsv
-        DockerTag: python3.8-v1
+  TraitCSVFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      PackageType: Image
+      Events:
+        TraitCSV:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /traitCSV
+            Method: POST
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./traitcsv
+      DockerTag: python3.8-v1
 
-    UpdateCareerFunction:
-      Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
-      Properties:
-        PackageType: Image
-        Events:
-          UpdateCareer:
-            Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
-            Properties:
-              Path: /updatecareer
-              Method: POST
-      Metadata:
-        Dockerfile: Dockerfile
-        DockerContext: ./updatecareer
-        DockerTag: python3.8-v1
+  UpdateCareerFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      PackageType: Image
+      Events:
+        UpdateCareer:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /updatecareer
+            Method: POST
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./updatecareer
+      DockerTag: python3.8-v1
 
-    UpdateTraitFunction:
-      Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
-      Properties:
-        PackageType: Image
-        Events:
-          UpdateTrait:
-            Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
-            Properties:
-              Path: /updatetrait
-              Method: POST
-      Metadata:
-        Dockerfile: Dockerfile
-        DockerContext: ./updatetrait
-        DockerTag: python3.8-v1
+  UpdateTraitFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      PackageType: Image
+      Events:
+        UpdateTrait:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /updatetrait
+            Method: POST
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./updatetrait
+      DockerTag: python3.8-v1
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
