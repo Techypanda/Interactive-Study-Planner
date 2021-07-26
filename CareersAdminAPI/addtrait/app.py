@@ -16,6 +16,11 @@ def validateJWTToken(self, token):
 
     #return valid, error
 
+class Trait:
+    def __init__(self, traitId, name):
+        self.id = traitId
+        self.name = name
+
 def lambda_handler(event, context):
     #Setup link to database and table
     db = boto3.resource('dynamodb', region_name='ap-southeast-2')
@@ -24,17 +29,21 @@ def lambda_handler(event, context):
     try:
         #Attempt to load table - checks if table exists
         table.load()
-    except Exception:
+    except Exception:   #TODO - Find out import for ResourceNotFoundException
         #Create table
         table = db.create_table(
             TableName='DevTraits',
             KeySchema=[
                 {
-                    'AttributeName': 'Name',
+                    'AttributeName': 'Id',
                     'KeyType': 'HASH'
                 }
             ],
             AttributeDefinitions=[
+                {
+                    'AttributeName': 'Id',
+                    'AttributeType': 'S'
+                },
                 {
                     'AttributeName': 'Name',
                     'AttributeType': 'S'
@@ -46,23 +55,31 @@ def lambda_handler(event, context):
             }
         )
 
-        #Return bad request indicating table did not exist and is being created
-        return badRequest("Table did not exist. Table is now being created. Please try again later.")
+        #Return bad request indicating table does not exist and is being created
+        return badRequest("Table does not exist. Table is now being created. Please try again.")
+    else:
+        #Retrieve data
+        body = json.loads(event["body"])
+        trait = Trait(body["Id"], body["Name"])
 
-    #Retrieve data
-    body = json.loads(event["body"])   
-    name = body["name"]
-
-    #Add to table
-    #TODO - Add check for if it already exists
-    response = table.put_item(
-        Item={
-            "Name": name
-        }
-    )
-
-    #Return ok response
-    return okResponse("Trait added to database.")
+        #Add to table
+        try:
+            response = table.put_item(
+                Item={
+                    "Id": trait.id,
+                    "Name": trait.name
+                },
+                ConditionExpression=Attr("Id").ne(trait.id)   #Check not in table already
+            )
+        except ClientError as err:
+            #Check if error was due to item already existing in table
+            if err.response['Error']['Code'] == 'ConditionalCheckFailedException':
+                return badRequest("Item already exists in table.")
+            else:
+                return badRequest("Unknown error occured.")
+        else:
+            #Return ok response
+            return okResponse("Trait added to database.")
 
 #Http responses
 #Badrequest response
