@@ -7,6 +7,13 @@ Globals:
   Function:
     Timeout: 5
 
+Parameters:
+
+  Authentication:
+    Type: String
+    Description: Disable Authentication (True) or Leave It (False)
+    Default: "false"
+    
 Resources:
   AdminUnitAPI:
     Type: AWS::Serverless::Api
@@ -29,13 +36,6 @@ Resources:
               Access-Control-Allow-Origin: "'*'"
               Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
               Access-Control-Allow-Methods: "'OPTIONS,POST'"
-      # Auth: doing it manually fk this
-      #  AddDefaultAuthorizerToCorsPreflight: true # doesnt work zzzz
-      #  DefaultAuthorizer: DevUserPool
-      #  Authorizers:
-      #    DevUserPool:
-      #      UserPoolArn: arn:aws:cognito-idp:ap-southeast-2:363837338544:userpool/ap-southeast-2_gn4KIEkx0
-
   AddUnitFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -47,6 +47,9 @@ Resources:
             Path: /addunit
             Method: POST
             RestApiId: !Ref AdminUnitAPI
+      Environment:
+        Variables:
+          DisableAuthentication: !Ref Authentication
       Policies:
         - DynamoDBCrudPolicy:
             TableName: DevUnits
@@ -65,6 +68,9 @@ Resources:
             Path: /removeunit
             Method: POST
             RestApiId: !Ref AdminUnitAPI
+      Environment:
+        Variables:
+          DisableAuthentication: !Ref Authentication
       Policies:
         - DynamoDBCrudPolicy:
             TableName: DevUnits
@@ -83,6 +89,9 @@ Resources:
             Path: /updateunit
             Method: POST
             RestApiId: !Ref AdminUnitAPI
+      Environment:
+        Variables:
+          DisableAuthentication: !Ref Authentication
       Policies:
         - DynamoDBCrudPolicy:
             TableName: DevUnits
@@ -101,6 +110,9 @@ Resources:
             Path: /addmajor
             Method: POST
             RestApiId: !Ref AdminUnitAPI
+      Environment:
+        Variables:
+          DisableAuthentication: !Ref Authentication
       Policies:
         - DynamoDBCrudPolicy:
             TableName: DevMajors
@@ -119,6 +131,9 @@ Resources:
             Path: /updatemajor
             Method: POST
             RestApiId: !Ref AdminUnitAPI
+      Environment:
+        Variables:
+          DisableAuthentication: !Ref Authentication
       Policies:
         - DynamoDBCrudPolicy:
             TableName: DevMajors
@@ -126,7 +141,7 @@ Resources:
       DockerTag: go1.x-v1
       DockerContext: ./updatemajor
       Dockerfile: Dockerfile
-  DeleteMajorFunction:
+  RemoveMajorFunction:
     Type: AWS::Serverless::Function
     Properties:
       PackageType: Image
@@ -137,6 +152,9 @@ Resources:
             Path: /removemajor
             Method: POST
             RestApiId: !Ref AdminUnitAPI
+      Environment:
+        Variables:
+          DisableAuthentication: !Ref Authentication
       Policies:
         - DynamoDBCrudPolicy:
             TableName: DevMajors
@@ -155,6 +173,9 @@ Resources:
             Path: /addspec
             Method: POST
             RestApiId: !Ref AdminUnitAPI
+      Environment:
+        Variables:
+          DisableAuthentication: !Ref Authentication
       Policies:
         - DynamoDBCrudPolicy:
             TableName: DevSpecializations
@@ -173,6 +194,9 @@ Resources:
             Path: /updatespec
             Method: POST
             RestApiId: !Ref AdminUnitAPI
+      Environment:
+        Variables:
+          DisableAuthentication: !Ref Authentication
       Policies:
         - DynamoDBCrudPolicy:
             TableName: DevSpecializations
@@ -191,6 +215,9 @@ Resources:
             Path: /removespec
             Method: POST
             RestApiId: !Ref AdminUnitAPI
+      Environment:
+        Variables:
+          DisableAuthentication: !Ref Authentication
       Policies:
         - DynamoDBCrudPolicy:
             TableName: DevSpecializations

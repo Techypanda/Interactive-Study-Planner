@@ -1,0 +1,88 @@
+{
+  "resource": "/addunit",
+  "path": "/addunit",
+  "httpMethod": "POST",
+  "headers": {
+    "Accept": "*/*",
+    "Accept-Encoding": "gzip, deflate, br",
+    "Connection": "keep-alive",
+    "Content-Length": "279",
+    "Content-Type": "application/json",
+    "Host": "localhost:3000",
+    "Origin": "http://localhost:3000.com",
+    "Postman-Token": "283ebe16-57db-414b-bb76-af599aedf0cd",
+    "User-Agent": "PostmanRuntime/7.26.8",
+    "X-Forwarded-Port": "3000",
+    "X-Forwarded-Proto": "http"
+  },
+  "multiValueHeaders": {
+    "Accept": [
+      "*/*"
+    ],
+    "Accept-Encoding": [
+      "gzip, deflate, br"
+    ],
+    "Connection": [
+      "keep-alive"
+    ],
+    "Content-Length": [
+      "279"
+    ],
+    "Content-Type": [
+      "application/json"
+    ],
+    "Host": [
+      "localhost:3000"
+    ],
+    "Origin": [
+      "http://localhost:3000.com"
+    ],
+    "Postman-Token": [
+      "283ebe16-57db-414b-bb76-af599aedf0cd"
+    ],
+    "User-Agent": [
+      "PostmanRuntime/7.26.8"
+    ],
+    "X-Forwarded-Port": [
+      "3000"
+    ],
+    "X-Forwarded-Proto": [
+      "http"
+    ]
+  },
+  "queryStringParameters": null,
+  "multiValueQueryStringParameters": null,
+  "pathParameters": null,
+  "stageVariables": null,
+  "requestContext": {
+    "accountId": "123456789012",
+    "resourceId": "123456",
+    "stage": "Dev",
+    "domainName": "localhost:3000",
+    "domainPrefix": "",
+    "requestId": "99bcc809-c651-441b-b120-a3defc2b054d",
+    "protocol": "HTTP/1.1",
+    "identity": {
+      "cognitoIdentityPoolId": "",
+      "accountId": "",
+      "cognitoIdentityId": "",
+      "caller": "",
+      "apiKey": "",
+      "apiKeyId": "",
+      "accessKey": "",
+      "sourceIp": "127.0.0.1",
+      "cognitoAuthenticationType": "",
+      "cognitoAuthenticationProvider": "",
+      "userArn": "",
+      "userAgent": "Custom User Agent String",
+      "user": ""
+    },
+    "resourcePath": "/addunit",
+    "authorizer": null,
+    "httpMethod": "POST",
+    "requestTime": "31/May/2021:10:34:58 +0000",
+    "requestTimeEpoch": 1622457298,
+    "apiId": "1234567890"
+  },
+  "body": "{\"unitCode\": \"testunit\"}"
+}

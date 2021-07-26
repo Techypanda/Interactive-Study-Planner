@@ -123,7 +123,7 @@ func addToDatabase(unit Unit, db *dynamodb.DynamoDB) error {
 			case dynamodb.ErrCodeProvisionedThroughputExceededException:
 				return errors.New("dberror: throughput exceeded")
 			case dynamodb.ErrCodeResourceNotFoundException:
-				return errors.New("dberror: resource not found")
+				return errors.New(fmt.Sprintf("dberror: resource not found, %v", err))
 			case dynamodb.ErrCodeItemCollectionSizeLimitExceededException:
 				return errors.New("dberror: FATAL, item collection size exceeded")
 			case dynamodb.ErrCodeTransactionConflictException:
