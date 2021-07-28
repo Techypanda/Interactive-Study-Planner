@@ -1,6 +1,7 @@
 import json
 import boto3
 import requests
+from boto3.dynamodb.conditions import Attr
 from botocore.exceptions import ClientError
 
 #JWT token validation
@@ -17,11 +18,11 @@ def validateJWTToken(self, token):
     #return valid, error
 
 class Trait:
-    def __init__(self, traitId, name):
+    def __init__(self, traitId: str, name: str) -> None:
         self.id = traitId
         self.name = name
 
-def lambda_handler(event, context):
+def lambda_handler(event, context) -> dict:
     #Setup link to database and table
     db = boto3.resource('dynamodb', region_name='ap-southeast-2')
     table = db.Table("DevTraits")
@@ -84,7 +85,7 @@ def lambda_handler(event, context):
 
 #Http responses
 #Badrequest response
-def badRequest(reason):
+def badRequest(reason: str) -> dict:
     return {
         "statusCode" : 400,
         "body" : "Bad request: " + reason,
@@ -95,7 +96,7 @@ def badRequest(reason):
     }
 
 #Ok response
-def okResponse(reason):
+def okResponse(reason: str) -> dict:
     return {
         "statusCode" : 200,
         "body" : "Success: " + reason,

@@ -1,17 +1,18 @@
 import json
 import boto3
 import requests
+from boto3.dynamodb.conditions import Attr
 from botocore.exceptions import ClientError
 
 class Career:
-    def __init__(self, careerId, name, description, industry, reqs, traits):
+    def __init__(self, careerId: str, name: str, description: str, industry: str, reqs: list, traits: list) -> None:
         self.id = careerId
         self.name = name
         self.description = description
         self.reqs = reqs
         self.traits = traits
 
-def lambda_handler(event, context):
+def lambda_handler(event, context) -> dict:
     #Setup link to database and table
     db = boto3.resource('dynamodb', region_name='ap-southeast-2')
     table = db.Table("DevCareers")
@@ -75,7 +76,7 @@ def lambda_handler(event, context):
                     "Requirements": career.reqs,
                     "Traits": career.traits
                 },
-                ConditionExpression=Attr("Id").eq(trait.id)   #Check in table already
+                ConditionExpression=Attr("Id").eq(career.id)   #Check in table already
             )
         except ClientError as err:
             #Check if error was due to item not existing in table
@@ -89,7 +90,7 @@ def lambda_handler(event, context):
 
 #Http responses
 #Badrequest response
-def badRequest(reason):
+def badRequest(reason: str) -> dict:
     return {
         "statusCode" : 400,
         "body" : "Bad request: " + reason,
@@ -100,7 +101,7 @@ def badRequest(reason):
     }
 
 #Ok response
-def okResponse(reason):
+def okResponse(reason: str) -> dict:
     return {
         "statusCode" : 200,
         "body" : "Success: " + reason,
