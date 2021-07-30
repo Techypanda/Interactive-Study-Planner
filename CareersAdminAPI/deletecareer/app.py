@@ -4,14 +4,6 @@ import requests
 from boto3.dynamodb.conditions import Attr
 from botocore.exceptions import ClientError
 
-class Career:
-    def __init__(self, careerId: str, name: str, description: str, industry: str, reqs: list, traits: list) -> None:
-        self.id = careerId
-        self.name = name
-        self.description = description
-        self.reqs = reqs
-        self.traits = traits
-
 def lambda_handler(event, context) -> dict:
     #Setup link to database and table
     db = boto3.resource('dynamodb', region_name='ap-southeast-2')
@@ -26,13 +18,13 @@ def lambda_handler(event, context) -> dict:
             TableName='DevCareers',
             KeySchema=[
                 {
-                    'AttributeName': 'Id',
+                    'AttributeName': 'CareerId',
                     'KeyType': 'HASH'
                 }
             ],
             AttributeDefinitions=[
                 {
-                    'AttributeName': 'Id',
+                    'AttributeName': 'CareerId',
                     'AttributeType': 'S'
                 },
                 {
@@ -63,19 +55,15 @@ def lambda_handler(event, context) -> dict:
     else:
         #Retrieve data
         body = json.loads(event["body"])
-        career = Career(body["Id"], body["Name"], body["Description"], body["Requirements"], body["Traits"])
+        career = body["CareerId"]
 
         #Delete from table
         try:
             response = table.delete_item(
                 Item={
-                    "Id": career.id,
-                    "Name": career.name,
-                    "Description": career.description,
-                    "Requirements": career.reqs,
-                    "Traits": career.traits
+                    "CareerId": career
                 },
-                ConditionExpression=Attr("Id").eq(career.id)   #Check in table
+                ConditionExpression=Attr("CareerId").eq(career)   #Check in table
             )
         except ClientError as err:
             #Check if error was due to item not existing in table

@@ -9,6 +9,7 @@ class Career:
         self.id = careerId
         self.name = name
         self.description = description
+        self.industry = industry
         self.reqs = reqs
         self.traits = traits
 
@@ -26,13 +27,13 @@ def lambda_handler(event, context) -> dict:
             TableName='DevCareers',
             KeySchema=[
                 {
-                    'AttributeName': 'Id',
+                    'AttributeName': 'CareerId',
                     'KeyType': 'HASH'
                 }
             ],
             AttributeDefinitions=[
                 {
-                    'AttributeName': 'Id',
+                    'AttributeName': 'CareerId',
                     'AttributeType': 'S'
                 },
                 {
@@ -41,6 +42,10 @@ def lambda_handler(event, context) -> dict:
                 },
                 {
                     'AttributeName': 'Description',
+                    'AttributeType': 'S'
+                },
+                {
+                    'AttributeName': 'Industry',
                     'AttributeType': 'S'
                 },
                 {
@@ -64,19 +69,20 @@ def lambda_handler(event, context) -> dict:
     else:
         #Retrieve data
         body = json.loads(event["body"])
-        career = Career(body["Id"], body["Name"], body["Description"], body["Requirements"], body["Traits"])
+        career = Career(body["CareerId"], body["Name"], body["Description"],body["Industry"], body["Requirements"], body["Traits"])
 
         #Add to table
         try:
             response = table.put_item(
                 Item={
-                    "Id": career.id,
+                    "CareerId": career.id,
                     "Name": career.name,
                     "Description": career.description,
+                    "Industry": career.industry,
                     "Requirements": career.reqs,
                     "Traits": career.traits
                 },
-                ConditionExpression=Attr("Id").eq(career.id)   #Check in table already
+                ConditionExpression=Attr("CareerId").eq(career.id)   #Check in table already
             )
         except ClientError as err:
             #Check if error was due to item not existing in table
