@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
@@ -35,6 +36,7 @@ func handler(ctx context.Context, payload events.APIGatewayProxyRequest) (events
 	} else {
 		spec, err := interpretDPayload(payload)
 		if err == nil {
+			spec.SpecCode = strings.ToUpper(spec.SpecCode)
 			inDBError := checkInDatabase(spec, db)
 			if inDBError == nil {
 				delDBError := deleteFromDatabase(spec, db)

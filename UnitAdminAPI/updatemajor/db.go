@@ -3,6 +3,8 @@ package main
 import (
 	"errors"
 	"fmt"
+	"strings"
+
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/awserr"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -63,7 +65,7 @@ func addToDatabase(major Major, db *dynamodb.DynamoDB) error {
 	input := &dynamodb.PutItemInput{
 		Item: map[string]*dynamodb.AttributeValue{
 			"MajorCode": {
-				S: aws.String(major.MajorCode),
+				S: aws.String(strings.ToUpper(major.MajorCode)),
 			},
 			"Name": {
 				S: aws.String(major.Name),
@@ -79,6 +81,9 @@ func addToDatabase(major Major, db *dynamodb.DynamoDB) error {
 			},
 			"SpecAntiReqs": {
 				SS: convertToStringMemoryArray(major.SpecAntiReqs),
+			},
+			"SearchName": {
+				S: aws.String(strings.ToLower(major.Name)),
 			},
 		},
 		TableName: aws.String("DevMajors"),

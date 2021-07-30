@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"strings"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -87,7 +88,7 @@ func addToDatabase(unit Unit, db *dynamodb.DynamoDB) error {
 	input := &dynamodb.PutItemInput{
 		Item: map[string]*dynamodb.AttributeValue{
 			"UnitCode": {
-				S: aws.String(unit.UnitCode),
+				S: aws.String(strings.ToUpper(unit.UnitCode)),
 			},
 			"Name": {
 				S: aws.String(unit.Name),
@@ -109,6 +110,9 @@ func addToDatabase(unit Unit, db *dynamodb.DynamoDB) error {
 			},
 			"Antirequistes": {
 				SS: convertToStringMemoryArray(unit.Antirequistes),
+			},
+			"SearchName": {
+				S: aws.String(strings.ToLower(unit.Name)),
 			},
 		},
 		TableName: aws.String("DevUnits"),
