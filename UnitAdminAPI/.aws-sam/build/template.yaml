@@ -10,7 +10,7 @@ Parameters:
   Authentication:
     Type: String
     Description: Disable Authentication (True) or Leave It (False)
-    Default: 'true'
+    Default: 'false'
 Resources:
   AdminUnitAPI:
     Type: AWS::Serverless::Api
@@ -41,7 +41,7 @@ Resources:
         CatchAll:
           Type: Api
           Properties:
-            Path: /TEMP/{operation+}
+            Path: /{operation+}
             Method: ANY
             RestApiId:
               Ref: AdminUnitAPI

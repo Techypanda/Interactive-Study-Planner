@@ -1,29 +1,5 @@
 {
-  "AddUnitFunction": {
-    "DisableAuthentication": "true"
-  },
-  "RemoveUnitFunction": {
-    "DisableAuthentication": "true"
-  },
-  "UpdateUnitFunction": {
-    "DisableAuthentication": "true"
-  },
-  "AddMajorFunction": {
-    "DisableAuthentication": "true"
-  },
-  "UpdateMajorFunction": {
-    "DisableAuthentication": "true"
-  },
-  "RemoveMajorFunction": {
-    "DisableAuthentication": "true"
-  },
-  "AddSpecFunction": {
-    "DisableAuthentication": "true"
-  },
-  "UpdateSpecFunction": {
-    "DisableAuthentication": "true"
-  },
-  "RemoveSpecFunction": {
+  "UnitAdminAPI": {
     "DisableAuthentication": "true"
   }
 }
