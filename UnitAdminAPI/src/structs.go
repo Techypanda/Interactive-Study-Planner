@@ -27,3 +27,18 @@ type Major struct {
 type DelMajor struct {
 	MajorCode string `json:"majorCode"`
 }
+
+type Specialization struct {
+	SpecCode       string   `json:"specCode"`
+	Name           string   `json:"name"`
+	Credits        float32  `json:"credits"`
+	CourseInternal bool     `json:"courseInternal"`
+	Units          []string `json:"units"`
+	UnitAntiReqs   []string `json:"unitAntiReqs"`
+	SpecAntiReqs   []string `json:"specAntiReqs"`
+	MajorAntiReqs  []string `json:"majorAntiReqs"`
+}
+
+type DelSpecialization struct {
+	SpecCode string `json:"specCode"`
+}

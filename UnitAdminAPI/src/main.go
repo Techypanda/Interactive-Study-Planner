@@ -20,6 +20,9 @@ var ENDPOINTS = map[string]func(string) events.APIGatewayProxyResponse{
 	"addmajor":    AddMajorHandler,
 	"updatemajor": UpdateMajorHandler,
 	"deletemajor": DeleteMajorHandler,
+	"addspec":     AddSpecHandler,
+	"updatespec":  UpdateSpecHandler,
+	"deletespec":  DeleteSpecHandler,
 }
 
 func handler(ctx context.Context, payload events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
