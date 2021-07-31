@@ -41,7 +41,7 @@ Resources:
         CatchAll:
           Type: Api
           Properties:
-            Path: /TEMP/{operation+}
+            Path: /{operation+}
             Method: ANY
             RestApiId:
               Ref: AdminUnitAPI
