@@ -53,6 +53,10 @@ Resources:
       Policies:
         - DynamoDBCrudPolicy:
             TableName: DevUnits
+        - DynamoDBCrudPolicy:
+            TableName: DevMajors
+        - DynamoDBCrudPolicy:
+            TableName: DevSpecializations
     Metadata:
       DockerTag: go1.x-v1
       DockerContext: ./src

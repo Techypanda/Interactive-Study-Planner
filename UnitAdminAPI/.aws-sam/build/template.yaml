@@ -52,6 +52,10 @@ Resources:
       Policies:
       - DynamoDBCrudPolicy:
           TableName: DevUnits
+      - DynamoDBCrudPolicy:
+          TableName: DevMajors
+      - DynamoDBCrudPolicy:
+          TableName: DevSpecializations
       ImageUri: unitadminapi:go1.x-v1
     Metadata:
       DockerTag: go1.x-v1
