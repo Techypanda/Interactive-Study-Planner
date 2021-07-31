@@ -217,3 +217,188 @@ func addUnitToDatabase(unit Unit, db *dynamodb.DynamoDB) error {
 	}
 	return nil
 }
+
+/*
+	Purpose: Return a error if the major exists in DB, else return nil
+*/
+func checkMajorNotInDatabase(major Major, db *dynamodb.DynamoDB) error {
+	majorCode := strings.ToUpper(major.MajorCode)
+	input := &dynamodb.GetItemInput{
+		TableName: aws.String("DevMajors"),
+		Key: map[string]*dynamodb.AttributeValue{
+			"MajorCode": {
+				S: aws.String(majorCode),
+			},
+		},
+	}
+	item, getErr := db.GetItem(input)
+	if getErr == nil {
+		if item.Item == nil {
+			return nil
+		} else {
+			return errors.New("that major exists in db")
+		}
+	} else {
+		if aerr, ok := getErr.(awserr.Error); ok {
+			switch aerr.Code() {
+			case dynamodb.ErrCodeProvisionedThroughputExceededException:
+				return errors.New("DBError: Provisioned Throughput has been exceeded")
+			case dynamodb.ErrCodeResourceNotFoundException:
+				return nil
+			case dynamodb.ErrCodeRequestLimitExceeded:
+				return errors.New("DBError: cannot request from db, limit exceeded")
+			case dynamodb.ErrCodeInternalServerError:
+				return errors.New("DBError: internal server error (most likely on Amazon's Side)")
+			default:
+				return errors.New(aerr.Error())
+			}
+		} else {
+			return errors.New(getErr.Error())
+		}
+	}
+}
+
+/*
+	Purpose: Return a error if the major fails to add to db, else return nil
+*/
+func addMajorToDatabase(major Major, db *dynamodb.DynamoDB) error {
+	majorName := strings.ToLower(major.Name)
+	majorCode := strings.ToUpper(major.MajorCode)
+	input := &dynamodb.PutItemInput{
+		Item: map[string]*dynamodb.AttributeValue{
+			"MajorCode": {
+				S: aws.String(majorCode),
+			},
+			"Name": {
+				S: aws.String(major.Name),
+			},
+			"Credits": {
+				N: aws.String(fmt.Sprintf("%f", major.Credits)),
+			},
+			"Units": {
+				SS: convertToStringMemoryArray(major.Units),
+			},
+			"UnitAntiReqs": {
+				SS: convertToStringMemoryArray(major.UnitAntiReqs),
+			},
+			"SpecAntiReqs": {
+				SS: convertToStringMemoryArray(major.SpecAntiReqs),
+			},
+			"SearchName": {
+				S: aws.String(majorName),
+			},
+		},
+		TableName: aws.String("DevMajors"),
+	}
+
+	_, err := db.PutItem(input)
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case dynamodb.ErrCodeConditionalCheckFailedException:
+				return errors.New("dberror: conditionalcheck failed")
+			case dynamodb.ErrCodeProvisionedThroughputExceededException:
+				return errors.New("dberror: throughput exceeded")
+			case dynamodb.ErrCodeResourceNotFoundException:
+				return errors.New("dberror: resource not found")
+			case dynamodb.ErrCodeItemCollectionSizeLimitExceededException:
+				return errors.New("dberror: FATAL, item collection size exceeded")
+			case dynamodb.ErrCodeTransactionConflictException:
+				return errors.New("dberror: transaction conflict")
+			case dynamodb.ErrCodeRequestLimitExceeded:
+				return errors.New("dberror: request limits reached")
+			case dynamodb.ErrCodeInternalServerError:
+				return errors.New("dberror: dynamodb internal server error, likely aws down")
+			default:
+				return errors.New(aerr.Error())
+			}
+		} else {
+			return errors.New(err.Error())
+		}
+		return err
+	}
+	return nil
+}
+
+/*
+	Purpose: Return a error if the major doesnt exists in DB, else return nil
+*/
+func checkMajorIsInDatabase(major Major, db *dynamodb.DynamoDB) error {
+	majorCodeUppered := strings.ToUpper(major.MajorCode)
+	input := &dynamodb.GetItemInput{
+		TableName: aws.String("DevMajors"),
+		Key: map[string]*dynamodb.AttributeValue{
+			"MajorCode": {
+				S: aws.String(majorCodeUppered),
+			},
+		},
+	}
+	item, getErr := db.GetItem(input)
+	if getErr == nil {
+		if item.Item == nil {
+			return errors.New("that majorCode doesnt exist in db")
+		} else {
+			return nil
+		}
+	} else {
+		if aerr, ok := getErr.(awserr.Error); ok {
+			switch aerr.Code() {
+			case dynamodb.ErrCodeProvisionedThroughputExceededException:
+				return errors.New("DBError: Provisioned Throughput has been exceeded")
+			case dynamodb.ErrCodeResourceNotFoundException:
+				return nil
+			case dynamodb.ErrCodeRequestLimitExceeded:
+				return errors.New("DBError: cannot request from db, limit exceeded")
+			case dynamodb.ErrCodeInternalServerError:
+				return errors.New("DBError: internal server error (most likely on Amazon's Side)")
+			default:
+				return errors.New(aerr.Error())
+			}
+		} else {
+			return errors.New(getErr.Error())
+		}
+	}
+}
+
+/*
+	Purpose: Delete unit from the database
+*/
+func deleteMajorFromDatabase(major DelMajor, db *dynamodb.DynamoDB) error {
+	uppercased := strings.ToUpper(major.MajorCode)
+	input := &dynamodb.DeleteItemInput{
+		Key: map[string]*dynamodb.AttributeValue{
+			"MajorCode": {
+				S: aws.String(uppercased),
+			},
+		},
+		TableName: aws.String("DevMajors"),
+	}
+	_, err := db.DeleteItem(input)
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case dynamodb.ErrCodeConditionalCheckFailedException:
+				errors.New("dberror: conditional check failed")
+			case dynamodb.ErrCodeProvisionedThroughputExceededException:
+				errors.New("dberror: provisioned throughput exceeded")
+			case dynamodb.ErrCodeResourceNotFoundException:
+				errors.New("That resource is not found")
+			case dynamodb.ErrCodeItemCollectionSizeLimitExceededException:
+				errors.New("dberror: item collection size reached")
+			case dynamodb.ErrCodeTransactionConflictException:
+				errors.New("dberror: transaction code conflict")
+			case dynamodb.ErrCodeRequestLimitExceeded:
+				errors.New("dberror: request limit exceeded")
+			case dynamodb.ErrCodeInternalServerError:
+				errors.New("dberror: internal server error")
+			default:
+				errors.New(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			errors.New(err.Error())
+		}
+	}
+	return nil
+}

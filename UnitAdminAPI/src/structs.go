@@ -14,3 +14,16 @@ type Unit struct {
 type DelUnit struct {
 	UnitCode string `json:"unitCode"`
 }
+
+type Major struct {
+	MajorCode    string   `json:"majorCode"`
+	Name         string   `json:"name"`
+	Credits      float32  `json:"credits"`
+	Units        []string `json:"units"`
+	UnitAntiReqs []string `json:"unitAntiReqs"`
+	SpecAntiReqs []string `json:"specAntiReqs"`
+}
+
+type DelMajor struct {
+	MajorCode string `json:"majorCode"`
+}

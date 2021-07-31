@@ -14,9 +14,12 @@ import (
 var db *dynamodb.DynamoDB
 
 var ENDPOINTS = map[string]func(string) events.APIGatewayProxyResponse{
-	"addunit":    AddUnitHandler,
-	"updateunit": UpdateUnitHandler,
-	"deleteunit": RemoveUnitHandler,
+	"addunit":     AddUnitHandler,
+	"updateunit":  UpdateUnitHandler,
+	"deleteunit":  RemoveUnitHandler,
+	"addmajor":    AddMajorHandler,
+	"updatemajor": UpdateMajorHandler,
+	"deletemajor": DeleteMajorHandler,
 }
 
 func handler(ctx context.Context, payload events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
