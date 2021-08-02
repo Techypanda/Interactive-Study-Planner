@@ -4,6 +4,13 @@ import requests
 from boto3.dynamodb.conditions import Attr
 from botocore.exceptions import ClientError
 
+#Author: Matthew Loe
+#Student Id: 19452425
+#Date Created: 25/05/2021
+#Date Last Modified: 2/08/2021
+#Description: Add career operation handler
+
+#Career class definition
 class Career:
     def __init__(self, careerId: str, name: str, description: str, industry: str, reqs: list, traits: list) -> None:
         self.id = careerId
@@ -13,6 +20,7 @@ class Career:
         self.reqs = reqs
         self.traits = traits
 
+#Lambda handler - adds the received career to the database if possible
 def lambda_handler(event, context) -> dict:
     #Setup link to database and table
     db = boto3.resource('dynamodb', region_name='ap-southeast-2')

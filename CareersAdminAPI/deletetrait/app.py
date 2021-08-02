@@ -4,6 +4,13 @@ import requests
 from boto3.dynamodb.conditions import Attr
 from botocore.exceptions import ClientError
 
+#Author: Matthew Loe
+#Student Id: 19452425
+#Date Created: 25/05/2021
+#Date Last Modified: 2/08/2021
+#Description: Delete trait operation handler
+
+#Lambda handler - removes the received trait from the database if possible
 def lambda_handler(event, context) -> dict:
     #Setup link to database and table
     db = boto3.resource('dynamodb', region_name='ap-southeast-2')

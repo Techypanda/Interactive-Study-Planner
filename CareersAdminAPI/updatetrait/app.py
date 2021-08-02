@@ -4,11 +4,19 @@ import requests
 from boto3.dynamodb.conditions import Attr
 from botocore.exceptions import ClientError
 
+#Author: Matthew Loe
+#Student Id: 19452425
+#Date Created: 25/05/2021
+#Date Last Modified: 2/08/2021
+#Description: Update trait operation handler
+
+#Trait class definition
 class Trait:
     def __init__(self, traitId: str, name: str) -> None:
         self.id = traitId
         self.name = name
 
+#Lambda handler - updates the target trait in the database if possible
 def lambda_handler(event, context) -> dict:
     #Setup link to database and table
     db = boto3.resource('dynamodb', region_name='ap-southeast-2')
