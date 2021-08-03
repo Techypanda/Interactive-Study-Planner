@@ -7,7 +7,7 @@ from botocore.exceptions import ClientError
 #Author: Matthew Loe
 #Student Id: 19452425
 #Date Created: 25/05/2021
-#Date Last Modified: 2/08/2021
+#Date Last Modified: 3/08/2021
 #Description: Update trait operation handler
 
 #Trait class definition
@@ -39,10 +39,6 @@ def lambda_handler(event, context) -> dict:
                 {
                     'AttributeName': 'Id',
                     'AttributeType': 'S'
-                },
-                {
-                    'AttributeName': 'Name',
-                    'AttributeType': 'S'
                 }
             ],
             ProvisionedThroughput={
@@ -55,28 +51,33 @@ def lambda_handler(event, context) -> dict:
         return badRequest("Table does not exist. An empty table is now being created. Please try again.")
 
     else:
-        #Retrieve data
-        body = json.loads(event["body"])
-        trait = Trait(body["Id"], body["Name"])
-
-        #Update item in table
         try:
-            response = table.update_item(
-                Item={
-                    "Id": trait.name,
-                    "Name": trait.name
-                },
-                ConditionExpression=Attr("Id").eq(trait.id)   #Check in table already
-            )
-        except ClientError as err:
-            #Check if error was due to item not existing in table
-            if err.response['Error']['Code'] == 'ConditionalCheckFailedException':
-                return badRequest("Item does not exist in the table.")
+            #Retrieve data
+            body = json.loads(event["body"])
+            trait = Trait(body["Id"], body["Name"])
+        except KeyError:
+            return badRequest("Invalid data or format recieved.")
+        else:     
+            #Update item in table
+            try:
+                response = table.update_item(
+                    Key={
+                        "Id": trait.name
+                    },
+                    AttributeUpdates={
+                        "Name": trait.name
+                    },
+                    ConditionExpression=Attr("Id").eq(trait.id)   #Check in table already
+                )
+            except ClientError as err:
+                #Check if error was due to item not existing in table
+                if err.response['Error']['Code'] == 'ConditionalCheckFailedException':
+                    return badRequest("Item does not exist in the table.")
+                else:
+                    return badRequest("Unknown error occured.")
             else:
-                return badRequest("Unknown error occured.")
-        else:
-            #Return ok response
-            return okResponse("Trait updated to database.")
+                #Return ok response
+                return okResponse("Trait updated to database.")
 
 #Http responses
 #Badrequest response

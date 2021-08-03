@@ -7,7 +7,7 @@ from botocore.exceptions import ClientError
 #Author: Matthew Loe
 #Student Id: 19452425
 #Date Created: 25/05/2021
-#Date Last Modified: 2/08/2021
+#Date Last Modified: 3/08/2021
 #Description: Delete career operation handler
 
 #Lambda handler - removes the target career from the database if possible
@@ -33,22 +33,6 @@ def lambda_handler(event, context) -> dict:
                 {
                     'AttributeName': 'CareerId',
                     'AttributeType': 'S'
-                },
-                {
-                    'AttributeName': 'Name',
-                    'AttributeType': 'S'
-                },
-                {
-                    'AttributeName': 'Description',
-                    'AttributeType': 'S'
-                },
-                {
-                    'AttributeName': 'Requirements',
-                    'AttributeType': 'SS'
-                },
-                {
-                    'AttributeName': 'Traits',
-                    'AttributeType': 'SS'
                 }
             ],
             ProvisionedThroughput={
@@ -60,27 +44,30 @@ def lambda_handler(event, context) -> dict:
         #Return bad request indicating table does not exist and is being created
         return badRequest("Table does not exist. An empty table is now being created. Please try again.")
     else:
-        #Retrieve data
-        body = json.loads(event["body"])
-        career = body["CareerId"]
-
-        #Delete from table
         try:
-            response = table.delete_item(
-                Item={
-                    "CareerId": career
-                },
-                ConditionExpression=Attr("CareerId").eq(career)   #Check in table
-            )
-        except ClientError as err:
-            #Check if error was due to item not existing in table
-            if err.response['Error']['Code'] == 'ConditionalCheckFailedException':
-                return badRequest("Item does not exist in the table.")
-            else:
-                return badRequest("Unknown error occured.")
+            #Retrieve data
+            body = json.loads(event["body"])
+            career = body["CareerId"]
+        except KeyError:
+            return badRequest("Invalid data or format recieved.")
         else:
-            #Return ok response
-            return okResponse("Trait deleted from database.")
+            #Delete from table
+            try:
+                response = table.delete_item(
+                    Item={
+                        "CareerId": career
+                    },
+                    ConditionExpression=Attr("CareerId").eq(career)   #Check in table
+                )
+            except ClientError as err:
+                #Check if error was due to item not existing in table
+                if err.response['Error']['Code'] == 'ConditionalCheckFailedException':
+                    return badRequest("Item does not exist in the table.")
+                else:
+                    return badRequest("Unknown error occured.")
+            else:
+                #Return ok response
+                return okResponse("Trait deleted from database.")
 
 #Http responses
 #Badrequest response

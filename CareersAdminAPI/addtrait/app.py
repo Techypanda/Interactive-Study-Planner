@@ -7,7 +7,7 @@ from botocore.exceptions import ClientError
 #Author: Matthew Loe
 #Student Id: 19452425
 #Date Created: 25/05/2021
-#Date Last Modified: 2/08/2021
+#Date Last Modified: 3/08/2021
 #Description: Add trait operation handler
 
 #JWT token validation
@@ -52,10 +52,6 @@ def lambda_handler(event, context) -> dict:
                 {
                     'AttributeName': 'Id',
                     'AttributeType': 'S'
-                },
-                {
-                    'AttributeName': 'Name',
-                    'AttributeType': 'S'
                 }
             ],
             ProvisionedThroughput={
@@ -72,7 +68,7 @@ def lambda_handler(event, context) -> dict:
             body = json.loads(event["body"])
             trait = Trait(body["Id"], body["Name"])
         except KeyError:
-            return badRequest("Invalid data recieved.")
+            return badRequest("Invalid data or format recieved.")
         else:
             #Add to table
             try:

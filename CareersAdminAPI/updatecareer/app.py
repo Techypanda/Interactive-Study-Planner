@@ -7,8 +7,8 @@ from botocore.exceptions import ClientError
 #Author: Matthew Loe
 #Student Id: 19452425
 #Date Created: 25/05/2021
-#Date Last Modified: 2/08/2021
-#Description: Update trait operation handler
+#Date Last Modified: 3/08/2021
+#Description: Update career operation handler
 
 #Career class definition
 class Career:
@@ -43,26 +43,6 @@ def lambda_handler(event, context) -> dict:
                 {
                     'AttributeName': 'CareerId',
                     'AttributeType': 'S'
-                },
-                {
-                    'AttributeName': 'Name',
-                    'AttributeType': 'S'
-                },
-                {
-                    'AttributeName': 'Description',
-                    'AttributeType': 'S'
-                },
-                {
-                    'AttributeName': 'Industry',
-                    'AttributeType': 'S'
-                },
-                {
-                    'AttributeName': 'Requirements',
-                    'AttributeType': 'SS'
-                },
-                {
-                    'AttributeName': 'Traits',
-                    'AttributeType': 'SS'
                 }
             ],
             ProvisionedThroughput={
@@ -75,32 +55,35 @@ def lambda_handler(event, context) -> dict:
         return badRequest("Table does not exist. An empty table is now being created. Please try again.")
 
     else:
-        #Retrieve data
-        body = json.loads(event["body"])
-        career = Career(body["CareerId"], body["Name"], body["Description"],body["Industry"], body["Requirements"], body["Traits"])
-
-        #Update item in table
-        try:
-            response = table.put_item(
-                Item={
-                    "CareerId": career.id,
-                    "Name": career.name,
-                    "Description": career.description,
-                    "Industry": career.industry,
-                    "Requirements": career.reqs,
-                    "Traits": career.traits
-                },
-                ConditionExpression=Attr("CareerId").eq(career.id)   #Check in table already
-            )
-        except ClientError as err:
-            #Check if error was due to item not existing in table
-            if err.response['Error']['Code'] == 'ConditionalCheckFailedException':
-                return badRequest("Item does not exist in the table.")
-            else:
-                return badRequest("Unknown error occured.")
+        try:    
+            #Retrieve data
+            body = json.loads(event["body"])
+            career = Career(body["CareerId"], body["Name"], body["Description"],body["Industry"], body["Requirements"], body["Traits"])
+        except KeyError:
+            return badRequest("Invalid data or format recieved.")
         else:
-            #Return ok response
-            return okResponse("Trait updated to database.")
+            #Update item in table
+            try:
+                response = table.put_item(
+                    Item={
+                        "CareerId": career.id,
+                        "Name": career.name,
+                        "Description": career.description,
+                        "Industry": career.industry,
+                        "Requirements": career.reqs,
+                        "Traits": career.traits
+                    },
+                    ConditionExpression=Attr("CareerId").eq(career.id)   #Check in table already
+                )
+            except ClientError as err:
+                #Check if error was due to item not existing in table
+                if err.response['Error']['Code'] == 'ConditionalCheckFailedException':
+                    return badRequest("Item does not exist in the table.")
+                else:
+                    return badRequest("Unknown error occured.")
+            else:
+                #Return ok response
+                return okResponse("Trait updated to database.")
 
 #Http responses
 #Badrequest response
