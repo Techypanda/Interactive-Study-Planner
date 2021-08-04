@@ -62,10 +62,12 @@ def lambda_handler(event, context) -> dict:
             try:
                 response = table.update_item(
                     Key={
-                        "Id": trait.name
+                        "Id": trait.id
                     },
-                    AttributeUpdates={
-                        "Name": trait.name
+                    UpdateExpression="SET Id = :newId, Name = :newName",
+                    ExpressionAttributeValues={
+                        ":newId": trait.name,
+                        ":newName": trait.name
                     },
                     ConditionExpression=Attr("Id").eq(trait.id)   #Check in table already
                 )
@@ -77,7 +79,7 @@ def lambda_handler(event, context) -> dict:
                     return badRequest("Unknown error occured.")
             else:
                 #Return ok response
-                return okResponse("Trait updated to database.")
+                return okResponse("Trait updated in database.")
 
 #Http responses
 #Badrequest response

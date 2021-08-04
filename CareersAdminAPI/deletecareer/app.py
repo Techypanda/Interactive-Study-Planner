@@ -67,7 +67,7 @@ def lambda_handler(event, context) -> dict:
                     return badRequest("Unknown error occured.")
             else:
                 #Return ok response
-                return okResponse("Trait deleted from database.")
+                return okResponse("Career deleted from database.")
 
 #Http responses
 #Badrequest response
