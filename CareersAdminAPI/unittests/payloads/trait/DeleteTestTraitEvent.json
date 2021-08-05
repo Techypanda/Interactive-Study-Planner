@@ -1,5 +1,5 @@
 {
-  "body": "{\"CareerId\": \"Genetics Researcher\", \"Name\": \"Genetics Researcher\", \"Description\": \"Researcher of genetics.\", \"Industry\": \"Medical Research\", \"Requirements\": [\"CMHL1000\",\"HUMB1000\"], \"Traits\": [\"Hardworking\",\"Critical Thinker\"]}",
+  "body": "{\"Id\": \"Test\", \"Name\": \"Test\"}",
   "resource": "/{proxy+}",
   "path": "/path/to/resource",
   "httpMethod": "POST",
