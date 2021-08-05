@@ -50,21 +50,6 @@ Resources:
       DockerContext: ./addtrait
       DockerTag: python3.8-v1
 
-  CareerCSVFunction:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
-    Properties:
-      PackageType: Image
-      Events:
-        CareerCSV:
-          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
-          Properties:
-            Path: /careerCSV
-            Method: POST
-    Metadata:
-      Dockerfile: Dockerfile
-      DockerContext: ./careercsv
-      DockerTag: python3.8-v1
-
   DeleteCareerFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
@@ -93,21 +78,6 @@ Resources:
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./deletetrait
-      DockerTag: python3.8-v1
-
-  TraitCSVFunction:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
-    Properties:
-      PackageType: Image
-      Events:
-        TraitCSV:
-          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
-          Properties:
-            Path: /traitCSV
-            Method: POST
-    Metadata:
-      Dockerfile: Dockerfile
-      DockerContext: ./traitcsv
       DockerTag: python3.8-v1
 
   UpdateCareerFunction:
@@ -152,18 +122,12 @@ Outputs:
   AddTraitApi:
     Description: "API Gateway endpoint URL for Prod stage for Add Trait function"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/addtrait/"
-  CareerCSVApi:
-    Description: "API Gateway endpoint URL for Prod stage for Career CSV function"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/careercsv/"
   DeleteCareerApi:
     Description: "API Gateway endpoint URL for Prod stage for Delete Career function"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/deletecareer/"
   DeleteTraitApi:
     Description: "API Gateway endpoint URL for Prod stage for Delete Trait function"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/deletetrait/"
-  TraitCSVApi:
-    Description: "API Gateway endpoint URL for Prod stage for Trait CSV function"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/traitcsv/"
   UpdateCareerApi:
     Description: "API Gateway endpoint URL for Prod stage for Update Career function"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/updatecareer/"
@@ -178,18 +142,12 @@ Outputs:
   AddTraitFunction:
     Description: "Add Trait Lambda Function ARN"
     Value: !GetAtt AddTraitFunction.Arn
-  CareerCSVFunction:
-    Description: "Career CSV Lambda Function ARN"
-    Value: !GetAtt CareerCSVFunction.Arn
   DeleteCareerFunction:
     Description: "Delete Career Lambda Function ARN"
     Value: !GetAtt DeleteCareerFunction.Arn
   DeleteTraitFunction:
     Description: "Delete Trait Lambda Function ARN"
     Value: !GetAtt DeleteTraitFunction.Arn
-  TraitCSVFunction:
-    Description: "Trait CSV Lambda Function ARN"
-    Value: !GetAtt TraitCSVFunction.Arn
   UpdateCareerFunction:
     Description: "Update Career Lambda Function ARN"
     Value: !GetAtt UpdateCareerFunction.Arn
@@ -204,18 +162,12 @@ Outputs:
   AddTraitFunctionIamRole:
     Description: "Implicit IAM Role created for Add Trait function"
     Value: !GetAtt AddTraitFunction.Arn
-  CareerCSVFunctionIamRole:
-    Description: "Implicit IAM Role created for Career CSV function"
-    Value: !GetAtt CareerCSVFunction.Arn
   DeleteCareerFunctionIamRole:
     Description: "Implicit IAM Role created for Delete Career function"
     Value: !GetAtt DeleteCareerFunction.Arn
   DeleteTraitFunctionIamRole:
     Description: "Implicit IAM Role created for Delete Trait function"
     Value: !GetAtt DeleteTraitFunction.Arn
-  TraitCSVFunctionIamRole:
-    Description: "Implicit IAM Role created for Trait CSV function"
-    Value: !GetAtt TraitCSVFunction.Arn
   UpdateCareerFunctionIamRole:
     Description: "Implicit IAM Role created for Update Career function"
     Value: !GetAtt UpdateCareerFunction.Arn
