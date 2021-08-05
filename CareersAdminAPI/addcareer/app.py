@@ -35,7 +35,7 @@ def lambda_handler(event, context) -> dict:
             TableName='DevCareers',
             KeySchema=[
                 {
-                    'AttributeName': 'Id',
+                    'AttributeName': 'CareerId',
                     'KeyType': 'HASH'
                 }
             ],
