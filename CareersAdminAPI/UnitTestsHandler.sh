@@ -32,13 +32,13 @@ diff unittests/responses/trait/UpdateNonExistResponse.json unittests/expectedRes
 
 echo "Delete Trait Api" >> UnitTestOutput.txt
 #Executing
-sam local invoke DeleteTraitFunction -e unittests/payloads/trait/DeleteTraitEvent.json > unittests/responses/trait/DeleteTraitExpectedResponse.json
+sam local invoke DeleteTraitFunction -e unittests/payloads/trait/DeleteTraitEvent.json > unittests/responses/trait/DeleteTraitResponse.json
 #Comparing expected response to actual response
 diff unittests/responses/trait/DeleteTraitResponse.json unittests/expectedResponses/trait/DeleteTraitExpectedResponse.json >> UnitTestOutput.txt
 
 echo "Delete Non-Existing Item" >> UnitTestOutput.txt
 #Executing
-sam local invoke DeleteTraitFunction -e unittests/payloads/trait/DeleteKindTraitEvent.json > unittests/responses/trait/DeleteNonExistResponse.json
+sam local invoke DeleteTraitFunction -e unittests/payloads/trait/DeleteTestTraitEvent.json > unittests/responses/trait/DeleteNonExistResponse.json
 #Comparing expected response to actual response
 diff unittests/responses/trait/DeleteNonExistResponse.json unittests/expectedResponses/trait/NonExistExpectedResponse.json >> UnitTestOutput.txt
 
@@ -88,13 +88,13 @@ diff unittests/responses/career/UpdateNonExistResponse.json unittests/expectedRe
 
 echo "Delete Career Api" >> UnitTestOutput.txt
 #Executing
-sam local invoke DeleteCareerFunction -e unittests/payloads/career/DeleteCareerEvent.json > unittests/responses/career/DeleteCareerExpectedResponse.json
+sam local invoke DeleteCareerFunction -e unittests/payloads/career/DeleteCareerEvent.json > unittests/responses/career/DeleteCareerResponse.json
 #Comparing expected response to actual response
 diff unittests/responses/career/DeleteCareerResponse.json unittests/expectedResponses/career/DeleteCareerExpectedResponse.json >> UnitTestOutput.txt
 
 echo "Delete Non-Existing Item" >> UnitTestOutput.txt
 #Executing
-sam local invoke DeleteCareerFunction -e unittests/payloads/career/DeleteKindCareerEvent.json > unittests/responses/career/DeleteNonExistResponse.json
+sam local invoke DeleteCareerFunction -e unittests/payloads/career/DeleteTestCareerEvent.json > unittests/responses/career/DeleteNonExistResponse.json
 #Comparing expected response to actual response
 diff unittests/responses/career/DeleteNonExistResponse.json unittests/expectedResponses/career/NonExistExpectedResponse.json >> UnitTestOutput.txt
 
