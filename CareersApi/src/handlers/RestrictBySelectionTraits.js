@@ -1,15 +1,3 @@
-// //TODO Place this in a separate class
-// class Career {
-//     constructor(id,name,descript,industry,reqs,traits){
-//         this.id = id;
-//         this.name = name;
-//         this.descript = descript;
-//         this.industry = industry;
-//         this.reqs = reqs;
-//         this.traits = traits;
-//     }
-// }
-
 // Get the Careers DynamoDB table name from environment variables
 const tableName = process.env.DEV_CAREER_TABLE;
 
@@ -21,24 +9,32 @@ AWS.config.update({
 
 const docClient = new AWS.DynamoDB.DocumentClient();
 
-exports.getAllCareers = async (event) => {
+exports.restrictWithTraitCode = async (event) => {
     if (event.httpMethod !== 'GET') {
-        throw new Error(`getAllItems only accept GET method, you tried: ${event.httpMethod}`);
+        throw new Error(`Traits only accept GET method, you tried: ${event.httpMethod}`);
     }
     // All log statements are written to CloudWatch
     console.info('received:', event);
 
+    let id = { "S" : "CMHL1000" };
     let params = {
-        TableName : tableName
+        TableName : tableName,
+        KeyConditionExpression: "#Id = :traitId",
+        ExpressionAttributeNames: {
+            '#Id' : 'Requirements'
+        },
+        ExpressionAttributeValues: {
+            ":traitId": id
+        }
     };
 
-    const scanResults = [];
-    let items = await docClient.scan(params).promise();
-    do {
-        items.Items.forEach((item) => scanResults.push(item));
-        params.ExclusiveStartKey = items.LastEvaluatedKey;
-        items = await docClient.scan(params).promise();
-    }while(items.LastEvaluatedKey);
+    let scanResults = [];
+    try {
+        const data = await docClient.query(params).promise();
+        data.Items.forEach( (item) => scanResults.push(data))
+    }  catch (err) {
+        console.log("ERROR:"+err);
+    }
 
     const response = {
         statusCode: 200,

@@ -9,7 +9,7 @@ AWS.config.update({
 
 const docClient = new AWS.DynamoDB.DocumentClient();
 
-exports.restrictWithUnitCode= async (event) => {
+exports.restrictWithUnitCode = async (event) => {
     if (event.httpMethod !== 'GET') {
         throw new Error(`getAllItems only accept GET method, you tried: ${event.httpMethod}`);
     }
@@ -18,24 +18,22 @@ exports.restrictWithUnitCode= async (event) => {
 
     let params = {
         TableName : tableName,
-        KeyConditionExpression: '#cid = :r',
-        ExpressionAttributeNames: {
-            '#cid': 'careerid'
-        },
+        KeyConditionExpression: "CareerId = :careerValue",
         ExpressionAttributeValues: {
-            ":r": "TestDontDelete"
+            ":careerValue":{"S":"TestDontDelete"}
         }
     };
     console.log("TESTINGITESTING");
 
     let scanResults = [];
     docClient.query(params, function(err, data) {
+        console.log("I AM HERE");
         if (err) {
             console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
         } else {
             console.log("Query succeeded.");
             data.Items.forEach(function(item) {
-                console.log("Data:", item.year + ": " + item.title);
+                console.log("Data:", item + ": " + item);
                 scanResults.append(data);
             });
             console.log("LOL YES:",data);

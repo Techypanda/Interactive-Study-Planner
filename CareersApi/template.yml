@@ -113,6 +113,7 @@ Resources:
           Properties:
             Path: /
             Method: GET
+
   RestrictWithUnitCode:
     Type: AWS::Serverless::Function
     Properties:
@@ -134,7 +135,30 @@ Resources:
           Type: Api
           Properties:
             Path: /
-            Method: GET                
+            Method: GET
+      
+  RestrictWithTraitCode:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handlers/RestrictBySelectionTraits.restrictWithTraitCode
+      Runtime: nodejs14.x
+      MemorySize: 128
+      Timeout: 100
+      Description: Search careers based on unit code
+      # Policies:
+      #   # Give Create/Read/Update/Delete Permissions to the DevCareers
+      #   - DynamoDBCrudPolicy:
+      #       TableName: !Ref DevCareers
+      Environment:
+        Variables:
+          # Make table name accessible as environment variable from function code during execution
+          DEV_CAREER_TABLE: !Ref DevCareers
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /
+            Method: GET                    
  
 Outputs:
   WebEndpoint:
