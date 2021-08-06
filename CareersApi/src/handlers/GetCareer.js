@@ -26,6 +26,6 @@ exports.getCareer = async (event) => {
 
     return {
          statusCode: 200,
-         body: JSON.stringify(item),
+         body: item,
     }
 }
