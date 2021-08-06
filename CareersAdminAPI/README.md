@@ -60,6 +60,8 @@ All Delete Operations simply require the trait or career id which is the same as
 ## Deployment
 
 
-## Testing
+## Testing Locally
 
 Testing can be done by building locally and running each endpoint, comparing the actual and expected responses.
+
+This can be done manually or using the test script.
