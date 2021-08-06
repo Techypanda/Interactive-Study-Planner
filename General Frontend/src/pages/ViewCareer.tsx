@@ -1,8 +1,8 @@
-import {Button} from "@material-ui-core";
+import {Button, Typography} from "@material-ui/core";
 import Navbar from "../components/shared/Navbar";
-import { DefaultProps } from "../types";
+import { CareerProps } from "../types";
 
-function ViewCareer(props: DefaultProps) {
+function ViewCareer(props: CareerProps) {
     return (
         <div>
           <Navbar/>
@@ -12,11 +12,14 @@ function ViewCareer(props: DefaultProps) {
           <Typography variant="h6">
             {props.careerDescription}
           </Typography>
-          <Button variant="contained">
+          {/* why is material ui so inflexible and gross */}
+          <Button variant="contained" style={{
+              backgroundColor: "#FFBF00",
+          }}>
             Back
           </Button>
         </div>
-    )
+    );
 }
 
 export default ViewCareer;

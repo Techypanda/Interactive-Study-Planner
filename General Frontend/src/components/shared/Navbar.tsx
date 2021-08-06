@@ -46,7 +46,7 @@ export default styled(Navbar)`
   }
   #LogoSection h6 {
     display: inline;
-    margin-right: 20px;
+    margin-left: 20px;
   }
   #LogoSection img {
     height: 50px;
