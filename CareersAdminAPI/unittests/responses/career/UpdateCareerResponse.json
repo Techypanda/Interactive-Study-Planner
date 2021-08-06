@@ -1,1 +1,1 @@
-{"statusCode": 400, "body": "Bad request: Unknown error occured.", "headers": {"Content-Type": "application/json", "Access-Control-Allow-Origin": "*"}}
+{"statusCode": 200, "body": "Success: Career updated in database.", "headers": {"Content-Type": "application/json", "Access-Control-Allow-Origin": "*"}}
