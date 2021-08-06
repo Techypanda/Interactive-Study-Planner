@@ -18,8 +18,8 @@ class Career:
         self.name = name
         self.description = description
         self.industry = industry
-        self.reqs = reqs
-        self.traits = traits
+        self.reqs = set(reqs)
+        self.traits = set(traits)
 
 
 #Lambda handler - adds the received career to the database if possible
