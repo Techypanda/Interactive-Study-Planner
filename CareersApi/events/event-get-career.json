@@ -1,4 +1,4 @@
 {
     "httpMethod": "GET",
-    "body": "{\"CareerId\": \"TEST\", \"Name\": \"Test\", \"Description\": \"Researcher of genetics.\", \"Industry\": \"Medical Research\", \"Requirements\": [\"CMHL1000\",\"HUMB1000\"], \"Traits\": [\"Hardworking\",\"Critical Thinker\"]}"
+    "body": "{\"CareerId\": \"TestDontDelete\", \"Name\": \"Test\", \"Description\": \"Researcher of genetics.\", \"Industry\": \"Medical Research\", \"Requirements\": [\"CMHL1000\",\"HUMB1000\"], \"Traits\": [\"Hardworking\",\"Critical Thinker\"]}"
 }

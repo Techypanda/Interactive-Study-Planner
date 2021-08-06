@@ -19,7 +19,7 @@ exports.getCareer = async (event) => {
     var params = {
         TableName: tableName,
         Key: {
-          'CareerId' : body['ToSearch']
+          'CareerId' : body['CareerId']
         },
     };
     const item = await docClient.get(params).promise()

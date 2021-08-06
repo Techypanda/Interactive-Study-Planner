@@ -27,15 +27,17 @@ exports.search = async (event) => {
     do {
         items.Items.forEach(function(item) {
             for(let key in item) { 
-                //Example: if its a list, we need to loop over data to search
-                if(typeof item[key] !== 'object') {
+                //Example: if its a string, we can get the value as is
+                if(typeof item[key] !== 'object') {  
                     if(item[key].toLowerCase().includes(valueToSearchFor)){
-                         scanResults.push(item);
+                        scanResults.push(item);
                     }
                 }
                 else {
-                    for(let listData in item[key]){
-                        if(item[key][listData].toLowerCase().includes(valueToSearchFor)){
+                    //Other data type used in careersdb is string set, therefore need to loop it this way
+                    for(let listData of item[key].values){
+                        console.log("other:"+listData);
+                        if(listData.toLowerCase().includes(valueToSearchFor)){
                             scanResults.push(item);
                         }
                     }

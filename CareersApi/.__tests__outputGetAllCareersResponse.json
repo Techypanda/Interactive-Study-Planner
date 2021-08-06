@@ -1,0 +1,1 @@
+{"errorType":"ReferenceError","errorMessage":"items is not defined","trace":["ReferenceError: items is not defined","    at Runtime.exports.getAllCareers [as handler] (/var/task/src/handlers/GetAllCareers.js:29:18)","    at processTicksAndRejections (internal/process/task_queues.js:95:5)"]}

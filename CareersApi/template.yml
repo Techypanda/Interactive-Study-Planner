@@ -23,7 +23,7 @@ Resources:
   # Each Lambda function is defined by properties:
   # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
 
-  # This is a Lambda function config associated with the source code: get-all-items.js
+  # This is a Lambda function config associated with the source code: GetAllCareers.js
   GetAllCareers:
     Type: AWS::Serverless::Function
     Properties:
@@ -32,13 +32,8 @@ Resources:
       MemorySize: 128
       Timeout: 100
       Description: Get All Career Items from DevCareer DynamoDB table
-      # Policies:
-      #   # Give Create/Read/Update/Delete Permissions to the DevCareers
-      #   - DynamoDBCrudPolicy:
-      #       TableName: !Ref DevCareers
       Environment:
         Variables:
-          # Make table name accessible as environment variable from function code during execution
           DEV_CAREER_TABLE: !Ref DevCareers
       Events:
         Api:
@@ -55,13 +50,8 @@ Resources:
         MemorySize: 128
         Timeout: 100
         Description: Get All Trait Items from DevCareer DynamoDB table
-        # Policies:
-        #   # Give Create/Read/Update/Delete Permissions to the DevCareers
-        #   - DynamoDBCrudPolicy:
-        #       TableName: !Ref DevCareers
         Environment:
           Variables:
-            # Make table name accessible as environment variable from function code during execution
             DEV_TRAIT_TABLE: !Ref DevTraits
         Events:
           Api:
@@ -77,13 +67,8 @@ Resources:
       MemorySize: 128
       Timeout: 100
       Description: Get Career Item from DevCareer DynamoDB table
-      # Policies:
-      #   # Give Create/Read/Update/Delete Permissions to the DevCareers
-      #   - DynamoDBCrudPolicy:
-      #       TableName: !Ref DevCareers
       Environment:
         Variables:
-          # Make table name accessible as environment variable from function code during execution
           DEV_CAREER_TABLE: !Ref DevCareers
       Events:
         Api:
@@ -99,13 +84,8 @@ Resources:
       MemorySize: 128
       Timeout: 100
       Description: Search any word in career db.
-      # Policies:
-      #   # Give Create/Read/Update/Delete Permissions to the DevCareers
-      #   - DynamoDBCrudPolicy:
-      #       TableName: !Ref DevCareers
       Environment:
         Variables:
-          # Make table name accessible as environment variable from function code during execution
           DEV_CAREER_TABLE: !Ref DevCareers
       Events:
         Api:
@@ -122,13 +102,8 @@ Resources:
       MemorySize: 128
       Timeout: 100
       Description: Search careers based on unit code
-      # Policies:
-      #   # Give Create/Read/Update/Delete Permissions to the DevCareers
-      #   - DynamoDBCrudPolicy:
-      #       TableName: !Ref DevCareers
       Environment:
         Variables:
-          # Make table name accessible as environment variable from function code during execution
           DEV_CAREER_TABLE: !Ref DevCareers
       Events:
         Api:
@@ -145,13 +120,8 @@ Resources:
       MemorySize: 128
       Timeout: 100
       Description: Search careers based on trait codes
-      # Policies:
-      #   # Give Create/Read/Update/Delete Permissions to the DevCareers
-      #   - DynamoDBCrudPolicy:
-      #       TableName: !Ref DevCareers
       Environment:
         Variables:
-          # Make table name accessible as environment variable from function code during execution
           DEV_CAREER_TABLE: !Ref DevCareers
       Events:
         Api:
@@ -161,6 +131,7 @@ Resources:
             Method: GET                    
  
 Outputs:
-  WebEndpoint:
+  GetAllCareers:
     Description: "API Gateway endpoint URL for Prod stage"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/getcareer"
+    #TODO: Configure for production
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/GetAllCareers"

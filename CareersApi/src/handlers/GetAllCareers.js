@@ -15,15 +15,14 @@ exports.getAllCareers = async (event) => {
     // All log statements are written to CloudWatch
     console.info('received:', event);
 
-    let value = 'CareerId';
     let params = {
         TableName : tableName,
-        Key: {'CareerId':value}
     };
 
     const scanResults = [];
+    let items = [];
     do{
-        const items =  await docClient.scan(params).promise();
+        items =  await docClient.scan(params).promise();
         items.Items.forEach((item) => scanResults.push(item));
         params.ExclusiveStartKey  = items.LastEvaluatedKey;
     }while(items.LastEvaluatedKey);
