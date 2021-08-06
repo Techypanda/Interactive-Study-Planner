@@ -5,6 +5,8 @@
 #Date Created: 29/07/2021
 #Date Last Modified: 6/08/2021
 
+set -e
+
 #Remove old test file output.
 rm -f -- UnitTestOutput.txt
 

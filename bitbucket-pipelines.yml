@@ -35,7 +35,8 @@ pipelines:
                 - ./SetupAWSPipeline.sh
                 - echo "Deploying Userpools"
                 - aws cloudformation deploy --template-file "./Infrastructure Templates/ECRRepositories.yaml" --stack-name ECRRepositories --no-fail-on-empty-changeset
-      - step: # TESTING/BUILDING/DEPLOY STAGES
+      - parallel:   # TESTING/BUILDING/DEPLOY STAGES
+        - step: 
           name: "Build, Test, Deploy Unit Admin API"
           image: python:3.7.2
           script:

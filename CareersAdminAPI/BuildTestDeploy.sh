@@ -5,6 +5,8 @@
 #Date Created: 6/08/2021
 #Date Last Modified: 6/08/2021
 
+set -e
+
 #Build and Test
 echo "Building and Testing API"
 ./UnitTestHandler.sh
