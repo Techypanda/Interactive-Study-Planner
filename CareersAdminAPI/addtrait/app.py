@@ -1,13 +1,14 @@
 import json
 import boto3
 import requests
+import random
 from boto3.dynamodb.conditions import Attr
 from botocore.exceptions import ClientError
 
 #Author: Matthew Loe
 #Student Id: 19452425
 #Date Created: 25/05/2021
-#Date Last Modified: 3/08/2021
+#Date Last Modified: 6/08/2021
 #Description: Add trait operation handler
 
 #JWT token validation
@@ -25,9 +26,10 @@ def validateJWTToken(self, token):
 
 #Trait class definition
 class Trait:
-    def __init__(self, traitId: str, name: str) -> None:
-        self.id = traitId
+    def __init__(self, name: str) -> None:
         self.name = name
+        self.id = "0"
+
 
 #Lambda handler - adds the received trait to the database if possible
 def lambda_handler(event, context) -> dict:
@@ -66,7 +68,30 @@ def lambda_handler(event, context) -> dict:
         try:
             #Retrieve data
             body = json.loads(event["body"])
-            trait = Trait(body["Id"], body["Name"])
+            trait = Trait(body["Name"])
+        
+            #Check Testing
+            if (body["Id"] == "TEST"):
+                trait.id = body["Id"]
+            else:
+                #Check id not in table already
+                flag = True
+                random.seed()
+                while(flag):
+                    trait.id = random.randint(1, 10000000);
+
+                    try:
+                        response = table.get_item(
+                            Key={
+                                trait.id
+                            }
+                        )
+                    except Exception as err:
+                        return badRequest("Failed check for existing item.")
+
+                    #Check no item
+                    if response is None:
+                        flag = False
         except KeyError:
             return badRequest("Invalid data or format recieved.")
         else:
@@ -77,7 +102,7 @@ def lambda_handler(event, context) -> dict:
                         "Id": trait.id,
                         "Name": trait.name
                     },
-                    ConditionExpression=Attr("Id").ne(trait.id)   #Check not in table already
+                    ConditionExpression=Attr("Id").ne(trait.id)  #Check not in table already
                 )
             except ClientError as err:
                 #Check if error was due to item already existing in table

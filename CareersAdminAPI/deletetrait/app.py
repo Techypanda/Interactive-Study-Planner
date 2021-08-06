@@ -7,7 +7,7 @@ from botocore.exceptions import ClientError
 #Author: Matthew Loe
 #Student Id: 19452425
 #Date Created: 25/05/2021
-#Date Last Modified: 3/08/2021
+#Date Last Modified: 6/08/2021
 #Description: Delete trait operation handler
 
 #Lambda handler - removes the received trait from the database if possible
@@ -54,7 +54,7 @@ def lambda_handler(event, context) -> dict:
             #Delete from table
             try:
                 response = table.delete_item(
-                    Item={
+                    Key={
                         "Id": trait
                     },
                     ConditionExpression=Attr("Id").eq(trait)   #Check in table

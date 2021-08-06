@@ -7,7 +7,7 @@ from botocore.exceptions import ClientError
 #Author: Matthew Loe
 #Student Id: 19452425
 #Date Created: 25/05/2021
-#Date Last Modified: 3/08/2021
+#Date Last Modified: 6/08/2021
 #Description: Update career operation handler
 
 #Career class definition
@@ -64,23 +64,19 @@ def lambda_handler(event, context) -> dict:
         else:
             #Update item in table
             try:
-                response = table.update_item(
-                    Key={
-                        "CareerId": career.id
-                    },
-                    UpdateExpression="SET CareerId = :newId, Name = :newName, Description = :newDesc, Industry = :newIndustry, Requirements = :newReqs, Traits = :newTraits",
-                    ExpressionAttributeValues={
-                        ":newId": career.name,
-                        ":newName": career.name,
-                        ":newDesc": career.description,
-                        ":newIndustry": career.industry,
-                        ":newReqs": career.reqs,
-                        ":newTraits": career.traits
+                response = table.put_item(
+                    Item={
+                        "CareerId": career.id,
+                        "Name": career.name,
+                        "Description": career.description,
+                        "Industry": career.industry,
+                        "Requirements": career.reqs,
+                        "Traits": career.traits
                     },
                     ConditionExpression=Attr("CareerId").eq(career.id)   #Check in table already
                 )
             except ClientError as err:
-                #Check if error was due to item not existing in table
+                #Check if error was due to item already existing in table
                 if err.response['Error']['Code'] == 'ConditionalCheckFailedException':
                     return badRequest("Item does not exist in the table.")
                 else:

@@ -7,7 +7,7 @@ from botocore.exceptions import ClientError
 #Author: Matthew Loe
 #Student Id: 19452425
 #Date Created: 25/05/2021
-#Date Last Modified: 3/08/2021
+#Date Last Modified: 6/08/2021
 #Description: Update trait operation handler
 
 #Trait class definition
@@ -57,28 +57,23 @@ def lambda_handler(event, context) -> dict:
             trait = Trait(body["Id"], body["Name"])
         except KeyError:
             return badRequest("Invalid data or format recieved.")
-        else:     
+        else:    
             #Update item in table
             try:
-                response = table.update_item(
-                    Key={
-                        "Id": trait.id
-                    },
-                    UpdateExpression="SET Id = :newId, Name = :newName",
-                    ExpressionAttributeValues={
-                        ":newId": trait.name,
-                        ":newName": trait.name
+                response = table.put_item(
+                    Item={
+                        "Id": trait.id,
+                        "Name": trait.name
                     },
                     ConditionExpression=Attr("Id").eq(trait.id)   #Check in table already
                 )
             except ClientError as err:
-                #Check if error was due to item not existing in table
+                #Check if error was due to item already existing in table
                 if err.response['Error']['Code'] == 'ConditionalCheckFailedException':
                     return badRequest("Item does not exist in the table.")
                 else:
                     return badRequest("Unknown error occured.")
             else:
-                #Return ok response
                 return okResponse("Trait updated in database.")
 
 #Http responses

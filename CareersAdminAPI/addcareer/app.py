@@ -1,24 +1,26 @@
 import json
 import boto3
 import requests
+import random
 from boto3.dynamodb.conditions import Attr
 from botocore.exceptions import ClientError
 
 #Author: Matthew Loe
 #Student Id: 19452425
 #Date Created: 25/05/2021
-#Date Last Modified: 3/08/2021
+#Date Last Modified: 6/08/2021
 #Description: Add career operation handler
 
 #Career class definition
 class Career:
-    def __init__(self, careerId: str, name: str, description: str, industry: str, reqs: list, traits: list) -> None:
-        self.id = careerId
+    def __init__(self, name: str, description: str, industry: str, reqs: list, traits: list) -> None:
+        self.id = "0"
         self.name = name
         self.description = description
         self.industry = industry
         self.reqs = reqs
         self.traits = traits
+
 
 #Lambda handler - adds the received career to the database if possible
 def lambda_handler(event, context) -> dict:
@@ -57,7 +59,30 @@ def lambda_handler(event, context) -> dict:
         try:   
             #Retrieve data
             body = json.loads(event["body"])
-            career = Career(body["CareerId"], body["Name"], body["Description"], body["Description"], body["Industry"], body["Traits"])
+            career = Career(body["Name"], body["Description"], body["Industry"], body["Requirements"], body["Traits"])
+            
+            #Check Testing
+            if (body["CareerId"] == "TEST"):
+                career.id = body["CareerId"]
+            else:
+                #Check id not in table already
+                flag = True
+                random.seed()
+                while(flag):
+                    career.id = random.randint(1, 10000000);
+
+                    try:
+                        response = table.get_item(
+                            Key={
+                                career.id
+                            }
+                        )
+                    except Exception as err:
+                        return badRequest("Failed check for existing item.")
+
+                    #Check no item
+                    if response is None:
+                        flag = False
         except KeyError:
             return badRequest("Invalid data or format recieved.")
         else:
@@ -72,7 +97,7 @@ def lambda_handler(event, context) -> dict:
                         "Requirements": career.reqs,
                         "Traits": career.traits
                     },
-                    ConditionExpression=Attr("CareerId").ne(career.id)   #Check not in table already
+                    ConditionExpression=Attr("CareerId").ne(career.id)  #Check not in table already
                 )
             except ClientError as err:
                 #Check if error was due to item already existing in table
