@@ -1,4 +1,11 @@
 #!/bin/bash
+
+#Author: Matthew Loe
+#Student Id: 19452425
+#Date Created: 29/07/2021
+#Date Last Modified: 6/08/2021
+
+#Remove old test file output.
 rm -f -- UnitTestOutput.txt
 
 echo "Running Build" >> UnitTestOutput.txt

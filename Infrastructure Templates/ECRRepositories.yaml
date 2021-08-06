@@ -10,6 +10,9 @@ Resources:
     Properties:
       RepositoryName: curtinmedicalcourseplanner/careeradmin
 Outputs:
+  UnitAdminRespository:
+    Description: Arn Value For Repository
+    Value: !GetAtt UnitAdminRepository.Arn
   CareerAdminRepository:
     Description: Arn Value For Repository
     Value: !GetAtt CareerAdminRepository.Arn

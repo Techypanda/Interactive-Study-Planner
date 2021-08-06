@@ -20,4 +20,3 @@ fix broken branch
 
 Written in Python3 using AWS SAM
 Provides create, delete and update operations for Career and Trait data.
-Also provides a batch create via CSV for Career and Trait data.
