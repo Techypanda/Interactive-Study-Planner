@@ -15,30 +15,31 @@ exports.restrictWithUnitCode = async (event) => {
     }
     // All log statements are written to CloudWatch
     console.info('received:', event);
-
+    let userUnitCode = JSON.parse(event['body'])['Requirements'];
     let params = {
         TableName : tableName,
-        KeyConditionExpression: "CareerId = :careerValue",
-        ExpressionAttributeValues: {
-            ":careerValue":{"S":"TestDontDelete"}
-        }
     };
-    console.log("TESTINGITESTING");
-
-    let scanResults = [];
-    docClient.query(params, function(err, data) {
-        console.log("I AM HERE");
-        if (err) {
-            console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
-        } else {
-            console.log("Query succeeded.");
-            data.Items.forEach(function(item) {
-                console.log("Data:", item + ": " + item);
-                scanResults.append(data);
-            });
-            console.log("LOL YES:",data);
-        }
-    });
+    scanResults = [];
+    
+    let items = await docClient.scan(params).promise();
+    do {
+        items.Items.forEach(function(item) {
+            for(let key in item) { 
+                if(key === 'Requirements') {
+                    let dbUnitCodes = item[key].values;
+                    for(let dbUnitCode of dbUnitCodes){ 
+                        if(dbUnitCode.toLowerCase() === userUnitCode.toLowerCase()) {
+                            scanResults.push(item);
+                            break; //No longer need to keep checking if other unit codes are involved with this career choice
+                        }
+                    }
+                    
+                }
+            }
+        });
+        params.ExclusiveStartKey = items.LastEvaluatedKey;
+        items = await docClient.scan(params).promise();
+    }while(items.LastEvaluatedKey);
 
     const response = {
         statusCode: 200,

@@ -2,7 +2,6 @@
 const tableName = process.env.DEV_CAREER_TABLE;
 
 const AWS = require('aws-sdk');
-
 AWS.config.update({
     region: "ap-southeast-2"
 });
@@ -16,16 +15,17 @@ exports.getAllCareers = async (event) => {
     // All log statements are written to CloudWatch
     console.info('received:', event);
 
+    let value = 'CareerId';
     let params = {
-        TableName : tableName
+        TableName : tableName,
+        Key: {'CareerId':value}
     };
 
     const scanResults = [];
-    let items = await docClient.get(params).promise();
-    do {
+    do{
+        const items =  await docClient.scan(params).promise();
         items.Items.forEach((item) => scanResults.push(item));
-        params.ExclusiveStartKey = items.LastEvaluatedKey;
-        items = await docClient.scan(params).promise();
+        params.ExclusiveStartKey  = items.LastEvaluatedKey;
     }while(items.LastEvaluatedKey);
 
     const response = {

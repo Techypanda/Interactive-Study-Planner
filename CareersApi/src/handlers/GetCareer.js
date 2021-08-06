@@ -14,12 +14,12 @@ exports.getCareer = async (event) => {
     if (event.httpMethod !== 'GET') {
         throw new Error(`getCareer only accept GET method, you tried: ${event.httpMethod}`);
     }
+    //TODO: Make this tolower when data has been changed to towerlower
     let body = JSON.parse(event["body"])
-
     var params = {
         TableName: tableName,
         Key: {
-          'CareerName' : body['CareerName']
+          'CareerId' : body['ToSearch']
         },
     };
     const item = await docClient.get(params).promise()

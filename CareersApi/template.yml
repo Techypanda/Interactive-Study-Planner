@@ -144,7 +144,7 @@ Resources:
       Runtime: nodejs14.x
       MemorySize: 128
       Timeout: 100
-      Description: Search careers based on unit code
+      Description: Search careers based on trait codes
       # Policies:
       #   # Give Create/Read/Update/Delete Permissions to the DevCareers
       #   - DynamoDBCrudPolicy:
