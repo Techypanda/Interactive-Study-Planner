@@ -24,13 +24,14 @@ exports.restrictWithUnitCode = async (event) => {
     let items = await docClient.scan(params).promise();
     do {
         items.Items.forEach(function(item) {
+            getOutOfLoop:
             for(let key in item) { 
                 if(key === 'Requirements') {
                     let dbUnitCodes = item[key].values;
                     for(let dbUnitCode of dbUnitCodes){ 
                         if(dbUnitCode.toLowerCase() === userUnitCode.toLowerCase()) {
                             scanResults.push(item);
-                            break; //No longer need to keep checking if other unit codes are involved with this career choice
+                            break getOutOfLoop; //No longer need to keep checking if other unit codes are involved with this career choice
                         }
                     }
                     

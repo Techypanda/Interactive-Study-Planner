@@ -36,7 +36,6 @@ exports.search = async (event) => {
                 else {
                     //Other data type used in careersdb is string set, therefore need to loop it this way
                     for(let listData of item[key].values){
-                        console.log("other:"+listData);
                         if(listData.toLowerCase().includes(valueToSearchFor)){
                             scanResults.push(item);
                         }
