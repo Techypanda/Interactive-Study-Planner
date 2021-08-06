@@ -82,7 +82,7 @@ diff unittests/responses/career/UpdateCareerResponse.json unittests/expectedResp
 
 echo "Update Non-Existing Item" >> UnitTestOutput.txt
 #Executing
-sam local invoke UpdateCareerFunction -e unittests/payloads/career/AddCareerEvent.json > unittests/responses/career/UpdateNonExistResponse.json
+sam local invoke UpdateCareerFunction -e unittests/payloads/career/UpdateNonExistCareerEvent.json > unittests/responses/career/UpdateNonExistResponse.json
 #Comparing expected response to actual response
 diff unittests/responses/career/UpdateNonExistResponse.json unittests/expectedResponses/career/NonExistExpectedResponse.json >> UnitTestOutput.txt
 
