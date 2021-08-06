@@ -27,7 +27,7 @@ def validateJWTToken(self, token):
 #Trait class definition
 class Trait:
     def __init__(self, name: str) -> None:
-        self.name = name
+        self.name = name.lower()    #Convert to lowercase
         self.id = "0"
 
 

@@ -15,11 +15,11 @@ from botocore.exceptions import ClientError
 class Career:
     def __init__(self, name: str, description: str, industry: str, reqs: list, traits: list) -> None:
         self.id = "0"
-        self.name = name
+        self.name = name.lower()        #Convert to lowercase
         self.description = description
         self.industry = industry
-        self.reqs = set(reqs)
-        self.traits = set(traits)
+        self.reqs = set(x.lower() for x in reqs)        #Convert to lowercase
+        self.traits = set(x.lower() for x in traits)    #Convert to lowercase
 
 
 #Lambda handler - adds the received career to the database if possible

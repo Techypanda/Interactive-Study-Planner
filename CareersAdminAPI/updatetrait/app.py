@@ -14,7 +14,7 @@ from botocore.exceptions import ClientError
 class Trait:
     def __init__(self, traitId: str, name: str) -> None:
         self.id = traitId
-        self.name = name
+        self.name = name.lower()        #Convert to lowercase
 
 #Lambda handler - updates the target trait in the database if possible
 def lambda_handler(event, context) -> dict:
