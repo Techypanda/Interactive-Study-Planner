@@ -1,5 +1,5 @@
 {
-  "body": "{\"Id\": \"Trait\", \"Name\": \"Trait\"}",
+  "body": "{\"Id\": \"TEST\", \"Name\": \"Trait\"}",
   "resource": "/{proxy+}",
   "path": "/path/to/resource",
   "httpMethod": "POST",
