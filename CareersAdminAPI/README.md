@@ -59,6 +59,15 @@ All Delete Operations simply require the trait or career id which is the same as
 
 ## Deployment
 
+Deployment is done via AWS SAM, to do it manually you need to do the following commands
+```sh
+./UnitTestHandler.sh    #Build and Test
+IMAGES_TO_DELETE=$( aws ecr list-images --region ap-southeast-2 --repository-name "curtinmedicalcourseplanner/careeradmin" --query 'imageIds[*]' --output json ) # Get all the images
+aws ecr batch-delete-image --region ap-southeast-2 --repository-name curtinmedicalcourseplanner/careeradmin --image-ids "$IMAGES_TO_DELETE" || true # Delete all the images
+sam package --output-template-file packaged-template.yaml --image-repository 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careeradmin --no-progressbar # Package into ECR
+sam deploy --template ./packaged-template.yaml --stack-name CareerAdminAPIDev --region ap-southeast-2 --capabilities CAPABILITY_IAM --image-repository 363837338544.dkr.ecr. ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careeradmin # Deploy onto API
+aws ecr batch-delete-image --region ap-southeast-2 --repository-name curtinmedicalcourseplanner/careeradmin --image-ids "$IMAGES_TO_DELETE" || true # for some reason it doesnt need to exist, so we can save money by just removing it again
+```
 
 ## Testing Locally
 

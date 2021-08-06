@@ -51,3 +51,18 @@ pipelines:
             - ./BuildTestDeploy.sh
           services:
             - docker
+        -step: 
+          name: "Build, Test, Deploy Career Admin API"
+          image: python:3.7.2
+          script:
+            - apt-get update
+            - pip install awscli
+            - pip install aws-sam-cli
+            - chmod +x ./SetupAWSPipeline.sh
+            - ./SetupAWSPipeline.sh
+            - cd CareerAdminAPI
+            - chmod +x ./BuildTestDeploy.sh
+            - chmod +x ./UnitTestsHandler.sh
+            - ./BuildTestDeploy.sh
+          services:
+            - docker
