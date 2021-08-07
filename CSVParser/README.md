@@ -19,3 +19,12 @@
 - Units (CSV Seperated)
 - UnitAntiReqs (entered as groups, to split into a new group (i.e OR path) use a semicolon else its comma seperated)
 - SpecAntiReqs (entered as groups, to split into a new group (i.e OR path) use a semicolon else its comma seperated)
+## Specialiation Definition
+- SpecCode
+- Name
+- Credits
+- InternalSpecialization (FALSE/TRUE)
+- Units (CSV Seperated)
+- UnitAntiReqs (entered as groups, to split into a new group (i.e OR path) use a semicolon else its comma seperated)
+- SpecAntiReqs (entered as groups, to split into a new group (i.e OR path) use a semicolon else its comma seperated)
+- MajorAntiReqs (entered as groups, to split into a new group (i.e OR path) use a semicolon else its comma seperated)
