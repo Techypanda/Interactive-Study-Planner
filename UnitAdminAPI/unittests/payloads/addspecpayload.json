@@ -86,5 +86,5 @@
     "requestTimeEpoch": 1622457298,
     "apiId": "1234567890"
   },
-  "body": "{\"specCode\": \"testSpec\", \"name\": \"Test One With Real API\", \"credits\": 12.5, \"courseInternal\": false, \"units\": [\"aa\"], \"unitAntiReqs\": [\"aa\"], \"specAntiReqs\": [\"bb\"], \"majorAntiReqs\": [\"cc\"]}"
+  "body": "{\"specCode\": \"testSpec\", \"name\": \"Test One With Real API\", \"credits\": 12.5, \"courseInternal\": false, \"units\": [\"aa\"], \"unitAntiReqs\": [[\"one group of unit anti req\"], [\"two group of unit anti req\"]], \"specAntiReqs\": [[\"one group of spec anti req\"], [\"two group of spec anti req\"]], \"majorAntiReqs\": [[\"one group of major anti req\"], [\"two group of major anti req\"]]}"
 }

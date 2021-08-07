@@ -12,7 +12,7 @@ Parameters:
   Authentication:
     Type: String
     Description: Disable Authentication (True) or Leave It (False)
-    Default: "true"
+    Default: "false"
     
 Resources:
   AdminUnitAPI:
