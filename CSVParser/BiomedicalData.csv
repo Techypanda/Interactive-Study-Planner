@@ -75,8 +75,8 @@ MJRU-HUMBM
 Human Biomedicine
 200
 HUMB2013,HUMB2014,HUMB2011,HUMB2012,ECEV3004,HUMB3009,BIOL3010,HUMB3003
-UnitAntiReqs
-SpecAntiReqs
+
+
 UNIT
 HUMB2013
 Trunk Anatomy and Embryology
@@ -158,3 +158,25 @@ Internal
 HUMB3009
 
 
+MAJOR
+MJRU-MOLGN
+Molecular Genetics
+200
+BCCB2000,MEDI2010,BIOL2001,GENE2001,GENE3000,GENE3002,BIOL3010,BIOL3011
+
+SPUC-HUMGN
+UNIT
+GENE3002
+Human Genetic Disease
+In this unit students will understand the molecular basis for Human genetic diseases and traits. This will include an understanding of both Mendelian and non Mendelian genetic diseases, complex diseases, diseases caused by epigenetic changes, risk and environmental factors affecting human disease progression and the methods of interpreting variants as a key member of a multidisciplinary team.
+25
+Fully Online
+GENE1000
+
+
+UNIT
+BIOL3011
+Protein Structure and Interactions
+This unit emphasises protein structure, dynamics and interactions. This unit explores topics such as biomolecular interactions, hierarchy of protein structures, experimental and theoretical methods to study protein structure and interactions, molecular modelling of protein structure and interactions , protein folding, visualisation of protein structure. This emphasis on protein structure and interactions reflects the crucial importance of proteins to life.
+25
+Internal
