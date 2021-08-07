@@ -70,3 +70,37 @@ Internal
 MEDI1000
 
 
+MAJOR
+MJRU-HUMBM
+Human Biomedicine
+200
+HUMB2013,HUMB2014,HUMB2011,HUMB2012,ECEV3004,HUMB3009,BIOL3010,HUMB3003
+UnitAntiReqs
+SpecAntiReqs
+UNIT
+HUMB2013
+Trunk Anatomy and Embryology
+Explores the relationships between structure, function and embryological development of the somatic and visceral components of the neck, thorax, abdomen and pelvis.
+25
+Internal
+HUMB1001
+
+
+UNIT
+HUMB2014
+Vital Physiology
+Physiology is the study of the functions of an organism. This unit looks at the physiological underpinning of the supply and removal of oxygen, water and waste products to and from tissues, and the mechanisms that regulate these within homeostatic limits.
+25
+Internal
+HUMB1001
+
+
+UNIT
+HUMB2011
+Limb Anatomy and Biomechanics
+The unit explores, in detail, the functional anatomy of the upper and lower limb and their associated girdles. Applications of anatomical and biomechanical principles in analysis of upper and lower limb function and dysfunction will also be covered.
+25
+Internal
+HUMB1001
+
+
