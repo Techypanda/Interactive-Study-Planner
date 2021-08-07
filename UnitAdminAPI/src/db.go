@@ -286,36 +286,54 @@ func checkMajorNotInDatabase(major Major, db *dynamodb.DynamoDB) error {
 	}
 }
 
+func attachMajorData(putItem *map[string]*dynamodb.AttributeValue, major Major) {
+	if len(major.UnitAntiReqs) > 0 {
+		var majorAntiReqs []*dynamodb.AttributeValue
+		for _, req := range major.UnitAntiReqs {
+			majorAntiReqs = append(majorAntiReqs, &dynamodb.AttributeValue{
+				SS: convertToStringMemoryArray(req),
+			})
+		}
+		(*putItem)["UnitAntiReqs"] = &dynamodb.AttributeValue{
+			L: majorAntiReqs,
+		}
+	}
+	if len(major.SpecAntiReqs) > 0 {
+		var specAntiReqs []*dynamodb.AttributeValue
+		for _, req := range major.SpecAntiReqs {
+			specAntiReqs = append(specAntiReqs, &dynamodb.AttributeValue{
+				SS: convertToStringMemoryArray(req),
+			})
+		}
+		(*putItem)["SpecAntiReqs"] = &dynamodb.AttributeValue{
+			L: specAntiReqs,
+		}
+	}
+}
+
 /*
 	Purpose: Return a error if the major fails to add to db, else return nil
 */
 func addMajorToDatabase(major Major, db *dynamodb.DynamoDB) error {
 	majorName := strings.ToLower(major.Name)
 	majorCode := strings.ToUpper(major.MajorCode)
-	input := &dynamodb.PutItemInput{
-		Item: map[string]*dynamodb.AttributeValue{
-			"MajorCode": {
-				S: aws.String(majorCode),
-			},
-			"Name": {
-				S: aws.String(major.Name),
-			},
-			"Credits": {
-				N: aws.String(fmt.Sprintf("%f", major.Credits)),
-			},
-			// "Units": {
-			// 	SS: convertToStringMemoryArray(major.Units),
-			// },
-			// "UnitAntiReqs": {
-			// 	SS: convertToStringMemoryArray(major.UnitAntiReqs),
-			// },
-			// "SpecAntiReqs": {
-			// 	SS: convertToStringMemoryArray(major.SpecAntiReqs),
-			// },
-			"SearchName": {
-				S: aws.String(majorName),
-			},
+	putItem := map[string]*dynamodb.AttributeValue{
+		"MajorCode": {
+			S: aws.String(majorCode),
 		},
+		"Name": {
+			S: aws.String(majorName),
+		},
+		"Credits": {
+			N: aws.String(fmt.Sprintf("%f", major.Credits)),
+		},
+		"Units": {
+			SS: convertToStringMemoryArray(major.Units),
+		},
+	}
+	attachMajorData(&putItem, major)
+	input := &dynamodb.PutItemInput{
+		Item:      putItem,
 		TableName: aws.String("DevMajors"),
 	}
 
@@ -530,15 +548,15 @@ func addSpecToDatabase(spec Specialization, db *dynamodb.DynamoDB) error {
 			"Units": {
 				SS: convertToStringMemoryArray(spec.Units),
 			},
-			"UnitAntiReqs": {
-				SS: convertToStringMemoryArray(spec.UnitAntiReqs),
-			},
-			"SpecAntiReqs": {
-				SS: convertToStringMemoryArray(spec.SpecAntiReqs),
-			},
-			"MajorAntiReqs": {
-				SS: convertToStringMemoryArray(spec.MajorAntiReqs),
-			},
+			// "UnitAntiReqs": {
+			// 	SS: convertToStringMemoryArray(spec.UnitAntiReqs),
+			// },
+			// "SpecAntiReqs": {
+			// 	SS: convertToStringMemoryArray(spec.SpecAntiReqs),
+			// },
+			// "MajorAntiReqs": {
+			// 	SS: convertToStringMemoryArray(spec.MajorAntiReqs),
+			// },
 			"SearchName": {
 				S: aws.String(lowercasedName),
 			},
