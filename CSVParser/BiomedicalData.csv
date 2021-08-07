@@ -442,3 +442,47 @@ PHRM2005,PHRM2006,IMED3010,IMED3008
 
 
 MJRU-PHCOL
+SPECIALIZATION
+SPUC-ILLUS
+Illustration
+100
+FALSE
+GRDE1015,GRDE2017,GRDE2031,GRDE3018
+
+
+
+UNIT
+GRDE1015
+Illustration Fundamentals
+This unit introduces students to the fundamental principles and technical processes of illustration design. Students will learn how to visualise and communicate narrative concepts, developing their abilities as skilled technical practitioners and visual communicators.
+25
+Internal
+
+
+
+UNIT
+GRDE2017
+Illustration Concepts and Processes
+Illustration practice involves the exploration and development of ideas by using a wide range of skills, techniques and processes. Throughout this unit students are encouraged to experiment with as many different techniques as possible. This enables students to convey messages in appropriate and effective ways to a series of design briefs.
+25
+Internal
+GRDE1015;GRDE1002;310131
+
+
+UNIT
+GRDE2031
+Digital Illustration Production
+This unit focuses on the learning of contemporary digital techniques used to execute commercial illustrations. Students are instructed in and study the advanced technical processes used by industry professionals across the illustration industry.
+25
+Internal
+
+
+
+UNIT
+GRDE3018
+Illustration and Visual Development
+This unit explores the benefits of the role of the computer in modern image making techniques. It serves to break down the traditional barriers between illustration and photography by synthesising the common ground in both fields of image creation and enhancement.
+25
+Internal
+GRDE2019;GRDE2017;313306
+
