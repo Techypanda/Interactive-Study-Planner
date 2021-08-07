@@ -9,13 +9,13 @@
 - UNIT DESCRIPTION
 - CREDITS
 - DELIVERY TYPE (e.g. internal,fully online,...)
-- PREREQUISTES (EMPTY IF NONE, COMMA SEPERATED)
-- COREQUISTES (EMPTY IF NONE, COMMA SEPERATED)
-- ANTIREQUISTES (EMPTY IF NONE, COMMA SEPERATED)
+- PREREQUISTES (entered as groups, to split into a new group (i.e OR path) use a semicolon else its comma seperated)
+- COREQUISTES (entered as groups, to split into a new group (i.e OR path) use a semicolon else its comma seperated)
+- ANTIREQUISTES (entered as groups, to split into a new group (i.e OR path) use a semicolon else its comma seperated)
 ## Major Definition
 - MajorCode
 - Name
 - Credits
-- Units (EMPTY IF NONE, COMMA SEPERATED)
-- UnitAntiReqs (EMPTY IF NONE, COMMA SEPERATED)
-- SpecAntiReqs (EMPTY IF NONE, COMMA SEPERATED)
+- Units (CSV Seperated)
+- UnitAntiReqs (entered as groups, to split into a new group (i.e OR path) use a semicolon else its comma seperated)
+- SpecAntiReqs (entered as groups, to split into a new group (i.e OR path) use a semicolon else its comma seperated)
