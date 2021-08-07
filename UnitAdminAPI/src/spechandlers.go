@@ -103,8 +103,5 @@ func parseSpecBody(body string) (Specialization, error) {
 		return specialization, errors.New("spec code is empty")
 	}
 	specialization.Units = append(specialization.Units, "")
-	specialization.MajorAntiReqs = append(specialization.MajorAntiReqs, "")
-	specialization.SpecAntiReqs = append(specialization.SpecAntiReqs, "")
-	specialization.UnitAntiReqs = append(specialization.UnitAntiReqs, "")
 	return specialization, nil
 }

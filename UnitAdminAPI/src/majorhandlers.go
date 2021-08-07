@@ -90,9 +90,6 @@ func parseMajorBody(body string) (Major, error) {
 	if major.MajorCode == "" {
 		return major, errors.New("MajorCode is empty")
 	}
-	major.Units = append(major.Units, "")
-	major.SpecAntiReqs = append(major.SpecAntiReqs, "")
-	major.UnitAntiReqs = append(major.UnitAntiReqs, "")
 	return major, nil
 }
 
