@@ -152,41 +152,70 @@ func deleteUnitFromDatabase(item DelUnit, db *dynamodb.DynamoDB) error {
 }
 
 /*
+	Purpose: If prereqs required, attach them, its pass by reference to allow clean code
+*/
+func attachRequistesToUnitAddition(putItemInput *map[string]*dynamodb.AttributeValue, unit Unit) {
+	if len(unit.Prerequistes) > 0 {
+		var preReqs []*dynamodb.AttributeValue
+		for _, req := range unit.Prerequistes {
+			preReqs = append(preReqs, &dynamodb.AttributeValue{
+				SS: convertToStringMemoryArray(req),
+			})
+		}
+		(*putItemInput)["Prerequistes"] = &dynamodb.AttributeValue{
+			L: preReqs,
+		}
+	}
+	if len(unit.Antirequistes) > 0 {
+		var antiReqs []*dynamodb.AttributeValue
+		for _, req := range unit.Antirequistes {
+			antiReqs = append(antiReqs, &dynamodb.AttributeValue{
+				SS: convertToStringMemoryArray(req),
+			})
+		}
+		(*putItemInput)["Antirequistes"] = &dynamodb.AttributeValue{
+			L: antiReqs,
+		}
+	}
+	if len(unit.Corequistes) > 0 {
+		var coReqs []*dynamodb.AttributeValue
+		for _, req := range unit.Corequistes {
+			coReqs = append(coReqs, &dynamodb.AttributeValue{
+				SS: convertToStringMemoryArray(req),
+			})
+		}
+		(*putItemInput)["Corequistes"] = &dynamodb.AttributeValue{
+			L: coReqs,
+		}
+	}
+}
+
+/*
 	Purpose: Return a error if the unit fails to add to db, else return nil
 */
 func addUnitToDatabase(unit Unit, db *dynamodb.DynamoDB) error {
 	tempUpperCaseUnitCode := strings.ToUpper(unit.UnitCode)
 	tempLowerCaseUnitName := strings.ToLower(unit.Name)
-	input := &dynamodb.PutItemInput{
-		Item: map[string]*dynamodb.AttributeValue{
-			"UnitCode": {
-				S: aws.String(tempUpperCaseUnitCode),
-			},
-			"Name": {
-				S: aws.String(unit.Name),
-			},
-			"Description": {
-				S: aws.String(unit.Description),
-			},
-			"Credits": {
-				N: aws.String(fmt.Sprintf("%f", unit.Credits)),
-			},
-			"Delivery": {
-				S: aws.String(unit.Delivery),
-			},
-			"Prerequistes": {
-				SS: convertToStringMemoryArray(unit.Prerequistes),
-			},
-			"Corequistes": {
-				SS: convertToStringMemoryArray(unit.Corequistes),
-			},
-			"Antirequistes": {
-				SS: convertToStringMemoryArray(unit.Antirequistes),
-			},
-			"SearchName": {
-				S: aws.String(tempLowerCaseUnitName),
-			},
+	putItemInput := map[string]*dynamodb.AttributeValue{
+		"UnitCode": {
+			S: aws.String(tempUpperCaseUnitCode),
 		},
+		"Name": {
+			S: aws.String(tempLowerCaseUnitName),
+		},
+		"Description": {
+			S: aws.String(unit.Description),
+		},
+		"Credits": {
+			N: aws.String(fmt.Sprintf("%f", unit.Credits)),
+		},
+		"Delivery": {
+			S: aws.String(unit.Delivery),
+		},
+	}
+	attachRequistesToUnitAddition(&putItemInput, unit) // pass it by reference
+	input := &dynamodb.PutItemInput{
+		Item:      putItemInput,
 		TableName: aws.String("DevUnits"),
 	}
 
@@ -275,15 +304,15 @@ func addMajorToDatabase(major Major, db *dynamodb.DynamoDB) error {
 			"Credits": {
 				N: aws.String(fmt.Sprintf("%f", major.Credits)),
 			},
-			"Units": {
-				SS: convertToStringMemoryArray(major.Units),
-			},
-			"UnitAntiReqs": {
-				SS: convertToStringMemoryArray(major.UnitAntiReqs),
-			},
-			"SpecAntiReqs": {
-				SS: convertToStringMemoryArray(major.SpecAntiReqs),
-			},
+			// "Units": {
+			// 	SS: convertToStringMemoryArray(major.Units),
+			// },
+			// "UnitAntiReqs": {
+			// 	SS: convertToStringMemoryArray(major.UnitAntiReqs),
+			// },
+			// "SpecAntiReqs": {
+			// 	SS: convertToStringMemoryArray(major.SpecAntiReqs),
+			// },
 			"SearchName": {
 				S: aws.String(majorName),
 			},

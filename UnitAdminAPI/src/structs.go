@@ -1,14 +1,14 @@
 package main
 
 type Unit struct {
-	UnitCode      string   `json:"unitCode"`
-	Name          string   `json:"unitName"`
-	Description   string   `json:"unitDescription"`
-	Credits       float32  `json:"unitCredits"` // could be a half unit :/
-	Delivery      string   `json:"delivery"`
-	Prerequistes  []string `json:"prerequistes"`
-	Corequistes   []string `json:"corequistes"`
-	Antirequistes []string `json:"antirequistes"`
+	UnitCode      string     `json:"unitCode"`
+	Name          string     `json:"unitName"`
+	Description   string     `json:"unitDescription"`
+	Credits       float32    `json:"unitCredits"` // could be a half unit :/
+	Delivery      string     `json:"delivery"`
+	Prerequistes  [][]string `json:"prerequistes"`
+	Corequistes   [][]string `json:"corequistes"`
+	Antirequistes [][]string `json:"antirequistes"`
 }
 
 type DelUnit struct {
@@ -16,12 +16,12 @@ type DelUnit struct {
 }
 
 type Major struct {
-	MajorCode    string   `json:"majorCode"`
-	Name         string   `json:"name"`
-	Credits      float32  `json:"credits"`
-	Units        []string `json:"units"`
-	UnitAntiReqs []string `json:"unitAntiReqs"`
-	SpecAntiReqs []string `json:"specAntiReqs"`
+	MajorCode    string     `json:"majorCode"`
+	Name         string     `json:"name"`
+	Credits      float32    `json:"credits"`
+	Units        [][]string `json:"units"`
+	UnitAntiReqs [][]string `json:"unitAntiReqs"`
+	SpecAntiReqs [][]string `json:"specAntiReqs"`
 }
 
 type DelMajor struct {

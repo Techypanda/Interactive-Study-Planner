@@ -10,7 +10,7 @@ Parameters:
   Authentication:
     Type: String
     Description: Disable Authentication (True) or Leave It (False)
-    Default: 'false'
+    Default: 'true'
 Resources:
   AdminUnitAPI:
     Type: AWS::Serverless::Api
