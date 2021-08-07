@@ -218,7 +218,6 @@ func addUnitToDatabase(unit Unit, db *dynamodb.DynamoDB) error {
 		Item:      putItemInput,
 		TableName: aws.String("DevUnits"),
 	}
-
 	_, err := db.PutItem(input)
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
