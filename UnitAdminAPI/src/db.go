@@ -286,6 +286,9 @@ func checkMajorNotInDatabase(major Major, db *dynamodb.DynamoDB) error {
 	}
 }
 
+/*
+	Parse the major data and attach it pass by reference for cleaner code
+*/
 func attachMajorData(putItem *map[string]*dynamodb.AttributeValue, major Major) {
 	if len(major.UnitAntiReqs) > 0 {
 		var majorAntiReqs []*dynamodb.AttributeValue
@@ -529,38 +532,67 @@ func checkSpecIsInDatabase(spec Specialization, db *dynamodb.DynamoDB) error {
 }
 
 /*
+	Parse the spec data and attach it pass by reference for cleaner code
+*/
+func attachSpecData(putItem *map[string]*dynamodb.AttributeValue, spec Specialization) {
+	if len(spec.UnitAntiReqs) > 0 {
+		var unitAntiReqs []*dynamodb.AttributeValue
+		for _, req := range spec.UnitAntiReqs {
+			unitAntiReqs = append(unitAntiReqs, &dynamodb.AttributeValue{
+				SS: convertToStringMemoryArray(req),
+			})
+		}
+		(*putItem)["UnitAntiReqs"] = &dynamodb.AttributeValue{
+			L: unitAntiReqs,
+		}
+	}
+	if len(spec.MajorAntiReqs) > 0 {
+		var majorAntiReqs []*dynamodb.AttributeValue
+		for _, req := range spec.MajorAntiReqs {
+			majorAntiReqs = append(majorAntiReqs, &dynamodb.AttributeValue{
+				SS: convertToStringMemoryArray(req),
+			})
+		}
+		(*putItem)["MajorAntiReqs"] = &dynamodb.AttributeValue{
+			L: majorAntiReqs,
+		}
+	}
+	if len(spec.SpecAntiReqs) > 0 {
+		var specAntiReqs []*dynamodb.AttributeValue
+		for _, req := range spec.SpecAntiReqs {
+			specAntiReqs = append(specAntiReqs, &dynamodb.AttributeValue{
+				SS: convertToStringMemoryArray(req),
+			})
+		}
+		(*putItem)["SpecAntiReqs"] = &dynamodb.AttributeValue{
+			L: specAntiReqs,
+		}
+	}
+}
+
+/*
 	Purpose: Return a error if the unit fails to add to db, else return nil
 */
 func addSpecToDatabase(spec Specialization, db *dynamodb.DynamoDB) error {
 	uppercasedSpecCode := strings.ToUpper(spec.SpecCode)
 	lowercasedName := strings.ToLower(spec.Name)
-	input := &dynamodb.PutItemInput{
-		Item: map[string]*dynamodb.AttributeValue{
-			"SpecializationCode": {
-				S: aws.String(uppercasedSpecCode),
-			},
-			"Name": {
-				S: aws.String(spec.Name),
-			},
-			"Credits": {
-				N: aws.String(fmt.Sprintf("%f", spec.Credits)),
-			},
-			"Units": {
-				SS: convertToStringMemoryArray(spec.Units),
-			},
-			// "UnitAntiReqs": {
-			// 	SS: convertToStringMemoryArray(spec.UnitAntiReqs),
-			// },
-			// "SpecAntiReqs": {
-			// 	SS: convertToStringMemoryArray(spec.SpecAntiReqs),
-			// },
-			// "MajorAntiReqs": {
-			// 	SS: convertToStringMemoryArray(spec.MajorAntiReqs),
-			// },
-			"SearchName": {
-				S: aws.String(lowercasedName),
-			},
+	putItem := map[string]*dynamodb.AttributeValue{
+		"SpecializationCode": {
+			S: aws.String(uppercasedSpecCode),
 		},
+		"Name": {
+			S: aws.String(lowercasedName),
+		},
+		"Credits": {
+			N: aws.String(fmt.Sprintf("%f", spec.Credits)),
+		},
+		"Units": {
+			SS: convertToStringMemoryArray(spec.Units),
+		},
+	}
+	attachSpecData(&putItem, spec)
+	input := &dynamodb.PutItemInput{
+		Item:      putItem,
 		TableName: aws.String("DevSpecializations"),
 	}
 
