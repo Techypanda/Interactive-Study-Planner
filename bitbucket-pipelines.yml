@@ -18,7 +18,7 @@ pipelines:
                 - chmod +x ./SetupAWSPipeline.sh
                 - ./SetupAWSPipeline.sh
                 - echo "Deploying Developer Databases"
-                - aws cloudformation deploy --template-file "./Infrastructure Templates/DevDatabases.yaml" describe-stack-events --stack-name DevDB --no-fail-on-empty-changeset
+                - aws cloudformation deploy --template-file "./Infrastructure Templates/DevDatabases.yaml" --stack-name DevDB --no-fail-on-empty-changeset
           - step:
               name: "Deploy Userpools"
               image: atlassian/pipelines-awscli
