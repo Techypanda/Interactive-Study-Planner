@@ -5,7 +5,16 @@ Resources:
     Type: AWS::ECR::Repository
     Properties:
       RepositoryName: curtinmedicalcourseplanner/unitadmin
+    
+  CareersApiRepository:
+    Type: AWS::ECR::Repository
+    Properties:
+      RepositoryName: curtinmedicalcourseplanner/careerapi
 Outputs:
   UnitAdminRepository:
     Description: Arn Value For Repository
     Value: !GetAtt UnitAdminRepository.Arn
+
+  CareersApiRepository:
+    Description: Arn Value For Repository
+    Value: !GetAtt CareersApiRepository.Arn
