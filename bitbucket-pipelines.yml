@@ -58,7 +58,6 @@ pipelines:
           script:
             - apt-get update && apt-get install -y python-dev
             - apt-get update
-            - python get-pip.py
             - pip install awscli
             - pip install aws-sam-cli
             - npm install
