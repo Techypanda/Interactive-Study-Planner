@@ -56,7 +56,7 @@ Resources:
       ProvisionedThroughput:
         ReadCapacityUnits: 1
         WriteCapacityUnits: 1
-      TableName: "DevTraits1"
+      TableName: "DevTraits"
   DevCareerTable:
     Type: AWS::DynamoDB::Table
     Properties:
@@ -70,7 +70,7 @@ Resources:
       ProvisionedThroughput:
         ReadCapacityUnits: 1
         WriteCapacityUnits: 1
-      TableName: "DevCareers1"
+      TableName: "DevCareers"
 
 Outputs:
   DevUnitsTable:

@@ -33,7 +33,7 @@ pipelines:
               script:
                 - chmod +x ./SetupAWSPipeline.sh
                 - ./SetupAWSPipeline.sh
-                - echo "Deploying Userpools"
+                - echo "Deploying Public Repositories"
                 - aws cloudformation deploy --template-file "./Infrastructure Templates/ECRRepositories.yaml" --stack-name ECRRepositories --no-fail-on-empty-changeset
       - parallel:   # TESTING/BUILDING/DEPLOY STAGES
           - step: 
@@ -61,7 +61,7 @@ pipelines:
                 - pip install aws-sam-cli
                 - chmod +x ./SetupAWSPipeline.sh
                 - ./SetupAWSPipeline.sh
-                - cd CareerAdminAPI
+                - cd CareersAdminAPI
                 - chmod +x ./BuildTestDeploy.sh
                 - chmod +x ./UnitTestsHandler.sh
                 - ./BuildTestDeploy.sh
