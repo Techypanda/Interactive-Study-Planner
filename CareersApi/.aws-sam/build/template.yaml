@@ -9,7 +9,7 @@ Resources:
   GetAllCareers:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: src/handlers/GetAllCareers.getAllCareers
+      Handler: src/handlers/getallcareers/GetAllCareers.getAllCareers
       Runtime: nodejs14.x
       MemorySize: 128
       Timeout: 100
@@ -22,13 +22,17 @@ Resources:
         Api:
           Type: Api
           Properties:
-            Path: /
+            Path: /events/event-get-all-careers
             Method: GET
       CodeUri: GetAllCareers
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./src/handlers/getallcareers
+      DockerTag: nodejs14.x-v1
   GetAllTraits:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: src/handlers/GetAllTrait.getAllTraits
+      Handler: src/handlers/getalltraits/GetAllTrait.getAllTraits
       PackageType: Image
       Runtime: nodejs14.x
       MemorySize: 128
@@ -42,17 +46,17 @@ Resources:
         Api:
           Type: Api
           Properties:
-            Path: /events/
+            Path: /events/event-get-all-traits
             Method: GET
       ImageUri: getalltraits:nodejs14.x-v1
     Metadata:
       Dockerfile: Dockerfile
-      DockerContext: ./src/handlers
+      DockerContext: ./src/handlers/getalltraits
       DockerTag: nodejs14.x-v1
   GetCareer:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: src/handlers/GetCareer.getCareer
+      Handler: src/handlers/getcareer/GetCareer.getCareer
       Runtime: nodejs14.x
       MemorySize: 128
       Timeout: 100
@@ -65,13 +69,17 @@ Resources:
         Api:
           Type: Api
           Properties:
-            Path: /
+            Path: /events/event-get-career
             Method: GET
       CodeUri: GetCareer
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./src/handlers/getcareer
+      DockerTag: nodejs14.x-v1
   Search:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: src/handlers/Search.search
+      Handler: src/handlers/search/Search.search
       Runtime: nodejs14.x
       MemorySize: 128
       Timeout: 100
@@ -84,13 +92,17 @@ Resources:
         Api:
           Type: Api
           Properties:
-            Path: /
+            Path: /events/event-search
             Method: GET
       CodeUri: Search
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./src/handlers/search
+      DockerTag: nodejs14.x-v1
   RestrictWithUnitCode:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: src/handlers/RestrictBySelectionUnits.restrictWithUnitCode
+      Handler: src/handlers/byunitcode/RestrictBySelectionUnits.restrictWithUnitCode
       Runtime: nodejs14.x
       MemorySize: 128
       Timeout: 100
@@ -103,13 +115,17 @@ Resources:
         Api:
           Type: Api
           Properties:
-            Path: /
+            Path: /events/event-get-by-unit-code
             Method: GET
       CodeUri: RestrictWithUnitCode
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./src/handlers/byunitcode
+      DockerTag: nodejs14.x-v1
   RestrictWithTraitCode:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: src/handlers/RestrictBySelectionTraits.restrictWithTraitCode
+      Handler: src/handlers/bytraitcode/RestrictBySelectionTraits.restrictWithTraitCode
       Runtime: nodejs14.x
       MemorySize: 128
       Timeout: 100
@@ -122,11 +138,10 @@ Resources:
         Api:
           Type: Api
           Properties:
-            Path: /
+            Path: /events/event-get-by-trait-code
             Method: GET
       CodeUri: RestrictWithTraitCode
-Outputs:
-  GetAllCareers:
-    Description: API Gateway endpoint URL for Prod stage
-    Value:
-      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/GetAllCareers
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./src/handlers/bytraitcode
+      DockerTag: nodejs14.x-v1
