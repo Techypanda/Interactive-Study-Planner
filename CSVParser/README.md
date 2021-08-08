@@ -13,6 +13,7 @@
 - COREQUISTES (entered as groups, to split into a new group (i.e OR path) use a semicolon else its comma seperated)
 - ANTIREQUISTES (entered as groups, to split into a new group (i.e OR path) use a semicolon else its comma seperated)
 ## Major Definition
+- MAJOR
 - MajorCode
 - Name
 - Credits
@@ -20,6 +21,7 @@
 - UnitAntiReqs (entered as groups, to split into a new group (i.e OR path) use a semicolon else its comma seperated)
 - SpecAntiReqs (entered as groups, to split into a new group (i.e OR path) use a semicolon else its comma seperated)
 ## Specialiation Definition
+- SPECIALIZATION
 - SpecCode
 - Name
 - Credits
