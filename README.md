@@ -15,3 +15,8 @@ Written in React
 Provides access to Unit Admin API with GUI & Auth
 
 fix broken branch
+
+## Career Admin API
+
+Written in Python3 using AWS SAM
+Provides create, delete and update operations for Career and Trait data.

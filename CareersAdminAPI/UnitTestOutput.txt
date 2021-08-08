@@ -1,0 +1,31 @@
+Running Build
+
+Build Succeeded
+
+Built Artifacts  : .aws-sam\build
+Built Template   : .aws-sam\build\template.yaml
+
+Commands you can use next
+=========================
+[*] Invoke Function: sam local invoke
+[*] Deploy: sam deploy --guided
+    
+Running Trait Api Events
+Add Trait Api
+Add Already Existing Item
+Update Trait Api
+Update Non-Existing Item
+Delete Trait Api
+Delete Non-Existing Item
+Attempt Add with Bad Input
+Attempt Update with Bad Input
+Attempt Delete with Bad Input
+Add Career Api
+Add Already Existing Item
+Update Career Api
+Update Non-Existing Item
+Delete Career Api
+Delete Non-Existing Item
+Attempt Add with Bad Input
+Attempt Update with Bad Input
+Attempt Delete with Bad Input

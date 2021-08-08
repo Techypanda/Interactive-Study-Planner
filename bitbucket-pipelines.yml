@@ -33,8 +33,9 @@ pipelines:
               script:
                 - chmod +x ./SetupAWSPipeline.sh
                 - ./SetupAWSPipeline.sh
-                - echo "Deploying Userpools"
+                - echo "Deploying Public Repositories"
                 - aws cloudformation deploy --template-file "./Infrastructure Templates/ECRRepositories.yaml" --stack-name ECRRepositories --no-fail-on-empty-changeset
+<<<<<<< HEAD
       - step: # TESTING/BUILDING/DEPLOY STAGES
           name: "Build, Test, Deploy Unit Admin API"
           image: python:3.7.2
@@ -71,3 +72,37 @@ pipelines:
             - ./BuildTestDeploy.sh
           services:
             - docker
+=======
+      - parallel:   # TESTING/BUILDING/DEPLOY STAGES
+          - step: 
+              name: "Build, Test, Deploy Unit Admin API"
+              image: python:3.7.2
+              script:
+                - apt-get update
+                - apt-get install -y golang-go
+                - pip install awscli
+                - pip install aws-sam-cli
+                - chmod +x ./SetupAWSPipeline.sh
+                - ./SetupAWSPipeline.sh
+                - cd UnitAdminAPI
+                - chmod +x ./BuildTestDeploy.sh
+                - chmod +x ./RunSamTests.sh
+                - ./BuildTestDeploy.sh
+              services:
+                - docker
+          - step: 
+              name: "Build, Test, Deploy Career Admin API"
+              image: python:3.7.2
+              script:
+                - apt-get update
+                - pip install awscli
+                - pip install aws-sam-cli
+                - chmod +x ./SetupAWSPipeline.sh
+                - ./SetupAWSPipeline.sh
+                - cd CareersAdminAPI
+                - chmod +x ./BuildTestDeploy.sh
+                - chmod +x ./UnitTestsHandler.sh
+                - ./BuildTestDeploy.sh
+              services:
+                - docker
+>>>>>>> dev_sprint

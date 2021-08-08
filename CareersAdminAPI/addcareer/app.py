@@ -1,17 +1,29 @@
 import json
 import boto3
 import requests
+import random
+from boto3.dynamodb.conditions import Attr
 from botocore.exceptions import ClientError
 
-class Career:
-    def __init__(self, careerId, name, description, industry, reqs, traits):
-        self.id = careerId
-        self.name = name
-        self.description = description
-        self.reqs = reqs
-        self.traits = traits
+#Author: Matthew Loe
+#Student Id: 19452425
+#Date Created: 25/05/2021
+#Date Last Modified: 6/08/2021
+#Description: Add career operation handler
 
-def lambda_handler(event, context):
+#Career class definition
+class Career:
+    def __init__(self, name: str, description: str, industry: str, reqs: list, traits: list) -> None:
+        self.id = "0"
+        self.name = name.lower()        #Convert to lowercase
+        self.description = description
+        self.industry = industry
+        self.reqs = set(x.lower() for x in reqs)        #Convert to lowercase
+        self.traits = set(x.lower() for x in traits)    #Convert to lowercase
+
+
+#Lambda handler - adds the received career to the database if possible
+def lambda_handler(event, context) -> dict:
     #Setup link to database and table
     db = boto3.resource('dynamodb', region_name='ap-southeast-2')
     table = db.Table("DevCareers")
@@ -25,30 +37,14 @@ def lambda_handler(event, context):
             TableName='DevCareers',
             KeySchema=[
                 {
-                    'AttributeName': 'Id',
+                    'AttributeName': 'CareerId',
                     'KeyType': 'HASH'
                 }
             ],
             AttributeDefinitions=[
                 {
-                    'AttributeName': 'Id',
+                    'AttributeName': 'CareerId',
                     'AttributeType': 'S'
-                },
-                {
-                    'AttributeName': 'Name',
-                    'AttributeType': 'S'
-                },
-                {
-                    'AttributeName': 'Description',
-                    'AttributeType': 'S'
-                },
-                {
-                    'AttributeName': 'Requirements',
-                    'AttributeType': 'SS'
-                },
-                {
-                    'AttributeName': 'Traits',
-                    'AttributeType': 'SS'
                 }
             ],
             ProvisionedThroughput={
@@ -60,35 +56,62 @@ def lambda_handler(event, context):
         #Return bad request indicating table does not exist and is being created
         return badRequest("Table does not exist. Table is now being created. Please try again.")
     else:
-        #Retrieve data
-        body = json.loads(event["body"])
-        career = Career(body["Id"], body["Name"], body["Description"], body["Requirements"], body["Traits"])
-
-        #Add to table
-        try:
-            response = table.put_item(
-                Item={
-                    "Id": career.id,
-                    "Name": career.name,
-                    "Description": career.description,
-                    "Requirements": career.reqs,
-                    "Traits": career.traits
-                },
-                ConditionExpression=Attr("Id").ne(career.id)   #Check not in table already
-            )
-        except ClientError as err:
-            #Check if error was due to item already existing in table
-            if err.response['Error']['Code'] == 'ConditionalCheckFailedException':
-                return badRequest("Item already exists in table.")
+        try:   
+            #Retrieve data
+            body = json.loads(event["body"])
+            career = Career(body["Name"], body["Description"], body["Industry"], body["Requirements"], body["Traits"])
+            
+            #Check Testing
+            if (body["CareerId"] == "TEST"):
+                career.id = body["CareerId"]
             else:
-                return badRequest("Unknown error occured.")
+                #Check id not in table already
+                flag = True
+                random.seed()
+                while(flag):
+                    career.id = random.randint(1, 10000000);
+
+                    try:
+                        response = table.get_item(
+                            Key={
+                                career.id
+                            }
+                        )
+                    except Exception as err:
+                        return badRequest("Failed check for existing item.")
+
+                    #Check no item
+                    if response is None:
+                        flag = False
+        except KeyError:
+            return badRequest("Invalid data or format recieved.")
         else:
-            #Return ok response
-            return okResponse("Career added to database.")
+            #Add to table
+            try:
+                response = table.put_item(
+                    Item={
+                        "CareerId": career.id,
+                        "Name": career.name,
+                        "Description": career.description,
+                        "Industry": career.industry,
+                        "Requirements": career.reqs,
+                        "Traits": career.traits
+                    },
+                    ConditionExpression=Attr("CareerId").ne(career.id)  #Check not in table already
+                )
+            except ClientError as err:
+                #Check if error was due to item already existing in table
+                if err.response['Error']['Code'] == 'ConditionalCheckFailedException':
+                    return badRequest("Item already exists in table.")
+                else:
+                    return badRequest("Unknown error occured.")
+            else:
+                #Return ok response
+                return okResponse("Career added to database.")
 
 #Http responses
 #Badrequest response
-def badRequest(reason):
+def badRequest(reason: str) -> dict:
     return {
         "statusCode" : 400,
         "body" : "Bad request: " + reason,
@@ -99,7 +122,7 @@ def badRequest(reason):
     }
 
 #Ok response
-def okResponse(reason):
+def okResponse(reason: str) -> dict:
     return {
         "statusCode" : 200,
         "body" : "Success: " + reason,

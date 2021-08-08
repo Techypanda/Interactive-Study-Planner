@@ -5,16 +5,30 @@ Resources:
     Type: AWS::ECR::Repository
     Properties:
       RepositoryName: curtinmedicalcourseplanner/unitadmin
+<<<<<<< HEAD
     
   CareersApiRepository:
     Type: AWS::ECR::Repository
     Properties:
       RepositoryName: curtinmedicalcourseplanner/careerapi
+=======
+  CareerAdminRepository:
+    Type: AWS::ECR::Repository
+    Properties:
+      RepositoryName: curtinmedicalcourseplanner/careeradmin
+>>>>>>> dev_sprint
 Outputs:
-  UnitAdminRepository:
+  UnitAdminRespository:
     Description: Arn Value For Repository
+    Value: !GetAtt UnitAdminRepository.Arn
+  CareerAdminRepository:
+    Description: Arn Value For Repository
+<<<<<<< HEAD
     Value: !GetAtt UnitAdminRepository.Arn
 
   CareersApiRepository:
     Description: Arn Value For Repository
     Value: !GetAtt CareersApiRepository.Arn
+=======
+    Value: !GetAtt CareerAdminRepository.Arn
+>>>>>>> dev_sprint
