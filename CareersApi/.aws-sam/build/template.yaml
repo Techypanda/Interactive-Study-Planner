@@ -1,0 +1,132 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: CareersApi
+Transform:
+- AWS::Serverless-2016-10-31
+Globals:
+  Function:
+    Timeout: 3
+Resources:
+  GetAllCareers:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handlers/GetAllCareers.getAllCareers
+      Runtime: nodejs14.x
+      MemorySize: 128
+      Timeout: 100
+      Description: Get All Career Items from DevCareer DynamoDB table
+      Environment:
+        Variables:
+          DEV_CAREER_TABLE:
+            Ref: DevCareers
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /
+            Method: GET
+      CodeUri: GetAllCareers
+  GetAllTraits:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handlers/GetAllTrait.getAllTraits
+      PackageType: Image
+      Runtime: nodejs14.x
+      MemorySize: 128
+      Timeout: 100
+      Description: Get All Trait Items from DevCareer DynamoDB table
+      Environment:
+        Variables:
+          DEV_TRAIT_TABLE:
+            Ref: DevTraits
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /events/
+            Method: GET
+      ImageUri: getalltraits:nodejs14.x-v1
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./src/handlers
+      DockerTag: nodejs14.x-v1
+  GetCareer:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handlers/GetCareer.getCareer
+      Runtime: nodejs14.x
+      MemorySize: 128
+      Timeout: 100
+      Description: Get Career Item from DevCareer DynamoDB table
+      Environment:
+        Variables:
+          DEV_CAREER_TABLE:
+            Ref: DevCareers
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /
+            Method: GET
+      CodeUri: GetCareer
+  Search:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handlers/Search.search
+      Runtime: nodejs14.x
+      MemorySize: 128
+      Timeout: 100
+      Description: Search any word in career db.
+      Environment:
+        Variables:
+          DEV_CAREER_TABLE:
+            Ref: DevCareers
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /
+            Method: GET
+      CodeUri: Search
+  RestrictWithUnitCode:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handlers/RestrictBySelectionUnits.restrictWithUnitCode
+      Runtime: nodejs14.x
+      MemorySize: 128
+      Timeout: 100
+      Description: Search careers based on unit code
+      Environment:
+        Variables:
+          DEV_CAREER_TABLE:
+            Ref: DevCareers
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /
+            Method: GET
+      CodeUri: RestrictWithUnitCode
+  RestrictWithTraitCode:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handlers/RestrictBySelectionTraits.restrictWithTraitCode
+      Runtime: nodejs14.x
+      MemorySize: 128
+      Timeout: 100
+      Description: Search careers based on trait codes
+      Environment:
+        Variables:
+          DEV_CAREER_TABLE:
+            Ref: DevCareers
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /
+            Method: GET
+      CodeUri: RestrictWithTraitCode
+Outputs:
+  GetAllCareers:
+    Description: API Gateway endpoint URL for Prod stage
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/GetAllCareers

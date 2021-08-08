@@ -44,7 +44,7 @@ exports.restrictWithUnitCode = async (event) => {
 
     const response = {
         statusCode: 200,
-        body: scanResults
+        body: JSON.stringify(scanResults)
     };
     console.info(`response from: ${event.path} statusCode: ${response.statusCode} body: ${response.body}`);
 
