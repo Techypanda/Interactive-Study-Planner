@@ -71,7 +71,7 @@ Resources:
         ReadCapacityUnits: 1
         WriteCapacityUnits: 1
       TableName: "DevCareers"
-
+      
 Outputs:
   DevUnitsTable:
     Description: "Dev Units (1 R/W Unit - SLOW)"
