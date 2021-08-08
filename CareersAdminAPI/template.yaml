@@ -153,7 +153,7 @@ Outputs:
     Value: !GetAtt UpdateCareerFunction.Arn
   UpdateTraitFunction:
     Description: "Upate Trait Lambda Function ARN"
-    Value: !GetAtt Update TraitFunction.Arn
+    Value: !GetAtt UpdateTraitFunction.Arn
 
   #Function IAM Roles
   AddCareerFunctionIamRole:
