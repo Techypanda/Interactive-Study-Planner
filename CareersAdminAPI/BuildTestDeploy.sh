@@ -9,7 +9,7 @@ set -e
 
 #Build and Test
 echo "Building and Testing API"
-./UnitTestHandler.sh
+./UnitTestsHandler.sh
 
 #Deploy
 echo "Beginning Deploy Stage"
