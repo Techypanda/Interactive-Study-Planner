@@ -54,11 +54,15 @@ pipelines:
 
         step: # TESTING/BUILDING/DEPLOY STAGES
           name: "Build, Test, Deploy CareersApi"
-          image: python:3.7.2
+          image:  node:14
           script:
+            - apt-get update && apt-get install -y python-dev
             - apt-get update
+            - python get-pip.py
             - pip install awscli
             - pip install aws-sam-cli
+            - npm install
+            - sam build
             - chmod +x ./SetupAWSPipeline.sh
             - ./SetupAWSPipeline.sh
             - cd CareersApi
