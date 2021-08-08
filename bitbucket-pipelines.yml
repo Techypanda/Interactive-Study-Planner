@@ -59,8 +59,8 @@ pipelines:
             - apt-get update && apt-get install -y python-dev
             - apt-get -y install python-pip
             - apt-get update
-            - pip install awscli
-            - pip install aws-sam-cli
+            - apt install awscli
+            - apt install aws-sam-cli
             - npm install
             - sam build
             - chmod +x ./SetupAWSPipeline.sh
