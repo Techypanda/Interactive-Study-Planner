@@ -71,7 +71,6 @@ pipelines:
               name: "Build, Test, Deploy Careers API"
               image: node:14
               script:
-                - add-apt-repository -y ppa:deadsnakes/ppa
                 - apt-get -y update
                 - apt-get -y install python3.7
                 - pip install awscli
