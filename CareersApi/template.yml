@@ -28,7 +28,6 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       PackageType: Image
-      Runtime: nodejs14.x
       MemorySize: 128
       Timeout: 100
       Description: Get All Career Items from DevCareer DynamoDB table
@@ -50,7 +49,6 @@ Resources:
       Type: AWS::Serverless::Function
       Properties:
         PackageType: Image
-        Runtime: nodejs14.x
         MemorySize: 128
         Timeout: 100
         Description: Get All Trait Items from DevCareer DynamoDB table
@@ -72,7 +70,6 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       PackageType: Image
-      Runtime: nodejs14.x
       MemorySize: 128
       Timeout: 100
       Description: Get Career Item from DevCareer DynamoDB table
@@ -94,7 +91,6 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       PackageType: Image
-      Runtime: nodejs14.x
       MemorySize: 128
       Timeout: 100
       Description: Search any word in career db.
@@ -116,7 +112,6 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       PackageType: Image
-      Runtime: nodejs14.x
       MemorySize: 128
       Timeout: 100
       Description: Search careers based on unit code
@@ -138,7 +133,6 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       PackageType: Image
-      Runtime: nodejs14.x
       MemorySize: 128
       Timeout: 100
       Description: Search careers based on trait codes
