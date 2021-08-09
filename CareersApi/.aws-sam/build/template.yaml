@@ -1,0 +1,147 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: CareersApi
+Transform:
+- AWS::Serverless-2016-10-31
+Globals:
+  Function:
+    Timeout: 3
+Resources:
+  GetAllCareers:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handlers/getallcareers/GetAllCareers.getAllCareers
+      Runtime: nodejs14.x
+      MemorySize: 128
+      Timeout: 100
+      Description: Get All Career Items from DevCareer DynamoDB table
+      Environment:
+        Variables:
+          DEV_CAREER_TABLE:
+            Ref: DevCareers
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /events/event-get-all-careers
+            Method: GET
+      CodeUri: GetAllCareers
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./src/handlers/getallcareers
+      DockerTag: nodejs14.x-v1
+  GetAllTraits:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handlers/getalltraits/GetAllTrait.getAllTraits
+      PackageType: Image
+      Runtime: nodejs14.x
+      MemorySize: 128
+      Timeout: 100
+      Description: Get All Trait Items from DevCareer DynamoDB table
+      Environment:
+        Variables:
+          DEV_TRAIT_TABLE:
+            Ref: DevTraits
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /events/event-get-all-traits
+            Method: GET
+      ImageUri: getalltraits:nodejs14.x-v1
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./src/handlers/getalltraits
+      DockerTag: nodejs14.x-v1
+  GetCareer:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handlers/getcareer/GetCareer.getCareer
+      Runtime: nodejs14.x
+      MemorySize: 128
+      Timeout: 100
+      Description: Get Career Item from DevCareer DynamoDB table
+      Environment:
+        Variables:
+          DEV_CAREER_TABLE:
+            Ref: DevCareers
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /events/event-get-career
+            Method: GET
+      CodeUri: GetCareer
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./src/handlers/getcareer
+      DockerTag: nodejs14.x-v1
+  Search:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handlers/search/Search.search
+      Runtime: nodejs14.x
+      MemorySize: 128
+      Timeout: 100
+      Description: Search any word in career db.
+      Environment:
+        Variables:
+          DEV_CAREER_TABLE:
+            Ref: DevCareers
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /events/event-search
+            Method: GET
+      CodeUri: Search
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./src/handlers/search
+      DockerTag: nodejs14.x-v1
+  RestrictWithUnitCode:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handlers/byunitcode/RestrictBySelectionUnits.restrictWithUnitCode
+      Runtime: nodejs14.x
+      MemorySize: 128
+      Timeout: 100
+      Description: Search careers based on unit code
+      Environment:
+        Variables:
+          DEV_CAREER_TABLE:
+            Ref: DevCareers
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /events/event-get-by-unit-code
+            Method: GET
+      CodeUri: RestrictWithUnitCode
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./src/handlers/byunitcode
+      DockerTag: nodejs14.x-v1
+  RestrictWithTraitCode:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handlers/bytraitcode/RestrictBySelectionTraits.restrictWithTraitCode
+      Runtime: nodejs14.x
+      MemorySize: 128
+      Timeout: 100
+      Description: Search careers based on trait codes
+      Environment:
+        Variables:
+          DEV_CAREER_TABLE:
+            Ref: DevCareers
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /events/event-get-by-trait-code
+            Method: GET
+      CodeUri: RestrictWithTraitCode
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./src/handlers/bytraitcode
+      DockerTag: nodejs14.x-v1
