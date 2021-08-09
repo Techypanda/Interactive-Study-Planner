@@ -35,7 +35,6 @@ pipelines:
                 - ./SetupAWSPipeline.sh
                 - echo "Deploying Public Repositories"
                 - aws cloudformation deploy --template-file "./Infrastructure Templates/ECRRepositories.yaml" --stack-name ECRRepositories --no-fail-on-empty-changeset
-<<<<<<< HEAD
       - step: # TESTING/BUILDING/DEPLOY STAGES
           name: "Build, Test, Deploy Unit Admin API"
           image: python:3.7.2
@@ -53,7 +52,7 @@ pipelines:
           services:
             - docker
 
-        step: # TESTING/BUILDING/DEPLOY STAGES
+      - step: # TESTING/BUILDING/DEPLOY STAGES
           name: "Build, Test, Deploy CareersApi"
           image:  node:14
           script:
@@ -72,7 +71,6 @@ pipelines:
             - ./BuildTestDeploy.sh
           services:
             - docker
-=======
       - parallel:   # TESTING/BUILDING/DEPLOY STAGES
           - step: 
               name: "Build, Test, Deploy Unit Admin API"
@@ -105,4 +103,3 @@ pipelines:
                 - ./BuildTestDeploy.sh
               services:
                 - docker
->>>>>>> dev_sprint
