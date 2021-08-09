@@ -47,9 +47,8 @@ pipelines:
           image: node:14
           script:
             - apt-get update
-            - apt install -y  awscli
-            - apt-get -y install python2
-            - pip install aws-sam-cli
+            - pip install -y  awscli
+            - pip install -y aws-sam-cli
             - chmod +x ./SetupAWSPipeline.sh
             - ./SetupAWSPipeline.sh
             - cd CareersApi
