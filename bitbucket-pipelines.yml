@@ -74,10 +74,10 @@ pipelines:
                 - apt-get update
                 - pip3 install awscli
                 - pip3 install aws-sam-cli
-                - sam build
                 - chmod +x ./SetupAWSPipeline.sh
                 - ./SetupAWSPipeline.sh
                 - cd CareersApi
+                - sam build
                 - chmod +x ./BuildTestDeploy.sh
                 - chmod +x ./CareerApiTests.sh
                 - ./BuildTestDeploy.sh
