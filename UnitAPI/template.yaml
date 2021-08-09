@@ -26,50 +26,137 @@ Resources:
       DockerContext: ./hello_world
       DockerTag: python3.8-v1
   
-  GetAllSpecializations:
+  getallspecs:
     Type: AWS::Serverless::Function
     Properties:
       PackageType: Image
       Events:
-        GetAllSpecializations:
+        getallspecs:
           Type: Api
           Properties:
-            Path: /getAllSpecializations
+            Path: /getallspecs
             Method: get
     Metadata:
       Dockerfile: Dockerfile
-      DockerContext: ./GetAllSpecializations
+      DockerContext: ./getallspecs
       DockerTag: python3.8-v1
   
-  GetAllMajors:
+  getallmajors:
     Type: AWS::Serverless::Function
     Properties:
       PackageType: Image
       Events:
-        GetAllMajors:
+        getallmajors:
           Type: Api
           Properties:
-            Path: /getAllMajors
+            Path: /getallmajors
             Method: get
     Metadata:
       Dockerfile: Dockerfile
-      DockerContext: ./GetAllMajors
+      DockerContext: ./getallmajors
       DockerTag: python3.8-v1
 
-  GetAllUnits:
+  getallunits:
     Type: AWS::Serverless::Function
     Properties:
       PackageType: Image
       Events: 
-        GetAllUnits:
+        getallunits:
           Type: Api
           Properties:
-            Path: /getAllUnits
+            Path: /getallunits
             Method: get
     Metadata:
       Dockerfile: Dockerfile
-      DockerContext: ./GetAllUnits
+      DockerContext: ./getallunits
       DockerTag: python3.8-v1
+  
+  getmajor:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Events:
+        getmajor:
+          Type: Api
+          Properties:
+            Path: /getmajor
+            Method: get
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./getmajor
+      DockerTag: python3.8-v1
+
+  getspec:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Events:
+        getspec:
+          Type: Api
+          Properties:
+            Path: /getspec
+            Method: get
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./getspec
+      DockerTag: python3.8-v1
+
+  getunit:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Events:
+        getunit:
+          Type: Api
+          Properties:
+            Path: /getunit
+            Method: get
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./getunit
+      DockerTag: python3.8-v1
+  searchmajor:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Events:
+        searchmajor:
+          Type: Api
+          Properties:
+            Path: /searchmajor
+            Method: get
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./searchmajor
+      DockerTag: python3.8-v1
+  searchspec:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Events:
+        searchspec:
+          Type: Api
+          Properties:
+            Path: /searchspec
+            Method: get
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./searchspec
+      DockerTag: python3.8-v1
+  searchunit:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Events:
+        searchunit:
+          Type: Api
+          Properties:
+            Path: /searchunit
+            Method: get
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./searchunit
+      DockerTag: Python3.8-v1
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
   # Find out more about other implicit resources you can reference within SAM
