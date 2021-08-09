@@ -2,6 +2,8 @@
 set -e
 
 #Build and Test
+sam build
+
 echo "Building and Testing API"
 ./CareerApiTests.sh
 
