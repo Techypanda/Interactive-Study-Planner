@@ -61,11 +61,11 @@ Dockerfile = "Dockerfile"
 DockerContext = "Y:\\capstone\\2021-03-interactive-study-planner\\CareersApi\\src\\handlers\\bytraitcode"
 DockerTag = "nodejs14.x-v1"
 
-[function_build_definitions.65223854-e8f4-487a-95a1-0ef626593b01]
+[function_build_definitions.47c3fcd7-db28-4cc6-bd11-c555c614361e]
 packagetype = "Image"
 functions = ["GetAllTraits"]
 
-[function_build_definitions.65223854-e8f4-487a-95a1-0ef626593b01.metadata]
+[function_build_definitions.47c3fcd7-db28-4cc6-bd11-c555c614361e.metadata]
 Dockerfile = "Dockerfile"
 DockerContext = "Y:\\capstone\\2021-03-interactive-study-planner\\CareersApi\\src\\handlers\\getalltraits"
 DockerTag = "nodejs14.x-v1"
