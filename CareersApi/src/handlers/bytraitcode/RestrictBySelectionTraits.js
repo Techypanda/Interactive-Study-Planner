@@ -13,6 +13,7 @@ exports.restrictWithTraitCode = async (event) => {
     if (event.httpMethod !== 'GET') {
         throw new Error(`Traits only accept GET method, you tried: ${event.httpMethod}`);
     }
+    console.log("Recieved:"+event);
     let userTraitCodes = JSON.parse(event['body'])['Traits'];
     let params = {
         TableName : tableName,

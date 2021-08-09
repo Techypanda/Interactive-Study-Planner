@@ -14,6 +14,8 @@ exports.getCareer = async (event) => {
     if (event.httpMethod !== 'GET') {
         throw new Error(`getCareer only accept GET method, you tried: ${event.httpMethod}`);
     }
+    console.info('received:', event);
+
     // //TODO: Make this tolower when data has been changed to towerlower
     let body = JSON.parse(event.body)
     var params = {
@@ -23,6 +25,7 @@ exports.getCareer = async (event) => {
         },
     };
     const item = await docClient.get(params).promise()
+    console.info(`response from: ${event.path} statusCode: ${response.statusCode} body: ${response.body}`);
 
     return {
          statusCode: 200,
