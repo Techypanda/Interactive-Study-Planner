@@ -3,6 +3,7 @@ set -e
 
 #Build and Test
 echo "Building and Testing API"
+sam build
 ./CareerApiTests.sh
 
 #Deploy
