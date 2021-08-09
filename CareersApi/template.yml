@@ -28,6 +28,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: src/handlers/getallcareers/GetAllCareers.getAllCareers
+      PackageType: Image
       Runtime: nodejs14.x
       MemorySize: 128
       Timeout: 100
@@ -73,6 +74,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: src/handlers/getcareer/GetCareer.getCareer
+      PackageType: Image
       Runtime: nodejs14.x
       MemorySize: 128
       Timeout: 100
@@ -95,6 +97,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: src/handlers/search/Search.search
+      PackageType: Image
       Runtime: nodejs14.x
       MemorySize: 128
       Timeout: 100
@@ -117,6 +120,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: src/handlers/byunitcode/RestrictBySelectionUnits.restrictWithUnitCode
+      PackageType: Image
       Runtime: nodejs14.x
       MemorySize: 128
       Timeout: 100
@@ -139,6 +143,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: src/handlers/bytraitcode/RestrictBySelectionTraits.restrictWithTraitCode
+      PackageType: Image
       Runtime: nodejs14.x
       MemorySize: 128
       Timeout: 100
