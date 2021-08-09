@@ -73,7 +73,6 @@ pipelines:
               script:
                 - apt-get update
                 - apt install -y  awscli
-                - apt install -y aws-sam-cli
                 - chmod +x ./SetupAWSPipeline.sh
                 - ./SetupAWSPipeline.sh
                 - cd CareersApi
