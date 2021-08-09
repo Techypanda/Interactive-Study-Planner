@@ -36,19 +36,16 @@ pipelines:
                 - echo "Deploying Public Repositories"
                 - aws cloudformation deploy --template-file "./Infrastructure Templates/ECRRepositories.yaml" --stack-name ECRRepositories --no-fail-on-empty-changeset
       - step:
-            name: "Install dependencies"
-            image: python:3.7.2
-            script:
-              - apt-get update
-              - pip install awscli
-              - pip install aws-sam-cli  
+          name: "Install dependencies"
+          image: python:3.7.2
+          script:
+            - apt-get update
+            - pip install awscli
+            - pip install aws-sam-cli  
       - step: 
           name: "Build, Test, Deploy Careers API"
           image: node:14
           script:
-            - apt-get update
-            - pip install -y  awscli
-            - pip install -y aws-sam-cli
             - chmod +x ./SetupAWSPipeline.sh
             - ./SetupAWSPipeline.sh
             - cd CareersApi
