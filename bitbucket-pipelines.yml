@@ -77,9 +77,8 @@ pipelines:
                 - chmod +x ./SetupAWSPipeline.sh
                 - ./SetupAWSPipeline.sh
                 - cd CareersApi
-                - apt install nodejs
+                - apt install -y  nodejs
                 - sam build
-                - Y
                 - chmod +x ./BuildTestDeploy.sh
                 - chmod +x ./CareerApiTests.sh
                 - ./BuildTestDeploy.sh
