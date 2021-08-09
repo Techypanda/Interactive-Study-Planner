@@ -69,17 +69,14 @@ pipelines:
                 - docker
           - step: 
               name: "Build, Test, Deploy Careers API"
-              image: python:3.8
+              image: node:14
               script:
                 - apt-get update
-                - pip3 install awscli
-                - pip3 install aws-sam-cli
+                - apt install -y  awscli
+                - apt install -y aws-sam-cli
                 - chmod +x ./SetupAWSPipeline.sh
                 - ./SetupAWSPipeline.sh
                 - cd CareersApi
-                - apt install -y nodejs
-                - npm install
-                - sam build
                 - chmod +x ./BuildTestDeploy.sh
                 - chmod +x ./CareerApiTests.sh
                 - ./BuildTestDeploy.sh
