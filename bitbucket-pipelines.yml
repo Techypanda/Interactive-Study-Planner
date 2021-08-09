@@ -68,13 +68,12 @@ pipelines:
               services:
                 - docker
           - step: 
-              name: "Build, Test, Deploy Career Admin API"
+              name: "Build, Test, Deploy Careers API"
               image: python:3.8
               script:
                 - apt-get update
-                - apt-get install awscli
-                - pip3 install awscli --upgrade
-                - pip3 install aws-sam-cli --upgrade
+                - pip3 install awscli
+                - pip3 install aws-sam-cli
                 - sam build
                 - chmod +x ./SetupAWSPipeline.sh
                 - ./SetupAWSPipeline.sh
