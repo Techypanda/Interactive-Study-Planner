@@ -33,7 +33,7 @@ Resources:
       Description: Get All Career Items from DevCareer DynamoDB table
       Environment:
         Variables:
-          DEV_CAREER_TABLE: !Ref DevCareers
+          DEV_CAREER_TABLE: DevCareers
       Events:
         Api:
           Type: Api
@@ -54,7 +54,7 @@ Resources:
         Description: Get All Trait Items from DevCareer DynamoDB table
         Environment:
           Variables:
-            DEV_TRAIT_TABLE: !Ref DevTraits
+            DEV_TRAIT_TABLE: DevTraits
         Events:
           Api:
             Type: Api
@@ -75,7 +75,7 @@ Resources:
       Description: Get Career Item from DevCareer DynamoDB table
       Environment:
         Variables:
-          DEV_CAREER_TABLE: !Ref DevCareers
+          DEV_CAREER_TABLE: DevCareers
       Events:
         Api:
           Type: Api
@@ -96,7 +96,7 @@ Resources:
       Description: Search any word in career db.
       Environment:
         Variables:
-          DEV_CAREER_TABLE: !Ref DevCareers
+          DEV_CAREER_TABLE: DevCareers
       Events:
         Api:
           Type: Api
@@ -117,7 +117,7 @@ Resources:
       Description: Search careers based on unit code
       Environment:
         Variables:
-          DEV_CAREER_TABLE: !Ref DevCareers
+          DEV_CAREER_TABLE: DevCareers
       Events:
         Api:
           Type: Api
@@ -138,7 +138,7 @@ Resources:
       Description: Search careers based on trait codes
       Environment:
         Variables:
-          DEV_CAREER_TABLE: !Ref DevCareers
+          DEV_CAREER_TABLE: DevCareers
       Events:
         Api:
           Type: Api
