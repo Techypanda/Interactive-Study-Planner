@@ -8,7 +8,7 @@ from botocore.exceptions import ClientError
 #Author: Matthew Loe
 #Student Id: 19452425
 #Date Created: 25/05/2021
-#Date Last Modified: 6/08/2021
+#Date Last Modified: 9/08/2021
 #Description: Add career operation handler
 
 #Career class definition
@@ -69,19 +69,22 @@ def lambda_handler(event, context) -> dict:
                 flag = True
                 random.seed()
                 while(flag):
-                    career.id = random.randint(1, 10000000);
+                    career.id = random.randint(1, 1000000);
 
                     try:
                         response = table.get_item(
                             Key={
-                                career.id
+                                "CareerId": career.id
                             }
                         )
-                    except Exception as err:
+                    except ClientError as err:
                         return badRequest("Failed check for existing item.")
 
                     #Check no item
-                    if response is None:
+                    try:
+                        #Exception is raised when there is no matching item
+                        response["Item"]    
+                    except KeyError:    
                         flag = False
         except KeyError:
             return badRequest("Invalid data or format recieved.")
