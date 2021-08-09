@@ -79,6 +79,7 @@ pipelines:
                 - cd CareersApi
                 - apt install nodejs
                 - sam build
+                - Y
                 - chmod +x ./BuildTestDeploy.sh
                 - chmod +x ./CareerApiTests.sh
                 - ./BuildTestDeploy.sh
