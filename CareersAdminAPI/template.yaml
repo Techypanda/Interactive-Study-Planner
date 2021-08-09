@@ -6,7 +6,7 @@ Description: >
 #Author: Matthew Loe
 #Student Id: 19452425
 #Date Created: 17/05/2021
-#Date Last Modified: 2/08/2021
+#Date Last Modified: 9/08/2021
 
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
@@ -40,11 +40,6 @@ Resources:
           Properties:
             Path: /addtrait
             Method: POST
-          # Auth:
-          # DefaultAuthorizer: TokenAuthorizer
-          # Authorizers:
-          #   JWTAuthorizer:
-          #     FunctionArn: !GetAtt JWTAuthorizer.Arn
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./addtrait

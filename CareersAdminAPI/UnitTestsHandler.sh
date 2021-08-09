@@ -3,7 +3,7 @@
 #Author: Matthew Loe
 #Student Id: 19452425
 #Date Created: 29/07/2021
-#Date Last Modified: 6/08/2021
+#Date Last Modified: 9/08/2021
 
 set -e
 
@@ -21,7 +21,7 @@ sam local invoke AddTraitFunction -e unittests/payloads/trait/AddTraitEvent.json
 #Comparing expected response to actual response
 diff unittests/responses/trait/AddTraitResponse.json unittests/expectedResponses/trait/AddTraitExpectedResponse.json >> UnitTestOutput.txt
 
-echo "Add Already Existing Item" >> UnitTestOutput.txt
+echo "Add Trait Already Existing Item" >> UnitTestOutput.txt
 #Executing
 sam local invoke AddTraitFunction -e unittests/payloads/trait/AddTraitEvent.json > unittests/responses/trait/AlreadyExistsResponse.json
 #Comparing expected response to actual response
@@ -33,7 +33,7 @@ sam local invoke UpdateTraitFunction -e unittests/payloads/trait/UpdateTraitEven
 #Comparing expected response to actual response
 diff unittests/responses/trait/UpdateTraitResponse.json unittests/expectedResponses/trait/UpdateTraitExpectedResponse.json >> UnitTestOutput.txt
 
-echo "Update Non-Existing Item" >> UnitTestOutput.txt
+echo "Update Trait Non-Existing Item" >> UnitTestOutput.txt
 #Executing
 sam local invoke UpdateTraitFunction -e unittests/payloads/trait/UpdateNonExistTraitEvent.json > unittests/responses/trait/UpdateNonExistResponse.json
 #Comparing expected response to actual response
@@ -45,25 +45,25 @@ sam local invoke DeleteTraitFunction -e unittests/payloads/trait/DeleteTraitEven
 #Comparing expected response to actual response
 diff unittests/responses/trait/DeleteTraitResponse.json unittests/expectedResponses/trait/DeleteTraitExpectedResponse.json >> UnitTestOutput.txt
 
-echo "Delete Non-Existing Item" >> UnitTestOutput.txt
+echo "Delete Trait Non-Existing Item" >> UnitTestOutput.txt
 #Executing
 sam local invoke DeleteTraitFunction -e unittests/payloads/trait/DeleteTraitEvent.json > unittests/responses/trait/DeleteNonExistResponse.json
 #Comparing expected response to actual response
 diff unittests/responses/trait/DeleteNonExistResponse.json unittests/expectedResponses/trait/NonExistExpectedResponse.json >> UnitTestOutput.txt
 
-echo "Attempt Add with Bad Input" >> UnitTestOutput.txt
+echo "Attempt Add Trait with Bad Input" >> UnitTestOutput.txt
 #Executing
 sam local invoke AddTraitFunction -e unittests/payloads/trait/BadInputEvent.json > unittests/responses/trait/AddBadInputResponse.json
 #Comparing expected response to actual response
 diff unittests/responses/trait/AddBadInputResponse.json unittests/expectedResponses/trait/BadInputExpectedResponse.json >> UnitTestOutput.txt
 
-echo "Attempt Update with Bad Input" >> UnitTestOutput.txt
+echo "Attempt Update Trait with Bad Input" >> UnitTestOutput.txt
 #Executing
 sam local invoke UpdateTraitFunction -e unittests/payloads/trait/BadInputEvent.json > unittests/responses/trait/UpdateBadInputResponse.json
 #Comparing expected response to actual response
 diff unittests/responses/trait/UpdateBadInputResponse.json unittests/expectedResponses/trait/BadInputExpectedResponse.json >> UnitTestOutput.txt
 
-echo "Attempt Delete with Bad Input" >> UnitTestOutput.txt
+echo "Attempt Delete Trait with Bad Input" >> UnitTestOutput.txt
 #Executing
 sam local invoke DeleteTraitFunction -e unittests/payloads/trait/BadInputEvent.json > unittests/responses/trait/DeleteBadInputResponse.json
 #Comparing expected response to actual response
@@ -77,7 +77,7 @@ sam local invoke AddCareerFunction -e unittests/payloads/career/AddCareerEvent.j
 #Comparing expected response to actual response
 diff unittests/responses/career/AddCareerResponse.json unittests/expectedResponses/career/AddCareerExpectedResponse.json >> UnitTestOutput.txt
 
-echo "Add Already Existing Item" >> UnitTestOutput.txt
+echo "Add Career Already Existing Item" >> UnitTestOutput.txt
 #Executing
 sam local invoke AddCareerFunction -e unittests/payloads/career/AddCareerEvent.json > unittests/responses/career/AlreadyExistsResponse.json
 #Comparing expected response to actual response
@@ -89,7 +89,7 @@ sam local invoke UpdateCareerFunction -e unittests/payloads/career/UpdateCareerE
 #Comparing expected response to actual response
 diff unittests/responses/career/UpdateCareerResponse.json unittests/expectedResponses/career/UpdateCareerExpectedResponse.json >> UnitTestOutput.txt
 
-echo "Update Non-Existing Item" >> UnitTestOutput.txt
+echo "Update Career Non-Existing Item" >> UnitTestOutput.txt
 #Executing
 sam local invoke UpdateCareerFunction -e unittests/payloads/career/UpdateNonExistCareerEvent.json > unittests/responses/career/UpdateNonExistResponse.json
 #Comparing expected response to actual response
@@ -101,25 +101,25 @@ sam local invoke DeleteCareerFunction -e unittests/payloads/career/DeleteCareerE
 #Comparing expected response to actual response
 diff unittests/responses/career/DeleteCareerResponse.json unittests/expectedResponses/career/DeleteCareerExpectedResponse.json >> UnitTestOutput.txt
 
-echo "Delete Non-Existing Item" >> UnitTestOutput.txt
+echo "Delete Career Non-Existing Item" >> UnitTestOutput.txt
 #Executing
 sam local invoke DeleteCareerFunction -e unittests/payloads/career/DeleteCareerEvent.json > unittests/responses/career/DeleteNonExistResponse.json
 #Comparing expected response to actual response
 diff unittests/responses/career/DeleteNonExistResponse.json unittests/expectedResponses/career/NonExistExpectedResponse.json >> UnitTestOutput.txt
 
-echo "Attempt Add with Bad Input" >> UnitTestOutput.txt
+echo "Attempt Add Career with Bad Input" >> UnitTestOutput.txt
 #Executing
 sam local invoke AddCareerFunction -e unittests/payloads/career/BadInputEvent.json > unittests/responses/career/AddBadInputResponse.json
 #Comparing expected response to actual response
 diff unittests/responses/career/AddBadInputResponse.json unittests/expectedResponses/career/BadInputExpectedResponse.json >> UnitTestOutput.txt
 
-echo "Attempt Update with Bad Input" >> UnitTestOutput.txt
+echo "Attempt Update Career with Bad Input" >> UnitTestOutput.txt
 #Executing
 sam local invoke UpdateCareerFunction -e unittests/payloads/career/BadInputEvent.json > unittests/responses/career/UpdateBadInputResponse.json
 #Comparing expected response to actual response
 diff unittests/responses/career/UpdateBadInputResponse.json unittests/expectedResponses/career/BadInputExpectedResponse.json >> UnitTestOutput.txt
 
-echo "Attempt Delete with Bad Input" >> UnitTestOutput.txt
+echo "Attempt Delete Career with Bad Input" >> UnitTestOutput.txt
 #Executing
 sam local invoke DeleteCareerFunction -e unittests/payloads/career/BadInputEvent.json > unittests/responses/career/DeleteBadInputResponse.json
 #Comparing expected response to actual response

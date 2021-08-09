@@ -12,20 +12,20 @@ Commands you can use next
     
 Running Trait Api Events
 Add Trait Api
-Add Already Existing Item
+Add Trait Already Existing Item
 Update Trait Api
-Update Non-Existing Item
+Update Trait Non-Existing Item
 Delete Trait Api
-Delete Non-Existing Item
-Attempt Add with Bad Input
-Attempt Update with Bad Input
-Attempt Delete with Bad Input
+Delete Trait Non-Existing Item
+Attempt Add Trait with Bad Input
+Attempt Update Trait with Bad Input
+Attempt Delete Trait with Bad Input
 Add Career Api
-Add Already Existing Item
+Add Career Already Existing Item
 Update Career Api
-Update Non-Existing Item
+Update Career Non-Existing Item
 Delete Career Api
-Delete Non-Existing Item
-Attempt Add with Bad Input
-Attempt Update with Bad Input
-Attempt Delete with Bad Input
+Delete Career Non-Existing Item
+Attempt Add Career with Bad Input
+Attempt Update Career with Bad Input
+Attempt Delete Career with Bad Input
