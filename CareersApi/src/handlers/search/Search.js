@@ -10,8 +10,8 @@ AWS.config.update({
 const docClient = new AWS.DynamoDB.DocumentClient();
 
 exports.search = async (event) => {
-    if (event.httpMethod !== 'GET') {
-        throw new Error(`Search only accept GET method, you tried: ${event.httpMethod}`);
+    if (event.httpMethod !== 'POST') {
+        throw new Error(`Search only accept POST method, you tried: ${event.httpMethod}`);
     }
     
     // All log statements are written to CloudWatch

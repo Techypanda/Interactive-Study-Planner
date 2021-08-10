@@ -96,7 +96,7 @@ Resources:
           Type: Api
           Properties:
             Path: /events/event-get-career
-            Method: GET
+            Method: POST
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./src/handlers/getcareer
@@ -122,7 +122,7 @@ Resources:
           Type: Api
           Properties:
             Path: /events/event-search
-            Method: GET
+            Method: POST
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./src/handlers/search
@@ -148,7 +148,7 @@ Resources:
           Type: Api
           Properties:
             Path: /events/event-get-by-unit-code
-            Method: GET
+            Method: POST
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./src/handlers/byunitcode
@@ -174,7 +174,7 @@ Resources:
           Type: Api
           Properties:
             Path: /events/event-get-by-trait-code
-            Method: GET     
+            Method: POST     
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./src/handlers/bytraitcode

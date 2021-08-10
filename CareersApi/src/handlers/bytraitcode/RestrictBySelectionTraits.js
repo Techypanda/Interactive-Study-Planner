@@ -10,8 +10,8 @@ AWS.config.update({
 const docClient = new AWS.DynamoDB.DocumentClient();
 
 exports.restrictWithTraitCode = async (event) => {
-    if (event.httpMethod !== 'GET') {
-        throw new Error(`Traits only accept GET method, you tried: ${event.httpMethod}`);
+    if (event.httpMethod !== 'POST') {
+        throw new Error(`Traits only accept POST method, you tried: ${event.httpMethod}`);
     }
     console.log("Recieved:"+event);
     let userTraitCodes = JSON.parse(event['body'])['Traits'];

@@ -11,8 +11,8 @@ AWS.config.update({
 const docClient = new AWS.DynamoDB.DocumentClient();
 
 exports.getCareer = async (event) => {
-    if (event.httpMethod !== 'GET') {
-        throw new Error(`getCareer only accept GET method, you tried: ${event.httpMethod}`);
+    if (event.httpMethod !== 'POST') {
+        throw new Error(`getCareer only accept POST method, you tried: ${event.httpMethod}`);
     }
     console.info('received:', event);
 
