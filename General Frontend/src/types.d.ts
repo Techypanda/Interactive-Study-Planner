@@ -8,7 +8,7 @@ export interface CareerProps extends DefaultProps {
     careerDescription: string;
 }
 
-export interface UnitEntryProps extends DefaultProps {
+export interface UnitProps extends DefaultProps {
   unitTitle: string;
   unitContent: string;
 }

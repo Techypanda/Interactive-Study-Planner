@@ -1,24 +1,31 @@
-import {UnitEntryProps} from "../types";
+import {UnitProps} from "../types";
+import axios, { AxiosError, AxiosResponse } from "axios";
+import { useMutation, useQueryClient } from "react-query";
+import { useHistory } from "react-router-dom";
 
 // per Ricky's request, this is an incredibly simple page where all the units available to a biomedical student
-// is displayed with relatively minimal info i.e. name, code, and a brief course description.
+// is displayed with relatively minimal info i.e. name, code, and a brief course
 
+function GetAllUnits() {
+    // axios.get("${process.env.REACT_APP_API_URI}/getunit");
+    const { isLoading, isError, error, data} = useQuery('getunits', async () => {
+                                                            const data = await axios('${process.env.REACT_APP_API_URI}/getunit');
+                                                            return data;
+                                                        });
+    if (isLoading) {
+        return "Retrieving all available courses"; 
+    }
+    if (isError) {
+        return error; 
+    }
+     // poorly structured, make it prettier later 
+    return (
+	<div>
+          <ul>
 
-function GetUnits(): Promise<UnitEntryProps[]> {
-    return fetch()
-    .then(res => res.json('/units.json'))
-    .then(res => {
-	return res as UnitEntryProps[];
-    });
+          </ul>
+        </div>
+    );
 }
 
-function ListUnits() {
-    const units_list = GetUnits();
-    return(
-  <>
-    {units_list}
-  </>
-    )
-}
-
-export default ListUnits; 
+export default GetAllUnits;

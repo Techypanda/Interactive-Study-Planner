@@ -17,7 +17,7 @@ const unit_list: Array<{UnitName: string, UnitCode: string}> = Array(
 
 // renders the other components
 // is this how you're meant to use React? Who knows
-function StudyPlanner() {
+function CoursePlanner() {
     return(
 	<>
 	    <UnitsSelectedDisplay/> 
@@ -45,4 +45,4 @@ function ListAvailableUnits() {
   );
 }
 
-export default StudyPlanner;
+export default CoursePlanner;
