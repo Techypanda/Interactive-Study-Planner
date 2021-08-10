@@ -5,13 +5,23 @@ import { Box, Button, Grid, Typography, Card, CardHeader, TextField} from "@mate
 import Navbar from "../components/shared/Navbar";
 import { useHistory } from 'react-router-dom';
 import styled from "styled-components";
-import { useMutation, useQueryClient } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import {CareerProps} from "../types";
 
 // called on loading of this component
 // makes call to the careers API to get all careers so they can be rendered
 function ListCareers(props: DefaultProps) {
+    const { isLoading, isError, error, data} = useQuery('getcareers', async() => {
+	const data = await axios('${process.env.REACT_APP_API_URI}/event-get-all-careers');
+	return data;
+    })
+    if (isLoading) {
+	return "Retrieving all careers";
+    }
+    if (isError) {
+	return error;
+    }
     return (
         <>
           <Navbar/>

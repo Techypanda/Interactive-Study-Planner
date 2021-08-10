@@ -18,31 +18,12 @@ const unit_list: Array<{UnitName: string, UnitCode: string}> = Array(
 // renders the other components
 // is this how you're meant to use React? Who knows
 function CoursePlanner() {
-    return(
+
+    return (
 	<>
-	    <UnitsSelectedDisplay/> 
-	    <UnitsList/>
 
 	</>
     );
 }
 
-// as units are chosen, they appear here
-function CurrentPlay(props: DefaultProps) {
-    return(
-	<>
-	  <Typography>Current Plan</Typography>
-	     
-	</>
-    );
-}
-
-// as units are chosen, more should appear as prerequisites are met and others should
-// disappear due to anti-requisites or major/specialisation constraints
-function ListAvailableUnits() {
-  return (
-      
-  );
-}
-
-export default CoursePlanner;
+export default style(CoursePlanner)`
