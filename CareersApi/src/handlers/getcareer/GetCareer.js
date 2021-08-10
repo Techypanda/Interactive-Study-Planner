@@ -25,10 +25,10 @@ exports.getCareer = async (event) => {
         },
     };
     const item = await docClient.get(params).promise()
-    console.info(`response from: ${event.path} statusCode: ${response.statusCode} body: ${response.body}`);
-
-    return {
+    const response=  {
          statusCode: 200,
          body: JSON.stringify(item)
     }
+    console.info(`response from: ${event.path} statusCode: ${response.statusCode} body: ${response.body}`);
+    return response;
 }
