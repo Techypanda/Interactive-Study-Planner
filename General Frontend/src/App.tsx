@@ -1,24 +1,13 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+@import './App.scss'; // this'll be deprecated by scss soon in favour of @use but that's not supported by CRA
+import Landing from './pages/Landing';
 
+// could just render the landing page from the index file but opportunities for other
+// setup could be done here
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> for a good time.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <Landing/>
     </div>
   );
 }

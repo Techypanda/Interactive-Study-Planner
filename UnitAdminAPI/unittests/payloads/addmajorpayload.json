@@ -52,7 +52,9 @@
   },
   "queryStringParameters": null,
   "multiValueQueryStringParameters": null,
-  "pathParameters": null,
+  "pathParameters": {
+    "operation": "addmajor"
+  },
   "stageVariables": null,
   "requestContext": {
     "accountId": "123456789012",
@@ -84,5 +86,5 @@
     "requestTimeEpoch": 1622457298,
     "apiId": "1234567890"
   },
-  "body": "{\"majorCode\": \"testMajor\", \"name\": \"Test One With Real API\", \"credits\": 12.5, \"units\": [\"aa\"], \"unitAntiReqs\": [\"aa\"], \"specAntiReqs\": [\"bb\"]}"
+  "body": "{\"majorCode\": \"testMajor\", \"name\": \"Test One With Real API\", \"credits\": 12.5, \"units\": [\"aa\"], \"unitAntiReqs\": [[\"one group of unit anti req\"], [\"two group of unit anti req\"]], \"specAntiReqs\": [[\"one group of spec req\"], [\"two group of spec anti req\"]]}"
 }

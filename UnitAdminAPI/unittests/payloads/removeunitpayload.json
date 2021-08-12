@@ -52,7 +52,9 @@
   },
   "queryStringParameters": null,
   "multiValueQueryStringParameters": null,
-  "pathParameters": null,
+  "pathParameters": {
+    "operation": "deleteunit"
+  },
   "stageVariables": null,
   "requestContext": {
     "accountId": "123456789012",
