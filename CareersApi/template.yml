@@ -1,0 +1,187 @@
+# This is the SAM template that represents the architecture of your serverless application
+# https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-template-basics.html
+
+# The AWSTemplateFormatVersion identifies the capabilities of the template
+# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/format-version-structure.html
+AWSTemplateFormatVersion: 2010-09-09
+Description: >-
+  CareersApi
+
+# Transform section specifies one or more macros that AWS CloudFormation uses to process your template
+# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-section-structure.html
+Transform:
+- AWS::Serverless-2016-10-31
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 3
+
+# Resources declares the AWS resources that you want to include in the stack
+# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html
+Resources:
+  # Each Lambda function is defined by properties:
+  # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+
+  # This is a Lambda function config associated with the source code: GetAllCareers.js
+  GetAllCareers:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      MemorySize: 128
+      Timeout: 100
+      Description: Get All Career Items from DevCareer DynamoDB table
+      Environment:
+        Variables:
+          DEV_CAREER_TABLE: DevCareers
+      Policies:
+          - DynamoDBCrudPolicy:
+              TableName: DevCareers
+          - DynamoDBCrudPolicy:
+              TableName: DevTraits
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /events/event-get-all-careers
+            Method: GET
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./src/handlers/getallcareers
+      DockerTag: nodejs14.x-v1
+
+  GetAllTraits:
+      Type: AWS::Serverless::Function
+      Properties:
+        PackageType: Image
+        MemorySize: 128
+        Timeout: 100
+        Description: Get All Trait Items from DevCareer DynamoDB table
+        Environment:
+          Variables:
+            DEV_TRAIT_TABLE: DevTraits
+        Events:
+          Api:
+            Type: Api
+            Properties:
+              Path: /events/event-get-all-traits
+              Method: GET
+        Policies:
+          - DynamoDBCrudPolicy:
+              TableName: DevCareers
+          - DynamoDBCrudPolicy:
+              TableName: DevTraits
+      Metadata:
+        Dockerfile: Dockerfile
+        DockerContext: ./src/handlers/getalltraits
+        DockerTag: nodejs14.x-v1
+      
+  GetCareer:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      MemorySize: 128
+      Timeout: 100
+      Description: Get Career Item from DevCareer DynamoDB table
+      Environment:
+        Variables:
+          DEV_CAREER_TABLE: DevCareers
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: DevCareers
+        - DynamoDBCrudPolicy:
+            TableName: DevTraits
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /events/event-get-career
+            Method: POST
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./src/handlers/getcareer
+      DockerTag: nodejs14.x-v1
+
+  Search:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      MemorySize: 128
+      Timeout: 100
+      Description: Search any word in career db.
+      Environment:
+        Variables:
+          DEV_CAREER_TABLE: DevCareers
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: DevCareers
+        - DynamoDBCrudPolicy:
+            TableName: DevTraits
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /events/event-search
+            Method: POST
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./src/handlers/search
+      DockerTag: nodejs14.x-v1
+
+  RestrictWithUnitCode:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      MemorySize: 128
+      Timeout: 100
+      Description: Search careers based on unit code
+      Environment:
+        Variables:
+          DEV_CAREER_TABLE: DevCareers
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: DevCareers
+        - DynamoDBCrudPolicy:
+            TableName: DevTraits
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /events/event-get-by-unit-code
+            Method: POST
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./src/handlers/byunitcode
+      DockerTag: nodejs14.x-v1
+      
+  RestrictWithTraitCode:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      MemorySize: 128
+      Timeout: 100
+      Description: Search careers based on trait codes
+      Environment:
+        Variables:
+          DEV_CAREER_TABLE: DevCareers
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: DevCareers
+        - DynamoDBCrudPolicy:
+            TableName: DevTraits
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /events/event-get-by-trait-code
+            Method: POST     
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./src/handlers/bytraitcode
+      DockerTag: nodejs14.x-v1               
+ 
+# Outputs:
+#   GetAllCareers:
+#     Description: "API Gateway endpoint URL for Prod stage"
+#     #TODO: Configure for production
+#     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/GetAllCareers"

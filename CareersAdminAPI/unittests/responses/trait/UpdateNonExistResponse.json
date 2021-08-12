@@ -1,0 +1,1 @@
+{"statusCode": 400, "body": "Bad request: Item does not exist in the table.", "headers": {"Content-Type": "application/json", "Access-Control-Allow-Origin": "*"}}

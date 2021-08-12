@@ -10,7 +10,7 @@ Parameters:
   Authentication:
     Type: String
     Description: Disable Authentication (True) or Leave It (False)
-    Default: 'false'
+    Default: 'true'
 Resources:
   AdminUnitAPI:
     Type: AWS::Serverless::Api
@@ -33,7 +33,7 @@ Resources:
               Access-Control-Allow-Origin: '''*'''
               Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'''
               Access-Control-Allow-Methods: '''OPTIONS,POST'''
-  AddUnitFunction:
+  UnitAdminAPI:
     Type: AWS::Serverless::Function
     Properties:
       PackageType: Image
@@ -41,8 +41,8 @@ Resources:
         CatchAll:
           Type: Api
           Properties:
-            Path: /addunit
-            Method: POST
+            Path: /{operation+}
+            Method: ANY
             RestApiId:
               Ref: AdminUnitAPI
       Environment:
@@ -52,202 +52,14 @@ Resources:
       Policies:
       - DynamoDBCrudPolicy:
           TableName: DevUnits
-      ImageUri: addunitfunction:go1.x-v1
-    Metadata:
-      DockerTag: go1.x-v1
-      DockerContext: ./addunit
-      Dockerfile: Dockerfile
-  RemoveUnitFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      PackageType: Image
-      Events:
-        CatchAll:
-          Type: Api
-          Properties:
-            Path: /removeunit
-            Method: POST
-            RestApiId:
-              Ref: AdminUnitAPI
-      Environment:
-        Variables:
-          DisableAuthentication:
-            Ref: Authentication
-      Policies:
-      - DynamoDBCrudPolicy:
-          TableName: DevUnits
-      ImageUri: removeunitfunction:go1.x-v1
-    Metadata:
-      DockerTag: go1.x-v1
-      DockerContext: ./removeunit
-      Dockerfile: Dockerfile
-  UpdateUnitFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      PackageType: Image
-      Events:
-        CatchAll:
-          Type: Api
-          Properties:
-            Path: /updateunit
-            Method: POST
-            RestApiId:
-              Ref: AdminUnitAPI
-      Environment:
-        Variables:
-          DisableAuthentication:
-            Ref: Authentication
-      Policies:
-      - DynamoDBCrudPolicy:
-          TableName: DevUnits
-      ImageUri: updateunitfunction:go1.x-v1
-    Metadata:
-      DockerTag: go1.x-v1
-      DockerContext: ./updateunit
-      Dockerfile: Dockerfile
-  AddMajorFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      PackageType: Image
-      Events:
-        CatchAll:
-          Type: Api
-          Properties:
-            Path: /addmajor
-            Method: POST
-            RestApiId:
-              Ref: AdminUnitAPI
-      Environment:
-        Variables:
-          DisableAuthentication:
-            Ref: Authentication
-      Policies:
       - DynamoDBCrudPolicy:
           TableName: DevMajors
-      ImageUri: addmajorfunction:go1.x-v1
-    Metadata:
-      DockerTag: go1.x-v1
-      DockerContext: ./addmajor
-      Dockerfile: Dockerfile
-  UpdateMajorFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      PackageType: Image
-      Events:
-        CatchAll:
-          Type: Api
-          Properties:
-            Path: /updatemajor
-            Method: POST
-            RestApiId:
-              Ref: AdminUnitAPI
-      Environment:
-        Variables:
-          DisableAuthentication:
-            Ref: Authentication
-      Policies:
-      - DynamoDBCrudPolicy:
-          TableName: DevMajors
-      ImageUri: updatemajorfunction:go1.x-v1
-    Metadata:
-      DockerTag: go1.x-v1
-      DockerContext: ./updatemajor
-      Dockerfile: Dockerfile
-  RemoveMajorFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      PackageType: Image
-      Events:
-        CatchAll:
-          Type: Api
-          Properties:
-            Path: /removemajor
-            Method: POST
-            RestApiId:
-              Ref: AdminUnitAPI
-      Environment:
-        Variables:
-          DisableAuthentication:
-            Ref: Authentication
-      Policies:
-      - DynamoDBCrudPolicy:
-          TableName: DevMajors
-      ImageUri: removemajorfunction:go1.x-v1
-    Metadata:
-      DockerTag: go1.x-v1
-      DockerContext: ./removemajor
-      Dockerfile: Dockerfile
-  AddSpecFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      PackageType: Image
-      Events:
-        CatchAll:
-          Type: Api
-          Properties:
-            Path: /addspec
-            Method: POST
-            RestApiId:
-              Ref: AdminUnitAPI
-      Environment:
-        Variables:
-          DisableAuthentication:
-            Ref: Authentication
-      Policies:
       - DynamoDBCrudPolicy:
           TableName: DevSpecializations
-      ImageUri: addspecfunction:go1.x-v1
+      ImageUri: unitadminapi:go1.x-v1
     Metadata:
       DockerTag: go1.x-v1
-      DockerContext: ./addspec
-      Dockerfile: Dockerfile
-  UpdateSpecFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      PackageType: Image
-      Events:
-        CatchAll:
-          Type: Api
-          Properties:
-            Path: /updatespec
-            Method: POST
-            RestApiId:
-              Ref: AdminUnitAPI
-      Environment:
-        Variables:
-          DisableAuthentication:
-            Ref: Authentication
-      Policies:
-      - DynamoDBCrudPolicy:
-          TableName: DevSpecializations
-      ImageUri: updatespecfunction:go1.x-v1
-    Metadata:
-      DockerTag: go1.x-v1
-      DockerContext: ./updatespec
-      Dockerfile: Dockerfile
-  RemoveSpecFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      PackageType: Image
-      Events:
-        CatchAll:
-          Type: Api
-          Properties:
-            Path: /removespec
-            Method: POST
-            RestApiId:
-              Ref: AdminUnitAPI
-      Environment:
-        Variables:
-          DisableAuthentication:
-            Ref: Authentication
-      Policies:
-      - DynamoDBCrudPolicy:
-          TableName: DevSpecializations
-      ImageUri: removespecfunction:go1.x-v1
-    Metadata:
-      DockerTag: go1.x-v1
-      DockerContext: ./removespec
+      DockerContext: ./src
       Dockerfile: Dockerfile
 Outputs:
   AdminUnitAPI:
