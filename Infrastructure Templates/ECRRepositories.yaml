@@ -1,6 +1,10 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Description: Template that creates Dev DBs.
 Resources:
+  UnitApiRepository:
+    Type: AWS::ECR::Repository
+    Properties:
+      RepositoryName: curtinmedicalcourseplanner/unitapi
   UnitAdminRepository:
     Type: AWS::ECR::Repository
     Properties:
@@ -9,3 +13,6 @@ Outputs:
   UnitAdminRepository:
     Description: Arn Value For Repository
     Value: !GetAtt UnitAdminRepository.Arn
+  UnitApiRepository:
+    Description: Arn Value For Repository
+    Value: !GetAtt UnitApiRepository.Arn
