@@ -27,14 +27,18 @@ Resources:
   GetAllCareers:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: src/handlers/getallcareers/GetAllCareers.getAllCareers
-      Runtime: nodejs14.x
+      PackageType: Image
       MemorySize: 128
       Timeout: 100
       Description: Get All Career Items from DevCareer DynamoDB table
       Environment:
         Variables:
-          DEV_CAREER_TABLE: !Ref DevCareers
+          DEV_CAREER_TABLE: DevCareers
+      Policies:
+          - DynamoDBCrudPolicy:
+              TableName: DevCareers
+          - DynamoDBCrudPolicy:
+              TableName: DevTraits
       Events:
         Api:
           Type: Api
@@ -49,21 +53,24 @@ Resources:
   GetAllTraits:
       Type: AWS::Serverless::Function
       Properties:
-        Handler: src/handlers/getalltraits/GetAllTrait.getAllTraits
         PackageType: Image
-        Runtime: nodejs14.x
         MemorySize: 128
         Timeout: 100
         Description: Get All Trait Items from DevCareer DynamoDB table
         Environment:
           Variables:
-            DEV_TRAIT_TABLE: !Ref DevTraits
+            DEV_TRAIT_TABLE: DevTraits
         Events:
           Api:
             Type: Api
             Properties:
               Path: /events/event-get-all-traits
               Method: GET
+        Policies:
+          - DynamoDBCrudPolicy:
+              TableName: DevCareers
+          - DynamoDBCrudPolicy:
+              TableName: DevTraits
       Metadata:
         Dockerfile: Dockerfile
         DockerContext: ./src/handlers/getalltraits
@@ -72,20 +79,24 @@ Resources:
   GetCareer:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: src/handlers/getcareer/GetCareer.getCareer
-      Runtime: nodejs14.x
+      PackageType: Image
       MemorySize: 128
       Timeout: 100
       Description: Get Career Item from DevCareer DynamoDB table
       Environment:
         Variables:
-          DEV_CAREER_TABLE: !Ref DevCareers
+          DEV_CAREER_TABLE: DevCareers
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: DevCareers
+        - DynamoDBCrudPolicy:
+            TableName: DevTraits
       Events:
         Api:
           Type: Api
           Properties:
             Path: /events/event-get-career
-            Method: GET
+            Method: POST
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./src/handlers/getcareer
@@ -94,20 +105,24 @@ Resources:
   Search:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: src/handlers/search/Search.search
-      Runtime: nodejs14.x
+      PackageType: Image
       MemorySize: 128
       Timeout: 100
       Description: Search any word in career db.
       Environment:
         Variables:
-          DEV_CAREER_TABLE: !Ref DevCareers
+          DEV_CAREER_TABLE: DevCareers
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: DevCareers
+        - DynamoDBCrudPolicy:
+            TableName: DevTraits
       Events:
         Api:
           Type: Api
           Properties:
             Path: /events/event-search
-            Method: GET
+            Method: POST
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./src/handlers/search
@@ -116,20 +131,24 @@ Resources:
   RestrictWithUnitCode:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: src/handlers/byunitcode/RestrictBySelectionUnits.restrictWithUnitCode
-      Runtime: nodejs14.x
+      PackageType: Image
       MemorySize: 128
       Timeout: 100
       Description: Search careers based on unit code
       Environment:
         Variables:
-          DEV_CAREER_TABLE: !Ref DevCareers
+          DEV_CAREER_TABLE: DevCareers
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: DevCareers
+        - DynamoDBCrudPolicy:
+            TableName: DevTraits
       Events:
         Api:
           Type: Api
           Properties:
             Path: /events/event-get-by-unit-code
-            Method: GET
+            Method: POST
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./src/handlers/byunitcode
@@ -138,20 +157,24 @@ Resources:
   RestrictWithTraitCode:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: src/handlers/bytraitcode/RestrictBySelectionTraits.restrictWithTraitCode
-      Runtime: nodejs14.x
+      PackageType: Image
       MemorySize: 128
       Timeout: 100
       Description: Search careers based on trait codes
       Environment:
         Variables:
-          DEV_CAREER_TABLE: !Ref DevCareers
+          DEV_CAREER_TABLE: DevCareers
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: DevCareers
+        - DynamoDBCrudPolicy:
+            TableName: DevTraits
       Events:
         Api:
           Type: Api
           Properties:
             Path: /events/event-get-by-trait-code
-            Method: GET     
+            Method: POST     
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./src/handlers/bytraitcode

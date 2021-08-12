@@ -1,0 +1,42 @@
+Running Build
+
+Build Succeeded
+
+Built Artifacts  : .aws-sam/build
+Built Template   : .aws-sam/build/template.yaml
+
+Commands you can use next
+=========================
+[*] Invoke Function: sam local invoke
+[*] Deploy: sam deploy --guided
+    
+Running Unit related Api events
+Running get all units Api
+Running get unit valid query
+Running get unit no result
+Running get unit invalid parameter
+Running get unit no parameter
+Running search unit invalid param api
+Running search unit no param api
+Running search unit no result api
+Running search unit valid query api
+Running Major related Api events
+Running get all majors Api
+Running get major invalid param Api
+Running get major no result api
+Running get major no param api
+Running get major valid query api
+Running search major invalid param api
+Running search major no param api
+Running search major no resultapi
+Running search major valid query api
+Running Specialization related Api events
+Running get all specializations Api
+Running get spec invalid param api
+Running get spec no result api
+Running get spec no param api
+Running get spec valid query api
+Running search spec invalid param api
+Running search spec no param api
+Running search spec no result api
+Running search spec valid query api
