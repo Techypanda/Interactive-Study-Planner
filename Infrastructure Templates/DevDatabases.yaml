@@ -47,11 +47,11 @@ Resources:
     Type: AWS::DynamoDB::Table
     Properties:
       AttributeDefinitions:
-        - AttributeName: "Name"
+        - AttributeName: "Id"
           AttributeType: "S"
       BillingMode: "PROVISIONED"
       KeySchema:
-        - AttributeName: "Name"
+        - AttributeName: "Id"
           KeyType: "HASH"
       ProvisionedThroughput:
         ReadCapacityUnits: 1
@@ -61,11 +61,11 @@ Resources:
     Type: AWS::DynamoDB::Table
     Properties:
       AttributeDefinitions:
-        - AttributeName: "CareerName"
+        - AttributeName: "CareerId"
           AttributeType: "S"
       BillingMode: "PROVISIONED"
       KeySchema:
-        - AttributeName: "CareerName"
+        - AttributeName: "CareerId"
           KeyType: "HASH"
       ProvisionedThroughput:
         ReadCapacityUnits: 1

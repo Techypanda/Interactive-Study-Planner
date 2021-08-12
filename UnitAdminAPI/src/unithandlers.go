@@ -108,8 +108,8 @@ func parseUnitAddBody(body string) (Unit, error) {
 	if unit.Delivery == "" {
 		return unit, errors.New("delivery is empty")
 	}
-	unit.Corequistes = append(unit.Corequistes, "")
-	unit.Prerequistes = append(unit.Prerequistes, "")
-	unit.Antirequistes = append(unit.Antirequistes, "")
+	// unit.Corequistes = append(unit.Corequistes, "")
+	// unit.Prerequistes = append(unit.Prerequistes, "")
+	// unit.Antirequistes = append(unit.Antirequistes, "")
 	return unit, nil
 }
