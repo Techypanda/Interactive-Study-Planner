@@ -27,7 +27,6 @@ Resources:
       Dockerfile: Dockerfile
       DockerContext: ./getallspecs
       DockerTag: python3.8-v1
-  
   GetAllMajorsFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -42,7 +41,6 @@ Resources:
       Dockerfile: Dockerfile
       DockerContext: ./getallmajors
       DockerTag: python3.8-v1
-
   GetAllUnitsFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -57,7 +55,6 @@ Resources:
       Dockerfile: Dockerfile
       DockerContext: ./getallunits
       DockerTag: python3.8-v1
-  
   GetMajorFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -72,7 +69,6 @@ Resources:
       Dockerfile: Dockerfile
       DockerContext: ./getmajor
       DockerTag: python3.8-v1
-
   GetSpecFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -87,7 +83,6 @@ Resources:
       Dockerfile: Dockerfile
       DockerContext: ./getspec
       DockerTag: python3.8-v1
-
   GetUnitFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -178,9 +173,6 @@ Outputs:
     Description: "API Gateway endpoint URL for Prod stage for Search Unit Function"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/searchunit/"
   #Functions
-  HelloWorldFunction:
-    Description: "Hello World Lambda Function ARN"
-    Value: !GetAtt HelloWorldFunction.Arn
   GetAllSpecsFunction:
     Description: "Get All Specs Lambda Function ARN"
     Value: !GetAtt GetAllSpecsFunction.Arn
@@ -209,9 +201,6 @@ Outputs:
     Description: "Search Unit Lambda Function ARN"
     Value: !GetAtt SearchUnitFunction.Arn
   #Function IAM Roles
-  HelloWorldFunctionIamRole:
-    Description: "Implicit IAM Role created for Hello World function"
-    Value: !GetAtt HelloWorldFunctionRole.Arn
   GetAllSpecsFunctionIamRole:
     Description: "Implicit IAM Role created for Get All Specs Function"
     Value: !GetAtt GetAllSpecsFunction.Arn
