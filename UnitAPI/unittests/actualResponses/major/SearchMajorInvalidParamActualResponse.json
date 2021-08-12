@@ -1,0 +1,1 @@
+{"statusCode": 400, "body": "\"Non valid query parameter.\"", "headers": {"Content-Type": "application/json", "Access-Control-Allow-Origin": "*"}}
