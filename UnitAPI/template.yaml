@@ -26,12 +26,12 @@ Resources:
       DockerContext: ./hello_world
       DockerTag: python3.8-v1
   
-  getallspecs:
+  GetAllSpecsFunction:
     Type: AWS::Serverless::Function
     Properties:
       PackageType: Image
       Events:
-        getallspecs:
+        GetAllSpecs:
           Type: Api
           Properties:
             Path: /getallspecs
@@ -41,12 +41,12 @@ Resources:
       DockerContext: ./getallspecs
       DockerTag: python3.8-v1
   
-  getallmajors:
+  GetAllMajorsFunction:
     Type: AWS::Serverless::Function
     Properties:
       PackageType: Image
       Events:
-        getallmajors:
+        GetAllMajors:
           Type: Api
           Properties:
             Path: /getallmajors
@@ -56,12 +56,12 @@ Resources:
       DockerContext: ./getallmajors
       DockerTag: python3.8-v1
 
-  getallunits:
+  GetAllUnitsFunction:
     Type: AWS::Serverless::Function
     Properties:
       PackageType: Image
       Events: 
-        getallunits:
+        GetAllUnits:
           Type: Api
           Properties:
             Path: /getallunits
@@ -71,12 +71,12 @@ Resources:
       DockerContext: ./getallunits
       DockerTag: python3.8-v1
   
-  getmajor:
+  GetMajorFunction:
     Type: AWS::Serverless::Function
     Properties:
       PackageType: Image
       Events:
-        getmajor:
+        GetMajor:
           Type: Api
           Properties:
             Path: /getmajor
@@ -86,12 +86,12 @@ Resources:
       DockerContext: ./getmajor
       DockerTag: python3.8-v1
 
-  getspec:
+  GetSpecFunction:
     Type: AWS::Serverless::Function
     Properties:
       PackageType: Image
       Events:
-        getspec:
+        GetSpec:
           Type: Api
           Properties:
             Path: /getspec
@@ -101,12 +101,12 @@ Resources:
       DockerContext: ./getspec
       DockerTag: python3.8-v1
 
-  getunit:
+  GetUnitFunction:
     Type: AWS::Serverless::Function
     Properties:
       PackageType: Image
       Events:
-        getunit:
+        GetUnit:
           Type: Api
           Properties:
             Path: /getunit
@@ -115,12 +115,12 @@ Resources:
       Dockerfile: Dockerfile
       DockerContext: ./getunit
       DockerTag: python3.8-v1
-  searchmajor:
+  SearchMajorFunction:
     Type: AWS::Serverless::Function
     Properties:
       PackageType: Image
       Events:
-        searchmajor:
+        SearchMajor:
           Type: Api
           Properties:
             Path: /searchmajor
@@ -129,12 +129,12 @@ Resources:
       Dockerfile: Dockerfile
       DockerContext: ./searchmajor
       DockerTag: python3.8-v1
-  searchspec:
+  SearchSpecFunction:
     Type: AWS::Serverless::Function
     Properties:
       PackageType: Image
       Events:
-        searchspec:
+        SearchSpec:
           Type: Api
           Properties:
             Path: /searchspec
@@ -143,12 +143,12 @@ Resources:
       Dockerfile: Dockerfile
       DockerContext: ./searchspec
       DockerTag: python3.8-v1
-  searchunit:
+  SearchUnitFunction:
     Type: AWS::Serverless::Function
     Properties:
       PackageType: Image
       Events:
-        searchunit:
+        SearchUnit:
           Type: Api
           Properties:
             Path: /searchunit
@@ -161,12 +161,97 @@ Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
   # Find out more about other implicit resources you can reference within SAM
   # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
+  
+  # APIs
   HelloWorldApi:
     Description: "API Gateway endpoint URL for Prod stage for Hello World function"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
+  GetAllSpecsApi:
+    Description: "API Gateway endpoint URL for Prod stage for Get All Specs Function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/getallspecs/"
+  GetAllMajorsApi:
+    Description: "API Gateway endpoint URL for Prod stage for Get All Majors Function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/getallmajors/"
+  GetAllUnitsApi:
+    Description: "API Gateway endpoint URL for Prod stage for Get All Units Function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/getallunits/"
+  GetMajorApi:
+    Description: "API Gateway endpoint URL for Prod stage for Get Major Function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/getmajor/"
+  GetSpecApi:
+    Description: "API Gateway endpoint URL for Prod stage for Get Spec Function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/getspec/"
+  GetUnitApi:
+    Description: "API Gateway endpoint URL for Prod stage for Get Unit Function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/getunit/"
+  SearchMajorApi:
+    Description: "API Gateway endpoint URL for Prod stage for Search Major Function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/searchmajor/"
+  SearchSpecApi:
+    Description: "API Gateway endpoint URL for Prod stage for Search Spec Function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/searchspec/"
+  SearchUnitApi:
+    Description: "API Gateway endpoint URL for Prod stage for Search Unit Function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/searchunit/"
+  #Functions
   HelloWorldFunction:
     Description: "Hello World Lambda Function ARN"
     Value: !GetAtt HelloWorldFunction.Arn
+  GetAllSpecsFunction:
+    Description: "Get All Specs Lambda Function ARN"
+    Value: !GetAtt GetAllSpecsFunction.Arn
+  GetAllMajorsFunction:
+    Description: "Get All Majors Lambda Function ARN"
+    Value: !GetAtt GetAllMajorsFunction.Arn
+  GetAllUnitsFunction:
+    Description: "Get All Units Lambda Function ARN"
+    Value: !GetAtt GetAllUnitsFunction.Arn
+  GetMajorFunction:
+    Description: "Get Major Lambda Function ARN"
+    Value: !GetAtt GetMajorFunction.Arn
+  GetSpecFunction:
+    Description: "Get Spec Lambda Function ARN"
+    Value: !GetAtt GetSpecFunction.Arn
+  GetUnitFunction:
+    Description: "Get Unit Lambda Function ARN"
+    Value: !GetAtt GetUnitFunction.Arn
+  SearchMajorFunction:
+    Description: "Search Major Lambda Function ARN"
+    Value: !GetAtt SearchMajorFunction.Arn
+  SearchSpecFunction:
+    Description: "Search Spec Lambda Function ARN"
+    Value: !GetAtt SearchSpecFunction.Arn
+  SearchUnitFunction:
+    Description: "Search Unit Lambda Function ARN"
+    Value: !GetAtt SearchUnitFunction.Arn
+  #Function IAM Roles
   HelloWorldFunctionIamRole:
     Description: "Implicit IAM Role created for Hello World function"
     Value: !GetAtt HelloWorldFunctionRole.Arn
+  GetAllSpecsFunctionIamRole:
+    Description: "Implicit IAM Role created for Get All Specs Function"
+    Value: !GetAtt GetAllSpecsFunction.Arn
+  GetAllMajorsFunctionIamRole:
+    Description: "Implicit IAM Role created for Get All Majors Function"
+    Value: !GetAtt GetAllMajorsFunction.Arn
+  GetAllUnitsFunctionIamRole:
+    Description: "Implicit IAM Role created for Get All Units Function"
+    Value: !GetAtt GetAllUnitsFunction.Arn
+  GetMajorFunctionIamRole:
+    Description: "Implicit IAM Role created for Get Major Function"
+    Value: !GetAtt GetMajorFunction.Arn
+  GetSpecFunctionIamRole:
+    Description: "Implicit IAM Role created for Get Spec Function"
+    Value: !GetAtt GetSpecFunction.Arn
+  GetUnitFunctionIamRole:
+    Description: "Implicit IAM Role created for Get Unit Function"
+    Value: !GetAtt GetUnitFunction.Arn
+  SearchMajorFunctionIamRole:
+    Description: "Implicit IAM Role created for Search Major Function"
+    Value: !GetAtt SearchMajorFunction.Arn
+  SearchSpecFunctionIamRole:
+    Description: "Implicit IAM Role created for Search Spec Function"
+    Value: !GetAtt SearchSpecFunction.Arn
+  SearchUnitFunctionIamRole:
+    Description: "Implicit IAM Role created for Search Unit Function"
+    Value: !GetAtt SearchUnitFunction.Arn

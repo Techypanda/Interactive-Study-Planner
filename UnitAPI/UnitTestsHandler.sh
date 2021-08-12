@@ -1,4 +1,8 @@
 #!/bin/bash
+
+rm unittests/actualResponses/unit/*
+rm unittests/actualResponses/specialization/*
+rm unittests/actualResponses/major/*
 rm -f -- UnitTestOutput.txt
 echo "Running Build" >> UnitTestOutput.txt
 sam build >> UnitTestOutput.txt
