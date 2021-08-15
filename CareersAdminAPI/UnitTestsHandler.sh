@@ -17,13 +17,13 @@ sam build >> UnitTestOutput.txt
 echo "Running Trait Api Events" >> UnitTestOutput.txt
 echo "Add Trait Api" >> UnitTestOutput.txt
 #Executing
-sam local invoke AddTraitFunction -e unittests/payloads/trait/AddTraitEvent.json > unittests/responses/trait/AddTraitResponse.json
+sam local invoke --env-vars unittests/debug.json AddTraitFunction -e unittests/payloads/trait/AddTraitEvent.json > unittests/responses/trait/AddTraitResponse.json
 #Comparing expected response to actual response
 diff unittests/responses/trait/AddTraitResponse.json unittests/expectedResponses/trait/AddTraitExpectedResponse.json >> UnitTestOutput.txt
 
 echo "Add Trait Already Existing Item" >> UnitTestOutput.txt
 #Executing
-sam local invoke AddTraitFunction -e unittests/payloads/trait/AddTraitEvent.json > unittests/responses/trait/AlreadyExistsResponse.json
+sam local invoke --env-vars unittests/debug.json AddTraitFunction -e unittests/payloads/trait/AddTraitEvent.json > unittests/responses/trait/AlreadyExistsResponse.json
 #Comparing expected response to actual response
 diff unittests/responses/trait/AlreadyExistsResponse.json unittests/expectedResponses/trait/AlreadyExistsExpectedResponse.json >> UnitTestOutput.txt
 
@@ -53,7 +53,7 @@ diff unittests/responses/trait/DeleteNonExistResponse.json unittests/expectedRes
 
 echo "Attempt Add Trait with Bad Input" >> UnitTestOutput.txt
 #Executing
-sam local invoke AddTraitFunction -e unittests/payloads/trait/BadInputEvent.json > unittests/responses/trait/AddBadInputResponse.json
+sam local invoke --env-vars unittests/debug.json AddTraitFunction -e unittests/payloads/trait/BadInputEvent.json > unittests/responses/trait/AddBadInputResponse.json
 #Comparing expected response to actual response
 diff unittests/responses/trait/AddBadInputResponse.json unittests/expectedResponses/trait/BadInputExpectedResponse.json >> UnitTestOutput.txt
 
