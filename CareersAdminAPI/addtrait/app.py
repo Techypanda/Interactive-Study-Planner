@@ -2,27 +2,57 @@ import json
 import boto3
 import requests
 import random
+import jose
+import jose.util
+import time
+import os
 from boto3.dynamodb.conditions import Attr
 from botocore.exceptions import ClientError
 
 #Author: Matthew Loe
 #Student Id: 19452425
 #Date Created: 25/05/2021
-#Date Last Modified: 9/08/2021
+#Date Last Modified: 15/08/2021
 #Description: Add trait operation handler
 
 #JWT token validation
 # Link: https://github.com/awslabs/aws-support-tools/blob/master/Cognito/decode-verify-jwt/decode-verify-jwt.py
-def validateJWTToken(self, token):
+def validateJWTToken(token: str) -> bool, dict:
     keys_url = "https://cognito-idp.ap-southeast-2.amazonaws.com/ap-southeast-2_gn4KIEkx0/.well-known/jwks.json"
 
     response = requests.get(keys_url)
     keys = json.loads(response.decode("utf-8"))["keys"]
 
-    #headers = jwt.get_unverified_headers(token)
-    #kid = headers["kid"]
+    headers = jwt.get_unverified_headers(token)
+    kid = headers["kid"]
 
-    #return valid, error
+    key_index = -1
+
+    #sSearch for kid in public keys list
+    for i in range(len(keys)):
+        if kid == keys[i]['kid']:
+            key_index = i
+            break
+    if key_index == -1:
+        return False, badRequest("Public key not found in jwks.json")
+
+    #Construct and decode signature
+    public_key = jwk.construct(keys[key_index])
+
+    message, encoded_signature = str(token.rsplit('.', 1))
+
+    decoded_signature = base64url_decode(encoded_signature.encode('utf-8'))
+
+    #Verify signature
+    if not public_key.verify(message.encode("utf8"), decoded_signature):
+        return False, badRequest("Signature verification failed.")
+    else:
+        claims = jwt.get_unverified_claims(token)
+        #Verify token not expired
+        if time.time() > claims['exp']:
+            return False, badRequest("Token is expired.")
+        else:
+            return True, None
 
 #Trait class definition
 class Trait:
@@ -30,9 +60,19 @@ class Trait:
         self.name = name.lower()    #Convert to lowercase
         self.id = "0"
 
-
 #Lambda handler - adds the received trait to the database if possible
 def lambda_handler(event, context) -> dict:
+    valid, error = validateJWTToken(event['token'])
+
+    if os.getenv("DisableAuthentication"):
+        return adddTrait(json.loads(event["body"]))
+    else:
+        if valid:
+            return addTrait(json.loads(event["body"]))
+        else:
+            return error
+
+def addTrait(body: dict) -> dict:
     #Setup link to database and table
     db = boto3.resource('dynamodb', region_name='ap-southeast-2')
     table = db.Table("DevTraits")
@@ -67,7 +107,6 @@ def lambda_handler(event, context) -> dict:
     else:
         try:
             #Retrieve data
-            body = json.loads(event["body"])
             trait = Trait(body["Name"])
         
             #Check Testing
@@ -117,7 +156,8 @@ def lambda_handler(event, context) -> dict:
                     return badRequest("Unknown error occured.")
             else:
                 #Return ok response
-                return okResponse("Trait added to database.")
+                return okResponse("Trait added to database.") 
+
 
 #Http responses
 #Badrequest response
