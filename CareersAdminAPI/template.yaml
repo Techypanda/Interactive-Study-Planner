@@ -6,7 +6,7 @@ Description: >
 #Author: Matthew Loe
 #Student Id: 19452425
 #Date Created: 17/05/2021
-#Date Last Modified: 9/08/2021
+#Date Last Modified: 15/08/2021
 
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
@@ -24,7 +24,10 @@ Resources:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /addcareer
-            Method: POST     
+            Method: POST
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: DevCareer
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./addcareer
@@ -40,6 +43,9 @@ Resources:
           Properties:
             Path: /addtrait
             Method: POST
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: DevTrait
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./addtrait
@@ -55,6 +61,9 @@ Resources:
           Properties:
             Path: /deletecareer
             Method: POST
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: DevCareer
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./deletecareer
@@ -70,6 +79,9 @@ Resources:
           Properties:
             Path: /deletetrait
             Method: POST
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: DevTrait
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./deletetrait
@@ -85,6 +97,9 @@ Resources:
           Properties:
             Path: /updatecareer
             Method: POST
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: DevCareer
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./updatecareer
@@ -100,6 +115,9 @@ Resources:
           Properties:
             Path: /updatetrait
             Method: POST
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: DevTrait
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./updatetrait
