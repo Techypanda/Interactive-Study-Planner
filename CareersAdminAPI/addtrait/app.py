@@ -1,11 +1,11 @@
 import json
 import boto3
 import requests
-import random
 import jose
 import jose.util
 import time
 import os
+import fast_luhn
 from boto3.dynamodb.conditions import Attr
 from botocore.exceptions import ClientError
 
@@ -34,7 +34,9 @@ def validateJWTToken(token: str) -> bool, dict:
             key_index = i
             break
     if key_index == -1:
-        return False, badRequest("Public key not found in jwks.json")
+        message = "Public key not found in jwks.json."
+        ic(message)
+        return False, badRequest(message)
 
     #Construct and decode signature
     public_key = jwk.construct(keys[key_index])
@@ -45,12 +47,16 @@ def validateJWTToken(token: str) -> bool, dict:
 
     #Verify signature
     if not public_key.verify(message.encode("utf8"), decoded_signature):
-        return False, badRequest("Signature verification failed.")
+        message = "Signature verification failed."
+        ic(message)
+        return False, badRequest(message)
     else:
         claims = jwt.get_unverified_claims(token)
         #Verify token not expired
         if time.time() > claims['exp']:
-            return False, badRequest("Token is expired.")
+            message = "Token is expired."
+            ic(message)
+            return False, badRequest(message)
         else:
             return True, None
 
@@ -62,11 +68,13 @@ class Trait:
 
 #Lambda handler - adds the received trait to the database if possible
 def lambda_handler(event, context) -> dict:
-    valid, error = validateJWTToken(event['token'])
-
+    #Check if testing
     if os.getenv("DisableAuthentication"):
         return adddTrait(json.loads(event["body"]))
     else:
+        #Validate token
+        valid, error = validateJWTToken(event['token'])
+
         if valid:
             return addTrait(json.loads(event["body"]))
         else:
@@ -102,6 +110,7 @@ def addTrait(body: dict) -> dict:
             }
         )
 
+        ic("Unable to handle request, DevTraits table does not exist, table is now being created.")
         #Return bad request indicating table does not exist and is being created
         return badRequest("Table does not exist. Table is now being created. Please try again.")
     else:
@@ -118,7 +127,7 @@ def addTrait(body: dict) -> dict:
                 random.seed()
 
                 while(flag):
-                    trait.id = str(random.randint(1, 1000000));
+                    trait.id = str(fast_luhn.generate(20))
 
                     try:
                         response = table.get_item(
@@ -127,6 +136,7 @@ def addTrait(body: dict) -> dict:
                             }
                         )
                     except ClientError as err:
+                        ic("Failed check for existing trait with same id.")
                         return badRequest("Failed check for existing item.")
 
                     #Check no item
@@ -137,6 +147,7 @@ def addTrait(body: dict) -> dict:
                         flag = False
 
         except KeyError:
+            ic("Data received was in an invalid format or was incorrect.")
             return badRequest("Invalid data or format recieved.")
         else:
             #Add to table
@@ -151,8 +162,10 @@ def addTrait(body: dict) -> dict:
             except ClientError as err:
                 #Check if error was due to item already existing in table
                 if err.response['Error']['Code'] == 'ConditionalCheckFailedException':
+                    ic("Trait already exists.")
                     return badRequest("Item already exists in table.")
                 else:
+                    ic("Unknown client error:" + err.response)
                     return badRequest("Unknown error occured.")
             else:
                 #Return ok response
