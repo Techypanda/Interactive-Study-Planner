@@ -7,9 +7,9 @@ The unit admin api will perform CUD (Create Update Delete) operations for Majors
 ## Requirements
 The following are required to run:
 
--Python3
--pip
--Docker
+- Python3
+- pip
+- Docker
 
 ## Payloads
 Career/Trait id should be the same as the career/trait name for the add payloads.
