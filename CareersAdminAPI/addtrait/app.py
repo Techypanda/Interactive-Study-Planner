@@ -120,7 +120,7 @@ def addTrait(body: dict) -> dict:
             trait = Trait(body["Name"])
         
             #Check Testing
-            if (body["Id"] == "TEST"):
+            if (os.getenv('Testing')):
                 trait.id = body["Id"]
             else:
                 #Check id not in table already

@@ -91,34 +91,35 @@ def updateCareer(body: dict) -> dict:
             return badRequest("Invalid data or format recieved.")
         else:
             #Check valid id
-            if not fast_luhn.validate(career):
-                ic("Recieved CareerId was invalid.")
-                return badRequest("Id recieved was invalid.")
-            else:
-                #Update item in table
-                try:
-                    response = table.put_item(
-                        Item={
-                            "CareerId": career.id,
-                            "Name": career.name,
-                            "Description": career.description,
-                            "Industry": career.industry,
-                            "Requirements": career.reqs,
-                            "Traits": career.traits
-                        },
-                        ConditionExpression=Attr("CareerId").eq(career.id)   #Check in table already
-                    )
-                except ClientError as err:
-                    #Check if error was due to item already existing in table
-                    if err.response['Error']['Code'] == 'ConditionalCheckFailedException':
-                        ic("Target career does not exist.")
-                        return badRequest("Item does not exist in the table.")
-                    else:
-                        ic("Unknown client error:" + err.response)
-                        return badRequest("Unknown error occured.")
+            if not os.getenv('Testing'):    #Check not testing
+                if not fast_luhn.validate(career.careerId):
+                    ic("Recieved CareerId was invalid.")
+                    return badRequest("Id recieved was invalid.")
+
+            #Update item in table
+            try:
+                response = table.put_item(
+                    Item={
+                        "CareerId": career.id,
+                        "Name": career.name,
+                        "Description": career.description,
+                        "Industry": career.industry,
+                        "Requirements": career.reqs,
+                        "Traits": career.traits
+                    },
+                    ConditionExpression=Attr("CareerId").eq(career.id)   #Check in table already
+                )
+            except ClientError as err:
+                #Check if error was due to item already existing in table
+                if err.response['Error']['Code'] == 'ConditionalCheckFailedException':
+                    ic("Target career does not exist.")
+                    return badRequest("Item does not exist in the table.")
                 else:
-                    #Return ok response
-                    return okResponse("Career updated in database.")
+                    ic("Unknown client error:" + err.response)
+                    return badRequest("Unknown error occured.")
+            else:
+                #Return ok response
+                return okResponse("Career updated in database.")
 
 #Http responses
 #Badrequest response

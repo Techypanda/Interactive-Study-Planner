@@ -87,29 +87,30 @@ def updateTrait(body: dict) -> dict:
             return badRequest("Invalid data or format recieved.")
         else:    
             #Check valid id
-            if not fast_luhn.validate(career):
-                ic("Recieved Id was invalid.")
-                return badRequest("Id recieved was invalid.")
-            else:
-                #Update item in table
-                try:
-                    response = table.put_item(
-                        Item={
-                            "Id": trait.id,
-                            "Name": trait.name
-                        },
-                        ConditionExpression=Attr("Id").eq(trait.id)   #Check in table already
-                    )
-                except ClientError as err:
-                    #Check if error was due to item already existing in table
-                    if err.response['Error']['Code'] == 'ConditionalCheckFailedException':
-                        ic("Target trait does not exist.")
-                        return badRequest("Item does not exist in the table.")
-                    else:
-                        ic("Unknown client error:" + err.response)
-                        return badRequest("Unknown error occured.")
+            if not os.getenv('Testing'):    #Check not testing
+                if not fast_luhn.validate(trait):
+                    ic("Recieved Id was invalid.")
+                    return badRequest("Id recieved was invalid.")
+
+            #Update item in table
+            try:
+                response = table.put_item(
+                    Item={
+                        "Id": trait.id,
+                        "Name": trait.name
+                    },
+                    ConditionExpression=Attr("Id").eq(trait.id)   #Check in table already
+                )
+            except ClientError as err:
+                #Check if error was due to item already existing in table
+                if err.response['Error']['Code'] == 'ConditionalCheckFailedException':
+                    ic("Target trait does not exist.")
+                    return badRequest("Item does not exist in the table.")
                 else:
-                    return okResponse("Trait updated in database.")
+                    ic("Unknown client error:" + err.response)
+                    return badRequest("Unknown error occured.")
+            else:
+                return okResponse("Trait updated in database.")
 
 #Http responses
 #Badrequest response

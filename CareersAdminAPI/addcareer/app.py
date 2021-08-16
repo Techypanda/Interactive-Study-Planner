@@ -125,7 +125,7 @@ def addCareer(body: dict) -> dict:
             career = Career(body["Name"], body["Description"], body["Industry"], body["Requirements"], body["Traits"])
             
             #Check Testing
-            if (body["CareerId"] == "TEST"):
+            if (os.getenv('Testing')):
                 career.id = body["CareerId"]
             else:
                 #Check id not in table already

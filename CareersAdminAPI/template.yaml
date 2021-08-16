@@ -18,6 +18,10 @@ Parameters:
     Type: String
     Description: Disable Authentication (True) or Leave It (False)
     Default: "False"
+  Testing:
+    Type: String
+    Description: Enable Testing mode (True) or Leave It (False)
+    Default: "False"
 
 Resources:
   #API and Functions
@@ -34,6 +38,7 @@ Resources:
       Environment:
         Variables:
           DisableAuthentication: !Ref Authentication
+          Testing: !Ref Testing
       Policies:
         - DynamoDBCrudPolicy:
             TableName: DevCareer
@@ -55,6 +60,7 @@ Resources:
       Environment:
         Variables:
           DisableAuthentication: !Ref Authentication
+          Testing: !Ref Testing
       Policies:
         - DynamoDBCrudPolicy:
             TableName: DevTrait
@@ -76,6 +82,7 @@ Resources:
       Environment:
         Variables:
           DisableAuthentication: !Ref Authentication
+          Testing: !Ref Testing
       Policies:
         - DynamoDBCrudPolicy:
             TableName: DevCareer
@@ -97,6 +104,7 @@ Resources:
       Environment:
         Variables:
           DisableAuthentication: !Ref Authentication
+          Testing: !Ref Testing
       Policies:
         - DynamoDBCrudPolicy:
             TableName: DevTrait
@@ -118,6 +126,7 @@ Resources:
       Environment:
         Variables:
           DisableAuthentication: !Ref Authentication
+          Testing: !Ref Testing
       Policies:
         - DynamoDBCrudPolicy:
             TableName: DevCareer
@@ -139,6 +148,7 @@ Resources:
       Environment:
         Variables:
           DisableAuthentication: !Ref Authentication
+          Testing: !Ref Testing
       Policies:
         - DynamoDBCrudPolicy:
             TableName: DevTrait
