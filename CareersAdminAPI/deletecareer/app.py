@@ -17,7 +17,48 @@ from botocore.exceptions import ClientError
 
 #JWT token validation
 # Link: https://github.com/awslabs/aws-support-tools/blob/master/Cognito/decode-verify-jwt/decode-verify-jwt.py
-def validateJWTToken(token: str) -> bool, dict:
+def validateJWTToken(token: str) -> Tuple[bool, dict]:
+    keys_url = "https://cognito-idp.ap-southeast-2.amazonaws.com/ap-southeast-2_gn4KIEkx0/.well-known/jwks.json"
+
+    response = requests.get(keys_url)
+    keys = json.loads(response.decode("utf-8"))["keys"]
+
+    headers = jwt.get_unverified_headers(token)
+    kid = headers["kid"]
+
+    key_index = -1
+
+    #sSearch for kid in public keys list
+    for i in range(len(keys)):
+        if kid == keys[i]['kid']:
+            key_index = i
+            break
+    if key_index == -1:
+        message = "Public key not found in jwks.json."
+        ic(message)
+        return False, badRequest(message)
+
+    #Construct and decode signature
+    public_key = jwk.construct(keys[key_index])
+
+    message, encoded_signature = str(token.rsplit('.', 1))
+
+    decoded_signature = base64url_decode(encoded_signature.encode('utf-8'))
+
+    #Verify signature
+    if not public_key.verify(message.encode("utf8"), decoded_signature):
+        message = "Signature verification failed."
+        ic(message)
+        return False, badRequest(message)
+    else:
+        claims = jwt.get_unverified_claims(token)
+        #Verify token not expired
+        if time.time() > claims['exp']:
+            message = "Token is expired."
+            ic(message)
+            return False, badRequest(message)
+        else:
+            return True, None
 
 #Lambda handler - removes the target career from the database if possible
 def lambda_handler(event, context) -> dict:
