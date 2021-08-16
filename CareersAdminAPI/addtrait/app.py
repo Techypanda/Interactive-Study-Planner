@@ -12,7 +12,7 @@ from botocore.exceptions import ClientError
 #Author: Matthew Loe
 #Student Id: 19452425
 #Date Created: 25/05/2021
-#Date Last Modified: 15/08/2021
+#Date Last Modified: 16/08/2021
 #Description: Add trait operation handler
 
 #JWT token validation
@@ -70,7 +70,7 @@ class Trait:
 def lambda_handler(event, context) -> dict:
     #Check if testing
     if os.getenv("DisableAuthentication"):
-        return adddTrait(json.loads(event["body"]))
+        return addTrait(json.loads(event["body"]))
     else:
         #Validate token
         valid, error = validateJWTToken(event['token'])
@@ -80,6 +80,7 @@ def lambda_handler(event, context) -> dict:
         else:
             return error
 
+#Add trait function
 def addTrait(body: dict) -> dict:
     #Setup link to database and table
     db = boto3.resource('dynamodb', region_name='ap-southeast-2')
@@ -124,7 +125,6 @@ def addTrait(body: dict) -> dict:
             else:
                 #Check id not in table already
                 flag = True
-                random.seed()
 
                 while(flag):
                     trait.id = str(fast_luhn.generate(20))

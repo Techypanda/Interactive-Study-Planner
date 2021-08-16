@@ -1,2 +1,7 @@
 requests
 boto3
+jose
+time
+os
+fast_luhn
+icescream

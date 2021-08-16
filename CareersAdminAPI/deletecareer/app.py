@@ -1,17 +1,44 @@
 import json
 import boto3
 import requests
+import jose
+import jose.util
+import time
+import os
+import fast_luhn
 from boto3.dynamodb.conditions import Attr
 from botocore.exceptions import ClientError
 
 #Author: Matthew Loe
 #Student Id: 19452425
 #Date Created: 25/05/2021
-#Date Last Modified: 6/08/2021
+#Date Last Modified: 16/08/2021
 #Description: Delete career operation handler
+
+#JWT token validation
+# Link: https://github.com/awslabs/aws-support-tools/blob/master/Cognito/decode-verify-jwt/decode-verify-jwt.py
+def validateJWTToken(token: str) -> bool, dict:
 
 #Lambda handler - removes the target career from the database if possible
 def lambda_handler(event, context) -> dict:
+    #Check if testing
+    try:
+        if os.getenv("DisableAuthentication"):
+            return deleteCareer(json.loads(event["body"]))
+        else:
+            #Validate token
+            valid, error = validateJWTToken(event['token'])
+
+            if valid:
+                return deleteCareer(json.loads(event["body"]))
+            else:
+                return error
+    except KeyError:
+            ic("Data received was in an invalid format or was incorrect.")
+            return badRequest("Invalid data or format recieved.")
+
+#Delete career function
+def deleteCareer(body: dict) -> dict:
     #Setup link to database and table
     db = boto3.resource('dynamodb', region_name='ap-southeast-2')
     table = db.Table("DevCareers")
@@ -41,34 +68,42 @@ def lambda_handler(event, context) -> dict:
             }
         )
 
+        ic("Unable to handle request, DevCareers table does not exist, table is now being created.")
         #Return bad request indicating table does not exist and is being created
         return badRequest("Table does not exist. An empty table is now being created. Please try again.")
     else:
         try:
             #Retrieve data
-            body = json.loads(event["body"])
             career = body["CareerId"]
         except KeyError:
+            ic("Data received was in an invalid format or was incorrect.")
             return badRequest("Invalid data or format recieved.")
         else:
-            #Delete from table
-            try:
-                response = table.delete_item(
-                    Key={
-                        "CareerId": career
-                    },
-                    ConditionExpression=Attr("CareerId").eq(career)   #Check in table
-                )
-            except ClientError as err:
-                #Check if error was due to item not existing in table
-                if err.response['Error']['Code'] == 'ConditionalCheckFailedException':
-                    return badRequest("Item does not exist in the table.")
-                else:
-                    return badRequest("Unknown error occured.")
+            #Check valid id
+            if not fast_luhn.validate(career):
+                ic("Recieved CareerId was invalid.")
+                return badRequest("Id recieved was invalid.")
             else:
-                #Return ok response
-                return okResponse("Career deleted from database.")
-
+                #Delete from table
+                try:
+                    response = table.delete_item(
+                        Key={
+                            "CareerId": career
+                        },
+                        ConditionExpression=Attr("CareerId").eq(career)   #Check in table
+                    )
+                except ClientError as err:
+                    #Check if error was due to item not existing in table
+                    if err.response['Error']['Code'] == 'ConditionalCheckFailedException':
+                        ic("Target career does not exist.")
+                        return badRequest("Item does not exist in the table.")
+                    else:
+                        ic("Unknown client error:" + err.response)
+                        return badRequest("Unknown error occured.")
+                else:
+                    #Return ok response
+                    return okResponse("Career deleted from database.")
+    
 #Http responses
 #Badrequest response
 def badRequest(reason: str) -> dict:
