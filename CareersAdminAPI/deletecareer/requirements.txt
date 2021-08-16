@@ -1,7 +1,5 @@
 requests
 boto3
-jose
-time
-os
+python-jose
 fast_luhn
-icescream
+icecream
