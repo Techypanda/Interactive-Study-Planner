@@ -2,7 +2,7 @@ import json
 import boto3
 import requests
 import jose
-import jose.util
+import jose.utils
 import time
 import os
 import fast_luhn
@@ -12,7 +12,7 @@ from botocore.exceptions import ClientError
 #Author: Matthew Loe
 #Student Id: 19452425
 #Date Created: 25/05/2021
-#Date Last Modified: 16/08/2021
+#Date Last Modified: 17/08/2021
 #Description: Update career operation handler
 
 #JWT token validation
