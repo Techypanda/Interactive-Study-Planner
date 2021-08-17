@@ -1,0 +1,26 @@
+{
+  "AddCareerFunction": {
+    "DisableAuthentication": "true",
+    "Testing": "true"
+  },
+  "AddTraitFunction": {
+    "DisableAuthentication": "true",
+    "Testing": "true"
+  },
+  "DeleteCareerFunction": {
+    "DisableAuthentication": "true",
+    "Testing": "true"
+  },
+  "DeleteTraitFunction": {
+    "DisableAuthentication": "true",
+    "Testing": "true"
+  },
+  "UpdateCareerFunction": {
+    "DisableAuthentication": "true",
+    "Testing": "true"
+  },
+  "UpdateTraitFunction": {
+    "DisableAuthentication": "true",
+    "Testing": "true"
+  }
+}

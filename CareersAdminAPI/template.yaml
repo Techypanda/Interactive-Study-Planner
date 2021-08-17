@@ -6,12 +6,22 @@ Description: >
 #Author: Matthew Loe
 #Student Id: 19452425
 #Date Created: 17/05/2021
-#Date Last Modified: 9/08/2021
+#Date Last Modified: 15/08/2021
 
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
     Timeout: 5
+
+Parameters:
+  Authentication:
+    Type: String
+    Description: Disable Authentication (True) or Leave It (False)
+    Default: "False"
+  Testing:
+    Type: String
+    Description: Enable Testing mode (True) or Leave It (False)
+    Default: "False"
 
 Resources:
   #API and Functions
@@ -24,7 +34,14 @@ Resources:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /addcareer
-            Method: POST     
+            Method: POST
+      Environment:
+        Variables:
+          DisableAuthentication: !Ref Authentication
+          Testing: !Ref Testing
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: DevCareer
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./addcareer
@@ -40,6 +57,13 @@ Resources:
           Properties:
             Path: /addtrait
             Method: POST
+      Environment:
+        Variables:
+          DisableAuthentication: !Ref Authentication
+          Testing: !Ref Testing
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: DevTrait
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./addtrait
@@ -55,6 +79,13 @@ Resources:
           Properties:
             Path: /deletecareer
             Method: POST
+      Environment:
+        Variables:
+          DisableAuthentication: !Ref Authentication
+          Testing: !Ref Testing
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: DevCareer
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./deletecareer
@@ -70,6 +101,13 @@ Resources:
           Properties:
             Path: /deletetrait
             Method: POST
+      Environment:
+        Variables:
+          DisableAuthentication: !Ref Authentication
+          Testing: !Ref Testing
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: DevTrait
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./deletetrait
@@ -85,6 +123,13 @@ Resources:
           Properties:
             Path: /updatecareer
             Method: POST
+      Environment:
+        Variables:
+          DisableAuthentication: !Ref Authentication
+          Testing: !Ref Testing
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: DevCareer
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./updatecareer
@@ -100,6 +145,13 @@ Resources:
           Properties:
             Path: /updatetrait
             Method: POST
+      Environment:
+        Variables:
+          DisableAuthentication: !Ref Authentication
+          Testing: !Ref Testing
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: DevTrait
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./updatetrait
