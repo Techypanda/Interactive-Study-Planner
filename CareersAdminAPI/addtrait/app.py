@@ -6,6 +6,8 @@ import jose.utils
 import time
 import os
 import fast_luhn
+from icecream import ic
+from typing import Tuple
 from boto3.dynamodb.conditions import Attr
 from botocore.exceptions import ClientError
 
