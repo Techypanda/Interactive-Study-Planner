@@ -10,7 +10,7 @@ function ViewCareer(props: CareerProps) {
         <div>
           <Navbar/>
           <Typography variant="h2">
-            {props.careerTitle}
+            {props.careerName}
           </Typography>
           <Typography variant="h6">
             {props.careerDescription}
