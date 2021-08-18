@@ -3,9 +3,17 @@ export interface DefaultProps {
   username?: string;
 }
 
+export interface CareerEntryProps extends DefaultProps {
+  careerTitle: string;
+  careerContent: string;
+}
+
 export interface CareerProps extends DefaultProps {
-    careerTitle: string;
-    careerDescription: string;
+  careerName: string;
+  careerDescription: string;
+  careerIndustry: string;
+  careerReqs: string;
+  careerTraits: string;
 }
 
 export interface UnitProps extends DefaultProps {
