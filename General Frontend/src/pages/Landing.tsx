@@ -1,7 +1,7 @@
 // first page that is seen when the general user opens the site, prompting a choice
 // between top down and bottom up course planner buildilng.
 
-import { RouterLink } from "react-router-dom";
+import { Router, Link } from "react-router-dom";
 import { Box, Grid, Typography, Card, CardActions, CardActionArea, CardHeader, CardMedia, CardContent, Paper} from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
 import Navbar from "../components/shared/Navbar";
@@ -18,7 +18,7 @@ return (
   <Box id="landing" className={props.className} paddingTop={4}>
     <Grid container spacing={4} justify="center" alignItems="center">
       <Grid item xs={6}>
-        <CardActionArea component={RouterLink} to='/ListCareers'>
+        <CardActionArea /*component={Router-Link} to='/ListCareers'*/>
 	  <Card variant="outlined"> 
 	    <CardHeader title="Careers"/>
 	    <CardContent> {/* loading image through material ui card media doesn't seem to work */}
@@ -33,7 +33,7 @@ return (
 
       <Grid item xs = {6}>
 	<Card variant="outlined">
-          <CardActionArea component={RouterLink} to='CoursePlanner'>
+          <CardActionArea /*component={Router-Link} to='CoursePlanner'*/>
 	    <CardHeader title="Courses"/>
 	    <CardContent>
               <img src={ClassesImage} alt="classroom stock photo"/>
