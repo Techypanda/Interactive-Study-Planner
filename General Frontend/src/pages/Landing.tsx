@@ -1,55 +1,74 @@
-// first page that is seen when the general user opens the site, prompting a choice
-// between top down and bottom up course planner buildilng.
-
-import { RouterLink } from "react-router-dom";
-import { Box, Grid, Typography, Card, CardActions, CardActionArea, CardHeader, CardMedia, CardContent, Paper} from "@material-ui/core";
-import { makeStyles } from '@material-ui/core/styles';
+import { AppBar, Box, , Card, CardActions, CardActionArea, CardHeader, CardMedia, CardContent, Toolbar, Typography } from "@material-ui/core";
 import Navbar from "../components/shared/Navbar";
-import { DefaultProps } from "../types";
-import ListCareers from "./ViewAllCareers";
+import styled from 'styled-components';
 
+import MedicalImage from "../static/doctor_teacher.jpg";
 import CareersImage from "../static/career.jpg";
-import ClassesImage from "../static/classes.jpg";
+import TraitsImage from "../static/traits.jpg";
 
-function Landing(props: DefaultProps) {
-return (
-<>
-  <Navbar/>
-  <Box id="landing" className={props.className} paddingTop={4}>
-    <Grid container spacing={4} justify="center" alignItems="center">
-      <Grid item xs={6}>
-        <CardActionArea component={RouterLink} to='/ListCareers'>
-	  <Card variant="outlined"> 
-	    <CardHeader title="Careers"/>
-	    <CardContent> {/* loading image through material ui card media doesn't seem to work */}
-              <img src={CareersImage} alt="careers stock image"/>
-	      <Typography variant="body1" align="left">
-                See what paths are available towards your dream career
-              </Typography>
-	    </CardContent>
-	  </Card>
-        </CardActionArea>
-      </Grid>
+function Landing() {
+    return(
+	<>
+	    <Navbar/>
+	    <Grid container spacing={8}>
+		<Grid item xs={6}>>
+		    <Typography>
+			Hi, welcome to Curtin University's Medical Course Planner
+		    </Typography>
+		</Grid
+		<Grid item xs={6}>
+		    <Typography>
+			"Witty phrase misattributed to ghandi or something idc"
+		    </Typography>
+		</Grid>
+	    </Grid>
+	    <Typography>
+		What would you like to do?
+	    </Typography>
+	    <Grid container spacing={4}>
+		
+		<Grid item xs={6}>
+		    <CardActionArea component={RouterLink} to='/PlannerInitialPage'>
+			<Card variant="outlined">
+			    <CardHeader tite="Plan Your Medical Course"/>
+			    <CardContent>
+				<img src={MedicalImage} alt="medical stock image"/>
+				<Typography variant="body1" align="left">
+				    See how Curtin's flexible course structure can be shaped to you advantage.
+				</Typography> 
+			    </CardContent>
+			</Card>
+		    </CardActionArea>
+		</Grid>
 
-      <Grid item xs = {6}>
-	<Card variant="outlined">
-          <CardActionArea component={RouterLink} to='CoursePlanner'>
-	    <CardHeader title="Courses"/>
-	    <CardContent>
-              <img src={ClassesImage} alt="classroom stock photo"/>
-	      
-	      <Typography variant="body1" align="left">
-                Create a study plan of interesting units and see what opportunities this could lead to
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-	</Card>
-      </Grid>
-    </Grid>
-  </Box>
-</>
-);
+		<Grid item={6}>
+		    <CardActionArea component={RouterLink} to='/ListCareers'>
+			<Card variant="outline">
+			    <CardHeader title="See Careers"/>
+			    <CardContent>
+				<img src={CareersImage} alt="careers stock image"/>
+				<Typography variant="body1" align="left">
+				    See all the possible careers Curtin can lead to and their requirements.
+				</Typography>
+			    </CardContent>
+			</Card>
+		    </CardActionArea>
+		</Grid>
+
+		<Grid item={6}>
+		    <CardActionArea> {/* traits page not made yet */}
+			<Card variant="outlined">
+			    <CardHeader title="What Career Path Suits Me?"/>
+			    <CardContent>
+				<img src={TraitsImage} alt="personality stock image"/>
+				<Typography  variant="body1" align="left">
+				    Find out what type of career suits your personality the best.
+				</Typography>
+			    </CardContent>
+			    </Card>
+		    </CardActionArea>
+		</Grid>
+	    </Grid>
+	</>
+    );
 }
-
-export default Landing;
-
