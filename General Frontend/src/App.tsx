@@ -8,7 +8,7 @@ import ViewCareer from './pages/ViewCareer';
 function App() {
   return (
     <div className="App">
-        <Landing/>
+        <ViewCareer id="TESTDONTDELETE"/>
     </div>
   );
 }
