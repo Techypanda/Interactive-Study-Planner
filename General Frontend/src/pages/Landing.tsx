@@ -1,21 +1,22 @@
-import { AppBar, Box, , Card, CardActions, CardActionArea, CardHeader, CardMedia, CardContent, Toolbar, Typography } from "@material-ui/core";
+import { AppBar, Box, Card, CardActions, CardActionArea, CardHeader, CardMedia, CardContent, Grid, Toolbar, Typography } from "@material-ui/core";
 import Navbar from "../components/shared/Navbar";
 import styled from 'styled-components';
-
+import {BrowserRouter as Router, Link} from "react-router-dom";
 import MedicalImage from "../static/doctor_teacher.jpg";
 import CareersImage from "../static/career.jpg";
-import TraitsImage from "../static/traits.jpg";
+import TraitsImage from "../static/traits_image.jpg";
 
 function Landing() {
     return(
 	<>
+	<Router>
 	    <Navbar/>
 	    <Grid container spacing={8}>
-		<Grid item xs={6}>>
+		<Grid item xs={6}>
 		    <Typography>
 			Hi, welcome to Curtin University's Medical Course Planner
 		    </Typography>
-		</Grid
+		</Grid>
 		<Grid item xs={6}>
 		    <Typography>
 			"Witty phrase misattributed to ghandi or something idc"
@@ -28,7 +29,7 @@ function Landing() {
 	    <Grid container spacing={4}>
 		
 		<Grid item xs={6}>
-		    <CardActionArea component={RouterLink} to='/PlannerInitialPage'>
+		    <CardActionArea component={Link} to='/PlannerInitialPage'>
 			<Card variant="outlined">
 			    <CardHeader tite="Plan Your Medical Course"/>
 			    <CardContent>
@@ -41,9 +42,9 @@ function Landing() {
 		    </CardActionArea>
 		</Grid>
 
-		<Grid item={6}>
-		    <CardActionArea component={RouterLink} to='/ListCareers'>
-			<Card variant="outline">
+		<Grid item xs={6}>
+		    <CardActionArea component={Link} to='/ListCareers'>
+			<Card variant="outlined">
 			    <CardHeader title="See Careers"/>
 			    <CardContent>
 				<img src={CareersImage} alt="careers stock image"/>
@@ -55,7 +56,7 @@ function Landing() {
 		    </CardActionArea>
 		</Grid>
 
-		<Grid item={6}>
+		<Grid item xs={6}>
 		    <CardActionArea> {/* traits page not made yet */}
 			<Card variant="outlined">
 			    <CardHeader title="What Career Path Suits Me?"/>
@@ -69,6 +70,9 @@ function Landing() {
 		    </CardActionArea>
 		</Grid>
 	    </Grid>
+		</Router>
 	</>
     );
 }
+
+export default Landing;

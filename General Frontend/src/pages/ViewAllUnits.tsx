@@ -1,6 +1,6 @@
 import {UnitProps} from "../types";
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { userQuery, useQueryClient } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { useHistory } from "react-router-dom";
 
 // per Ricky's request, this is an incredibly simple page where all the units available to a biomedical student
