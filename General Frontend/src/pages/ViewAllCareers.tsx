@@ -46,6 +46,15 @@ function ViewAllCareers(props: DefaultProps) {
     const history = useHistory();
     const classes = useStyles();
     const theme = useTheme();
+
+    // dummy data that mocks the actual data to be retrieved from the
+    // api call commented out below
+    let careers_list: { career_title: string, career_desc: string}[] = [
+	{"career_title": "Pharmacologist", "career_desc": "Medicines and stuff"},
+	{"career_title": "Anesthetician", "career_desc": "Give you a morphine problem"},
+	{"career_title": "Surgeon", "career_desc": "Does surgery"}
+    ];
+
     /*
        const { isLoading, isError, error, data } = useQuery('getcareers', async () => {
        const data = await axios('${process.env.REACT_APP_CAREERS_API}/event-get-all-careers');
@@ -63,36 +72,32 @@ function ViewAllCareers(props: DefaultProps) {
 	    <br/>
 	    <Container  >
 		<Box id="searchcontainer" display="flex">
-		    {/* somehow this search bar will dynamically filter the subsequent list
-			I have no idea how to do that as of now since the data i.e. career name
-			and description is totally hardcoded  */}
+		    
 		    <TextField variant="outlined" id="standard-full-width" fullWidth  placeholder="Search careers..." className="searchbar" />
 		    <Button  variant='contained' className="searchbtn">Search</Button>
 		</Box>
 		
 		{/* dummy example of entry, will be filled dynamically on api call on startup*/}
 		{/* Actual contents will be filled in a list of such Card items */}
-		<Card className={classes.root}>
-		    <div className={classes.details}>
-			<CardContent className={classes.content}>
-			    <Typography component="h5" variant="h5" align="left">
-				Pharmacological Researcher
-			    </Typography>
-			    <Typography variant="subtitle1" color="textSecondary">
-				With an intensive specialisation towards chemistry, this role will have you at the frontier of medicines.
-			    </Typography>
-			</CardContent>
-			<div className={classes.controls}>
+		{careers_list.map((x) => (
+		    <Card variant="outlined" className={classes.root}>
+			<div className={classes.details}>
+			    <CardContent className={classes.content}>
+				<Typography component="h5" variant="h5" align="left">
+				    {x.career_title}
+				</Typography>
+				<Typography variant="subtitle1" color="textSecondary">
+				    {x.career_desc}
+				</Typography>
+			    </CardContent>
+			    <div className={classes.controls}>
+			    </div>
 			</div>
-		    </div>
-		    <CardMedia
-		    className={classes.cover}
-		    image="/static/images/cards/live-from-space.jpg"
-		    title="Live from space album cover"
-		    />
-		</Card>
+		    </Card>
+		))}
 	    </Container>
 	    <br/>
+	    
 	    <Button variant="contained" onClick={() => history.goBack()}>Back</Button>
 	</>
     );
