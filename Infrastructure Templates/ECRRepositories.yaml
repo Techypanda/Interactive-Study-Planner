@@ -17,6 +17,10 @@ Resources:
     Type: AWS::ECR::Repository
     Properties:
       RepositoryName: curtinmedicalcourseplanner/careeradmin
+  PrivateCSVParserRepository:
+    Type: AWS::ECR::Repository
+    Properties:
+      RepositoryName: curtinmedicalcourseplanner/csvparser
 Outputs:
   UnitAdminRespository:
     Description: Arn Value For Repository
