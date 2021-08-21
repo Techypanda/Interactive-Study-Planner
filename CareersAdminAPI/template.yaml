@@ -6,7 +6,7 @@ Description: >
 #Author: Matthew Loe
 #Student Id: 19452425
 #Date Created: 17/05/2021
-#Date Last Modified: 15/08/2021
+#Date Last Modified: 21/08/2021
 
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
@@ -41,7 +41,7 @@ Resources:
           Testing: !Ref Testing
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: DevCareer
+            TableName: DevCareers
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./addcareer
@@ -63,7 +63,7 @@ Resources:
           Testing: !Ref Testing
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: DevTrait
+            TableName: DevTraits
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./addtrait
@@ -85,7 +85,7 @@ Resources:
           Testing: !Ref Testing
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: DevCareer
+            TableName: DevCareers
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./deletecareer
@@ -107,7 +107,7 @@ Resources:
           Testing: !Ref Testing
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: DevTrait
+            TableName: DevTraits
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./deletetrait
@@ -129,7 +129,7 @@ Resources:
           Testing: !Ref Testing
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: DevCareer
+            TableName: DevCareers
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./updatecareer
@@ -151,7 +151,7 @@ Resources:
           Testing: !Ref Testing
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: DevTrait
+            TableName: DevTraits
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./updatetrait
