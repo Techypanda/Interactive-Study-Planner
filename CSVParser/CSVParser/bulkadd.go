@@ -13,6 +13,102 @@ import (
 	"github.com/aws/aws-lambda-go/events"
 )
 
+func processSpec(parser *LineParser) (Specialization, error) {
+	spec := Specialization{}
+	specCode, err := parser.getLine("speccode")
+	if err != nil {
+		return spec, err
+	}
+	spec.SpecCode = strings.ToUpper(specCode)
+	specName, err := parser.getLine("specname")
+	if err != nil {
+		return spec, err
+	}
+	spec.Name = specName
+	tempStr, err := parser.getLine("speccredits")
+	if err != nil {
+		return spec, err
+	}
+	tempCredits, err := strconv.ParseFloat(tempStr, 32)
+	if err != nil {
+		return spec, fmt.Errorf("Unable to process credits on line: %d, error: %s", **parser.lineNumber, err)
+	}
+	spec.Credits = float32(tempCredits)
+	specInternal, err := parser.getLine("specinternal")
+	if err != nil {
+		return spec, err
+	}
+	switch strings.ToUpper(specInternal) {
+	case "TRUE":
+		spec.CourseInternal = true
+	case "FALSE":
+		spec.CourseInternal = false
+	default:
+		return spec, fmt.Errorf("Unable to process internal on line: %d, expected TRUE/FALSE recieved: %s", **parser.lineNumber, specInternal)
+	}
+	units, err := parser.getLine("specunits")
+	if err != nil {
+		return spec, err
+	}
+	var unitList []string
+	for _, unit := range strings.Split(units, ",") {
+		unitList = append(unitList, unit)
+	}
+	unitList = append(unitList, "")
+	spec.Units = unitList
+	tempUnitAntiReqs, err := parser.getLine("specunitantireqs")
+	if err != nil {
+		return spec, err
+	}
+	var unitAntiReqs [][]string
+	for _, unitAntiReqsGroup := range strings.Split(tempUnitAntiReqs, ";") {
+		var tempAntireqGroup []string
+		tempAntireqGroup = append(tempAntireqGroup, "")
+		for _, antiReq := range strings.Split(unitAntiReqsGroup, ",") {
+			tempAntireqGroup = append(tempAntireqGroup, antiReq)
+		}
+		unitAntiReqs = append(unitAntiReqs, tempAntireqGroup)
+	}
+	var tempAntireqGroup []string
+	tempAntireqGroup = append(tempAntireqGroup, "")
+	unitAntiReqs = append(unitAntiReqs, tempAntireqGroup)
+	spec.UnitAntiReqs = unitAntiReqs
+	tempSpecAntiReqs, err := parser.getLine("specspecantireqs")
+	if err != nil {
+		return spec, err
+	}
+	var specAntiReqs [][]string
+	for _, specAntiReqsGroup := range strings.Split(tempSpecAntiReqs, ";") {
+		var tempAntireqGroup []string
+		tempAntireqGroup = append(tempAntireqGroup, "")
+		for _, antiReq := range strings.Split(specAntiReqsGroup, ",") {
+			tempAntireqGroup = append(tempAntireqGroup, antiReq)
+		}
+		specAntiReqs = append(specAntiReqs, tempAntireqGroup)
+	}
+	var tempSpecAntireqGroup []string
+	tempSpecAntireqGroup = append(tempSpecAntireqGroup, "")
+	specAntiReqs = append(specAntiReqs, tempSpecAntireqGroup)
+	spec.SpecAntiReqs = specAntiReqs
+	tempMajorAntiReqs, err := parser.getLine("specmajorantireqs")
+	if err != nil {
+		return spec, err
+	}
+	var majorAntiReqs [][]string
+	for _, majorAntiReqsGroup := range strings.Split(tempMajorAntiReqs, ";") {
+		var tempAntireqGroup []string
+		tempAntireqGroup = append(tempAntireqGroup, "")
+		for _, antiReq := range strings.Split(majorAntiReqsGroup, ",") {
+			tempAntireqGroup = append(tempAntireqGroup, antiReq)
+		}
+		majorAntiReqs = append(majorAntiReqs, tempAntireqGroup)
+	}
+	var tempMajorAntireqGroup []string
+	tempMajorAntireqGroup = append(tempMajorAntireqGroup, "")
+	majorAntiReqs = append(majorAntiReqs, tempMajorAntireqGroup)
+	spec.MajorAntiReqs = majorAntiReqs
+	return spec, nil
+}
 func processMajor(scanner *bufio.Scanner, lineNumber *int) (Major, error) {
 	major := Major{}
 	*lineNumber += 1
@@ -200,8 +296,11 @@ func BulkAddEndpoint(body string) events.APIGatewayProxyResponse {
 	log.Printf("Successfully processed data")
 	unitList := []Unit{}
 	majorList := []Major{}
+	specList := []Specialization{}
 	scanner := bufio.NewScanner(strings.NewReader(csvData))
 	lineNumber := 0
+	linNumAdd := &lineNumber
+	parser := LineParser{scanner: &scanner, lineNumber: &linNumAdd}
 	for scanner.Scan() {
 		lineNumber++
 		dataType := scanner.Text()
@@ -217,9 +316,16 @@ func BulkAddEndpoint(body string) events.APIGatewayProxyResponse {
 			major, err := processMajor(scanner, &lineNumber)
 			if err != nil {
 				log.Printf("Failed to process a major!: %s; On Line Number: %d", err.Error(), lineNumber)
-				return BadRequest(fmt.Sprintf("Failed to process a unit!: %s; On Line Number: %d", err.Error(), lineNumber))
+				return BadRequest(fmt.Sprintf("Failed to process a major!: %s; On Line Number: %d", err.Error(), lineNumber))
 			}
 			majorList = append(majorList, major)
+		case "SPECIALIZATION":
+			spec, err := processSpec(&parser)
+			if err != nil {
+				log.Printf("Failed to process a major!: %s; On Line Number: %d", err.Error(), lineNumber)
+				return BadRequest(fmt.Sprintf("Failed to process a specialization!: %s; On Line Number: %d", err.Error(), lineNumber))
+			}
+			specList = append(specList, spec)
 		case "":
 			continue
 		default:
@@ -227,12 +333,7 @@ func BulkAddEndpoint(body string) events.APIGatewayProxyResponse {
 			return BadRequest(fmt.Sprintf("Unknown data type: %s; On Line Number: %d", strings.ToUpper(dataType), lineNumber))
 		}
 	}
-	for _, i := range unitList {
-		fmt.Printf("%v", i)
-	}
-	for _, i := range majorList {
-		fmt.Printf("%v", i)
-	}
+	log.Printf("Validated %d units, %d majors, %d specializations", len(unitList), len(majorList), len(specList))
 	return OkResponse("Success - Bulk Addition")
 }
 
