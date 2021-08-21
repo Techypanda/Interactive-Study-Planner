@@ -24,6 +24,8 @@ Resources:
           Properties:
             Path: /{operation+}
             Method: ANY
+            RestApiId:
+              Ref: PrivateAPI
       Environment:
         Variables:
           DisableAuthentication:
@@ -33,20 +35,87 @@ Resources:
       DockerTag: go1.x-v1
       DockerContext: ./CSVParser
       Dockerfile: Dockerfile
+  PrivateSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      VpcId: vpc-27608a41
+      GroupDescription: Allows access over 443 to a single VPC Security Group
+      SecurityGroupIngress:
+      - IpProtocol: tcp
+        FromPort: 443
+        ToPort: 443
+        SourceSecurityGroupId: sg-dd2f0f92
+  APIAccessPoint:
+    Type: AWS::EC2::VPCEndpoint
+    Properties:
+      VpcId: vpc-27608a41
+      ServiceName:
+        Fn::Sub: com.amazonaws.${AWS::Region}.execute-api
+      VpcEndpointType: Interface
+      PrivateDnsEnabled: false
+      SubnetIds:
+      - subnet-e7439181
+      - subnet-9d0844c5
+      - subnet-efe629a7
+      SecurityGroupIds:
+      - Ref: PrivateSecurityGroup
+  PrivateAPI:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: Dev
+      EndpointConfiguration:
+        Type: PRIVATE
+        VPCEndpointIds:
+        - Ref: APIAccessPoint
+      DefinitionBody:
+        swagger: 2.0
+        info:
+          title: PrivateApi
+        schemes:
+        - https
+        x-amazon-apigateway-endpoint-configuration:
+          vpcEndpointIds:
+          - Ref: APIAccessPoint
+        x-amazon-apigateway-policy:
+          Version: '2012-10-17'
+          Statement:
+          - Effect: Allow
+            Principal: '*'
+            Action:
+            - execute-api:Invoke
+            Resource: execute-api:/*
+            Condition:
+              StringEquals:
+                aws:sourceVpce: vpc-27608a41
+        paths:
+          /{proxy+}:
+            x-amazon-apigateway-any-method:
+              produces:
+              - application/json
+              parameters:
+              - name: proxy
+                in: path
+                required: true
+                type: string
+              x-amazon-apigateway-integration:
+                uri:
+                  Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${CSVParser.Arn}/invocations
+                httpMethod: POST
+                type: aws_proxy
 Outputs:
-  HelloWorldAPI:
-    Description: API Gateway endpoint URL for Prod environment for First Function
+  CSVParserPrivateAPI:
+    Description: API Gateway endpoint URL for Prod stage
     Value:
-      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/
-  HelloWorldFunction:
-    Description: First Lambda Function ARN
+      Fn::Sub: https://${PrivateAPI}.execute-api.${AWS::Region}.amazonaws.com/Prod/
+  CSVParserFunction:
+    Description: CSV Lambda Function ARN
     Value:
       Fn::GetAtt:
-      - HelloWorldFunction
+      - CSVParser
       - Arn
-  HelloWorldFunctionIamRole:
-    Description: Implicit IAM Role created for Hello World function
+  CSVParserFunctionIamRole:
+    Description: Implicit IAM Role created for Social Events function
     Value:
       Fn::GetAtt:
-      - HelloWorldFunctionRole
+      - CSVParser
       - Arn
