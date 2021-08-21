@@ -11,7 +11,129 @@ import (
 	"strings"
 
 	"github.com/aws/aws-lambda-go/events"
+	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/service/dynamodb"
 )
+
+func bulkAddToDB(unitList []Unit, majorList []Major, specList []Specialization) error {
+	var db *dynamodb.DynamoDB
+	initializeDB(&db)
+	var unitWriteRequests []*dynamodb.WriteRequest
+	for _, unit := range unitList {
+		tempUpperCaseUnitCode := strings.ToUpper(unit.UnitCode)
+		tempLowerCaseUnitName := strings.ToLower(unit.Name)
+		unitItem := map[string]*dynamodb.AttributeValue{
+			"UnitCode": {
+				S: aws.String(tempUpperCaseUnitCode),
+			},
+			"Name": {
+				S: aws.String(tempLowerCaseUnitName),
+			},
+			"Description": {
+				S: aws.String(unit.Description),
+			},
+			"Credits": {
+				N: aws.String(fmt.Sprintf("%f", unit.Credits)),
+			},
+			"Delivery": {
+				S: aws.String(unit.Delivery),
+			},
+		}
+		attachRequistesToUnitAddition(&unitItem, unit)
+		unitWriteRequests = append(unitWriteRequests, &dynamodb.WriteRequest{
+			PutRequest: &dynamodb.PutRequest{
+				Item: unitItem,
+			},
+		})
+	}
+	if len(unitWriteRequests) > 0 {
+		input := &dynamodb.BatchWriteItemInput{
+			RequestItems: map[string][]*dynamodb.WriteRequest{
+				"DevUnits": unitWriteRequests,
+			},
+		}
+		res, err := db.BatchWriteItem(input)
+		if err != nil {
+			return fmt.Errorf("failed to batch write units: %s", err.Error())
+		}
+		log.Println(res)
+	}
+	var majorWriteRequests []*dynamodb.WriteRequest
+	for _, major := range majorList {
+		majorName := strings.ToLower(major.Name)
+		majorCode := strings.ToUpper(major.MajorCode)
+		majorItem := map[string]*dynamodb.AttributeValue{
+			"MajorCode": {
+				S: aws.String(majorCode),
+			},
+			"Name": {
+				S: aws.String(majorName),
+			},
+			"Credits": {
+				N: aws.String(fmt.Sprintf("%f", major.Credits)),
+			},
+			"Units": {
+				SS: convertToStringMemoryArray(major.Units),
+			},
+		}
+		attachMajorData(&majorItem, major)
+		majorWriteRequests = append(majorWriteRequests, &dynamodb.WriteRequest{
+			PutRequest: &dynamodb.PutRequest{
+				Item: majorItem,
+			},
+		})
+	}
+	if len(majorWriteRequests) > 0 {
+		input := &dynamodb.BatchWriteItemInput{
+			RequestItems: map[string][]*dynamodb.WriteRequest{
+				"DevMajors": majorWriteRequests,
+			},
+		}
+		res, err := db.BatchWriteItem(input)
+		if err != nil {
+			return fmt.Errorf("failed to batch write majors: %s", err.Error())
+		}
+		log.Println(res)
+	}
+	var specWriteRequests []*dynamodb.WriteRequest
+	for _, spec := range specList {
+		uppercasedSpecCode := strings.ToUpper(spec.SpecCode)
+		lowercasedName := strings.ToLower(spec.Name)
+		specItem := map[string]*dynamodb.AttributeValue{
+			"SpecializationCode": {
+				S: aws.String(uppercasedSpecCode),
+			},
+			"Name": {
+				S: aws.String(lowercasedName),
+			},
+			"Credits": {
+				N: aws.String(fmt.Sprintf("%f", spec.Credits)),
+			},
+			"Units": {
+				SS: convertToStringMemoryArray(spec.Units),
+			},
+		}
+		attachSpecData(&specItem, spec)
+		specWriteRequests = append(specWriteRequests, &dynamodb.WriteRequest{
+			PutRequest: &dynamodb.PutRequest{
+				Item: specItem,
+			},
+		})
+	}
+	if len(specWriteRequests) > 0 {
+		input := &dynamodb.BatchWriteItemInput{
+			RequestItems: map[string][]*dynamodb.WriteRequest{
+				"DevSpecializations": specWriteRequests,
+			},
+		}
+		res, err := db.BatchWriteItem(input)
+		if err != nil {
+			return fmt.Errorf("failed to batch write specs: %s", err.Error())
+		}
+		log.Println(res)
+	}
+	return nil
+}
 
 func processSpec(parser *LineParser) (Specialization, error) {
 	spec := Specialization{}
@@ -54,7 +176,6 @@ func processSpec(parser *LineParser) (Specialization, error) {
 	for _, unit := range strings.Split(units, ",") {
 		unitList = append(unitList, unit)
 	}
-	unitList = append(unitList, "")
 	spec.Units = unitList
 	tempUnitAntiReqs, err := parser.getLine("specunitantireqs")
 	if err != nil {
@@ -63,15 +184,15 @@ func processSpec(parser *LineParser) (Specialization, error) {
 	var unitAntiReqs [][]string
 	for _, unitAntiReqsGroup := range strings.Split(tempUnitAntiReqs, ";") {
 		var tempAntireqGroup []string
-		tempAntireqGroup = append(tempAntireqGroup, "")
 		for _, antiReq := range strings.Split(unitAntiReqsGroup, ",") {
-			tempAntireqGroup = append(tempAntireqGroup, antiReq)
+			if antiReq != "" {
+				tempAntireqGroup = append(tempAntireqGroup, antiReq)
+			}
 		}
-		unitAntiReqs = append(unitAntiReqs, tempAntireqGroup)
+		if len(tempAntireqGroup) > 0 {
+			unitAntiReqs = append(unitAntiReqs, tempAntireqGroup)
+		}
 	}
-	var tempAntireqGroup []string
-	tempAntireqGroup = append(tempAntireqGroup, "")
-	unitAntiReqs = append(unitAntiReqs, tempAntireqGroup)
 	spec.UnitAntiReqs = unitAntiReqs
 	tempSpecAntiReqs, err := parser.getLine("specspecantireqs")
 	if err != nil {
@@ -80,15 +201,15 @@ func processSpec(parser *LineParser) (Specialization, error) {
 	var specAntiReqs [][]string
 	for _, specAntiReqsGroup := range strings.Split(tempSpecAntiReqs, ";") {
 		var tempAntireqGroup []string
-		tempAntireqGroup = append(tempAntireqGroup, "")
 		for _, antiReq := range strings.Split(specAntiReqsGroup, ",") {
-			tempAntireqGroup = append(tempAntireqGroup, antiReq)
+			if antiReq != "" {
+				tempAntireqGroup = append(tempAntireqGroup, antiReq)
+			}
 		}
-		specAntiReqs = append(specAntiReqs, tempAntireqGroup)
+		if len(tempAntireqGroup) > 0 {
+			specAntiReqs = append(specAntiReqs, tempAntireqGroup)
+		}
 	}
-	var tempSpecAntireqGroup []string
-	tempSpecAntireqGroup = append(tempSpecAntireqGroup, "")
-	specAntiReqs = append(specAntiReqs, tempSpecAntireqGroup)
 	spec.SpecAntiReqs = specAntiReqs
 	tempMajorAntiReqs, err := parser.getLine("specmajorantireqs")
 	if err != nil {
@@ -97,15 +218,15 @@ func processSpec(parser *LineParser) (Specialization, error) {
 	var majorAntiReqs [][]string
 	for _, majorAntiReqsGroup := range strings.Split(tempMajorAntiReqs, ";") {
 		var tempAntireqGroup []string
-		tempAntireqGroup = append(tempAntireqGroup, "")
 		for _, antiReq := range strings.Split(majorAntiReqsGroup, ",") {
-			tempAntireqGroup = append(tempAntireqGroup, antiReq)
+			if antiReq != "" {
+				tempAntireqGroup = append(tempAntireqGroup, antiReq)
+			}
 		}
-		majorAntiReqs = append(majorAntiReqs, tempAntireqGroup)
+		if len(tempAntireqGroup) > 0 {
+			majorAntiReqs = append(majorAntiReqs, tempAntireqGroup)
+		}
 	}
-	var tempMajorAntireqGroup []string
-	tempMajorAntireqGroup = append(tempMajorAntireqGroup, "")
-	majorAntiReqs = append(majorAntiReqs, tempMajorAntireqGroup)
 	spec.MajorAntiReqs = majorAntiReqs
 	return spec, nil
 }
@@ -141,7 +262,9 @@ func processMajor(scanner *bufio.Scanner, lineNumber *int) (Major, error) {
 	temp := scanner.Text()
 	var majorUnits []string
 	for _, unit := range strings.Split(temp, ",") {
-		majorUnits = append(majorUnits, unit)
+		if unit != "" {
+			majorUnits = append(majorUnits, unit)
+		}
 	}
 	major.Units = majorUnits
 	*lineNumber += 1
@@ -153,15 +276,15 @@ func processMajor(scanner *bufio.Scanner, lineNumber *int) (Major, error) {
 	var unitAntiReqs [][]string
 	for _, unitAntiReqsGroup := range strings.Split(tempUnitAntiReqs, ";") {
 		var tempAntireqGroup []string
-		tempAntireqGroup = append(tempAntireqGroup, "")
 		for _, antiReq := range strings.Split(unitAntiReqsGroup, ",") {
-			tempAntireqGroup = append(tempAntireqGroup, antiReq)
+			if antiReq != "" {
+				tempAntireqGroup = append(tempAntireqGroup, antiReq)
+			}
 		}
-		unitAntiReqs = append(unitAntiReqs, tempAntireqGroup)
+		if len(tempAntireqGroup) > 0 {
+			unitAntiReqs = append(unitAntiReqs, tempAntireqGroup)
+		}
 	}
-	var tempAntireqGroup []string
-	tempAntireqGroup = append(tempAntireqGroup, "")
-	unitAntiReqs = append(unitAntiReqs, tempAntireqGroup)
 	major.UnitAntiReqs = unitAntiReqs
 	*lineNumber += 1
 	read = scanner.Scan()
@@ -172,15 +295,15 @@ func processMajor(scanner *bufio.Scanner, lineNumber *int) (Major, error) {
 	var specAntiReqs [][]string
 	for _, specAntiReqsGroup := range strings.Split(tempSpecAntiReqs, ";") {
 		var tempAntireqGroup []string
-		tempAntireqGroup = append(tempAntireqGroup, "")
 		for _, antiReq := range strings.Split(specAntiReqsGroup, ",") {
-			tempAntireqGroup = append(tempAntireqGroup, antiReq)
+			if antiReq != "" {
+				tempAntireqGroup = append(tempAntireqGroup, antiReq)
+			}
 		}
-		specAntiReqs = append(specAntiReqs, tempAntireqGroup)
+		if len(tempAntireqGroup) > 0 {
+			specAntiReqs = append(specAntiReqs, tempAntireqGroup)
+		}
 	}
-	var tempSpecAntireqGroup []string
-	tempSpecAntireqGroup = append(tempSpecAntireqGroup, "")
-	specAntiReqs = append(specAntiReqs, tempSpecAntireqGroup)
 	major.SpecAntiReqs = specAntiReqs
 	return major, nil
 }
@@ -229,15 +352,15 @@ func processUnit(scanner *bufio.Scanner, lineNumber *int) (Unit, error) {
 	var preReqs [][]string
 	for _, preReqGroup := range strings.Split(tempPrereq, ";") {
 		var tempPrereqGroup []string
-		tempPrereqGroup = append(tempPrereqGroup, "")
 		for _, preReq := range strings.Split(preReqGroup, ",") {
-			tempPrereqGroup = append(tempPrereqGroup, preReq)
+			if preReq != "" {
+				tempPrereqGroup = append(tempPrereqGroup, preReq)
+			}
 		}
-		preReqs = append(preReqs, tempPrereqGroup)
+		if len(tempPrereqGroup) > 0 {
+			preReqs = append(preReqs, tempPrereqGroup)
+		}
 	}
-	var tempPrereqGroup []string
-	tempPrereqGroup = append(tempPrereqGroup, "")
-	preReqs = append(preReqs, tempPrereqGroup)
 	unit.Prerequistes = preReqs
 	*lineNumber += 1
 	read = scanner.Scan()
@@ -248,15 +371,15 @@ func processUnit(scanner *bufio.Scanner, lineNumber *int) (Unit, error) {
 	var coReqs [][]string
 	for _, coreqGroup := range strings.Split(tempCoreq, ";") {
 		var tempCoreqGroup []string
-		tempCoreqGroup = append(tempCoreqGroup, "")
 		for _, coReq := range strings.Split(coreqGroup, ",") {
-			tempCoreqGroup = append(tempCoreqGroup, coReq)
+			if coReq != "" {
+				tempCoreqGroup = append(tempCoreqGroup, coReq)
+			}
 		}
-		coReqs = append(coReqs, tempCoreqGroup)
+		if len(tempCoreqGroup) > 0 {
+			coReqs = append(coReqs, tempCoreqGroup)
+		}
 	}
-	var tempCoreqGroup []string
-	tempCoreqGroup = append(tempCoreqGroup, "")
-	coReqs = append(coReqs, tempCoreqGroup)
 	unit.Corequistes = coReqs
 	*lineNumber += 1
 	read = scanner.Scan()
@@ -267,15 +390,15 @@ func processUnit(scanner *bufio.Scanner, lineNumber *int) (Unit, error) {
 	var antiReqs [][]string
 	for _, antiGroup := range strings.Split(tempAntireq, ";") {
 		var tempAntiGroup []string
-		tempAntiGroup = append(tempAntiGroup, "")
 		for _, antiReq := range strings.Split(antiGroup, ",") {
-			tempAntiGroup = append(tempAntiGroup, antiReq)
+			if antiReq != "" {
+				tempAntiGroup = append(tempAntiGroup, antiReq)
+			}
 		}
-		antiReqs = append(antiReqs, tempAntiGroup)
+		if len(tempAntiGroup) > 0 {
+			antiReqs = append(antiReqs, tempAntiGroup)
+		}
 	}
-	var tempAntiGroup []string
-	tempAntiGroup = append(tempAntiGroup, "")
-	antiReqs = append(antiReqs, tempAntiGroup)
 	unit.Antirequistes = antiReqs
 	return unit, nil
 }
@@ -334,6 +457,11 @@ func BulkAddEndpoint(body string) events.APIGatewayProxyResponse {
 		}
 	}
 	log.Printf("Validated %d units, %d majors, %d specializations", len(unitList), len(majorList), len(specList))
+	err = bulkAddToDB(unitList, majorList, specList)
+	if err != nil {
+		log.Printf("Failed to bulk add - %s", err.Error())
+		return BadRequest(fmt.Sprintf("Failed to bulk add - %s", err.Error()))
+	}
 	return OkResponse("Success - Bulk Addition")
 }
 

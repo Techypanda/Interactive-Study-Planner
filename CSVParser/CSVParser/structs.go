@@ -34,3 +34,13 @@ type Specialization struct {
 type BulkAddRequest struct {
 	CSVData string `json:"csvData"`
 }
+
+type DelUnit struct {
+	UnitCode string `json:"unitCode"`
+}
+type DelMajor struct {
+	MajorCode string `json:"majorCode"`
+}
+type DelSpecialization struct {
+	SpecCode string `json:"specCode"`
+}
