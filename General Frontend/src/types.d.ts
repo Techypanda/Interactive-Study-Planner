@@ -3,7 +3,12 @@ export interface DefaultProps {
   username?: string;
 }
 
-export interface DataId extends DefaultProps {
+export interface TextSectionProps extends DefaultProps {
+  sectionHeading: string;
+  sectionContent: string;
+}
+
+export interface DataIdProps extends DefaultProps {
   id: string;
 }
 

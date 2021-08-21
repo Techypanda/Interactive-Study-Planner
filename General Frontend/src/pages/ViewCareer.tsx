@@ -1,6 +1,6 @@
 import {Box, Button, Typography} from "@material-ui/core";
 import Navbar from "../components/shared/Navbar";
-import { CareerProps, DataId } from "../types";
+import { CareerProps, DataIdProps } from "../types";
 import { useHistory } from 'react-router-dom';
 import styled from "styled-components";
 import { useQuery, useQueryClient } from "react-query";
@@ -10,7 +10,7 @@ import Error from "../components/shared/Error";
 // most likey used for top down, so user looks at careers, picks one (where though?) and a pre-planned plan is generated.
 // Pretty much just a white page with a title, paragraphs and a back button, could really be
 // with raw HTML tbh
-function ViewCareer(props: DataId) {
+function ViewCareer(props: DataIdProps) {
   //Get career information from table
   const payload = {
     "CareerId" : props.id
