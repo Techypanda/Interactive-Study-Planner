@@ -954,3 +954,84 @@ Internal
 PUBH2005
 
 
+UNIT
+FORS1005
+Foundations of Forensic Science
+Foundations of Forensic Science is a general introduction to the history, underlying principles and contemporary issues in forensic science. It will provide an overview of the forensic process from crime scene to court and the role of the forensic scientist as an expert witness. It also includes an introduction to forensic analysis and interpretation as illustrated by selected case studies. Students attend a two-hour seminar per week and a one-hour workshop fortnightly with supporting online material.
+25
+Internal
+
+
+
+UNIT
+PSYC1000
+Introduction to Psychology
+Broad outline of the nature, methods, and fields of psychology. Introduction to psychology and methodological issues related to the study of human beings and the relevance of both for interactions with individuals and groups. Introduction to social psychology, personality, development, learning, memory, and motivation.
+25
+Internal,Fully Online
+
+
+
+UNIT
+CHEM1006
+Pharmaceutical Chemistry
+This unit provides an introduction to core concepts within pharmaceutical chemistry. Students will be introduced to the principal laboratory techniques used for drug analysis and learn about a range of physio-chemical drug properties which influence their pharmaceutical formulation, pharmacology and clinical use.  This unit is divided into two learning modules. Module 1: Titrimetric analysis of drugs, spectrophotometric analysis of drugs, chromatographic analysis of drugs, analysis of drug formulations. Module 2: Key functional groups in drugs, drug ionisation, drug solubility, drug stereochemistry, drug stability.
+25
+Internal
+BCCB2000
+
+
+UNIT
+PHAR2000
+Foundations of Pharmaceutics
+This unit introduces students to the pharmaceutical science and formulation of liquid and solid dosage forms Pharmaceutical science aspects: Physicochemical properties of pharmaceutical solids including crystalline form, solubility and distribution. Powder technology including particle size analysis, particle size reduction, powder mixing and drying. Physicochemical properties of pharmaceutical solutions including solvents, effects of pH, buffers, phase rule and phase diagrams. Formulation aspects: Formulation, preparation and evaluation of solid oral dosage forms and pharmaceutical solutions. Principles of preservation, flavouring, colouring and stabilisation of pharmaceutical solutions.
+25
+Internal
+CHEM1006
+
+
+UNIT
+PHAR2001
+Pharmaceutical Formulation
+This unit introduces students to the pharmaceutical science and formulation of liquid-in-liquid, solid-in-liquid, solid and semi-solid dosage forms. Pharmaceutical Science aspects: surface phenomena, surface and interfacial tension; surfactants, micelle formation; properties of colloids and rheology. Formulation Aspects: Formulation, preparation and evaluation of semi-solid dosage forms, suppositories and two phase liquid-based preparations. Preservation of two phase systems.
+25
+Internal
+PHAR2000;310384
+
+
+UNIT
+PUBH1001
+Introduction to Health, Safety and Environment
+A broad overview of selected disciplines within the field of health, safety and environment.
+25
+Internal,Fully Online
+
+
+
+UNIT
+STAT1003
+Introduction to Data Science
+This unit will provide a broad introduction to four key aspects of data science: data retrieval and manipulation, data visualisation, statistical computation and machine learning, and presentation and communication. Students will use data from a variety of sources, be introduced to contemporary computing and database environments such as R and SQL, and be exposed to case studies from outside the classroom. Through this unit students will become acquainted with the challenges of contemporary data science and gain an appreciation of the foundational skills necessary to turn data into information.
+25
+Internal
+
+
+
+UNIT
+ISEC2001
+Fundamental Concepts of Data Security
+This unit will cover the core information security principles of confidentiality, integrity and availability. These core principles will be applied to the concepts of information risk management, and the analysis and handling of compromised systems. The ethics around computer crime, privacy, and intellectual property are covered in detail. Finally, the unit will cover the criteria and controls for information classification.
+25
+Internal
+
+
+
+UNIT
+COMP1005
+Fundamentals of Programming
+This unit aims at equipping students with the ability to write simple programs as part of managing large volumes of data. Topics include data representation in a computer, algorithm design, submodules, Boolean expressions, selection and repetition control structures, basic Object Oriented programming design and File I/O. These will be discussed in the context of implementation in the Python programming language.
+25
+Internal
+
+
+COMP1001;COMP1007;COMP5005
