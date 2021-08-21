@@ -34,3 +34,6 @@ Outputs:
   UnitApiRepository:
     Description: Arn Value For Repository
     Value: !GetAtt UnitApiRepository.Arn
+  CSVParserApiRepository:
+    Description: Arn Value For Repository
+    Value: !GetAtt PrivateCSVParserRepository.Arn
