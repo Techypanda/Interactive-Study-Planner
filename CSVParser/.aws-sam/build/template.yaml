@@ -2,12 +2,12 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: 'CSVParser
 
-  Sample SAM Template for CSVParser
+  Parse CSV to effect DB
 
   '
 Globals:
   Function:
-    Timeout: 5
+    Timeout: 180
 Parameters:
   Authentication:
     Type: String

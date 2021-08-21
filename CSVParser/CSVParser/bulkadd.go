@@ -7,6 +7,7 @@ import (
 	"errors"
 	"fmt"
 	"log"
+	"math"
 	"strconv"
 	"strings"
 
@@ -15,122 +16,140 @@ import (
 	"github.com/aws/aws-sdk-go/service/dynamodb"
 )
 
+const STEP = 24
+
 func bulkAddToDB(unitList []Unit, majorList []Major, specList []Specialization) error {
 	var db *dynamodb.DynamoDB
 	initializeDB(&db)
-	var unitWriteRequests []*dynamodb.WriteRequest
-	for _, unit := range unitList {
-		tempUpperCaseUnitCode := strings.ToUpper(unit.UnitCode)
-		tempLowerCaseUnitName := strings.ToLower(unit.Name)
-		unitItem := map[string]*dynamodb.AttributeValue{
-			"UnitCode": {
-				S: aws.String(tempUpperCaseUnitCode),
-			},
-			"Name": {
-				S: aws.String(tempLowerCaseUnitName),
-			},
-			"Description": {
-				S: aws.String(unit.Description),
-			},
-			"Credits": {
-				N: aws.String(fmt.Sprintf("%f", unit.Credits)),
-			},
-			"Delivery": {
-				S: aws.String(unit.Delivery),
-			},
+	count := 0
+	for count < len(unitList) { // Write in roughly blocks of STEP (Bulk Write has a limit of 25)
+		var unitWriteRequests []*dynamodb.WriteRequest
+		temp := int(math.Min(float64(count)+STEP, float64(len(unitList))))
+		for _, unit := range unitList[count:temp] {
+			tempUpperCaseUnitCode := strings.ToUpper(unit.UnitCode)
+			tempLowerCaseUnitName := strings.ToLower(unit.Name)
+			unitItem := map[string]*dynamodb.AttributeValue{
+				"UnitCode": {
+					S: aws.String(tempUpperCaseUnitCode),
+				},
+				"Name": {
+					S: aws.String(tempLowerCaseUnitName),
+				},
+				"Description": {
+					S: aws.String(unit.Description),
+				},
+				"Credits": {
+					N: aws.String(fmt.Sprintf("%f", unit.Credits)),
+				},
+				"Delivery": {
+					S: aws.String(unit.Delivery),
+				},
+			}
+			attachRequistesToUnitAddition(&unitItem, unit)
+			unitWriteRequests = append(unitWriteRequests, &dynamodb.WriteRequest{
+				PutRequest: &dynamodb.PutRequest{
+					Item: unitItem,
+				},
+			})
 		}
-		attachRequistesToUnitAddition(&unitItem, unit)
-		unitWriteRequests = append(unitWriteRequests, &dynamodb.WriteRequest{
-			PutRequest: &dynamodb.PutRequest{
-				Item: unitItem,
-			},
-		})
+		if len(unitWriteRequests) > 0 {
+			input := &dynamodb.BatchWriteItemInput{
+				RequestItems: map[string][]*dynamodb.WriteRequest{
+					"DevUnits": unitWriteRequests,
+				},
+			}
+			res, err := db.BatchWriteItem(input)
+			if err != nil {
+				return fmt.Errorf("failed to batch write units: %s", err.Error())
+			}
+			log.Println(res)
+		}
+		count += STEP
 	}
-	if len(unitWriteRequests) > 0 {
-		input := &dynamodb.BatchWriteItemInput{
-			RequestItems: map[string][]*dynamodb.WriteRequest{
-				"DevUnits": unitWriteRequests,
-			},
+	count = 0
+	for count < len(majorList) { // Write in roughly blocks of STEP (Bulk Write has a limit of 25)
+		var majorWriteRequests []*dynamodb.WriteRequest
+		temp := int(math.Min(float64(count)+STEP, float64(len(majorList))))
+		for _, major := range majorList[count:temp] {
+			majorName := strings.ToLower(major.Name)
+			majorCode := strings.ToUpper(major.MajorCode)
+			majorItem := map[string]*dynamodb.AttributeValue{
+				"MajorCode": {
+					S: aws.String(majorCode),
+				},
+				"Name": {
+					S: aws.String(majorName),
+				},
+				"Credits": {
+					N: aws.String(fmt.Sprintf("%f", major.Credits)),
+				},
+				"Units": {
+					SS: convertToStringMemoryArray(major.Units),
+				},
+			}
+			attachMajorData(&majorItem, major)
+			majorWriteRequests = append(majorWriteRequests, &dynamodb.WriteRequest{
+				PutRequest: &dynamodb.PutRequest{
+					Item: majorItem,
+				},
+			})
 		}
-		res, err := db.BatchWriteItem(input)
-		if err != nil {
-			return fmt.Errorf("failed to batch write units: %s", err.Error())
+		if len(majorWriteRequests) > 0 {
+			input := &dynamodb.BatchWriteItemInput{
+				RequestItems: map[string][]*dynamodb.WriteRequest{
+					"DevMajors": majorWriteRequests,
+				},
+			}
+			res, err := db.BatchWriteItem(input)
+			if err != nil {
+				return fmt.Errorf("failed to batch write majors: %s", err.Error())
+			}
+			log.Println(res)
 		}
-		log.Println(res)
+		count += STEP
 	}
-	var majorWriteRequests []*dynamodb.WriteRequest
-	for _, major := range majorList {
-		majorName := strings.ToLower(major.Name)
-		majorCode := strings.ToUpper(major.MajorCode)
-		majorItem := map[string]*dynamodb.AttributeValue{
-			"MajorCode": {
-				S: aws.String(majorCode),
-			},
-			"Name": {
-				S: aws.String(majorName),
-			},
-			"Credits": {
-				N: aws.String(fmt.Sprintf("%f", major.Credits)),
-			},
-			"Units": {
-				SS: convertToStringMemoryArray(major.Units),
-			},
+	count = 0
+	for count < len(specList) { // Write in roughly blocks of STEP (Bulk Write has a limit of 25)
+		var specWriteRequests []*dynamodb.WriteRequest
+		temp := int(math.Min(float64(count)+STEP, float64(len(specList))))
+		for _, spec := range specList[count:temp] {
+			uppercasedSpecCode := strings.ToUpper(spec.SpecCode)
+			lowercasedName := strings.ToLower(spec.Name)
+			specItem := map[string]*dynamodb.AttributeValue{
+				"SpecializationCode": {
+					S: aws.String(uppercasedSpecCode),
+				},
+				"Name": {
+					S: aws.String(lowercasedName),
+				},
+				"Credits": {
+					N: aws.String(fmt.Sprintf("%f", spec.Credits)),
+				},
+				"Units": {
+					SS: convertToStringMemoryArray(spec.Units),
+				},
+			}
+			attachSpecData(&specItem, spec)
+			specWriteRequests = append(specWriteRequests, &dynamodb.WriteRequest{
+				PutRequest: &dynamodb.PutRequest{
+					Item: specItem,
+				},
+			})
 		}
-		attachMajorData(&majorItem, major)
-		majorWriteRequests = append(majorWriteRequests, &dynamodb.WriteRequest{
-			PutRequest: &dynamodb.PutRequest{
-				Item: majorItem,
-			},
-		})
-	}
-	if len(majorWriteRequests) > 0 {
-		input := &dynamodb.BatchWriteItemInput{
-			RequestItems: map[string][]*dynamodb.WriteRequest{
-				"DevMajors": majorWriteRequests,
-			},
+
+		if len(specWriteRequests) > 0 {
+			input := &dynamodb.BatchWriteItemInput{
+				RequestItems: map[string][]*dynamodb.WriteRequest{
+					"DevSpecializations": specWriteRequests,
+				},
+			}
+			res, err := db.BatchWriteItem(input)
+			if err != nil {
+				return fmt.Errorf("failed to batch write specs: %s", err.Error())
+			}
+			log.Println(res)
 		}
-		res, err := db.BatchWriteItem(input)
-		if err != nil {
-			return fmt.Errorf("failed to batch write majors: %s", err.Error())
-		}
-		log.Println(res)
-	}
-	var specWriteRequests []*dynamodb.WriteRequest
-	for _, spec := range specList {
-		uppercasedSpecCode := strings.ToUpper(spec.SpecCode)
-		lowercasedName := strings.ToLower(spec.Name)
-		specItem := map[string]*dynamodb.AttributeValue{
-			"SpecializationCode": {
-				S: aws.String(uppercasedSpecCode),
-			},
-			"Name": {
-				S: aws.String(lowercasedName),
-			},
-			"Credits": {
-				N: aws.String(fmt.Sprintf("%f", spec.Credits)),
-			},
-			"Units": {
-				SS: convertToStringMemoryArray(spec.Units),
-			},
-		}
-		attachSpecData(&specItem, spec)
-		specWriteRequests = append(specWriteRequests, &dynamodb.WriteRequest{
-			PutRequest: &dynamodb.PutRequest{
-				Item: specItem,
-			},
-		})
-	}
-	if len(specWriteRequests) > 0 {
-		input := &dynamodb.BatchWriteItemInput{
-			RequestItems: map[string][]*dynamodb.WriteRequest{
-				"DevSpecializations": specWriteRequests,
-			},
-		}
-		res, err := db.BatchWriteItem(input)
-		if err != nil {
-			return fmt.Errorf("failed to batch write specs: %s", err.Error())
-		}
-		log.Println(res)
+		count += STEP
 	}
 	return nil
 }

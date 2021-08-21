@@ -3,12 +3,11 @@ Transform: AWS::Serverless-2016-10-31
 Description: >
   CSVParser
   
-  Sample SAM Template for CSVParser
+  Parse CSV to effect DB
 
-# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
-    Timeout: 5
+    Timeout: 180 # Way Bigger Timeout As were doing a long process
 
 Parameters:
 
