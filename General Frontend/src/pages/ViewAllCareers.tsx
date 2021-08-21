@@ -13,7 +13,7 @@ import { CareerProps, DefaultProps } from "../types";
 // makes call to the careers API to get all careers so they can be rendered
 function ListCareers(props: CareerProps) {
   const { isLoading, isError, error, data } = useQuery('getcareers', async () => {
-    const data = await axios('${process.env.REACT_APP_API_URI}/event-get-all-careers');
+    const data = await axios('${process.env.REACT_APP_CAREERS_API}/event-get-all-careers');
     return data;
   })
   if (isLoading) {
