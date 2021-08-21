@@ -3,9 +3,36 @@ export interface DefaultProps {
   username?: string;
 }
 
+export interface DataId extends DefaultProps {
+  id: string;
+}
+
+export interface CareerEntryProps extends DefaultProps {
+  careerTitle: string;
+  careerContent: string;
+}
+
 export interface CareerProps extends DefaultProps {
-    careerTitle: string;
-    careerDescription: string;
+  careerName: string;
+  careerDescription: string;
+  careerIndustry: string;
+  careerReqs: string;
+  careerTraits: string;
+}
+
+export interface MajorEntryProps extends DefaultProps {
+  majorTitle: string;
+  majorContent: string;
+}
+
+export interface MajorProps extends DefaultProps {
+  majorCode : string;
+  majorName : string;
+  majorDescription : string;
+  majorUnits : string;
+  majorPreReqs : string;
+  majorCoReqs : string;
+  majorAntiReqs : string;
 }
 
 export interface UnitProps extends DefaultProps {
