@@ -779,7 +779,178 @@ SPUC-MRKTG
 Marketing Foundations
 100
 FALSE
-MKTG2004,MKTG2005,MKTG3006,MKTG3004
+MKTG2002,MKTG2004,MKTG3003,MKTG1000
 
+
+
+UNIT
+MKTG2002
+Marketing Across Borders
+Covers topics related to the international marketplace, multi-national, global and transnational corporations and international trading companies. Knowledge is gained in world organisational or regional trade, trade blocks and international marketing opportunities, and developed and less developed country counter trade.
+25
+Fully Online,Internal
+
+
+
+UNIT
+MKTG2004
+Consumer Behaviour
+Introduces the role of consumer behaviour and how it is shaped by the social and cultural environment and the psychological foundations. The unit in essence focuses on the decision processes in consumption behaviour in different buying situations. This develops the student's ability to integrate marketing processes at a higher level. For marketers, an understanding of how a consumer selects, purchases, uses and disposes of products and services is pertinent to successfully managing the marketing function. Concepts drawn from various disciplines such as psychology, economics and anthropology are also examined.
+25
+Fully Online,Internal
+
+
+
+UNIT
+MKTG3003
+Digital Marketing Strategy
+This unit introduces students to the world of digital marketing. It broadens understanding of the non-technical aspects of the internet and its strategic marketing applications. The unit covers how the digital environment affects marketing decisions through identifying web-based opportunities and threats for firms. Furthermore, the unit focuses on major digital marketing tools and strategies (e.g., Google AdWords and Search Engine Optimization) that a firm or brand can adopt to engage with consumers across their purchase journey using various digital channels such as paid, owned, and earned media.
+25
+Fully Online,Internal
+
+
+
+UNIT
+MKTG1000
+Discovering Marketing
+Understanding the role marketing plays in business and society; The global marketing environment; Consumer buyer behaviour; Market segmentation, target marketing and positioning; New product development and the product life cycle; Marketing Strategies (the 4 P's) - product, price, place and promotion; Ethics in marketing.
+25
+Internal,Fully Online
+
+
+
+SPECIALIZATION
+SPUC-JOURL
+Journalism
+100
+FALSE
+JOUR1001,JOUR2000,JOUR2002,JOUR2003
+
+
+
+UNIT
+JOUR1001
+Introduction to Journalism - Broadcast
+An examination of the nature, history and function of broadcast journalism in Australia by analysing and evaluating the public, community and commercial sectors. Students will dissect and evaluate all aspects of broadcast journalism and develop their multi-platform journalistic skillset by producing recorded radio stories and a smart-phone essay.
+25
+Internal
+
+
+JOUR5013
+UNIT
+JOUR2000
+Radio News
+This unit equips students to work in a radio newsroom environment performing a range of tasks in the development of complex radio news stories. Students will undertake intensive tuition in digital recording, editing and production using industry standard equipment, ensuring they are able to react to the demands of the modern news environment. The unit will encourage students to develop critical thinking skills and establish professional practices within journalism's ethical and legal parameters, while working both independently and collaboratively within a news team.
+25
+Internal
+JOUR1001;1564
+
+JOUR5002
+UNIT
+JOUR2002
+Video News
+This unit introduces students to the theory and practice of video news production for the web and television. It equips students with the capacity to develop research, writing, interviewing and presentation skills for video news productions across platforms. This unit also introduces basic competencies in camerawork and editing.
+25
+Internal
+JOUR1001;1564
+
+JOUR5005
+UNIT
+JOUR2003
+News Writing and Reporting
+An introduction to news writing and reporting for publication, whereby students develop news gathering, writing and research skills and an awareness of different styles and genres within print and online journalism.  Students learn how to generate ideas, undertake research, conduct interviews and write in news style to tight deadlines.  The highly practical nature of the unit provides students the opportunity to experience work-integrated learning through acting as reporters for the Department of Journalism’s online publication.
+25
+Internal
+JOUR1001
+
+JOUR5003
+SPECIALIZATION
+SPUC-PRWRI
+Professional Writing
+100
+FALSE
+PWRP1000,PWRP1003,PWRP2001,PWRP2000
+
+
+
+UNIT
+PWRP1000
+Introduction to Creative and Professional Writing
+This unit explores representation in writing and how the dynamic relationship between Self and Other plays a central role in the writing process. The representation of the self and of others is central to a broad range of written genres and forms. Students of writing will find that the unit introduces them to a variety of genres and forms essential to the portfolio of a professional writer, and will discover how creative writing techniques can enrich their professional work.
+25
+Internal
+
+
+PWRP5021
+UNIT
+PWRP1003
+Writing, Rhetoric and Persuasion
+This unit introduces students to the role of the professional writer in the field of public discourse. It offers critical and ethical perspectives on rhetoric and persuasion, and introduces students to the structuring of arguments, and the framing and communication of issues on behalf of government, industry, non-government organisations, and individuals.
+25
+Internal
+
+
+PWRP5022
+UNIT
+PWRP2001
+Writing, Editing and Publishing
+This unit provides a practical introduction to editing. Students learn about the editor’s role and profession, the publishing process, and editorial project management; and they learn and practice the skills needed for professional proofreading and copyediting, including language skills, on the page and the screen. Student learning is graduated through a series of successively higher-level editing tasks, which students practice thoroughly in workshops, and are assessed in before moving to a higher level.
+25
+Internal
+
+
+PWRP5003
+UNIT
+PWRP2000
+Tricks of Truth and Authenticity
+This unit explores issues of truth and authenticity in professional writing and publishing, providing students with an understanding of the cultural, ethical and legal issues of writing for publication. Historical and contemporary cases of fraud, faked identity, plagiarism, hoax, the role of the author and the blurring of genre boundaries are used to highlight the professional and personal responsibilities and dilemmas of writing and publishing in the public domain.
+25
+Internal
+
+
+PWRP5001
+SPECIALIZATION
+SPUC-HLTDA
+Health Data
+100
+FALSE
+PUBH2005,SPAT1007,PUBH2006,PUBH3006
+
+
+
+UNIT
+PUBH2005
+Big Data and Health
+This unit will provide the opportunity for students to learn how to use big data to comprehend complex real-world health challenges. It provides an introduction to how data are generated and used in health contexts. It gives students the opportunity to investigate the major sources of data relevant to health and explore how this information can be used to create evidence for policy, research and individual behaviour change.
+25
+Fully Online,Internal
+
+
+
+UNIT
+SPAT1007
+Fundamentals of Geographic Information Systems
+This unit is an introduction to the application, structure and function of geographic information systems (GIS). Students will develop skills and knowledge around the input and management, analysis and presentation of geographic data and relationships. They will also develop expertise in the storage and simple manipulation of spatial data together with the integration and management of spatial and attribute data. There will be a particular focus in this unit on the application of the principles of academic integrity and academic referencing conventions.
+25
+Fully Online,Internal
+
+
+SPAT5006,SPAT2011
+UNIT
+PUBH2006
+Privacy and Cyber Security: Health Data Governance
+This unit will introduce students to health data governance, including relevant privacy and data protection law. Students will explore contemporary concerns about the collection, linkage, storage and use of health data including transparency, informed consent, confidentiality, third party access and the application of artificial intelligence. They will also engage with issues of data privacy and protection.
+25
+Internal,Fully Online
+
+
+
+UNIT
+PUBH3006
+Introduction to Artificial Intelligence, Machine Learning and Health
+This unit introduces students to the fundamental concepts of machine learning (ML) and artificial intelligence (AI). Students will have the opportunity to explore the uses and impact of machine learning and artificial intelligence in public health and health care. They will address the advantages, limitations and scope of ML/AI from a health perspective. The unit will also have a practical component in which students use the data generated by ML/AI to explore contemporary health issues.
+25
+Internal
+PUBH2005
 
 
