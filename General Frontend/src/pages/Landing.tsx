@@ -10,6 +10,8 @@ import ViewAllCareers from "./ViewAllCareers";
 import MedicalImage from "../static/doctor_teacher.jpg";
 import CareersImage from "../static/career.jpg";
 import TraitsImage from "../static/traits_image.jpg";
+import '../App.scss';
+
 
 function Landing() {
     const history = useHistory();
@@ -27,8 +29,8 @@ function Landing() {
 		</Grid>
 		<Grid item xs={5}>
 		    <Paper>
-			<Typography variant="h6">
-			    "Witty phrase misattributed to ghandi or something idc"
+			<Typography variant="h6" align="left">
+			    "Witty phrase misattributed to ghandi or something idc" - Joe Biden
 			</Typography>
 		    </Paper>
 		</Grid>
@@ -43,46 +45,51 @@ function Landing() {
 	    {/* routed cards */}
 	    <Grid container spacing={4} justify="center">
 		<Grid item xs={4}>
-		    <Card variant="outlined"> 
-			
-			<CardHeader title="Plan Your Medical Course"/>
-			<CardContent>
-			    {/* <img src={MedicalImage} alt="medical stock image"/> */}
-			    <Typography variant="body1" align="left">
-				See how Curtin's flexible course structure can be shaped to you advantage.
-			    </Typography> 
-			</CardContent>
-			
-		    </Card>
+		    <div className="card-body">
+			<Card variant="outlined" > 
+			    <CardHeader title="Plan Your Medical Course"/>
+			    <CardContent>
+				{/* <img src={MedicalImage} alt="medical stock image"/> */}
+				<Typography variant="body1" align="left">
+				    See how Curtin's flexible course structure can be shaped to you advantage.
+				</Typography> 
+			    </CardContent>
+			</Card>
+		    </div>
 		</Grid>
 
 		<Grid item xs={4}>
-		    <Card variant="outlined"  onClick = {() => history.push('/ViewAllCareers')}>
+		    <div className="card-body">
+			<Card variant="outlined"  onClick = {() => history.push('/ViewAllCareers')}>
 
-			<CardHeader title="See Careers"/>
-			<CardContent>
-			    {/* <img src={CareersImage} alt="careers stock image"/> */}
-			    <Typography variant="body1" align="left">
-				See all the possible careers Curtin can lead to and their requirements.
-			    </Typography>
-			</CardContent>
-		    </Card>
+			    <CardHeader title="See Careers"/>
+			    <CardContent>
+				{/* <img src={CareersImage} alt="careers stock image"/> */}
+				<Typography variant="body1" align="left">
+				    See all the possible careers Curtin can lead to and their requirements.
+				</Typography>
+			    </CardContent>
+			</Card>
+		    </div>
 		</Grid>
 
 		<Grid item xs={4}>
-		    <Card variant="outlined">
-			<CardHeader title="What Career Path Suits Me?"/>
-			<CardContent>
-			    {/* <img src={TraitsImage} alt="personality stock image"/> */}
-			    <Typography  variant="body1" align="left">
-				Find out what type of career is most suitable for your personality.
-			    </Typography>
-			</CardContent>
-		    </Card>
+		    <div className="card-body">
+			<Card variant="outlined">
+			    <CardHeader title="What Career Path Suits Me?"/>
+			    <CardContent>
+				{/* <img src={TraitsImage} alt="personality stock image"/> */}
+				<Typography  variant="body1" align="left">
+				    Find out what type of career is most suitable for your personality.
+				</Typography>
+			    </CardContent>
+			</Card>
+		    </div>
 		</Grid>
 	    </Grid>
 	</>
     );
 }
+
 
 export default Landing;

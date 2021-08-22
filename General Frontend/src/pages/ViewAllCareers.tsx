@@ -1,12 +1,12 @@
-// careers display with a search. Somehow this links to the course selection thingy
-// don't call this yet it's not even close to done
+import { useState } from 'react';
 import { BrowserRouter as Router } from "react-router-dom";
 import { Box, Button, Container,Grid, Typography, Card, CardHeader, CardContent, CardMedia, TextField} from "@material-ui/core";
-import Navbar from "../components/shared/Navbar";
-import styled from "styled-components";
-import {useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useQuery, useQueryClient } from "react-query";
+import styled from "styled-components";
 import axios, { AxiosError, AxiosResponse } from "axios";
+
+import Navbar from "../components/shared/Navbar";
 import { CareerProps, DefaultProps } from "../types";
 import { createStyles, makeStyles, Theme , useTheme} from '@material-ui/core/styles';
 
@@ -35,8 +35,10 @@ const useStyles = makeStyles((theme: Theme) =>
 	    height: 38,
 	    width: 38,
 	},
+	
     }),
 );
+
 
 // called on loading of this component
 // makes call to the careers API to get all careers so they can be rendered
@@ -54,8 +56,10 @@ function ViewAllCareers(props: DefaultProps) {
 	{"career_title": "Anesthetician", "career_desc": "Give you a morphine problem"},
 	{"career_title": "Surgeon", "career_desc": "Does surgery"}
     ];
+    // with real dynamic data this would be:
+    // const [career_title, career_desc] = useState([])
 
-    /*
+    /* // api call, perhaps simplify with just fetch()?
        const { isLoading, isError, error, data } = useQuery('getcareers', async () => {
        const data = await axios('${process.env.REACT_APP_CAREERS_API}/event-get-all-careers');
        return data;
@@ -66,13 +70,18 @@ function ViewAllCareers(props: DefaultProps) {
        if (isError) {
        return error;
        }*/
+
+    // search bar filtering
+    const [q, setq] = useState("");
+    /* const [search_param] = useState("career_title", "career_desc"); */
+
+ 
     return (
 	<>
 	    <Navbar />
 	    <br/>
 	    <Container  >
 		<Box id="searchcontainer" display="flex">
-		    
 		    <TextField variant="outlined" id="standard-full-width" fullWidth  placeholder="Search careers..." className="searchbar" />
 		    <Button  variant='contained' className="searchbtn">Search</Button>
 		</Box>
@@ -102,5 +111,22 @@ function ViewAllCareers(props: DefaultProps) {
 	</>
     );
 }
+
+/* delete this and re-write later what the fuck was I thinkin */
+/* function Search(careers_list: CareerProps, career_query: string) {
+ *     return careers_list.filter(career) => {
+ * 	if (career.career_title == career_query) {
+ * 	    return career_query.some((new_career) => {
+ * 		return (
+ * 		    career[new_career]
+ * 			.toString()
+ * 			.towLowerCase()
+ * 			.indexOf(career)
+ * 		)
+ * 	    })
+ * 	}
+ *     }
+ * }
+ *  */
 
 export default ViewAllCareers;
