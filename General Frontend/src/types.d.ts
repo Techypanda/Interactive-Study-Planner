@@ -45,6 +45,12 @@ export interface UnitProps extends DefaultProps {
   unitContent: string;
 }
 
+export interface PromptData {
+  promptTitle: string
+  promptContent: string
+  showPrompt: bool
+}
+
 export interface ErrorProps extends DefaultProps {
   promptTitle: string
   promptContent: string
