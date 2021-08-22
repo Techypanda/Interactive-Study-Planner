@@ -1,5 +1,6 @@
 import {Box, Button, Typography} from "@material-ui/core";
 import Navbar from "../components/shared/Navbar";
+import TextSection from "../components/shared/TextSection"
 import { CareerProps, DataIdProps } from "../types";
 import { useHistory } from 'react-router-dom';
 import styled from "styled-components";
@@ -7,9 +8,20 @@ import { useQuery, useQueryClient } from "react-query";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import Error from "../components/shared/Error";
 
-// most likey used for top down, so user looks at careers, picks one (where though?) and a pre-planned plan is generated.
-// Pretty much just a white page with a title, paragraphs and a back button, could really be
-// with raw HTML tbh
+/*
+ * Author: Matthew Loe
+ * Student Id: 19452425
+ * Date Last Modified: 22/08/2021
+ * Description: Page for viewing the detailed information on a career
+ */
+
+//Returns user to their previous page
+function BackFunction()
+{
+
+}
+
+//Retrieves career information and returns in html
 function ViewCareer(props: DataIdProps) {
   //Get career information from table
   const payload = {
@@ -17,33 +29,29 @@ function ViewCareer(props: DataIdProps) {
   };
 
   //TODO - Check regarding CORS
-  axios.post(`${process.env.REACT_APP_CAREER_API_URI}/event/event-get-career`, JSON.stringify(payload), {
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
-  .then(response => {
-    console.log(response.data);
-    //Parse data
-    let career = JSON.parse(response.data);
-  })
-  .catch(error => {
-    //Return error page
-    if (error.response)   //Response received
-    {
-      
-    }
-    else if (error.request) //Request made but no response
-    {
-      
-    }
-    else    //Unknown other error
-    {
+  const { isLoading, isError, error, response} = useQuery('getCareer', async () => {
+    const response = await axios({
+      method: 'POST',
+      url: '${process.env.CAREER_API}/event/event-getCareer',
+      data: payload
+    });
+    
+    return response;
+  });
 
-    }
-    //END IF
-  });  
+  //Check if loading
+  if (isLoading)
+  {
+    return "Retrieving career information."; 
+  }
 
+  //Check if error
+  if (isError)
+  {
+    return error; 
+  }
+
+  //Parse data
   const career : CareerProps = {
     careerName : "Test",
     careerDescription : "A rewarding career in medial research. asfdddddddddddddddddddddddddddddddddd dddddddddddddddddddddddddddddd ddddddddddddddddddddddddddddddd ddddddddd dddddddddddddddddasssssddddddddddgagasdgasgfsagsgasgddddddddddddddddddddddddddddddasssssddddddddddgagasdgasgfsagsgasgddddddddddddddddddddddddddddddddddddasssssddddddddddgagasdgasgfsagsgasgdddddddddddddddddddddddddddd",
@@ -52,22 +60,14 @@ function ViewCareer(props: DataIdProps) {
     careerTraits : "Some traits"
   };
 
-  //TODO-Look into styling
   return (
       <div>
         <Navbar/>
         <Typography id="careerTitle" variant="h2">
             {career.careerName}
         </Typography>
-        <Typography className="careerHeadings" align="left" variant="h4">Description</Typography>
+        <TextSection sectionHeading="Description" sectionContent= {career.careerDescription}/>
 
-        <Box width={1}>
-          <Typography className="textClass" variant="h6" align="left" style={{ wordWrap: "break-word" }}>
-            {career.careerDescription}
-          </Typography>
-        </Box>
-        
-      
         <Typography className="careerHeadings" variant="h4">Industry</Typography>
         <Typography className="textClass" variant="h6">
           {career.careerDescription}
