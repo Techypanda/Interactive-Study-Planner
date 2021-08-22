@@ -9,6 +9,7 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 import Navbar from "../components/shared/Navbar";
 import { CareerProps, DefaultProps } from "../types";
 import { createStyles, makeStyles, Theme , useTheme} from '@material-ui/core/styles';
+import "../App.scss";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -75,7 +76,6 @@ function ViewAllCareers(props: DefaultProps) {
     const [q, setq] = useState("");
     /* const [search_param] = useState("career_title", "career_desc"); */
 
- 
     return (
 	<>
 	    <Navbar />
@@ -89,20 +89,22 @@ function ViewAllCareers(props: DefaultProps) {
 		{/* dummy example of entry, will be filled dynamically on api call on startup*/}
 		{/* Actual contents will be filled in a list of such Card items */}
 		{careers_list.map((x) => (
-		    <Card variant="outlined" className={classes.root}>
-			<div className={classes.details}>
-			    <CardContent className={classes.content}>
-				<Typography component="h5" variant="h5" align="left">
-				    {x.career_title}
-				</Typography>
-				<Typography variant="subtitle1" color="textSecondary">
-				    {x.career_desc}
-				</Typography>
-			    </CardContent>
-			    <div className={classes.controls}>
+		    <div className="career-option">
+			<Card variant="outlined" className={classes.root}>
+			    <div className={classes.details}>
+				<CardContent className={classes.content}>
+				    <Typography component="h5" variant="h5" align="left">
+					{x.career_title}
+				    </Typography>
+				    <Typography variant="subtitle1" color="textSecondary">
+					{x.career_desc}
+				    </Typography>
+				</CardContent>
+				<div className={classes.controls}>
+				</div>
 			    </div>
-			</div>
-		    </Card>
+			</Card>
+		    </div>
 		))}
 	    </Container>
 	    <br/>

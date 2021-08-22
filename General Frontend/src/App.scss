@@ -28,3 +28,11 @@
 .card-body:active {
     transform: scale(1.01) translateY(0.2rem);
 }
+
+.career-option:hover {
+    transform: scale(1.01);
+}
+
+.career-option:active {
+    transform: scale(1.01) translateY(0.2rem);
+}
