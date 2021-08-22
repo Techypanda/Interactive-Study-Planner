@@ -21,8 +21,8 @@ export interface CareerProps extends DefaultProps {
   careerName: string;
   careerDescription: string;
   careerIndustry: string;
-  careerReqs: string;
-  careerTraits: string;
+  careerReqs: string[];
+  careerTraits: string[];
 }
 
 export interface MajorEntryProps extends DefaultProps {
@@ -35,14 +35,16 @@ export interface MajorProps extends DefaultProps {
   majorName : string;
   majorDescription : string;
   majorUnits : string;
-  majorPreReqs : string;
-  majorCoReqs : string;
-  majorAntiReqs : string;
+  majorAntiReqs : string[];
 }
 
 export interface UnitProps extends DefaultProps {
   unitTitle: string;
   unitContent: string;
+}
+
+export interface ListDataProps extends DefaultProps {
+  list: string[];
 }
 
 export interface PromptData {

@@ -1,4 +1,4 @@
-import {Box, Button, Typography} from "@material-ui/core";
+import { Box, Button, Paper, Typography } from "@material-ui/core";
 import Navbar from "../components/shared/Navbar";
 import TextSection from "../components/shared/TextSection"
 import { CareerProps, DataIdProps, ErrorProps, PromptData } from "../types";
@@ -16,7 +16,6 @@ import { BounceLoader } from "react-spinners";
  * Date Last Modified: 22/08/2021
  * Description: Page for viewing the detailed information on a career
  */
-
 
 //Retrieves career information and returns in html
 function ViewCareer(props: DataIdProps) {
@@ -49,8 +48,8 @@ function ViewCareer(props: DataIdProps) {
     careerName : "Test",
     careerDescription : "A rewarding career in medial research. asfdddddddddddddddddddddddddddddddddd dddddddddddddddddddddddddddddd ddddddddddddddddddddddddddddddd ddddddddd dddddddddddddddddasssssddddddddddgagasdgasgfsagsgasgddddddddddddddddddddddddddddddasssssddddddddddgagasdgasgfsagsgasgddddddddddddddddddddddddddddddddddddasssssddddddddddgagasdgasgfsagsgasgdddddddddddddddddddddddddddd",
     careerIndustry : "Medical research",
-    careerReqs : "Some units",
-    careerTraits : "Some traits"
+    careerReqs : ["Some units", "Some units", "Some units" ],
+    careerTraits : [ "Some units", "Some units", "Some units" ],
   };
 
   //Returns user to their previous page
@@ -62,31 +61,27 @@ function ViewCareer(props: DataIdProps) {
   return (
       <div>
         <Navbar/>
-        <Typography id="careerTitle" variant="h2">
-            {career.careerName}
-        </Typography>
-        <TextSection sectionHeading="Description" sectionContent= {career.careerDescription}/>
-
-        <Typography className="careerHeadings" variant="h4">Industry</Typography>
-        <Typography className="textClass" variant="h6">
-          {career.careerDescription}
-        </Typography>
-        
-        <Typography className="careerHeadings" variant="h4">Requirements</Typography>
-        <Typography className="textClass" variant="h6">
-          {career.careerDescription}
-        </Typography>
-        <Typography className="careerHeadings" variant="h4">Traits</Typography>
-        <Typography className="textClass" variant="h6">
-          {career.careerDescription}
-        </Typography>
+        <Paper>
+          <Typography id="careerTitle" variant="h3">
+              {career.careerName}
+          </Typography>
+          <Box alignContent="flex-start" >
+            <TextSection sectionHeading="Industry" sectionContent= {career.careerIndustry}/>
+            <TextSection sectionHeading="Description" sectionContent= {career.careerDescription}/>
+            <ListSectionWithNav sectionHeading="Recommended Course Pathway" sectionContent= {career.careerReqs}/>
+            <ListSection sectionHeading="Compatible Traits" sectionContent= {career.careerTraits}/>
+          </Box>
+        </Paper>
         <Button variant="contained" onClick={ () => BackFunction() } style={{
             backgroundColor: "#FFBF00",
-        }}>
+            margin: "12px",
+          }}>
           Back
         </Button>
       </div>
   );
 }
 
-export default ViewCareer;
+export default styled(ViewCareer)`
+
+`;
