@@ -1,12 +1,14 @@
 import {Box, Button, Typography} from "@material-ui/core";
 import Navbar from "../components/shared/Navbar";
 import TextSection from "../components/shared/TextSection"
-import { CareerProps, DataIdProps } from "../types";
-import { useHistory } from 'react-router-dom';
+import { CareerProps, DataIdProps, ErrorProps, PromptData } from "../types";
 import styled from "styled-components";
-import { useQuery, useQueryClient } from "react-query";
+import { useState } from "react";
+import { useMutation, useQueryClient } from "react-query";
+import { useHistory } from "react-router-dom";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import Error from "../components/shared/Error";
+import { BounceLoader } from "react-spinners";
 
 /*
  * Author: Matthew Loe
@@ -15,11 +17,6 @@ import Error from "../components/shared/Error";
  * Description: Page for viewing the detailed information on a career
  */
 
-//Returns user to their previous page
-function BackFunction()
-{
-
-}
 
 //Retrieves career information and returns in html
 function ViewCareer(props: DataIdProps) {
@@ -28,28 +25,24 @@ function ViewCareer(props: DataIdProps) {
     "CareerId" : props.id
   };
 
+  const history = useHistory();
+  const [error, setError] = useState<PromptData>({ promptTitle: "", promptContent: "", showPrompt: false });
+  const [loading, setLoading] = useState(false);
+
   //TODO - Check regarding CORS
-  const { isLoading, isError, error, response} = useQuery('getCareer', async () => {
-    const response = await axios({
-      method: 'POST',
-      url: '${process.env.CAREER_API}/event/event-getCareer',
-      data: payload
-    });
-    
-    return response;
+  axios({
+    method: 'POST',
+    url: 'https://uiqb5tsrsc.execute-api.ap-southeast-2.amazonaws.com/Prod/events/event-get-career',//'${process.env.CAREER_API}/events/event-get-career',
+    data: JSON.stringify(payload)
+  })
+  .then( response => () => {
+    //Parse response into career props
+  })
+  .catch( error => () => {
+    //Return error
+    console.log(error);
+    return <Error promptTitle="Request Error" promptContent={error} showPrompt={true} onAccept={() => BackFunction() } />
   });
-
-  //Check if loading
-  if (isLoading)
-  {
-    return "Retrieving career information."; 
-  }
-
-  //Check if error
-  if (isError)
-  {
-    return error; 
-  }
 
   //Parse data
   const career : CareerProps = {
@@ -59,6 +52,12 @@ function ViewCareer(props: DataIdProps) {
     careerReqs : "Some units",
     careerTraits : "Some traits"
   };
+
+  //Returns user to their previous page
+  function BackFunction()
+  {
+    history.goBack();
+  }
 
   return (
       <div>
@@ -81,7 +80,7 @@ function ViewCareer(props: DataIdProps) {
         <Typography className="textClass" variant="h6">
           {career.careerDescription}
         </Typography>
-        <Button variant="contained" style={{
+        <Button variant="contained" onClick={ () => BackFunction() } style={{
             backgroundColor: "#FFBF00",
         }}>
           Back
