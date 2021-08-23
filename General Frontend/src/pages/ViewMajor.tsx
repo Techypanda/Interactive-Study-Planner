@@ -3,19 +3,22 @@ import Navbar from "../components/shared/Navbar";
 import { MajorProps, DataIdProps } from "../types";
 import axios, { AxiosError, AxiosResponse } from "axios";
 
-// most likey used for top down, so user looks at majors, picks one (where though?) and a pre-planned plan is generated.
-// Pretty much just a white page with a title, paragraphs and a back button, could really be
-// with raw HTML tbh
+/*
+ * Author: Matthew Loe
+ * Student Id: 19452425
+ * Date Last Modified: 23/08/2021
+ * Description: Page for viewing the detailed information on a major
+ */
+
 function ViewMajor(props: DataIdProps) {
   //Get major information from table
   const major : MajorProps = {
     majorCode : "Hello",
     majorName: "haoghoehg",
     majorDescription : "ahfj",
-    majorUnits : "ahgiod",
-    majorPreReqs : "dfiophjiah",
-    majorCoReqs : "ajghoaeh",
-    majorAntiReqs : "aghoifh"
+    majorCredits: 200,
+    majorUnits : ["ahgiod"],
+    majorAntiReqs : ["ajghoaeh"],
   };
 
   return (
@@ -28,9 +31,9 @@ function ViewMajor(props: DataIdProps) {
         <Typography variant="h6">
           {major.majorDescription}
         </Typography>
-        <Typography variant="h4">Industry</Typography>
+        <Typography variant="h4">Credits</Typography>
         <Typography variant="h6">
-          {major.majorDescription}
+          {major.majorCredits}
         </Typography>
         <Typography variant="h4">Requirements</Typography>
         <Typography variant="h6">
