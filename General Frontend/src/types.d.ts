@@ -1,3 +1,5 @@
+import internal from "stream";
+
 export interface DefaultProps {
   className?: string;
   username?: string;
@@ -34,7 +36,8 @@ export interface MajorProps extends DefaultProps {
   majorCode : string;
   majorName : string;
   majorDescription : string;
-  majorUnits : string;
+  majorCredits: integer;
+  majorUnits : string[];
   majorAntiReqs : string[];
 }
 
@@ -44,6 +47,7 @@ export interface UnitProps extends DefaultProps {
 }
 
 export interface ListDataProps extends DefaultProps {
+  sectionHeading: string;
   list: string[];
 }
 
