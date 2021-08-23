@@ -11,6 +11,7 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 import Error from "../components/shared/Error";
 import { BounceLoader } from "react-spinners";
 
+
 /*
  * Author: Matthew Loe
  * Student Id: 19452425
@@ -69,7 +70,7 @@ function ViewCareer(props: DataIdProps) {
           <Box alignContent="flex-start" >
             <TextSection sectionHeading="Industry" sectionContent= {career.careerIndustry}/>
             <TextSection sectionHeading="Description" sectionContent= {career.careerDescription}/>
-            
+          
             <ListSection sectionHeading="Compatible Traits" list= {career.careerTraits}/>
           </Box>
         </Paper>
