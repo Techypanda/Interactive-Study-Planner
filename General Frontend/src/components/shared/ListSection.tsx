@@ -1,14 +1,17 @@
-import { List, ListItem, ListItemText, Typography } from "@material-ui/core";
+import { List, ListItem, ListItemIcon, ListItemText, SvgIcon, Typography } from "@material-ui/core";
 import { ListDataProps }  from "../../types";
 import styled from "styled-components";
+import BulletPointIcon from "./BulletPointIcon";
+
 
 /*
  * Author: Matthew Loe
  * Student Id: 19452425
  * Date Last Modified: 23/08/2021
- * Description: Component that returns a formated list section composed from list data.
+ * Description: Returns formated list from provided data
  */
 
+//Returns list
 function ListSection(props: ListDataProps)
 {
     //Create list
@@ -16,6 +19,9 @@ function ListSection(props: ListDataProps)
     {
         return(
             <ListItem>
+                <ListItemIcon>
+                    <BulletPointIcon />
+                </ListItemIcon>
                 <ListItemText primary={item} />
             </ListItem>
         );
@@ -36,5 +42,6 @@ function ListSection(props: ListDataProps)
 export default styled(ListSection)`
 .sectionHeading {
     text-align: left;
+    margin: 0px 0px 0px 14px;
 }
 `;
