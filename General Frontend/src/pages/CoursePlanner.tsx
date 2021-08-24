@@ -1,12 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {DefaultProps} from "../types";
-import {Typography} from "@material-ui-core";
+import {Typography} from "@material-ui/core";
 
 // POC of class selection into an organised plan separated by semester, assuming full time study.
 // Prerequisites, co-requisites and antirequisites TBD, as well as semester availability
 
 // dummy classes with just names and codes
+<<<<<<< HEAD
 const unit_list: Array<{UnitName: string, UnitCode: string}> = [
+=======
+
+let unit_list: {UnitName: string, UnitCode: string}[] = [
+>>>>>>> dev_sprint
     {UnitName: "Distributed Computing", UnitCode: "COMP3006"},
     {UnitName: "Artificial and Machine Intelligence", UnitCode: "COMP3001"},
     {UnitName: "Human Computer Interface", UnitCode: "ISAD3001"},
@@ -27,4 +32,8 @@ function CoursePlanner() {
     );
 }
 
+<<<<<<< HEAD
 export default style(CoursePlanner)
+=======
+export default CoursePlanner;
+>>>>>>> dev_sprint

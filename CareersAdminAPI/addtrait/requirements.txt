@@ -1,2 +1,5 @@
 requests
 boto3
+python-jose
+fast_luhn
+icecream
