@@ -14,7 +14,7 @@ from botocore.exceptions import ClientError
 #Author: Matthew Loe
 #Student Id: 19452425
 #Date Created: 25/05/2021
-#Date Last Modified: 17/08/2021
+#Date Last Modified: 21/08/2021
 #Description: Add trait operation handler
 
 #JWT token validation
@@ -91,31 +91,10 @@ def addTrait(body: dict) -> dict:
     try:
         #Attempt to load table - checks if table exists
         table.load()
-    except Exception:   #TODO - Find out import for ResourceNotFoundException
-        #Create table
-        table = db.create_table(
-            TableName='DevTraits',
-            KeySchema=[
-                {
-                    'AttributeName': 'Id',
-                    'KeyType': 'HASH'
-                }
-            ],
-            AttributeDefinitions=[
-                {
-                    'AttributeName': 'Id',
-                    'AttributeType': 'S'
-                }
-            ],
-            ProvisionedThroughput={
-                'ReadCapacityUnits': 1,
-                'WriteCapacityUnits': 1
-            }
-        )
-
-        ic("Unable to handle request, DevTraits table does not exist, table is now being created.")
-        #Return bad request indicating table does not exist and is being created
-        return badRequest("Table does not exist. Table is now being created. Please try again.")
+    except Exception:
+        ic("Unable to handle request, DevTraits table does not exist.")
+        #Return bad request indicating table does not exist
+        return badRequest("Table does not exist. Please try again.")
     else:
         try:
             #Retrieve data
