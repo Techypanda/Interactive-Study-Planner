@@ -1,4 +1,4 @@
-import { List, ListItem, ListItemIcon, ListItemText, SvgIcon, Typography } from "@material-ui/core";
+import { List, ListItem, ListItemIcon, ListItemText, Typography } from "@material-ui/core";
 import { ListDataProps }  from "../../types";
 import styled from "styled-components";
 import BulletPointIcon from "./BulletPointIcon";
@@ -7,7 +7,7 @@ import BulletPointIcon from "./BulletPointIcon";
 /*
  * Author: Matthew Loe
  * Student Id: 19452425
- * Date Last Modified: 23/08/2021
+ * Date Last Modified: 24/08/2021
  * Description: Returns formated list from provided data
  */
 
