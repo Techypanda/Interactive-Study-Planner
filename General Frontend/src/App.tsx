@@ -5,6 +5,7 @@ import Landing from './pages/Landing';
 import Error from './components/shared/Error';
 import ViewAllCareers from './pages/ViewAllCareers';
 import PlannerInitialPage from './pages/PlannerInitialPage';
+import CoursePlanner from './pages/CoursePlanner';
 
 // could just render the landing page from the index file but opportunities for other
 // setup could be done here
