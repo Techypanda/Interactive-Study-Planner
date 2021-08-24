@@ -40,11 +40,11 @@ function ListSection(props: ListDataProps)
     const dataList = props.list.map(function(item)
     {
         return(
-            <ListItem button onClick={() => InfoNav(item)}>
+            <ListItem>
                 <ListItemIcon>
                     <BulletPointIcon />
                 </ListItemIcon>
-                <ListItemText primary={item} />
+                <ListItemText className="listItemText" primary={item} onClick={() => InfoNav(item)}/>
             </ListItem>
         );
     });
@@ -54,7 +54,7 @@ function ListSection(props: ListDataProps)
             <Typography variant="h4" className="sectionHeading">
                 {props.sectionHeading}
             </Typography>
-            <List>
+            <List dense>
                 {dataList}
             </List>
         </div>
@@ -65,5 +65,11 @@ export default styled(ListSection)`
 .sectionHeading {
     text-align: left;
     margin: 0px 0px 0px 14px;
+}
+
+.MuiListItemText-root {
+    cursor:pointer;
+    color:blue;
+    text-decoration:underline;
 }
 `;

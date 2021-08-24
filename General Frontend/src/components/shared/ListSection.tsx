@@ -32,7 +32,7 @@ function ListSection(props: ListDataProps)
             <Typography variant="h4" className="sectionHeading">
                 {props.sectionHeading}
             </Typography>
-            <List>
+            <List dense>
                 {dataList}
             </List>
         </div>
