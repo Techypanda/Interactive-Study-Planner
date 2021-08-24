@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { BrowserRouter as Router } from "react-router-dom";
-import { Box, Button, Container,Grid, Typography, Card, CardHeader, CardContent, CardMedia, TextField} from "@material-ui/core";
+import { Box, Button, Container,Grid, Typography, Card, CardHeader, CardContent, TextField} from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { useQuery, useQueryClient } from "react-query";
 import styled from "styled-components";
@@ -86,8 +86,6 @@ function ViewAllCareers(props: DefaultProps) {
 		    <Button  variant='contained' className="searchbtn">Search</Button>
 		</Box>
 		
-		{/* dummy example of entry, will be filled dynamically on api call on startup*/}
-		{/* Actual contents will be filled in a list of such Card items */}
 		{careers_list.map((x) => (
 		    <div className="career-option">
 			<Card variant="outlined" className={classes.root}>
@@ -113,22 +111,5 @@ function ViewAllCareers(props: DefaultProps) {
 	</>
     );
 }
-
-/* delete this and re-write later what the fuck was I thinkin */
-/* function Search(careers_list: CareerProps, career_query: string) {
- *     return careers_list.filter(career) => {
- * 	if (career.career_title == career_query) {
- * 	    return career_query.some((new_career) => {
- * 		return (
- * 		    career[new_career]
- * 			.toString()
- * 			.towLowerCase()
- * 			.indexOf(career)
- * 		)
- * 	    })
- * 	}
- *     }
- * }
- *  */
 
 export default ViewAllCareers;

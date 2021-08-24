@@ -5,6 +5,7 @@ import {useHistory} from "react-router-dom";
 
 // pages
 import ViewAllCareers from "./ViewAllCareers";
+import PlannerInitialPage from "./PlannerInitialPage";
 
 // stock images
 import MedicalImage from "../static/doctor_teacher.jpg";
@@ -46,7 +47,7 @@ function Landing() {
 	    <Grid container spacing={4} justify="center">
 		<Grid item xs={4}>
 		    <div className="card-body">
-			<Card variant="outlined" > 
+			<Card variant="outlined" onClick = {() => history.push('./PlannerInitialPage') }> 
 			    <CardHeader title="Plan Your Medical Course"/>
 			    <CardContent>
 				{/* <img src={MedicalImage} alt="medical stock image"/> */}
