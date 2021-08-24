@@ -2,6 +2,7 @@ import { Box, Button, Paper, Typography } from "@material-ui/core";
 import Navbar from "../components/shared/Navbar";
 import TextSection from "../components/shared/TextSection"
 import ListSection from "../components/shared/ListSection"
+import ListSectionWithNav from "../components/shared/ListSectionWithNav"
 import { CareerProps, DataIdProps, ErrorProps, PromptData } from "../types";
 import styled from "styled-components";
 import { useState } from "react";
@@ -15,7 +16,7 @@ import { BounceLoader } from "react-spinners";
 /*
  * Author: Matthew Loe
  * Student Id: 19452425
- * Date Last Modified: 23/08/2021
+ * Date Last Modified: 24/08/2021
  * Description: Page for viewing the detailed information on a career
  */
 
@@ -70,7 +71,7 @@ function ViewCareer(props: DataIdProps) {
           <Box alignContent="flex-start" >
             <TextSection sectionHeading="Industry" sectionContent= {career.careerIndustry}/>
             <TextSection sectionHeading="Description" sectionContent= {career.careerDescription}/>
-          
+            <ListSectionWithNav sectionHeading="Suggested Career Requirements" list= {career.careerReqs}/>
             <ListSection sectionHeading="Compatible Traits" list= {career.careerTraits}/>
           </Box>
         </Paper>
