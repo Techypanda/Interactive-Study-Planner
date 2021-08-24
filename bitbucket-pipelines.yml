@@ -4,6 +4,7 @@ pipelines:
     '**':
       - parallel: # INFRASTRUCTURE i.e NO DEPENDENCIES AND NO TESTING
           - step:
+              runs-on: self.hosted
               name: "Deploy User Accounts"
               image: atlassian/pipelines-awscli
               script:
@@ -12,6 +13,7 @@ pipelines:
                 - echo "Deploying User Accounts"
                 - aws cloudformation deploy --template-file "./Infrastructure Templates/RootTemplate.yaml" --stack-name Capstone-3-Developers --no-fail-on-empty-changeset --capabilities CAPABILITY_NAMED_IAM
           - step:
+              runs-on: self.hosted
               name: "Deploy Databases"
               image: atlassian/pipelines-awscli
               script:
@@ -20,6 +22,7 @@ pipelines:
                 - echo "Deploying Developer Databases"
                 - aws cloudformation deploy --template-file "./Infrastructure Templates/DevDatabases.yaml" --stack-name DevDB --no-fail-on-empty-changeset
           - step:
+              runs-on: self.hosted
               name: "Deploy Userpools"
               image: atlassian/pipelines-awscli
               script:
@@ -28,6 +31,7 @@ pipelines:
                 - echo "Deploying Userpools"
                 - aws cloudformation deploy --template-file "./Infrastructure Templates/Userpools.yaml" --stack-name Userpools --no-fail-on-empty-changeset
           - step:
+              runs-on: self.hosted
               name: "Deploy Public Repositories"
               image: atlassian/pipelines-awscli
               script:
@@ -37,6 +41,7 @@ pipelines:
                 - aws cloudformation deploy --template-file "./Infrastructure Templates/ECRRepositories.yaml" --stack-name ECRRepositories --no-fail-on-empty-changeset
       - parallel:   # TESTING/BUILDING/DEPLOY STAGES
           - step: 
+              runs-on: self.hosted
               name: "Build, Test, Deploy Unit Admin API"
               image: python:3.7.2
               script:
@@ -53,6 +58,7 @@ pipelines:
               services:
                 - docker
           - step: 
+              runs-on: self.hosted
               name: "Build, Test, Deploy Career Admin API"
               image: python:3.7.2
               script:
@@ -68,6 +74,7 @@ pipelines:
               services:
                 - docker
           - step: 
+              runs-on: self.hosted
               name: "Build, Test, Deploy Careers API"
               image: python:3.7.2
               script:
@@ -88,6 +95,7 @@ pipelines:
               services:
                 - docker
           - step: 
+              runs-on: self.hosted
               name: "Build, Test, Deploy Unit API"
               image: python:3.7.2
               script:
