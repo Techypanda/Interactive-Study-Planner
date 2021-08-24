@@ -27,5 +27,4 @@ function CoursePlanner() {
 	</>
     );
 }
-
 export default CoursePlanner;
