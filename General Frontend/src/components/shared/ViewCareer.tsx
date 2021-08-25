@@ -1,4 +1,4 @@
-import { Box, Button, Paper, Typography } from "@material-ui/core";
+import { Box, Button, Grid, Paper, Typography } from "@material-ui/core";
 import TextSection from "./TextSection"
 import ListSection from "./ListSection"
 import NavListSection from "./NavListSection"
@@ -10,6 +10,7 @@ import { useHistory } from "react-router-dom";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import Error from "./Error";
 import { BounceLoader } from "react-spinners";
+import { classicNameResolver } from "typescript";
 
 
 /*
@@ -61,11 +62,23 @@ function ViewCareer(props: DataIdProps) {
   }
 
   return (
-      <div>
+      <div className={props.className}>
         <Paper>
-          <Typography id="careerTitle" variant="h3">
-              {career.careerName}
-          </Typography>
+          <Grid className="titleBar" container direction="row">
+            <Grid item>
+              <Button className="backButton" variant="contained" onClick={() => BackFunction()} >
+                Back
+              </Button>
+            </Grid>
+            <Grid item>
+              <Typography id="careerTitle" variant="h3">
+                {career.careerName}
+              </Typography>
+            </Grid>
+            <Grid item >
+              {/*Empty grid item to make title more centre. */}
+            </Grid>
+          </Grid>
           <Box alignContent="flex-start" >
             <TextSection sectionHeading="Industry" sectionContent= {career.careerIndustry}/>
             <TextSection sectionHeading="Description" sectionContent= {career.careerDescription}/>
@@ -73,15 +86,17 @@ function ViewCareer(props: DataIdProps) {
             <ListSection sectionHeading="Compatible Traits" list= {career.careerTraits}/>
           </Box>
         </Paper>
-        <Button variant="contained" onClick={ () => BackFunction() } style={{
-            backgroundColor: "#FFBF00",
-            margin: "12px",
-          }}>
-          Back
-        </Button>
       </div>
   );
 }
 
 export default styled(ViewCareer)`
+.backButton {
+  background-color: #FFBF00;
+  margin: 14px;
+}
+.titleBar {
+  justify-content: space-between;
+  align-items: center;
+}
 `;
