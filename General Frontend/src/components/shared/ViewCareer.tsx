@@ -1,22 +1,21 @@
 import { Box, Button, Paper, Typography } from "@material-ui/core";
-import Navbar from "../components/shared/Navbar";
-import TextSection from "../components/shared/TextSection"
-import ListSection from "../components/shared/ListSection"
-import ListSectionWithNav from "../components/shared/ListSectionWithNav"
-import { CareerProps, DataIdProps, ErrorProps, PromptData } from "../types";
+import TextSection from "./TextSection"
+import ListSection from "./ListSection"
+import NavListSection from "./NavListSection"
+import { CareerProps, DataIdProps, ErrorProps, PromptData } from "../../types";
 import styled from "styled-components";
 import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { useHistory } from "react-router-dom";
 import axios, { AxiosError, AxiosResponse } from "axios";
-import Error from "../components/shared/Error";
+import Error from "./Error";
 import { BounceLoader } from "react-spinners";
 
 
 /*
  * Author: Matthew Loe
  * Student Id: 19452425
- * Date Last Modified: 24/08/2021
+ * Date Last Modified: 25/08/2021
  * Description: Page for viewing the detailed information on a career
  */
 
@@ -46,7 +45,7 @@ function ViewCareer(props: DataIdProps) {
     return <Error promptTitle="Request Error" promptContent={error} showPrompt={true} onAccept={() => BackFunction() } />
   });
 
-  //Parse data
+  //Mock data
   const career : CareerProps = {
     careerName : "Test",
     careerDescription : "A rewarding career in medial research. asfdddddddddddddddddddddddddddddddddd dddddddddddddddddddddddddddddd ddddddddddddddddddddddddddddddd ddddddddd dddddddddddddddddasssssddddddddddgagasdgasgfsagsgasgddddddddddddddddddddddddddddddasssssddddddddddgagasdgasgfsagsgasgddddddddddddddddddddddddddddddddddddasssssddddddddddgagasdgasgfsagsgasgdddddddddddddddddddddddddddd",
@@ -63,7 +62,6 @@ function ViewCareer(props: DataIdProps) {
 
   return (
       <div>
-        <Navbar/>
         <Paper>
           <Typography id="careerTitle" variant="h3">
               {career.careerName}
@@ -71,7 +69,7 @@ function ViewCareer(props: DataIdProps) {
           <Box alignContent="flex-start" >
             <TextSection sectionHeading="Industry" sectionContent= {career.careerIndustry}/>
             <TextSection sectionHeading="Description" sectionContent= {career.careerDescription}/>
-            <ListSectionWithNav sectionHeading="Suggested Career Requirements" list= {career.careerReqs}/>
+            <NavListSection sectionHeading="Suggested Career Requirements" list= {career.careerReqs}/>
             <ListSection sectionHeading="Compatible Traits" list= {career.careerTraits}/>
           </Box>
         </Paper>
@@ -86,5 +84,4 @@ function ViewCareer(props: DataIdProps) {
 }
 
 export default styled(ViewCareer)`
-
 `;

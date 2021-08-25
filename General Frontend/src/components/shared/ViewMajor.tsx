@@ -1,12 +1,12 @@
 import {Button, Typography} from "@material-ui/core";
-import Navbar from "../components/shared/Navbar";
-import { MajorProps, DataIdProps } from "../types";
+import Navbar from "./Navbar";
+import { MajorProps, DataIdProps } from "../../types";
 import axios, { AxiosError, AxiosResponse } from "axios";
 
 /*
  * Author: Matthew Loe
  * Student Id: 19452425
- * Date Last Modified: 23/08/2021
+ * Date Last Modified: 25/08/2021
  * Description: Page for viewing the detailed information on a major
  */
 
@@ -23,7 +23,6 @@ function ViewMajor(props: DataIdProps) {
 
   return (
       <div>
-        <Navbar/>
         <Typography variant="h2">
           {major.majorCode} - {major.majorName}
         </Typography>
