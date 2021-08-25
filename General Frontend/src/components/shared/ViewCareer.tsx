@@ -26,7 +26,7 @@ function ViewCareer(props: DefaultProps) {
     "CareerId" : id
   };
 
-  //TODO - Check regarding CORS
+  //TODO - Check regarding CORS & loading screen for when waiting
   axios({
     method: 'POST',
     url: 'https://uiqb5tsrsc.execute-api.ap-southeast-2.amazonaws.com/Prod/events/event-get-career',//'${process.env.CAREER_API}/events/event-get-career',
