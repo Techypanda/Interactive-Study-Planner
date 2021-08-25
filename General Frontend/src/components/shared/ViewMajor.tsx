@@ -22,7 +22,7 @@ function ViewMajor(props: DefaultProps)
   const id = history.location.state;  //Retrieve id for major information to get
 
   //Mock data
-  const major : MajorProps = {
+  let major : MajorProps = {
     majorCode : id as string,
     majorName: "haoghoehg",
     majorDescription : "ahfj",
@@ -33,7 +33,7 @@ function ViewMajor(props: DefaultProps)
   
 
   //TODO - loading screen for when waiting
-  axios.get('${process.env.REACT_APP_UNITS_API}/getmajor',
+  axios.get('https://c7u1a16o0f.execute-api.ap-southeast-2.amazonaws.com/Prod/getmajor',//'${process.env.REACT_APP_UNITS_API}/getmajor',
     { params:
       {
         code : id
@@ -46,11 +46,13 @@ function ViewMajor(props: DefaultProps)
   )
   .then( response => () => {
     //Parse response into major props
+    console.log("Success");
     major.majorName = response.data.Name;
     major.majorCredits = response.data.Credits;
     major.majorDescription = response.data.Description;
     major.majorUnits = response.data.Units;
     major.majorAntiReqs = response.data.SpecAntiReqs;
+    console.log(response.data);
   })
   .catch( error => () => {
     //Return error
