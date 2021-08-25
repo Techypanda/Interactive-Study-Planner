@@ -4,14 +4,11 @@ import ListSection from "./ListSection"
 import NavListSection from "./NavListSection"
 import { CareerProps, DataIdProps, ErrorProps, PromptData } from "../../types";
 import styled from "styled-components";
-import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { useHistory } from "react-router-dom";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import Error from "./Error";
 import { BounceLoader } from "react-spinners";
-import { classicNameResolver } from "typescript";
-
 
 /*
  * Author: Matthew Loe
@@ -22,14 +19,12 @@ import { classicNameResolver } from "typescript";
 
 //Retrieves career information and returns in html
 function ViewCareer(props: DataIdProps) {
+  const history = useHistory();
+  const id = history.location.state;
   //Get career information from table
   const payload = {
-    "CareerId" : props.id
+    "CareerId" : id
   };
-
-  const history = useHistory();
-  const [error, setError] = useState<PromptData>({ promptTitle: "", promptContent: "", showPrompt: false });
-  const [loading, setLoading] = useState(false);
 
   //TODO - Check regarding CORS
   axios({

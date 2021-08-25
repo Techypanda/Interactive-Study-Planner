@@ -20,19 +20,19 @@ function InfoNav(props: String)
     if (codeHead == majorSpecHeads[0])
     {
         //Nav to major info page
-        history.push('/ViewMajor')
+        history.push('/ViewMajor', { props })
         console.log("Nav to major");
     }
     else if (codeHead == majorSpecHeads[1])
     {
         //Nav to spec info page
-        history.push('/ViewSpecialisation')
+        history.push('/ViewSpecialisation', { props })
         console.log("Nav to spec");
     }
     else
     {
         //Nav to unit info page
-        history.push('/ViewUnit')
+        history.push('/ViewUnit', { props })
         console.log("Nav to unit");
     }
     //END IF
