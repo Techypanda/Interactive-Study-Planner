@@ -6,6 +6,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 const client = new QueryClient();
+
 ReactDOM.render(
   <React.StrictMode>
     <QueryClientProvider client={client}>
