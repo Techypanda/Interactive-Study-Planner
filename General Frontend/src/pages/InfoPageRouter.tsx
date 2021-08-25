@@ -2,6 +2,8 @@ import {BrowserRouter, Switch, Route} from "react-router-dom";
 import { DefaultProps } from "../types";
 import ViewCareer from "../components/shared/ViewCareer";
 import ViewMajor from "../components/shared/ViewMajor";
+import ViewSpecialization from "../components/shared/ViewSpecialization";
+import ViewUnit from "../components/shared/ViewUnit";
 
 /*
  * Author: Matthew Loe
