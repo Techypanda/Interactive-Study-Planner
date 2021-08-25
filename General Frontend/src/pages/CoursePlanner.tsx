@@ -1,12 +1,12 @@
+import Navbar from "../components/shared/Navbar";
 import {DefaultProps} from "../types";
-import styled from "styled-components";
 import {Typography} from "@material-ui/core";
 
 // POC of class selection into an organised plan separated by semester, assuming full time study.
 // Prerequisites, co-requisites and antirequisites TBD, as well as semester availability
 
 // dummy classes with just names and codes
-const unit_list: Array<{UnitName: string, UnitCode: string}> = Array(
+let unit_list: {UnitName: string, UnitCode: string}[] = [
     {UnitName: "Distributed Computing", UnitCode: "COMP3006"},
     {UnitName: "Artificial and Machine Intelligence", UnitCode: "COMP3001"},
     {UnitName: "Human Computer Interface", UnitCode: "ISAD3001"},
@@ -14,7 +14,7 @@ const unit_list: Array<{UnitName: string, UnitCode: string}> = Array(
     {UnitName: "Computer Graphics", UnitCode: "COMP2006"},
     {UnitName: "Programming Design and Implementation", UnitCode: "COMP1001"},
     {UnitName: "Unix and C Programming", UnitCode: "COMP2003"}
-);
+];
 
 // renders the other components
 // is this how you're meant to use React? Who knows
@@ -22,10 +22,22 @@ function CoursePlanner() {
 
     return (
 	<>
+	    <Navbar/>
 
 	</>
     );
 }
 
-export default styled(CoursePlanner)`
-`;
+// scrollable list to the right of the screen, dynamically shows available courses
+// as pre-reqs and anti-reqs are made, rendering and unrendering as necessary.
+function CourseDisplay() {
+    
+}
+
+// displays selected courses drag and dropped
+// divided into semesters
+function SelectionArea() {
+    
+}
+
+export default CoursePlanner;
