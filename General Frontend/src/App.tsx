@@ -6,8 +6,7 @@ import Error from './components/shared/Error';
 import ViewAllCareers from './pages/ViewAllCareers';
 import PlannerInitialPage from './pages/PlannerInitialPage';
 import CoursePlanner from './pages/CoursePlanner';
-
-import ViewCareer from './components/shared/ViewCareer';
+import InfoPageRouter from './pages/InfoPageRouter';
 
 // could just render the landing page from the index file but opportunities for other
 // setup could be done here
@@ -28,6 +27,9 @@ function App() {
 		    <Route exact path="/CoursePlanner">
 			<CoursePlanner/>
 		    </Route>
+			<Route path="/InfoPage">
+				<InfoPageRouter/>
+			</Route>
 		    <Route>
 			<h1>Error 404 not found</h1> 
 		    </Route>
