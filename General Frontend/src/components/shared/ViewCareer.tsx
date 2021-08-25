@@ -2,7 +2,7 @@ import { Box, Button, Grid, Paper, Typography } from "@material-ui/core";
 import TextSection from "./TextSection"
 import ListSection from "./ListSection"
 import NavListSection from "./NavListSection"
-import { CareerProps, DataIdProps, ErrorProps, PromptData } from "../../types";
+import { CareerProps, DefaultProps, ErrorProps, PromptData } from "../../types";
 import styled from "styled-components";
 import { useMutation, useQueryClient } from "react-query";
 import { useHistory } from "react-router-dom";
@@ -18,7 +18,7 @@ import { BounceLoader } from "react-spinners";
  */
 
 //Retrieves career information and returns in html
-function ViewCareer(props: DataIdProps) {
+function ViewCareer(props: DefaultProps) {
   const history = useHistory();
   const id = history.location.state;
   //Get career information from table

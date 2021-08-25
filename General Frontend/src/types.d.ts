@@ -10,16 +10,12 @@ export interface TextSectionProps extends DefaultProps {
   sectionContent: string;
 }
 
-export interface DataIdProps extends DefaultProps {
-  id: string;
-}
-
 export interface CareerEntryProps extends DefaultProps {
   careerTitle: string;
   careerContent: string;
 }
 
-export interface CareerProps extends DefaultProps {
+export interface CareerProps {
   careerName: string;
   careerDescription: string;
   careerIndustry: string;
@@ -32,7 +28,7 @@ export interface MajorEntryProps extends DefaultProps {
   majorContent: string;
 }
 
-export interface MajorProps extends DefaultProps {
+export interface MajorProps {
   majorCode : string;
   majorName : string;
   majorDescription : string;
