@@ -7,7 +7,7 @@ export interface DefaultProps {
 
 export interface TextSectionProps extends DefaultProps {
   sectionHeading: string;
-  sectionContent: string;
+  sectionContent?: string;
 }
 
 export interface CareerEntryProps extends DefaultProps {
@@ -16,11 +16,11 @@ export interface CareerEntryProps extends DefaultProps {
 }
 
 export interface CareerProps {
-  careerName: string;
-  careerDescription: string;
-  careerIndustry: string;
-  careerReqs: string[];
-  careerTraits: string[];
+  careerName : string;
+  careerDescription? : string;
+  careerIndustry? : string;
+  careerReqs? : string[];
+  careerTraits? : string[];
 }
 
 export interface MajorEntryProps extends DefaultProps {
@@ -30,11 +30,11 @@ export interface MajorEntryProps extends DefaultProps {
 
 export interface MajorProps {
   majorCode : string;
-  majorName : string;
-  majorDescription : string;
-  majorCredits: integer;
-  majorUnits : string[];
-  majorAntiReqs : string[];
+  majorName? : string;
+  majorDescription? : string;
+  majorCredits? : integer;
+  majorUnits? : string[];
+  majorAntiReqs? : string[];
 }
 
 export interface UnitProps extends DefaultProps {
@@ -44,7 +44,7 @@ export interface UnitProps extends DefaultProps {
 
 export interface ListDataProps extends DefaultProps {
   sectionHeading: string;
-  list: string[];
+  list?: string[];
 }
 
 export interface PromptData {

@@ -3,68 +3,104 @@ import TextSection from "./TextSection"
 import NavListSection from "./NavListSection"
 import { MajorProps, DefaultProps, ErrorProps, PromptData } from "../../types";
 import styled from "styled-components";
-import { useMutation, useQueryClient } from "react-query";
 import { useHistory } from "react-router-dom";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import Error from "./Error";
-import { BounceLoader } from "react-spinners";
+import { useEffect, useState } from "react";
+import LoadingScreen from "./Loading";
 
 /*
  * Author: Matthew Loe
  * Student Id: 19452425
- * Date Last Modified: 25/08/2021
+ * Date Last Modified: 27/08/2021
  * Description: Page for viewing the detailed information on a major
  */
 
 function ViewMajor(props: DefaultProps)
 {
   const history = useHistory();
-  const id = history.location.state;  //Retrieve id for major information to get
+  const id = history.location.state as string;  //Retrieve id for major information to get
 
   //Mock data
-  let major : MajorProps = {
-    majorCode : id as string,
-    majorName: "haoghoehg",
-    majorDescription : "ahfj",
-    majorCredits: 200,
-    majorUnits : ["ahgiod"],
-    majorAntiReqs : ["ajghoaeh"],
+  let mock : MajorProps = {
+    majorCode : id
   };
-  
 
-  //TODO - loading screen for when waiting
-  axios.get('https://c7u1a16o0f.execute-api.ap-southeast-2.amazonaws.com/Prod/getmajor',//'${process.env.REACT_APP_UNITS_API}/getmajor',
-    { params:
-      {
-        code : id
-      },
-      headers:
-      {
-        'Content-Type': 'application/json'
-      }
+  const [isLoading, setLoading ] = useState(true);
+  const [isError, setError ] = useState(false);
+  const [error, setErrorContent] = useState();
+  const [major, setMajor] = useState<MajorProps>(mock);
+  
+  //Asynchronously fetch data
+  async function fetchData(id: string)
+  {
+    try
+    {
+      const {data} = await axios.get(
+        'https://c7u1a16o0f.execute-api.ap-southeast-2.amazonaws.com/Prod/getmajor',//'${process.env.REACT_APP_UNITS_API}/getmajor',
+          { params:
+            {
+              code : id
+            },
+            headers:
+            {
+              'Content-Type': 'application/json'
+            }
+          }
+      );
+
+      let resp : MajorProps = {
+        majorCode : data[0].MajorCode,
+        majorName : data[0].Name,
+        majorCredits : data[0].Credits,
+        majorDescription : data[0].Description,
+        majorUnits : data[0].Units,
+        majorAntiReqs : data[0].SpecAntiReqs
+      };
+      
+      setMajor(resp);
+      setLoading(false);
     }
-  )
-  .then( response => () => {
-    //Parse response into major props
-    console.log("Success");
-    major.majorName = response.data.Name;
-    major.majorCredits = response.data.Credits;
-    major.majorDescription = response.data.Description;
-    major.majorUnits = response.data.Units;
-    major.majorAntiReqs = response.data.SpecAntiReqs;
-    console.log(response.data);
-  })
-  .catch( error => () => {
-    //Return error
-    console.log(error);
-    return <Error promptTitle="Request Error" promptContent={error} showPrompt={true} onAccept={() => BackFunction() } />
-  });
+    catch(err)
+    {
+      if (axios.isAxiosError(err))
+      {
+        //Handle axios err
+      }
+      else
+      {
+        //Handle non axios error
+      }
+      console.error(err);
+    }
+    //END TRY-CATCH
+  }
+
+  //Get data and then refresh
+  useEffect(() => {
+    fetchData(id);
+  }, []);
 
   //Returns user to their previous page
   function BackFunction()
   {
     history.goBack();
   }
+
+  //Check if still loading/getting data
+  if (isLoading)
+  {
+    return (<LoadingScreen/>);
+  }
+  //END IF
+
+  //if (isError)
+  //{
+    //return <Error promptTitle="Request Error" promptContent={error} showPrompt={true} onAccept={() => BackFunction() } />
+    //console.log(error);
+    
+  //}
+  //END IF
 
   return (
       <div className={props.className}>

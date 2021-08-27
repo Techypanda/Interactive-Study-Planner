@@ -41,6 +41,13 @@ function InfoNav(props: String)
 //Returns list
 function NavListSection(props: ListDataProps)
 {
+    //Check if no data to display
+    if (props.list === undefined)
+    {
+        return (<div/>);
+    }
+    //END IF
+
     //Create list
     const dataList = props.list.map(function(item)
     {
