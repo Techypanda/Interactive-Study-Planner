@@ -1,6 +1,8 @@
 import React from 'react';
+import { Typography } from "@material-ui/core";
+import styled from "styled-components";
 
-export default class UnitInformationPage extends React.Component<any,any> {
+class UnitInformationPage extends React.Component<any,any> {
     constructor(UnitProps: any) {
         super(UnitProps);
         this.state = {
@@ -34,14 +36,21 @@ export default class UnitInformationPage extends React.Component<any,any> {
         return (
             <div>
                 <h1 className="header"> 
-                    {this.state.unitName} - {this.state.unitCode}
+                    <Typography variant="h3">{this.state.unitName} - {this.state.unitCode} </Typography>
                 </h1>
                 <div>
                     <p className="paragraph-text">
-                        {this.state.unitDescr} 
+                        <Typography variant="h6">{this.state.unitDescr} </Typography>
                     </p>
                 </div>
             </div>
         );
     }
 }
+
+export default styled(UnitInformationPage)`
+.header {
+    max-height: 100px;
+    overflow-y: scroll;
+}
+`;
