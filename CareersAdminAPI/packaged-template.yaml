@@ -26,6 +26,23 @@ Resources:
           Properties:
             Path: /addcareer
             Method: POST
+          Cors:
+            AllowMethods: POST
+            AllowHeaders: '''Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'''
+            AllowOrigin: '''*'''
+          GatewayResponses:
+            DEFAULT_4XX:
+              ResponseParameters:
+                Headers:
+                  Access-Control-Allow-Origin: '''*'''
+                  Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'''
+                  Access-Control-Allow-Methods: POST
+            DEFAULT_5XX:
+              ResponseParameters:
+                Headers:
+                  Access-Control-Allow-Origin: '''*'''
+                  Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'''
+                  Access-Control-Allow-Methods: POST
       Environment:
         Variables:
           DisableAuthentication:
@@ -34,8 +51,8 @@ Resources:
             Ref: Testing
       Policies:
       - DynamoDBCrudPolicy:
-          TableName: DevCareer
-      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careeradmin:addcareerfunction-16727eb9157d-python3.8-v1
+          TableName: DevCareers
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careeradmin:addcareerfunction-03522e01b350-python3.8-v1
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./addcareer
@@ -50,6 +67,23 @@ Resources:
           Properties:
             Path: /addtrait
             Method: POST
+          Cors:
+            AllowMethods: POST
+            AllowHeaders: '''Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'''
+            AllowOrigin: '''*'''
+          GatewayResponses:
+            DEFAULT_4XX:
+              ResponseParameters:
+                Headers:
+                  Access-Control-Allow-Origin: '''*'''
+                  Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'''
+                  Access-Control-Allow-Methods: POST
+            DEFAULT_5XX:
+              ResponseParameters:
+                Headers:
+                  Access-Control-Allow-Origin: '''*'''
+                  Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'''
+                  Access-Control-Allow-Methods: POST
       Environment:
         Variables:
           DisableAuthentication:
@@ -58,8 +92,8 @@ Resources:
             Ref: Testing
       Policies:
       - DynamoDBCrudPolicy:
-          TableName: DevTrait
-      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careeradmin:addtraitfunction-c4d69acb2277-python3.8-v1
+          TableName: DevTraits
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careeradmin:addtraitfunction-4fa8819ddc6e-python3.8-v1
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./addtrait
@@ -74,6 +108,23 @@ Resources:
           Properties:
             Path: /deletecareer
             Method: POST
+          Cors:
+            AllowMethods: POST
+            AllowHeaders: '''Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'''
+            AllowOrigin: '''*'''
+          GatewayResponses:
+            DEFAULT_4XX:
+              ResponseParameters:
+                Headers:
+                  Access-Control-Allow-Origin: '''*'''
+                  Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'''
+                  Access-Control-Allow-Methods: POST
+            DEFAULT_5XX:
+              ResponseParameters:
+                Headers:
+                  Access-Control-Allow-Origin: '''*'''
+                  Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'''
+                  Access-Control-Allow-Methods: POST
       Environment:
         Variables:
           DisableAuthentication:
@@ -82,8 +133,8 @@ Resources:
             Ref: Testing
       Policies:
       - DynamoDBCrudPolicy:
-          TableName: DevCareer
-      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careeradmin:deletecareerfunction-6afe0b55a5c2-python3.8-v1
+          TableName: DevCareers
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careeradmin:deletecareerfunction-dcf335914c6b-python3.8-v1
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./deletecareer
@@ -98,6 +149,23 @@ Resources:
           Properties:
             Path: /deletetrait
             Method: POST
+          Cors:
+            AllowMethods: POST
+            AllowHeaders: '''Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'''
+            AllowOrigin: '''*'''
+          GatewayResponses:
+            DEFAULT_4XX:
+              ResponseParameters:
+                Headers:
+                  Access-Control-Allow-Origin: '''*'''
+                  Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'''
+                  Access-Control-Allow-Methods: POST
+            DEFAULT_5XX:
+              ResponseParameters:
+                Headers:
+                  Access-Control-Allow-Origin: '''*'''
+                  Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'''
+                  Access-Control-Allow-Methods: POST
       Environment:
         Variables:
           DisableAuthentication:
@@ -106,8 +174,8 @@ Resources:
             Ref: Testing
       Policies:
       - DynamoDBCrudPolicy:
-          TableName: DevTrait
-      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careeradmin:deletetraitfunction-321ba9fcc85b-python3.8-v1
+          TableName: DevTraits
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careeradmin:deletetraitfunction-e9ccdc13cd3b-python3.8-v1
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./deletetrait
@@ -122,6 +190,23 @@ Resources:
           Properties:
             Path: /updatecareer
             Method: POST
+          Cors:
+            AllowMethods: POST
+            AllowHeaders: '''Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'''
+            AllowOrigin: '''*'''
+          GatewayResponses:
+            DEFAULT_4XX:
+              ResponseParameters:
+                Headers:
+                  Access-Control-Allow-Origin: '''*'''
+                  Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'''
+                  Access-Control-Allow-Methods: POST
+            DEFAULT_5XX:
+              ResponseParameters:
+                Headers:
+                  Access-Control-Allow-Origin: '''*'''
+                  Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'''
+                  Access-Control-Allow-Methods: POST
       Environment:
         Variables:
           DisableAuthentication:
@@ -130,8 +215,8 @@ Resources:
             Ref: Testing
       Policies:
       - DynamoDBCrudPolicy:
-          TableName: DevCareer
-      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careeradmin:updatecareerfunction-04f46447d2c4-python3.8-v1
+          TableName: DevCareers
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careeradmin:updatecareerfunction-67d0237dfe65-python3.8-v1
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./updatecareer
@@ -146,6 +231,23 @@ Resources:
           Properties:
             Path: /updatetrait
             Method: POST
+          Cors:
+            AllowMethods: POST
+            AllowHeaders: '''Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'''
+            AllowOrigin: '''*'''
+          GatewayResponses:
+            DEFAULT_4XX:
+              ResponseParameters:
+                Headers:
+                  Access-Control-Allow-Origin: '''*'''
+                  Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'''
+                  Access-Control-Allow-Methods: POST
+            DEFAULT_5XX:
+              ResponseParameters:
+                Headers:
+                  Access-Control-Allow-Origin: '''*'''
+                  Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'''
+                  Access-Control-Allow-Methods: POST
       Environment:
         Variables:
           DisableAuthentication:
@@ -154,8 +256,8 @@ Resources:
             Ref: Testing
       Policies:
       - DynamoDBCrudPolicy:
-          TableName: DevTrait
-      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careeradmin:updatetraitfunction-72c3859bbcec-python3.8-v1
+          TableName: DevTraits
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careeradmin:updatetraitfunction-b0b269b2090a-python3.8-v1
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./updatetrait
