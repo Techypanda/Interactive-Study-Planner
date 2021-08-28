@@ -2,6 +2,9 @@ export interface DefaultProps {
   className?: string;
   username?: string;
 }
+export interface UnitFormProps extends DefaultProps {
+  unit?: Unit
+}
 export interface CognitoJWT {
   at_hash: string
   aud: string

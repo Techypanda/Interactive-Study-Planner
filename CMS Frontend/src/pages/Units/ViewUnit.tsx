@@ -47,7 +47,7 @@ function ViewUnit(props: DefaultProps) {
                 <UnitDisplay unit={((unit.data?.data!) as unknown as Array<Unit>)[0]} />
                 <Box mt={1}>
                   <Box mr={1} display="inline-block">
-                    <Button variant="contained" color="primary" className="fixright">
+                    <Button variant="contained" color="primary" className="fixright" onClick={() => history.push(`/units/edit/${((unit.data?.data!) as unknown as Array<Unit>)[0].UnitCode}`)}>
                       <EditIcon /> - Edit
                     </Button>
                   </Box>
