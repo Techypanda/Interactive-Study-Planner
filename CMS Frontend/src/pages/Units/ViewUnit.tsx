@@ -1,10 +1,10 @@
 import { Box, Button, Container, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, LinearProgress, Typography } from "@material-ui/core";
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useState } from "react";
 import { useQueryClient } from "react-query";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { useUnit } from "../../api/hooks";
 import Error from "../../components/shared/Error";
@@ -15,19 +15,28 @@ import NotFound from "../NotFound";
 function ViewUnit(props: DefaultProps) {
   const { UnitCode } = useParams<{ UnitCode: string }>();
   const unit = useUnit(UnitCode)
-  const client = useQueryClient();
   const [displayDel, setDisplayDel] = useState(false);
+  const history = useHistory();
+  const client = useQueryClient();
+  const [loading, setLoading] = useState(false);
   function delUnit() {
-    console.log(unit.data?.data)
+    setDisplayDel(false);
+    setLoading(true);
     axios.post(`${process.env.REACT_APP_UNIT_ADMIN_API}/deleteunit`, {
       unitCode: ((unit.data?.data!) as unknown as Array<Unit>)[0].UnitCode
     }, { headers: { 'Authorization': client.getQueryData("token") } }).then(() => {
-      setDisplayDel(false);
+      setLoading(false);
+      client.removeQueries("units")
+      history.push("/units")
+    }).catch((err) => {
+      const tmp = err as AxiosError
+      setLoading(false);
+      alert(tmp.response?.data)
     })
   }
   return (
     <div className={props.className}>
-      {unit.isLoading
+      {(unit.isLoading || loading)
         ? <LinearProgress />
         : <>
           {unit.isError

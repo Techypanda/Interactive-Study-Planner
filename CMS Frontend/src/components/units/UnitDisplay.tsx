@@ -32,7 +32,6 @@ function UnitDisplay(props: UnitEntryProps) {
             <Typography variant="body1"><span className="bold">Unit Code: </span>{props.unit.UnitCode}</Typography>
             <Typography variant="body1"><span className="bold">Delivery: </span>{props.unit.Delivery}</Typography>
             <Typography variant="body1"><span className="bold">Credits: </span>{props.unit.Credits}</Typography>
-            <Typography variant="body1"><span className="bold">Credits: </span>{props.unit.Credits}</Typography>
             <span className="bold">Prerequistes: </span>
             <Box>
               {comprehendLogic(props.unit.Prerequistes).map((e, _) => <>{e}</>)}
