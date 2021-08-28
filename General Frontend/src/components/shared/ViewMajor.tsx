@@ -1,10 +1,10 @@
 import { Box, Button, Grid, Paper, Typography } from "@material-ui/core";
 import TextSection from "./TextSection"
 import NavListSection from "./NavListSection"
-import { MajorProps, DefaultProps, ErrorProps, PromptData } from "../../types";
+import { MajorProps, DefaultProps } from "../../types";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
-import axios, { AxiosError, AxiosResponse } from "axios";
+import axios, { AxiosResponse } from "axios";
 import Error from "./Error";
 import { useEffect, useState } from "react";
 import LoadingScreen from "./Loading";
@@ -12,7 +12,7 @@ import LoadingScreen from "./Loading";
 /*
  * Author: Matthew Loe
  * Student Id: 19452425
- * Date Last Modified: 27/08/2021
+ * Date Last Modified: 28/08/2021
  * Description: Page for viewing the detailed information on a major
  */
 
@@ -28,7 +28,7 @@ function ViewMajor(props: DefaultProps)
 
   const [isLoading, setLoading ] = useState(true);
   const [isError, setError ] = useState(false);
-  const [error, setErrorContent] = useState();
+  const [error, setErrorContent] = useState<string>();
   const [major, setMajor] = useState<MajorProps>(mock);
   
   //Asynchronously fetch data
@@ -49,6 +49,8 @@ function ViewMajor(props: DefaultProps)
           }
       );
 
+      console.log(data);
+
       let resp : MajorProps = {
         majorCode : data[0].MajorCode,
         majorName : data[0].Name,
@@ -63,15 +65,22 @@ function ViewMajor(props: DefaultProps)
     }
     catch(err)
     {
-      if (axios.isAxiosError(err))
+      if (err && err.response && axios.isAxiosError(err))
       {
         //Handle axios err
+        const axiosResp = err.response as AxiosResponse;
+        setErrorContent(axiosResp.data);
+        setError(true);
+        setLoading(false);
       }
       else
       {
         //Handle non axios error
+        setErrorContent("Unknown error occured during data retrieval.");
+        setError(true);
+        setLoading(false);
       }
-      console.error(err);
+      //END IF
     }
     //END TRY-CATCH
   }
@@ -94,12 +103,10 @@ function ViewMajor(props: DefaultProps)
   }
   //END IF
 
-  //if (isError)
-  //{
-    //return <Error promptTitle="Request Error" promptContent={error} showPrompt={true} onAccept={() => BackFunction() } />
-    //console.log(error);
-    
-  //}
+  if (isError)
+  {
+    return <Error promptTitle="Request Error" promptContent={error as string} showPrompt={true} onAccept={() => BackFunction() } />
+  }
   //END IF
 
   return (
