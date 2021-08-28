@@ -545,6 +545,16 @@ func attachSpecData(putItem *map[string]*dynamodb.AttributeValue, spec Specializ
 		(*putItem)["UnitAntiReqs"] = &dynamodb.AttributeValue{
 			L: unitAntiReqs,
 		}
+	} else {
+		var emptyReq []*dynamodb.AttributeValue
+		var tempReqSS []string
+		tempReqSS = append(tempReqSS, "")
+		emptyReq = append(emptyReq, &dynamodb.AttributeValue{
+			SS: convertToStringMemoryArray(tempReqSS),
+		})
+		(*putItem)["UnitAntiReqs"] = &dynamodb.AttributeValue{
+			L: emptyReq,
+		}
 	}
 	if len(spec.MajorAntiReqs) > 0 {
 		var majorAntiReqs []*dynamodb.AttributeValue
@@ -556,6 +566,16 @@ func attachSpecData(putItem *map[string]*dynamodb.AttributeValue, spec Specializ
 		(*putItem)["MajorAntiReqs"] = &dynamodb.AttributeValue{
 			L: majorAntiReqs,
 		}
+	} else {
+		var emptyReq []*dynamodb.AttributeValue
+		var tempReqSS []string
+		tempReqSS = append(tempReqSS, "")
+		emptyReq = append(emptyReq, &dynamodb.AttributeValue{
+			SS: convertToStringMemoryArray(tempReqSS),
+		})
+		(*putItem)["MajorAntiReqs"] = &dynamodb.AttributeValue{
+			L: emptyReq,
+		}
 	}
 	if len(spec.SpecAntiReqs) > 0 {
 		var specAntiReqs []*dynamodb.AttributeValue
@@ -566,6 +586,16 @@ func attachSpecData(putItem *map[string]*dynamodb.AttributeValue, spec Specializ
 		}
 		(*putItem)["SpecAntiReqs"] = &dynamodb.AttributeValue{
 			L: specAntiReqs,
+		}
+	} else {
+		var emptyReq []*dynamodb.AttributeValue
+		var tempReqSS []string
+		tempReqSS = append(tempReqSS, "")
+		emptyReq = append(emptyReq, &dynamodb.AttributeValue{
+			SS: convertToStringMemoryArray(tempReqSS),
+		})
+		(*putItem)["SpecAntiReqs"] = &dynamodb.AttributeValue{
+			L: emptyReq,
 		}
 	}
 }

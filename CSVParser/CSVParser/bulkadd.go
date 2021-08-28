@@ -128,8 +128,12 @@ func bulkAddToDB(unitList []Unit, majorList []Major, specList []Specialization) 
 				"Units": {
 					SS: convertToStringMemoryArray(spec.Units),
 				},
+				"Internal": {
+					BOOL: aws.Bool(spec.CourseInternal),
+				},
 			}
 			attachSpecData(&specItem, spec)
+
 			specWriteRequests = append(specWriteRequests, &dynamodb.WriteRequest{
 				PutRequest: &dynamodb.PutRequest{
 					Item: specItem,
