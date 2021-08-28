@@ -2,59 +2,113 @@ import { Box, Button, Grid, Paper, Typography } from "@material-ui/core";
 import TextSection from "./TextSection"
 import ListSection from "./ListSection"
 import NavListSection from "./NavListSection"
-import { CareerProps, DefaultProps, ErrorProps, PromptData } from "../../types";
+import { CareerProps, DefaultProps } from "../../types";
 import styled from "styled-components";
-import { useMutation, useQueryClient } from "react-query";
 import { useHistory } from "react-router-dom";
-import axios, { AxiosError, AxiosResponse } from "axios";
+import axios, { AxiosResponse } from "axios";
 import Error from "./Error";
-import { BounceLoader } from "react-spinners";
+import { useEffect, useState } from "react";
+import LoadingScreen from "./Loading";
 
 /*
  * Author: Matthew Loe
  * Student Id: 19452425
- * Date Last Modified: 25/08/2021
+ * Date Last Modified: 29/08/2021
  * Description: Page for viewing the detailed information on a career
  */
 
 //Retrieves career information and returns in html
-function ViewCareer(props: DefaultProps) {
+function ViewCareer(props: DefaultProps)
+{
   const history = useHistory();
-  const id = history.location.state;
+  const id = history.location.state as string; //Get target career id
+
   //Get career information from table
   const payload = {
     "CareerId" : id
   };
 
-  //TODO - Check regarding CORS & loading screen for when waiting
-  axios({
-    method: 'POST',
-    url: 'https://uiqb5tsrsc.execute-api.ap-southeast-2.amazonaws.com/Prod/events/event-get-career',//'${process.env.CAREER_API}/events/event-get-career',
-    data: JSON.stringify(payload)
-  })
-  .then( response => () => {
-    //Parse response into career props
-  })
-  .catch( error => () => {
-    //Return error
-    console.log(error);
-    return <Error promptTitle="Request Error" promptContent={error} showPrompt={true} onAccept={() => BackFunction() } />
-  });
+  const headers =
+  {
+    'Content-Type': 'application/json'
+  }
 
-  //Mock data
-  const career : CareerProps = {
-    careerName : "Test",
-    careerDescription : "A rewarding career in medial research. asfdddddddddddddddddddddddddddddddddd dddddddddddddddddddddddddddddd ddddddddddddddddddddddddddddddd ddddddddd dddddddddddddddddasssssddddddddddgagasdgasgfsagsgasgddddddddddddddddddddddddddddddasssssddddddddddgagasdgasgfsagsgasgddddddddddddddddddddddddddddddddddddasssssddddddddddgagasdgasgfsagsgasgdddddddddddddddddddddddddddd",
-    careerIndustry : "Medical research",
-    careerReqs : ["Some units", "Some units", "Some units" ],
-    careerTraits : [ "Some units", "Some units", "Some units" ],
-  };
+  const base : CareerProps = {};
+
+  const [isLoading, setLoading ] = useState(true);
+  const [isError, setError ] = useState(false);
+  const [error, setErrorContent] = useState<string>();
+  const [career, setCareer] = useState<CareerProps>(base);
+
+  //Asynchronously fetch data
+  async function fetchData(id: string)
+  {
+    try
+    {
+      const {data} = await axios.post(
+        'https://uiqb5tsrsc.execute-api.ap-southeast-2.amazonaws.com/Prod/events/event-get-career',//'${process.env.REACT_APP_CAREERS_API}/getmajor',
+        payload,
+        {
+           headers 
+        }
+      );
+
+      let resp : CareerProps = {
+        careerName : data[0].CareerName,
+        careerDescription : data[0].Description,
+        careerIndustry : data[0].Industry,
+        careerReqs : data[0].Requirements,
+        careerTraits : data[0].Traits
+      };
+      
+      setCareer(resp);
+      setLoading(false);
+    }
+    catch(err)
+    {
+      if (err && err.response && axios.isAxiosError(err))
+      {
+        //Handle axios err
+        const axiosResp = err.response as AxiosResponse;
+        setErrorContent(axiosResp.data);
+        setError(true);
+        setLoading(false);
+      }
+      else
+      {
+        //Handle non axios error
+        setErrorContent("Unknown error occured during data retrieval.");
+        setError(true);
+        setLoading(false);
+      }
+      //END IF
+    }
+    //END TRY-CATCH
+  }
 
   //Returns user to their previous page
   function BackFunction()
   {
     history.goBack();
   }
+
+  //Get data and then refresh
+  useEffect(() => {
+    fetchData(id);
+  }, []);
+
+  //Check if still loading/getting data
+  if (isLoading)
+  {
+    return (<LoadingScreen/>);
+  }
+  //END IF
+
+  if (isError)
+  {
+    return <Error promptTitle="Request Error" promptContent={error as string} showPrompt={true} onAccept={() => BackFunction() } />
+  }
+  //END IF
 
   return (
       <div className={props.className}>
