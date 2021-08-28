@@ -33,6 +33,15 @@ type Specialization struct {
 	MajorAntiReqs  [][]string `json:"majorAntiReqs"`
 }
 
+type Career struct {
+	CareerCode   string   `json:"careerCode"`
+	Name         string   `json:"name"`
+	Description  string   `json:"description"`
+	Industry     string   `json:"industry"`
+	Requirements []string `json:"requirements"`
+	Traits       []string `json:"traits"`
+}
+
 type BulkAddRequest struct {
 	CSVData string `json:"csvData"`
 }

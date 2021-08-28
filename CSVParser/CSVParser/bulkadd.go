@@ -14,11 +14,12 @@ import (
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
+	"github.com/segmentio/ksuid"
 )
 
 const STEP = 24
 
-func bulkAddToDB(unitList []Unit, majorList []Major, specList []Specialization) error {
+func bulkAddToDB(unitList []Unit, majorList []Major, specList []Specialization, careerList []Career) error {
 	var db *dynamodb.DynamoDB
 	initializeDB(&db)
 	count := 0
@@ -161,7 +162,96 @@ func bulkAddToDB(unitList []Unit, majorList []Major, specList []Specialization) 
 		}
 		count += STEP
 	}
+	count = 0
+	for count < len(careerList) {
+		var careerWriteRequests []*dynamodb.WriteRequest
+		temp := int(math.Min(float64(count)+STEP, float64(len(careerList))))
+		for _, career := range careerList[count:temp] {
+			lowercasedName := strings.ToLower(career.Name)
+			var careerReqs []*dynamodb.AttributeValue
+			for _, req := range career.Requirements {
+				careerReqs = append(careerReqs, &dynamodb.AttributeValue{
+					S: aws.String(req),
+				})
+			}
+			var careerTraits []*dynamodb.AttributeValue
+			for _, trait := range career.Traits {
+				careerTraits = append(careerTraits, &dynamodb.AttributeValue{
+					S: aws.String(trait),
+				})
+			}
+			careerItem := map[string]*dynamodb.AttributeValue{
+				"CareerId": {
+					S: aws.String(career.CareerCode),
+				},
+				"Name": {
+					S: aws.String(lowercasedName),
+				},
+				"Description": {
+					S: aws.String(career.Description),
+				},
+				"Industry": {
+					S: aws.String(career.Industry),
+				},
+				"Requirements": {
+					L: careerReqs,
+				},
+				"Traits": {
+					L: careerTraits,
+				},
+			}
+			careerWriteRequests = append(careerWriteRequests, &dynamodb.WriteRequest{
+				PutRequest: &dynamodb.PutRequest{
+					Item: careerItem,
+				},
+			})
+		}
+		if len(careerWriteRequests) > 0 {
+			input := &dynamodb.BatchWriteItemInput{
+				RequestItems: map[string][]*dynamodb.WriteRequest{
+					"DevCareers": careerWriteRequests,
+				},
+			}
+			res, err := db.BatchWriteItem(input)
+			if err != nil {
+				return fmt.Errorf("failed to batch write careers: %s", err.Error())
+			}
+			log.Println(res)
+		}
+		count += STEP
+	}
 	return nil
+}
+
+func processCareer(parser *LineParser) (Career, error) {
+	career := Career{}
+	career.CareerCode = ksuid.New().String()
+	careerName, err := parser.getLine("careername")
+	if err != nil {
+		return career, err
+	}
+	career.Name = careerName
+	careerDescription, err := parser.getLine("careerdesc")
+	if err != nil {
+		return career, err
+	}
+	career.Description = careerDescription
+	careerIndustry, err := parser.getLine("careerindustry")
+	if err != nil {
+		return career, err
+	}
+	career.Industry = careerIndustry
+	careerRequirements, err := parser.getLine("careerrequirements")
+	if err != nil {
+		return career, err
+	}
+	career.Requirements = strings.Split(careerRequirements, ",")
+	careerTraits, err := parser.getLine("careerTraits")
+	if err != nil {
+		return career, err
+	}
+	career.Traits = strings.Split(careerTraits, ",")
+	return career, nil
 }
 
 func processSpec(parser *LineParser) (Specialization, error) {
@@ -460,6 +550,7 @@ func BulkAddEndpoint(body string) events.APIGatewayProxyResponse {
 	unitList := []Unit{}
 	majorList := []Major{}
 	specList := []Specialization{}
+	careerList := []Career{}
 	scanner := bufio.NewScanner(strings.NewReader(csvData))
 	lineNumber := 0
 	linNumAdd := &lineNumber
@@ -468,6 +559,13 @@ func BulkAddEndpoint(body string) events.APIGatewayProxyResponse {
 		lineNumber++
 		dataType := scanner.Text()
 		switch strings.ToUpper(dataType) {
+		case "CAREER":
+			career, err := processCareer(&parser)
+			if err != nil {
+				log.Printf("Failed to process a career!: %s; On Line Number: %d", err.Error(), lineNumber)
+				return BadRequest(fmt.Sprintf("Failed to process a career!: %s, On Line Number: %d", err.Error(), lineNumber))
+			}
+			careerList = append(careerList, career)
 		case "UNIT":
 			unit, err := processUnit(scanner, &lineNumber)
 			if err != nil {
@@ -485,7 +583,7 @@ func BulkAddEndpoint(body string) events.APIGatewayProxyResponse {
 		case "SPECIALIZATION":
 			spec, err := processSpec(&parser)
 			if err != nil {
-				log.Printf("Failed to process a major!: %s; On Line Number: %d", err.Error(), lineNumber)
+				log.Printf("Failed to process a specialization!: %s; On Line Number: %d", err.Error(), lineNumber)
 				return BadRequest(fmt.Sprintf("Failed to process a specialization!: %s; On Line Number: %d", err.Error(), lineNumber))
 			}
 			specList = append(specList, spec)
@@ -497,7 +595,8 @@ func BulkAddEndpoint(body string) events.APIGatewayProxyResponse {
 		}
 	}
 	log.Printf("Validated %d units, %d majors, %d specializations", len(unitList), len(majorList), len(specList))
-	err = bulkAddToDB(unitList, majorList, specList)
+	log.Printf("Validated %d careers", len(careerList))
+	err = bulkAddToDB(unitList, majorList, specList, careerList)
 	if err != nil {
 		log.Printf("Failed to bulk add - %s", err.Error())
 		return BadRequest(fmt.Sprintf("Failed to bulk add - %s", err.Error()))

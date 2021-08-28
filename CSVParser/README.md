@@ -32,3 +32,10 @@
 - UnitAntiReqs (entered as groups, to split into a new group (i.e OR path) use a semicolon else its comma seperated)
 - SpecAntiReqs (entered as groups, to split into a new group (i.e OR path) use a semicolon else its comma seperated)
 - MajorAntiReqs (entered as groups, to split into a new group (i.e OR path) use a semicolon else its comma seperated)
+## Career Definition
+- CAREER
+- Name
+- Description
+- Industry
+- UnitRequirements (CSV Seperated)
+- Traits (CSV Seperated)
