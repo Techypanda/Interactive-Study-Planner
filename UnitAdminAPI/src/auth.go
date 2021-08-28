@@ -10,7 +10,7 @@ import (
 )
 
 func validateJWT(accessTokenString string) (bool, error) {
-	keySet, err := jwk.Fetch(context.TODO(), "https://cognito-idp.ap-southeast-2.amazonaws.com/ap-southeast-2_gn4KIEkx0/.well-known/jwks.json")
+	keySet, err := jwk.Fetch(context.TODO(), "https://cognito-idp.ap-southeast-2.amazonaws.com/ap-southeast-2_1EmEPwI2J/.well-known/jwks.json")
 	_, err = jwt.Parse(accessTokenString, func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodRSA); !ok {
 			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
