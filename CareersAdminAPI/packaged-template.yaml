@@ -1,0 +1,259 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'SAM Template for Careers Admin API
+
+  '
+Globals:
+  Function:
+    Timeout: 5
+Parameters:
+  Authentication:
+    Type: String
+    Description: Disable Authentication (True) or Leave It (False)
+    Default: 'False'
+  Testing:
+    Type: String
+    Description: Enable Testing mode (True) or Leave It (False)
+    Default: 'False'
+Resources:
+  AddCareerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Events:
+        AddCareer:
+          Type: Api
+          Properties:
+            Path: /addcareer
+            Method: POST
+      Environment:
+        Variables:
+          DisableAuthentication:
+            Ref: Authentication
+          Testing:
+            Ref: Testing
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName: DevCareer
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careeradmin:addcareerfunction-16727eb9157d-python3.8-v1
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./addcareer
+      DockerTag: python3.8-v1
+  AddTraitFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Events:
+        AddTrait:
+          Type: Api
+          Properties:
+            Path: /addtrait
+            Method: POST
+      Environment:
+        Variables:
+          DisableAuthentication:
+            Ref: Authentication
+          Testing:
+            Ref: Testing
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName: DevTrait
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careeradmin:addtraitfunction-c4d69acb2277-python3.8-v1
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./addtrait
+      DockerTag: python3.8-v1
+  DeleteCareerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Events:
+        DeleteCareer:
+          Type: Api
+          Properties:
+            Path: /deletecareer
+            Method: POST
+      Environment:
+        Variables:
+          DisableAuthentication:
+            Ref: Authentication
+          Testing:
+            Ref: Testing
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName: DevCareer
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careeradmin:deletecareerfunction-6afe0b55a5c2-python3.8-v1
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./deletecareer
+      DockerTag: python3.8-v1
+  DeleteTraitFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Events:
+        DeleteTrait:
+          Type: Api
+          Properties:
+            Path: /deletetrait
+            Method: POST
+      Environment:
+        Variables:
+          DisableAuthentication:
+            Ref: Authentication
+          Testing:
+            Ref: Testing
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName: DevTrait
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careeradmin:deletetraitfunction-321ba9fcc85b-python3.8-v1
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./deletetrait
+      DockerTag: python3.8-v1
+  UpdateCareerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Events:
+        UpdateCareer:
+          Type: Api
+          Properties:
+            Path: /updatecareer
+            Method: POST
+      Environment:
+        Variables:
+          DisableAuthentication:
+            Ref: Authentication
+          Testing:
+            Ref: Testing
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName: DevCareer
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careeradmin:updatecareerfunction-04f46447d2c4-python3.8-v1
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./updatecareer
+      DockerTag: python3.8-v1
+  UpdateTraitFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Events:
+        UpdateTrait:
+          Type: Api
+          Properties:
+            Path: /updatetrait
+            Method: POST
+      Environment:
+        Variables:
+          DisableAuthentication:
+            Ref: Authentication
+          Testing:
+            Ref: Testing
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName: DevTrait
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careeradmin:updatetraitfunction-72c3859bbcec-python3.8-v1
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./updatetrait
+      DockerTag: python3.8-v1
+Outputs:
+  AddCareerApi:
+    Description: API Gateway endpoint URL for Prod stage for Add Career function
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/addcareer/
+  AddTraitApi:
+    Description: API Gateway endpoint URL for Prod stage for Add Trait function
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/addtrait/
+  DeleteCareerApi:
+    Description: API Gateway endpoint URL for Prod stage for Delete Career function
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/deletecareer/
+  DeleteTraitApi:
+    Description: API Gateway endpoint URL for Prod stage for Delete Trait function
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/deletetrait/
+  UpdateCareerApi:
+    Description: API Gateway endpoint URL for Prod stage for Update Career function
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/updatecareer/
+  UpdateTraitApi:
+    Description: API Gateway endpoint URL for Prod stage for Update Trait function
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/updatetrait/
+  AddCareerFunction:
+    Description: Add Career Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+      - AddCareerFunction
+      - Arn
+  AddTraitFunction:
+    Description: Add Trait Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+      - AddTraitFunction
+      - Arn
+  DeleteCareerFunction:
+    Description: Delete Career Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+      - DeleteCareerFunction
+      - Arn
+  DeleteTraitFunction:
+    Description: Delete Trait Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+      - DeleteTraitFunction
+      - Arn
+  UpdateCareerFunction:
+    Description: Update Career Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+      - UpdateCareerFunction
+      - Arn
+  UpdateTraitFunction:
+    Description: Upate Trait Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+      - UpdateTraitFunction
+      - Arn
+  AddCareerFunctionIamRole:
+    Description: Implicit IAM Role created for Add Career function
+    Value:
+      Fn::GetAtt:
+      - AddCareerFunction
+      - Arn
+  AddTraitFunctionIamRole:
+    Description: Implicit IAM Role created for Add Trait function
+    Value:
+      Fn::GetAtt:
+      - AddTraitFunction
+      - Arn
+  DeleteCareerFunctionIamRole:
+    Description: Implicit IAM Role created for Delete Career function
+    Value:
+      Fn::GetAtt:
+      - DeleteCareerFunction
+      - Arn
+  DeleteTraitFunctionIamRole:
+    Description: Implicit IAM Role created for Delete Trait function
+    Value:
+      Fn::GetAtt:
+      - DeleteTraitFunction
+      - Arn
+  UpdateCareerFunctionIamRole:
+    Description: Implicit IAM Role created for Update Career function
+    Value:
+      Fn::GetAtt:
+      - UpdateCareerFunction
+      - Arn
+  UpdateTraitFunctionIamRole:
+    Description: Implicit IAM Role created for Update Trait function
+    Value:
+      Fn::GetAtt:
+      - UpdateTraitFunction
+      - Arn
