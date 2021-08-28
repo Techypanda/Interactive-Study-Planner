@@ -13,6 +13,26 @@
   }
 }
 
+.header {
+  text-transform: capitalize;
+  font-family: "Arial";
+  font-size: 3em;
+  display: 'flex';
+  text-align: center;
+  justify-content:'center'
+}
+
+.paragraph-text {
+  border: 3px solid rgb(0, 0, 0);
+  padding: 20px;
+  font-size: 20px;
+  font-family: "Arial";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-25%);
+  
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

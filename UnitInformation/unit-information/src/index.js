@@ -3,22 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-async function test () {
-  await fetch('https://c7u1a16o0f.execute-api.ap-southeast-2.amazonaws.com/Prod/getunit?code=ASIA3001').then((response) => { 
-    return response.json().then((data) => {
-        console.log(data);
-        return data;
-    }).catch((err) => {
-        console.log(err);
-    }) 
-  });
-}
-
-const unitValues = test();
 
 ReactDOM.render(
   <React.StrictMode>
-    <App unitValues/>
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

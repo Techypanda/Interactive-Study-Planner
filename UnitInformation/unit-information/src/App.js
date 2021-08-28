@@ -1,11 +1,10 @@
 import './App.css';
-import InformationPage from './Components/InformationPage';
-import axios from 'axios';
+import UnitInformationPage from './Components/UnitInformationPage';
 
 function App(unitValues) {
   return (
     <div className="unitInformationPage">
-      <InformationPage unitTitle={'onGod'} unitCode={'justLikeThat'} unitText={'yaylol'}/>
+      <UnitInformationPage unitCode="ASIA3001"/>
     </div>
   );
 }
