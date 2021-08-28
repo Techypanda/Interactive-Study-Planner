@@ -1,4 +1,3 @@
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 const SearchBar = (keyword: string, setKeyword: (a: string) => void) => {
   const BarStyling = {width:"20rem",background:"#F2F1F9", border:"none", padding:"0.5rem"};
   return (
