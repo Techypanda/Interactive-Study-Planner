@@ -14,7 +14,6 @@ function UnitDisplay(props: UnitEntryProps) {
       str = str.trimEnd()
       str = str.substring(0, str.lastIndexOf(" "))
       str = str.trimEnd()
-      console.log(str)
       out.push(
         <Typography>{str}</Typography>
       )
@@ -23,34 +22,32 @@ function UnitDisplay(props: UnitEntryProps) {
   }
   return (
     <div className={props.className}>
-      <Container>
-        <Box mt={2}>
-          <Paper className="clickable">
-            <Box padding={2}>
-              <Box pb={1}>
-                <Typography variant="h6" className="unitTitle"><span className="bold">Unit Name: </span>{props.unit.Name}</Typography>
-              </Box>
-              <Typography variant="body1"><span className="bold">Description: </span>{props.unit.Description}</Typography>
-              <Typography variant="body1"><span className="bold">Unit Code: </span>{props.unit.UnitCode}</Typography>
-              <Typography variant="body1"><span className="bold">Delivery: </span>{props.unit.Delivery}</Typography>
-              <Typography variant="body1"><span className="bold">Credits: </span>{props.unit.Credits}</Typography>
-              <Typography variant="body1"><span className="bold">Credits: </span>{props.unit.Credits}</Typography>
-              <span className="bold">Prerequistes: </span>
-              <Box>
-                {comprehendLogic(props.unit.Prerequistes).map((e, _) => <>{e}</>)}
-              </Box>
-              <span className="bold">Corequistes: </span>
-              <Box>
-                {comprehendLogic(props.unit.Corequistes).map((e, _) => <>{e}</>)}
-              </Box>
-              <span className="bold">Antirequistes: </span>
-              <Box>
-                {comprehendLogic(props.unit.Antirequistes).map((e, _) => <>{e}</>)}
-              </Box>
+      <Box mt={2}>
+        <Paper className="clickable">
+          <Box padding={2}>
+            <Box pb={1}>
+              <Typography variant="h6" className="unitTitle"><span className="bold">Unit Name: </span>{props.unit.Name}</Typography>
             </Box>
-          </Paper>
-        </Box>
-      </Container>
+            <Typography variant="body1"><span className="bold">Description: </span>{props.unit.Description}</Typography>
+            <Typography variant="body1"><span className="bold">Unit Code: </span>{props.unit.UnitCode}</Typography>
+            <Typography variant="body1"><span className="bold">Delivery: </span>{props.unit.Delivery}</Typography>
+            <Typography variant="body1"><span className="bold">Credits: </span>{props.unit.Credits}</Typography>
+            <Typography variant="body1"><span className="bold">Credits: </span>{props.unit.Credits}</Typography>
+            <span className="bold">Prerequistes: </span>
+            <Box>
+              {comprehendLogic(props.unit.Prerequistes).map((e, _) => <>{e}</>)}
+            </Box>
+            <span className="bold">Corequistes: </span>
+            <Box>
+              {comprehendLogic(props.unit.Corequistes).map((e, _) => <>{e}</>)}
+            </Box>
+            <span className="bold">Antirequistes: </span>
+            <Box>
+              {comprehendLogic(props.unit.Antirequistes).map((e, _) => <>{e}</>)}
+            </Box>
+          </Box>
+        </Paper>
+      </Box>
     </div>
   )
 }
