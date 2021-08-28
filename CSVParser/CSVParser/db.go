@@ -165,6 +165,16 @@ func attachRequistesToUnitAddition(putItemInput *map[string]*dynamodb.AttributeV
 		(*putItemInput)["Prerequistes"] = &dynamodb.AttributeValue{
 			L: preReqs,
 		}
+	} else {
+		var def []*dynamodb.AttributeValue
+		var emtpyss []string
+		emtpyss = append(emtpyss, "") // empty defualt
+		def = append(def, &dynamodb.AttributeValue{
+			SS: convertToStringMemoryArray(emtpyss),
+		})
+		(*putItemInput)["Prerequistes"] = &dynamodb.AttributeValue{
+			L: def,
+		}
 	}
 	if len(unit.Antirequistes) > 0 {
 		var antiReqs []*dynamodb.AttributeValue
@@ -176,6 +186,16 @@ func attachRequistesToUnitAddition(putItemInput *map[string]*dynamodb.AttributeV
 		(*putItemInput)["Antirequistes"] = &dynamodb.AttributeValue{
 			L: antiReqs,
 		}
+	} else {
+		var def []*dynamodb.AttributeValue
+		var emtpyss []string
+		emtpyss = append(emtpyss, "") // empty defualt
+		def = append(def, &dynamodb.AttributeValue{
+			SS: convertToStringMemoryArray(emtpyss),
+		})
+		(*putItemInput)["Antirequistes"] = &dynamodb.AttributeValue{
+			L: def,
+		}
 	}
 	if len(unit.Corequistes) > 0 {
 		var coReqs []*dynamodb.AttributeValue
@@ -186,6 +206,16 @@ func attachRequistesToUnitAddition(putItemInput *map[string]*dynamodb.AttributeV
 		}
 		(*putItemInput)["Corequistes"] = &dynamodb.AttributeValue{
 			L: coReqs,
+		}
+	} else {
+		var def []*dynamodb.AttributeValue
+		var emtpyss []string
+		emtpyss = append(emtpyss, "") // empty defualt
+		def = append(def, &dynamodb.AttributeValue{
+			SS: convertToStringMemoryArray(emtpyss),
+		})
+		(*putItemInput)["Corequistes"] = &dynamodb.AttributeValue{
+			L: def,
 		}
 	}
 }
