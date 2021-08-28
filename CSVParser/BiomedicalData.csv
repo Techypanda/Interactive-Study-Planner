@@ -73,6 +73,7 @@ MEDI1000
 MAJOR
 MJRU-HUMBM
 Human Biomedicine
+This major/stream is part of a larger course. Information is specific to the major/stream, please refer to the course for more information. Biomedicine is the application of biological and physiological principles to clinical practice. In this major, students will complete significant integrated study in applied human anatomy, physiology, and neuroscience. Students will gain valuable hands-on experience in our high-quality laboratory facilities using cadaveric specimens and physiology equipment. The Human Pathology extension specialisation will allow students to extend their studies into Clinical Pathophysiology and Neurophysiology, and more broadly prepare them for a career in clinical health.services.
 200
 HUMB2013,HUMB2014,HUMB2011,HUMB2012,ECEV3004,HUMB3009,BIOL3010,HUMB3003
 
@@ -161,6 +162,7 @@ HUMB2000;HUMB3009;314236
 MAJOR
 MJRU-MOLGN
 Molecular Genetics
+Molecular Genetics is a rapidly advancing and exciting discipline for the 21st century. In this major, students will learn about universal principles and new advances in genetics and genomics, and how these can be applied to improve health outcomes. Areas of study will include molecular biology, human genetic disease, bioinformatics and genetic engineering. Students will also be introduced to cutting-edge technology for molecular and genetic analyses. Through a combination of theoretical and practical laboratory training, students will acquire a thorough understanding of molecular genetics and also develop skills in critical thinking and scientific communication. This course will prepare students for a career or further study in the biomedical sciences. 
 200
 BCCB2000,MEDI2010,BIOL2001,GENE2001,GENE3000,GENE3002,BIOL3010,BIOL3011
 
@@ -231,6 +233,7 @@ BCCB2000,BIOL2001
 MAJOR
 MJRU-PHCOL
 Pharmacology
+Pharmacology explores the effects of drugs on living organisms. An in-depth understanding of pharmacological principles is essential to the safe and effective application of medicines aimed to prevent or treat disease. It is the cornerstone for a career in drug discovery and development, and is highly complementary to those planning on a career in biomedical sciences. In this major, students will learn how drugs target specific receptors in tissues and explore the major biochemical pathways that are activated. Other topics include dose-response relationship, toxicity, drug metabolism and elimination, drug design and development, and how genetic variation between populations influences drug response. With the increased global challenge to develop new drugs against infectious agents, an emphasis is placed on the understanding of drug action against microorganisms. Theoretical knowledge is underpinned through computer-based simulations and hands-on laboratories covering molecular, cellular and physiological responses, and modern drug analysis techniques. 
 200
 BCCB2000,PHRM2005,CHEM1006,PHRM2006,IMED3009,IMED3010,IMED3008,PHRM3005
 
@@ -301,6 +304,7 @@ CHEM1006,PHRM2006
 SPECIALIZATION
 SPUC-HUMPT
 Human Pathology
+This specialisation will allow students to pursue their interest in biology of human health and disease and more broadly prepares them for a career in clinical health services. This specialisation consists of four pathology and physiology units such as Histopathology, Immunobiology, Clinical Pathophysiology and Neurophysiology, 
 100
 TRUE
 PATH2000,MEDI2000,MEDI3017,HUMB3008
@@ -346,6 +350,7 @@ HUMB2014,HUMB2000;HUMB2014,HUMB3009;HUMB2004,HUMB2000;HUMB2004,HUMB3009
 SPECIALIZATION
 SPUC-ICBIO
 Immunology and Cell Biology
+This specialisation will allow students to pursue their interest in immunology and cell biology. In this specialisation, students will explore cell biology concepts such as membrane transport, protein sorting and maturation, protein degradation, vesicle trafficking and fundamental concepts of cell signalling. Students will learn the structure and functions of the immune system, antibody structure and function, autoimmune diseases, viral and parasitic infectious diseases, and carcinomas. Students will explore current advances in immunology and cell biology concepts and techniques. 
 100
 TRUE
 BCCB2004,MEDI2000,MEDI3016,BCCB3001
@@ -382,6 +387,7 @@ BCCB2004
 SPECIALIZATION
 SPUC-MICRO
 Microbiology
+This specialisation will allow students to pursue their interest in microbiology. From investigations in infectious microbiology to advances in molecular microbiology, this specialisation offers students an insight into microbiological cell structures and functions, an understanding of microbial gene regulation and nucleic acid replication, pathogenesis of major microbial pathogens, the impact of microbiology on human health, and the use of microbes in agriculture, mining, and other industries. It also introduces students to the molecular biology of viruses, the development of antiviral agents and vaccines, and the epidemiology of viral disease.
 100
 TRUE
 MEDI2009,MICB2001,MICB3000,MICB3002
@@ -427,6 +433,7 @@ MEDI2003;MEDI2009
 SPECIALIZATION
 SPUC-HUMGN
 Human Genetics and Genomics
+This specialisation will allow students to pursue their interest in human genetics and genomics. In this specialisation, students will learn the basic identification of all chromosomes in the human genome and understand the characteristics of, and molecular basis for, human genetic diseases and traits. Students will also learn to source and interpret genetic and genomic data using online databases and specialist software.
 100
 TRUE
 MEDI2010,GENE2001,GENE3002,BIOL2001
@@ -436,6 +443,7 @@ MJRU-MOLGN
 SPECIALIZATION
 SPUC-PHCOL
 Pharmacology
+This specialisation will allow students to pursue their interest in pharmacology. It is designed to introduce students from essential through advanced principles and concepts in pharmacology, and compares and contrasts drugs that act on the cardiovascular, respiratory, gastrointestinal, renal, musculoskeletal, and endocrine systems, and the autonomic and central nervous systems.
 100
 TRUE
 PHRM2005,PHRM2006,IMED3010,IMED3008
@@ -445,6 +453,7 @@ MJRU-PHCOL
 SPECIALIZATION
 SPUC-ILLUS
 Illustration
+This specialisation will provide a theoretical and practical education experience aimed at developing the essential creative and practical skills and knowledge in illustration.
 100
 FALSE
 GRDE1015,GRDE2017,GRDE2031,GRDE3018
@@ -490,6 +499,7 @@ GRDE2019;GRDE2017;313306
 SPECIALIZATION
 SPUC-ASIAN
 Asian Studies
+This specialisation provides students with an introduction to Asian studies, including Chinese and Japanese language.
 100
 FALSE
 ASIA2003,ASIA3001,CHIN1000,JAPN1000
@@ -535,6 +545,7 @@ Internal,Fully Online
 SPECIALIZATION
 SPUC-CHNSE
 Chinese Language
+This specialisation provides students with an introduction to the Chinese language.
 100
 FALSE
 CHIN1000,CHIN1001,CHIN2001,CHIN2002
@@ -571,6 +582,7 @@ Internal
 SPECIALIZATION
 SPUC-JAPAN
 Japanese Language
+This specialisation provides students with an introduction to the Japanese language.
 100
 FALSE
 JAPN2001,JAPN2002,JAPN3000,JAPN3001
@@ -616,6 +628,7 @@ Internal
 SPECIALIZATION
 SPUC-CORPG
 Corporate Governance
+This specialisation provides students with the relevant knowledge about the role of corporate governance.
 100
 FALSE
 BLAW2006,BLAW2011,BLAW1006,BLAW3004
@@ -661,6 +674,7 @@ BLAW2006;BLAW1006;BLAW1004
 SPECIALIZATION
 SPUC-INENT
 Innovation and Entrepreneurship
+This specialisation provides breadth in innovation, entrepreneurship, creativity, design thinking and prototyping for innovative individuals or those wishing to work as internal corporate entrepreneurs
 100
 FALSE
 MGMT3007,MGMT3004,MGMT2004,MGMT3002
@@ -706,6 +720,7 @@ Internal,Fully Online
 SPECIALIZATION
 SPUC-SMBUS
 Small Business Start-Up
+This specialisation is designed for enterprising individuals who want to start their own business, or work as internal corporate entrepreneurs.
 100
 FALSE
 MGMT3004,MGMT3003,MGMT3007,MGMT2001
@@ -733,6 +748,7 @@ Internal
 SPECIALIZATION
 SPUC-ADVRT
 The Business of Advertising
+This specialisation is designed to provide students with an understanding of the business process underpinning advertising whilst also providing an insight and appreciation for the creative elements of advertising.
 100
 FALSE
 MKTG2000,MKTG2001,MKTG3002,MKTG2006
@@ -778,6 +794,7 @@ Internal,Fully Online
 SPECIALIZATION
 SPUC-MRKTG
 Marketing Foundations
+This specialisation prepares students to organise and control marketing activities efficiently in a highly competitive and volatile environment.
 100
 FALSE
 MKTG2002,MKTG2004,MKTG3003,MKTG1000
@@ -823,6 +840,7 @@ Internal,Fully Online
 SPECIALIZATION
 SPUC-JOURL
 Journalism
+This specialisation sets the foundations for the study of practical journalism leading to the acquisition of skills relevant to the journalism profession.
 100
 FALSE
 JOUR1001,JOUR2000,JOUR2002,JOUR2003
@@ -868,6 +886,7 @@ JOUR5003
 SPECIALIZATION
 SPUC-PRWRI
 Professional Writing
+This specialisation covers the study and practice of a range of different writing forms including non-fiction writing, editing and publishing skills.
 100
 FALSE
 PWRP1000,PWRP1003,PWRP2001,PWRP2000
@@ -913,6 +932,7 @@ PWRP5001
 SPECIALIZATION
 SPUC-HLTDA
 Health Data
+This specialisation allows undergraduate students to combine studies in health data (including biostatistics, epidemiology, research design and health care systems). The specialisation consists of four units dealing with big data, health governance, Geographic Information System (GIS), visualisation and the application of health data produced by machine learning and artificial intelligence. The students enrolled in the specialisation will also study existing units in biostatistics, epidemiology, research design and health care systems.
 100
 FALSE
 PUBH2005,SPAT1007,PUBH2006,PUBH3006

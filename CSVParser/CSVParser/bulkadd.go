@@ -80,6 +80,9 @@ func bulkAddToDB(unitList []Unit, majorList []Major, specList []Specialization) 
 				"Name": {
 					S: aws.String(majorName),
 				},
+				"Description": {
+					S: aws.String(major.Description),
+				},
 				"Credits": {
 					N: aws.String(fmt.Sprintf("%f", major.Credits)),
 				},
@@ -121,6 +124,9 @@ func bulkAddToDB(unitList []Unit, majorList []Major, specList []Specialization) 
 				},
 				"Name": {
 					S: aws.String(lowercasedName),
+				},
+				"Description": {
+					S: aws.String(spec.Description),
 				},
 				"Credits": {
 					N: aws.String(fmt.Sprintf("%f", spec.Credits)),
@@ -170,6 +176,11 @@ func processSpec(parser *LineParser) (Specialization, error) {
 		return spec, err
 	}
 	spec.Name = specName
+	specDesc, err := parser.getLine("specdescription")
+	if err != nil {
+		return spec, err
+	}
+	spec.Description = specDesc
 	tempStr, err := parser.getLine("speccredits")
 	if err != nil {
 		return spec, err
@@ -267,6 +278,12 @@ func processMajor(scanner *bufio.Scanner, lineNumber *int) (Major, error) {
 		return major, fmt.Errorf("expected majorname on line: %d, recieved either error or eof", *lineNumber)
 	}
 	major.Name = strings.ToUpper(scanner.Text())
+	*lineNumber += 1
+	read = scanner.Scan()
+	if !read {
+		return major, fmt.Errorf("expected majordescription on line: %d, recieved either error or eof", *lineNumber)
+	}
+	major.Description = scanner.Text()
 	*lineNumber += 1
 	read = scanner.Scan()
 	if !read {

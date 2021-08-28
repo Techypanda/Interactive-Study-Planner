@@ -16,6 +16,7 @@
 - MAJOR
 - MajorCode
 - Name
+- Description
 - Credits
 - Units (CSV Seperated)
 - UnitAntiReqs (entered as groups, to split into a new group (i.e OR path) use a semicolon else its comma seperated)
@@ -24,6 +25,7 @@
 - SPECIALIZATION
 - SpecCode
 - Name
+- Description
 - Credits
 - InternalSpecialization (FALSE/TRUE)
 - Units (CSV Seperated)
