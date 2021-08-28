@@ -1,0 +1,318 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'python3.8
+
+  Max''s Unit API Template
+
+  '
+Globals:
+  Function:
+    Timeout: 3
+Resources:
+  GetAllSpecsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Policies:
+      - DynamoDBReadPolicy:
+          TableName: DevSpecializations
+      Events:
+        GetAllSpecs:
+          Type: Api
+          Properties:
+            Path: /getallspecs
+            Method: get
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/unitapi:getallspecsfunction-0610eba8a81a-python3.8-v1
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./getallspecs
+      DockerTag: python3.8-v1
+  GetAllMajorsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Policies:
+      - DynamoDBReadPolicy:
+          TableName: DevMajors
+      Events:
+        GetAllMajors:
+          Type: Api
+          Properties:
+            Path: /getallmajors
+            Method: get
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/unitapi:getallmajorsfunction-9fe7748e7b9f-python3.8-v1
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./getallmajors
+      DockerTag: python3.8-v1
+  GetAllUnitsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Policies:
+      - DynamoDBReadPolicy:
+          TableName: DevUnits
+      Events:
+        GetAllUnits:
+          Type: Api
+          Properties:
+            Path: /getallunits
+            Method: get
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/unitapi:getallunitsfunction-4d30c8e62ad6-python3.8-v1
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./getallunits
+      DockerTag: python3.8-v1
+  GetMajorFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Policies:
+      - DynamoDBReadPolicy:
+          TableName: DevMajors
+      Events:
+        GetMajor:
+          Type: Api
+          Properties:
+            Path: /getmajor
+            Method: get
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/unitapi:getmajorfunction-8292c9971cd5-python3.8-v1
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./getmajor
+      DockerTag: python3.8-v1
+  GetSpecFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Policies:
+      - DynamoDBReadPolicy:
+          TableName: DevSpecializations
+      Events:
+        GetSpec:
+          Type: Api
+          Properties:
+            Path: /getspec
+            Method: get
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/unitapi:getspecfunction-764e50f7121b-python3.8-v1
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./getspec
+      DockerTag: python3.8-v1
+  GetUnitFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Policies:
+      - DynamoDBReadPolicy:
+          TableName: DevUnits
+      Events:
+        GetUnit:
+          Type: Api
+          Properties:
+            Path: /getunit
+            Method: get
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/unitapi:getunitfunction-a231edf0c42d-python3.8-v1
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./getunit
+      DockerTag: python3.8-v1
+  SearchMajorFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Policies:
+      - DynamoDBReadPolicy:
+          TableName: DevMajors
+      Events:
+        SearchMajor:
+          Type: Api
+          Properties:
+            Path: /searchmajor
+            Method: get
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/unitapi:searchmajorfunction-c2a6dd5d43e2-python3.8-v1
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./searchmajor
+      DockerTag: python3.8-v1
+  SearchSpecFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Policies:
+      - DynamoDBReadPolicy:
+          TableName: DevSpecializations
+      Events:
+        SearchSpec:
+          Type: Api
+          Properties:
+            Path: /searchspec
+            Method: get
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/unitapi:searchspecfunction-8647e8064571-python3.8-v1
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./searchspec
+      DockerTag: python3.8-v1
+  SearchUnitFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Policies:
+      - DynamoDBReadPolicy:
+          TableName: DevUnits
+      Events:
+        SearchUnit:
+          Type: Api
+          Properties:
+            Path: /searchunit
+            Method: get
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/unitapi:searchunitfunction-21fb63e95798-Python3.8-v1
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./searchunit
+      DockerTag: Python3.8-v1
+Outputs:
+  GetAllSpecsApi:
+    Description: API Gateway endpoint URL for Prod stage for Get All Specs Function
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/getallspecs/
+  GetAllMajorsApi:
+    Description: API Gateway endpoint URL for Prod stage for Get All Majors Function
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/getallmajors/
+  GetAllUnitsApi:
+    Description: API Gateway endpoint URL for Prod stage for Get All Units Function
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/getallunits/
+  GetMajorApi:
+    Description: API Gateway endpoint URL for Prod stage for Get Major Function
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/getmajor/
+  GetSpecApi:
+    Description: API Gateway endpoint URL for Prod stage for Get Spec Function
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/getspec/
+  GetUnitApi:
+    Description: API Gateway endpoint URL for Prod stage for Get Unit Function
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/getunit/
+  SearchMajorApi:
+    Description: API Gateway endpoint URL for Prod stage for Search Major Function
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/searchmajor/
+  SearchSpecApi:
+    Description: API Gateway endpoint URL for Prod stage for Search Spec Function
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/searchspec/
+  SearchUnitApi:
+    Description: API Gateway endpoint URL for Prod stage for Search Unit Function
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/searchunit/
+  GetAllSpecsFunction:
+    Description: Get All Specs Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+      - GetAllSpecsFunction
+      - Arn
+  GetAllMajorsFunction:
+    Description: Get All Majors Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+      - GetAllMajorsFunction
+      - Arn
+  GetAllUnitsFunction:
+    Description: Get All Units Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+      - GetAllUnitsFunction
+      - Arn
+  GetMajorFunction:
+    Description: Get Major Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+      - GetMajorFunction
+      - Arn
+  GetSpecFunction:
+    Description: Get Spec Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+      - GetSpecFunction
+      - Arn
+  GetUnitFunction:
+    Description: Get Unit Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+      - GetUnitFunction
+      - Arn
+  SearchMajorFunction:
+    Description: Search Major Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+      - SearchMajorFunction
+      - Arn
+  SearchSpecFunction:
+    Description: Search Spec Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+      - SearchSpecFunction
+      - Arn
+  SearchUnitFunction:
+    Description: Search Unit Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+      - SearchUnitFunction
+      - Arn
+  GetAllSpecsFunctionIamRole:
+    Description: Implicit IAM Role created for Get All Specs Function
+    Value:
+      Fn::GetAtt:
+      - GetAllSpecsFunction
+      - Arn
+  GetAllMajorsFunctionIamRole:
+    Description: Implicit IAM Role created for Get All Majors Function
+    Value:
+      Fn::GetAtt:
+      - GetAllMajorsFunction
+      - Arn
+  GetAllUnitsFunctionIamRole:
+    Description: Implicit IAM Role created for Get All Units Function
+    Value:
+      Fn::GetAtt:
+      - GetAllUnitsFunction
+      - Arn
+  GetMajorFunctionIamRole:
+    Description: Implicit IAM Role created for Get Major Function
+    Value:
+      Fn::GetAtt:
+      - GetMajorFunction
+      - Arn
+  GetSpecFunctionIamRole:
+    Description: Implicit IAM Role created for Get Spec Function
+    Value:
+      Fn::GetAtt:
+      - GetSpecFunction
+      - Arn
+  GetUnitFunctionIamRole:
+    Description: Implicit IAM Role created for Get Unit Function
+    Value:
+      Fn::GetAtt:
+      - GetUnitFunction
+      - Arn
+  SearchMajorFunctionIamRole:
+    Description: Implicit IAM Role created for Search Major Function
+    Value:
+      Fn::GetAtt:
+      - SearchMajorFunction
+      - Arn
+  SearchSpecFunctionIamRole:
+    Description: Implicit IAM Role created for Search Spec Function
+    Value:
+      Fn::GetAtt:
+      - SearchSpecFunction
+      - Arn
+  SearchUnitFunctionIamRole:
+    Description: Implicit IAM Role created for Search Unit Function
+    Value:
+      Fn::GetAtt:
+      - SearchUnitFunction
+      - Arn

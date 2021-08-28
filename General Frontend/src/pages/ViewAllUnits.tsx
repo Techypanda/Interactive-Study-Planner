@@ -7,18 +7,18 @@ import { useHistory } from "react-router-dom";
 // is displayed with relatively minimal info i.e. name, code, and a brief course
 
 function GetAllUnits() {
-    // axios.get("${process.env.REACT_APP_API_URI}/getunit");
     const { isLoading, isError, error, data} = useQuery('getunits', async () => {
-                                                            const data = await axios('${process.env.REACT_APP_API_URI}/getunit');
-                                                            return data;
-                                                        });
+        const data = await axios('${process.env.REACT_APP_UNITS_API}/getunit');
+        return data;
+    });
+    
     if (isLoading) {
         return "Retrieving all available courses"; 
     }
     if (isError) {
         return error; 
     }
-     // poorly structured, make it prettier later 
+    
     return (
 	<div>
           <ul>

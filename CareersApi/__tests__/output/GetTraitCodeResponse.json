@@ -1,1 +1,1 @@
-{"statusCode":200,"body":"[{\"Requirements\":[\"cmhl1000\",\"humb1000\"],\"Traits\":[\"critical thinker\",\"hardworking\"],\"Description\":\"Researcher of genetics.\",\"CareerId\":\"TESTDONTDELETE\",\"Industry\":\"Medical Research\",\"Name\":\"test\"}]"}
+{"errorType":"Error","errorMessage":"Traits only accept POST method, you tried: GET","trace":["Error: Traits only accept POST method, you tried: GET","    at Runtime.exports.restrictWithTraitCode [as handler] (/var/task/RestrictBySelectionTraits.js:14:15)","    at Runtime.handleOnce (/var/runtime/Runtime.js:66:25)"]}

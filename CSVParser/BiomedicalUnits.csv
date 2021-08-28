@@ -73,6 +73,7 @@ MEDI1000
 MAJOR
 MJRU-HUMBM
 Human Biomedicine
+This major/stream is part of a larger course. Information is specific to the major/stream, please refer to the course for more information. Biomedicine is the application of biological and physiological principles to clinical practice. In this major, students will complete significant integrated study in applied human anatomy, physiology, and neuroscience. Students will gain valuable hands-on experience in our high-quality laboratory facilities using cadaveric specimens and physiology equipment. The Human Pathology extension specialisation will allow students to extend their studies into Clinical Pathophysiology and Neurophysiology, and more broadly prepare them for a career in clinical health.services.
 200
 HUMB2013,HUMB2014,HUMB2011,HUMB2012,ECEV3004,HUMB3009,BIOL3010,HUMB3003
 
@@ -161,6 +162,7 @@ HUMB2000;HUMB3009;314236
 MAJOR
 MJRU-MOLGN
 Molecular Genetics
+Molecular Genetics is a rapidly advancing and exciting discipline for the 21st century. In this major, students will learn about universal principles and new advances in genetics and genomics, and how these can be applied to improve health outcomes. Areas of study will include molecular biology, human genetic disease, bioinformatics and genetic engineering. Students will also be introduced to cutting-edge technology for molecular and genetic analyses. Through a combination of theoretical and practical laboratory training, students will acquire a thorough understanding of molecular genetics and also develop skills in critical thinking and scientific communication. This course will prepare students for a career or further study in the biomedical sciences. 
 200
 BCCB2000,MEDI2010,BIOL2001,GENE2001,GENE3000,GENE3002,BIOL3010,BIOL3011
 
@@ -231,6 +233,7 @@ BCCB2000,BIOL2001
 MAJOR
 MJRU-PHCOL
 Pharmacology
+Pharmacology explores the effects of drugs on living organisms. An in-depth understanding of pharmacological principles is essential to the safe and effective application of medicines aimed to prevent or treat disease. It is the cornerstone for a career in drug discovery and development, and is highly complementary to those planning on a career in biomedical sciences. In this major, students will learn how drugs target specific receptors in tissues and explore the major biochemical pathways that are activated. Other topics include dose-response relationship, toxicity, drug metabolism and elimination, drug design and development, and how genetic variation between populations influences drug response. With the increased global challenge to develop new drugs against infectious agents, an emphasis is placed on the understanding of drug action against microorganisms. Theoretical knowledge is underpinned through computer-based simulations and hands-on laboratories covering molecular, cellular and physiological responses, and modern drug analysis techniques. 
 200
 BCCB2000,PHRM2005,CHEM1006,PHRM2006,IMED3009,IMED3010,IMED3008,PHRM3005
 
@@ -301,6 +304,7 @@ CHEM1006,PHRM2006
 SPECIALIZATION
 SPUC-HUMPT
 Human Pathology
+This specialisation will allow students to pursue their interest in biology of human health and disease and more broadly prepares them for a career in clinical health services. This specialisation consists of four pathology and physiology units such as Histopathology, Immunobiology, Clinical Pathophysiology and Neurophysiology, 
 100
 TRUE
 PATH2000,MEDI2000,MEDI3017,HUMB3008
@@ -346,6 +350,7 @@ HUMB2014,HUMB2000;HUMB2014,HUMB3009;HUMB2004,HUMB2000;HUMB2004,HUMB3009
 SPECIALIZATION
 SPUC-ICBIO
 Immunology and Cell Biology
+This specialisation will allow students to pursue their interest in immunology and cell biology. In this specialisation, students will explore cell biology concepts such as membrane transport, protein sorting and maturation, protein degradation, vesicle trafficking and fundamental concepts of cell signalling. Students will learn the structure and functions of the immune system, antibody structure and function, autoimmune diseases, viral and parasitic infectious diseases, and carcinomas. Students will explore current advances in immunology and cell biology concepts and techniques. 
 100
 TRUE
 BCCB2004,MEDI2000,MEDI3016,BCCB3001
@@ -382,6 +387,7 @@ BCCB2004
 SPECIALIZATION
 SPUC-MICRO
 Microbiology
+This specialisation will allow students to pursue their interest in microbiology. From investigations in infectious microbiology to advances in molecular microbiology, this specialisation offers students an insight into microbiological cell structures and functions, an understanding of microbial gene regulation and nucleic acid replication, pathogenesis of major microbial pathogens, the impact of microbiology on human health, and the use of microbes in agriculture, mining, and other industries. It also introduces students to the molecular biology of viruses, the development of antiviral agents and vaccines, and the epidemiology of viral disease.
 100
 TRUE
 MEDI2009,MICB2001,MICB3000,MICB3002
@@ -427,6 +433,7 @@ MEDI2003;MEDI2009
 SPECIALIZATION
 SPUC-HUMGN
 Human Genetics and Genomics
+This specialisation will allow students to pursue their interest in human genetics and genomics. In this specialisation, students will learn the basic identification of all chromosomes in the human genome and understand the characteristics of, and molecular basis for, human genetic diseases and traits. Students will also learn to source and interpret genetic and genomic data using online databases and specialist software.
 100
 TRUE
 MEDI2010,GENE2001,GENE3002,BIOL2001
@@ -436,6 +443,7 @@ MJRU-MOLGN
 SPECIALIZATION
 SPUC-PHCOL
 Pharmacology
+This specialisation will allow students to pursue their interest in pharmacology. It is designed to introduce students from essential through advanced principles and concepts in pharmacology, and compares and contrasts drugs that act on the cardiovascular, respiratory, gastrointestinal, renal, musculoskeletal, and endocrine systems, and the autonomic and central nervous systems.
 100
 TRUE
 PHRM2005,PHRM2006,IMED3010,IMED3008
@@ -445,6 +453,7 @@ MJRU-PHCOL
 SPECIALIZATION
 SPUC-ILLUS
 Illustration
+This specialisation will provide a theoretical and practical education experience aimed at developing the essential creative and practical skills and knowledge in illustration.
 100
 FALSE
 GRDE1015,GRDE2017,GRDE2031,GRDE3018
@@ -490,6 +499,7 @@ GRDE2019;GRDE2017;313306
 SPECIALIZATION
 SPUC-ASIAN
 Asian Studies
+This specialisation provides students with an introduction to Asian studies, including Chinese and Japanese language.
 100
 FALSE
 ASIA2003,ASIA3001,CHIN1000,JAPN1000
@@ -528,12 +538,14 @@ JAPN1000
 Beginning Japanese
 This unit introduces basic communicative skills in Japanese at an elementary level. Students acquire the four essential language skills of speaking, listening, reading and writing characters (Hiragana, Katakana, and Kanji) through ample practice in communicative activities supported by digital technology. Students will also be introduced to Japanese society and culture through mini-lectures, audio-visual presentations and virtual real-time classroom-based or online tutorials.
 25
+Internal,Fully Online
 
 
 11265
 SPECIALIZATION
 SPUC-CHNSE
 Chinese Language
+This specialisation provides students with an introduction to the Chinese language.
 100
 FALSE
 CHIN1000,CHIN1001,CHIN2001,CHIN2002
@@ -570,6 +582,7 @@ Internal
 SPECIALIZATION
 SPUC-JAPAN
 Japanese Language
+This specialisation provides students with an introduction to the Japanese language.
 100
 FALSE
 JAPN2001,JAPN2002,JAPN3000,JAPN3001
@@ -615,6 +628,7 @@ Internal
 SPECIALIZATION
 SPUC-CORPG
 Corporate Governance
+This specialisation provides students with the relevant knowledge about the role of corporate governance.
 100
 FALSE
 BLAW2006,BLAW2011,BLAW1006,BLAW3004
@@ -660,6 +674,7 @@ BLAW2006;BLAW1006;BLAW1004
 SPECIALIZATION
 SPUC-INENT
 Innovation and Entrepreneurship
+This specialisation provides breadth in innovation, entrepreneurship, creativity, design thinking and prototyping for innovative individuals or those wishing to work as internal corporate entrepreneurs
 100
 FALSE
 MGMT3007,MGMT3004,MGMT2004,MGMT3002
@@ -702,3 +717,342 @@ Internal,Fully Online
 
 
 
+SPECIALIZATION
+SPUC-SMBUS
+Small Business Start-Up
+This specialisation is designed for enterprising individuals who want to start their own business, or work as internal corporate entrepreneurs.
+100
+FALSE
+MGMT3004,MGMT3003,MGMT3007,MGMT2001
+
+
+
+UNIT
+MGMT3003
+Small Business Growth
+This unit focuses on integration and analysis of key functions, concepts and strategies for growth-oriented Small and Medium Enterprises (SMEs). The unit has a significant fieldwork component where students work in teams or individually to identify a small business owner that they can work with throughout semester to develop a tailored report to which these key functions, strategies and concepts are applied. The owners are invited to provide input into the assessment of the report to retain the reality-based approach of this live case.
+25
+Internal
+
+
+
+UNIT
+MGMT2001
+Start-Up Business Planning
+The unit examines Small and Medium Enterprises (SMEs) from a practical perspective and provides students with a &quot;hands on approach&quot; to the art of small business planning. This includes creating a business plan in teams that considers the main functional areas necessary for the establishment and continuous operation of a small business.
+25
+Internal
+
+
+
+SPECIALIZATION
+SPUC-ADVRT
+The Business of Advertising
+This specialisation is designed to provide students with an understanding of the business process underpinning advertising whilst also providing an insight and appreciation for the creative elements of advertising.
+100
+FALSE
+MKTG2000,MKTG2001,MKTG3002,MKTG2006
+
+
+
+UNIT
+MKTG2000
+Integrated Marketing Communications
+This is an introductory unit which explores the importance of marketing communication, the concepts underlying  effective marketing communication and the skills needed to create simple integrated marketing communication (IMC) campaigns.
+25
+Internal,Fully Online
+
+
+
+UNIT
+MKTG2001
+Brand Management
+This unit extends on the various aspects of advertising and marketing and applies these concepts to a brand equity perspective. The topics will be built around the product/brand management decisions and through seminars, case analyses and a brand audit project. The unit examines specific advertising and marketing topics related to building, measuring, and managing brand equity. Specifically, the unit examines various brand management decisions and the strategies and tactics to build measure and manage brand equity. These include (a) direct and indirect measures of brand equity, (b) structures of desired brand knowledge, (c) choice of brand elements, (d) development of supporting marketing programs, (e) introduction of new products naming, corporate perspectives and (f) management of brands over time and geographical boundaries.
+25
+Internal
+
+
+
+UNIT
+MKTG3002
+Account Management
+This is a strategic account management unit which explores the theories behind and processes involved in developing and implementing integrated marketing communication campaigns. Specifically, students learn about the rationale for selecting a given creative and media strategy as a result of comprehending the linkages with brand positioning, audience processing, semiotics, elaboration likelihood and hierarchy of effect objectives. Student learning of these linkages is enabled through application of these theories to an industry based client where students engage in a hands-on task to develop an advertising plan that consists of analysis and rationale for having selected a given creative and media strategy. Students are able to use their theoretical knowledge to justify and provide rationale for their creative and media recommendations.
+25
+Internal
+11016;MKTG2000
+
+
+UNIT
+MKTG2006
+Managing Social Media Platforms
+This unit provides students with both a theoretical and applied understanding of managing social media platforms. The unit reviews social media platforms, critical research and agency best practice in social media marketing. Students will develop an understanding of the social media landscape, social media platforms, develop digital literacy as well as an understanding of ethical and regulatory conduct in the social media space.
+25
+Internal,Fully Online
+
+
+
+SPECIALIZATION
+SPUC-MRKTG
+Marketing Foundations
+This specialisation prepares students to organise and control marketing activities efficiently in a highly competitive and volatile environment.
+100
+FALSE
+MKTG2002,MKTG2004,MKTG3003,MKTG1000
+
+
+
+UNIT
+MKTG2002
+Marketing Across Borders
+Covers topics related to the international marketplace, multi-national, global and transnational corporations and international trading companies. Knowledge is gained in world organisational or regional trade, trade blocks and international marketing opportunities, and developed and less developed country counter trade.
+25
+Fully Online,Internal
+
+
+
+UNIT
+MKTG2004
+Consumer Behaviour
+Introduces the role of consumer behaviour and how it is shaped by the social and cultural environment and the psychological foundations. The unit in essence focuses on the decision processes in consumption behaviour in different buying situations. This develops the student's ability to integrate marketing processes at a higher level. For marketers, an understanding of how a consumer selects, purchases, uses and disposes of products and services is pertinent to successfully managing the marketing function. Concepts drawn from various disciplines such as psychology, economics and anthropology are also examined.
+25
+Fully Online,Internal
+
+
+
+UNIT
+MKTG3003
+Digital Marketing Strategy
+This unit introduces students to the world of digital marketing. It broadens understanding of the non-technical aspects of the internet and its strategic marketing applications. The unit covers how the digital environment affects marketing decisions through identifying web-based opportunities and threats for firms. Furthermore, the unit focuses on major digital marketing tools and strategies (e.g., Google AdWords and Search Engine Optimization) that a firm or brand can adopt to engage with consumers across their purchase journey using various digital channels such as paid, owned, and earned media.
+25
+Fully Online,Internal
+
+
+
+UNIT
+MKTG1000
+Discovering Marketing
+Understanding the role marketing plays in business and society; The global marketing environment; Consumer buyer behaviour; Market segmentation, target marketing and positioning; New product development and the product life cycle; Marketing Strategies (the 4 P's) - product, price, place and promotion; Ethics in marketing.
+25
+Internal,Fully Online
+
+
+
+SPECIALIZATION
+SPUC-JOURL
+Journalism
+This specialisation sets the foundations for the study of practical journalism leading to the acquisition of skills relevant to the journalism profession.
+100
+FALSE
+JOUR1001,JOUR2000,JOUR2002,JOUR2003
+
+
+
+UNIT
+JOUR1001
+Introduction to Journalism - Broadcast
+An examination of the nature, history and function of broadcast journalism in Australia by analysing and evaluating the public, community and commercial sectors. Students will dissect and evaluate all aspects of broadcast journalism and develop their multi-platform journalistic skillset by producing recorded radio stories and a smart-phone essay.
+25
+Internal
+
+
+JOUR5013
+UNIT
+JOUR2000
+Radio News
+This unit equips students to work in a radio newsroom environment performing a range of tasks in the development of complex radio news stories. Students will undertake intensive tuition in digital recording, editing and production using industry standard equipment, ensuring they are able to react to the demands of the modern news environment. The unit will encourage students to develop critical thinking skills and establish professional practices within journalism's ethical and legal parameters, while working both independently and collaboratively within a news team.
+25
+Internal
+JOUR1001;1564
+
+JOUR5002
+UNIT
+JOUR2002
+Video News
+This unit introduces students to the theory and practice of video news production for the web and television. It equips students with the capacity to develop research, writing, interviewing and presentation skills for video news productions across platforms. This unit also introduces basic competencies in camerawork and editing.
+25
+Internal
+JOUR1001;1564
+
+JOUR5005
+UNIT
+JOUR2003
+News Writing and Reporting
+An introduction to news writing and reporting for publication, whereby students develop news gathering, writing and research skills and an awareness of different styles and genres within print and online journalism.  Students learn how to generate ideas, undertake research, conduct interviews and write in news style to tight deadlines.  The highly practical nature of the unit provides students the opportunity to experience work-integrated learning through acting as reporters for the Department of Journalism’s online publication.
+25
+Internal
+JOUR1001
+
+JOUR5003
+SPECIALIZATION
+SPUC-PRWRI
+Professional Writing
+This specialisation covers the study and practice of a range of different writing forms including non-fiction writing, editing and publishing skills.
+100
+FALSE
+PWRP1000,PWRP1003,PWRP2001,PWRP2000
+
+
+
+UNIT
+PWRP1000
+Introduction to Creative and Professional Writing
+This unit explores representation in writing and how the dynamic relationship between Self and Other plays a central role in the writing process. The representation of the self and of others is central to a broad range of written genres and forms. Students of writing will find that the unit introduces them to a variety of genres and forms essential to the portfolio of a professional writer, and will discover how creative writing techniques can enrich their professional work.
+25
+Internal
+
+
+PWRP5021
+UNIT
+PWRP1003
+Writing, Rhetoric and Persuasion
+This unit introduces students to the role of the professional writer in the field of public discourse. It offers critical and ethical perspectives on rhetoric and persuasion, and introduces students to the structuring of arguments, and the framing and communication of issues on behalf of government, industry, non-government organisations, and individuals.
+25
+Internal
+
+
+PWRP5022
+UNIT
+PWRP2001
+Writing, Editing and Publishing
+This unit provides a practical introduction to editing. Students learn about the editor’s role and profession, the publishing process, and editorial project management; and they learn and practice the skills needed for professional proofreading and copyediting, including language skills, on the page and the screen. Student learning is graduated through a series of successively higher-level editing tasks, which students practice thoroughly in workshops, and are assessed in before moving to a higher level.
+25
+Internal
+
+
+PWRP5003
+UNIT
+PWRP2000
+Tricks of Truth and Authenticity
+This unit explores issues of truth and authenticity in professional writing and publishing, providing students with an understanding of the cultural, ethical and legal issues of writing for publication. Historical and contemporary cases of fraud, faked identity, plagiarism, hoax, the role of the author and the blurring of genre boundaries are used to highlight the professional and personal responsibilities and dilemmas of writing and publishing in the public domain.
+25
+Internal
+
+
+PWRP5001
+SPECIALIZATION
+SPUC-HLTDA
+Health Data
+This specialisation allows undergraduate students to combine studies in health data (including biostatistics, epidemiology, research design and health care systems). The specialisation consists of four units dealing with big data, health governance, Geographic Information System (GIS), visualisation and the application of health data produced by machine learning and artificial intelligence. The students enrolled in the specialisation will also study existing units in biostatistics, epidemiology, research design and health care systems.
+100
+FALSE
+PUBH2005,SPAT1007,PUBH2006,PUBH3006
+
+
+
+UNIT
+PUBH2005
+Big Data and Health
+This unit will provide the opportunity for students to learn how to use big data to comprehend complex real-world health challenges. It provides an introduction to how data are generated and used in health contexts. It gives students the opportunity to investigate the major sources of data relevant to health and explore how this information can be used to create evidence for policy, research and individual behaviour change.
+25
+Fully Online,Internal
+
+
+
+UNIT
+SPAT1007
+Fundamentals of Geographic Information Systems
+This unit is an introduction to the application, structure and function of geographic information systems (GIS). Students will develop skills and knowledge around the input and management, analysis and presentation of geographic data and relationships. They will also develop expertise in the storage and simple manipulation of spatial data together with the integration and management of spatial and attribute data. There will be a particular focus in this unit on the application of the principles of academic integrity and academic referencing conventions.
+25
+Fully Online,Internal
+
+
+SPAT5006,SPAT2011
+UNIT
+PUBH2006
+Privacy and Cyber Security: Health Data Governance
+This unit will introduce students to health data governance, including relevant privacy and data protection law. Students will explore contemporary concerns about the collection, linkage, storage and use of health data including transparency, informed consent, confidentiality, third party access and the application of artificial intelligence. They will also engage with issues of data privacy and protection.
+25
+Internal,Fully Online
+
+
+
+UNIT
+PUBH3006
+Introduction to Artificial Intelligence, Machine Learning and Health
+This unit introduces students to the fundamental concepts of machine learning (ML) and artificial intelligence (AI). Students will have the opportunity to explore the uses and impact of machine learning and artificial intelligence in public health and health care. They will address the advantages, limitations and scope of ML/AI from a health perspective. The unit will also have a practical component in which students use the data generated by ML/AI to explore contemporary health issues.
+25
+Internal
+PUBH2005
+
+
+UNIT
+FORS1005
+Foundations of Forensic Science
+Foundations of Forensic Science is a general introduction to the history, underlying principles and contemporary issues in forensic science. It will provide an overview of the forensic process from crime scene to court and the role of the forensic scientist as an expert witness. It also includes an introduction to forensic analysis and interpretation as illustrated by selected case studies. Students attend a two-hour seminar per week and a one-hour workshop fortnightly with supporting online material.
+25
+Internal
+
+
+
+UNIT
+PSYC1000
+Introduction to Psychology
+Broad outline of the nature, methods, and fields of psychology. Introduction to psychology and methodological issues related to the study of human beings and the relevance of both for interactions with individuals and groups. Introduction to social psychology, personality, development, learning, memory, and motivation.
+25
+Internal,Fully Online
+
+
+
+UNIT
+CHEM1006
+Pharmaceutical Chemistry
+This unit provides an introduction to core concepts within pharmaceutical chemistry. Students will be introduced to the principal laboratory techniques used for drug analysis and learn about a range of physio-chemical drug properties which influence their pharmaceutical formulation, pharmacology and clinical use.  This unit is divided into two learning modules. Module 1: Titrimetric analysis of drugs, spectrophotometric analysis of drugs, chromatographic analysis of drugs, analysis of drug formulations. Module 2: Key functional groups in drugs, drug ionisation, drug solubility, drug stereochemistry, drug stability.
+25
+Internal
+BCCB2000
+
+
+UNIT
+PHAR2000
+Foundations of Pharmaceutics
+This unit introduces students to the pharmaceutical science and formulation of liquid and solid dosage forms Pharmaceutical science aspects: Physicochemical properties of pharmaceutical solids including crystalline form, solubility and distribution. Powder technology including particle size analysis, particle size reduction, powder mixing and drying. Physicochemical properties of pharmaceutical solutions including solvents, effects of pH, buffers, phase rule and phase diagrams. Formulation aspects: Formulation, preparation and evaluation of solid oral dosage forms and pharmaceutical solutions. Principles of preservation, flavouring, colouring and stabilisation of pharmaceutical solutions.
+25
+Internal
+CHEM1006
+
+
+UNIT
+PHAR2001
+Pharmaceutical Formulation
+This unit introduces students to the pharmaceutical science and formulation of liquid-in-liquid, solid-in-liquid, solid and semi-solid dosage forms. Pharmaceutical Science aspects: surface phenomena, surface and interfacial tension; surfactants, micelle formation; properties of colloids and rheology. Formulation Aspects: Formulation, preparation and evaluation of semi-solid dosage forms, suppositories and two phase liquid-based preparations. Preservation of two phase systems.
+25
+Internal
+PHAR2000;310384
+
+
+UNIT
+PUBH1001
+Introduction to Health, Safety and Environment
+A broad overview of selected disciplines within the field of health, safety and environment.
+25
+Internal,Fully Online
+
+
+
+UNIT
+STAT1003
+Introduction to Data Science
+This unit will provide a broad introduction to four key aspects of data science: data retrieval and manipulation, data visualisation, statistical computation and machine learning, and presentation and communication. Students will use data from a variety of sources, be introduced to contemporary computing and database environments such as R and SQL, and be exposed to case studies from outside the classroom. Through this unit students will become acquainted with the challenges of contemporary data science and gain an appreciation of the foundational skills necessary to turn data into information.
+25
+Internal
+
+
+
+UNIT
+ISEC2001
+Fundamental Concepts of Data Security
+This unit will cover the core information security principles of confidentiality, integrity and availability. These core principles will be applied to the concepts of information risk management, and the analysis and handling of compromised systems. The ethics around computer crime, privacy, and intellectual property are covered in detail. Finally, the unit will cover the criteria and controls for information classification.
+25
+Internal
+
+
+
+UNIT
+COMP1005
+Fundamentals of Programming
+This unit aims at equipping students with the ability to write simple programs as part of managing large volumes of data. Topics include data representation in a computer, algorithm design, submodules, Boolean expressions, selection and repetition control structures, basic Object Oriented programming design and File I/O. These will be discussed in the context of implementation in the Python programming language.
+25
+Internal
+
+
+COMP1001;COMP1007;COMP5005
