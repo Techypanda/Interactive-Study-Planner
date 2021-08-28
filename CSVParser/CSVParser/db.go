@@ -330,6 +330,16 @@ func attachMajorData(putItem *map[string]*dynamodb.AttributeValue, major Major) 
 		(*putItem)["UnitAntiReqs"] = &dynamodb.AttributeValue{
 			L: majorAntiReqs,
 		}
+	} else {
+		var def []*dynamodb.AttributeValue
+		var emtpyss []string
+		emtpyss = append(emtpyss, "") // empty defualt
+		def = append(def, &dynamodb.AttributeValue{
+			SS: convertToStringMemoryArray(emtpyss),
+		})
+		(*putItem)["UnitAntiReqs"] = &dynamodb.AttributeValue{
+			L: def,
+		}
 	}
 	if len(major.SpecAntiReqs) > 0 {
 		var specAntiReqs []*dynamodb.AttributeValue
@@ -340,6 +350,16 @@ func attachMajorData(putItem *map[string]*dynamodb.AttributeValue, major Major) 
 		}
 		(*putItem)["SpecAntiReqs"] = &dynamodb.AttributeValue{
 			L: specAntiReqs,
+		}
+	} else {
+		var def []*dynamodb.AttributeValue
+		var emtpyss []string
+		emtpyss = append(emtpyss, "") // empty defualt
+		def = append(def, &dynamodb.AttributeValue{
+			SS: convertToStringMemoryArray(emtpyss),
+		})
+		(*putItem)["SpecAntiReqs"] = &dynamodb.AttributeValue{
+			L: def,
 		}
 	}
 }
