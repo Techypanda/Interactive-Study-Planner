@@ -1,9 +1,8 @@
-import { AppBar, Toolbar,  Typography, Box,  List} from "@material-ui/core";
+import { AppBar, Toolbar, Typography, Box} from "@material-ui/core";
 import { DefaultProps } from "../../types";
 import styled from 'styled-components';
 import CurtinLogo from "../../static/curtinlogo.png";
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
 
 function Navbar(props: DefaultProps) {
     return (
@@ -33,7 +32,6 @@ export default styled(Navbar)`
   .flexit {
     display: flex;
     justify-content: flex-start;
-
   }
   #test {
     display: none !important;
@@ -41,7 +39,7 @@ export default styled(Navbar)`
   #LogoSection {
     margin-left: auto;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
   }
   #LogoSection h6 {
