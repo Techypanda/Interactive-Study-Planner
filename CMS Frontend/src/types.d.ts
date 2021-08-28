@@ -14,8 +14,7 @@ export interface CognitoJWT {
   token_use: string
 }
 export interface UnitEntryProps extends DefaultProps {
-  unitTitle: string;
-  unitContent: string;
+  unit: Unit
 }
 export interface CreateUnitForm {
   unitCode: string
@@ -26,6 +25,19 @@ export interface CreateUnitForm {
 	prerequistes: string[]
 	corequistes: string[]
 	antirequistes: string[]
+}
+export interface Unit {
+  Credits: Number
+  Antirequistes: Array<Array<string>>
+  Prerequistes: Array<Array<string>>
+  Corequistes: Array<Array<string>>
+  Name: string
+  Delivery: string
+  UnitCode: string
+  Description: string
+}
+export interface PaginatedUnitsProps extends DefaultProps {
+  units: Array<Unit>
 }
 export interface PromptData {
   promptTitle: string

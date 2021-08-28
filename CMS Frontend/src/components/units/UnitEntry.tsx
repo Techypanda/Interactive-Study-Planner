@@ -7,8 +7,10 @@ function UnitEntry(props: UnitEntryProps) {
   return (
     <Paper className={props.className}>
       <Box padding={2}>
-        <Typography variant="h6">{props.unitTitle}</Typography>
-        <Typography variant="body1" className="unitContent">{props.unitContent}</Typography>
+        <Box pb={2}>
+          <Typography variant="h6">{props.unit.Name}</Typography>
+        </Box>
+        <Typography variant="body1" className="unitContent">{props.unit.Description}</Typography>
       </Box>
     </Paper>
   )

@@ -58,5 +58,6 @@ export default styled(Landing)`
   .cardEntry {
     height: 100% !important;
     cursor: pointer;
+    min-height: 400px;
   }
 `;

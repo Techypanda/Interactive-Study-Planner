@@ -18,7 +18,7 @@ function MajorManagement(props: DefaultProps) {
         <Button color="primary" variant='contained' className="searchbtn">GO</Button>
       </Box>
       <Box id="units" marginTop={2}>
-        <UnitEntry unitContent="Max hasn't written the read API yet." unitTitle="Example Major" />
+        {/* <UnitEntry unitContent="Max hasn't written the read API yet." unitTitle="Example Major" /> */}
       </Box>
     </Container>
   )
