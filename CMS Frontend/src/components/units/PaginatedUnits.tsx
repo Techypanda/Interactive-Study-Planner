@@ -17,16 +17,18 @@ function PaginatedUnits(props: PaginatedUnitsProps) {
   }
   return (
     <div className={props.className}>
-      { props.units.slice(paginationCount * page, Math.min((paginationCount * page) + paginationCount, props.units.length - 1)).map((unit, _) =>
-        <UnitEntry unit={unit} />
-      ) }
-      {pageIcons().map((obj: number, i: number) => {
+      {props.units.slice(paginationCount * page, Math.min((paginationCount * page) + paginationCount, props.units.length - 1)).map((unit, _) =>
+        <Box mb={1}>
+          <UnitEntry unit={unit} />
+        </Box>
+      )}
+      {pageIcons().map((obj: number, _: number) => {
         return <Box mr={1} mt={2} mb={2} display="inline-block" onClick={() => setPage(obj)}>
           <Paper className="pageIconButton">
             <Box px={1} py={0.5}>
               {obj === page
-              ? <Typography className="icontxt active">{obj}</Typography>
-              : <Typography className="icontxt">{obj}</Typography> 
+                ? <Typography className="icontxt active">{obj}</Typography>
+                : <Typography className="icontxt">{obj}</Typography>
               }
             </Box>
           </Paper>

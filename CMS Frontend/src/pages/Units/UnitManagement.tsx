@@ -1,11 +1,11 @@
-import { DefaultProps } from "../types";
+import { DefaultProps } from "../../types";
 import { Box, Button, CircularProgress, Container, Paper, TextField, Typography } from "@material-ui/core";
 import styled from "styled-components";
-import UnitEntry from "../components/units/UnitEntry";
+import UnitEntry from "../../components/units/UnitEntry";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import { useUnits } from "../api/hooks";
-import PaginatedUnits from "../components/units/PaginatedUnits";
+import { useUnits } from "../../api/hooks";
+import PaginatedUnits from "../../components/units/PaginatedUnits";
 
 function UnitManagement(props: DefaultProps) {
   const history = useHistory();
