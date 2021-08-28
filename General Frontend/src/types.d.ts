@@ -16,7 +16,7 @@ export interface CareerEntryProps extends DefaultProps {
 }
 
 export interface CareerProps {
-  careerName : string;
+  careerName? : string;
   careerDescription? : string;
   careerIndustry? : string;
   careerReqs? : string[];

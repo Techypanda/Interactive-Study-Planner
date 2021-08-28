@@ -12,7 +12,7 @@ import LoadingScreen from "./Loading";
 /*
  * Author: Matthew Loe
  * Student Id: 19452425
- * Date Last Modified: 28/08/2021
+ * Date Last Modified: 29/08/2021
  * Description: Page for viewing the detailed information on a major
  */
 
@@ -21,15 +21,14 @@ function ViewMajor(props: DefaultProps)
   const history = useHistory();
   const id = history.location.state as string;  //Retrieve id for major information to get
 
-  //Mock data
-  let mock : MajorProps = {
+  let base : MajorProps = {
     majorCode : id
   };
 
   const [isLoading, setLoading ] = useState(true);
   const [isError, setError ] = useState(false);
   const [error, setErrorContent] = useState<string>();
-  const [major, setMajor] = useState<MajorProps>(mock);
+  const [major, setMajor] = useState<MajorProps>(base);
   
   //Asynchronously fetch data
   async function fetchData(id: string)
@@ -48,8 +47,6 @@ function ViewMajor(props: DefaultProps)
             }
           }
       );
-
-      console.log(data);
 
       let resp : MajorProps = {
         majorCode : data[0].MajorCode,
