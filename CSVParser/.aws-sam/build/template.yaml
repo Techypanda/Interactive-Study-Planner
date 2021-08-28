@@ -51,24 +51,23 @@ Resources:
         Variables:
           DisableAuthentication:
             Ref: Authentication
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName: DevUnits
+      - DynamoDBCrudPolicy:
+          TableName: DevMajors
+      - DynamoDBCrudPolicy:
+          TableName: DevSpecializations
+      - DynamoDBCrudPolicy:
+          TableName: DevCareers
       ImageUri: csvparser:go1.x-v1
     Metadata:
       DockerTag: go1.x-v1
       DockerContext: ./CSVParser
       Dockerfile: Dockerfile
 Outputs:
-  CSVParserPrivateAPI:
-    Description: API Gateway endpoint URL for Prod stage
-    Value:
-      Fn::Sub: https://${PrivateAPI}.execute-api.${AWS::Region}.amazonaws.com/Prod/
   CSVParserFunction:
     Description: CSV Lambda Function ARN
-    Value:
-      Fn::GetAtt:
-      - CSVParser
-      - Arn
-  CSVParserFunctionIamRole:
-    Description: Implicit IAM Role created for Social Events function
     Value:
       Fn::GetAtt:
       - CSVParser
