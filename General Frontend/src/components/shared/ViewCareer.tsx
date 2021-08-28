@@ -110,6 +110,13 @@ function ViewCareer(props: DefaultProps)
   }
   //END IF
 
+  //Check for no name
+  if (career.careerName === undefined)
+  {
+    career.careerName = "No career name";
+  }
+  //END IF
+
   return (
       <div className={props.className}>
         <Paper>
