@@ -5,12 +5,12 @@ import Authenticated from './pages/Authenticated';
 import Authenticate from './pages/Authenticate';
 
 function TokenExpired() {
-  if (localStorage.getItem('rToken') && localStorage.getItem('rTokenExpiry')) {
+  if (sessionStorage.getItem('rToken') && sessionStorage.getItem('rTokenExpiry')) {
     try {
-      return !(new Date(new Date().getTime() + (2 * 24 * 60 * 60 * 1000)) < new Date(localStorage.getItem('rTokenExpiry')!)); // if theres atleast 2 days left on token were ok
+      return !(new Date(new Date().getTime() + (2 * 24 * 60 * 60 * 1000)) < new Date(sessionStorage.getItem('rTokenExpiry')!)); // if theres atleast 2 days left on token were ok
     } catch {
-      localStorage.removeItem('rToken');
-      localStorage.removeItem('rTokenExpiry');
+      sessionStorage.removeItem('rToken');
+      sessionStorage.removeItem('rTokenExpiry');
       return true;
     }
   }

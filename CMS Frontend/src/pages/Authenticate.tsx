@@ -18,8 +18,8 @@ export default function Authenticate(props: DefaultProps) {
       params.append('code', urlParams.get('code')!);
       params.append('redirect_uri', window.location.origin);
       axios.post(`${process.env.REACT_APP_COGNITO_LOGIN_URI}/oauth2/token`, params, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then((resp) => {
-        localStorage.setItem('rToken', resp.data['refresh_token']);
-        localStorage.setItem('rTokenExpiry', new Date(new Date().getTime()+(30*24*60*60*1000)).toString()); // After 60 days the refresh token no longer works
+        sessionStorage.setItem('rToken', resp.data['refresh_token']);
+        sessionStorage.setItem('rTokenExpiry', new Date(new Date().getTime()+(30*24*60*60*1000)).toString()); // After 60 days the refresh token no longer works
         window.location.replace('/')
       })
       .catch((err: AxiosError) => {
