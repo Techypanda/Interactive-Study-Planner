@@ -1,6 +1,5 @@
 import { Box, Dialog, Typography, Button } from "@material-ui/core";
 import styled from "styled-components";
-import { ErrorProps } from "../../types";
 
 function Error(props: ErrorProps) {
 

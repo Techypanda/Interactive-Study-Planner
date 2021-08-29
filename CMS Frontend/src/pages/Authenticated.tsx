@@ -1,13 +1,12 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navbar from "../components/shared/Navbar";
-import { CognitoJWT, DefaultProps } from "../types";
 import Landing from "./Landing";
 import NotFound from "./NotFound";
 import useCognitoToken from "../api/cognito";
 import { QueryClient, useQueryClient } from "react-query";
 import { decode } from "jsonwebtoken";
 import { useEffect, useState } from "react";
-import UnitRouter from "./UnitRouter";
+import UnitRouter from "./Units/UnitRouter";
 import CareerRouter from "./CareerRouter";
 import MajorRouter from "./MajorRouter";
 import SpecializationRouter from "./SpecializationRouter";

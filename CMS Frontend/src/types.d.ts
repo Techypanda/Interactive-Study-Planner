@@ -1,8 +1,11 @@
-export interface DefaultProps {
+interface DefaultProps {
   className?: string;
   username?: string;
 }
-export interface CognitoJWT {
+interface UnitFormProps extends DefaultProps {
+  unit?: Unit
+}
+interface CognitoJWT {
   at_hash: string
   aud: string
   auth_time: number
@@ -13,11 +16,26 @@ export interface CognitoJWT {
   sub: string
   token_use: string
 }
-export interface UnitEntryProps extends DefaultProps {
-  unitTitle: string;
-  unitContent: string;
+interface Delivery {
+  delivery: "Internal" | "Online";
 }
-export interface CreateUnitForm {
+interface DeliveryAddProps extends DefaultProps {
+  add: (deliveryName: "Online" | "Internal") => void;
+}
+interface RequistePathProps extends DefaultProps {
+  path: Array<string>
+  updatePath: (newArr: Array<string>, idx: number) => void;
+  idx: number
+  delete: (idx: number) => void
+}
+interface DeliveryListProps extends DefaultProps {
+  list: Array<string>
+  remove: (deliveryName: string) => void;
+}
+interface UnitEntryProps extends DefaultProps {
+  unit: Unit
+}
+interface CreateUnitForm {
   unitCode: string
 	unitName: string
 	unitDescription: string
@@ -27,12 +45,25 @@ export interface CreateUnitForm {
 	corequistes: string[]
 	antirequistes: string[]
 }
-export interface PromptData {
+interface Unit {
+  Credits: Number
+  Antirequistes: Array<Array<string>>
+  Prerequistes: Array<Array<string>>
+  Corequistes: Array<Array<string>>
+  Name: string
+  Delivery: string
+  UnitCode: string
+  Description: string
+}
+interface PaginatedUnitsProps extends DefaultProps {
+  units: Array<Unit>
+}
+interface PromptData {
   promptTitle: string
   promptContent: string
   showPrompt: bool
 }
-export interface ErrorProps extends DefaultProps {
+interface ErrorProps extends DefaultProps {
   promptTitle: string
   promptContent: string
   showPrompt: bool
