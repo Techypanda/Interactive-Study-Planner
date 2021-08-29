@@ -1,5 +1,4 @@
 import { Box, Typography } from "@material-ui/core";
-import { DefaultProps } from "../types";
 import axios, { AxiosError } from 'axios';
 import 'cross-fetch/polyfill';
 import { useEffect } from "react";

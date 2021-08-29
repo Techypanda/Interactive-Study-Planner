@@ -1,7 +1,6 @@
 import { Box, Container, Paper, Typography } from "@material-ui/core";
 import { ReactComponentElement } from "react";
 import styled from "styled-components"
-import { UnitEntryProps } from "../../types";
 
 function UnitDisplay(props: UnitEntryProps) {
   function comprehendLogic(val: Array<Array<string>>): Array<JSX.Element> {

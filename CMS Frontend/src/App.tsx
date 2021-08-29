@@ -1,6 +1,5 @@
 import React from 'react';
 import './style.scss';
-import { DefaultProps } from './types';
 import Authenticated from './pages/Authenticated';
 import Authenticate from './pages/Authenticate';
 

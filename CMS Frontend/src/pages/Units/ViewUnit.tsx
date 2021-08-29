@@ -9,7 +9,6 @@ import styled from "styled-components";
 import { useUnit } from "../../api/hooks";
 import Error from "../../components/shared/Error";
 import UnitDisplay from "../../components/units/UnitDisplay";
-import { DefaultProps, Unit } from "../../types";
 import NotFound from "../NotFound";
 
 function ViewUnit(props: DefaultProps) {

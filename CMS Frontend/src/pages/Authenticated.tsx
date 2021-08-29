@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navbar from "../components/shared/Navbar";
-import { CognitoJWT, DefaultProps } from "../types";
 import Landing from "./Landing";
 import NotFound from "./NotFound";
 import useCognitoToken from "../api/cognito";

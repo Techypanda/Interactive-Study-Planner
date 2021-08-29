@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { useUnit } from "../../api/hooks";
 import UnitForm from "../../components/units/UnitForm";
-import { DefaultProps, Unit } from "../../types";
 import NotFound from "../NotFound";
 
 function EditUnit(props: DefaultProps) {

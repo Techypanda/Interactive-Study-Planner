@@ -1,7 +1,6 @@
 import { Box, Grid, Paper, Typography } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { DefaultProps } from "../types";
 
 function Landing(props: DefaultProps) {
   const history = useHistory();

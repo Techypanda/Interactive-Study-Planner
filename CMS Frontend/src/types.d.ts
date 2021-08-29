@@ -1,11 +1,11 @@
-export interface DefaultProps {
+interface DefaultProps {
   className?: string;
   username?: string;
 }
-export interface UnitFormProps extends DefaultProps {
+interface UnitFormProps extends DefaultProps {
   unit?: Unit
 }
-export interface CognitoJWT {
+interface CognitoJWT {
   at_hash: string
   aud: string
   auth_time: number
@@ -16,10 +16,10 @@ export interface CognitoJWT {
   sub: string
   token_use: string
 }
-export interface UnitEntryProps extends DefaultProps {
+interface UnitEntryProps extends DefaultProps {
   unit: Unit
 }
-export interface CreateUnitForm {
+interface CreateUnitForm {
   unitCode: string
 	unitName: string
 	unitDescription: string
@@ -29,7 +29,7 @@ export interface CreateUnitForm {
 	corequistes: string[]
 	antirequistes: string[]
 }
-export interface Unit {
+interface Unit {
   Credits: Number
   Antirequistes: Array<Array<string>>
   Prerequistes: Array<Array<string>>
@@ -39,15 +39,15 @@ export interface Unit {
   UnitCode: string
   Description: string
 }
-export interface PaginatedUnitsProps extends DefaultProps {
+interface PaginatedUnitsProps extends DefaultProps {
   units: Array<Unit>
 }
-export interface PromptData {
+interface PromptData {
   promptTitle: string
   promptContent: string
   showPrompt: bool
 }
-export interface ErrorProps extends DefaultProps {
+interface ErrorProps extends DefaultProps {
   promptTitle: string
   promptContent: string
   showPrompt: bool

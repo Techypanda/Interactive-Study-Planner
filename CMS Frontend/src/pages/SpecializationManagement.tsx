@@ -1,4 +1,3 @@
-import { DefaultProps } from "../types";
 import { Box, Container, Typography, Button, TextField } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import UnitEntry from "../components/units/UnitEntry";

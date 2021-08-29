@@ -1,7 +1,6 @@
 import { Paper, Box, Typography } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { UnitEntryProps } from "../../types";
 
 function UnitEntry(props: UnitEntryProps) {
   const history = useHistory();

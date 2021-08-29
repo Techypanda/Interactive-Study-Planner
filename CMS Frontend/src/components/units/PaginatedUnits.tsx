@@ -1,7 +1,6 @@
 import { Box, Paper, Typography } from "@material-ui/core";
 import { useState } from "react";
 import styled from "styled-components";
-import { PaginatedUnitsProps } from "../../types";
 import UnitEntry from "./UnitEntry";
 
 function PaginatedUnits(props: PaginatedUnitsProps) {
