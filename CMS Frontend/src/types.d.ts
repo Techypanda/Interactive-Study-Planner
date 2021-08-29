@@ -16,6 +16,22 @@ interface CognitoJWT {
   sub: string
   token_use: string
 }
+interface Delivery {
+  delivery: "Internal" | "Online";
+}
+interface DeliveryAddProps extends DefaultProps {
+  add: (deliveryName: "Online" | "Internal") => void;
+}
+interface RequistePathProps extends DefaultProps {
+  path: Array<string>
+  updatePath: (newArr: Array<string>, idx: number) => void;
+  idx: number
+  delete: (idx: number) => void
+}
+interface DeliveryListProps extends DefaultProps {
+  list: Array<string>
+  remove: (deliveryName: string) => void;
+}
 interface UnitEntryProps extends DefaultProps {
   unit: Unit
 }

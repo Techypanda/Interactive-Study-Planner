@@ -1,4 +1,5 @@
-import { Box, Typography, TextField, Button, Grid } from "@material-ui/core";
+import { Box, Typography, TextField, Button, Grid, MenuItem, Select, Fab, Chip, Paper } from "@material-ui/core";
+import { Add, PlusOne } from "@material-ui/icons";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
@@ -6,6 +7,9 @@ import { useHistory } from "react-router-dom";
 import { BounceLoader } from "react-spinners";
 import styled from "styled-components";
 import Error from "../shared/Error";
+import DeliveryAddition from "./DeliveryAddition";
+import DeliveryList from "./DeliveryList";
+import RequistePath from "./RequistePath";
 
 function UnitForm(props: UnitFormProps) {
   const history = useHistory();
@@ -13,7 +17,6 @@ function UnitForm(props: UnitFormProps) {
   const [unitCode, setUnitCode] = useState<string | undefined>(props.unit?.UnitCode);
   const [description, setDescription] = useState<string | undefined>(props.unit?.Description);
   const [credits, setCredits] = useState(props.unit ? props.unit.Credits : 0);
-  const [delivery, setDelivery] = useState<string | undefined>(props.unit?.Delivery);
   const [corequistes, setCorequistes] = useState("");
   const [prerequistes, setPrerequistes] = useState("");
   const [antiRequistes, setAntirequistes] = useState("");
@@ -21,7 +24,11 @@ function UnitForm(props: UnitFormProps) {
   const [loading, setLoading] = useState(false);
   const client = useQueryClient();
 
-  const [deliverys, setDeliverys] = useState([]);
+  const [prereq, setPrereq] = useState<Array<Array<string>>>([])
+  const [coreq, setCoreq] = useState<Array<Array<string>>>([])
+  const [antireq, setAntireq] = useState<Array<Array<string>>>([])
+
+  const [deliverys, setDeliverys] = useState<Array<string>>(props.unit?.Delivery ? props.unit?.Delivery.split(",") : []);
 
   const mutation = useMutation(() => {
     const parsedCoreq = corequistes.split(',');
@@ -32,7 +39,8 @@ function UnitForm(props: UnitFormProps) {
       unitCode: unitCode!,
       unitDescription: description!,
       unitCredits: Number.isNaN(credits) ? 0 : credits as number,
-      delivery: delivery!,
+      delivery: "",
+      // delivery: delivery!,
       corequistes: parsedCoreq,
       prerequistes: parsedPrereq,
       antirequistes: pasredAntireq
@@ -63,8 +71,62 @@ function UnitForm(props: UnitFormProps) {
     }
   })
 
+  function addDelivery(delivery: "Online" | "Internal") {
+    let donotadd = false;
+    deliverys.forEach((del) => {
+      if (del.toUpperCase() === delivery.toUpperCase()) {
+        donotadd = true;
+      }
+    })
+    if (!donotadd) {
+      const copy = [...deliverys]
+      copy.push(delivery)
+      setDeliverys(copy);
+    }
+  }
+  function removeDelivery(delivery: string) {
+    let newArr: Array<string> = []
+    deliverys.forEach((val) => {
+      if (val.toUpperCase() !== delivery.toUpperCase()) {
+        newArr.push(val)
+      }
+    })
+    setDeliverys(newArr)
+  }
+
   function SubmitForm() {
     mutation.mutate();
+  }
+
+  function deletePrePath(idx: number) {
+    const copy = [...prereq]
+    copy.splice(idx, 1)
+    setPrereq(copy)
+  }
+  function updatePrePath(arr: Array<string>, idx: number) {
+    const copy = [...prereq]
+    copy[idx] = arr;
+    setPrereq(copy);
+  }
+  function deleteCoPath(idx: number) {
+    const copy = [...coreq]
+    copy.splice(idx, 1)
+    setCoreq(copy)
+  }
+  function updateCoPath(arr: Array<string>, idx: number) {
+    const copy = [...coreq]
+    copy[idx] = arr;
+    setCoreq(copy);
+  }
+  function deleteAntiPath(idx: number) {
+    const copy = [...prereq]
+    copy.splice(idx, 1)
+    setAntireq(copy)
+  }
+  function updateAntiPath(arr: Array<string>, idx: number) {
+    const copy = [...prereq]
+    copy[idx] = arr;
+    setAntireq(copy);
   }
 
   return (
@@ -102,36 +164,45 @@ function UnitForm(props: UnitFormProps) {
           </Box>
         </Grid>
       </Grid>
-      <Box> {/* delivery */}
-        <li>
 
-        </li>
+      <Box mt={2}>
+        <Typography className="bold" variant="subtitle1">Delivery Of Unit</Typography>
+        <DeliveryList list={deliverys} remove={removeDelivery} />
+        <Box mt={1}>
+          <DeliveryAddition add={addDelivery} />
+        </Box>
       </Box>
 
-      <Grid container spacing={1}>
-        <Grid item sm={6} xs={12}>
-          <Box marginTop={2}>
-            <TextField error={!delivery} label="Delivery Of Unit - Required" fullWidth placeholder="Enter Delivery i.e Internal/External/Online" variant="outlined" required onChange={(e) => setDelivery(e.target.value)} value={delivery} />
+      <Box mt={2}>
+        <Typography className="bold" variant="subtitle1">Prerequistes</Typography>
+        {prereq.map((path, i) =>
+          <Box mb={1}>
+            <RequistePath idx={i} key={i} path={path} delete={deletePrePath} updatePath={updatePrePath} />
           </Box>
-        </Grid>
-        <Grid item sm={6} xs={12}>
-          <Box marginTop={2}>
-            <TextField label="Prerequiste Of Unit - Optional" fullWidth placeholder="Enter Prerequiste Unit Codes as a CSV i.e COMP6001,COMP2000" variant="outlined" onChange={(e) => setPrerequistes(e.target.value)} value={prerequistes} />
+        )}
+        <Button variant="contained" color="primary" onClick={() => { const copy = [...prereq]; copy.push([]); setPrereq(copy) }}>Add Requiste Path</Button>
+      </Box>
+
+      <Box mt={2}>
+        <Typography className="bold" variant="subtitle1">Corequistes</Typography>
+        {coreq.map((path, i) =>
+          <Box mb={1}>
+            <RequistePath idx={i} key={i} path={path} delete={deleteCoPath} updatePath={updateCoPath} />
           </Box>
-        </Grid>
-      </Grid>
-      <Grid container spacing={1}>
-        <Grid item sm={6} xs={12}>
-          <Box marginTop={2}>
-            <TextField label="Corequistes Of Unit - Optional" fullWidth placeholder="Enter Corequistes Unit Codes as a CSV i.e COMP6001,COMP2000" variant="outlined" onChange={(e) => setCorequistes(e.target.value)} value={corequistes} />
+        )}
+        <Button variant="contained" color="primary" onClick={() => { const copy = [...coreq]; copy.push([]); setCoreq(copy) }}>Add Requiste Path</Button>
+      </Box>
+
+      <Box mt={2}>
+        <Typography className="bold" variant="subtitle1">Antirequistes</Typography>
+        {antireq.map((path, i) =>
+          <Box mb={1}>
+            <RequistePath idx={i} key={i} path={path} delete={deleteAntiPath} updatePath={updateAntiPath} />
           </Box>
-        </Grid>
-        <Grid item sm={6} xs={12}>
-          <Box marginTop={2}>
-            <TextField label="Antirequistes Of Unit - Optional" fullWidth placeholder="Enter Antirequistes Unit Codes as a CSV i.e COMP6001,COMP2000" variant="outlined" onChange={(e) => setAntirequistes(e.target.value)} value={antiRequistes} />
-          </Box>
-        </Grid>
-      </Grid>
+        )}
+        <Button variant="contained" color="primary" onClick={() => { const copy = [...antireq]; copy.push([]); setAntireq(copy) }}>Add Requiste Path</Button>
+      </Box>
+
       <Box display="flex" justifyContent="space-between" mt={2}>
         <Button variant="contained" color="secondary" id="backbtn" onClick={() => history.push("/units")}>Back</Button>
         <Button
@@ -139,7 +210,7 @@ function UnitForm(props: UnitFormProps) {
           color="primary"
           id="createbtn"
           onClick={() => SubmitForm()}
-          disabled={!credits || !delivery || !description || !name || !unitCode}
+          disabled={!credits || !description || !name || !unitCode /* || !delivery */}
         >
           Create
         </Button>
@@ -162,5 +233,8 @@ export default styled(UnitForm)`
   left: 50%;
   position: absolute;
   transform: translate(-75px, -75px);
+}
+.bold {
+  font-weight: 600;
 }
 `;
