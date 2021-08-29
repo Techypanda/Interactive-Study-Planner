@@ -1,4 +1,4 @@
-import { Box, Button, Fade, Grid, Paper, Typography } from "@material-ui/core";
+import { Box, Button, Grid, Paper, Typography } from "@material-ui/core";
 import TextSection from "./TextSection"
 import NavListSection from "./NavListSection"
 import { MajorProps, DefaultProps } from "../../types";
@@ -108,31 +108,29 @@ function ViewMajor(props: DefaultProps)
 
   return (
       <div className={props.className}>
-        <Fade in={true} timeout={2000}>
-          <Paper>
-            <Grid className="titleBar" container direction="row">
-              <Grid item>
-                <Button className="backButton" variant="contained" onClick={() => BackFunction()} >
-                  Back
-                </Button>
-              </Grid>
-              <Grid item>
-                <Typography id="careerTitle" variant="h3">
-                  {major.majorName} - {major.majorCode}
-                </Typography>
-              </Grid>
-              <Grid item >
-                {/*Empty grid item to make title more centre. */}
-              </Grid>
+        <Paper>
+          <Grid className="titleBar" container direction="row">
+            <Grid item>
+              <Button className="backButton" variant="contained" onClick={() => BackFunction()} >
+                Back
+              </Button>
             </Grid>
-            <Box alignContent="flex-start" >
-              <TextSection sectionHeading="Credits" sectionContent={major.majorCredits}/>
-              <TextSection sectionHeading="Description" sectionContent= {major.majorDescription}/>
-              <NavListSection sectionHeading="Units in Major" list= {major.majorUnits}/>
-              <NavListSection sectionHeading="Antirequisite Specializations" list= {major.majorAntiReqs}/>
-            </Box>
-          </Paper>
-        </Fade>
+            <Grid item>
+              <Typography id="careerTitle" variant="h3">
+                {major.majorName} - {major.majorCode}
+              </Typography>
+            </Grid>
+            <Grid item >
+              {/*Empty grid item to make title more centre. */}
+            </Grid>
+          </Grid>
+          <Box alignContent="flex-start" >
+            <TextSection sectionHeading="Credits" sectionContent={major.majorCredits}/>
+            <TextSection sectionHeading="Description" sectionContent= {major.majorDescription}/>
+            <NavListSection sectionHeading="Units in Major" list= {major.majorUnits}/>
+            <NavListSection sectionHeading="Antirequisite Specializations" list= {major.majorAntiReqs}/>
+          </Box>
+        </Paper>
       </div>
   );
 }

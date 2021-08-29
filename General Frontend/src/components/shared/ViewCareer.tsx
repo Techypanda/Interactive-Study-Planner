@@ -1,4 +1,4 @@
-import { Box, Button, Fade, Grid, Paper, Typography } from "@material-ui/core";
+import { Box, Button, Grid, Paper, Typography } from "@material-ui/core";
 import TextSection from "./TextSection"
 import ListSection from "./ListSection"
 import NavListSection from "./NavListSection"
@@ -119,31 +119,29 @@ function ViewCareer(props: DefaultProps)
 
   return (
       <div className={props.className}>
-        <Fade in={true} timeout={2000}>
-          <Paper>
-            <Grid className="titleBar" container direction="row">
-              <Grid item>
-                <Button className="backButton" variant="contained" onClick={() => BackFunction()} >
-                  Back
-                </Button>
-              </Grid>
-              <Grid item>
-                <Typography id="careerTitle" variant="h3">
-                  {career.careerName}
-                </Typography>
-              </Grid>
-              <Grid item >
-                {/*Empty grid item to make title more centre. */}
-              </Grid>
+        <Paper>
+          <Grid className="titleBar" container direction="row">
+            <Grid item>
+              <Button className="backButton" variant="contained" onClick={() => BackFunction()} >
+                Back
+              </Button>
             </Grid>
-            <Box alignContent="flex-start" >
-              <TextSection sectionHeading="Industry" sectionContent= {career.careerIndustry}/>
-              <TextSection sectionHeading="Description" sectionContent= {career.careerDescription}/>
-              <NavListSection sectionHeading="Suggested Career Requirements" list= {career.careerReqs}/>
-              <ListSection sectionHeading="Compatible Traits" list= {career.careerTraits}/>
-            </Box>
-          </Paper>
-        </Fade>
+            <Grid item>
+              <Typography id="careerTitle" variant="h3">
+                {career.careerName}
+              </Typography>
+            </Grid>
+            <Grid item >
+              {/*Empty grid item to make title more centre. */}
+            </Grid>
+          </Grid>
+          <Box alignContent="flex-start" >
+            <TextSection sectionHeading="Industry" sectionContent= {career.careerIndustry}/>
+            <TextSection sectionHeading="Description" sectionContent= {career.careerDescription}/>
+            <NavListSection sectionHeading="Suggested Career Requirements" list= {career.careerReqs}/>
+            <ListSection sectionHeading="Compatible Traits" list= {career.careerTraits}/>
+          </Box>
+        </Paper>
       </div>
   );
 }
