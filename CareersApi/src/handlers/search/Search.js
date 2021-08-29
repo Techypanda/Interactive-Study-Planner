@@ -49,6 +49,11 @@ exports.search = async (event) => {
 
     const response = {
         statusCode: 200,
+        headers: {
+            "Access-Control-Allow-Headers" : "Content-Type",
+            "Access-Control-Allow-Origin": "*", // Allow from anywhere 
+            "Access-Control-Allow-Methods": "POST" 
+        },
         body: JSON.stringify(scanResults)
     };
     console.info(`response from: ${event.path} statusCode: ${response.statusCode} body: ${response.body}`);
