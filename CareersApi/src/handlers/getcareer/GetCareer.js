@@ -21,7 +21,7 @@ exports.getCareer = async (event) => {
     var params = {
         TableName: tableName,
         Key: {
-          'CareerId' : body['CareerId']
+          'CareerId' : body['CareerId'].toLowerCase()
         },
     };
     const item = await docClient.get(params).promise()
