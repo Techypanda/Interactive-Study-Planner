@@ -13,7 +13,6 @@ import CareersImage from "../static/career.jpg";
 import TraitsImage from "../static/traits_image.jpg";
 import '../App.scss';
 
-
 function Landing() {
     const history = useHistory();
     return(
