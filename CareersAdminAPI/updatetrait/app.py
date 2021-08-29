@@ -20,7 +20,7 @@ from botocore.exceptions import ClientError
 #JWT token validation
 # Link: https://github.com/awslabs/aws-support-tools/blob/master/Cognito/decode-verify-jwt/decode-verify-jwt.py
 def validateJWTToken(token: str) -> Tuple[bool, dict]:
-    keys_url = "https://cognito-idp.ap-southeast-2.amazonaws.com/ap-southeast-2_gn4KIEkx0/.well-known/jwks.json"
+    keys_url = "https://cognito-idp.ap-southeast-2.amazonaws.com/ap-southeast-2_1EmEPwI2J/.well-known/jwks.json"
 
     response = requests.get(keys_url)
     keys = json.loads(response.decode("utf-8"))["keys"]

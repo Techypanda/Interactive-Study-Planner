@@ -1,0 +1,164 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: CareersApi
+Transform:
+- AWS::Serverless-2016-10-31
+Globals:
+  Function:
+    Timeout: 3
+Resources:
+  GetAllCareers:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      MemorySize: 128
+      Timeout: 100
+      Description: Get All Career Items from DevCareer DynamoDB table
+      Environment:
+        Variables:
+          DEV_CAREER_TABLE: DevCareers
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName: DevCareers
+      - DynamoDBCrudPolicy:
+          TableName: DevTraits
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /events/event-get-all-careers
+            Method: GET
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careerapi:getallcareers-68befc55bea3-nodejs14.x-v1
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./src/handlers/getallcareers
+      DockerTag: nodejs14.x-v1
+  GetAllTraits:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      MemorySize: 128
+      Timeout: 100
+      Description: Get All Trait Items from DevCareer DynamoDB table
+      Environment:
+        Variables:
+          DEV_TRAIT_TABLE: DevTraits
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /events/event-get-all-traits
+            Method: GET
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName: DevCareers
+      - DynamoDBCrudPolicy:
+          TableName: DevTraits
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careerapi:getalltraits-942f20cb9b38-nodejs14.x-v1
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./src/handlers/getalltraits
+      DockerTag: nodejs14.x-v1
+  GetCareer:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      MemorySize: 128
+      Timeout: 100
+      Description: Get Career Item from DevCareer DynamoDB table
+      Environment:
+        Variables:
+          DEV_CAREER_TABLE: DevCareers
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName: DevCareers
+      - DynamoDBCrudPolicy:
+          TableName: DevTraits
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /events/event-get-career
+            Method: POST
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careerapi:getcareer-398fb01eab8d-nodejs14.x-v1
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./src/handlers/getcareer
+      DockerTag: nodejs14.x-v1
+  Search:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      MemorySize: 128
+      Timeout: 100
+      Description: Search any word in career db.
+      Environment:
+        Variables:
+          DEV_CAREER_TABLE: DevCareers
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName: DevCareers
+      - DynamoDBCrudPolicy:
+          TableName: DevTraits
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /events/event-search
+            Method: POST
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careerapi:search-1197bbefbcb1-nodejs14.x-v1
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./src/handlers/search
+      DockerTag: nodejs14.x-v1
+  RestrictWithUnitCode:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      MemorySize: 128
+      Timeout: 100
+      Description: Search careers based on unit code
+      Environment:
+        Variables:
+          DEV_CAREER_TABLE: DevCareers
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName: DevCareers
+      - DynamoDBCrudPolicy:
+          TableName: DevTraits
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /events/event-get-by-unit-code
+            Method: POST
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careerapi:restrictwithunitcode-78f41383a6ac-nodejs14.x-v1
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./src/handlers/byunitcode
+      DockerTag: nodejs14.x-v1
+  RestrictWithTraitCode:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      MemorySize: 128
+      Timeout: 100
+      Description: Search careers based on trait codes
+      Environment:
+        Variables:
+          DEV_CAREER_TABLE: DevCareers
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName: DevCareers
+      - DynamoDBCrudPolicy:
+          TableName: DevTraits
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /events/event-get-by-trait-code
+            Method: POST
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careerapi:restrictwithtraitcode-b4b6124fc0a8-nodejs14.x-v1
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./src/handlers/bytraitcode
+      DockerTag: nodejs14.x-v1
