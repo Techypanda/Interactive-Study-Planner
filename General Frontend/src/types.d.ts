@@ -2,7 +2,6 @@ import internal from "stream";
 
 export interface DefaultProps {
   className?: string;
-  username?: string;
 }
 
 export interface TextSectionProps extends DefaultProps {

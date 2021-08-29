@@ -7,32 +7,32 @@ import { useHistory } from "react-router-dom";
 /*
  * Author: Matthew Loe
  * Student Id: 19452425
- * Date Last Modified: 27/08/2021
+ * Date Last Modified: 29/08/2021
  * Description: Component that returns a list section that allows each item to be clickable.
  */
-function InfoNav(props: String)
+function InfoNav(code: string)
 {
     const history = useHistory();
     const majorSpecHeads = ["MJRU", "SPUC"]
     //Retrieve first 4 characters of code
-    const codeHead = props.substring(0,3);
+    const codeHead = code.substring(0,3);
 
     if (codeHead === majorSpecHeads[0])
     {
         //Nav to major info page
-        history.push('/ViewMajor', { props })
+        history.push('/ViewMajor', { code })
         console.log("Nav to major");
     }
     else if (codeHead === majorSpecHeads[1])
     {
         //Nav to spec info page
-        history.push('/ViewSpecialisation', { props })
+        history.push('/ViewSpecialisation', { code })
         console.log("Nav to spec");
     }
     else
     {
         //Nav to unit info page
-        history.push('/ViewUnit', { props })
+        history.push('/ViewUnit', { code })
         console.log("Nav to unit");
     }
     //END IF
