@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	b, err := ioutil.ReadFile("Test.csv")
+	b, err := ioutil.ReadFile("BiomedicalUnits.csv")
 	if err != nil {
 		fmt.Print(err)
 	} else {

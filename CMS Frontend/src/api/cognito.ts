@@ -5,14 +5,14 @@ const getToken = async () => {
   const params = new URLSearchParams();
   params.append('grant_type', 'refresh_token');
   params.append('client_id', process.env.REACT_APP_COGNITO_CLIENT_ID!)
-  params.append('refresh_token', localStorage.getItem('rToken')!);
+  params.append('refresh_token', sessionStorage.getItem('rToken')!);
   try {
     const resp = await axios.post(`${process.env.REACT_APP_COGNITO_LOGIN_URI}/oauth2/token`, params, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } })
     let idToken: string = resp.data['id_token'];
     return idToken;
   } catch {
-    localStorage.removeItem("rToken");
-    localStorage.removeItem('rTokenExpiry');
+    sessionStorage.removeItem("rToken");
+    sessionStorage.removeItem('rTokenExpiry');
     window.location.href = "/";
     return new Error();
   }

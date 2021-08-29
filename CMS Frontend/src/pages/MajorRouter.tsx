@@ -1,6 +1,5 @@
 import { Route, Switch } from "react-router-dom";
 import styled from "styled-components";
-import { DefaultProps } from "../types";
 import CreateMajor from "./CreateMajor";
 import MajorManagement from "./MajorManagement";
 import NotFound from "./NotFound";
