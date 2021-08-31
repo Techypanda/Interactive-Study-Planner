@@ -47,6 +47,7 @@ function Test()
         <div>
             <Button onClick={() => {
                 history.push("/InfoPage/ViewMajor", "MJRU-HUMBM")
+                //history.push("/InfoPage/ViewCareer", "1xLja1wVTNUVxKVO1N6vnG51rJZ")
             }}>
                 Test
             </Button>
