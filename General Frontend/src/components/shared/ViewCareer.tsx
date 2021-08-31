@@ -13,7 +13,7 @@ import LoadingScreen from "./Loading";
 /*
  * Author: Matthew Loe
  * Student Id: 19452425
- * Date Last Modified: 29/08/2021
+ * Date Last Modified: 31/08/2021
  * Description: Page for viewing the detailed information on a career
  */
 
@@ -25,7 +25,7 @@ function ViewCareer(props: DefaultProps)
 
   //Get career information from table
   const payload = {
-    "CareerId" : id
+    'CareerId' : id
   };
 
   const headers =
@@ -46,10 +46,10 @@ function ViewCareer(props: DefaultProps)
     try
     {
       const {data} = await axios.post(
-        'https://uiqb5tsrsc.execute-api.ap-southeast-2.amazonaws.com/Prod/events/event-get-career',//'${process.env.REACT_APP_CAREERS_API}/getmajor',
+        'https://q02l9qoni6.execute-api.ap-southeast-2.amazonaws.com/Prod/events/event-get-career',//'${process.env.REACT_APP_CAREERS_API}/event-get-career',
         payload,
         {
-           headers 
+          headers
         }
       );
 
