@@ -24,15 +24,6 @@ function ViewCareer(props: DefaultProps)
   const id = history.location.state as string; //Get target career id
 
   //Get career information from table
-  const payload = {
-    'CareerId' : id
-  };
-
-  const headers =
-  {
-    'Content-Type': 'application/json'
-  }
-
   const base : CareerProps = {};
 
   const [isLoading, setLoading ] = useState(true);
@@ -47,9 +38,14 @@ function ViewCareer(props: DefaultProps)
     {
       const {data} = await axios.post(
         'https://q02l9qoni6.execute-api.ap-southeast-2.amazonaws.com/Prod/events/event-get-career',//'${process.env.REACT_APP_CAREERS_API}/event-get-career',
-        payload,
         {
-          headers
+          'CareerId': id
+        },
+        {
+          headers:
+          {
+            'Content-Type': 'application/json'
+          }
         }
       );
 
