@@ -53,8 +53,20 @@ function ViewCareer(props: DefaultProps)
         }
       );
 
+      //Making uppercase the words in the name
+      let name : string = data[0].CareerName;
+      let parts : string[] = name.split(" ");
+
+      for (let ii=0; ii < parts.length; ii++)
+      {
+        parts[ii] = parts[ii][0].toUpperCase() + parts[ii].substr(1);
+      }
+      //END FOR
+
+      name = parts.join(" ");
+
       let resp : CareerProps = {
-        careerName : data[0].CareerName,
+        careerName : name,
         careerDescription : data[0].Description,
         careerIndustry : data[0].Industry,
         careerReqs : data[0].Requirements,

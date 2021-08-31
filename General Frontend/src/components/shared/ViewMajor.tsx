@@ -48,9 +48,21 @@ function ViewMajor(props: DefaultProps)
           }
       );
 
+      //Making uppercase the words in the name
+      let name : string = data[0].Name;
+      let parts : string[] = name.split(" ");
+
+      for (let ii=0; ii < parts.length; ii++)
+      {
+        parts[ii] = parts[ii][0].toUpperCase() + parts[ii].substr(1);
+      }
+      //END FOR
+
+      name = parts.join(" ");
+
       let resp : MajorProps = {
         majorCode : data[0].MajorCode,
-        majorName : data[0].Name,
+        majorName : name,
         majorCredits : data[0].Credits,
         majorDescription : data[0].Description,
         majorUnits : data[0].Units,
