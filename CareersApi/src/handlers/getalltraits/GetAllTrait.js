@@ -33,6 +33,7 @@ exports.getAllTraits = async (event) => {
         headers: {
             "Access-Control-Allow-Headers" : "Content-Type",
             "Access-Control-Allow-Origin": "*", // Allow from anywhere 
+            'Access-Control-Allow-Credentials': true,
             "Access-Control-Allow-Methods": "GET" 
         },
         body: JSON.stringify(scanResults)
