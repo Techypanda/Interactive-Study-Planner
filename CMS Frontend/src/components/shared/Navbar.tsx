@@ -1,6 +1,5 @@
 import { AppBar, Toolbar, IconButton, Typography, Box, Drawer, List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
 import { Book, FolderSpecial, Home, Menu, Report, Work } from "@material-ui/icons";
-import { DefaultProps } from "../../types";
 import styled from 'styled-components';
 import CurtinLogo from "../../static/curtinlogo.png";
 import { useState } from "react";

@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { CreateUnitForm, DefaultProps, PromptData } from "../types";
 import Error from "../components/shared/Error";
 import { BounceLoader } from "react-spinners";
 

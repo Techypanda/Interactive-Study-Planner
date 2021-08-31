@@ -22,7 +22,6 @@ function GetAllUnits() {
     return (
 	<div>
           <ul>
-
           </ul>
         </div>
     );

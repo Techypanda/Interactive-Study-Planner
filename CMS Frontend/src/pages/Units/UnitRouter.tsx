@@ -1,9 +1,10 @@
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import styled from "styled-components";
-import { DefaultProps } from "../types";
 import CreateUnit from "./CreateUnit";
-import NotFound from "./NotFound";
+import NotFound from "../NotFound";
 import UnitManagement from "./UnitManagement";
+import ViewUnit from "./ViewUnit";
+import EditUnit from "./EditUnit";
 
 function UnitRouter(props: DefaultProps) {
 
@@ -14,6 +15,12 @@ function UnitRouter(props: DefaultProps) {
       </Route>
       <Route exact path="/units/create">
         <CreateUnit />
+      </Route>
+      <Route exact path="/units/view/:UnitCode">
+        <ViewUnit />
+      </Route>
+      <Route exact path="/units/edit/:UnitCode">
+        <EditUnit />
       </Route>
       <Route>
         <NotFound />
