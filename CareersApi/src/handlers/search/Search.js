@@ -52,6 +52,7 @@ exports.search = async (event) => {
         headers: {
             "Access-Control-Allow-Headers" : "Content-Type",
             "Access-Control-Allow-Origin": "*", // Allow from anywhere 
+            'Access-Control-Allow-Credentials': true,
             "Access-Control-Allow-Methods": "POST" 
         },
         body: JSON.stringify(scanResults)

@@ -32,7 +32,8 @@ exports.getAllCareers = async (event) => {
         headers: {
             "Access-Control-Allow-Headers" : "Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers",
             "Access-Control-Allow-Origin": "*", // Allow from anywhere 
-            "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+            'Access-Control-Allow-Credentials': true,
+            "Access-Control-Allow-Methods": "GET"
         },
         body: JSON.stringify(scanResults)
     };
