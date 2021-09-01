@@ -35,23 +35,23 @@ Resources:
           Properties:
             Path: /addcareer
             Method: POST
-          Cors:
-            AllowMethods: "POST"
-            AllowHeaders: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-            AllowOrigin: "'*'"
-          GatewayResponses:
-            DEFAULT_4XX:
-              ResponseParameters:
-                Headers:
-                  Access-Control-Allow-Origin: "'*'"
-                  Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-                  Access-Control-Allow-Methods: "POST"
-            DEFAULT_5XX:
-              ResponseParameters:
-                Headers:
-                  Access-Control-Allow-Origin: "'*'"
-                  Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-                  Access-Control-Allow-Methods: "POST"
+          # Cors:
+          #   AllowMethods: "POST"
+          #   AllowHeaders: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
+          #   AllowOrigin: "'*'"
+          # GatewayResponses:
+          #   DEFAULT_4XX:
+          #     ResponseParameters:
+          #       Headers:
+          #         Access-Control-Allow-Origin: "'*'"
+          #         Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
+          #         Access-Control-Allow-Methods: "POST"
+          #   DEFAULT_5XX:
+          #     ResponseParameters:
+          #       Headers:
+          #         Access-Control-Allow-Origin: "'*'"
+          #         Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
+          #         Access-Control-Allow-Methods: "POST"
       Environment:
         Variables:
           DisableAuthentication: !Ref Authentication
@@ -74,23 +74,23 @@ Resources:
           Properties:
             Path: /addtrait
             Method: POST
-          Cors:
-            AllowMethods: "POST"
-            AllowHeaders: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-            AllowOrigin: "'*'"
-          GatewayResponses:
-            DEFAULT_4XX:
-              ResponseParameters:
-                Headers:
-                  Access-Control-Allow-Origin: "'*'"
-                  Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-                  Access-Control-Allow-Methods: "POST"
-            DEFAULT_5XX:
-              ResponseParameters:
-                Headers:
-                  Access-Control-Allow-Origin: "'*'"
-                  Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-                  Access-Control-Allow-Methods: "POST"
+          # Cors:
+          #   AllowMethods: "POST"
+          #   AllowHeaders: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
+          #   AllowOrigin: "'*'"
+          # GatewayResponses:
+          #   DEFAULT_4XX:
+          #     ResponseParameters:
+          #       Headers:
+          #         Access-Control-Allow-Origin: "'*'"
+          #         Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
+          #         Access-Control-Allow-Methods: "POST"
+          #   DEFAULT_5XX:
+          #     ResponseParameters:
+          #       Headers:
+          #         Access-Control-Allow-Origin: "'*'"
+          #         Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
+          #         Access-Control-Allow-Methods: "POST"
       Environment:
         Variables:
           DisableAuthentication: !Ref Authentication
@@ -113,23 +113,23 @@ Resources:
           Properties:
             Path: /deletecareer
             Method: POST
-          Cors:
-            AllowMethods: "POST"
-            AllowHeaders: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-            AllowOrigin: "'*'"
-          GatewayResponses:
-            DEFAULT_4XX:
-              ResponseParameters:
-                Headers:
-                  Access-Control-Allow-Origin: "'*'"
-                  Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-                  Access-Control-Allow-Methods: "POST"
-            DEFAULT_5XX:
-              ResponseParameters:
-                Headers:
-                  Access-Control-Allow-Origin: "'*'"
-                  Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-                  Access-Control-Allow-Methods: "POST"
+          # Cors:
+          #   AllowMethods: "POST"
+          #   AllowHeaders: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
+          #   AllowOrigin: "'*'"
+          # GatewayResponses:
+          #   DEFAULT_4XX:
+          #     ResponseParameters:
+          #       Headers:
+          #         Access-Control-Allow-Origin: "'*'"
+          #         Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
+          #         Access-Control-Allow-Methods: "POST"
+          #   DEFAULT_5XX:
+          #     ResponseParameters:
+          #       Headers:
+          #         Access-Control-Allow-Origin: "'*'"
+          #         Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
+          #         Access-Control-Allow-Methods: "POST"
       Environment:
         Variables:
           DisableAuthentication: !Ref Authentication
@@ -152,23 +152,23 @@ Resources:
           Properties:
             Path: /deletetrait
             Method: POST
-          Cors:
-            AllowMethods: "POST"
-            AllowHeaders: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-            AllowOrigin: "'*'"
-          GatewayResponses:
-            DEFAULT_4XX:
-              ResponseParameters:
-                Headers:
-                  Access-Control-Allow-Origin: "'*'"
-                  Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-                  Access-Control-Allow-Methods: "POST"
-            DEFAULT_5XX:
-              ResponseParameters:
-                Headers:
-                  Access-Control-Allow-Origin: "'*'"
-                  Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-                  Access-Control-Allow-Methods: "POST"
+          # Cors:
+          #   AllowMethods: "POST"
+          #   AllowHeaders: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
+          #   AllowOrigin: "'*'"
+          # GatewayResponses:
+          #   DEFAULT_4XX:
+          #     ResponseParameters:
+          #       Headers:
+          #         Access-Control-Allow-Origin: "'*'"
+          #         Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
+          #         Access-Control-Allow-Methods: "POST"
+          #   DEFAULT_5XX:
+          #     ResponseParameters:
+          #       Headers:
+          #         Access-Control-Allow-Origin: "'*'"
+          #         Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
+          #         Access-Control-Allow-Methods: "POST"
       Environment:
         Variables:
           DisableAuthentication: !Ref Authentication
@@ -191,23 +191,23 @@ Resources:
           Properties:
             Path: /updatecareer
             Method: POST
-          Cors:
-            AllowMethods: "POST"
-            AllowHeaders: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-            AllowOrigin: "'*'"
-          GatewayResponses:
-            DEFAULT_4XX:
-              ResponseParameters:
-                Headers:
-                  Access-Control-Allow-Origin: "'*'"
-                  Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-                  Access-Control-Allow-Methods: "POST"
-            DEFAULT_5XX:
-              ResponseParameters:
-                Headers:
-                  Access-Control-Allow-Origin: "'*'"
-                  Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-                  Access-Control-Allow-Methods: "POST"
+          # Cors:
+          #   AllowMethods: "POST"
+          #   AllowHeaders: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
+          #   AllowOrigin: "'*'"
+          # GatewayResponses:
+          #   DEFAULT_4XX:
+          #     ResponseParameters:
+          #       Headers:
+          #         Access-Control-Allow-Origin: "'*'"
+          #         Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
+          #         Access-Control-Allow-Methods: "POST"
+          #   DEFAULT_5XX:
+          #     ResponseParameters:
+          #       Headers:
+          #         Access-Control-Allow-Origin: "'*'"
+          #         Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
+          #         Access-Control-Allow-Methods: "POST"
       Environment:
         Variables:
           DisableAuthentication: !Ref Authentication
@@ -230,23 +230,23 @@ Resources:
           Properties:
             Path: /updatetrait
             Method: POST
-          Cors:
-            AllowMethods: "POST"
-            AllowHeaders: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-            AllowOrigin: "'*'"
-          GatewayResponses:
-            DEFAULT_4XX:
-              ResponseParameters:
-                Headers:
-                  Access-Control-Allow-Origin: "'*'"
-                  Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-                  Access-Control-Allow-Methods: "POST"
-            DEFAULT_5XX:
-              ResponseParameters:
-                Headers:
-                  Access-Control-Allow-Origin: "'*'"
-                  Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-                  Access-Control-Allow-Methods: "POST"
+          # Cors:
+          #   AllowMethods: "POST"
+          #   AllowHeaders: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
+          #   AllowOrigin: "'*'"
+          # GatewayResponses:
+          #   DEFAULT_4XX:
+          #     ResponseParameters:
+          #       Headers:
+          #         Access-Control-Allow-Origin: "'*'"
+          #         Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
+          #         Access-Control-Allow-Methods: "POST"
+          #   DEFAULT_5XX:
+          #     ResponseParameters:
+          #       Headers:
+          #         Access-Control-Allow-Origin: "'*'"
+          #         Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
+          #         Access-Control-Allow-Methods: "POST"
       Environment:
         Variables:
           DisableAuthentication: !Ref Authentication
