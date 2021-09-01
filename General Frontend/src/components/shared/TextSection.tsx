@@ -1,17 +1,17 @@
-import { Paper, Box, Typography } from "@material-ui/core";
+import { Box, Typography } from "@material-ui/core";
 import styled from "styled-components";
 import { TextSectionProps } from "../../types";
 
 /*
  * Author: Matthew Loe
  * Student Id: 19452425
- * Date Last Modified: 27/08/2021
+ * Date Last Modified: 31/08/2021
  * Description: Returns formatted text section
  */
 function TextSection(props: TextSectionProps)
 {
   //Check if no data to display
-  if (props.sectionContent === undefined)
+  if (props.sectionContent === undefined || props.sectionContent === "")
   {
       return (<div/>);
   }

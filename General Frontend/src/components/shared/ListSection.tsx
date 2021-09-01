@@ -7,7 +7,7 @@ import BulletPointIcon from "./BulletPointIcon";
 /*
  * Author: Matthew Loe
  * Student Id: 19452425
- * Date Last Modified: 27/08/2021
+ * Date Last Modified: 31/08/2021
  * Description: Returns formated list from provided data
  */
 
@@ -15,7 +15,7 @@ import BulletPointIcon from "./BulletPointIcon";
 function ListSection(props: ListDataProps)
 {
     //Check if no data to display
-    if (props.list === undefined)
+    if (props.list === undefined || props.list[0][0] === "")
     {
         return(<div/>);
     }

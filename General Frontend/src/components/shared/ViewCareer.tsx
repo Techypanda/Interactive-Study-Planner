@@ -13,7 +13,7 @@ import LoadingScreen from "./Loading";
 /*
  * Author: Matthew Loe
  * Student Id: 19452425
- * Date Last Modified: 29/08/2021
+ * Date Last Modified: 31/08/2021
  * Description: Page for viewing the detailed information on a career
  */
 
@@ -24,15 +24,6 @@ function ViewCareer(props: DefaultProps)
   const id = history.location.state as string; //Get target career id
 
   //Get career information from table
-  const payload = {
-    "CareerId" : id
-  };
-
-  const headers =
-  {
-    'Content-Type': 'application/json'
-  }
-
   const base : CareerProps = {};
 
   const [isLoading, setLoading ] = useState(true);
@@ -46,15 +37,32 @@ function ViewCareer(props: DefaultProps)
     try
     {
       const {data} = await axios.post(
-        'https://uiqb5tsrsc.execute-api.ap-southeast-2.amazonaws.com/Prod/events/event-get-career',//'${process.env.REACT_APP_CAREERS_API}/getmajor',
-        payload,
+        'https://q02l9qoni6.execute-api.ap-southeast-2.amazonaws.com/Prod/events/event-get-career',//'${process.env.REACT_APP_CAREERS_API}/event-get-career',
         {
-           headers 
+          'CareerId': id
+        },
+        {
+          headers:
+          {
+            'Content-Type': 'application/json'
+          }
         }
       );
 
+      //Making uppercase the words in the name
+      let name : string = data[0].CareerName;
+      let parts : string[] = name.split(" ");
+
+      for (let ii=0; ii < parts.length; ii++)
+      {
+        parts[ii] = parts[ii][0].toUpperCase() + parts[ii].substr(1);
+      }
+      //END FOR
+
+      name = parts.join(" ");
+
       let resp : CareerProps = {
-        careerName : data[0].CareerName,
+        careerName : name,
         careerDescription : data[0].Description,
         careerIndustry : data[0].Industry,
         careerReqs : data[0].Requirements,

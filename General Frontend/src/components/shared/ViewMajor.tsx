@@ -12,7 +12,7 @@ import LoadingScreen from "./Loading";
 /*
  * Author: Matthew Loe
  * Student Id: 19452425
- * Date Last Modified: 29/08/2021
+ * Date Last Modified: 31/08/2021
  * Description: Page for viewing the detailed information on a major
  */
 
@@ -36,7 +36,7 @@ function ViewMajor(props: DefaultProps)
     try
     {
       const {data} = await axios.get(
-        'https://c7u1a16o0f.execute-api.ap-southeast-2.amazonaws.com/Prod/getmajor',//'${process.env.REACT_APP_UNITS_API}/getmajor',
+        'https://ilur318q9c.execute-api.ap-southeast-2.amazonaws.com/Prod/getmajor',//'${process.env.REACT_APP_UNITS_API}/getmajor',
           { params:
             {
               code : id
@@ -48,9 +48,21 @@ function ViewMajor(props: DefaultProps)
           }
       );
 
+      //Making uppercase the words in the name
+      let name : string = data[0].Name;
+      let parts : string[] = name.split(" ");
+
+      for (let ii=0; ii < parts.length; ii++)
+      {
+        parts[ii] = parts[ii][0].toUpperCase() + parts[ii].substr(1);
+      }
+      //END FOR
+
+      name = parts.join(" ");
+
       let resp : MajorProps = {
         majorCode : data[0].MajorCode,
-        majorName : data[0].Name,
+        majorName : name,
         majorCredits : data[0].Credits,
         majorDescription : data[0].Description,
         majorUnits : data[0].Units,

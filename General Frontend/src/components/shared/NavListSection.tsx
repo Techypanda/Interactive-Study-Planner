@@ -2,47 +2,47 @@ import { List, ListItem, ListItemIcon, ListItemText, Typography } from "@materia
 import { ListDataProps } from "../../types";
 import styled from "styled-components";
 import BulletPointIcon from "./BulletPointIcon";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 
 /*
  * Author: Matthew Loe
  * Student Id: 19452425
- * Date Last Modified: 29/08/2021
+ * Date Last Modified: 31/08/2021
  * Description: Component that returns a list section that allows each item to be clickable.
  */
-function InfoNav(code: string)
-{
-    const history = useHistory();
-    const majorSpecHeads = ["MJRU", "SPUC"]
-    //Retrieve first 4 characters of code
-    const codeHead = code.substring(0,3);
-
-    if (codeHead === majorSpecHeads[0])
-    {
-        //Nav to major info page
-        history.push('/ViewMajor', { code })
-        console.log("Nav to major");
-    }
-    else if (codeHead === majorSpecHeads[1])
-    {
-        //Nav to spec info page
-        history.push('/ViewSpecialisation', { code })
-        console.log("Nav to spec");
-    }
-    else
-    {
-        //Nav to unit info page
-        history.push('/ViewUnit', { code })
-        console.log("Nav to unit");
-    }
-    //END IF
-}
 
 //Returns list
 function NavListSection(props: ListDataProps)
 {
+    const history = useHistory();
+
+    function InfoNav(code: string)
+    {
+        //const history = useHistory();
+        const majorSpecHeads = ["MJRU", "SPUC"]
+        //Retrieve first 4 characters of code
+        const codeHead = code.substring(0,3);
+
+        if (codeHead === majorSpecHeads[0])
+        {
+            //Nav to major info page
+            history.push('/InfoPage/ViewMajor', { code })
+        }
+        else if (codeHead === majorSpecHeads[1])
+        {
+            //Nav to spec info page
+            history.push('/InfoPage/ViewSpecialisation', { code })
+        }
+        else
+        {
+            //Nav to unit info page
+            history.push('/InfoPage/ViewUnit', { code })
+        }
+        //END IF
+    }
+
     //Check if no data to display
-    if (props.list === undefined)
+    if (props.list === undefined || props.list[0][0] === "")
     {
         return (<div/>);
     }
@@ -51,6 +51,7 @@ function NavListSection(props: ListDataProps)
     //Create list
     const dataList = props.list.map(function(item)
     {
+        
         return(
             <ListItem>
                 <ListItemIcon>
