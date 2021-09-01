@@ -1,3 +1,7 @@
+//This is a redundant component - will make 'CurrentPlan' be a little more generic later
+    //This only exists so I can quickly ensure intitial page works
+        //Again, I will remove this later :)
+
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { CardContent, CardActions, ListSubheader, AppBar, Toolbar, Typography, Box, List, CardHeader, Avatar, Card, CardMedia, Switch } from '@material-ui/core';
 import { DefaultProps, MajorProps } from '../../types';
@@ -36,50 +40,56 @@ const useStyles = makeStyles((theme) => ({
     },
     listHeader: {
       //'text-align': 'center',
+      color: 'black',
     }
 }))
 
 
-export default function CurrentPlan(props: MajorProps) { 
+export default function EmptyCurrentPlan() { 
     const classes = useStyles();
-    if(props.majorUnits === undefined) { 
-      props.majorUnits = [""]
-    }
+
     function handleToggle() { 
         console.log('This would remove the entry from the list ?');
     }
 
 
+    const testCareerJson = [
+      {
+        "Requirements": [
+          "CMHL1000",
+          "HUMB1000"
+        ],
+        "Traits": [
+          "critical thinker",
+          "hardworking"
+        ],
+        "Name": "Pharmacology",
+      },
+    ];
+    /*const testMajorJson = [
+      {
+        "majorCode": "CACA1000",
+        "majorName": "Pharmacology",
+        "majorDescription": "yeah yeah hey yeah a ha aaaa",
+        "majorCredits": 25,
+        "majorUnits": [
+          "BIOL3010",
+          "ECEV3004",
+          "HUMB2011",
+          "HUMB2012",
+          "HUMB2014",
+          "HUMB3003",
+          "HUMB3009"
+        ]
+      }
+    ]*/
+
     return ( 
-      <List subheader={<ListSubheader className={classes.listHeader}></ListSubheader>} className={classes.root}>
-        <ListItem divider={true}>
-          <ListItemText 
-            primary={
-              <Typography 
-                variant='h6' 
-                align='center'>
-                  Current Plan
-              </Typography>
-            }>
-          </ListItemText>
-        </ListItem>
-        <ListItem divider={true}>
-          <ListItemText primary={`Main Major: ${props.majorName}`} />
-        </ListItem>
-        {/*{props.Mamap((value) => { */}
-        {props.majorUnits.map((value) => {
-            const labelId = `checkbox-list-label-${value}`;
-            return (
-              <ListItem divider={true} key={value} role={undefined} dense button>
-                <ListItemText id={labelId} primary={`Core: ${value}`} />
-                <ListItemSecondaryAction>
-                    <IconButton edge='end'>
-                        <ClearIcon style={{ color: red[500] }} /> 
-                    </IconButton> 
-                </ListItemSecondaryAction>
-              </ListItem>
-            )
-        })}
+      <List subheader={<ListSubheader className={classes.listHeader}>
+          <Typography variant='h6' align='center'>
+              Current Plan
+           </Typography>
+           </ListSubheader>} className={classes.root}>
       </List>
     )
 }

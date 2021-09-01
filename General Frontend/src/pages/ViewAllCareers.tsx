@@ -1,6 +1,5 @@
 // careers display with a search. Somehow this links to the course selection thingy
 // don't call this yet it's not even close to done
-import { DefaultProps } from "../types"
 import { BrowserRouter as Router } from "react-router-dom";
 import { Box, Button, Container,Grid, Typography, Card, CardHeader, TextField} from "@material-ui/core";
 import Navbar from "../components/shared/Navbar";
