@@ -103,8 +103,7 @@ pipelines:
               services:
                 - docker
           - step: 
-              runs-on: self.hosted
-              name: "Build, Test, Deploy Unit Admin API"
+              name: "Build, Test, Deploy CSV Parser"
               image: python:3.7.2
               script:
                 - apt-get update
