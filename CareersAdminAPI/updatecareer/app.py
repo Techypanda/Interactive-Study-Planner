@@ -5,7 +5,6 @@ import jose
 import jose.utils
 import time
 import os
-import fast_luhn
 from icecream import ic
 from typing import Tuple
 from boto3.dynamodb.conditions import Attr
@@ -14,13 +13,13 @@ from botocore.exceptions import ClientError
 #Author: Matthew Loe
 #Student Id: 19452425
 #Date Created: 25/05/2021
-#Date Last Modified: 17/08/2021
+#Date Last Modified: 1/09/2021
 #Description: Update career operation handler
 
 #JWT token validation
 # Link: https://github.com/awslabs/aws-support-tools/blob/master/Cognito/decode-verify-jwt/decode-verify-jwt.py
 def validateJWTToken(token: str) -> Tuple[bool, dict]:
-    keys_url = "https://cognito-idp.ap-southeast-2.amazonaws.com/ap-southeast-2_gn4KIEkx0/.well-known/jwks.json"
+    keys_url = "https://cognito-idp.ap-southeast-2.amazonaws.com/ap-southeast-2_1EmEPwI2J/.well-known/jwks.json"
 
     response = requests.get(keys_url)
     keys = json.loads(response.decode("utf-8"))["keys"]
@@ -61,6 +60,7 @@ def validateJWTToken(token: str) -> Tuple[bool, dict]:
             return False, badRequest(message)
         else:
             return True, None
+
 #Career class definition
 class Career:
     def __init__(self, careerId: str, name: str, description: str, industry: str, reqs: list, traits: list) -> None:
@@ -110,12 +110,6 @@ def updateCareer(body: dict) -> dict:
             ic("Data received was in an invalid format or was incorrect.")
             return badRequest("Invalid data or format recieved.")
         else:
-            #Check valid id
-            if not os.getenv('Testing'):    #Check not testing
-                if not fast_luhn.validate(career.careerId):
-                    ic("Recieved CareerId was invalid.")
-                    return badRequest("Id recieved was invalid.")
-
             #Update item in table
             try:
                 response = table.put_item(

@@ -1,7 +1,6 @@
 import { Box, Grid, Paper, Typography } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { DefaultProps } from "../types";
 
 function Landing(props: DefaultProps) {
   const history = useHistory();
@@ -58,5 +57,6 @@ export default styled(Landing)`
   .cardEntry {
     height: 100% !important;
     cursor: pointer;
+    min-height: 400px;
   }
 `;

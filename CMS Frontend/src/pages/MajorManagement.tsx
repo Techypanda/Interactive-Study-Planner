@@ -1,4 +1,3 @@
-import { DefaultProps } from "../types";
 import { Box, Container, Typography, Button, TextField } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import UnitEntry from "../components/units/UnitEntry";
@@ -18,7 +17,7 @@ function MajorManagement(props: DefaultProps) {
         <Button color="primary" variant='contained' className="searchbtn">GO</Button>
       </Box>
       <Box id="units" marginTop={2}>
-        <UnitEntry unitContent="Max hasn't written the read API yet." unitTitle="Example Major" />
+        {/* <UnitEntry unitContent="Max hasn't written the read API yet." unitTitle="Example Major" /> */}
       </Box>
     </Container>
   )

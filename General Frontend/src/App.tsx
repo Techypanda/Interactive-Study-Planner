@@ -1,19 +1,42 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import React from 'react';
-import './App.scss'; // this'll be deprecated by scss soon in favour of @use but that's not supported by CRA
+import './App.scss';
+import {BrowserRouter, Switch, Route} from "react-router-dom";
+import { useEffect} from "react";
 import Landing from './pages/Landing';
-//import TopdownFilled from '../pages/TopdownFilled';
-import TopDownFilled from './pages/TopdownFilled';
-import TopDownInitial from './pages/TopdownInitial'
+import Error from './components/shared/Error';
+import ViewAllCareers from './pages/ViewAllCareers';
+import PlannerInitialPage from './pages/PlannerInitialPage';
+import CoursePlanner from './pages/CoursePlanner';
+import InfoPageRouter from './pages/InfoPageRouter';
 
 // could just render the landing page from the index file but opportunities for other
 // setup could be done here
 function App() {
-
-  return (
-    <div className="App">
-    </div>
-  );
+    return (
+	<div className="App">
+	    <BrowserRouter>
+		<Switch>
+		    <Route exact path="/">
+			<Landing/>
+		    </Route>
+		    <Route exact path="/ViewAllCareers">
+			<ViewAllCareers/>
+		    </Route>
+		    <Route exact path="/PlannerInitialPage">
+			<PlannerInitialPage/>
+		    </Route>
+		    <Route exact path="/CoursePlanner">
+			<CoursePlanner/>
+		    </Route>
+			<Route path="/InfoPage">
+				<InfoPageRouter/>
+			</Route>
+		    <Route>
+			<h1>Error 404 not found</h1> 
+		    </Route>
+		</Switch>
+	    </BrowserRouter>
+	</div>
+    );
 }
 
 export default App;

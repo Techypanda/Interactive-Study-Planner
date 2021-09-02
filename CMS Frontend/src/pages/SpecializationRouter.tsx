@@ -1,6 +1,5 @@
 import { Route, Switch } from "react-router-dom";
 import styled from "styled-components";
-import { DefaultProps } from "../types";
 import CreateSpecialization from "./CreateSpecialization";
 import NotFound from "./NotFound";
 import SpecializationManagement from "./SpecializationManagement";
