@@ -49,13 +49,9 @@ Resources:
           AllowMethods: "GET, OPTIONS, POST"
           AllowHeaders: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
           AllowOrigin: "'*'"
-        GatewayResponses:
-          DEFAULT_4XX:
-            ResponseParameters:
-              Headers:
-                Access-Control-Allow-Origin: "'*'"
-                Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-                Access-Control-Allow-Methods: "'OPTIONS,POST'"
+          AllowCredentials : true
+
+
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./src/handlers/getallcareers
@@ -81,13 +77,9 @@ Resources:
             AllowMethods: "GET"
             AllowHeaders: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
             AllowOrigin: "'*'"
-          GatewayResponses:
-            DEFAULT_4XX:
-              ResponseParameters:
-                Headers:
-                  Access-Control-Allow-Origin: "'*'"
-                  Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-                  Access-Control-Allow-Methods: "GET"
+            AllowCredentials : true
+
+
         Policies:
           - DynamoDBCrudPolicy:
               TableName: DevCareers
@@ -125,19 +117,8 @@ Resources:
             AllowMethods: "POST"
             AllowHeaders: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
             AllowOrigin: "'*'"
-          GatewayResponses:
-            DEFAULT_4XX:
-              ResponseParameters:
-                Headers:
-                  Access-Control-Allow-Origin: "'*'"
-                  Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-                  Access-Control-Allow-Methods: "POST"
-          DEFAULT_5XX:
-            ResponseParameters:
-              Headers:
-                Access-Control-Allow-Origin: "'*'"
-                Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-                Access-Control-Allow-Methods: "POST"
+            AllowCredentials : true
+
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./src/handlers/getcareer
@@ -168,19 +149,9 @@ Resources:
             AllowMethods: "POST"
             AllowHeaders: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
             AllowOrigin: "'*'"
-          GatewayResponses:
-            DEFAULT_4XX:
-              ResponseParameters:
-                Headers:
-                  Access-Control-Allow-Origin: "'*'"
-                  Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-                  Access-Control-Allow-Methods: "POST"
-          DEFAULT_5XX:
-            ResponseParameters:
-              Headers:
-                Access-Control-Allow-Origin: "'*'"
-                Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-                Access-Control-Allow-Methods: "POST"
+            AllowCredentials : true
+
+
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./src/handlers/search
@@ -211,19 +182,9 @@ Resources:
             AllowMethods: "POST"
             AllowHeaders: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
             AllowOrigin: "'*'"
-          GatewayResponses:
-            DEFAULT_4XX:
-              ResponseParameters:
-                Headers:
-                  Access-Control-Allow-Origin: "'*'"
-                  Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-                  Access-Control-Allow-Methods: "POST"
-          DEFAULT_5XX:
-            ResponseParameters:
-              Headers:
-                Access-Control-Allow-Origin: "'*'"
-                Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-                Access-Control-Allow-Methods: "POST"
+            AllowCredentials : true
+
+
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./src/handlers/byunitcode
@@ -254,19 +215,8 @@ Resources:
             AllowMethods: "POST"
             AllowHeaders: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
             AllowOrigin: "'*'"
-          GatewayResponses:
-            DEFAULT_4XX:
-              ResponseParameters:
-                Headers:
-                  Access-Control-Allow-Origin: "'*'"
-                  Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-                  Access-Control-Allow-Methods: "POST"
-          DEFAULT_5XX:
-            ResponseParameters:
-              Headers:
-                Access-Control-Allow-Origin: "'*'"
-                Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-                Access-Control-Allow-Methods: "POST" 
+            AllowCredentials : true
+
                 
     Metadata:
       Dockerfile: Dockerfile
