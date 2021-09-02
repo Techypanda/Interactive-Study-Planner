@@ -45,11 +45,6 @@ Resources:
           Properties:
             Path: /events/event-get-all-careers
             Method: GET
-        Cors:
-          AllowMethods: "GET, OPTIONS, POST"
-          AllowHeaders: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-          AllowOrigin: "'*'"
-          AllowCredentials : true
 
 
     Metadata:
@@ -73,11 +68,6 @@ Resources:
             Properties:
               Path: /events/event-get-all-traits
               Method: GET
-          Cors:
-            AllowMethods: "GET"
-            AllowHeaders: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-            AllowOrigin: "'*'"
-            AllowCredentials : true
 
 
         Policies:
@@ -113,11 +103,6 @@ Resources:
           Properties:
             Path: /events/event-get-career
             Method: POST
-          Cors:
-            AllowMethods: "POST"
-            AllowHeaders: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-            AllowOrigin: "'*'"
-            AllowCredentials : true
 
     Metadata:
       Dockerfile: Dockerfile
@@ -145,11 +130,6 @@ Resources:
           Properties:
             Path: /events/event-search
             Method: POST
-          Cors:
-            AllowMethods: "POST"
-            AllowHeaders: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-            AllowOrigin: "'*'"
-            AllowCredentials : true
 
 
     Metadata:
@@ -178,11 +158,6 @@ Resources:
           Properties:
             Path: /events/event-get-by-unit-code
             Method: POST
-          Cors:
-            AllowMethods: "POST"
-            AllowHeaders: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-            AllowOrigin: "'*'"
-            AllowCredentials : true
 
 
     Metadata:
@@ -211,11 +186,6 @@ Resources:
           Properties:
             Path: /events/event-get-by-trait-code
             Method: POST    
-          Cors: 
-            AllowMethods: "POST"
-            AllowHeaders: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-            AllowOrigin: "'*'"
-            AllowCredentials : true
 
                 
     Metadata:
