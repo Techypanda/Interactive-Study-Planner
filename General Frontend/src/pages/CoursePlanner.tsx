@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-/* eslint-disable @typescript-eslint/no-unused-vars */
-=======
 import Navbar from "../components/shared/Navbar";
->>>>>>> 2ccbccb6a0408716bd1664bde645005897a0acb5
 import {DefaultProps} from "../types";
 import {Typography} from "@material-ui/core";
 
@@ -31,8 +27,6 @@ function CoursePlanner() {
 	</>
     );
 }
-<<<<<<< HEAD
-=======
 
 // scrollable list to the right of the screen, dynamically shows available courses
 // as pre-reqs and anti-reqs are made, rendering and unrendering as necessary.
@@ -46,5 +40,4 @@ function SelectionArea() {
     
 }
 
->>>>>>> 2ccbccb6a0408716bd1664bde645005897a0acb5
 export default CoursePlanner;
