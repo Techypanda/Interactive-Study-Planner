@@ -5,7 +5,6 @@ import jose
 import jose.utils
 import time
 import os
-import fast_luhn
 from icecream import ic
 from typing import Tuple
 from boto3.dynamodb.conditions import Attr
@@ -14,7 +13,7 @@ from botocore.exceptions import ClientError
 #Author: Matthew Loe
 #Student Id: 19452425
 #Date Created: 25/05/2021
-#Date Last Modified: 21/08/2021
+#Date Last Modified: 1/09/2021
 #Description: Update trait operation handler
 
 #JWT token validation
@@ -106,13 +105,7 @@ def updateTrait(body: dict) -> dict:
         except KeyError:
             ic("Data received was in an invalid format or was incorrect.")
             return badRequest("Invalid data or format recieved.")
-        else:    
-            #Check valid id
-            if not os.getenv('Testing'):    #Check not testing
-                if not fast_luhn.validate(trait):
-                    ic("Recieved Id was invalid.")
-                    return badRequest("Id recieved was invalid.")
-
+        else:
             #Update item in table
             try:
                 response = table.put_item(
