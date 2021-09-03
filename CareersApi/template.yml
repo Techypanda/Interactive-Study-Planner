@@ -45,23 +45,8 @@ Resources:
           Properties:
             Path: /events/event-get-all-careers
             Method: GET
-        Cors:
-          AllowMethods: "GET, OPTIONS, POST"
-          AllowHeaders: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-          AllowOrigin: "'*'"
-        GatewayResponses:
-          DEFAULT_4XX:
-            ResponseParameters:
-              Headers:
-                Access-Control-Allow-Origin: "'*'"
-                Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-                Access-Control-Allow-Methods: "'OPTIONS,POST'"
-        DEFAULT_5XX:
-          ResponseParameters:
-            Headers:
-              Access-Control-Allow-Origin: "'*'"
-              Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-              Access-Control-Allow-Methods: "'OPTIONS,POST'"
+
+
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./src/handlers/getallcareers
@@ -83,23 +68,8 @@ Resources:
             Properties:
               Path: /events/event-get-all-traits
               Method: GET
-          Cors:
-            AllowMethods: "GET"
-            AllowHeaders: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-            AllowOrigin: "'*'"
-          GatewayResponses:
-            DEFAULT_4XX:
-              ResponseParameters:
-                Headers:
-                  Access-Control-Allow-Origin: "'*'"
-                  Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-                  Access-Control-Allow-Methods: "GET"
-          DEFAULT_5XX:
-            ResponseParameters:
-              Headers:
-                Access-Control-Allow-Origin: "'*'"
-                Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-                Access-Control-Allow-Methods: "GET"    
+
+
         Policies:
           - DynamoDBCrudPolicy:
               TableName: DevCareers
@@ -133,23 +103,7 @@ Resources:
           Properties:
             Path: /events/event-get-career
             Method: POST
-          Cors:
-            AllowMethods: "POST"
-            AllowHeaders: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-            AllowOrigin: "'*'"
-          GatewayResponses:
-            DEFAULT_4XX:
-              ResponseParameters:
-                Headers:
-                  Access-Control-Allow-Origin: "'*'"
-                  Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-                  Access-Control-Allow-Methods: "POST"
-          DEFAULT_5XX:
-            ResponseParameters:
-              Headers:
-                Access-Control-Allow-Origin: "'*'"
-                Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-                Access-Control-Allow-Methods: "POST"
+
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./src/handlers/getcareer
@@ -176,23 +130,8 @@ Resources:
           Properties:
             Path: /events/event-search
             Method: POST
-          Cors:
-            AllowMethods: "POST"
-            AllowHeaders: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-            AllowOrigin: "'*'"
-          GatewayResponses:
-            DEFAULT_4XX:
-              ResponseParameters:
-                Headers:
-                  Access-Control-Allow-Origin: "'*'"
-                  Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-                  Access-Control-Allow-Methods: "POST"
-          DEFAULT_5XX:
-            ResponseParameters:
-              Headers:
-                Access-Control-Allow-Origin: "'*'"
-                Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-                Access-Control-Allow-Methods: "POST"
+
+
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./src/handlers/search
@@ -219,23 +158,8 @@ Resources:
           Properties:
             Path: /events/event-get-by-unit-code
             Method: POST
-          Cors:
-            AllowMethods: "POST"
-            AllowHeaders: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-            AllowOrigin: "'*'"
-          GatewayResponses:
-            DEFAULT_4XX:
-              ResponseParameters:
-                Headers:
-                  Access-Control-Allow-Origin: "'*'"
-                  Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-                  Access-Control-Allow-Methods: "POST"
-          DEFAULT_5XX:
-            ResponseParameters:
-              Headers:
-                Access-Control-Allow-Origin: "'*'"
-                Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-                Access-Control-Allow-Methods: "POST"
+
+
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./src/handlers/byunitcode
@@ -262,23 +186,7 @@ Resources:
           Properties:
             Path: /events/event-get-by-trait-code
             Method: POST    
-          Cors: 
-            AllowMethods: "POST"
-            AllowHeaders: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-            AllowOrigin: "'*'"
-          GatewayResponses:
-            DEFAULT_4XX:
-              ResponseParameters:
-                Headers:
-                  Access-Control-Allow-Origin: "'*'"
-                  Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-                  Access-Control-Allow-Methods: "POST"
-          DEFAULT_5XX:
-            ResponseParameters:
-              Headers:
-                Access-Control-Allow-Origin: "'*'"
-                Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'"
-                Access-Control-Allow-Methods: "POST" 
+
                 
     Metadata:
       Dockerfile: Dockerfile
