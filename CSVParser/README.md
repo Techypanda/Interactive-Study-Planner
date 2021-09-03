@@ -1,8 +1,11 @@
-# CSV Format
+# CSV Parser
+## Why isnt it private like in the arch diagram
+AWS charged us $5 for having it in a VPC, so were just making it another API.
+## CSV Format
 - DATATYPE
 - PROPERTIES
 ...
-## Unit Definition
+### Unit Definition
 - UNIT
 - UNITCODE
 - UNIT TITLE
@@ -12,21 +15,30 @@
 - PREREQUISTES (entered as groups, to split into a new group (i.e OR path) use a semicolon else its comma seperated)
 - COREQUISTES (entered as groups, to split into a new group (i.e OR path) use a semicolon else its comma seperated)
 - ANTIREQUISTES (entered as groups, to split into a new group (i.e OR path) use a semicolon else its comma seperated)
-## Major Definition
+### Major Definition
 - MAJOR
 - MajorCode
 - Name
+- Description
 - Credits
 - Units (CSV Seperated)
 - UnitAntiReqs (entered as groups, to split into a new group (i.e OR path) use a semicolon else its comma seperated)
 - SpecAntiReqs (entered as groups, to split into a new group (i.e OR path) use a semicolon else its comma seperated)
-## Specialiation Definition
+### Specialiation Definition
 - SPECIALIZATION
 - SpecCode
 - Name
+- Description
 - Credits
 - InternalSpecialization (FALSE/TRUE)
 - Units (CSV Seperated)
 - UnitAntiReqs (entered as groups, to split into a new group (i.e OR path) use a semicolon else its comma seperated)
 - SpecAntiReqs (entered as groups, to split into a new group (i.e OR path) use a semicolon else its comma seperated)
 - MajorAntiReqs (entered as groups, to split into a new group (i.e OR path) use a semicolon else its comma seperated)
+### Career Definition
+- CAREER
+- Name
+- Description
+- Industry
+- UnitRequirements (CSV Seperated)
+- Traits (CSV Seperated)

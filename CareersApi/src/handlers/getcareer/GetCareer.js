@@ -21,12 +21,18 @@ exports.getCareer = async (event) => {
     var params = {
         TableName: tableName,
         Key: {
-          'CareerId' : body['CareerId']
+          'CareerId' : body['CareerId'].toLowerCase()
         },
     };
     const item = await docClient.get(params).promise()
     const response=  {
          statusCode: 200,
+         headers: {
+            "Access-Control-Allow-Headers" : "Content-Type",
+            "Access-Control-Allow-Origin": "*", // Allow from anywhere 
+            'Access-Control-Allow-Credentials': true,
+            "Access-Control-Allow-Methods": "POST"
+        },
          body: JSON.stringify(item)
     }
     console.info(`response from: ${event.path} statusCode: ${response.statusCode} body: ${response.body}`);

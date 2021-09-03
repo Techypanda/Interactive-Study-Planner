@@ -1,14 +1,65 @@
 import json
 import boto3
 import requests
+import jose
+import jose.utils
+import time
+import os
+from icecream import ic
+from typing import Tuple
 from boto3.dynamodb.conditions import Attr
 from botocore.exceptions import ClientError
 
 #Author: Matthew Loe
 #Student Id: 19452425
 #Date Created: 25/05/2021
-#Date Last Modified: 6/08/2021
+#Date Last Modified: 1/09/2021
 #Description: Update trait operation handler
+
+#JWT token validation
+# Link: https://github.com/awslabs/aws-support-tools/blob/master/Cognito/decode-verify-jwt/decode-verify-jwt.py
+def validateJWTToken(token: str) -> Tuple[bool, dict]:
+    keys_url = "https://cognito-idp.ap-southeast-2.amazonaws.com/ap-southeast-2_1EmEPwI2J/.well-known/jwks.json"
+
+    response = requests.get(keys_url)
+    keys = json.loads(response.decode("utf-8"))["keys"]
+
+    headers = jwt.get_unverified_headers(token)
+    kid = headers["kid"]
+
+    key_index = -1
+
+    #sSearch for kid in public keys list
+    for i in range(len(keys)):
+        if kid == keys[i]['kid']:
+            key_index = i
+            break
+    if key_index == -1:
+        message = "Public key not found in jwks.json."
+        ic(message)
+        return False, badRequest(message)
+
+    #Construct and decode signature
+    public_key = jwk.construct(keys[key_index])
+
+    message, encoded_signature = str(token.rsplit('.', 1))
+
+    decoded_signature = base64url_decode(encoded_signature.encode('utf-8'))
+
+    #Verify signature
+    if not public_key.verify(message.encode("utf8"), decoded_signature):
+        message = "Signature verification failed."
+        ic(message)
+        return False, badRequest(message)
+    else:
+        claims = jwt.get_unverified_claims(token)
+        #Verify token not expired
+        if time.time() > claims['exp']:
+            message = "Token is expired."
+            ic(message)
+            return False, badRequest(message)
+        else:
+            return True, None
 
 #Trait class definition
 class Trait:
@@ -18,6 +69,24 @@ class Trait:
 
 #Lambda handler - updates the target trait in the database if possible
 def lambda_handler(event, context) -> dict:
+    #Check if testing
+    try:
+        if os.getenv("DisableAuthentication"):
+            return updateTrait(json.loads(event["body"]))
+        else:
+            #Validate token
+            valid, error = validateJWTToken(event['token'])
+
+            if valid:
+                return updateTrait(json.loads(event["body"]))
+            else:
+                return error
+    except KeyError:
+            ic("Data received was in an invalid format or was incorrect.")
+            return badRequest("Invalid data or format recieved.")
+
+#Update trait function
+def updateTrait(body: dict) -> dict:
     #Setup link to database and table
     db = boto3.resource('dynamodb', region_name='ap-southeast-2')
     table = db.Table("DevTraits")
@@ -25,39 +94,18 @@ def lambda_handler(event, context) -> dict:
     try:
         #Attempt to load table - checks if table exists
         table.load()
-    except Exception:   #TODO - Find out import for ResourceNotFoundException
-        #Create table
-        table = db.create_table(
-            TableName='DevTraits',
-            KeySchema=[
-                {
-                    'AttributeName': 'Id',
-                    'KeyType': 'HASH'
-                }
-            ],
-            AttributeDefinitions=[
-                {
-                    'AttributeName': 'Id',
-                    'AttributeType': 'S'
-                }
-            ],
-            ProvisionedThroughput={
-                'ReadCapacityUnits': 1,
-                'WriteCapacityUnits': 1
-            }
-        )
-
-        #Return bad request indicating table does not exist and is being created
-        return badRequest("Table does not exist. An empty table is now being created. Please try again.")
-
+    except Exception:
+        ic("Unable to handle request, DevTraits table does not exist.")
+        #Return bad request indicating table does not exist
+        return badRequest("Table does not exist. Please try again.")
     else:
         try:
             #Retrieve data
-            body = json.loads(event["body"])
             trait = Trait(body["Id"], body["Name"])
         except KeyError:
+            ic("Data received was in an invalid format or was incorrect.")
             return badRequest("Invalid data or format recieved.")
-        else:    
+        else:
             #Update item in table
             try:
                 response = table.put_item(
@@ -70,8 +118,10 @@ def lambda_handler(event, context) -> dict:
             except ClientError as err:
                 #Check if error was due to item already existing in table
                 if err.response['Error']['Code'] == 'ConditionalCheckFailedException':
+                    ic("Target trait does not exist.")
                     return badRequest("Item does not exist in the table.")
                 else:
+                    ic("Unknown client error:" + err.response)
                     return badRequest("Unknown error occured.")
             else:
                 return okResponse("Trait updated in database.")

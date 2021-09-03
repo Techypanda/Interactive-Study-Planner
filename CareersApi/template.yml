@@ -45,6 +45,8 @@ Resources:
           Properties:
             Path: /events/event-get-all-careers
             Method: GET
+
+
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./src/handlers/getallcareers
@@ -66,11 +68,14 @@ Resources:
             Properties:
               Path: /events/event-get-all-traits
               Method: GET
+
+
         Policies:
           - DynamoDBCrudPolicy:
               TableName: DevCareers
           - DynamoDBCrudPolicy:
               TableName: DevTraits
+
       Metadata:
         Dockerfile: Dockerfile
         DockerContext: ./src/handlers/getalltraits
@@ -91,12 +96,14 @@ Resources:
             TableName: DevCareers
         - DynamoDBCrudPolicy:
             TableName: DevTraits
+
       Events:
         Api:
           Type: Api
           Properties:
             Path: /events/event-get-career
             Method: POST
+
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./src/handlers/getcareer
@@ -123,6 +130,8 @@ Resources:
           Properties:
             Path: /events/event-search
             Method: POST
+
+
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./src/handlers/search
@@ -149,6 +158,8 @@ Resources:
           Properties:
             Path: /events/event-get-by-unit-code
             Method: POST
+
+
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./src/handlers/byunitcode
@@ -174,7 +185,9 @@ Resources:
           Type: Api
           Properties:
             Path: /events/event-get-by-trait-code
-            Method: POST     
+            Method: POST    
+
+                
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./src/handlers/bytraitcode

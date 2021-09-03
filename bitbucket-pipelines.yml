@@ -102,3 +102,19 @@ pipelines:
                 - ./BuildTestDeploy.sh
               services:
                 - docker
+          - step: 
+              name: "Build, Test, Deploy CSV Parser"
+              image: python:3.7.2
+              script:
+                - apt-get update
+                - apt-get install -y golang-go
+                - pip install awscli
+                - pip install aws-sam-cli
+                - chmod +x ./SetupAWSPipeline.sh
+                - ./SetupAWSPipeline.sh
+                - cd CSVParser
+                - chmod +x ./BuildTestDeploy.sh
+                - ./BuildTestDeploy.sh
+              services:
+                - docker
+

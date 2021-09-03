@@ -1,5 +1,6 @@
 import { Box, Dialog, Typography, Button } from "@material-ui/core";
 import styled from "styled-components";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { ErrorProps } from "../../types";
 
 function Error(props: ErrorProps) {
