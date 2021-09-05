@@ -16,7 +16,7 @@ function PaginatedUnits(props: PaginatedUnitsProps) {
   }
   return (
     <div className={props.className}>
-      {props.units.slice(paginationCount * page, Math.min((paginationCount * page) + paginationCount, props.units.length - 1)).map((unit, _) =>
+      {props.units.slice(paginationCount * page, Math.min((paginationCount * page) + paginationCount, props.units.length)).map((unit, _) =>
         <Box mb={1}>
           <UnitEntry unit={unit} />
         </Box>

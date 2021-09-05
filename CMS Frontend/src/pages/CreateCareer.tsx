@@ -31,9 +31,9 @@ function CreateCareer(props: DefaultProps) {
       unitDescription: description,
       unitCredits: Number.isNaN(credits) ? 0 : credits,
       delivery,
-      corequistes: parsedCoreq,
-      prerequistes: parsedPrereq,
-      antirequistes: pasredAntireq
+      corequistes: [[""]],
+      prerequistes: [[""]],
+      antirequistes: [[""]]
     };
     setLoading(true);
     return axios.post(`${process.env.REACT_APP_API_URI}/addunit`, JSON.stringify(payload), {

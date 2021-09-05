@@ -41,9 +41,9 @@ interface CreateUnitForm {
 	unitDescription: string
 	unitCredits: number
 	delivery: string
-	prerequistes: string[]
-	corequistes: string[]
-	antirequistes: string[]
+	prerequistes: string[][]
+	corequistes: string[][]
+	antirequistes: string[][]
 }
 interface Unit {
   Credits: Number
