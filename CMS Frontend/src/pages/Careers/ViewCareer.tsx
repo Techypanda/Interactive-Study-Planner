@@ -43,10 +43,10 @@ function ViewCareer(props: DefaultProps) {
             :
             <>
               <Container>
-                <CareerDisplay career={career.data?.data!} />
+                <CareerDisplay career={((career.data?.data! as any).Item as Career)} />
                 <Box mt={1}>
                   <Box mr={1} display="inline-block">
-                    <Button variant="contained" color="primary" className="fixright" onClick={() => history.push(`/careers/edit/${career.data?.data.CareerId}`)}>
+                    <Button variant="contained" color="primary" className="fixright" onClick={() => history.push(`/careers/edit/${((career.data?.data! as any).Item as Career).CareerId}`)}>
                       <EditIcon /> - Edit
                     </Button>
                   </Box>
@@ -61,7 +61,7 @@ function ViewCareer(props: DefaultProps) {
                 aria-labelledby="delete-alert-title"
                 aria-describedby="delete-alert-description"
               >
-                <DialogTitle id="delete-alert-title">Are You Sure You Want To Delete {career.data?.data!.CareerId}?</DialogTitle>
+                <DialogTitle id="delete-alert-title">Are You Sure You Want To Delete {((career.data?.data! as any).Item as Career).CareerId}?</DialogTitle> {/* API returns a wrapper for some reason zzz */}
                 <DialogContent>
                   <DialogContentText id="delete-alert-description">
                     Are you sure you want to permanently delete this career?<br />
