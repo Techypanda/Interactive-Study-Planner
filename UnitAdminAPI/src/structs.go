@@ -18,6 +18,7 @@ type DelUnit struct {
 type Major struct {
 	MajorCode    string     `json:"majorCode"`
 	Name         string     `json:"name"`
+	Description  string     `json:"description"`
 	Credits      float32    `json:"credits"`
 	Units        []string   `json:"units"`
 	UnitAntiReqs [][]string `json:"unitAntiReqs"`
@@ -31,6 +32,7 @@ type DelMajor struct {
 type Specialization struct {
 	SpecCode       string     `json:"specCode"`
 	Name           string     `json:"name"`
+	Description    string     `json:"description"`
 	Credits        float32    `json:"credits"`
 	CourseInternal bool       `json:"courseInternal"`
 	Units          []string   `json:"units"`
