@@ -48,6 +48,18 @@ function Landing(props: DefaultProps) {
           </Grid>
         </Grid>
       </Box>
+      <Box marginTop={5}>
+        <Grid container justify="space-evenly">
+          <Grid item xs={4}>
+            <Paper className="cardEntry" onClick={() => history.push('/csv')}>
+              <Box padding={2}>
+                <Typography variant="h6" align="center">Bulk Upload</Typography>
+                <Typography variant="body1" align="center">Upload A CSV To Perform Bulk Operations</Typography>
+              </Box>
+            </Paper>
+          </Grid>
+        </Grid>
+      </Box>
     </Box>
   )
 }

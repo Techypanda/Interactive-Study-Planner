@@ -1,5 +1,5 @@
-import { AppBar, Toolbar, IconButton, Typography, Box, Drawer, List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
-import { Book, FolderSpecial, Home, Menu, Report, Work } from "@material-ui/icons";
+import { AppBar, Toolbar, IconButton, Typography, Box, Drawer, List, ListItem, ListItemIcon, ListItemText, Button } from "@material-ui/core";
+import { Book, FolderSpecial, Home, LocalShipping, Menu, Report, Work } from "@material-ui/icons";
 import styled from 'styled-components';
 import CurtinLogo from "../../static/curtinlogo.png";
 import { useState } from "react";
@@ -21,7 +21,7 @@ function Navbar(props: DefaultProps) {
           </IconButton>
           <Typography variant="h6">
             Curtin Course Planner - Medical Content Management System
-        </Typography>
+          </Typography>
           <Box id="LogoSection">
             <Typography variant="subtitle1">{props.username}</Typography>
             <img src={CurtinLogo} alt="curtin logo" />
@@ -58,6 +58,12 @@ function Navbar(props: DefaultProps) {
             <ListItem button onClick={() => nav('/specializations')}>
               <ListItemIcon><FolderSpecial /></ListItemIcon>
               <ListItemText primary="Manage Specializations" />
+            </ListItem>
+          </Box>
+          <Box width={225}>
+            <ListItem button onClick={() => nav('/csv')}>
+              <ListItemIcon><LocalShipping /></ListItemIcon>
+              <ListItemText primary="Bulk Upload" />
             </ListItem>
           </Box>
         </List>
