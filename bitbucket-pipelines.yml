@@ -127,6 +127,7 @@ pipelines:
                 - docker
           - step:
               name: "Build, Test, Deploy CMS Static Site"
+              image: python:3.7.2
               script:
                 - apt-get -y update
                 - pip install awscli
