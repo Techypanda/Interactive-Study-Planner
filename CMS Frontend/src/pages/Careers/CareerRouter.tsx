@@ -3,6 +3,7 @@ import styled from "styled-components";
 import NotFound from "../NotFound";
 import CareerManagement from "./CareerManagement";
 import CreateCareer from "./CreateCareer";
+import ViewCareer from "./ViewCareer";
 
 function CareerRouter(props: DefaultProps) {
   return (
@@ -12,6 +13,12 @@ function CareerRouter(props: DefaultProps) {
       </Route>
       <Route exact path="/careers/create">
         <CreateCareer />
+      </Route>
+      <Route exact path="/careers/view/:CareerId">
+        <ViewCareer />
+      </Route>
+      <Route exact path="/careers/edit/:MajorCode">
+        {/* <EditMajor /> */}
       </Route>
       <Route>
         <NotFound />
