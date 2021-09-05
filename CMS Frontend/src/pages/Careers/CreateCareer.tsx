@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import Error from "../components/shared/Error";
+import Error from "../../components/shared/Error";
 import { BounceLoader } from "react-spinners";
 
 function CreateCareer(props: DefaultProps) {

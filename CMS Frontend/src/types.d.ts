@@ -131,3 +131,11 @@ interface Specialization {
 	SpecAntiReqs: string[][]
 	MajorAntiReqs: string[][]
 }
+interface Career {
+  CareerId: string
+  Description: string
+  Industry: string
+  Name: string
+  Requirements: string[]
+  Traits: string[]
+}

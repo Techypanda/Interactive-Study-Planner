@@ -52,3 +52,12 @@ export function useSpecialization(specCode: string) {
     retry: false
   })
 }
+
+export function useCareers() {
+  return useQuery("careers", async (): Promise<AxiosResponse<Array<Career>>> => {
+    return await axios.get(`${process.env.REACT_APP_CAREER_ADMIN_API}/events/event-get-all-careers`)
+  }, {
+    staleTime: Infinity,
+    retry: false
+  })
+}

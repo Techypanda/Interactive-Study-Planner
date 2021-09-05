@@ -7,7 +7,7 @@ import { QueryClient, useQueryClient } from "react-query";
 import { decode } from "jsonwebtoken";
 import { useEffect, useState } from "react";
 import UnitRouter from "./Units/UnitRouter";
-import CareerRouter from "./CareerRouter";
+import CareerRouter from "./Careers/CareerRouter";
 import MajorRouter from "./Majors/MajorRouter";
 import SpecializationRouter from "./Specialization/SpecializationRouter";
 import CSV from "./CSV";
