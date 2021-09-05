@@ -666,6 +666,9 @@ func addSpecToDatabase(spec Specialization, db *dynamodb.DynamoDB) error {
 		"Name": {
 			S: aws.String(lowercasedName),
 		},
+		"Internal": {
+			BOOL: aws.Bool(spec.CourseInternal),
+		},
 		"Description": {
 			S: aws.String(spec.Description),
 		},
