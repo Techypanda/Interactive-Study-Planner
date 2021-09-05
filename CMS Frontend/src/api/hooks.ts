@@ -55,7 +55,18 @@ export function useSpecialization(specCode: string) {
 
 export function useCareers() {
   return useQuery("careers", async (): Promise<AxiosResponse<Array<Career>>> => {
-    return await axios.get(`${process.env.REACT_APP_CAREER_ADMIN_API}/events/event-get-all-careers`)
+    return await axios.get(`${process.env.REACT_APP_CAREER_API}/events/event-get-all-careers`)
+  }, {
+    staleTime: Infinity,
+    retry: false
+  })
+}
+
+export function useCareer(careerCode: string) {
+  return useQuery(`career - ${careerCode}`, async (): Promise<AxiosResponse<Career>> => {
+    return await axios.post(`${process.env.REACT_APP_CAREER_API}/events/event-get-career`, { // unfortunately not cached because post request :(
+      CareerId: careerCode
+    })
   }, {
     staleTime: Infinity,
     retry: false

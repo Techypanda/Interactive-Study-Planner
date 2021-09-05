@@ -48,6 +48,9 @@ interface UnitEntryProps extends DefaultProps {
 interface MajorEntryProps extends DefaultProps {
   major: Major
 }
+interface CareerEntryProps extends DefaultProps {
+  career: Career
+}
 interface SpecEntryProps extends DefaultProps {
   spec: Specialization
 }
@@ -105,6 +108,9 @@ interface PaginatedUnitsProps extends DefaultProps {
 }
 interface PaginatedMajorProps extends DefaultProps {
   majors: Array<Major>
+}
+interface PaginatedCareerProps extends DefaultProps {
+  careers: Array<Career>
 }
 interface PaginatedSpecializationProps extends DefaultProps {
   specs: Array<Specialization>
