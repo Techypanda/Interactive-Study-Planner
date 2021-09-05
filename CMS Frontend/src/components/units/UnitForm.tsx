@@ -28,7 +28,7 @@ function UnitForm(props: UnitFormProps) {
   const [error, setError] = useState<PromptData>({ promptTitle: "", promptContent: "", showPrompt: false });
   const [loading, setLoading] = useState(false);
   const client = useQueryClient();
-
+  const queryClient = useQueryClient();
   const [prereq, setPrereq] = useState<Array<Array<string>>>(comprehendCursedArrays("Prerequistes", props.unit))
   const [coreq, setCoreq] = useState<Array<Array<string>>>(comprehendCursedArrays("Corequistes", props.unit))
   const [antireq, setAntireq] = useState<Array<Array<string>>>(comprehendCursedArrays("Antirequistes", props.unit))
@@ -83,7 +83,7 @@ function UnitForm(props: UnitFormProps) {
     },
     onSuccess: (data: AxiosResponse) => {
       setLoading(false)
-      // Need to refetch the units list
+      queryClient.invalidateQueries('units')
       history.push('/units')
     }
   })

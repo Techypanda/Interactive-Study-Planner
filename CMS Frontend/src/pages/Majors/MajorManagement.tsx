@@ -1,11 +1,14 @@
-import { Box, Container, Typography, Button, TextField } from "@material-ui/core";
+import { Box, Container, Typography, Button, TextField, CircularProgress } from "@material-ui/core";
+import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import UnitEntry from "../components/units/UnitEntry";
 import styled from "styled-components";
+import { useMajors } from "../../api/hooks";
+import PaginatedMajors from "../../components/majors/PaginatedMajors";
 
 function MajorManagement(props: DefaultProps) {
   const history = useHistory();
-
+  const [filtered, setFiltered] = useState<Array<Major>>()
+  const majors = useMajors();
   return (
     <Container id="majormanagement" className={props.className}>
       <Box id="titlebar" display="flex" justifyContent="center" alignItems="center" marginY={2}>
@@ -17,7 +20,14 @@ function MajorManagement(props: DefaultProps) {
         <Button color="primary" variant='contained' className="searchbtn">GO</Button>
       </Box>
       <Box id="units" marginTop={2}>
-        {/* <UnitEntry unitContent="Max hasn't written the read API yet." unitTitle="Example Major" /> */}
+        {majors.isLoading
+          ? <CircularProgress />
+          : <>
+            {!majors.isError
+              ? <PaginatedMajors majors={!filtered ? majors.data?.data! : filtered} />
+              : <Typography>Sorry, An error has occured, please inform a admin</Typography>}
+          </>
+        }
       </Box>
     </Container>
   )

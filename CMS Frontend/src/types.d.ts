@@ -5,6 +5,9 @@ interface DefaultProps {
 interface UnitFormProps extends DefaultProps {
   unit?: Unit
 }
+interface MajorFormProps extends DefaultProps {
+  major?: Major
+}
 interface CognitoJWT {
   at_hash: string
   aud: string
@@ -32,8 +35,15 @@ interface DeliveryListProps extends DefaultProps {
   list: Array<string>
   remove: (deliveryName: string) => void;
 }
+interface MajorListProps extends DefaultProps {
+  list: Array<string>
+  remove: (unitCode: string) => void;
+}
 interface UnitEntryProps extends DefaultProps {
   unit: Unit
+}
+interface MajorEntryProps extends DefaultProps {
+  major: Major
 }
 interface CreateUnitForm {
   unitCode: string
@@ -45,6 +55,15 @@ interface CreateUnitForm {
 	corequistes: string[][]
 	antirequistes: string[][]
 }
+interface CreateMajorForm {
+  majorCode: string
+  name: string
+  description: string
+  credits: number
+  units: string[]
+  unitAntiReqs: string[][]
+  specAntiReqs: string[][]
+}
 interface Unit {
   Credits: Number
   Antirequistes: Array<Array<string>>
@@ -55,8 +74,20 @@ interface Unit {
   UnitCode: string
   Description: string
 }
+interface Major {
+  MajorCode: string,
+	Name: string,
+	Description: string,
+	Credits: Number,
+	Units: string[],
+	UnitAntiReqs: Array<Array<string>>
+	SpecAntiReqs: Array<Array<string>>
+}
 interface PaginatedUnitsProps extends DefaultProps {
   units: Array<Unit>
+}
+interface PaginatedMajorProps extends DefaultProps {
+  majors: Array<Major>
 }
 interface PromptData {
   promptTitle: string

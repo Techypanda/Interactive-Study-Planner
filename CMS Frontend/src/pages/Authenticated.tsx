@@ -8,7 +8,7 @@ import { decode } from "jsonwebtoken";
 import { useEffect, useState } from "react";
 import UnitRouter from "./Units/UnitRouter";
 import CareerRouter from "./CareerRouter";
-import MajorRouter from "./MajorRouter";
+import MajorRouter from "./Majors/MajorRouter";
 import SpecializationRouter from "./SpecializationRouter";
 
 function decodeLoop(setFunc: React.Dispatch<React.SetStateAction<string>>, client: QueryClient) { // recursive algorithm that just keeps going until it has a username.
