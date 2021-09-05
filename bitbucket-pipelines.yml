@@ -137,6 +137,7 @@ pipelines:
                 - apt -y install nodejs
                 - apt-get -y install nodejs
                 - apt-get -y install npm
+                - npm install --global yarn
                 - chmod +x ./SetupAWSPipeline.sh
                 - ./SetupAWSPipeline.sh
                 - cd "CMS Frontend"
