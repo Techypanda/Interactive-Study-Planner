@@ -8,6 +8,9 @@ interface UnitFormProps extends DefaultProps {
 interface MajorFormProps extends DefaultProps {
   major?: Major
 }
+interface SpecFormProps extends DefaultProps {
+  spec?: Specialization
+}
 interface CognitoJWT {
   at_hash: string
   aud: string
@@ -45,6 +48,9 @@ interface UnitEntryProps extends DefaultProps {
 interface MajorEntryProps extends DefaultProps {
   major: Major
 }
+interface SpecEntryProps extends DefaultProps {
+  spec: Specialization
+}
 interface CreateUnitForm {
   unitCode: string
 	unitName: string
@@ -54,6 +60,17 @@ interface CreateUnitForm {
 	prerequistes: string[][]
 	corequistes: string[][]
 	antirequistes: string[][]
+}
+interface CreateSpecForm {
+  SpecCode: string
+	Name: string
+	Description: string
+	Credits: number
+	CourseInternal: boolean
+	Units: string[]
+	UnitAntiReqs: string[][]
+	SpecAntiReqs: string[][]
+	MajorAntiReqs: string[][]
 }
 interface CreateMajorForm {
   majorCode: string
@@ -89,6 +106,9 @@ interface PaginatedUnitsProps extends DefaultProps {
 interface PaginatedMajorProps extends DefaultProps {
   majors: Array<Major>
 }
+interface PaginatedSpecializationProps extends DefaultProps {
+  specs: Array<Specialization>
+}
 interface PromptData {
   promptTitle: string
   promptContent: string
@@ -99,4 +119,15 @@ interface ErrorProps extends DefaultProps {
   promptContent: string
   showPrompt: bool
   onAccept: Function
+}
+interface Specialization {
+  SpecializationCode: string
+	Name: string
+	Description: string
+	Credits: number
+	Internal: boolean
+	Units: string[]
+	UnitAntiReqs: string[][]
+	SpecAntiReqs: string[][]
+	MajorAntiReqs: string[][]
 }

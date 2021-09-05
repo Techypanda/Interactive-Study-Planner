@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import UnitRouter from "./Units/UnitRouter";
 import CareerRouter from "./CareerRouter";
 import MajorRouter from "./Majors/MajorRouter";
-import SpecializationRouter from "./SpecializationRouter";
+import SpecializationRouter from "./Specialization/SpecializationRouter";
 
 function decodeLoop(setFunc: React.Dispatch<React.SetStateAction<string>>, client: QueryClient) { // recursive algorithm that just keeps going until it has a username.
   const token = client.getQueryData('token') as string;

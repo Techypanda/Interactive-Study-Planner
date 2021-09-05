@@ -34,3 +34,21 @@ export function useMajor(majorCode: string) {
     retry: false
   })
 }
+
+export function useSpecializations() {
+  return useQuery("specs", async (): Promise<AxiosResponse<Array<Specialization>>> => {
+    return await axios.get(`${process.env.REACT_APP_UNIT_API}/getallspecs`)
+  }, {
+    staleTime: Infinity,
+    retry: false
+  })
+}
+
+export function useSpecialization(specCode: string) {
+  return useQuery(`spec - ${specCode}`, async (): Promise<AxiosResponse<Specialization>> => {
+    return await axios.get(`${process.env.REACT_APP_UNIT_API}/getspec?code=${specCode}`)
+  }, {
+    staleTime: Infinity,
+    retry: false
+  })
+}
