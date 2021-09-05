@@ -6,7 +6,6 @@ export default function Authenticate(props: DefaultProps) {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     if (!urlParams.get('code')) {
-      const url = `${process.env.REACT_APP_COGNITO_LOGIN_URI}/login?client_id=${process.env.REACT_APP_COGNITO_CLIENT_ID}&response_type=code&scope=email+openid+phone+profile&redirect_uri=${window.location.origin}`;
       window.location.replace(`${process.env.REACT_APP_COGNITO_LOGIN_URI}/login?client_id=${process.env.REACT_APP_COGNITO_CLIENT_ID}&response_type=code&scope=email+openid+phone+profile&redirect_uri=${window.location.origin}`);
     } else {
       const params = new URLSearchParams();

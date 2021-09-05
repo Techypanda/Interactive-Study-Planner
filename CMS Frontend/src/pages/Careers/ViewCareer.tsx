@@ -1,4 +1,4 @@
-import { Box, Button, Container, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, LinearProgress, Typography } from "@material-ui/core";
+import { Box, Button, Container, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, LinearProgress } from "@material-ui/core";
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import axios, { AxiosError } from "axios";
@@ -6,11 +6,8 @@ import { useState } from "react";
 import { useQueryClient } from "react-query";
 import { useHistory, useParams } from "react-router-dom";
 import styled from "styled-components";
-import { useCareer, useMajor } from "../../api/hooks";
+import { useCareer } from "../../api/hooks";
 import CareerDisplay from "../../components/careers/CareerDisplay";
-import MajorDisplay from "../../components/majors/MajorDisplay";
-import Error from "../../components/shared/Error";
-import UnitDisplay from "../../components/units/UnitDisplay";
 import NotFound from "../NotFound";
 
 function ViewCareer(props: DefaultProps) {

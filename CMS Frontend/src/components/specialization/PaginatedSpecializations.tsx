@@ -2,10 +2,9 @@ import { Box, Paper, Typography } from "@material-ui/core";
 import { useState } from "react";
 import styled from "styled-components";
 import SpecEntry from "./SpecEntry";
-import MajorEntry from "./SpecEntry";
 
 function PaginatedSpecializations(props: PaginatedSpecializationProps) {
-  const [paginationCount, setPaginationCount] = useState(10);
+  const [paginationCount] = useState(10);
   const [page, setPage] = useState(0);
   const pageLimit = props.specs.length / paginationCount === Infinity ? 0 : props.specs.length / paginationCount
   const pageIcons = () => {

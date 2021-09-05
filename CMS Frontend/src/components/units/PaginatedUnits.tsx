@@ -4,7 +4,7 @@ import styled from "styled-components";
 import UnitEntry from "./UnitEntry";
 
 function PaginatedUnits(props: PaginatedUnitsProps) {
-  const [paginationCount, setPaginationCount] = useState(10);
+  const [paginationCount] = useState(10);
   const [page, setPage] = useState(0);
   const pageLimit = props.units.length / paginationCount === Infinity ? 0 : props.units.length / paginationCount
   const pageIcons = () => {

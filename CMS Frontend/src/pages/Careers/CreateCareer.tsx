@@ -1,4 +1,4 @@
-import { Box, Button, Container, Dialog, Grid, TextField, Typography } from "@material-ui/core";
+import { Box, Button, Container, Grid, TextField, Typography } from "@material-ui/core";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
@@ -22,9 +22,6 @@ function CreateCareer(props: DefaultProps) {
   const client = useQueryClient();
 
   const mutation = useMutation(() => {
-    const parsedCoreq = corequistes.split(',');
-    const parsedPrereq = prerequistes.split(',');
-    const pasredAntireq = antiRequistes.split(',');
     const payload: CreateUnitForm = {
       unitName: name,
       unitCode,

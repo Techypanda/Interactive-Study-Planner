@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, IconButton, Typography, Box, Drawer, List, ListItem, ListItemIcon, ListItemText, Button } from "@material-ui/core";
+import { AppBar, Toolbar, IconButton, Typography, Box, Drawer, List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
 import { Book, FolderSpecial, Home, LocalShipping, Menu, Report, Work } from "@material-ui/icons";
 import styled from 'styled-components';
 import CurtinLogo from "../../static/curtinlogo.png";

@@ -2,10 +2,9 @@ import { Box, Paper, Typography } from "@material-ui/core";
 import { useState } from "react";
 import styled from "styled-components";
 import CareerEntry from "./CareerEntry";
-import MajorEntry from "./CareerEntry";
 
 function PaginatedCareers(props: PaginatedCareerProps) {
-  const [paginationCount, setPaginationCount] = useState(10);
+  const [paginationCount] = useState(10);
   const [page, setPage] = useState(0);
   const pageLimit = props.careers.length / paginationCount === Infinity ? 0 : props.careers.length / paginationCount
   const pageIcons = () => {

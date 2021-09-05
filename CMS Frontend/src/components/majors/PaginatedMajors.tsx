@@ -4,7 +4,7 @@ import styled from "styled-components";
 import MajorEntry from "./MajorEntry";
 
 function PaginatedMajors(props: PaginatedMajorProps) {
-  const [paginationCount, setPaginationCount] = useState(10);
+  const [paginationCount] = useState(10);
   const [page, setPage] = useState(0);
   const pageLimit = props.majors.length / paginationCount === Infinity ? 0 : props.majors.length / paginationCount
   const pageIcons = () => {

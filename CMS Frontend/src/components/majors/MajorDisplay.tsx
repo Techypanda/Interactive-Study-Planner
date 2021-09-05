@@ -1,5 +1,4 @@
-import { Box, Chip, Container, Paper, Typography } from "@material-ui/core";
-import { ReactComponentElement } from "react";
+import { Box, Chip, Paper, Typography } from "@material-ui/core";
 import styled from "styled-components"
 
 function MajorDisplay(props: MajorEntryProps) {

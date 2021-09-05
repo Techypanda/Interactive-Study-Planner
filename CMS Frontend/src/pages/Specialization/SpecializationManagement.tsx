@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { useSpecializations } from "../../api/hooks";
 import PaginatedSpecializations from "../../components/specialization/PaginatedSpecializations";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function SpecializationManagement(props: DefaultProps) {
   const history = useHistory();

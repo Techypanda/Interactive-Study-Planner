@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { useMajor } from "../../api/hooks";
 import MajorForm from "../../components/majors/MajorForm";
-import UnitForm from "../../components/units/UnitForm";
 import NotFound from "../NotFound";
 
 function EditMajor(props: DefaultProps) {
