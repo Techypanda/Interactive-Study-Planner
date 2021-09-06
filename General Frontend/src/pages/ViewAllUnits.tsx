@@ -1,4 +1,4 @@
-import {UnitProps} from "../types";
+import {EntryProps} from "../types";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { useQuery, useQueryClient } from "react-query";
 import { useHistory } from "react-router-dom";
