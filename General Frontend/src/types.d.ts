@@ -23,7 +23,8 @@ export interface MajorProps {
   majorDescription? : string;
   majorCredits? : integer;
   majorUnits? : string[];
-  majorAntiReqs? : string[];
+  majorSpecAntiReqs? : string[];
+  majorUnitAntiReqs? : string[];
 }
 
 export interface EntryProps extends DefaultProps {
@@ -36,7 +37,7 @@ export interface SpecProps {
   specName?:string;
   specCredits?: integer;
   specDescription?: string;
-  specInternal: boolean;
+  specInternal?: boolean;
   specMajorAntiReqs?: string[];
   specSpecAntiReqs?: string[];
   specUnitAntiReqs?: string[];
