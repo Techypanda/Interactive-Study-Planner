@@ -13,7 +13,7 @@ import LoadingScreen from "./Loading";
 /*
  * Author: Matthew Loe
  * Student Id: 19452425
- * Date Last Modified: 7/09/2021
+ * Date Last Modified: 31/08/2021
  * Description: Page for viewing the detailed information on a career
  */
 
@@ -36,21 +36,16 @@ function ViewCareer(props: DefaultProps)
   {
     try
     {
+      let payload = JSON.stringify({'CareerId': id})
       const {data} = await axios.post(
         'https://q02l9qoni6.execute-api.ap-southeast-2.amazonaws.com/Prod/events/event-get-career',//'${process.env.REACT_APP_CAREERS_API}/event-get-career',
-        {
-          'CareerId': id
-        },
-        {
-          headers:
-          {
-            'Content-Type': 'application/json'
-          }
-        }
+        payload
       );
 
+      let info = data["Item"];
+
       //Making uppercase the words in the name
-      let name : string = data[0].CareerName;
+      let name : string = info["Name"];
       let parts : string[] = name.split(" ");
 
       for (let ii=0; ii < parts.length; ii++)
@@ -61,12 +56,20 @@ function ViewCareer(props: DefaultProps)
 
       name = parts.join(" ");
 
+      let traits : string[] = info["Traits"];
+
+      for (let ii=0; ii < traits.length; ii++)
+      {
+        traits[ii] = traits[ii][0].toUpperCase() + traits[ii].substr(1);
+      }
+      //END FOR
+
       let resp : CareerProps = {
         careerName : name,
-        careerDescription : data[0].Description,
-        careerIndustry : data[0].Industry,
-        careerReqs : data[0].Requirements,
-        careerTraits : data[0].Traits
+        careerDescription : info["Description"],
+        careerIndustry : info["Industry"],
+        careerReqs : info["Requirements"],
+        careerTraits : traits
       };
       
       setCareer(resp);
@@ -74,6 +77,7 @@ function ViewCareer(props: DefaultProps)
     }
     catch(err)
     {
+      console.log(err)
       if (err && axios.isAxiosError(err))
       {
         //Handle axios err
