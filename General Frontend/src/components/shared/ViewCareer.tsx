@@ -13,7 +13,7 @@ import LoadingScreen from "./Loading";
 /*
  * Author: Matthew Loe
  * Student Id: 19452425
- * Date Last Modified: 31/08/2021
+ * Date Last Modified: 7/09/2021
  * Description: Page for viewing the detailed information on a career
  */
 

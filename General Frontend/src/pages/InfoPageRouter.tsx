@@ -9,7 +9,7 @@ import { Fade, Button } from "@material-ui/core";
 /*
  * Author: Matthew Loe
  * Student Id: 19452425
- * Date Last Modified: 25/08/2021
+ * Date Last Modified: 7/09/2021
  * Description: Routing page for information pages
  */
 //Notes - remove button, test function, test route and usehistory after testing concluded or comment out
