@@ -49,8 +49,10 @@ function ViewCareer(props: DefaultProps)
         }
       );
 
+      let info = data["Item"];
+
       //Making uppercase the words in the name
-      let name : string = data[0].CareerName;
+      let name : string = info["Name"];
       let parts : string[] = name.split(" ");
 
       for (let ii=0; ii < parts.length; ii++)
@@ -61,12 +63,20 @@ function ViewCareer(props: DefaultProps)
 
       name = parts.join(" ");
 
+      let traits : string[] = info["Traits"];
+
+      for (let ii=0; ii < traits.length; ii++)
+      {
+        traits[ii] = traits[ii][0].toUpperCase() + traits[ii].substr(1);
+      }
+      //END FOR
+
       let resp : CareerProps = {
         careerName : name,
-        careerDescription : data[0].Description,
-        careerIndustry : data[0].Industry,
-        careerReqs : data[0].Requirements,
-        careerTraits : data[0].Traits
+        careerDescription : info["Description"],
+        careerIndustry : info["Industry"],
+        careerReqs : info["Requirements"],
+        careerTraits : traits
       };
       
       setCareer(resp);
@@ -74,7 +84,7 @@ function ViewCareer(props: DefaultProps)
     }
     catch(err)
     {
-      if (err && err.response && axios.isAxiosError(err))
+      if (err && axios.isAxiosError(err))
       {
         //Handle axios err
         const axiosResp = err.response as AxiosResponse;
