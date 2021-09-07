@@ -1,6 +1,7 @@
 import Navbar from "../components/shared/Navbar";
 import {DefaultProps} from "../types";
 import {Typography} from "@material-ui/core";
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 // POC of class selection into an organised plan separated by semester, assuming full time study.
 // Prerequisites, co-requisites and antirequisites TBD, as well as semester availability
