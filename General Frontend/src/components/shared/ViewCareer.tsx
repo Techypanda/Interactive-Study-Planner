@@ -40,12 +40,6 @@ function ViewCareer(props: DefaultProps)
         'https://q02l9qoni6.execute-api.ap-southeast-2.amazonaws.com/Prod/events/event-get-career',//'${process.env.REACT_APP_CAREERS_API}/event-get-career',
         {
           'CareerId': id
-        },
-        {
-          headers:
-          {
-            'Content-Type': 'application/json'
-          }
         }
       );
 
