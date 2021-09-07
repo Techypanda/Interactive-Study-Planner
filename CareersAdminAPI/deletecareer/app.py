@@ -129,7 +129,7 @@ def badRequest(reason: str) -> dict:
         "headers": { 
             "Access-Control-Allow-Headers" : "Content-Type",
             "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Credentials": True,
+            "Access-Control-Allow-Credentials": "True",
             "Access-Control-Allow-Methods": "POST",
             "Content-Type": "application/json"
             },
@@ -143,7 +143,7 @@ def okResponse(reason: str) -> dict:
         "headers": { 
             "Access-Control-Allow-Headers" : "Content-Type",
             "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Credentials": True,
+            "Access-Control-Allow-Credentials": "True",
             "Access-Control-Allow-Methods": "POST",
             "Content-Type": "application/json"
             },
