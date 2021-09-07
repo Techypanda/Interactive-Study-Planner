@@ -75,7 +75,7 @@ function ViewMajor(props: DefaultProps)
     }
     catch(err)
     {
-      if (err && err.response && axios.isAxiosError(err))
+      if (err && axios.isAxiosError(err))
       {
         //Handle axios err
         const axiosResp = err.response as AxiosResponse;
