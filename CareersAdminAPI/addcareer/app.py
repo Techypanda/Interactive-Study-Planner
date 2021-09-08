@@ -14,7 +14,7 @@ from botocore.exceptions import ClientError
 #Author: Matthew Loe
 #Student Id: 19452425
 #Date Created: 25/05/2021
-#Date Last Modified: 7/09/2021
+#Date Last Modified: 8/09/2021
 #Description: Add career operation handler
 
 #JWT token validation
@@ -169,7 +169,7 @@ def badRequest(reason: str) -> dict:
         "headers": { 
             "Access-Control-Allow-Headers" : "Content-Type",
             "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Credentials": "True",
+            "Access-Control-Allow-Credentials": "true",
             "Access-Control-Allow-Methods": "POST",
             "Content-Type": "application/json"
             },
@@ -183,7 +183,7 @@ def okResponse(reason: str) -> dict:
         "headers": { 
             "Access-Control-Allow-Headers" : "Content-Type",
             "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Credentials": "True",
+            "Access-Control-Allow-Credentials": "true",
             "Access-Control-Allow-Methods": "POST",
             "Content-Type": "application/json"
             },
