@@ -134,7 +134,7 @@ Resources:
       Policies:
       - DynamoDBCrudPolicy:
           TableName: DevCareers
-      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careeradmin:deletecareerfunction-dcf335914c6b-python3.8-v1
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careeradmin:deletecareerfunction-6a3b5f257a07-python3.8-v1
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./deletecareer
@@ -175,7 +175,7 @@ Resources:
       Policies:
       - DynamoDBCrudPolicy:
           TableName: DevTraits
-      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careeradmin:deletetraitfunction-e9ccdc13cd3b-python3.8-v1
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careeradmin:deletetraitfunction-ba94758bf032-python3.8-v1
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./deletetrait
@@ -216,7 +216,7 @@ Resources:
       Policies:
       - DynamoDBCrudPolicy:
           TableName: DevCareers
-      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careeradmin:updatecareerfunction-67d0237dfe65-python3.8-v1
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careeradmin:updatecareerfunction-51245cb7598a-python3.8-v1
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./updatecareer
@@ -257,7 +257,7 @@ Resources:
       Policies:
       - DynamoDBCrudPolicy:
           TableName: DevTraits
-      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careeradmin:updatetraitfunction-b0b269b2090a-python3.8-v1
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careeradmin:updatetraitfunction-ea661753da8d-python3.8-v1
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./updatetrait

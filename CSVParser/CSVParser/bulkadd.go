@@ -180,9 +180,10 @@ func bulkAddToDB(unitList []Unit, majorList []Major, specList []Specialization, 
 					S: aws.String(trait),
 				})
 			}
+			lowercasedID := strings.ToLower(career.CareerCode)
 			careerItem := map[string]*dynamodb.AttributeValue{
 				"CareerId": {
-					S: aws.String(career.CareerCode),
+					S: aws.String(lowercasedID),
 				},
 				"Name": {
 					S: aws.String(lowercasedName),

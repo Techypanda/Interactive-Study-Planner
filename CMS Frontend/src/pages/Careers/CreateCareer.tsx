@@ -1,10 +1,10 @@
-import { Box, Button, Container, Dialog, Grid, TextField, Typography } from "@material-ui/core";
+import { Box, Button, Container, Grid, TextField, Typography } from "@material-ui/core";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import Error from "../components/shared/Error";
+import Error from "../../components/shared/Error";
 import { BounceLoader } from "react-spinners";
 
 function CreateCareer(props: DefaultProps) {
@@ -22,18 +22,15 @@ function CreateCareer(props: DefaultProps) {
   const client = useQueryClient();
 
   const mutation = useMutation(() => {
-    const parsedCoreq = corequistes.split(',');
-    const parsedPrereq = prerequistes.split(',');
-    const pasredAntireq = antiRequistes.split(',');
     const payload: CreateUnitForm = {
       unitName: name,
       unitCode,
       unitDescription: description,
       unitCredits: Number.isNaN(credits) ? 0 : credits,
       delivery,
-      corequistes: parsedCoreq,
-      prerequistes: parsedPrereq,
-      antirequistes: pasredAntireq
+      corequistes: [[""]],
+      prerequistes: [[""]],
+      antirequistes: [[""]]
     };
     setLoading(true);
     return axios.post(`${process.env.REACT_APP_API_URI}/addunit`, JSON.stringify(payload), {

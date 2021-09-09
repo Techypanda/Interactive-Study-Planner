@@ -78,7 +78,6 @@ function ViewCareer(props: DefaultProps)
     }
     catch(err)
     {
-      console.log(err)
       if (err && axios.isAxiosError(err))
       {
         //Handle axios err
