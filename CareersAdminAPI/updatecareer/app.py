@@ -13,7 +13,7 @@ from botocore.exceptions import ClientError
 #Author: Matthew Loe
 #Student Id: 19452425
 #Date Created: 25/05/2021
-#Date Last Modified: 1/09/2021
+#Date Last Modified: 8/09/2021
 #Description: Update career operation handler
 
 #JWT token validation
@@ -142,8 +142,11 @@ def badRequest(reason: str) -> dict:
         "statusCode" : 400,
         "body" : "Bad request: " + reason,
         "headers": { 
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*"
+            "Access-Control-Allow-Headers" : "Content-Type",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Allow-Methods": "POST",
+            "Content-Type": "application/json"
             },
     }
 
@@ -153,7 +156,10 @@ def okResponse(reason: str) -> dict:
         "statusCode" : 200,
         "body" : "Success: " + reason,
         "headers": { 
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*"
+            "Access-Control-Allow-Headers" : "Content-Type",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Allow-Methods": "POST",
+            "Content-Type": "application/json"
             },
     }    
