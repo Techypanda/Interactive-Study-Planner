@@ -2,7 +2,9 @@ import { Route, Switch } from "react-router-dom";
 import styled from "styled-components";
 import CreateMajor from "./CreateMajor";
 import MajorManagement from "./MajorManagement";
-import NotFound from "./NotFound";
+import NotFound from "../NotFound";
+import ViewMajor from "./ViewMajor";
+import EditMajor from "./EditMajor";
 
 function MajorRouter(props: DefaultProps) {
 
@@ -13,6 +15,12 @@ function MajorRouter(props: DefaultProps) {
       </Route>
       <Route exact path="/majors/create">
         <CreateMajor />
+      </Route>
+      <Route exact path="/majors/view/:MajorCode">
+        <ViewMajor />
+      </Route>
+      <Route exact path="/majors/edit/:MajorCode">
+        <EditMajor />
       </Route>
       <Route>
         <NotFound />

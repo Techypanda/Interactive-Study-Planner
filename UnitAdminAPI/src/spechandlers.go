@@ -99,6 +99,9 @@ func parseSpecBody(body string) (Specialization, error) {
 	if specialization.Name == "" {
 		return specialization, errors.New("name is empty")
 	}
+	if specialization.Description == "" {
+		return specialization, errors.New("description is empty")
+	}
 	if specialization.SpecCode == "" {
 		return specialization, errors.New("spec code is empty")
 	}

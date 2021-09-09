@@ -84,6 +84,9 @@ func parseMajorBody(body string) (Major, error) {
 	if major.Name == "" {
 		return major, errors.New("name is empty")
 	}
+	if major.Description == "" {
+		return major, errors.New("description is empty")
+	}
 	if major.Credits <= 0 {
 		return major, errors.New("credits is <= 0")
 	}

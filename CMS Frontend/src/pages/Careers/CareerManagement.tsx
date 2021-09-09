@@ -1,11 +1,14 @@
-import { Box, Container, Typography, Button, TextField } from "@material-ui/core";
+import { Box, Container, Typography, Button, TextField, CircularProgress } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
-import UnitEntry from "../components/units/UnitEntry";
 import styled from "styled-components";
+import { useCareers } from "../../api/hooks";
+import PaginatedCareers from "../../components/careers/PaginatedCareers";
+import { useState } from "react";
 
 function CareerManagement(props: DefaultProps) {
   const history = useHistory();
-
+  const careers = useCareers()
+  const [filtered] = useState<Array<Career>>()
   return (
     <Container id="careermanagement" className={props.className}>
       <Box id="titlebar" display="flex" justifyContent="center" alignItems="center" marginY={2}>
@@ -17,7 +20,14 @@ function CareerManagement(props: DefaultProps) {
         <Button color="primary" variant='contained' className="searchbtn">GO</Button>
       </Box>
       <Box id="units" marginTop={2}>
-        {/* <UnitEntry unitContent="Max hasn't written the read API yet." unitTitle="Example Career" /> */}
+      {careers.isLoading
+          ? <CircularProgress />
+          : <>
+            {!careers.isError
+              ? <PaginatedCareers careers={!filtered ? careers.data?.data! : filtered} />
+              : <Typography>Sorry, An error has occured, please inform a admin</Typography>}
+          </>
+        }
       </Box>
     </Container>
   )

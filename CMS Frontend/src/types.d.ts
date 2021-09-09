@@ -5,6 +5,12 @@ interface DefaultProps {
 interface UnitFormProps extends DefaultProps {
   unit?: Unit
 }
+interface MajorFormProps extends DefaultProps {
+  major?: Major
+}
+interface SpecFormProps extends DefaultProps {
+  spec?: Specialization
+}
 interface CognitoJWT {
   at_hash: string
   aud: string
@@ -32,8 +38,21 @@ interface DeliveryListProps extends DefaultProps {
   list: Array<string>
   remove: (deliveryName: string) => void;
 }
+interface MajorListProps extends DefaultProps {
+  list: Array<string>
+  remove: (unitCode: string) => void;
+}
 interface UnitEntryProps extends DefaultProps {
   unit: Unit
+}
+interface MajorEntryProps extends DefaultProps {
+  major: Major
+}
+interface CareerEntryProps extends DefaultProps {
+  career: Career
+}
+interface SpecEntryProps extends DefaultProps {
+  spec: Specialization
 }
 interface CreateUnitForm {
   unitCode: string
@@ -41,9 +60,29 @@ interface CreateUnitForm {
 	unitDescription: string
 	unitCredits: number
 	delivery: string
-	prerequistes: string[]
-	corequistes: string[]
-	antirequistes: string[]
+	prerequistes: string[][]
+	corequistes: string[][]
+	antirequistes: string[][]
+}
+interface CreateSpecForm {
+  SpecCode: string
+	Name: string
+	Description: string
+	Credits: number
+	CourseInternal: boolean
+	Units: string[]
+	UnitAntiReqs: string[][]
+	SpecAntiReqs: string[][]
+	MajorAntiReqs: string[][]
+}
+interface CreateMajorForm {
+  majorCode: string
+  name: string
+  description: string
+  credits: number
+  units: string[]
+  unitAntiReqs: string[][]
+  specAntiReqs: string[][]
 }
 interface Unit {
   Credits: Number
@@ -55,8 +94,26 @@ interface Unit {
   UnitCode: string
   Description: string
 }
+interface Major {
+  MajorCode: string,
+	Name: string,
+	Description: string,
+	Credits: Number,
+	Units: string[],
+	UnitAntiReqs: Array<Array<string>>
+	SpecAntiReqs: Array<Array<string>>
+}
 interface PaginatedUnitsProps extends DefaultProps {
   units: Array<Unit>
+}
+interface PaginatedMajorProps extends DefaultProps {
+  majors: Array<Major>
+}
+interface PaginatedCareerProps extends DefaultProps {
+  careers: Array<Career>
+}
+interface PaginatedSpecializationProps extends DefaultProps {
+  specs: Array<Specialization>
 }
 interface PromptData {
   promptTitle: string
@@ -68,4 +125,23 @@ interface ErrorProps extends DefaultProps {
   promptContent: string
   showPrompt: bool
   onAccept: Function
+}
+interface Specialization {
+  SpecializationCode: string
+	Name: string
+	Description: string
+	Credits: number
+	Internal: boolean
+	Units: string[]
+	UnitAntiReqs: string[][]
+	SpecAntiReqs: string[][]
+	MajorAntiReqs: string[][]
+}
+interface Career {
+  CareerId: string
+  Description: string
+  Industry: string
+  Name: string
+  Requirements: string[]
+  Traits: string[]
 }
