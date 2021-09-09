@@ -1,8 +1,6 @@
 import './App.scss';
 import {BrowserRouter, Switch, Route} from "react-router-dom";
-import { useEffect} from "react";
 import Landing from './pages/Landing';
-import Error from './components/shared/Error';
 import ViewAllCareers from './pages/ViewAllCareers';
 import PlannerInitialPage from './pages/PlannerInitialPage';
 import CoursePlanner from './pages/CoursePlanner';
@@ -27,9 +25,9 @@ function App() {
 		    <Route exact path="/CoursePlanner">
 			<CoursePlanner/>
 		    </Route>
-			<Route path="/InfoPage">
-				<InfoPageRouter/>
-			</Route>
+		    <Route path="/InfoPage">
+			<InfoPageRouter/>
+		    </Route>
 		    <Route>
 			<h1>Error 404 not found</h1> 
 		    </Route>

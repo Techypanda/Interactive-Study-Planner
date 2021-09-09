@@ -1,14 +1,13 @@
 // first page that is seen when the general user opens the site, prompting a choice
 // between top down and bottom up course planner buildilng.
 
-import { Box, Grid, Typography, Card, CardActions, CardActionArea, CardHeader, CardMedia, CardContent, Paper} from "@material-ui/core";
+import { Box, Grid, Typography, Card, CardHeader, CardMedia, CardContent} from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from "react-router-dom";
 import Navbar from "../components/shared/Navbar";
 import { DefaultProps } from "../types";
 
 import ListCareers from "./ViewAllCareers";
-import CoursePlanner from "./CoursePlanner";
 
 import CareersImage from "../static/career.jpg";
 import ClassesImage from "../static/classes.jpg";

@@ -1,16 +1,12 @@
-import { AppBar, Card, CardActionArea, CardHeader, CardMedia, CardContent, Grid, Paper, Typography } from "@material-ui/core";
+import {  Card, CardHeader, CardMedia, CardContent, Grid, Paper, Typography } from "@material-ui/core";
 import Navbar from "../components/shared/Navbar";
 import styled from 'styled-components';
 import {useHistory} from "react-router-dom";
 
-// pages
-import ViewAllCareers from "./ViewAllCareers";
-import PlannerInitialPage from "./PlannerInitialPage";
-
-// stock images
-import MedicalImage from "../static/doctor_teacher.jpg";
-import CareersImage from "../static/career.jpg";
-import TraitsImage from "../static/traits_image.jpg";
+// stock images - reinsert when similar sized and not ugly
+/* import MedicalImage from "../static/doctor_teacher.jpg"; */
+/* import CareersImage from "../static/career.jpg"; */
+/* import TraitsImage from "../static/traits_image.jpg"; */
 import '../App.scss';
 
 function Landing() {
