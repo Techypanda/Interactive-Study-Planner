@@ -2,12 +2,12 @@ import { List, ListItem, ListItemIcon, ListItemText, Typography } from "@materia
 import { ListDataProps } from "../../types";
 import styled from "styled-components";
 import BulletPointIcon from "./BulletPointIcon";
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 /*
  * Author: Matthew Loe
  * Student Id: 19452425
- * Date Last Modified: 31/08/2021
+ * Date Last Modified: 06/09/2021
  * Description: Component that returns a list section that allows each item to be clickable.
  */
 

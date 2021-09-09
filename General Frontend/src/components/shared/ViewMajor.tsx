@@ -12,7 +12,7 @@ import LoadingScreen from "./Loading";
 /*
  * Author: Matthew Loe
  * Student Id: 19452425
- * Date Last Modified: 31/08/2021
+ * Date Last Modified: 7/09/2021
  * Description: Page for viewing the detailed information on a major
  */
 
@@ -66,7 +66,8 @@ function ViewMajor(props: DefaultProps)
         majorCredits : data[0].Credits,
         majorDescription : data[0].Description,
         majorUnits : data[0].Units,
-        majorAntiReqs : data[0].SpecAntiReqs
+        majorSpecAntiReqs : data[0].SpecAntiReqs,
+        majorUnitAntiReqs : data[0].UnitAntiReqs
       };
       
       setMajor(resp);
@@ -74,7 +75,7 @@ function ViewMajor(props: DefaultProps)
     }
     catch(err)
     {
-      if (err && err.response && axios.isAxiosError(err))
+      if (err && axios.isAxiosError(err))
       {
         //Handle axios err
         const axiosResp = err.response as AxiosResponse;
@@ -140,7 +141,8 @@ function ViewMajor(props: DefaultProps)
             <TextSection sectionHeading="Credits" sectionContent={major.majorCredits}/>
             <TextSection sectionHeading="Description" sectionContent= {major.majorDescription}/>
             <NavListSection sectionHeading="Units in Major" list= {major.majorUnits}/>
-            <NavListSection sectionHeading="Antirequisite Specializations" list= {major.majorAntiReqs}/>
+            <NavListSection sectionHeading="Antirequisite Specializations" list= {major.majorSpecAntiReqs}/>
+            <NavListSection sectionHeading="Antirequisite Units" list= {major.majorUnitAntiReqs}/>
           </Box>
         </Paper>
       </div>
