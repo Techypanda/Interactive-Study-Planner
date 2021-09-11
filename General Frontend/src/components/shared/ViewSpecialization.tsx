@@ -3,7 +3,7 @@ import TextSection from "./TextSection"
 import NavListSection from "./NavListSection"
 import { SpecProps, DefaultProps } from "../../types";
 import styled from "styled-components";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import axios, { AxiosResponse } from "axios";
 import Error from "./Error";
 import { useEffect, useState } from "react";
@@ -12,14 +12,14 @@ import LoadingScreen from "./Loading";
 /*
  * Author: Matthew Loe
  * Student Id: 19452425
- * Date Last Modified: 7/09/2021
+ * Date Last Modified: 11/09/2021
  * Description: Page for viewing the detailed information on a specialization
  */
 
 function ViewSpecialization(props: DefaultProps)
 {
     const history = useHistory();
-    const id = history.location.state as string;  //Retrieve id for specialization information to get
+    const { id } = useParams<{ id: string }>();     //Retreive id from url param
 
     let base : SpecProps = {
         specCode : id

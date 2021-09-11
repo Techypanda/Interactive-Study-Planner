@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 /*
  * Author: Matthew Loe
  * Student Id: 19452425
- * Date Last Modified: 06/09/2021
+ * Date Last Modified: 11/09/2021
  * Description: Component that returns a list section that allows each item to be clickable.
  */
 
@@ -26,17 +26,17 @@ function NavListSection(props: ListDataProps)
         if (codeHead === majorSpecHeads[0])
         {
             //Nav to major info page
-            history.push('/InfoPage/ViewMajor', { code })
+            history.push(('/InfoPage/ViewMajor/').concat(code));
         }
         else if (codeHead === majorSpecHeads[1])
         {
             //Nav to spec info page
-            history.push('/InfoPage/ViewSpecialisation', { code })
+            history.push(('/InfoPage/ViewSpecialisation/').concat(code))
         }
         else
         {
             //Nav to unit info page
-            history.push('/InfoPage/ViewUnit', { code })
+            history.push(('/InfoPage/ViewUnit/').concat(code))
         }
         //END IF
     }
