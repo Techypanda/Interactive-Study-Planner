@@ -2,6 +2,9 @@ interface DefaultProps {
   className?: string;
   username?: string;
 }
+interface CareerFormProps extends DefaultProps {
+  career?: Career;
+}
 interface UnitFormProps extends DefaultProps {
   unit?: Unit
 }
@@ -39,6 +42,10 @@ interface DeliveryListProps extends DefaultProps {
   remove: (deliveryName: string) => void;
 }
 interface MajorListProps extends DefaultProps {
+  list: Array<string>
+  remove: (unitCode: string) => void;
+}
+interface CareerListProps extends DefaultProps {
   list: Array<string>
   remove: (unitCode: string) => void;
 }
