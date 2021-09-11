@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import { useQuery, useQueryClient } from "react-query";
 import styled from "styled-components";
 import axios, { AxiosError, AxiosResponse } from "axios";
+import {BrowserRouter, Switch, Route} from "react-router-dom";
 
 import Navbar from "../components/shared/Navbar";
 import { CareerProps, DefaultProps } from "../types";
@@ -48,10 +49,10 @@ function ViewAllCareers(props: DefaultProps) {
     const history = useHistory();
     const classes = useStyles();
 
-	const base = [{Description : "", Industry : ""}]
+	const base = [{Description : "", Industry : "", CareerId: ""}]
 	const [careersList, setCareersData] = useState(base);
 
-	const getCareersData = async () => {
+	const getCareersData = () => {
 		axios.get("https://q02l9qoni6.execute-api.ap-southeast-2.amazonaws.com/Prod/events/event-get-all-careers")
 				.then((response) => {
 					console.log(response.data);
@@ -60,8 +61,7 @@ function ViewAllCareers(props: DefaultProps) {
 	}
 	useEffect(() => {
 		getCareersData();
-	}, []);
-
+	  }, []);
 
     return (
 	<>
@@ -70,14 +70,14 @@ function ViewAllCareers(props: DefaultProps) {
 	    <Container  >
 		<Box id="searchcontainer" display="flex">
 		    <TextField variant="outlined" id="standard-full-width" fullWidth  placeholder="Search careers..." className="searchbar" />
-		    <Button  variant='contained' className="searchbtn">Search</Button>
+		    <Button variant='contained' className="searchbtn">Search</Button>
 		</Box>
 		
 		{careersList.map((x) => (
 		    <div className="career-option">
 			<Card variant="outlined" className={classes.root}>
 			    <div className={classes.details}>
-				<CardContent className={classes.content}>
+				<CardContent onClick={() => history.push(`/careers/view/${x.CareerId}`, { state: x.CareerId})} className={classes.content}>
 				    <Typography component="h5" variant="h5" align="left">
 						{x.Industry}
 				    </Typography>

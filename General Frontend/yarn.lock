@@ -1972,8 +1972,10 @@
 "@types/q@^1.5.1":
   "version" "1.5.4"
 
-"@types/react-dom@^17.0.0":
-  "version" "17.0.8"
+"@types/react-dom@^17.0.9":
+  "integrity" "sha512-wIvGxLfgpVDSAMH5utdL9Ngm5Owu0VsGmldro3ORLXV8CShrL8awVj06NuEXFQ5xyaYfdca7Sgbk/50Ri1GdPg=="
+  "resolved" "https://registry.npmjs.org/@types/react-dom/-/react-dom-17.0.9.tgz"
+  "version" "17.0.9"
   dependencies:
     "@types/react" "*"
 
@@ -1995,8 +1997,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^16.8.6 || ^17.0.0", "@types/react@^17.0.0":
-  "version" "17.0.13"
+"@types/react@*", "@types/react@^16.8.6 || ^17.0.0", "@types/react@^17.0.20":
+  "integrity" "sha512-wWZrPlihslrPpcKyCSlmIlruakxr57/buQN1RjlIeaaTWDLtJkTtRW429MoQJergvVKc4IWBpRhWw7YNh/7GVA=="
+  "resolved" "https://registry.npmjs.org/@types/react/-/react-17.0.20.tgz"
+  "version" "17.0.20"
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"

@@ -22,6 +22,7 @@ function ViewCareer(props: DefaultProps)
 {
   const history = useHistory();
   const id = history.location.state as string; //Get target career id
+  const test = history.location.pathname.split("/").slice(-1)[0];
 
   //Get career information from table
   const base : CareerProps = {};
@@ -39,7 +40,7 @@ function ViewCareer(props: DefaultProps)
       const {data} = await axios.post(
         'https://q02l9qoni6.execute-api.ap-southeast-2.amazonaws.com/Prod/events/event-get-career',//'${process.env.REACT_APP_CAREERS_API}/event-get-career',
         {
-          'CareerId': id
+          'CareerId': test
         }
       );
 
