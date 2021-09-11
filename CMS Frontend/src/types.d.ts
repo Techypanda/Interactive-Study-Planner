@@ -2,6 +2,9 @@ interface DefaultProps {
   className?: string;
   username?: string;
 }
+interface AuthWrapperProps extends DefaultProps {
+  children: ReactNode;
+}
 interface CareerFormProps extends DefaultProps {
   career?: Career;
 }

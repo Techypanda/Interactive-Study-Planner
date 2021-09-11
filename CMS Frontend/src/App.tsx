@@ -2,6 +2,7 @@ import React from 'react';
 import './style.scss';
 import Authenticated from './pages/Authenticated';
 import Authenticate from './pages/Authenticate';
+import AuthWrapper from './pages/AuthWrapper';
 
 function TokenExpired() {
   if (sessionStorage.getItem('rToken') && sessionStorage.getItem('rTokenExpiry')) {
@@ -19,10 +20,13 @@ function TokenExpired() {
 function App(props: DefaultProps) {
   return (
     <>
-      { !TokenExpired()
-        && <Authenticated />
+      {!TokenExpired()
+        &&
+        <AuthWrapper>
+          <Authenticated />
+        </AuthWrapper>
       }
-      { TokenExpired()
+      {TokenExpired()
         && <Authenticate />
       }
     </>
