@@ -35,64 +35,59 @@ function ViewSpecialization(props: DefaultProps)
     {
         try
         {
-        const {data} = await axios.get(
-            'https://ilur318q9c.execute-api.ap-southeast-2.amazonaws.com/Prod/getspec',//'${process.env.REACT_APP_UNITS_API}/getspec',
-            { params:
-                {
-                code : id
-                },
-                headers:
-                {
-                'Content-Type': 'application/json'
+            const {data} = await axios.get('https://ilur318q9c.execute-api.ap-southeast-2.amazonaws.com/Prod/getspec',//'${process.env.REACT_APP_UNITS_API}/getspec',
+                { params:
+                    {
+                        code : id
+                    }
                 }
+            );
+
+            //Making uppercase the words in the name
+            let name : string = data[0].Name;
+            let parts : string[] = name.split(" ");
+
+            for (let ii=0; ii < parts.length; ii++)
+            {
+                parts[ii] = parts[ii][0].toUpperCase() + parts[ii].substr(1);
             }
-        );
+            //END FOR
 
-        //Making uppercase the words in the name
-        let name : string = data[0].Name;
-        let parts : string[] = name.split(" ");
+            name = parts.join(" ");
 
-        for (let ii=0; ii < parts.length; ii++)
-        {
-            parts[ii] = parts[ii][0].toUpperCase() + parts[ii].substr(1);
-        }
-        //END FOR
-
-        name = parts.join(" ");
-
-        let resp : SpecProps = {
-            specCode : data[0].specCode,
-            specName : name,
-            specCredits : data[0].Credits,
-            specDescription : data[0].Description,
-            specInternal : data[0].Internal,
-            specMajorAntiReqs : data[0].MajorAntiReqs,
-            specSpecAntiReqs : data[0].SpecAntiReqs,
-            specUnitAntiReqs : data[0].UnitAntiReqs,
-            specUnits : data[0].Units
-        };
-        
-        setSpec(resp);
-        setLoading(false);
+            let resp : SpecProps = {
+                specCode : data[0].SpecializationCode,
+                specName : name,
+                specCredits : data[0].Credits,
+                specDescription : data[0].Description,
+                specInternal : data[0].Internal,
+                specMajorAntiReqs : data[0].MajorAntiReqs,
+                specSpecAntiReqs : data[0].SpecAntiReqs,
+                specUnitAntiReqs : data[0].UnitAntiReqs,
+                specUnits : data[0].Units
+            };
+            
+            setSpec(resp);
+            setLoading(false);
         }
         catch(err)
         {
-        if (err && axios.isAxiosError(err))
-        {
-            //Handle axios err
-            const axiosResp = err.response as AxiosResponse;
-            setErrorContent(axiosResp.data);
-            setError(true);
-            setLoading(false);
-        }
-        else
-        {
-            //Handle non axios error
-            setErrorContent("Unknown error occured during data retrieval.");
-            setError(true);
-            setLoading(false);
-        }
-        //END IF
+            if (err && axios.isAxiosError(err))
+            {
+                //Handle axios err
+                const axiosResp = err.response as AxiosResponse;
+                setErrorContent(axiosResp.data);
+                setError(true);
+                setLoading(false);
+            }
+            else
+            {
+                //Handle non axios error
+                setErrorContent("Unknown error occured during data retrieval.");
+                setError(true);
+                setLoading(false);
+            }
+            //END IF
         }
         //END TRY-CATCH
     }
