@@ -2,6 +2,6 @@
 	"httpMethod": "GET",
 	"isBase64Encoded": false,
 	"queryStringParameters": {
-		"code": "test"
+		"code": "SPUC-INENT"
 	}
 }
