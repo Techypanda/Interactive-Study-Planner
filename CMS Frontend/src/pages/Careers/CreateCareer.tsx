@@ -1,11 +1,5 @@
-import { Box, Button, Container, Grid, TextField, Typography } from "@material-ui/core";
-import axios, { AxiosError, AxiosResponse } from "axios";
-import { useState } from "react";
-import { useMutation, useQueryClient } from "react-query";
-import { useHistory } from "react-router-dom";
+import { Container } from "@material-ui/core";
 import styled from "styled-components";
-import Error from "../../components/shared/Error";
-import { BounceLoader } from "react-spinners";
 import CareerForm from "../../components/careers/CareerForm";
 
 function CreateCareer(props: DefaultProps) {
