@@ -1,4 +1,5 @@
 import EmptyCurrentPlan from "../components/shared/EmptyCurrentPlan";
+import AvailableCareersList from "../components/shared/AvailableCareersList";
 import Navbar from "../components/shared/Navbar";
 import { DefaultProps } from "../types";
 import Error from "../components/shared/Error";
@@ -31,24 +32,26 @@ const useStyles = makeStyles((theme) => ({
 // i.e. prerequisite based filtering on drop.
 const dnd_lists: String[] = ["Plan So Far", "Available Units"];
 
-
-
 function CoursePlanner() {
     // updated as units are selected so that available units can be filtered out
     const [prerequisites_list, set_prerequisites_list] = useState(" ");
     const classes = useStyles();
     const history = useHistory();
-    const [units, set_units] = useState<UnitProps>();
+
+    const base = [{Credits: "", Antirequisites: "", Prerequisites: "", Delivery: "", UnitCode: "", Description: "", Corequisites: "", Name: ""}];
+    const [units, set_units] = useState(base);
+
     const [isLoading, setLoading ] = useState(true);
     const [isError, setError ] = useState(false);
     const [error, setErrorContent] = useState<string>();
 
-    async function GetAllUnits() {
+    const GetAllUnits = () => {
 	try {
-	    const {data} = await axios.get('${process.env.REACT_APP_UNITS_API}/event-get-all-units)');
-	    console.log(data);
-	    // formatting of data possibly required here
-
+	    axios.get("https://ilur318q9c.execute-api.ap-southeast-2.amazonaws.com/Prod/getallunits")
+		.then((response) => {
+		    console.log(response.data);
+		     set_units(response.data);
+		 });
 	} catch (err) {
 	    if (err && err.response && axios.isAxiosError(err)) {
 		const axios_resp = err.response as AxiosResponse;
@@ -61,7 +64,11 @@ function CoursePlanner() {
 		setLoading(false);
 	    }
 	}
-    }
+    };
+
+    useEffect(() => {
+	GetAllUnits();
+    }, []);
 
     return (
 	<>
@@ -69,12 +76,12 @@ function CoursePlanner() {
 	    <Typography variant="h4" align="left">
 		{prerequisites_list}
 	    </Typography>
+	    
 	    <DragDropContext
 		onDragUpdate={OnDragUpdate}
 		onDragEnd={OnDragEnd}>
-		<Grid container justify={'space-between'} alignItems={'stretch'} className={classes.nonNavBar}>
+		<Grid container justifyContent={'space-between'} alignItems={'stretch'} className={classes.nonNavBar}>
 		    <Grid item xs={2}>
-			{/* functionality-less dummy component until dnd implemented */}
 			<EmptyCurrentPlan/>
 		    </Grid>
 		    <Grid item xs={8} className={classes.test}>
@@ -84,7 +91,7 @@ function CoursePlanner() {
 			</div>
 		    </Grid>
 		    <Grid item xs={2}>
-			
+			<AvailableCareersList/>
 		    </Grid>
 
 		</Grid>
@@ -95,38 +102,33 @@ function CoursePlanner() {
 }
 
 // actual front end component for draggable representation of units
-function UnitPhysicalComponent() {
+function UnitDraggableComponent() {
 
-    return (
-	<div/>
-    );
 }
 
 // scrollable list to the right of the screen, dynamically shows available courses
 // as pre-reqs and anti-reqs are made, rendering and unrendering as necessary.
 function AvailableUnitsDisplay() {
+    /* return(
+       <Droppable droppableId="droppable">
+       {(provided, snapshot) =>(
+       <div
+       {...provided.droppableProps}
+       ref={provided.innerRef}>
 
-    return (
-	<Droppable droppableId="droppable">
-	    {(provided, snapshot) =>(
-		<div
-		    {...provided.droppableProps}
-		    ref={provided.innerRef}>
+       {provided.placeholder}
 
-		    {provided.placeholder}
-
-		</div>
-	    )}
+       </div>
+       )}
 
 
-	</Droppable>
-    );
+       </Droppable>
+     * ); */
 }
 
 // displays selected courses drag and dropped
 // divided into semesters
 function SelectionArea() {
-
     return (
 	<Droppable droppableId="droppable">
 	    {(provided, snapshot) =>(
@@ -143,6 +145,8 @@ function SelectionArea() {
 	</Droppable> 
     )
 }
+
+// every function below here is a placeholder until the prerequisite filtering is figured out
 
 function RemoveFromList(list: any, index: number) {
     const result = Array.from(list);

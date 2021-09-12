@@ -17,7 +17,7 @@ function Landing() {
 	    <br/>
 	    <br/>
 	    <br/>
-	    <Grid container spacing={8} justify="center">
+	    <Grid container spacing={8} justifyContent="center">
 		<Grid item xs={5}>
 		    <Typography variant="h5">
 			Hi, welcome to Curtin University's Medical Course Planner!
@@ -39,7 +39,7 @@ function Landing() {
 	    </Typography>
 	    
 	    {/* routed cards */}
-	    <Grid container spacing={4} justify="center">
+	    <Grid container spacing={4} justifyContent="center">
 		<Grid item xs={4}>
 		    <div className="card-body">
 			<Card variant="outlined" onClick = {() => history.push('./PlannerInitialPage') }> 
