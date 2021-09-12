@@ -4,10 +4,9 @@ import NavListSection from "./NavListSection"
 import { MajorProps, DefaultProps } from "../../types";
 import styled from "styled-components";
 import { useHistory, useParams } from "react-router-dom";
-import axios, { AxiosResponse } from "axios";
-import Error from "./Error";
-import { useEffect, useState } from "react";
 import LoadingScreen from "./Loading";
+import { useMajor } from "./hooks";
+import NotFound from "../../pages/NotFound";
 
 /*
  * Author: Matthew Loe
@@ -20,84 +19,7 @@ function ViewMajor(props: DefaultProps)
 {
     const history = useHistory();
     const { id } = useParams<{ id: string }>();     //Retreive id from url param
-
-    let base : MajorProps = {
-        majorCode : id
-    };
-
-    const [isLoading, setLoading ] = useState(true);
-    const [isError, setError ] = useState(false);
-    const [error, setErrorContent] = useState<string>();
-    const [major, setMajor] = useState<MajorProps>(base);
-    
-    
-
-    //Get data and then refresh
-    useEffect(() => {
-        //Asynchronously fetch data
-        async function fetchData(id: string)
-        {
-            try
-            {
-                const {data} = await axios.get(
-                    'https://ilur318q9c.execute-api.ap-southeast-2.amazonaws.com/Prod/getmajor',//'${process.env.REACT_APP_UNITS_API}/getmajor',
-                    { params:
-                        {
-                            code : id
-                        }
-                    }
-                );
-
-                //Making uppercase the words in the name
-                let name : string = data[0].Name;
-                let parts : string[] = name.split(" ");
-
-                for (let ii=0; ii < parts.length; ii++)
-                {
-                    parts[ii] = parts[ii][0].toUpperCase() + parts[ii].substr(1);
-                }
-                //END FOR
-
-                name = parts.join(" ");
-
-                let resp : MajorProps = {
-                    majorCode : data[0].MajorCode,
-                    majorName : name,
-                    majorCredits : data[0].Credits,
-                    majorDescription : data[0].Description,
-                    majorUnits : data[0].Units,
-                    majorSpecAntiReqs : data[0].SpecAntiReqs,
-                    majorUnitAntiReqs : data[0].UnitAntiReqs
-                };
-                
-                setMajor(resp);
-            }
-            catch(err)
-            {
-                if (err && axios.isAxiosError(err))
-                {
-                    //Handle axios err
-                    const axiosResp = err.response as AxiosResponse;
-                    setErrorContent(axiosResp.data);
-                    setError(true);
-                }
-                else
-                {
-                    //Handle non axios error
-                    setErrorContent("Unknown error occured during data retrieval.");
-                    setError(true);
-                }
-                //END IF
-            }
-            finally
-            {
-                setLoading(false);
-            }
-            //END TRY-CATCH-FINALLY
-        }
-        
-        fetchData(id);
-    }, []);
+    const major = useMajor(id);                     //Get data
 
     //Returns user to their previous page
     function BackFunction()
@@ -106,17 +28,41 @@ function ViewMajor(props: DefaultProps)
     }
 
     //Check if still loading/getting data
-    if (isLoading)
+    if (major.isLoading)
     {
         return (<LoadingScreen/>);
     }
     //END IF
 
-    if (isError)
+    if (major.isError)
     {
-        return <Error promptTitle="Request Error" promptContent={error as string} showPrompt={true} onAccept={() => BackFunction() } />
+        return <NotFound />
     }
     //END IF
+
+    let responseData = major.data?.data!;
+
+    //Making uppercase the words in the name
+    let name : string = responseData[0].Name;
+    let parts : string[] = name.split(" ");
+
+    for (let ii=0; ii < parts.length; ii++)
+    {
+        parts[ii] = parts[ii][0].toUpperCase() + parts[ii].substr(1);
+    }
+    //END FOR
+
+    name = parts.join(" ");
+
+    let data : MajorProps = {
+        majorCode : responseData[0].MajorCode,
+        majorName : name,
+        majorCredits : responseData[0].Credits,
+        majorDescription : responseData[0].Description,
+        majorUnits : responseData[0].Units,
+        majorSpecAntiReqs : responseData[0].SpecAntiReqs,
+        majorUnitAntiReqs : responseData[0].UnitAntiReqs
+    };
 
     return (
         <div className={props.className}>
@@ -129,7 +75,7 @@ function ViewMajor(props: DefaultProps)
                 </Grid>
                 <Grid item>
                 <Typography id="careerTitle" variant="h3">
-                    {major.majorName} - {major.majorCode}
+                    {data.majorName} - {data.majorCode}
                 </Typography>
                 </Grid>
                 <Grid item >
@@ -137,11 +83,11 @@ function ViewMajor(props: DefaultProps)
                 </Grid>
             </Grid>
             <Box alignContent="flex-start" >
-                <TextSection sectionHeading="Credits" sectionContent={major.majorCredits}/>
-                <TextSection sectionHeading="Description" sectionContent= {major.majorDescription}/>
-                <NavListSection sectionHeading="Units in Major" list= {major.majorUnits}/>
-                <NavListSection sectionHeading="Antirequisite Specializations" list= {major.majorSpecAntiReqs}/>
-                <NavListSection sectionHeading="Antirequisite Units" list= {major.majorUnitAntiReqs}/>
+                <TextSection sectionHeading="Credits" sectionContent={data.majorCredits}/>
+                <TextSection sectionHeading="Description" sectionContent= {data.majorDescription}/>
+                <NavListSection sectionHeading="Units in Major" list= {data.majorUnits}/>
+                <NavListSection sectionHeading="Antirequisite Specializations" list= {data.majorSpecAntiReqs}/>
+                <NavListSection sectionHeading="Antirequisite Units" list= {data.majorUnitAntiReqs}/>
             </Box>
             </Paper>
         </div>

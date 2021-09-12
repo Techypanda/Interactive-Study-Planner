@@ -4,10 +4,9 @@ import NavListSection from "./NavListSection"
 import { SpecProps, DefaultProps } from "../../types";
 import styled from "styled-components";
 import { useHistory, useParams } from "react-router-dom";
-import axios, { AxiosResponse } from "axios";
-import Error from "./Error";
-import { useEffect, useState } from "react";
 import LoadingScreen from "./Loading";
+import { useSpecialization } from "./hooks";
+import NotFound from "../../pages/NotFound";
 
 /*
  * Author: Matthew Loe
@@ -20,82 +19,7 @@ function ViewSpecialization(props: DefaultProps)
 {
     const history = useHistory();
     const { id } = useParams<{ id: string }>();     //Retreive id from url param
-
-    let base : SpecProps = {
-        specCode : id
-    };
-
-    const [isLoading, setLoading ] = useState(true);
-    const [isError, setError ] = useState(false);
-    const [error, setErrorContent] = useState<string>();
-    const [spec, setSpec] = useState<SpecProps>(base);
-    //Get data and then refresh
-    useEffect(() => {
-        //Asynchronously fetch data
-        async function fetchData(id: string)
-        {
-            try
-            {
-                const {data} = await axios.get('https://ilur318q9c.execute-api.ap-southeast-2.amazonaws.com/Prod/getspec',//'${process.env.REACT_APP_UNITS_API}/getspec',
-                    { params:
-                        {
-                            code : id
-                        }
-                    }
-                );
-
-                //Making uppercase the words in the name
-                let name : string = data[0].Name;
-                let parts : string[] = name.split(" ");
-
-                for (let ii=0; ii < parts.length; ii++)
-                {
-                    parts[ii] = parts[ii][0].toUpperCase() + parts[ii].substr(1);
-                }
-                //END FOR
-
-                name = parts.join(" ");
-
-                let resp : SpecProps = {
-                    specCode : data[0].SpecializationCode,
-                    specName : name,
-                    specCredits : data[0].Credits,
-                    specDescription : data[0].Description,
-                    specInternal : data[0].Internal,
-                    specMajorAntiReqs : data[0].MajorAntiReqs,
-                    specSpecAntiReqs : data[0].SpecAntiReqs,
-                    specUnitAntiReqs : data[0].UnitAntiReqs,
-                    specUnits : data[0].Units
-                };
-                
-                setSpec(resp);
-            }
-            catch(err)
-            {
-                if (err && axios.isAxiosError(err))
-                {
-                    //Handle axios err
-                    const axiosResp = err.response as AxiosResponse;
-                    setErrorContent(axiosResp.data);
-                    setError(true);
-                }
-                else
-                {
-                    //Handle non axios error
-                    setErrorContent("Unknown error occured during data retrieval.");
-                    setError(true);
-                }
-                //END IF
-            }
-            finally
-            {
-                setLoading(false);
-            }
-            //END TRY-CATCH
-        }
-
-        fetchData(id);
-    }, []);
+    const specialization = useSpecialization(id);   //Get data
 
     //Returns user to their previous page
     function BackFunction()
@@ -104,30 +28,56 @@ function ViewSpecialization(props: DefaultProps)
     }
 
     //Check if still loading/getting data
-    if (isLoading)
+    if (specialization.isLoading)
     {
         return (<LoadingScreen/>);
     }
     //END IF
 
     //Check if error occured
-    if (isError)
+    if (specialization.isError)
     {
-        return <Error promptTitle="Request Error" promptContent={error as string} showPrompt={true} onAccept={() => BackFunction() } />
+        return <NotFound />
     }
     //END IF
+
+    let responseData = specialization.data?.data!;
+
+    //Making uppercase the words in the name
+    let name : string = responseData[0].Name;
+    let parts : string[] = name.split(" ");
+
+    for (let ii=0; ii < parts.length; ii++)
+    {
+        parts[ii] = parts[ii][0].toUpperCase() + parts[ii].substr(1);
+    }
+    //END FOR
+
+    name = parts.join(" ");
+
+    let data : SpecProps = {
+        specCode : responseData[0].SpecializationCode,
+        specName : name,
+        specCredits : responseData[0].Credits,
+        specDescription : responseData[0].Description,
+        specInternal : responseData[0].Internal,
+        specMajorAntiReqs : responseData[0].MajorAntiReqs,
+        specSpecAntiReqs : responseData[0].SpecAntiReqs,
+        specUnitAntiReqs : responseData[0].UnitAntiReqs,
+        specUnits : responseData[0].Units
+    };
 
     //Assume no internal value
     let internal = (<div/>);
 
     //Check if no data to display
-    if (spec.specInternal !== undefined)
+    if (data.specInternal !== undefined)
     {
         //Assume specialization not internal to school/course
         let content : string = "This is a specialization external to the the school/course.";
         let heading : string = "Specialization Type - External";
 
-        if (spec.specInternal)
+        if (data.specInternal)
         {
             content = "This is a specialization internal to the the school/course.";
             heading = "Specialization Type - Internal";
@@ -149,7 +99,7 @@ function ViewSpecialization(props: DefaultProps)
                 </Grid>
                 <Grid item>
                 <Typography id="careerTitle" variant="h3">
-                    {spec.specName} - {spec.specCode}
+                    {data.specName} - {data.specCode}
                 </Typography>
                 </Grid>
                 <Grid item >
@@ -157,13 +107,13 @@ function ViewSpecialization(props: DefaultProps)
                 </Grid>
             </Grid>
             <Box alignContent="flex-start" >
-                <TextSection sectionHeading="Credits" sectionContent={spec.specCredits}/>
-                <TextSection sectionHeading="Description" sectionContent={spec.specDescription}/>
+                <TextSection sectionHeading="Credits" sectionContent={data.specCredits}/>
+                <TextSection sectionHeading="Description" sectionContent={data.specDescription}/>
                 {internal}
-                <NavListSection sectionHeading="Units in Specialization" list={spec.specUnits}/>
-                <NavListSection sectionHeading="Antirequisite Majors" list={spec.specMajorAntiReqs}/>
-                <NavListSection sectionHeading="Antirequisite Specializations" list={spec.specSpecAntiReqs}/>
-                <NavListSection sectionHeading="Antirequisite Units" list={spec.specUnitAntiReqs}/>
+                <NavListSection sectionHeading="Units in Specialization" list={data.specUnits}/>
+                <NavListSection sectionHeading="Antirequisite Majors" list={data.specMajorAntiReqs}/>
+                <NavListSection sectionHeading="Antirequisite Specializations" list={data.specSpecAntiReqs}/>
+                <NavListSection sectionHeading="Antirequisite Units" list={data.specUnitAntiReqs}/>
             </Box>
             </Paper>
         </div>
