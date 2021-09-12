@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 echo "Building"
-sam build
+sam build --parallel
 echo "Testing API"
 ./CareerApiTests.sh
 echo "Beginning Deploy Stage"
