@@ -2,8 +2,8 @@ Running build
 
 Build Succeeded
 
-Built Artifacts  : .aws-sam/build
-Built Template   : .aws-sam/build/template.yaml
+Built Artifacts  : .aws-sam\build
+Built Template   : .aws-sam\build\template.yaml
 
 Commands you can use next
 =========================
