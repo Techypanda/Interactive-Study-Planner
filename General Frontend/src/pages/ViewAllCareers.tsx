@@ -72,7 +72,7 @@ function ViewAllCareers(props: DefaultProps) {
 		    <TextField variant="outlined" id="standard-full-width" fullWidth  placeholder="Search careers..." className="searchbar" />
 		    <Button variant='contained' className="searchbtn">Search</Button>
 		</Box>
-		
+		<br/>
 		{careersList.map((x) => (
 		    <div className="career-option">
 			<Card variant="outlined" className={classes.root}>
