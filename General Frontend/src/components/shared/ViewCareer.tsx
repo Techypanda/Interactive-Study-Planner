@@ -13,7 +13,7 @@ import LoadingScreen from "./Loading";
 /*
  * Author: Matthew Loe
  * Student Id: 19452425
- * Date Last Modified: 11/09/2021
+ * Date Last Modified: 12/09/2021
  * Description: Page for viewing the detailed information on a career
  */
 
@@ -31,73 +31,6 @@ function ViewCareer(props: DefaultProps)
     const [error, setErrorContent] = useState<string>();
     const [career, setCareer] = useState<CareerProps>(base);
 
-    //Asynchronously fetch data
-    async function fetchData(id: string)
-    {
-        try
-        {
-            const {data} = await axios.post(
-            'https://q02l9qoni6.execute-api.ap-southeast-2.amazonaws.com/Prod/events/event-get-career',//'${process.env.REACT_APP_CAREERS_API}/event-get-career',
-            {
-                'CareerId': id
-            }
-            );
-
-            let info = data["Item"];
-
-            //Making uppercase the words in the name
-            let name : string = info["Name"];
-            let parts : string[] = name.split(" ");
-
-            for (let ii=0; ii < parts.length; ii++)
-            {
-            parts[ii] = parts[ii][0].toUpperCase() + parts[ii].substr(1);
-            }
-            //END FOR
-
-            name = parts.join(" ");
-
-            let traits : string[] = info["Traits"];
-
-            for (let ii=0; ii < traits.length; ii++)
-            {
-            traits[ii] = traits[ii][0].toUpperCase() + traits[ii].substr(1);
-            }
-            //END FOR
-
-            let resp : CareerProps = {
-            careerName : name,
-            careerDescription : info["Description"],
-            careerIndustry : info["Industry"],
-            careerReqs : info["Requirements"],
-            careerTraits : traits
-            };
-            
-            setCareer(resp);
-            setLoading(false);
-        }
-        catch(err)
-        {
-            if (err && axios.isAxiosError(err))
-            {
-            //Handle axios err
-            const axiosResp = err.response as AxiosResponse;
-            setErrorContent(axiosResp.data);
-            setError(true);
-            setLoading(false);
-            }
-            else
-            {
-            //Handle non axios error
-            setErrorContent("Unknown error occured during data retrieval.");
-            setError(true);
-            setLoading(false);
-            }
-            //END IF
-        }
-        //END TRY-CATCH
-    }
-
     //Returns user to their previous page
     function BackFunction()
     {
@@ -106,6 +39,74 @@ function ViewCareer(props: DefaultProps)
 
     //Get data and then refresh
     useEffect(() => {
+        //Asynchronously fetch data
+        async function fetchData(id: string)
+        {
+            try
+            {
+                const {data} = await axios.post(
+                    'https://q02l9qoni6.execute-api.ap-southeast-2.amazonaws.com/Prod/events/event-get-career',//'${process.env.REACT_APP_CAREERS_API}/event-get-career',
+                    {
+                        'CareerId': id
+                    }
+                );
+
+                let info = data["Item"];
+
+                //Making uppercase the words in the name
+                let name : string = info["Name"];
+                let parts : string[] = name.split(" ");
+
+                for (let ii=0; ii < parts.length; ii++)
+                {
+                parts[ii] = parts[ii][0].toUpperCase() + parts[ii].substr(1);
+                }
+                //END FOR
+
+                name = parts.join(" ");
+
+                let traits : string[] = info["Traits"];
+
+                for (let ii=0; ii < traits.length; ii++)
+                {
+                traits[ii] = traits[ii][0].toUpperCase() + traits[ii].substr(1);
+                }
+                //END FOR
+
+                let resp : CareerProps = {
+                careerName : name,
+                careerDescription : info["Description"],
+                careerIndustry : info["Industry"],
+                careerReqs : info["Requirements"],
+                careerTraits : traits
+                };
+                
+                setCareer(resp);
+            }
+            catch(err)
+            {
+                if (err && axios.isAxiosError(err))
+                {
+                    //Handle axios err
+                    const axiosResp = err.response as AxiosResponse;
+                    setErrorContent(axiosResp.data);
+                    setError(true);
+                }
+                else
+                {
+                    //Handle non axios error
+                    setErrorContent("Unknown error occured during data retrieval.");
+                    setError(true);
+                }
+                //END IF
+            }
+            finally
+            {
+                setLoading(false);
+            }
+            //END TRY-CATCH-FINALLY
+        }
+
         fetchData(id);
     }, []);
 

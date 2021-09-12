@@ -12,7 +12,7 @@ import LoadingScreen from "./Loading";
 /*
  * Author: Matthew Loe
  * Student Id: 19452425
- * Date Last Modified: 11/09/2021
+ * Date Last Modified: 12/09/2021
  * Description: Page for viewing the detailed information on a specialization
  */
 
@@ -29,71 +29,71 @@ function ViewSpecialization(props: DefaultProps)
     const [isError, setError ] = useState(false);
     const [error, setErrorContent] = useState<string>();
     const [spec, setSpec] = useState<SpecProps>(base);
-    
-    //Asynchronously fetch data
-    async function fetchData(id: string)
-    {
-        try
-        {
-            const {data} = await axios.get('https://ilur318q9c.execute-api.ap-southeast-2.amazonaws.com/Prod/getspec',//'${process.env.REACT_APP_UNITS_API}/getspec',
-                { params:
-                    {
-                        code : id
-                    }
-                }
-            );
-
-            //Making uppercase the words in the name
-            let name : string = data[0].Name;
-            let parts : string[] = name.split(" ");
-
-            for (let ii=0; ii < parts.length; ii++)
-            {
-                parts[ii] = parts[ii][0].toUpperCase() + parts[ii].substr(1);
-            }
-            //END FOR
-
-            name = parts.join(" ");
-
-            let resp : SpecProps = {
-                specCode : data[0].SpecializationCode,
-                specName : name,
-                specCredits : data[0].Credits,
-                specDescription : data[0].Description,
-                specInternal : data[0].Internal,
-                specMajorAntiReqs : data[0].MajorAntiReqs,
-                specSpecAntiReqs : data[0].SpecAntiReqs,
-                specUnitAntiReqs : data[0].UnitAntiReqs,
-                specUnits : data[0].Units
-            };
-            
-            setSpec(resp);
-            setLoading(false);
-        }
-        catch(err)
-        {
-            if (err && axios.isAxiosError(err))
-            {
-                //Handle axios err
-                const axiosResp = err.response as AxiosResponse;
-                setErrorContent(axiosResp.data);
-                setError(true);
-                setLoading(false);
-            }
-            else
-            {
-                //Handle non axios error
-                setErrorContent("Unknown error occured during data retrieval.");
-                setError(true);
-                setLoading(false);
-            }
-            //END IF
-        }
-        //END TRY-CATCH
-    }
-
     //Get data and then refresh
     useEffect(() => {
+        //Asynchronously fetch data
+        async function fetchData(id: string)
+        {
+            try
+            {
+                const {data} = await axios.get('https://ilur318q9c.execute-api.ap-southeast-2.amazonaws.com/Prod/getspec',//'${process.env.REACT_APP_UNITS_API}/getspec',
+                    { params:
+                        {
+                            code : id
+                        }
+                    }
+                );
+
+                //Making uppercase the words in the name
+                let name : string = data[0].Name;
+                let parts : string[] = name.split(" ");
+
+                for (let ii=0; ii < parts.length; ii++)
+                {
+                    parts[ii] = parts[ii][0].toUpperCase() + parts[ii].substr(1);
+                }
+                //END FOR
+
+                name = parts.join(" ");
+
+                let resp : SpecProps = {
+                    specCode : data[0].SpecializationCode,
+                    specName : name,
+                    specCredits : data[0].Credits,
+                    specDescription : data[0].Description,
+                    specInternal : data[0].Internal,
+                    specMajorAntiReqs : data[0].MajorAntiReqs,
+                    specSpecAntiReqs : data[0].SpecAntiReqs,
+                    specUnitAntiReqs : data[0].UnitAntiReqs,
+                    specUnits : data[0].Units
+                };
+                
+                setSpec(resp);
+            }
+            catch(err)
+            {
+                if (err && axios.isAxiosError(err))
+                {
+                    //Handle axios err
+                    const axiosResp = err.response as AxiosResponse;
+                    setErrorContent(axiosResp.data);
+                    setError(true);
+                }
+                else
+                {
+                    //Handle non axios error
+                    setErrorContent("Unknown error occured during data retrieval.");
+                    setError(true);
+                }
+                //END IF
+            }
+            finally
+            {
+                setLoading(false);
+            }
+            //END TRY-CATCH
+        }
+
         fetchData(id);
     }, []);
 

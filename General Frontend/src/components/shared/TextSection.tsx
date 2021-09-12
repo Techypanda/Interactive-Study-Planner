@@ -5,13 +5,13 @@ import { TextSectionProps } from "../../types";
 /*
  * Author: Matthew Loe
  * Student Id: 19452425
- * Date Last Modified: 11/09/2021
+ * Date Last Modified: 12/09/2021
  * Description: Returns formatted text section
  */
 function TextSection(props: TextSectionProps)
 {
     //Check if no data to display
-    if (props.sectionContent === undefined || props.sectionContent === "")
+    if (!(props.sectionContent) || props.sectionContent === "")
     {
         return (<div/>);
     }
