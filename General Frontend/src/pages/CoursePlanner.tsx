@@ -1,9 +1,9 @@
 import EmptyCurrentPlan from "../components/shared/EmptyCurrentPlan";
-import AvailableCareersList from "../components/shared/AvailableCareersList";
+import LoadingScreen from "../components/shared/Loading";
 import Navbar from "../components/shared/Navbar";
 import { DefaultProps } from "../types";
 import Error from "../components/shared/Error";
-import { Typography, List, Grid } from "@material-ui/core";
+import { Typography, List, ListItem, ListItemText, Grid } from "@material-ui/core";
 import { useQuery, useMutation } from "react-query";
 import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd';
 import { UnitProps } from '../types';
@@ -32,36 +32,36 @@ const useStyles = makeStyles((theme) => ({
 // i.e. prerequisite based filtering on drop.
 const dnd_lists: String[] = ["Plan So Far", "Available Units"];
 
+
 function CoursePlanner() {
-    // updated as units are selected so that available units can be filtered out
-    const [prerequisites_list, set_prerequisites_list] = useState(" ");
+
     const classes = useStyles();
     const history = useHistory();
 
-    const base = [{Credits: "", Antirequisites: "", Prerequisites: "", Delivery: "", UnitCode: "", Description: "", Corequisites: "", Name: ""}];
-    const [units, set_units] = useState(base);
+    const [units_list, set_units_list] = useState(null);
 
-    const [isLoading, setLoading ] = useState(true);
     const [isError, setError ] = useState(false);
     const [error, setErrorContent] = useState<string>();
+
+    
+    // updated as units are selected so that available units can be filtered out
+    const [prerequisites_list, set_prerequisites_list] = useState(" ");
 
     const GetAllUnits = () => {
 	try {
 	    axios.get("https://ilur318q9c.execute-api.ap-southeast-2.amazonaws.com/Prod/getallunits")
 		.then((response) => {
 		    console.log(response.data);
-		     set_units(response.data);
+		    set_units_list(response.data);
 		 });
 	} catch (err) {
 	    if (err && err.response && axios.isAxiosError(err)) {
 		const axios_resp = err.response as AxiosResponse;
 		setErrorContent(axios_resp.data);
 		setError(true);
-		setLoading(false);
 	    } else {
 		setErrorContent("Unknown error occurred attempting to retrieve units.");
 		setError(true);
-		setLoading(false);
 	    }
 	}
     };
@@ -70,6 +70,10 @@ function CoursePlanner() {
 	GetAllUnits();
     }, []);
 
+    if (isError) {
+	return <Error promptTitle="Request Error" promptContent={error as string} showPrompt={true} onAccept={() => history.goBack()} />
+    }
+    
     return (
 	<>
 	    <Navbar/>
@@ -82,7 +86,7 @@ function CoursePlanner() {
 		onDragEnd={OnDragEnd}>
 		<Grid container justifyContent={'space-between'} alignItems={'stretch'} className={classes.nonNavBar}>
 		    <Grid item xs={2}>
-			<EmptyCurrentPlan/>
+			<EmptyCurrentPlan/> {/* placeholder */}
 		    </Grid>
 		    <Grid item xs={8} className={classes.test}>
 			<div>
@@ -91,7 +95,7 @@ function CoursePlanner() {
 			</div>
 		    </Grid>
 		    <Grid item xs={2}>
-			<AvailableCareersList/>
+			<AvailableUnitsDisplay units_list={units_list}/>
 		    </Grid>
 
 		</Grid>
@@ -102,28 +106,17 @@ function CoursePlanner() {
 }
 
 // actual front end component for draggable representation of units
-function UnitDraggableComponent() {
+function UnitDraggableItem() {
 
 }
 
 // scrollable list to the right of the screen, dynamically shows available courses
 // as pre-reqs and anti-reqs are made, rendering and unrendering as necessary.
-function AvailableUnitsDisplay() {
-    /* return(
-       <Droppable droppableId="droppable">
-       {(provided, snapshot) =>(
-       <div
-       {...provided.droppableProps}
-       ref={provided.innerRef}>
-
-       {provided.placeholder}
-
-       </div>
-       )}
-
-
-       </Droppable>
-     * ); */
+function AvailableUnitsDisplay({units_list} : {units_list: any}) {
+    const classes = useStyles();
+    return (
+	<Typography>hey</Typography>
+    );
 }
 
 // displays selected courses drag and dropped
@@ -176,6 +169,18 @@ function OnDragEnd(result: DropResult) {
     // how to access this, I do not know
     
     return;
+}
+
+function CheckAntiRequisites(antirequisites: string[]) {
+    // if any of the param's elements are present in the current prerequisite pool or selection pool, return false
+}
+
+function CheckPrerequisites(prerequisites: string[]) {
+    // entire prereq array must be present within prerequisite state hook storage
+}
+
+function CheckCorequisites(corequisites: string[]) {
+    
 }
 
 export default CoursePlanner;
