@@ -1,5 +1,4 @@
-import { Box, Typography, TextField, Button, Grid, MenuItem, Select, Fab, Chip, Paper } from "@material-ui/core";
-import { Add, PlusOne } from "@material-ui/icons";
+import { Box, Typography, TextField, Button, Grid } from "@material-ui/core";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
@@ -11,47 +10,64 @@ import DeliveryAddition from "./DeliveryAddition";
 import DeliveryList from "./DeliveryList";
 import RequistePath from "./RequistePath";
 
+function comprehendCursedArrays(field: "Antirequistes" | "Corequistes" | "Prerequistes", unit?: Unit): Array<Array<string>> {
+  let arr: Array<Array<string>> = []
+  if (unit) {
+    arr = unit[field]
+  }
+  return arr
+}
+
 function UnitForm(props: UnitFormProps) {
   const history = useHistory();
   const [name, setName] = useState<string | undefined>(props.unit?.Name);
   const [unitCode, setUnitCode] = useState<string | undefined>(props.unit?.UnitCode);
   const [description, setDescription] = useState<string | undefined>(props.unit?.Description);
   const [credits, setCredits] = useState(props.unit ? props.unit.Credits : 0);
-  const [corequistes, setCorequistes] = useState("");
-  const [prerequistes, setPrerequistes] = useState("");
-  const [antiRequistes, setAntirequistes] = useState("");
   const [error, setError] = useState<PromptData>({ promptTitle: "", promptContent: "", showPrompt: false });
   const [loading, setLoading] = useState(false);
   const client = useQueryClient();
-
-  const [prereq, setPrereq] = useState<Array<Array<string>>>([])
-  const [coreq, setCoreq] = useState<Array<Array<string>>>([])
-  const [antireq, setAntireq] = useState<Array<Array<string>>>([])
+  const queryClient = useQueryClient();
+  const [prereq, setPrereq] = useState<Array<Array<string>>>(comprehendCursedArrays("Prerequistes", props.unit))
+  const [coreq, setCoreq] = useState<Array<Array<string>>>(comprehendCursedArrays("Corequistes", props.unit))
+  const [antireq, setAntireq] = useState<Array<Array<string>>>(comprehendCursedArrays("Antirequistes", props.unit))
 
   const [deliverys, setDeliverys] = useState<Array<string>>(props.unit?.Delivery ? props.unit?.Delivery.split(",") : []);
 
   const mutation = useMutation(() => {
-    const parsedCoreq = corequistes.split(',');
-    const parsedPrereq = prerequistes.split(',');
-    const pasredAntireq = antiRequistes.split(',');
+    let deliveryString = ""
+    deliverys.forEach((d) => {
+      deliveryString = `${deliveryString}${d}, `
+    })
+    deliveryString = deliveryString.substring(0, deliveryString.length - 2)
+
     const payload: CreateUnitForm = {
       unitName: name!,
       unitCode: unitCode!,
       unitDescription: description!,
       unitCredits: Number.isNaN(credits) ? 0 : credits as number,
-      delivery: "",
-      // delivery: delivery!,
-      corequistes: parsedCoreq,
-      prerequistes: parsedPrereq,
-      antirequistes: pasredAntireq
+      delivery: deliveryString,
+      corequistes: coreq,
+      prerequistes: prereq,
+      antirequistes: antireq
     };
     setLoading(true);
-    return axios.post(`${process.env.REACT_APP_API_URI}/addunit`, JSON.stringify(payload), {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `${client.getQueryData("token")}`
-      }
-    })
+    
+    if (props.unit) {
+      return axios.post(`${process.env.REACT_APP_UNIT_ADMIN_API}/updateunit`, JSON.stringify(payload), {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `${client.getQueryData("token")}`
+        }
+      })
+    } else {
+      return axios.post(`${process.env.REACT_APP_UNIT_ADMIN_API}/addunit`, JSON.stringify(payload), {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `${client.getQueryData("token")}`
+        }
+      })
+    }
   }, {
     onMutate: () => {
     },
@@ -66,7 +82,7 @@ function UnitForm(props: UnitFormProps) {
     },
     onSuccess: (data: AxiosResponse) => {
       setLoading(false)
-      // Need to refetch the units list
+      queryClient.invalidateQueries('units')
       history.push('/units')
     }
   })
@@ -119,12 +135,12 @@ function UnitForm(props: UnitFormProps) {
     setCoreq(copy);
   }
   function deleteAntiPath(idx: number) {
-    const copy = [...prereq]
+    const copy = [...antireq]
     copy.splice(idx, 1)
     setAntireq(copy)
   }
   function updateAntiPath(arr: Array<string>, idx: number) {
-    const copy = [...prereq]
+    const copy = [...antireq]
     copy[idx] = arr;
     setAntireq(copy);
   }
