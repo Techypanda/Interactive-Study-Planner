@@ -35,7 +35,7 @@ function PlannerInitialPage(props: DefaultProps) {
 				<br>
 				</br>
 				<div className="card-body">
-					<Card variant="outlined"> 
+					<Card variant="outlined" onClick={() => history.push('/ViewAllCareers')}> 
 					<CardHeader title="Careers"/>
 					<img src={CareersImage}/>
 
