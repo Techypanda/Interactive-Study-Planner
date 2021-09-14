@@ -77,7 +77,7 @@ function ViewAllCareers(props: DefaultProps) {
 		    <div className="career-option">
 			<Card variant="outlined" className={classes.root}>
 			    <div className={classes.details}>
-				<CardContent onClick={() => history.push(`/careers/view/${x.CareerId}`, { state: x.CareerId})} className={classes.content}>
+				<CardContent onClick={() => history.push(`/InfoPage/ViewCareer/${x.CareerId}`)} className={classes.content}>
 				    <Typography component="h5" variant="h5" align="left">
 						{x.Industry}
 				    </Typography>
