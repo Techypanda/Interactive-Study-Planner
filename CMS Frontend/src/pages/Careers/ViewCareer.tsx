@@ -17,13 +17,12 @@ function ViewCareer(props: DefaultProps) {
   const history = useHistory();
   const client = useQueryClient();
   const [loading, setLoading] = useState(false);
-
   function delCareer() {
     setDisplayDel(false);
     setLoading(true);
-    axios.post(`${process.env.REACT_APP_CAREER_ADMIN_API}/deletecareer`, {
-      CareerId: ((career.data?.data!).CareerId)
-    }, { headers: { 'Authorization': client.getQueryData("token") } }).then(() => {
+    axios.post(`${process.env.REACT_APP_CAREER_ADMIN_API}/deletecareer`, JSON.stringify({
+      CareerId: ((career.data?.data as any)?.Item?.CareerId)
+    }), { headers: { 'Authorization': client.getQueryData("token") } }).then(() => {
       setLoading(false);
       client.removeQueries("careers")
       history.push("/careers")

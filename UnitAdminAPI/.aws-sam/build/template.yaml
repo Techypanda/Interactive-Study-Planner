@@ -6,6 +6,24 @@ Description: 'Unit Admin API - Secured from DevUserPool
 Globals:
   Function:
     Timeout: 5
+  Api:
+    Cors:
+      AllowMethods: '''POST, OPTIONS'''
+      AllowHeaders: '''Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'''
+      AllowOrigin: '''*'''
+    GatewayResponses:
+      DEFAULT_4XX:
+        ResponseParameters:
+          Headers:
+            Access-Control-Allow-Origin: '''*'''
+            Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'''
+            Access-Control-Allow-Methods: '''POST, OPTIONS'''
+      DEFAULT_5XX:
+        ResponseParameters:
+          Headers:
+            Access-Control-Allow-Origin: '''*'''
+            Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'''
+            Access-Control-Allow-Methods: '''POST, OPTIONS'''
 Parameters:
   Authentication:
     Type: String
@@ -16,23 +34,6 @@ Resources:
     Type: AWS::Serverless::Api
     Properties:
       StageName: Dev
-      Cors:
-        AllowMethods: '''POST, OPTIONS'''
-        AllowHeaders: '''Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'''
-        AllowOrigin: '''*'''
-      GatewayResponses:
-        DEFAULT_4XX:
-          ResponseParameters:
-            Headers:
-              Access-Control-Allow-Origin: '''*'''
-              Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'''
-              Access-Control-Allow-Methods: '''OPTIONS,POST'''
-        DEFAULT_5XX:
-          ResponseParameters:
-            Headers:
-              Access-Control-Allow-Origin: '''*'''
-              Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'''
-              Access-Control-Allow-Methods: '''OPTIONS,POST'''
   UnitAdminAPI:
     Type: AWS::Serverless::Function
     Properties:

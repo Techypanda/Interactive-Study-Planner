@@ -64,7 +64,7 @@ export function useCareers() {
 
 export function useCareer(careerCode: string) {
   return useQuery(`career - ${careerCode}`, async (): Promise<AxiosResponse<Career>> => {
-    return await axios.post(`${process.env.REACT_APP_CAREER_API}/events/event-get-career`, JSON.stringify({ // unfortunately not cached because post request :(
+    return await axios.post(`${process.env.REACT_APP_CAREER_API}/events/event-get-career`, JSON.stringify({
       CareerId: careerCode
     }))
   }, {
