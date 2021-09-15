@@ -121,6 +121,7 @@ pipelines:
                 - chmod +x ./SetupAWSPipeline.sh
                 - ./SetupAWSPipeline.sh
                 - cd CSVParser
+                - chmod +x ./RunSamTests.sh
                 - chmod +x ./BuildTestDeploy.sh
                 - ./BuildTestDeploy.sh
               services:

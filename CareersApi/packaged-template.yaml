@@ -5,6 +5,24 @@ Transform:
 Globals:
   Function:
     Timeout: 3
+  Api:
+    Cors:
+      AllowMethods: '''GET, POST, OPTIONS'''
+      AllowHeaders: '''Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'''
+      AllowOrigin: '''*'''
+    GatewayResponses:
+      DEFAULT_4XX:
+        ResponseParameters:
+          Headers:
+            Access-Control-Allow-Origin: '''*'''
+            Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'''
+            Access-Control-Allow-Methods: '''GET, POST, OPTIONS'''
+      DEFAULT_5XX:
+        ResponseParameters:
+          Headers:
+            Access-Control-Allow-Origin: '''*'''
+            Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'''
+            Access-Control-Allow-Methods: '''GET, POST, OPTIONS'''
 Resources:
   GetAllCareers:
     Type: AWS::Serverless::Function
@@ -27,7 +45,7 @@ Resources:
           Properties:
             Path: /events/event-get-all-careers
             Method: GET
-      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careerapi:getallcareers-68befc55bea3-nodejs14.x-v1
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careerapi:getallcareers-3c136884c76a-nodejs14.x-v1
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./src/handlers/getallcareers
@@ -53,7 +71,7 @@ Resources:
           TableName: DevCareers
       - DynamoDBCrudPolicy:
           TableName: DevTraits
-      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careerapi:getalltraits-942f20cb9b38-nodejs14.x-v1
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careerapi:getalltraits-ac2e3442b39f-nodejs14.x-v1
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./src/handlers/getalltraits
@@ -79,7 +97,7 @@ Resources:
           Properties:
             Path: /events/event-get-career
             Method: POST
-      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careerapi:getcareer-398fb01eab8d-nodejs14.x-v1
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careerapi:getcareer-15e723524aac-nodejs14.x-v1
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./src/handlers/getcareer
@@ -105,7 +123,7 @@ Resources:
           Properties:
             Path: /events/event-search
             Method: POST
-      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careerapi:search-1197bbefbcb1-nodejs14.x-v1
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careerapi:search-a2ab8d7bfda4-nodejs14.x-v1
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./src/handlers/search
@@ -131,7 +149,7 @@ Resources:
           Properties:
             Path: /events/event-get-by-unit-code
             Method: POST
-      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careerapi:restrictwithunitcode-78f41383a6ac-nodejs14.x-v1
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careerapi:restrictwithunitcode-7f5a6f1c905b-nodejs14.x-v1
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./src/handlers/byunitcode
@@ -157,7 +175,7 @@ Resources:
           Properties:
             Path: /events/event-get-by-trait-code
             Method: POST
-      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careerapi:restrictwithtraitcode-b4b6124fc0a8-nodejs14.x-v1
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/careerapi:restrictwithtraitcode-a5d89fb8fa36-nodejs14.x-v1
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./src/handlers/bytraitcode
