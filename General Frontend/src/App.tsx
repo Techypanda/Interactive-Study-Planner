@@ -7,6 +7,8 @@ import ViewAllCareers from './pages/ViewAllCareers';
 import PlannerInitialPage from './pages/PlannerInitialPage';
 import CoursePlanner from './pages/CoursePlanner';
 import InfoPageRouter from './pages/InfoPageRouter';
+import ViewCareer from './components/shared/ViewCareer';
+
 
 // could just render the landing page from the index file but opportunities for other
 // setup could be done here
@@ -16,16 +18,19 @@ function App() {
 	    <BrowserRouter>
 		<Switch>
 		    <Route exact path="/">
-			<Landing/>
+				<Landing/>
 		    </Route>
+			<Route exact path="/careers/view/:CareerId">
+				<ViewCareer/>
+			</Route>
 		    <Route exact path="/ViewAllCareers">
-			<ViewAllCareers/>
+				<ViewAllCareers/>
 		    </Route>
 		    <Route exact path="/PlannerInitialPage">
-			<PlannerInitialPage/>
+				<PlannerInitialPage/>
 		    </Route>
-		    <Route exact path="/CoursePlanner">
-			<CoursePlanner/>
+		    	<Route exact path="/CoursePlanner">
+				<CoursePlanner/>
 		    </Route>
 			<Route path="/InfoPage">
 				<InfoPageRouter/>
