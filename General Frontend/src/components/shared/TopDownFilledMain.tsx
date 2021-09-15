@@ -58,9 +58,14 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function TopDownFilledMain() { 
     const classes = useStyles()
     const [title, setTitle] = React.useState(0);
+    const history = useHistory();
 
     const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
         setTitle(event.target.value as number)
+    }
+
+    function returnToMenu() { 
+        history.push('./');
     }
 
     return ( 
@@ -84,8 +89,9 @@ export default function TopDownFilledMain() {
                     study plan
                 </Typography>
                 <div className={classes.buttons}>
-                    <Button variant='contained' className={classes.test}>Return To Main Menu</Button>
-                    <Button variant='contained' className={classes.test}>Continue To Study Plan</Button>
+                    <Button variant='contained' className={classes.test} onClick={() => returnToMenu()}>Return To Main Menu</Button>
+                    <Button variant='contained' className={classes.test} onClick={() => returnToMenu()}>Continue To Study Plan</Button>
+                    {/*For now, continuing to study plan will just return to front page, can be easily tweaked later */}
                 </div>
             </div>
         </>

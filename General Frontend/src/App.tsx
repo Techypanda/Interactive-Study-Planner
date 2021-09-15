@@ -7,6 +7,8 @@ import ViewAllCareers from './pages/ViewAllCareers';
 import PlannerInitialPage from './pages/PlannerInitialPage';
 import CoursePlanner from './pages/CoursePlanner';
 import InfoPageRouter from './pages/InfoPageRouter';
+import TopdownInitial from './pages/TopdownInitial';
+import TopdownFilled from './pages/TopdownFilled';
 import ViewCareer from './components/shared/ViewCareer';
 
 
@@ -34,6 +36,12 @@ function App() {
 		    </Route>
 			<Route path="/InfoPage">
 				<InfoPageRouter/>
+			</Route>
+			<Route exact path="/TopdownInitial">
+				<TopdownInitial/>
+			</Route>
+			<Route exact path="/TopdownFilled">
+				<TopdownFilled />
 			</Route>
 		    <Route>
 			<h1>Error 404 not found</h1> 

@@ -9,7 +9,7 @@ import { DefaultProps } from "../types";
 
 import ListCareers from "./ViewAllCareers";
 import CoursePlanner from "./CoursePlanner";
-
+import TopdownInitial from "./TopdownInitial";
 import CareersImage from "../static/career.jpg";
 import ClassesImage from "../static/classes.jpg";
 
@@ -24,6 +24,22 @@ function PlannerInitialPage(props: DefaultProps) {
 	    <br/>
 	    <br/>
 		{/* top down component */}
+<<<<<<< HEAD
+		<Grid container spacing={4} justify="center" alignItems="center">
+		    <Grid item xs={6}>
+			<div className="card-body">
+			    <Card variant="outlined" onClick={() => history.push('/TopdownInitial')}> 
+				<CardHeader title="Careers"/>
+				<CardContent> 
+				    <img src={CareersImage}/>
+				    <Typography variant="body1" align="left">
+					See what paths are available towards your dream career
+				    </Typography>
+				</CardContent>
+			    </Card>
+			</div>
+		    </Grid>
+=======
 		<Grid direction="column"  justifyContent="center"  alignItems="stretch" container spacing={4} >
 				<Typography variant="h5" className="classes.prompt" align="center">
 					What would you like to do?
@@ -38,6 +54,7 @@ function PlannerInitialPage(props: DefaultProps) {
 					<Card variant="outlined" onClick={() => history.push('/ViewAllCareers')}> 
 					<CardHeader title="Careers"/>
 					<img src={CareersImage}/>
+>>>>>>> 81c86e2af69881fec13b5606a6288c4effeb2eea
 
 					<CardContent> 
 						<Typography variant="body1" align="center">
