@@ -20,9 +20,11 @@ function PlannerInitialPage(props: DefaultProps) {
     return (
 	<>
 	    <Navbar/>
-	    <Box id="landing" className={props.className} paddingTop={4}>
-
+	    <br/>
+	    <br/>
+	    <br/>
 		{/* top down component */}
+<<<<<<< HEAD
 		<Grid container spacing={4} justify="center" alignItems="center">
 		    <Grid item xs={6}>
 			<div className="card-body">
@@ -37,24 +39,52 @@ function PlannerInitialPage(props: DefaultProps) {
 			    </Card>
 			</div>
 		    </Grid>
+=======
+		<Grid direction="column"  justifyContent="center"  alignItems="stretch" container spacing={4} >
+				<Typography variant="h5" className="classes.prompt" align="center">
+					What would you like to do?
+				</Typography>
+			
+		    <Grid>
+				<br>
+				</br>
+				<br>
+				</br>
+				<div className="card-body">
+					<Card variant="outlined" onClick={() => history.push('/ViewAllCareers')}> 
+					<CardHeader title="Careers"/>
+					<img src={CareersImage}/>
+>>>>>>> 81c86e2af69881fec13b5606a6288c4effeb2eea
 
+					<CardContent> 
+						<Typography variant="body1" align="center">
+							See what paths are available towards your dream career
+						</Typography>
+					</CardContent>
+					</Card>
+				</div>
+		    </Grid>
+			
 		    {/* bottom up component */}
-		    <Grid item xs = {6}>
-			<div className="card-body">
-			    <Card variant="outlined" onClick={() => history.push('/CoursePlanner')}>
-				<CardHeader title="Courses"/>
-				<CardContent>
-				    <img src={ClassesImage} />
-				    
-				    <Typography variant="body1" align="left">
-					Create a study plan of interesting units and see what opportunities this could lead to
-				    </Typography>
-				</CardContent>
-			    </Card>
-			</div>
+		    <Grid> 
+				<br>
+				</br>
+				<br>
+				</br>
+				<div className="card-body">
+					<Card variant="outlined" onClick={() => history.push('/CoursePlanner')}>
+					<CardHeader title="Courses"/>
+					<img src={ClassesImage} />
+
+					<CardContent>				    
+						<Typography variant="body1" align="center">
+							Create a study plan of interesting units and see what opportunities this could lead to
+						</Typography>
+					</CardContent>
+					</Card>
+				</div>
 		    </Grid>
 		</Grid>
-	    </Box>
 	</>
     );
 }

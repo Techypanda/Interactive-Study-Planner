@@ -20,9 +20,26 @@
     color: #61dafb;
 }
 
+img {
+    float: center;
+    height: 200px;
+    max-width: 100%;
+}
+
+.card-body {
+    border-radius: 5px;
+    border: 3px solid rgb(0, 0, 0);
+}
+
+.career-option {
+    border: 1px solid rgb(0,0,0);
+}
+
+
 .card-body:hover {
-    // box-shadow: 0 0 2em 0px rgba(0, 0, 0, 0.4);
-    transform: scale(1.01);
+    box-shadow: 0 0 2em 0px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    transform: scale(1.05);
 }
 
 .card-body:active {
@@ -30,7 +47,9 @@
 }
 
 .career-option:hover {
-    transform: scale(1.01);
+    border: 3px solid rgb(0, 0, 0);
+    cursor: pointer;
+    transform: scale(1.1);
 }
 
 .career-option:active {
