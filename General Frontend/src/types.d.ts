@@ -28,7 +28,7 @@ export interface MajorEntryProps extends DefaultProps {
 }
 
 export interface MajorProps {
-  majorCode : string;
+  majorCode? : string;
   majorName? : string;
   majorDescription? : string;
   majorCredits? : integer;
@@ -43,6 +43,7 @@ export interface CareerEntryProps extends DefaultProps {
 
 export interface CareerProps {
   careerName? : string;
+  careerId? : string;
   careerDescription? : string;
   careerIndustry? : string;
   careerReqs? : string[];
@@ -99,4 +100,27 @@ export interface InfoCardProps extends DefaultProps {
   Code : string;
   Title : string;
   Description : string;
+}
+
+export interface MajorListProps extends DefaultProps { 
+  majorList : MajorProps[];
+}
+
+export interface CareerPropsList extends DefaultProps { 
+  listOfCareers? : CareerProps[];
+}
+
+export interface RequiredUnitsList extends DefaultProps { 
+  listOfRequiredUnits? : string[]
+}
+
+
+export interface testPayload extends DefaultProps { 
+  majorCode : string;
+  majorName? : string;
+  majorDescription? : string;
+  majorCredits? : BigInteger;
+  majorUnits? : string[];
+  majorAntiReqs? : string[]
+  requiredUnits? : string[];
 }

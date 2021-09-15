@@ -9,7 +9,7 @@ import { DefaultProps } from "../types";
 
 import ListCareers from "./ViewAllCareers";
 import CoursePlanner from "./CoursePlanner";
-
+import TopdownInitial from "./TopdownInitial";
 import CareersImage from "../static/career.jpg";
 import ClassesImage from "../static/classes.jpg";
 
@@ -26,7 +26,7 @@ function PlannerInitialPage(props: DefaultProps) {
 		<Grid container spacing={4} justify="center" alignItems="center">
 		    <Grid item xs={6}>
 			<div className="card-body">
-			    <Card variant="outlined"> 
+			    <Card variant="outlined" onClick={() => history.push('/TopdownInitial')}> 
 				<CardHeader title="Careers"/>
 				<CardContent> 
 				    <img src={CareersImage}/>

@@ -29,7 +29,9 @@ import AvailableCareersList from '../components/shared/AvailableCareersList';
 //import TopDownInitialMain from '../components/shared/TopDownInitialMain';
 import TopDownInitialMain from '../components/shared/TopDownInitialMain';
 import EmptyCurrentPlan from '../components/shared/EmptyCurrentPlan';
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
+import LoadingScreen from '../components/shared/Loading';
+import Error from '../components/shared/Error';
 import ReactDOM from 'react-dom';
 import { CareerProps,  ErrorProps,  MajorProps, CareerListProps} from "../types";
 import React, {useState, useEffect } from 'react';
@@ -49,26 +51,46 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
+//Going to need to load career API
+    //Pass that down to top down initial
+        //Pass that down to TestCareerUnitInfoCard
 
-export default function TopDownInitial() { 
+
+export default function TopdownInitial() { 
+    const classes = useStyles();
     const base : CareerListProps = {};
+    const history = useHistory();
     const [careerList2, setCareerList] = useState<CareerListProps>(base);
+    const [isLoading, setLoading] = useState(true);
+    const [isError, setError] = useState(false);
+    const [error, setErrorContent] = useState<string>();
 
     async function fetchData() { 
         try { 
-            //Just need to change url to event-get-all-careers and tweak
-                //CORS problem before, not sure if this is my fault?
-            const {data} = await axios.get("https://ilur318q9c.execute-api.ap-southeast-2.amazonaws.com/Prod/getallmajors");
+            let careerArray : CareerProps[] = [];
+            //const {data} = await axios.get("https://ilur318q9c.execute-api.ap-southeast-2.amazonaws.com/Prod/getallmajors");
+            const {data} = await axios.get("https://q02l9qoni6.execute-api.ap-southeast-2.amazonaws.com/Prod/events/event-get-all-careers");
+
             let careerTitles2 : string[] = [];
             for(let i = 0 ; i < data.length; i++) { 
-                careerTitles2[i] = data[i].MajorCode;
+                careerTitles2[i] = data[i].Name;
             }
             let resp : CareerListProps = { 
                 careerList : careerTitles2,
             }
             setCareerList(resp);
+            setLoading(false);
         } catch(error) { 
-            console.log(error)
+            if(error && axios.isAxiosError(error)) { 
+                const axiosResp = error.response as AxiosResponse;
+                setErrorContent(axiosResp.data);
+                setError(true);
+                setLoading(false);
+            } else { 
+                setErrorContent("Error: " + error);
+                setError(true);
+                setLoading(false);
+            }
         }
     }
 
@@ -77,7 +99,18 @@ export default function TopDownInitial() {
     }, []);
 
 
-    const classes = useStyles();
+    function backFunction() { 
+        history.goBack();
+    }
+
+    if(isLoading) { 
+        return(<LoadingScreen/>);
+    }
+
+    if(isError) { 
+        return <Error promptTitle="Request Error" promptContent={error as string} showPrompt={true} onAccept={() => backFunction() } />
+    }
+
     return (
         <>
             <Navbar />
