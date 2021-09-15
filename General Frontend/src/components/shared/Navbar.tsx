@@ -13,7 +13,7 @@ function Navbar(props: DefaultProps) {
                 <img src={CurtinLogo} alt="curtin logo" />
               </Box>
               <Typography variant="h6">
-	        Medical Course Planner  
+	          <b>Medical Course Planner  </b>
               </Typography>
             </Toolbar>
           </AppBar>
@@ -33,48 +33,17 @@ export default styled(Navbar)`
     display: flex;
     justify-content: flex-start;
   }
-  #test {
-    display: none !important;
-  }
   #LogoSection {
-    margin-left: auto;
+    margin-left: 0;
+    position: relative;
+    padding: 0;
+    left: 0
     display: flex;
     justify-content: flex-start;
-    align-items: center;
-  }
-  #LogoSection h6 {
-    display: inline;
-    margin-left: 20px;
+    align-items: left;
   }
   #LogoSection img {
     height: 50px;
-    object-fit: contain;
-  }
-  @media (max-width: 1000px) {
-    h6 {
-      font-size: 15px;
-      margin-right: 0;
-    }
-    #LogoSection img {
-      height: 20px;
-      object-fit: contain;
-    }
-  }
-  @media (max-width: 750px) {
-    h6 {
-      font-size: 15px;
-      margin-right: 0;
-    }
-    #LogoSection img {
-      display: none;
-    }
-  }
-  @media (max-width: 620px) {
-    h6 {
-      display: none;
-    }
-    #LogoSection h6 {
-      display: inline;
-    }
+    object-fit: fill;
   }
 `;

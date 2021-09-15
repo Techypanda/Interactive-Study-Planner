@@ -18,7 +18,6 @@ import { MajorProps, CareerListProps } from "../types";
 import axios, { AxiosResponse } from 'axios';
 import LoadingScreen from '../components/shared/Loading';
 import Error from '../components/shared/Error';
-import { MajorListProps, CareerProps, CareerPropsList, RequiredUnitsList} from '../types';
 import IconButton from '@material-ui/core/IconButton'
 import ClearIcon from '@material-ui/icons/Clear'
 import { red } from '@material-ui/core/colors'
@@ -26,7 +25,9 @@ import { red } from '@material-ui/core/colors'
 import { useLocation, useHistory } from 'react-router-dom';
 import { Location } from 'history'
 import { useCallback } from 'react';
-import { useCareers, useMajors, useUnits } from '../components/shared/hooks';
+//import { useCareers, useMajors, useUnits } from '../components/shared/hooks';
+//import { useCareer } from '../components/shared/hooks';
+import { useCareers, useMajors, useUnits } from '../components/shared/hooks'
 
 
 const useStyles = makeStyles((theme) => ({ 
@@ -91,7 +92,6 @@ export default function TopdownFilled(props: MajorProps) { //This should be just
     } else { 
        
 
-        //Now we need to check if we satisfy prerequisites
         return (
             <>
                 <Navbar />

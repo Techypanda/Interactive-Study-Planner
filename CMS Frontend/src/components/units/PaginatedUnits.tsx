@@ -4,7 +4,7 @@ import styled from "styled-components";
 import UnitEntry from "./UnitEntry";
 
 function PaginatedUnits(props: PaginatedUnitsProps) {
-  const [paginationCount, setPaginationCount] = useState(10);
+  const [paginationCount] = useState(10);
   const [page, setPage] = useState(0);
   const pageLimit = props.units.length / paginationCount === Infinity ? 0 : props.units.length / paginationCount
   const pageIcons = () => {
@@ -16,7 +16,7 @@ function PaginatedUnits(props: PaginatedUnitsProps) {
   }
   return (
     <div className={props.className}>
-      {props.units.slice(paginationCount * page, Math.min((paginationCount * page) + paginationCount, props.units.length - 1)).map((unit, _) =>
+      {props.units.slice(paginationCount * page, Math.min((paginationCount * page) + paginationCount, props.units.length)).map((unit, _) =>
         <Box mb={1}>
           <UnitEntry unit={unit} />
         </Box>
