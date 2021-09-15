@@ -31,12 +31,19 @@ const useStyles = makeStyles((theme) => ({
         height: '100%'
     }
 }))
+
+
 export default function AvailableCareersList(props: CareerListProps) { 
+    const history = useHistory();
     const classes = useStyles();
     let careerTitles= props.careerList
-    /*These are just place holder careers in the meantime*/
-    //const careerTitles = ["Medical Research", "Pharmacy", "Chemistry", "Research", "Microbiology", "Nanotechnologist", "Neuroscientist", "Medical Science Liaison"];  
 
+    function goToCareerInfoPage(value:any) { 
+    //For now this function will simply navigate to general 
+        //career info page, rather than the page for the specific career
+        //This should not take much to tweak however
+        history.push('./ViewAllCareers');
+    }
     if(careerTitles === undefined) { 
         careerTitles = [];
     }
@@ -45,7 +52,7 @@ export default function AvailableCareersList(props: CareerListProps) {
             {careerTitles.map((value) => {
                 const labelId = `checkbox-list-label-${value}`;
                 return (
-                    <ListItem key={value} role={undefined} dense button>
+                    <ListItem key={value} role={undefined} dense button onClick={() => goToCareerInfoPage(value)}>
                         <ListItemText id={labelId} primary={`${value}`} />
                         <ListItemSecondaryAction>
                             <IconButton edge='end' aria-label='comments'>

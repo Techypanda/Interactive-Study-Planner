@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { CardContent, CardActions, ListSubheader, AppBar, Toolbar, Typography, Box, List, CardHeader, Avatar, Card, CardMedia, Switch } from '@material-ui/core';
-import { DefaultProps, MajorProps } from '../../types';
+import { DefaultProps, MajorProps, testPayload } from '../../types';
 import { borders, positions } from '@material-ui/system';
 import styled from 'styled-components';
 import { useState } from 'react';
@@ -24,7 +24,9 @@ import React from 'react';
 import { isClassExpression } from 'typescript';
 import axios from 'axios';
 import { MajorUnitListProps } from '../../types';
-
+import { RequiredUnitsList } from '../../types';
+import { useEffect } from 'react';
+import LoadingScreen from './Loading';
 
 const useStyles = makeStyles((theme) => ({
     root: { 
@@ -36,18 +38,48 @@ const useStyles = makeStyles((theme) => ({
     },
     listHeader: {
       //'text-align': 'center',
-    }
+    },
 }))
 
 
 export default function CurrentPlan(props: MajorProps) { 
+
+
+    //const major = useMajor(props.majorCode A: String);
     const classes = useStyles();
+    /*const majorCode = props.majorCode;
+    const majorData = useMajor(majorCode!)
+    if(majorData.isLoading) { 
+      return (<LoadingScreen/>)
+    } 
+
+    let majorResponseData = majorData.data?.data!;
+    console.log(props.majorCode);
+    console.log(majorResponseData);*/
+
+    const commonUnits = [ 
+      "MEDI1000",
+      "HUMB1000",
+      "BIOL1004",
+      "CHEM1007",
+      "INDH1006",
+      "EPID1000",
+      "HUMB1001",
+      "GENE1000" 
+    ]
+
     if(props.majorUnits === undefined) { 
-      props.majorUnits = [""]
+      return(<div/>)
     }
     function handleToggle() { 
         console.log('This would remove the entry from the list ?');
     }
+
+
+
+
+    console.log("IN CURRENT PLAN") 
+    console.log(props.majorUnits);
 
 
     return ( 
@@ -66,7 +98,19 @@ export default function CurrentPlan(props: MajorProps) {
         <ListItem divider={true}>
           <ListItemText primary={`Main Major: ${props.majorName}`} />
         </ListItem>
-        {/*{props.Mamap((value) => { */}
+        {commonUnits.map((value) => { 
+          const labelId = `checkbox-list-label-${value}`;
+          return ( 
+            <ListItem divider={true} key={value} role={undefined} dense button>
+              <ListItemText id={labelId} primary={`Common: ${value}`} />
+              <ListItemSecondaryAction>
+                <IconButton edge='end'>
+                  <ClearIcon style={{ color: red[500] }} />
+                </IconButton>
+              </ListItemSecondaryAction>
+            </ListItem>
+          )
+        })}
         {props.majorUnits.map((value) => {
             const labelId = `checkbox-list-label-${value}`;
             return (

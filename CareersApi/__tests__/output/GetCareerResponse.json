@@ -1,1 +1,1 @@
-{"errorType":"Error","errorMessage":"getCareer only accept POST method, you tried: GET","trace":["Error: getCareer only accept POST method, you tried: GET","    at Runtime.exports.getCareer [as handler] (/var/task/GetCareer.js:15:15)","    at Runtime.handleOnce (/var/runtime/Runtime.js:66:25)"]}
+{"statusCode":200,"headers":{"Access-Control-Allow-Headers":"Content-Type","Access-Control-Allow-Origin":"*","Access-Control-Allow-Credentials":true,"Access-Control-Allow-Methods":"POST"},"body":"{}"}

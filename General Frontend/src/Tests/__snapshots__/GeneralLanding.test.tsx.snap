@@ -1,0 +1,839 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Landing General Frontend is working which happens When Renders And Matches Snapshot 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <header
+        class="MuiPaper-root MuiAppBar-root MuiAppBar-positionStatic MuiAppBar-colorPrimary sc-bdnxRM hKTgfL MuiPaper-elevation4"
+      >
+        <div
+          class="MuiToolbar-root MuiToolbar-regular flexit MuiToolbar-gutters"
+        >
+          <div
+            class="MuiBox-root MuiBox-root-2"
+            id="LogoSection"
+          >
+            <img
+              alt="curtin logo"
+              src="curtinlogo.png"
+            />
+          </div>
+          <h6
+            class="MuiTypography-root MuiTypography-h6"
+          >
+            <b>
+              Medical Course Planner  
+            </b>
+          </h6>
+        </div>
+      </header>
+      <br />
+      <br />
+      <br />
+      <div
+        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-8 MuiGrid-justify-content-xs-center"
+      >
+        <div
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6"
+        >
+          <h5
+            class="MuiTypography-root MuiTypography-h5"
+          >
+            Hi, welcome to Curtin University's Medical Course Planner!
+          </h5>
+        </div>
+      </div>
+      <br />
+      <br />
+      <br />
+      <h5
+        class="MuiTypography-root classes.prompt MuiTypography-h5"
+      >
+        What would you like to do?
+      </h5>
+      <div
+        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-4 MuiGrid-justify-content-xs-center"
+      >
+        <div
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6"
+        >
+          <div
+            class="card-body"
+          >
+            <div
+              class="MuiPaper-root MuiCard-root MuiPaper-outlined MuiPaper-rounded"
+            >
+              <div
+                class="MuiCardHeader-root"
+              >
+                <div
+                  class="MuiCardHeader-content"
+                >
+                  <span
+                    class="MuiTypography-root MuiCardHeader-title MuiTypography-h5 MuiTypography-displayBlock"
+                  >
+                    Plan Your Medical Course
+                  </span>
+                </div>
+              </div>
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              >
+                <img
+                  alt="medical stock image"
+                  src="doctor_teacher.jpg"
+                />
+              </div>
+              <div
+                class="MuiCardContent-root"
+              >
+                <p
+                  class="MuiTypography-root MuiTypography-body1 MuiTypography-alignCenter"
+                >
+                  See how Curtin's flexible course structure can be shaped to you advantage.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6"
+        >
+          <div
+            class="card-body"
+          >
+            <div
+              class="MuiPaper-root MuiCard-root MuiPaper-outlined MuiPaper-rounded"
+            >
+              <div
+                class="MuiCardHeader-root"
+              >
+                <div
+                  class="MuiCardHeader-content"
+                >
+                  <span
+                    class="MuiTypography-root MuiCardHeader-title MuiTypography-h5 MuiTypography-displayBlock"
+                  >
+                    See Careers
+                  </span>
+                </div>
+              </div>
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              >
+                <img
+                  alt="careers stock image"
+                  src="career.jpg"
+                />
+              </div>
+              <div
+                class="MuiCardContent-root"
+              >
+                <p
+                  class="MuiTypography-root MuiTypography-body1 MuiTypography-alignCenter"
+                >
+                  See all the possible careers Curtin can lead to and their requirements.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6"
+        >
+          <div
+            class="card-body"
+          >
+            <div
+              class="MuiPaper-root MuiCard-root MuiPaper-outlined MuiPaper-rounded"
+            >
+              <div
+                class="MuiCardHeader-root"
+              >
+                <div
+                  class="MuiCardHeader-content"
+                >
+                  <span
+                    class="MuiTypography-root MuiCardHeader-title MuiTypography-h5 MuiTypography-displayBlock"
+                  >
+                    What Career Path Suits Me?
+                  </span>
+                </div>
+              </div>
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              >
+                <img
+                  alt="careers stock image"
+                  src="traits_image.jpg"
+                />
+              </div>
+              <div
+                class="MuiCardContent-root"
+              >
+                <p
+                  class="MuiTypography-root MuiTypography-body1 MuiTypography-alignCenter"
+                >
+                  Find out what type of career is most suitable for your personality.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <header
+      class="MuiPaper-root MuiAppBar-root MuiAppBar-positionStatic MuiAppBar-colorPrimary sc-bdnxRM hKTgfL MuiPaper-elevation4"
+    >
+      <div
+        class="MuiToolbar-root MuiToolbar-regular flexit MuiToolbar-gutters"
+      >
+        <div
+          class="MuiBox-root MuiBox-root-2"
+          id="LogoSection"
+        >
+          <img
+            alt="curtin logo"
+            src="curtinlogo.png"
+          />
+        </div>
+        <h6
+          class="MuiTypography-root MuiTypography-h6"
+        >
+          <b>
+            Medical Course Planner  
+          </b>
+        </h6>
+      </div>
+    </header>
+    <br />
+    <br />
+    <br />
+    <div
+      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-8 MuiGrid-justify-content-xs-center"
+    >
+      <div
+        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6"
+      >
+        <h5
+          class="MuiTypography-root MuiTypography-h5"
+        >
+          Hi, welcome to Curtin University's Medical Course Planner!
+        </h5>
+      </div>
+    </div>
+    <br />
+    <br />
+    <br />
+    <h5
+      class="MuiTypography-root classes.prompt MuiTypography-h5"
+    >
+      What would you like to do?
+    </h5>
+    <div
+      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-4 MuiGrid-justify-content-xs-center"
+    >
+      <div
+        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6"
+      >
+        <div
+          class="card-body"
+        >
+          <div
+            class="MuiPaper-root MuiCard-root MuiPaper-outlined MuiPaper-rounded"
+          >
+            <div
+              class="MuiCardHeader-root"
+            >
+              <div
+                class="MuiCardHeader-content"
+              >
+                <span
+                  class="MuiTypography-root MuiCardHeader-title MuiTypography-h5 MuiTypography-displayBlock"
+                >
+                  Plan Your Medical Course
+                </span>
+              </div>
+            </div>
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <img
+                alt="medical stock image"
+                src="doctor_teacher.jpg"
+              />
+            </div>
+            <div
+              class="MuiCardContent-root"
+            >
+              <p
+                class="MuiTypography-root MuiTypography-body1 MuiTypography-alignCenter"
+              >
+                See how Curtin's flexible course structure can be shaped to you advantage.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6"
+      >
+        <div
+          class="card-body"
+        >
+          <div
+            class="MuiPaper-root MuiCard-root MuiPaper-outlined MuiPaper-rounded"
+          >
+            <div
+              class="MuiCardHeader-root"
+            >
+              <div
+                class="MuiCardHeader-content"
+              >
+                <span
+                  class="MuiTypography-root MuiCardHeader-title MuiTypography-h5 MuiTypography-displayBlock"
+                >
+                  See Careers
+                </span>
+              </div>
+            </div>
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <img
+                alt="careers stock image"
+                src="career.jpg"
+              />
+            </div>
+            <div
+              class="MuiCardContent-root"
+            >
+              <p
+                class="MuiTypography-root MuiTypography-body1 MuiTypography-alignCenter"
+              >
+                See all the possible careers Curtin can lead to and their requirements.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6"
+      >
+        <div
+          class="card-body"
+        >
+          <div
+            class="MuiPaper-root MuiCard-root MuiPaper-outlined MuiPaper-rounded"
+          >
+            <div
+              class="MuiCardHeader-root"
+            >
+              <div
+                class="MuiCardHeader-content"
+              >
+                <span
+                  class="MuiTypography-root MuiCardHeader-title MuiTypography-h5 MuiTypography-displayBlock"
+                >
+                  What Career Path Suits Me?
+                </span>
+              </div>
+            </div>
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <img
+                alt="careers stock image"
+                src="traits_image.jpg"
+              />
+            </div>
+            <div
+              class="MuiCardContent-root"
+            >
+              <p
+                class="MuiTypography-root MuiTypography-body1 MuiTypography-alignCenter"
+              >
+                Find out what type of career is most suitable for your personality.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`View All Careers is working which happens When Renders And Matches Snapshot 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <header
+        class="MuiPaper-root MuiAppBar-root MuiAppBar-positionStatic MuiAppBar-colorPrimary sc-bdnxRM hKTgfL MuiPaper-elevation4"
+      >
+        <div
+          class="MuiToolbar-root MuiToolbar-regular flexit MuiToolbar-gutters"
+        >
+          <div
+            class="MuiBox-root MuiBox-root-2"
+            id="LogoSection"
+          >
+            <img
+              alt="curtin logo"
+              src="curtinlogo.png"
+            />
+          </div>
+          <h6
+            class="MuiTypography-root MuiTypography-h6"
+          >
+            <b>
+              Medical Course Planner  
+            </b>
+          </h6>
+        </div>
+      </header>
+      <br />
+      <br />
+      <br />
+      <div
+        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-8 MuiGrid-justify-content-xs-center"
+      >
+        <div
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6"
+        >
+          <h5
+            class="MuiTypography-root MuiTypography-h5"
+          >
+            Hi, welcome to Curtin University's Medical Course Planner!
+          </h5>
+        </div>
+      </div>
+      <br />
+      <br />
+      <br />
+      <h5
+        class="MuiTypography-root classes.prompt MuiTypography-h5"
+      >
+        What would you like to do?
+      </h5>
+      <div
+        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-4 MuiGrid-justify-content-xs-center"
+      >
+        <div
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6"
+        >
+          <div
+            class="card-body"
+          >
+            <div
+              class="MuiPaper-root MuiCard-root MuiPaper-outlined MuiPaper-rounded"
+            >
+              <div
+                class="MuiCardHeader-root"
+              >
+                <div
+                  class="MuiCardHeader-content"
+                >
+                  <span
+                    class="MuiTypography-root MuiCardHeader-title MuiTypography-h5 MuiTypography-displayBlock"
+                  >
+                    Plan Your Medical Course
+                  </span>
+                </div>
+              </div>
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              >
+                <img
+                  alt="medical stock image"
+                  src="doctor_teacher.jpg"
+                />
+              </div>
+              <div
+                class="MuiCardContent-root"
+              >
+                <p
+                  class="MuiTypography-root MuiTypography-body1 MuiTypography-alignCenter"
+                >
+                  See how Curtin's flexible course structure can be shaped to you advantage.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6"
+        >
+          <div
+            class="card-body"
+          >
+            <div
+              class="MuiPaper-root MuiCard-root MuiPaper-outlined MuiPaper-rounded"
+            >
+              <div
+                class="MuiCardHeader-root"
+              >
+                <div
+                  class="MuiCardHeader-content"
+                >
+                  <span
+                    class="MuiTypography-root MuiCardHeader-title MuiTypography-h5 MuiTypography-displayBlock"
+                  >
+                    See Careers
+                  </span>
+                </div>
+              </div>
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              >
+                <img
+                  alt="careers stock image"
+                  src="career.jpg"
+                />
+              </div>
+              <div
+                class="MuiCardContent-root"
+              >
+                <p
+                  class="MuiTypography-root MuiTypography-body1 MuiTypography-alignCenter"
+                >
+                  See all the possible careers Curtin can lead to and their requirements.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6"
+        >
+          <div
+            class="card-body"
+          >
+            <div
+              class="MuiPaper-root MuiCard-root MuiPaper-outlined MuiPaper-rounded"
+            >
+              <div
+                class="MuiCardHeader-root"
+              >
+                <div
+                  class="MuiCardHeader-content"
+                >
+                  <span
+                    class="MuiTypography-root MuiCardHeader-title MuiTypography-h5 MuiTypography-displayBlock"
+                  >
+                    What Career Path Suits Me?
+                  </span>
+                </div>
+              </div>
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              >
+                <img
+                  alt="careers stock image"
+                  src="traits_image.jpg"
+                />
+              </div>
+              <div
+                class="MuiCardContent-root"
+              >
+                <p
+                  class="MuiTypography-root MuiTypography-body1 MuiTypography-alignCenter"
+                >
+                  Find out what type of career is most suitable for your personality.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <header
+      class="MuiPaper-root MuiAppBar-root MuiAppBar-positionStatic MuiAppBar-colorPrimary sc-bdnxRM hKTgfL MuiPaper-elevation4"
+    >
+      <div
+        class="MuiToolbar-root MuiToolbar-regular flexit MuiToolbar-gutters"
+      >
+        <div
+          class="MuiBox-root MuiBox-root-2"
+          id="LogoSection"
+        >
+          <img
+            alt="curtin logo"
+            src="curtinlogo.png"
+          />
+        </div>
+        <h6
+          class="MuiTypography-root MuiTypography-h6"
+        >
+          <b>
+            Medical Course Planner  
+          </b>
+        </h6>
+      </div>
+    </header>
+    <br />
+    <br />
+    <br />
+    <div
+      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-8 MuiGrid-justify-content-xs-center"
+    >
+      <div
+        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6"
+      >
+        <h5
+          class="MuiTypography-root MuiTypography-h5"
+        >
+          Hi, welcome to Curtin University's Medical Course Planner!
+        </h5>
+      </div>
+    </div>
+    <br />
+    <br />
+    <br />
+    <h5
+      class="MuiTypography-root classes.prompt MuiTypography-h5"
+    >
+      What would you like to do?
+    </h5>
+    <div
+      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-4 MuiGrid-justify-content-xs-center"
+    >
+      <div
+        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6"
+      >
+        <div
+          class="card-body"
+        >
+          <div
+            class="MuiPaper-root MuiCard-root MuiPaper-outlined MuiPaper-rounded"
+          >
+            <div
+              class="MuiCardHeader-root"
+            >
+              <div
+                class="MuiCardHeader-content"
+              >
+                <span
+                  class="MuiTypography-root MuiCardHeader-title MuiTypography-h5 MuiTypography-displayBlock"
+                >
+                  Plan Your Medical Course
+                </span>
+              </div>
+            </div>
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <img
+                alt="medical stock image"
+                src="doctor_teacher.jpg"
+              />
+            </div>
+            <div
+              class="MuiCardContent-root"
+            >
+              <p
+                class="MuiTypography-root MuiTypography-body1 MuiTypography-alignCenter"
+              >
+                See how Curtin's flexible course structure can be shaped to you advantage.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6"
+      >
+        <div
+          class="card-body"
+        >
+          <div
+            class="MuiPaper-root MuiCard-root MuiPaper-outlined MuiPaper-rounded"
+          >
+            <div
+              class="MuiCardHeader-root"
+            >
+              <div
+                class="MuiCardHeader-content"
+              >
+                <span
+                  class="MuiTypography-root MuiCardHeader-title MuiTypography-h5 MuiTypography-displayBlock"
+                >
+                  See Careers
+                </span>
+              </div>
+            </div>
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <img
+                alt="careers stock image"
+                src="career.jpg"
+              />
+            </div>
+            <div
+              class="MuiCardContent-root"
+            >
+              <p
+                class="MuiTypography-root MuiTypography-body1 MuiTypography-alignCenter"
+              >
+                See all the possible careers Curtin can lead to and their requirements.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6"
+      >
+        <div
+          class="card-body"
+        >
+          <div
+            class="MuiPaper-root MuiCard-root MuiPaper-outlined MuiPaper-rounded"
+          >
+            <div
+              class="MuiCardHeader-root"
+            >
+              <div
+                class="MuiCardHeader-content"
+              >
+                <span
+                  class="MuiTypography-root MuiCardHeader-title MuiTypography-h5 MuiTypography-displayBlock"
+                >
+                  What Career Path Suits Me?
+                </span>
+              </div>
+            </div>
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <img
+                alt="careers stock image"
+                src="traits_image.jpg"
+              />
+            </div>
+            <div
+              class="MuiCardContent-root"
+            >
+              <p
+                class="MuiTypography-root MuiTypography-body1 MuiTypography-alignCenter"
+              >
+                Find out what type of career is most suitable for your personality.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
