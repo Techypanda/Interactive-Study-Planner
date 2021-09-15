@@ -24,7 +24,6 @@ function PlannerInitialPage(props: DefaultProps) {
 	    <br/>
 	    <br/>
 		{/* top down component */}
-<<<<<<< HEAD
 		<Grid container spacing={4} justify="center" alignItems="center">
 		    <Grid item xs={6}>
 			<div className="card-body">
@@ -39,22 +38,6 @@ function PlannerInitialPage(props: DefaultProps) {
 			    </Card>
 			</div>
 		    </Grid>
-=======
-		<Grid direction="column"  justifyContent="center"  alignItems="stretch" container spacing={4} >
-				<Typography variant="h5" className="classes.prompt" align="center">
-					What would you like to do?
-				</Typography>
-			
-		    <Grid>
-				<br>
-				</br>
-				<br>
-				</br>
-				<div className="card-body">
-					<Card variant="outlined" onClick={() => history.push('/ViewAllCareers')}> 
-					<CardHeader title="Careers"/>
-					<img src={CareersImage}/>
->>>>>>> 81c86e2af69881fec13b5606a6288c4effeb2eea
 
 					<CardContent> 
 						<Typography variant="body1" align="center">
