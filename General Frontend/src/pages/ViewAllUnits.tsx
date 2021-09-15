@@ -67,7 +67,7 @@ function ViewAllUnits(props: DefaultProps) {
 		    <Button variant='contained' className="searchbtn">Search</Button>
 		</Box>
 		<br/>
-		{units_list.map((x) => {
+		{units_list.map((x) => (
 		    <div className="card-body">
 			<Card variant="outlined" className={classes.root}>
 			    <div className={classes.details}>
@@ -84,7 +84,7 @@ function ViewAllUnits(props: DefaultProps) {
 			    </div>
 			</Card>
 		    </div>
-		})}
+		    ))}
 	    </Container>
 	    <br/>
 	    <Button variant="contained" onClick={() => history.goBack()}>Back</Button>
