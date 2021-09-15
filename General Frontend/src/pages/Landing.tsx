@@ -5,6 +5,7 @@ import {useHistory} from "react-router-dom";
 
 // pages
 import ViewAllCareers from "./ViewAllCareers";
+import ViewAllUnits from "./ViewAllUnits";
 import PlannerInitialPage from "./PlannerInitialPage";
 
 // stock images
@@ -76,11 +77,11 @@ function Landing() {
 		<Grid item xs={4}>
 		    <div className="card-body">
 			<Card variant="outlined">
-			    <CardHeader title="What Career Path Suits Me?"/>
+			    <CardHeader title="See Classes" onClick = {() => history.push('/ViewAllUnits') } />
 			    <CardContent>
 				{/* <img src={TraitsImage} alt="personality stock image"/> */}
 				<Typography  variant="body1" align="left">
-				    Find out what type of career is most suitable for your personality.
+				    Discover all the courses that Curtin University offers in this program.
 				</Typography>
 			    </CardContent>
 			</Card>
