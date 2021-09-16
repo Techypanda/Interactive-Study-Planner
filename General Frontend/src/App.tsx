@@ -22,9 +22,6 @@ function App() {
 		    <Route exact path="/">
 			<Landing/>
 		    </Route>
-		    <Route exact path="/careers/view/:CareerId">
-			<ViewCareer/>
-		    </Route>
 		    <Route exact path="/ViewAllCareers">
 			<ViewAllCareers/>
 		    </Route>
@@ -33,9 +30,6 @@ function App() {
 		    </Route>
 		    <Route exact path="/CoursePlanner">
 			<CoursePlanner/>
-		    </Route>
-		    <Route path="/InfoPage">
-			<InfoPageRouter/>
 		    </Route>
 		    <Route exact path="/ViewAllUnits">
 			<ViewAllUnits/>
