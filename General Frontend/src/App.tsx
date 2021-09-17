@@ -31,6 +31,9 @@ function App() {
 		    <Route exact path="/CoursePlanner">
 			<CoursePlanner/>
 		    </Route>
+		    <Route path="/InfoPage">
+			<InfoPageRouter/>
+		    </Route>
 		    <Route exact path="/ViewAllUnits">
 			<ViewAllUnits/>
 		    </Route>
