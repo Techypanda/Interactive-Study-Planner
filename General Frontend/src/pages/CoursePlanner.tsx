@@ -4,7 +4,7 @@ import Navbar from "../components/shared/Navbar";
 import PlansAvailable from "../components/shared/PlansAvailable";
 import { DefaultProps } from "../types";
 import Error from "../components/shared/Error";
-import { Typography, List, ListItem, ListItemText, ListItemSecondaryAction, Grid } from "@material-ui/core";
+import { Typography, List, ListItem, ListItemText, ListItemSecondaryAction, ListSubheader, Grid } from "@material-ui/core";
 import BookOutlined from '@material-ui/icons/BookOutlined';
 import IconButton from '@material-ui/core/IconButton';
 import { useQuery, useMutation } from "react-query";
@@ -21,9 +21,11 @@ import { useEffect, useState } from "react";
 // TODO: remove all instances of 'any' and replace with useful type information
 const useStyles = makeStyles((theme) => ({ 
     root: { 
-        width: '100%',
-        maxWidth: 360,
+	width: '100%',
+	maxWidth: 360,
 	outline: '1px solid #d9b362',
+	backgroundColor: theme.palette.background.paper,
+	height: '100%',
     },
     nonNavBar: {
         'height': '90vh',
@@ -31,13 +33,19 @@ const useStyles = makeStyles((theme) => ({
     },
     test: { 
         'margin-top': 50
-    }
+    },
+    listHeader: {
+	//'text-align': 'center',
+	color: 'black',
+    },
+    capitalize: {
+	textTransform: "uppercase",
+    },
 }))
 
 // differentiate drag and drop zones as they are functionally identical sans side-effects
 // i.e. prerequisite based filtering on drop.
 const dnd_lists: String[] = ["Plan So Far", "Available Units"];
-
 
 function CoursePlanner() {
 
@@ -109,10 +117,12 @@ function CoursePlanner() {
 
 // actual front end component for draggable representation of units
 // used by both lists
-function UnitDraggableItem({unit} : {unit: any}) {
+// perhaps this isn't necessary? the units load in the right list after quite a delay
+function UnitListItem({unit} : {unit: any}) {
+    const classes = useStyles()
     return (
 	<ListItem role={undefined}>
-	    <ListItemText primary={unit.Name} />
+	    <ListItemText primary={unit.Name} className={classes.capitalize} />
 	    <ListItemSecondaryAction>
 		<IconButton edge="end" aria-label="comments">
 		    <BookOutlined/>
@@ -122,20 +132,39 @@ function UnitDraggableItem({unit} : {unit: any}) {
     );
 }
 
+/* function UnitDraggableItem({}) {
+ *     return (
+ * 	<>
+ * 	    <Droppable >
+ * 		{(provided) => (
+ * 		    <div {...provided.droppableProps} ref={provided.innerRef}>
+ * 		    
+ * 		)}
+ * 
+ * 	    </Droppable>
+ * 	</>
+ *     )
+ * } */
+
 // scrollable list to the right of the screen, dynamically shows available courses
 // as pre-reqs and anti-reqs are made, rendering and unrendering as necessary.
 function AvailableUnitsDisplay({units_list} : {units_list : any}) {
     const classes = useStyles();
     return (
-	/* will be made into a droppable area
-	   TODO: unit items to become UnitDraggableItem types rather than simple list items */
-	<List className={classes.root}>
-	    {units_list.map((value: any) => {
-		return (
-		    <UnitDraggableItem unit={value}/>
-		)
-	    })}
-	</List>
+	<>
+	    <List subheader =
+		  {<ListSubheader className={classes.listHeader }>
+		      <Typography variant='h5'>
+			  Available Units
+		      </Typography>
+		  </ListSubheader>} className={classes.root}>
+		{units_list.map((value: any) => {
+		    return (
+			<UnitListItem unit={value}/>
+		    )
+		})}
+	    </List>
+	</>
     )
 }
 
