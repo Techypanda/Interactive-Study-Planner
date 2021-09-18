@@ -16,11 +16,14 @@ import { useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 // https://www.youtube.com/watch?v=YONLLb7_31E -> source for the basics of how react-beautiful-dnd works
-
+// TODO: move some components into the components/shared directory for Max to collaborate with and keep this file
+// mostly for bottom up logic and behavioural correctness checks
+// TODO: remove all instances of 'any' and replace with useful type information
 const useStyles = makeStyles((theme) => ({ 
     root: { 
         width: '100%',
         maxWidth: 360,
+	outline: '1px solid #d9b362',
     },
     nonNavBar: {
         'height': '90vh',
@@ -86,11 +89,11 @@ function CoursePlanner() {
 		onDragEnd={OnDragEnd}>
 		<Grid container justifyContent={'space-between'} alignItems={'stretch'} className={classes.nonNavBar}>
 		    <Grid item xs={2}>
-			<EmptyCurrentPlan/> 
+			<EmptyCurrentPlan/> {/* placeholder */}
 		    </Grid>
 		    <Grid item xs={8} className={classes.test}>
 			<div>
-			    <PlansAvailable/>
+			    <PlansAvailable/> {/* placeholder */}
 			</div>
 		    </Grid>
 		    <Grid item xs={2}>
@@ -105,8 +108,18 @@ function CoursePlanner() {
 }
 
 // actual front end component for draggable representation of units
-function UnitDraggableItem() {
-
+// used by both lists
+function UnitDraggableItem({unit} : {unit: any}) {
+    return (
+	<ListItem role={undefined}>
+	    <ListItemText primary={unit.Name} />
+	    <ListItemSecondaryAction>
+		<IconButton edge="end" aria-label="comments">
+		    <BookOutlined/>
+		</IconButton>
+	    </ListItemSecondaryAction>
+	</ListItem>
+    );
 }
 
 // scrollable list to the right of the screen, dynamically shows available courses
@@ -119,14 +132,7 @@ function AvailableUnitsDisplay({units_list} : {units_list : any}) {
 	<List className={classes.root}>
 	    {units_list.map((value: any) => {
 		return (
-		    <ListItem role={undefined}>
-			<ListItemText primary={value.Name} />
-			<ListItemSecondaryAction>
-                        <IconButton edge='end' aria-label='comments'>
-			        <BookOutlined />
-                        </IconButton>
-			</ListItemSecondaryAction>
-	            </ListItem>
+		    <UnitDraggableItem unit={value}/>
 		)
 	    })}
 	</List>
@@ -153,8 +159,25 @@ function SelectedUnitsDisplay() {
     )
 }
 
-// every function below here is a placeholder until the prerequisite filtering is figured out
+// trigger re-shuffling of any list
+// OnDragStart is not necessary
+function OnDragEnd(result: DropResult) {
+    /* const {source, destination} = result;
+     * if (!destination) return;
 
+     * const items = Array.from()
+     * const [new_order] = 
+     * return; */
+}
+
+function OnDragUpdate(result: DropResult) {
+    
+}
+
+// the following two functions take in the droppable lists and reorder them as an item is taken or inserted
+// they are called by both list components through their onDragEnd properties.
+// As those calls are implemented by the previous two functions there is no need to call these two directly
+// these are necessary with more than one droppable list
 function RemoveFromList(list: any, index: number) {
     const result = Array.from(list);
     const [removed] = result.splice(index, 1);
@@ -166,44 +189,5 @@ function AddToList(list: any, index: number, element: any) {
     result.splice(index, 0, element);
     return result;
 }
-
-
-function OnDragUpdate() {
-    
-}
-
-function OnDragEnd(result: DropResult) {
-    if (!result.destination) return;
-
-    // typical boiler plate for react-beautiful-dnd won't work since item reordering and
-    // such doesn't fit our needs due to smeester based formatting
-    // better learn hooks better :/
-
-    // requirements: update state like anything else but somehow also update prerequisite hook
-    // how to access this, I do not know
-    
-    return;
-}
-
-// following is likely not going to be used
-// filtering is done on change detected in the selected area to re-render available units section, compatibility is NOT
-// checked upon drop attempt
-
-/* temporary, will replace with more conventional string array sharing likely with useContext() or global state or useQuery() */
-/* function CompatibleAntiRequisites(curr_prereqs: string[], antireqs: string[]) {
- *     // if any of the param's elements are present in the current prerequisite pool or selection pool, return false
- *     var shared_reqs = curr_prereqs.filter(element => antireqs.includes(element));
- *     return shared_reqs.length === 0 ? true : false;
- * }
- * 
- * function CompatiblePrerequisites(curr_prereqs: string[], selected_unit_prereqs: string[]) {
- *     // entire prereq array must be present within prerequisite state hook 
- *     var shared_reqs = curr_prereqs.filter(element => selected_unit_prereqs.includes(element));
- *     return shared_reqs.length === selected_unit_anitreqs ? true : false;
- * }
- * 
- * function CompatibleCorequisites(curr_prereqs: string[], coreqs: string[]) {
- *     // For the coreqs to be compatible, the units in the coreqs array must be composed of classes already in that semester
- * } */
 
 export default CoursePlanner;
