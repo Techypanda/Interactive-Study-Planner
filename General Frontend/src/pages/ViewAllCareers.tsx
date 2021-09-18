@@ -70,13 +70,11 @@ function ViewAllCareers(props: DefaultProps) {
 		</br>
 	    <Container  >
 			<Box id="searchcontainer" display="flex">
-				<div style={{padding: '0 10px'}}>
 					<Button className="backButton" variant="contained" onClick={() => history.goBack()} >
 						Back
 					</Button>
-				</div>
 
-				<TextField variant="outlined" id="standard-full-width" fullWidth  placeholder="Search careers..." className="searchbar" />
+				<TextField style={{padding: '0 10px'}} variant="outlined" id="standard-full-width" fullWidth  placeholder="Search careers..." className="searchbar" />
 				<Button variant='contained' className="searchbtn">Search</Button>
 			</Box>
 			<br/>
