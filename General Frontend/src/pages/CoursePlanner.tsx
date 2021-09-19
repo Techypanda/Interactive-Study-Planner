@@ -9,9 +9,9 @@ import BookOutlined from '@material-ui/icons/BookOutlined';
 import IconButton from '@material-ui/core/IconButton';
 import { useQuery, useMutation } from "react-query";
 import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd';
-import { UnitProps } from '../types';
+/* import { UnitProps } from '../types'; */
 import { makeStyles } from '@material-ui/core/styles';
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosResponse, AxiosError } from "axios";
 import { useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 
@@ -69,7 +69,7 @@ function CoursePlanner() {
 		     console.log(response.data);
 		     set_units_list(response.data);
 		 });
-	} catch (err) {
+	} catch (err: any) {
 	    if (err && err.response && axios.isAxiosError(err)) {
 		const axios_resp = err.response as AxiosResponse;
 		setErrorContent(axios_resp.data);
