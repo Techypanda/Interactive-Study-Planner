@@ -1,45 +1,45 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import CareerManagement from '../pages/Careers/CareerManagement';
-import CareerRouter from '../pages/Careers/CareerRouter';
-import CreateCareer from '../pages/Careers/CreateCareer';
-import EditCareer from '../pages/Careers/EditCareer';
-import ViewCareer from '../pages/Careers/ViewCareer';
+import MajorManagement from '../pages/Majors/MajorManagement';
+import MajorRouter from '../pages/Majors/MajorRouter';
+import CreateMajor from '../pages/Majors/CreateMajor';
+import EditMajor from '../pages/Majors/EditMajor';
+import ViewMajor from '../pages/Majors/ViewMajor';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter as Router } from "react-router-dom";
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useParams: () => ({
-    CareerId: '5c760179-2e1c-4fd5-98f8-dc92ce411b4e',
+    MajorCode: 'MJRU-PHCOL',
   })
 }));
 
-describe('Careers is Working When', () => {
+describe('Specializations is Working When', () => {
   const client = new QueryClient();
-  describe('Career Management is Working which happens When', () => {
+  describe('MajorManagement is Working which happens When', () => {
     it('Renders Without A Crash', () => {
       render(
         <QueryClientProvider client={client}>
-          <CareerManagement />
+          <MajorManagement />
         </QueryClientProvider>
       )
     })
     it('Renders And Matches Snapshot', () => {
       const x = render(
         <QueryClientProvider client={client}>
-          <CareerManagement />
+          <MajorManagement />
         </QueryClientProvider>
       )
       expect(x).toMatchSnapshot();
     })
   })
-  describe('Career Router is Working which happens when', () => {
+  describe('MajorRouter is Working which happens when', () => {
     it('Renders Without A Crash', () => {
       render(
         <QueryClientProvider client={client}>
           <Router>
-            <CareerRouter />
+            <MajorRouter />
           </Router>
         </QueryClientProvider>
       )
@@ -48,59 +48,59 @@ describe('Careers is Working When', () => {
       const x = render(
         <QueryClientProvider client={client}>
           <Router>
-            <CareerRouter />
+            <MajorRouter />
           </Router>
         </QueryClientProvider>
       )
       expect(x).toMatchSnapshot();
     })
   })
-  describe('Create Career is Working which happens when', () => {
+  describe('CreateMajor is Working which happens when', () => {
     it('Renders Without A Crash', () => {
       render(
         <QueryClientProvider client={client}>
-          <CreateCareer />
+          <CreateMajor />
         </QueryClientProvider>
       )
     })
     it('Renders And Matches Snapshot', () => {
       const x = render(
         <QueryClientProvider client={client}>
-          <CreateCareer />
+          <CreateMajor />
         </QueryClientProvider>
       )
       expect(x).toMatchSnapshot();
     })
   })
-  describe('Edit Career is Working which happens when', () => {
+  describe('EditMajor is Working which happens when', () => {
     it('Renders Without A Crash', () => {
       render(
         <QueryClientProvider client={client}>
-          <EditCareer />
+          <EditMajor />
         </QueryClientProvider>
       )
     })
     it('Renders And Matches Snapshot', () => {
       const x = render(
         <QueryClientProvider client={client}>
-          <EditCareer />
+          <EditMajor />
         </QueryClientProvider>
       )
       expect(x).toMatchSnapshot();
     })
   })
-  describe('View Career is Working which happens when', () => {
+  describe('ViewMajor is Working which happens when', () => {
     it('Renders Without A Crash', () => {
       render(
         <QueryClientProvider client={client}>
-          <ViewCareer />
+          <ViewMajor />
         </QueryClientProvider>
       )
     })
     it('Renders And Matches Snapshot', () => {
       const x = render(
         <QueryClientProvider client={client}>
-          <ViewCareer />
+          <ViewMajor />
         </QueryClientProvider>
       )
       expect(x).toMatchSnapshot();

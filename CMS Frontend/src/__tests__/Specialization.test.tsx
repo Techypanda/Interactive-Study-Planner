@@ -1,45 +1,45 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import CareerManagement from '../pages/Careers/CareerManagement';
-import CareerRouter from '../pages/Careers/CareerRouter';
-import CreateCareer from '../pages/Careers/CreateCareer';
-import EditCareer from '../pages/Careers/EditCareer';
-import ViewCareer from '../pages/Careers/ViewCareer';
+import SpecManagement from '../pages/Specialization/SpecializationManagement';
+import SpecRouter from '../pages/Specialization/SpecializationRouter';
+import CreateSpec from '../pages/Specialization/CreateSpecialization';
+import EditSpec from '../pages/Specialization/EditSpec';
+import ViewSpec from '../pages/Specialization/ViewSpecialization';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter as Router } from "react-router-dom";
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useParams: () => ({
-    CareerId: '5c760179-2e1c-4fd5-98f8-dc92ce411b4e',
+    SpecCode: 'SPUC-INENT',
   })
 }));
 
-describe('Careers is Working When', () => {
+describe('Specializations is Working When', () => {
   const client = new QueryClient();
-  describe('Career Management is Working which happens When', () => {
+  describe('SpecManagement is Working which happens When', () => {
     it('Renders Without A Crash', () => {
       render(
         <QueryClientProvider client={client}>
-          <CareerManagement />
+          <SpecManagement />
         </QueryClientProvider>
       )
     })
     it('Renders And Matches Snapshot', () => {
       const x = render(
         <QueryClientProvider client={client}>
-          <CareerManagement />
+          <SpecManagement />
         </QueryClientProvider>
       )
       expect(x).toMatchSnapshot();
     })
   })
-  describe('Career Router is Working which happens when', () => {
+  describe('SpecRouter is Working which happens when', () => {
     it('Renders Without A Crash', () => {
       render(
         <QueryClientProvider client={client}>
           <Router>
-            <CareerRouter />
+            <SpecRouter />
           </Router>
         </QueryClientProvider>
       )
@@ -48,59 +48,59 @@ describe('Careers is Working When', () => {
       const x = render(
         <QueryClientProvider client={client}>
           <Router>
-            <CareerRouter />
+            <SpecRouter />
           </Router>
         </QueryClientProvider>
       )
       expect(x).toMatchSnapshot();
     })
   })
-  describe('Create Career is Working which happens when', () => {
+  describe('CreateSpec is Working which happens when', () => {
     it('Renders Without A Crash', () => {
       render(
         <QueryClientProvider client={client}>
-          <CreateCareer />
+          <CreateSpec />
         </QueryClientProvider>
       )
     })
     it('Renders And Matches Snapshot', () => {
       const x = render(
         <QueryClientProvider client={client}>
-          <CreateCareer />
+          <CreateSpec />
         </QueryClientProvider>
       )
       expect(x).toMatchSnapshot();
     })
   })
-  describe('Edit Career is Working which happens when', () => {
+  describe('EditSpec is Working which happens when', () => {
     it('Renders Without A Crash', () => {
       render(
         <QueryClientProvider client={client}>
-          <EditCareer />
+          <EditSpec />
         </QueryClientProvider>
       )
     })
     it('Renders And Matches Snapshot', () => {
       const x = render(
         <QueryClientProvider client={client}>
-          <EditCareer />
+          <EditSpec />
         </QueryClientProvider>
       )
       expect(x).toMatchSnapshot();
     })
   })
-  describe('View Career is Working which happens when', () => {
+  describe('ViewSpec is Working which happens when', () => {
     it('Renders Without A Crash', () => {
       render(
         <QueryClientProvider client={client}>
-          <ViewCareer />
+          <ViewSpec />
         </QueryClientProvider>
       )
     })
     it('Renders And Matches Snapshot', () => {
       const x = render(
         <QueryClientProvider client={client}>
-          <ViewCareer />
+          <ViewSpec />
         </QueryClientProvider>
       )
       expect(x).toMatchSnapshot();
