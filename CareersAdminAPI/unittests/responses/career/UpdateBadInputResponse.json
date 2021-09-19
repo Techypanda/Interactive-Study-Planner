@@ -1,1 +1,1 @@
-{"statusCode": 400, "body": "Bad request: Invalid data or format recieved.", "headers": {"Content-Type": "application/json", "Access-Control-Allow-Origin": "*"}}
+{"statusCode": 400, "body": "Bad request: Invalid data or format recieved.", "headers": {"Access-Control-Allow-Headers": "Content-Type", "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Credentials": "true", "Access-Control-Allow-Methods": "POST", "Content-Type": "application/json"}}

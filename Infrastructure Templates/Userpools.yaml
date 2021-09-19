@@ -26,6 +26,7 @@ Resources:
       UserPoolId: !Ref DevUserPool
       CallbackURLs:
         - http://localhost:3000
+        - https://d2qox5jw8ub6rt.cloudfront.net
       AllowedOAuthFlows:
         - code
         - implicit
@@ -74,6 +75,7 @@ Resources:
       UserPoolId: !Ref ProdUserPool
       CallbackURLs:
         - http://localhost:3000
+        - https://d2qox5jw8ub6rt.cloudfront.net
       AllowedOAuthFlows:
         - code
         - implicit

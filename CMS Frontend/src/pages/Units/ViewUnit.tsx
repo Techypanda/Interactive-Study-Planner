@@ -1,4 +1,4 @@
-import { Box, Button, Container, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, LinearProgress, Typography } from "@material-ui/core";
+import { Box, Button, Container, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, LinearProgress } from "@material-ui/core";
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import axios, { AxiosError } from "axios";
@@ -7,7 +7,6 @@ import { useQueryClient } from "react-query";
 import { useHistory, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { useUnit } from "../../api/hooks";
-import Error from "../../components/shared/Error";
 import UnitDisplay from "../../components/units/UnitDisplay";
 import NotFound from "../NotFound";
 

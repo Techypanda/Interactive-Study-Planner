@@ -1,9 +1,12 @@
 import { useState } from 'react';
-import { Box, Button, Container, Typography, Card, CardHeader, CardContent, TextField} from "@material-ui/core";
+import { useEffect, useState } from 'react';
+import { BrowserRouter as Router } from "react-router-dom";
+import { Box, Button, Container,Grid, Typography, Card, CardHeader, CardContent, TextField} from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { useQuery, useQueryClient } from "react-query";
 import styled from "styled-components";
 import axios, { AxiosError, AxiosResponse } from "axios";
+import {BrowserRouter, Switch, Route} from "react-router-dom";
 
 import Navbar from "../components/shared/Navbar";
 import { CareerProps, DefaultProps } from "../types";
@@ -39,7 +42,6 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-
 // called on loading of this component
 // makes call to the careers API to get all careers so they can be rendered
 // props param is questionable atm but it's purpose is to take the form of the retrieved career
@@ -47,33 +49,20 @@ const useStyles = makeStyles((theme: Theme) =>
 function ViewAllCareers(props: DefaultProps) {
     const history = useHistory();
     const classes = useStyles();
-    const theme = useTheme();
 
-    // dummy data that mocks the actual data to be retrieved from the
-    // api call commented out below
-    let careers_list: { career_title: string, career_desc: string}[] = [
-	{"career_title": "Pharmacologist", "career_desc": "Medicines and stuff"},
-	{"career_title": "Anesthetician", "career_desc": "Give you a morphine problem"},
-	{"career_title": "Surgeon", "career_desc": "Does surgery"}
-    ];
-    // with real dynamic data this would be:
-    // const [career_title, career_desc] = useState([])
+	const base = [{Description : "", Industry : "", CareerId: ""}]
+	const [careersList, setCareersData] = useState(base);
 
-    /* // api call, perhaps simplify with just fetch()?
-       const { isLoading, isError, error, data } = useQuery('getcareers', async () => {
-       const data = await axios('${process.env.REACT_APP_CAREERS_API}/event-get-all-careers');
-       return data;
-       })
-       if (isLoading) {
-       return "Retrieving all careers";
-       }
-       if (isError) {
-       return error;
-       }*/
-
-    // search bar filtering
-    const [q, setq] = useState("");
-    /* const [search_param] = useState("career_title", "career_desc"); */
+	const getCareersData = () => {
+		axios.get("https://q02l9qoni6.execute-api.ap-southeast-2.amazonaws.com/Prod/events/event-get-all-careers")
+				.then((response) => {
+					console.log(response.data);
+					setCareersData(response.data);
+				})
+	}
+	useEffect(() => {
+		getCareersData();
+	  }, []);
 
     return (
 	<>
@@ -82,19 +71,19 @@ function ViewAllCareers(props: DefaultProps) {
 	    <Container  >
 		<Box id="searchcontainer" display="flex">
 		    <TextField variant="outlined" id="standard-full-width" fullWidth  placeholder="Search careers..." className="searchbar" />
-		    <Button  variant='contained' className="searchbtn">Search</Button>
+		    <Button variant='contained' className="searchbtn">Search</Button>
 		</Box>
-		
-		{careers_list.map((x) => (
+		<br/>
+		{careersList.map((x) => (
 		    <div className="career-option">
 			<Card variant="outlined" className={classes.root}>
 			    <div className={classes.details}>
-				<CardContent className={classes.content}>
-				    <Typography component="h5" variant="h5" align="left">
-					{x.career_title}
+				<CardContent onClick={() => history.push(`/InfoPage/ViewCareer/${x.CareerId}`)} className={classes.content}>
+				    <Typography className='values' component="h5" variant="h5" align="left">
+						{x.Industry}
 				    </Typography>
 				    <Typography variant="subtitle1" color="textSecondary">
-					{x.career_desc}
+						{x.Description}
 				    </Typography>
 				</CardContent>
 				<div className={classes.controls}>

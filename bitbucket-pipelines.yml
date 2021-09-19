@@ -35,6 +35,14 @@ pipelines:
                 - ./SetupAWSPipeline.sh
                 - echo "Deploying Public Repositories"
                 - aws cloudformation deploy --template-file "./Infrastructure Templates/ECRRepositories.yaml" --stack-name ECRRepositories --no-fail-on-empty-changeset
+          - step:
+              name: "Deploy CMS Bucket & CloudFormation"
+              image: atlassian/pipelines-awscli
+              script:
+                - chmod +x ./SetupAWSPipeline.sh
+                - ./SetupAWSPipeline.sh
+                - echo "Deploying CMS Bucket and Cloudformation"
+                - aws cloudformation deploy --template-file "./Infrastructure Templates/CMSStaticSite.yaml" --stack-name CMSStaticSite --no-fail-on-empty-changeset
       - parallel:   # TESTING/BUILDING/DEPLOY STAGES
           - step: 
               name: "Build, Test, Deploy Unit Admin API"
@@ -113,8 +121,26 @@ pipelines:
                 - chmod +x ./SetupAWSPipeline.sh
                 - ./SetupAWSPipeline.sh
                 - cd CSVParser
+                - chmod +x ./RunSamTests.sh
                 - chmod +x ./BuildTestDeploy.sh
                 - ./BuildTestDeploy.sh
               services:
                 - docker
-
+          - step:
+              name: "Build, Test, Deploy CMS Static Site"
+              image: python:3.7.2
+              script:
+                - apt-get -y update
+                - pip install awscli
+                - pip install aws-sam-cli
+                - curl -sL https://deb.nodesource.com/setup_14.x | bash -
+                - cat /etc/apt/sources.list.d/nodesource.list
+                - apt -y install nodejs
+                - apt-get -y install nodejs
+                - apt-get -y install npm
+                - npm install --global yarn
+                - chmod +x ./SetupAWSPipeline.sh
+                - ./SetupAWSPipeline.sh
+                - cd "CMS Frontend"
+                - chmod +x ./BuildTestDeploy.sh
+                - ./BuildTestDeploy.sh
