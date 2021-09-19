@@ -1,7 +1,7 @@
 // first page that is seen when the general user opens the site, prompting a choice
 // between top down and bottom up course planner buildilng.
 
-import { Box, Grid, Typography, Card, CardActions, CardActionArea, CardHeader, CardMedia, CardContent, Paper } from "@material-ui/core";
+import { Box, Grid, Typography, Card, CardActions, CardActionArea, CardHeader, CardMedia, CardContent, Paper, Button } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from "react-router-dom";
 import Navbar from "../components/shared/Navbar";
@@ -19,47 +19,66 @@ function PlannerInitialPage(props: DefaultProps) {
 	const history = useHistory();
 	return (
 		<>
-			<Navbar />
-			<br />
-			<br />
-			<br />
-			{/* top down component */}
-			<Grid container spacing={4} justify="center" alignItems="center">
-				<Grid item xs={6}>
-					<div className="card-body">
-						<Card variant="outlined" onClick={() => history.push('/TopdownInitial')}>
-							<CardHeader title="Careers" />
-							<CardContent>
-								<img src={CareersImage} />
-								<Typography variant="body1" align="left">
-									See what paths are available towards your dream career
-								</Typography>
-							</CardContent>
-						</Card>
-					</div>
-				</Grid>
+	    <Navbar/>
+		<br>
+		</br>
+		<div style={{float:'left'}}>
+			<Button className="backButton" variant="contained" onClick={() => history.goBack()} >
+				Back
+			</Button>
+		</div>
+	    <Typography variant="h5" className="classes.prompt">
+			What would you like to do?
+	    </Typography>
+	    <br>
+		</br>
+		<br>
+		</br>
+		<br>
+		</br>
+		<br>
+		</br>
+		<br>
+		</br>
+		<br>
+		</br>
+
+
+	    {/* routed cards */}
+	    <Grid container spacing={4} justify="center">
+			<Grid item xs={12} sm={6}>
+				<div className="card-body">
+				<Card variant="outlined" onClick = {() => history.push('/CoursePlanner') }> 
+					<CardHeader title="Plan Your Medical Course"/>
+					<Grid item>
+						<img  src={ClassesImage} alt="medical stock image"/>
+					</Grid>
+					<CardContent>
+					<Typography variant="body1" align="center">
+						See how Curtin's flexible course structure can be shaped to you advantage.
+					</Typography> 
+					</CardContent>
+				</Card>
+				</div>
 			</Grid>
 
-			{/* bottom up component */}
-			< Grid >
-				<br>
-				</br>
-				<br>
-				</br>
+			<Grid item xs={12} sm={6}>
 				<div className="card-body">
-					<Card variant="outlined" onClick={() => history.push('/CoursePlanner')}>
-						<CardHeader title="Courses" />
-						<img src={ClassesImage} />
-
-						<CardContent>
-							<Typography variant="body1" align="center">
-								Create a study plan of interesting units and see what opportunities this could lead to
-							</Typography>
-						</CardContent>
-					</Card>
+				<Card variant="outlined"  onClick = {() => history.push('/TopdownInitial')}>
+					<CardHeader title="See Careers"/>
+					<Grid item>
+					<img src={CareersImage} alt="careers stock image"/>
+					</Grid>
+					<CardContent>
+					<Typography variant="body1" align="center" >
+						See all the possible careers Curtin can lead to and their requirements.
+					</Typography>
+					</CardContent>
+				</Card>
 				</div>
-			</Grid >
-		</>
+			</Grid>
+	    </Grid>
+	</>
 	);
 }
 

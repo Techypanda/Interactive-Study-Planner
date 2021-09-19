@@ -28,10 +28,15 @@ img {
 
 .card-body {
     border-radius: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 500px;
     border: 3px solid rgb(0, 0, 0);
 }
 
 .career-option {
+    border-radius: 5px;
+
     border: 1px solid rgb(0,0,0);
 }
 
