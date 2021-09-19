@@ -1,7 +1,7 @@
 image: atlassian/default-image:2
 pipelines:
   pull-requests:
-    '**':
+    master:
       - parallel: # INFRASTRUCTURE i.e NO DEPENDENCIES AND NO TESTING
           - step:
               name: "Deploy User Accounts"
