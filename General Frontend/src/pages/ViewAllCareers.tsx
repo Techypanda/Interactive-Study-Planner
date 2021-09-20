@@ -66,31 +66,36 @@ function ViewAllCareers(props: DefaultProps) {
     return (
 	<>
 	    <Navbar />
-	    <br/>
+		<br>
+		</br>
 	    <Container  >
-		<Box id="searchcontainer" display="flex">
-		    <TextField variant="outlined" id="standard-full-width" fullWidth  placeholder="Search careers..." className="searchbar" />
-		    <Button variant='contained' className="searchbtn">Search</Button>
-		</Box>
-		<br/>
-		{careersList.map((x) => (
-		    <div className="career-option">
-			<Card variant="outlined" className={classes.root}>
-			    <div className={classes.details}>
-				<CardContent onClick={() => history.push(`/InfoPage/ViewCareer/${x.CareerId}`)} className={classes.content}>
-				    <Typography className='values' component="h5" variant="h5" align="left">
-						{x.Industry}
-				    </Typography>
-				    <Typography variant="subtitle1" color="textSecondary">
-						{x.Description}
-				    </Typography>
-				</CardContent>
-				<div className={classes.controls}>
+			<Box id="searchcontainer" display="flex">
+					<Button className="backButton" variant="contained" onClick={() => history.goBack()} >
+						Back
+					</Button>
+
+				<TextField style={{padding: '0 10px'}} variant="outlined" id="standard-full-width" fullWidth  placeholder="Search careers..." className="searchbar" />
+				<Button variant='contained' className="searchbtn">Search</Button>
+			</Box>
+			<br/>
+			{careersList.map((x) => (
+				<div className="career-option">
+				<Card variant="outlined" className={classes.root}>
+					<div className={classes.details}>
+					<CardContent onClick={() => history.push(`/InfoPage/ViewCareer/${x.CareerId}`)} className={classes.content}>
+						<Typography className='values' component="h5" variant="h5" align="left">
+							{x.Industry}
+						</Typography>
+						<Typography variant="subtitle1" color="textSecondary">
+							{x.Description}
+						</Typography>
+					</CardContent>
+					<div className={classes.controls}>
+					</div>
+					</div>
+				</Card>
 				</div>
-			    </div>
-			</Card>
-		    </div>
-		))}
+			))}
 	    </Container>
 	    <br/>
 	    
