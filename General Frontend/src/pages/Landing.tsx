@@ -1,4 +1,4 @@
-import { AppBar, Card, CardActionArea, CardHeader, CardMedia, CardContent, Grid, Paper, Typography } from "@material-ui/core";
+import {  Card, CardHeader, CardMedia, CardContent, Grid, Paper, Typography } from "@material-ui/core";
 import Navbar from "../components/shared/Navbar";
 import styled from 'styled-components';
 import {useHistory} from "react-router-dom";

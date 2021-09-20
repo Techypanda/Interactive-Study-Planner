@@ -97,7 +97,6 @@ export interface RequiredUnitsList extends DefaultProps {
   listOfRequiredUnits? : string[]
 }
 
-
 export interface testPayload extends DefaultProps { 
   majorCode : string;
   majorName? : string;

@@ -1,8 +1,6 @@
 import './App.scss';
 import {BrowserRouter, Switch, Route} from "react-router-dom";
-import { useEffect} from "react";
 import Landing from './pages/Landing';
-import Error from './components/shared/Error';
 import ViewAllCareers from './pages/ViewAllCareers';
 import ViewAllUnits from './pages/ViewAllUnits';
 import PlannerInitialPage from './pages/PlannerInitialPage';
