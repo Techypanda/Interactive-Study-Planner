@@ -1,5 +1,4 @@
-import { Box, Container, Paper, Typography } from "@material-ui/core";
-import { ReactComponentElement } from "react";
+import { Box, Paper, Typography } from "@material-ui/core";
 import styled from "styled-components"
 
 function UnitDisplay(props: UnitEntryProps) {

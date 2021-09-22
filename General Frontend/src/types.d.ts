@@ -9,11 +9,6 @@ export interface TextSectionProps extends DefaultProps {
   sectionContent?: string;
 }
 
-export interface CareerEntryProps extends DefaultProps {
-  careerTitle: string;
-  careerContent: string;
-}
-
 export interface CareerProps {
   careerName? : string;
   careerDescription? : string;
@@ -22,42 +17,40 @@ export interface CareerProps {
   careerTraits? : string[];
 }
 
-export interface MajorEntryProps extends DefaultProps {
-  majorTitle: string;
-  majorContent: string;
-}
-
 export interface MajorProps {
-  majorCode : string;
+  majorCode? : string;
   majorName? : string;
   majorDescription? : string;
   majorCredits? : integer;
   majorUnits? : string[];
-  majorAntiReqs? : string[];
+  majorSpecAntiReqs? : string[];
+  majorUnitAntiReqs? : string[];
 }
 
-export interface CareerEntryProps extends DefaultProps {
-  careerTitle: string;
-  careerContent: string;
+export interface EntryProps extends DefaultProps {
+  title: string;
+  content: string;
+}
+
+export interface SpecProps {
+  specCode: string;
+  specName?:string;
+  specCredits?: integer;
+  specDescription?: string;
+  specInternal?: boolean;
+  specMajorAntiReqs?: string[];
+  specSpecAntiReqs?: string[];
+  specUnitAntiReqs?: string[];
+  specUnits?: string[];
 }
 
 export interface CareerProps {
   careerName? : string;
+  careerId? : string;
   careerDescription? : string;
   careerIndustry? : string;
   careerReqs? : string[];
   careerTraits? : string[];
-}
-
-export interface MajorEntryProps extends DefaultProps {
-  majorTitle: string;
-  majorContent: string;
-}
-
-
-export interface UnitProps extends DefaultProps {
-  unitTitle: string;
-  unitContent: string;
 }
 
 export interface ListDataProps extends DefaultProps {
@@ -86,17 +79,30 @@ export interface MajorUnitListProps extends DefaultProps {
   majorUnitList: string[];
 }
 
-export interface MajorProps extends DefaultProps { 
-  majorCode : string;
-  majorName? : string;
-  majorDescription? : string;
-  majorCredits? : integer; 
-  majorUnits? : string[];
-  majorAntiReqs? : string[];
-}
-
 export interface InfoCardProps extends DefaultProps { 
   Code : string;
   Title : string;
   Description : string;
+}
+
+export interface MajorListProps extends DefaultProps { 
+  majorList : MajorProps[];
+}
+
+export interface CareerPropsList extends DefaultProps { 
+  listOfCareers? : CareerProps[];
+}
+
+export interface RequiredUnitsList extends DefaultProps { 
+  listOfRequiredUnits? : string[]
+}
+
+export interface testPayload extends DefaultProps { 
+  majorCode : string;
+  majorName? : string;
+  majorDescription? : string;
+  majorCredits? : BigInteger;
+  majorUnits? : string[];
+  majorAntiReqs? : string[]
+  requiredUnits? : string[];
 }

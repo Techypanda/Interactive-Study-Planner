@@ -1,7 +1,9 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // first page that is seen when the general user opens the site, prompting a choice
 // between top down and bottom up course planner buildilng.
 
-import { Box, Grid, Typography, Card, CardActions, CardActionArea, CardHeader, CardMedia, CardContent, Paper} from "@material-ui/core";
+import { Box, Grid, Typography, Card, CardActions, CardActionArea, CardHeader, CardMedia, CardContent, Paper, Button} from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from "react-router-dom";
 import Navbar from "../components/shared/Navbar";
@@ -9,55 +11,78 @@ import { DefaultProps } from "../types";
 
 import ListCareers from "./ViewAllCareers";
 import CoursePlanner from "./CoursePlanner";
-
+import TopdownInitial from "./TopdownInitial";
 import CareersImage from "../static/career.jpg";
 import ClassesImage from "../static/classes.jpg";
 
 import '../App.scss';
 
 function PlannerInitialPage(props: DefaultProps) {
-    const history = useHistory();
-    return (
-	<>
+	const history = useHistory();
+	return (
+		<>
 	    <Navbar/>
-	    <Box id="landing" className={props.className} paddingTop={4}>
+		<br>
+		</br>
+		<div style={{float:'left'}}>
+			<Button className="backButton" variant="contained" onClick={() => history.goBack()} >
+				Back
+			</Button>
+		</div>
+	    <Typography variant="h5" className="classes.prompt">
+			What would you like to do?
+	    </Typography>
+	    <br>
+		</br>
+		<br>
+		</br>
+		<br>
+		</br>
+		<br>
+		</br>
+		<br>
+		</br>
+		<br>
+		</br>
 
-		{/* top down component */}
-		<Grid container spacing={4} justify="center" alignItems="center">
-		    <Grid item xs={6}>
-			<div className="card-body">
-			    <Card variant="outlined"> 
-				<CardHeader title="Careers"/>
-				<CardContent> 
-				    <img src={CareersImage}/>
-				    <Typography variant="body1" align="left">
-					See what paths are available towards your dream career
-				    </Typography>
-				</CardContent>
-			    </Card>
-			</div>
-		    </Grid>
 
-		    {/* bottom up component */}
-		    <Grid item xs = {6}>
-			<div className="card-body">
-			    <Card variant="outlined" onClick={() => history.push('/CoursePlanner')}>
-				<CardHeader title="Courses"/>
-				<CardContent>
-				    <img src={ClassesImage} />
-				    
-				    <Typography variant="body1" align="left">
-					Create a study plan of interesting units and see what opportunities this could lead to
-				    </Typography>
-				</CardContent>
-			    </Card>
-			</div>
-		    </Grid>
-		</Grid>
-	    </Box>
+	    {/* routed cards */}
+	    <Grid container spacing={4} justify="center">
+			<Grid item xs={12} sm={6}>
+				<div className="card-body">
+				<Card variant="outlined" onClick = {() => history.push('/CoursePlanner') }> 
+					<CardHeader title="Plan Your Medical Course"/>
+					<Grid item>
+						<img  src={ClassesImage} alt="medical stock image"/>
+					</Grid>
+					<CardContent>
+					<Typography variant="body1" align="center">
+						See how Curtin's flexible course structure can be shaped to you advantage.
+					</Typography> 
+					</CardContent>
+				</Card>
+				</div>
+			</Grid>
+
+			<Grid item xs={12} sm={6}>
+				<div className="card-body">
+				<Card variant="outlined"  onClick = {() => history.push('/TopdownInitial')}>
+					<CardHeader title="See Careers"/>
+					<Grid item>
+					<img src={CareersImage} alt="careers stock image"/>
+					</Grid>
+					<CardContent>
+					<Typography variant="body1" align="center" >
+						See all the possible careers Curtin can lead to and their requirements.
+					</Typography>
+					</CardContent>
+				</Card>
+				</div>
+			</Grid>
+	    </Grid>
 	</>
-    );
+	);
 }
-
+    
 export default PlannerInitialPage;
 

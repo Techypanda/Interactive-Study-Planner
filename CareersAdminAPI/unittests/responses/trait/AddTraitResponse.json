@@ -1,1 +1,1 @@
-{"statusCode": 200, "body": "Success: Trait added to database.", "headers": {"Content-Type": "application/json", "Access-Control-Allow-Origin": "*"}}
+{"statusCode": 200, "body": "Success: Trait added to database.", "headers": {"Access-Control-Allow-Headers": "Content-Type", "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Credentials": "true", "Access-Control-Allow-Methods": "POST", "Content-Type": "application/json"}}

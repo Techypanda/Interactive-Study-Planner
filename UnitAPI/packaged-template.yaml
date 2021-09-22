@@ -22,7 +22,7 @@ Resources:
           Properties:
             Path: /getallspecs
             Method: get
-      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/unitapi:getallspecsfunction-0610eba8a81a-python3.8-v1
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/unitapi:getallspecsfunction-61931de15f15-python3.8-v1
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./getallspecs
@@ -40,7 +40,7 @@ Resources:
           Properties:
             Path: /getallmajors
             Method: get
-      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/unitapi:getallmajorsfunction-9fe7748e7b9f-python3.8-v1
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/unitapi:getallmajorsfunction-de2a39f0ab02-python3.8-v1
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./getallmajors
@@ -58,7 +58,7 @@ Resources:
           Properties:
             Path: /getallunits
             Method: get
-      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/unitapi:getallunitsfunction-4d30c8e62ad6-python3.8-v1
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/unitapi:getallunitsfunction-27c50b82b6ef-python3.8-v1
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./getallunits
@@ -76,7 +76,7 @@ Resources:
           Properties:
             Path: /getmajor
             Method: get
-      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/unitapi:getmajorfunction-8292c9971cd5-python3.8-v1
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/unitapi:getmajorfunction-632b6fcd8897-python3.8-v1
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./getmajor
@@ -94,7 +94,7 @@ Resources:
           Properties:
             Path: /getspec
             Method: get
-      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/unitapi:getspecfunction-764e50f7121b-python3.8-v1
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/unitapi:getspecfunction-d981d28bc617-python3.8-v1
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./getspec
@@ -112,7 +112,7 @@ Resources:
           Properties:
             Path: /getunit
             Method: get
-      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/unitapi:getunitfunction-a231edf0c42d-python3.8-v1
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/unitapi:getunitfunction-0ab14cc03c90-python3.8-v1
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./getunit
@@ -130,7 +130,7 @@ Resources:
           Properties:
             Path: /searchmajor
             Method: get
-      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/unitapi:searchmajorfunction-c2a6dd5d43e2-python3.8-v1
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/unitapi:searchmajorfunction-f1b4b6e87a6c-python3.8-v1
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./searchmajor
@@ -148,7 +148,7 @@ Resources:
           Properties:
             Path: /searchspec
             Method: get
-      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/unitapi:searchspecfunction-8647e8064571-python3.8-v1
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/unitapi:searchspecfunction-f2f1b5d60e0d-python3.8-v1
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./searchspec
@@ -166,7 +166,7 @@ Resources:
           Properties:
             Path: /searchunit
             Method: get
-      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/unitapi:searchunitfunction-21fb63e95798-Python3.8-v1
+      ImageUri: 363837338544.dkr.ecr.ap-southeast-2.amazonaws.com/curtinmedicalcourseplanner/unitapi:searchunitfunction-6256f524ed80-Python3.8-v1
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./searchunit

@@ -1,11 +1,10 @@
 #!/bin/bash
 set -e
 echo "Building"
-sam build
-# Currently Testing Locally as it is hard to CI/CD this component
-# echo "Testing API"
-# ./RunSamTests.sh
-# go test -v
+sam build --parallel
+echo "Testing CSV API"
+./RunSamTests.sh
+go test -v
 echo "Beginning Deploy Stage"
 echo "Wiping ECR Before Deploying..."
 IMAGES_TO_DELETE=$( aws ecr list-images --region ap-southeast-2 --repository-name "curtinmedicalcourseplanner/csvparser" --query 'imageIds[*]' --output json )
