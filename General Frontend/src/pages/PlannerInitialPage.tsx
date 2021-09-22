@@ -1,7 +1,9 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // first page that is seen when the general user opens the site, prompting a choice
 // between top down and bottom up course planner buildilng.
 
-import { Box, Grid, Typography, Card, CardActions, CardActionArea, CardHeader, CardMedia, CardContent, Paper, Button } from "@material-ui/core";
+import { Box, Grid, Typography, Card, CardActions, CardActionArea, CardHeader, CardMedia, CardContent, Paper, Button} from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from "react-router-dom";
 import Navbar from "../components/shared/Navbar";
@@ -81,6 +83,6 @@ function PlannerInitialPage(props: DefaultProps) {
 	</>
 	);
 }
-
+    
 export default PlannerInitialPage;
 

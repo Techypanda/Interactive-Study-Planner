@@ -47,15 +47,6 @@ export default function CurrentPlan(props: MajorProps) {
 
     //const major = useMajor(props.majorCode A: String);
     const classes = useStyles();
-    /*const majorCode = props.majorCode;
-    const majorData = useMajor(majorCode!)
-    if(majorData.isLoading) { 
-      return (<LoadingScreen/>)
-    } 
-
-    let majorResponseData = majorData.data?.data!;
-    console.log(props.majorCode);
-    console.log(majorResponseData);*/
 
     const commonUnits = [ 
       "MEDI1000",

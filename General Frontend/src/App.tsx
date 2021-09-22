@@ -8,7 +8,6 @@ import CoursePlanner from './pages/CoursePlanner';
 import InfoPageRouter from './pages/InfoPageRouter';
 import TopdownInitial from './pages/TopdownInitial';
 import TopdownFilled from './pages/TopdownFilled';
-import ViewCareer from './components/shared/ViewCareer';
 
 // could just render the landing page from the index file but opportunities for other
 // setup could be done here

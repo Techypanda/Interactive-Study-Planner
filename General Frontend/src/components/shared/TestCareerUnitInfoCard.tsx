@@ -55,7 +55,7 @@ export default function TestCareerUnitInfoCard(props: InfoCardProps) {
 
   function loadTopDownFilled() { 
       //console.log(props.Code);
-      history.push('/TopdownFilled', props.Code);
+      history.push('./TopdownFilled', props.Code);
   }
   function loadCareerInfoPage() { 
       //For now I will just redirect to the career info page
