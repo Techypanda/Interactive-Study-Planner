@@ -24,7 +24,6 @@ import CommentIcon from '@material-ui/icons/Comment';
 import CareerUnitInfoCard from '../components/shared/CareerUnitInfoCard'
 import TopDownFilledMain from '../components/shared/TopDownFilledMain';
 import CurrentPlan from '../components/shared/CurrentPlan';
-import Navbar from '../components/shared/Navbar';
 import AvailableCareersList from '../components/shared/AvailableCareersList';
 //import TopDownInitialMain from '../components/shared/TopDownInitialMain';
 import TopDownInitialMain from '../components/shared/TopDownInitialMain';
@@ -113,7 +112,6 @@ export default function TopdownInitial() {
 
     return (
         <>
-            <Navbar />
             <Grid container justify={'space-between'} alignItems={'stretch'} className={classes.nonNavBar}>
                 <Grid item xs={2}>
                     <EmptyCurrentPlan />

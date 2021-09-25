@@ -6,7 +6,6 @@
 import { Box, Grid, Typography, Card, CardActions, CardActionArea, CardHeader, CardMedia, CardContent, Paper, Button, Container, useMediaQuery } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from "react-router-dom";
-import Navbar from "../components/shared/Navbar";
 import { DefaultProps } from "../types";
 
 import ListCareers from "./ViewAllCareers";
