@@ -10,7 +10,6 @@ import {BrowserRouter, Switch, Route} from "react-router-dom";
 import Navbar from "../components/shared/Navbar";
 import { CareerProps, DefaultProps } from "../types";
 import { createStyles, makeStyles, Theme , useTheme} from '@material-ui/core/styles';
-import "../App.scss";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({

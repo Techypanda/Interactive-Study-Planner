@@ -15,8 +15,6 @@ import TopdownInitial from "./TopdownInitial";
 import CareersImage from "../static/career.jpg";
 import ClassesImage from "../static/classes.jpg";
 
-import '../App.scss';
-
 function PlannerInitialPage(props: DefaultProps) {
 	const history = useHistory();
 	return (
