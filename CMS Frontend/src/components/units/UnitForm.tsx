@@ -198,7 +198,7 @@ function UnitForm(props: UnitFormProps) {
             <RequistePath idx={i} key={i} path={path} delete={deletePrePath} updatePath={updatePrePath} />
           </Box>
         )}
-        <Button variant="contained" color="primary" onClick={() => { const copy = [...prereq]; copy.push([]); setPrereq(copy) }}>Add Requiste Path</Button>
+        <Button className="mb-1"  variant="contained" color="primary" onClick={() => { const copy = [...prereq]; copy.push([]); setPrereq(copy) }}>Add Requiste Path</Button>
       </Box>
 
       <Box mt={2}>
@@ -208,7 +208,7 @@ function UnitForm(props: UnitFormProps) {
             <RequistePath idx={i} key={i} path={path} delete={deleteCoPath} updatePath={updateCoPath} />
           </Box>
         )}
-        <Button variant="contained" color="primary" onClick={() => { const copy = [...coreq]; copy.push([]); setCoreq(copy) }}>Add Requiste Path</Button>
+        <Button className="mb-1"  variant="contained" color="primary" onClick={() => { const copy = [...coreq]; copy.push([]); setCoreq(copy) }}>Add Requiste Path</Button>
       </Box>
 
       <Box mt={2}>
@@ -218,12 +218,13 @@ function UnitForm(props: UnitFormProps) {
             <RequistePath idx={i} key={i} path={path} delete={deleteAntiPath} updatePath={updateAntiPath} />
           </Box>
         )}
-        <Button variant="contained" color="primary" onClick={() => { const copy = [...antireq]; copy.push([]); setAntireq(copy) }}>Add Requiste Path</Button>
+        <Button className="mb-1"  variant="contained" color="primary" onClick={() => { const copy = [...antireq]; copy.push([]); setAntireq(copy) }}>Add Requiste Path</Button>
       </Box>
 
       <Box display="flex" justifyContent="space-between" mt={2}>
-        <Button variant="contained" color="secondary" id="backbtn" onClick={() => history.push("/units")}>Back</Button>
+        <Button className="mb-1"  variant="contained" color="secondary" id="backbtn" onClick={() => history.push("/units")}>Back</Button>
         <Button
+          className="mb-1" 
           variant="contained"
           color="primary"
           id="createbtn"

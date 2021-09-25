@@ -206,7 +206,7 @@ function SpecForm(props: SpecFormProps) {
         <MajorList list={units} remove={removeUnitFromList} />
         <Box mt={1}>
           <TextField label="Unit Code" placeholder="Enter UnitCode To Add" variant="outlined" required onChange={(e) => setNewUnitCode(e.target.value)} value={newUnitCode} />
-          <Button onClick={() => addUnit(newUnitCode)}>Add Unit</Button>
+          <Button className="mb-1"  onClick={() => addUnit(newUnitCode)}>Add Unit</Button>
         </Box>
       </Box>
 
@@ -217,7 +217,7 @@ function SpecForm(props: SpecFormProps) {
             <RequistePath idx={i} key={i} path={path} delete={deleteUnitPath} updatePath={updateUnitPath} />
           </Box>
         )}
-        <Button variant="contained" color="primary" onClick={() => { const copy = [...unitAntiReqs]; copy.push([]); setUnitAntiReqs(copy) }}>Add AntiRequiste Path</Button>
+        <Button className="mb-1"  variant="contained" color="primary" onClick={() => { const copy = [...unitAntiReqs]; copy.push([]); setUnitAntiReqs(copy) }}>Add AntiRequiste Path</Button>
       </Box>
 
       <Box mt={2}>
@@ -227,7 +227,7 @@ function SpecForm(props: SpecFormProps) {
             <RequistePath idx={i} key={i} path={path} delete={deleteSpecPath} updatePath={updateSpecPath} />
           </Box>
         )}
-        <Button variant="contained" color="primary" onClick={() => { const copy = [...specAntiReqs]; copy.push([]); setSpecAntiReqs(copy) }}>Add AntiRequiste Path</Button>
+        <Button className="mb-1"  variant="contained" color="primary" onClick={() => { const copy = [...specAntiReqs]; copy.push([]); setSpecAntiReqs(copy) }}>Add AntiRequiste Path</Button>
       </Box>
 
       <Box mt={2}>
@@ -237,12 +237,13 @@ function SpecForm(props: SpecFormProps) {
             <RequistePath idx={i} key={i} path={path} delete={deleteMajorPath} updatePath={updateMajorPath} />
           </Box>
         )}
-        <Button variant="contained" color="primary" onClick={() => { const copy = [...majorAntiReqs]; copy.push([]); setMajorAntiReqs(copy) }}>Add AntiRequiste Path</Button>
+        <Button className="mb-1"  variant="contained" color="primary" onClick={() => { const copy = [...majorAntiReqs]; copy.push([]); setMajorAntiReqs(copy) }}>Add AntiRequiste Path</Button>
       </Box>
 
       <Box display="flex" justifyContent="space-between" mt={2}>
-        <Button variant="contained" color="secondary" id="backbtn" onClick={() => history.push("/units")}>Back</Button>
+        <Button className="mb-1"  variant="contained" color="secondary" id="backbtn" onClick={() => history.push("/units")}>Back</Button>
         <Button
+          className="mb-1"
           variant="contained"
           color="primary"
           id="createbtn"

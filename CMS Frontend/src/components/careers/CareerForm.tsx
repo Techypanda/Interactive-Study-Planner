@@ -151,7 +151,7 @@ function CareerForm(props: CareerFormProps) {
         <CareerList list={requirements} remove={removeReq} />
         <Box mt={1}>
           <TextField label="Career Requirement" placeholder="Enter Requirement To Add" variant="outlined" required onChange={(e) => setNewReq(e.target.value)} value={newReq} />
-          <Button onClick={() => addReq(newReq)}>Add Unit</Button>
+          <Button className="mb-1" onClick={() => addReq(newReq)}>Add Unit</Button>
         </Box>
       </Box>
       <Box mt={2}>
@@ -159,12 +159,12 @@ function CareerForm(props: CareerFormProps) {
         <CareerList list={traits} remove={removeTrait} />
         <Box mt={1}>
           <TextField label="Career Traits" placeholder="Enter Trait To Add" variant="outlined" required onChange={(e) => setNewTrait(e.target.value)} value={newTrait} />
-          <Button onClick={() => addTrait(newTrait)}>Add Trait</Button>
+          <Button className="mb-1"  onClick={() => addTrait(newTrait)}>Add Trait</Button>
         </Box>
       </Box>
       <Box mt={3} display="flex" justifyContent="space-between">
-        <Button variant="contained" color="secondary" onClick={() => history.goBack()}>Back</Button>
-        <Button variant="contained" color="primary" onClick={() => SubmitForm()}>
+        <Button className="mb-1"  variant="contained" color="secondary" onClick={() => history.goBack()}>Back</Button>
+        <Button className="mb-1"  variant="contained" color="primary" onClick={() => SubmitForm()}>
           {props.career ? "Update Career" : "Create Career"}
         </Button>
       </Box>
