@@ -1,5 +1,4 @@
 import EmptyCurrentPlan from "../components/shared/EmptyCurrentPlan";
-import LoadingScreen from "../components/shared/Loading";
 import Navbar from "../components/shared/Navbar";
 import PlansAvailable from "../components/shared/PlansAvailable";
 import { DefaultProps } from "../types";

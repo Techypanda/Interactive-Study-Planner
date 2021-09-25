@@ -30,11 +30,11 @@ import AvailableCareersList from '../components/shared/AvailableCareersList';
 import TopDownInitialMain from '../components/shared/TopDownInitialMain';
 import EmptyCurrentPlan from '../components/shared/EmptyCurrentPlan';
 import axios, { AxiosResponse } from 'axios'
-import LoadingScreen from '../components/shared/Loading';
 import Error from '../components/shared/Error';
 import ReactDOM from 'react-dom';
 import { CareerProps,  ErrorProps,  MajorProps, CareerListProps} from "../types";
 import React, {useState, useEffect } from 'react';
+import { BounceLoader } from "react-spinners";
 
 
 const useStyles = makeStyles((theme) => ({ 
@@ -104,7 +104,7 @@ export default function TopdownInitial() {
     }
 
     if(isLoading) { 
-        return(<LoadingScreen/>);
+        return(<BounceLoader color="#1473AB" loading={true} size={150}/>);
     }
 
     if(isError) { 

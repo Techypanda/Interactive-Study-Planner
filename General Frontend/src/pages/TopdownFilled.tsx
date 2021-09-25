@@ -16,11 +16,11 @@ import TopDownFilledMain from '../components/shared/TopDownFilledMain';
 import AvailableCareersList from '../components/shared/AvailableCareersList';
 import { MajorProps, CareerListProps } from "../types";
 import axios, { AxiosResponse } from 'axios';
-import LoadingScreen from '../components/shared/Loading';
 import Error from '../components/shared/Error';
 import IconButton from '@material-ui/core/IconButton'
 import ClearIcon from '@material-ui/icons/Clear'
 import { common, red } from '@material-ui/core/colors'
+import { BounceLoader } from "react-spinners";
 
 import { useLocation, useHistory } from 'react-router-dom';
 import { Location } from 'history'
@@ -78,7 +78,7 @@ export default function TopdownFilled(props: MajorProps) {
     ]
 
     if(careers.isLoading || majors.isLoading || units.isLoading) { 
-        return (<LoadingScreen/>)
+        return (<BounceLoader color="#1473AB" loading={true} size={150}/>)
     }
 
     let careerResponseData = careers.data?.data!;
