@@ -141,7 +141,9 @@ function MajorForm(props: MajorFormProps) {
       </Box>
       <Error onAccept={() => setError({ promptTitle: error.promptTitle, promptContent: error.promptContent, showPrompt: false })} promptTitle={error.promptTitle} promptContent={error.promptContent} showPrompt={error.showPrompt} />
       <Box marginTop={3}>
-        <Typography variant="h4" align="center">Add A Unit</Typography>
+        <Typography variant="h4" align="center">
+          {props.major ? `Edit Major - ${props.major.Name}` : "Add Major"}
+        </Typography>
       </Box>
       <Grid container spacing={1}>
         <Grid item sm={6} xs={12}>
@@ -206,7 +208,7 @@ function MajorForm(props: MajorFormProps) {
           onClick={() => SubmitForm()}
           disabled={!credits || !description || !name || !majorCode /* || !delivery */}
         >
-          Create
+          {props.major ? "Edit" : "Create"}
         </Button>
       </Box>
     </div>

@@ -131,7 +131,9 @@ function CareerForm(props: CareerFormProps) {
       </Box>
       <Error onAccept={() => setError({ promptTitle: error.promptTitle, promptContent: error.promptContent, showPrompt: false })} promptTitle={error.promptTitle} promptContent={error.promptContent} showPrompt={error.showPrompt} />
       <Box mt={3} mb={2}>
-        <Typography variant="h4" align="center">Add A Career</Typography>
+        <Typography variant="h4" align="center">
+          {props.career ? `Edit Career - ${props.career?.Name}` : "Add A Career"}
+        </Typography>
       </Box>
       <Grid container spacing={2}>
         <Grid item xs={6}>
@@ -162,7 +164,9 @@ function CareerForm(props: CareerFormProps) {
       </Box>
       <Box mt={3} display="flex" justifyContent="space-between">
         <Button variant="contained" color="secondary" onClick={() => history.goBack()}>Back</Button>
-        <Button variant="contained" color="primary" onClick={() => SubmitForm()}>Create Career</Button>
+        <Button variant="contained" color="primary" onClick={() => SubmitForm()}>
+          {props.career ? "Update Career" : "Create Career"}
+        </Button>
       </Box>
     </div>
   )

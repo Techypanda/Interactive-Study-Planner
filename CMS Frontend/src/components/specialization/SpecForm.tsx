@@ -155,7 +155,9 @@ function SpecForm(props: SpecFormProps) {
       </Box>
       <Error onAccept={() => setError({ promptTitle: error.promptTitle, promptContent: error.promptContent, showPrompt: false })} promptTitle={error.promptTitle} promptContent={error.promptContent} showPrompt={error.showPrompt} />
       <Box marginTop={3}>
-        <Typography variant="h4" align="center">Add A Specialization</Typography>
+        <Typography variant="h4" align="center">
+          {props.spec ? `Edit Specialization - ${props.spec?.Name}` : "Create Specialization"}
+        </Typography>
       </Box>
       <Grid container spacing={1}>
         <Grid item sm={6} xs={12}>
@@ -247,7 +249,7 @@ function SpecForm(props: SpecFormProps) {
           onClick={() => SubmitForm()}
           disabled={!credits || !description || !name || !specCode /* || !delivery */}
         >
-          Create
+          {props.spec ? "Edit" : "Create"}
         </Button>
       </Box>
     </div>

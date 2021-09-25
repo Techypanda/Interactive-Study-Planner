@@ -154,7 +154,9 @@ function UnitForm(props: UnitFormProps) {
       </Box>
       <Error onAccept={() => setError({ promptTitle: error.promptTitle, promptContent: error.promptContent, showPrompt: false })} promptTitle={error.promptTitle} promptContent={error.promptContent} showPrompt={error.showPrompt} />
       <Box marginTop={3}>
-        <Typography variant="h4" align="center">Add A Unit</Typography>
+        <Typography variant="h4" align="center">
+          {props.unit ? `Edit Unit - ${props.unit?.Name}` : "Create Unit"}
+        </Typography>
       </Box>
       <Grid container spacing={1}>
         <Grid item sm={6} xs={12}>
@@ -228,7 +230,7 @@ function UnitForm(props: UnitFormProps) {
           onClick={() => SubmitForm()}
           disabled={!credits || !description || !name || !unitCode /* || !delivery */}
         >
-          Create
+          {props.unit ? "Edit" : "Create"}
         </Button>
       </Box>
     </div>
