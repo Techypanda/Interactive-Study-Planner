@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardContent, Grid, Typography, Container, Box, Paper, useMediaQuery } from "@material-ui/core";
+import {	Grid, Typography, Container, Box, useMediaQuery } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 
 // stock images
