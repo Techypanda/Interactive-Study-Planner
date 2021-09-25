@@ -1,4 +1,4 @@
-import {useHistory, Switch, Route} from "react-router-dom";
+import { useHistory, Switch, Route } from "react-router-dom";
 import ViewCareer from "../components/shared/ViewCareer";
 import ViewMajor from "../components/shared/ViewMajor";
 import ViewSpecialization from "../components/shared/ViewSpecialization";
@@ -15,33 +15,29 @@ import { Fade, Button } from "@material-ui/core";
 //Notes - remove button, test function, test route and usehistory after testing concluded or comment out
 
 //Information page router
-function InfoPageRouter()
-{
-    return(
-        <Fade in={true} timeout={2000}>
-            <Switch>
-                <Route exact path="/InfoPage/Test">
-                    <Test/>
-                </Route>
-                <Route exact path="/InfoPage/ViewCareer/:id">
-                    <ViewCareer/>
-                </Route>
-                <Route exact path="/InfoPage/ViewMajor/:id">
-                    <ViewMajor/>
-                </Route>
-                <Route exact path="/InfoPage/ViewSpecialization/:id">
-                    <ViewSpecialization/>
-                </Route>
-                <Route exact path="/InfoPage/ViewUnit/:id">
-                    <ViewUnit/>
-                </Route>
-            </Switch>
-        </Fade>  
+function InfoPageRouter() {
+    return (
+        <Switch>
+            <Route exact path="/InfoPage/Test">
+                <Test />
+            </Route>
+            <Route exact path="/InfoPage/ViewCareer/:id">
+                <ViewCareer />
+            </Route>
+            <Route exact path="/InfoPage/ViewMajor/:id">
+                <ViewMajor />
+            </Route>
+            <Route exact path="/InfoPage/ViewSpecialization/:id">
+                <ViewSpecialization />
+            </Route>
+            <Route exact path="/InfoPage/ViewUnit/:id">
+                <ViewUnit />
+            </Route>
+        </Switch>
     );
 }
 
-function Test()
-{
+function Test() {
     const history = useHistory();
     return (
         <div>
