@@ -1,4 +1,6 @@
 import { render } from "@testing-library/react";
+import { BrowserRouter as Router } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from 'react-query';
 import ViewCareer from "../components/shared/ViewCareer";
 import ViewMajor from "../components/shared/ViewMajor";
 import ViewSpecialization from "../components/shared/ViewSpecialization";
@@ -9,6 +11,8 @@ import ViewSpecialization from "../components/shared/ViewSpecialization";
  * Date Last Modified: 25/09/2021
  * Description: Testing for information pages
  */
+
+const client = new QueryClient();
 
 //ViewCareer
 describe("Career Information Page is working when ", () => {
@@ -21,10 +25,22 @@ describe("Career Information Page is working when ", () => {
       }));
 
     it("Renders Without A Crash", () => {
-        render(<ViewCareer />)
+        render(
+            <QueryClientProvider client={client}>
+                <Router>
+                    <ViewCareer />
+                </Router>
+            </QueryClientProvider> 
+        );
     })
     it("Renders And Matches Snapshot", () => {
-        const x = render(<ViewCareer />)
+        const x = render(
+            <QueryClientProvider client={client}>
+                <Router>
+                    <ViewCareer />
+                </Router>
+            </QueryClientProvider> 
+        );
         expect(x).toMatchSnapshot();
     })
 })
@@ -40,10 +56,22 @@ describe("Major Information Page is working when ", () => {
       }));
 
     it("Renders Without A Crash", () => {
-        render(<ViewMajor />)
+        render(
+            <QueryClientProvider client={client}>
+                <Router>
+                    <ViewMajor />
+                </Router>
+            </QueryClientProvider> 
+        );
     })
     it("Renders And Matches Snapshot", () => {
-        const x = render(<ViewMajor />)
+        const x = render(
+            <QueryClientProvider client={client}>
+                <Router>
+                    <ViewMajor />
+                </Router>
+            </QueryClientProvider> 
+        );
         expect(x).toMatchSnapshot();
     })
 })
@@ -59,10 +87,22 @@ describe("Specialization Information Page is working when ", () => {
       }));
 
     it("Renders Without A Crash", () => {
-        render(<ViewSpecialization />)
+        render(
+            <QueryClientProvider client={client}>
+                <Router>
+                    <ViewSpecialization />
+                </Router>
+            </QueryClientProvider> 
+        );
     })
     it("Renders And Matches Snapshot", () => {
-        const x = render(<ViewSpecialization />)
+        const x = render(
+            <QueryClientProvider client={client}>
+                <Router>
+                    <ViewSpecialization />
+                </Router>
+            </QueryClientProvider> 
+        );
         expect(x).toMatchSnapshot();
     })
 })
