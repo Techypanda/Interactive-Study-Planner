@@ -29,7 +29,7 @@ function SpecializationManagement(props: DefaultProps) {
         <Typography display="inline" variant="h4">{props.username} - Specialization Management</Typography>
       </Box>
       <Box id="searchcontainer" display="flex">
-        <TextField variant="outlined" placeholder="Search Units..." className="searchbar" onChange={(e) => filter(e.target.value, searchMode)} />
+        <TextField variant="outlined" placeholder="Search Specializations..." className="searchbar" onChange={(e) => filter(e.target.value, searchMode)} />
         <Box marginLeft={2}>
           <Select
             id="select-searchmode"

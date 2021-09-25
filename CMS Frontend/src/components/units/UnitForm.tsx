@@ -154,7 +154,9 @@ function UnitForm(props: UnitFormProps) {
       </Box>
       <Error onAccept={() => setError({ promptTitle: error.promptTitle, promptContent: error.promptContent, showPrompt: false })} promptTitle={error.promptTitle} promptContent={error.promptContent} showPrompt={error.showPrompt} />
       <Box marginTop={3}>
-        <Typography variant="h4" align="center">Add A Unit</Typography>
+        <Typography variant="h4" align="center">
+          {props.unit ? `Edit Unit - ${props.unit?.Name}` : "Create Unit"}
+        </Typography>
       </Box>
       <Grid container spacing={1}>
         <Grid item sm={6} xs={12}>
@@ -196,7 +198,7 @@ function UnitForm(props: UnitFormProps) {
             <RequistePath idx={i} key={i} path={path} delete={deletePrePath} updatePath={updatePrePath} />
           </Box>
         )}
-        <Button variant="contained" color="primary" onClick={() => { const copy = [...prereq]; copy.push([]); setPrereq(copy) }}>Add Requiste Path</Button>
+        <Button className="mb-1"  variant="contained" color="primary" onClick={() => { const copy = [...prereq]; copy.push([]); setPrereq(copy) }}>Add Requiste Path</Button>
       </Box>
 
       <Box mt={2}>
@@ -206,7 +208,7 @@ function UnitForm(props: UnitFormProps) {
             <RequistePath idx={i} key={i} path={path} delete={deleteCoPath} updatePath={updateCoPath} />
           </Box>
         )}
-        <Button variant="contained" color="primary" onClick={() => { const copy = [...coreq]; copy.push([]); setCoreq(copy) }}>Add Requiste Path</Button>
+        <Button className="mb-1"  variant="contained" color="primary" onClick={() => { const copy = [...coreq]; copy.push([]); setCoreq(copy) }}>Add Requiste Path</Button>
       </Box>
 
       <Box mt={2}>
@@ -216,19 +218,20 @@ function UnitForm(props: UnitFormProps) {
             <RequistePath idx={i} key={i} path={path} delete={deleteAntiPath} updatePath={updateAntiPath} />
           </Box>
         )}
-        <Button variant="contained" color="primary" onClick={() => { const copy = [...antireq]; copy.push([]); setAntireq(copy) }}>Add Requiste Path</Button>
+        <Button className="mb-1"  variant="contained" color="primary" onClick={() => { const copy = [...antireq]; copy.push([]); setAntireq(copy) }}>Add Requiste Path</Button>
       </Box>
 
       <Box display="flex" justifyContent="space-between" mt={2}>
-        <Button variant="contained" color="secondary" id="backbtn" onClick={() => history.push("/units")}>Back</Button>
+        <Button className="mb-1"  variant="contained" color="secondary" id="backbtn" onClick={() => history.push("/units")}>Back</Button>
         <Button
+          className="mb-1" 
           variant="contained"
           color="primary"
           id="createbtn"
           onClick={() => SubmitForm()}
           disabled={!credits || !description || !name || !unitCode /* || !delivery */}
         >
-          Create
+          {props.unit ? "Edit" : "Create"}
         </Button>
       </Box>
     </div>
