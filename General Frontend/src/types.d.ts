@@ -2,6 +2,32 @@ import internal from "stream";
 
 export interface DefaultProps {
   className?: string;
+  style?: React.CSSProperties | undefined;
+}
+export interface PlanExplainProps extends DefaultProps {
+  title: string;
+  explaination: string;
+}
+export interface CareerListSPAProps extends DefaultProps {
+  careers: Array<Career>
+}
+export interface InitialCareerSPAProps extends DefaultProps {
+  majors: Array<Major>
+  selectMajor: (m: Major) => void;
+}
+export interface CareerListEntryProps extends DefaultProps {
+  title: string;
+}
+export interface UnitFirstSPAContextProps {
+  careers: Array<Career>
+  units: Array<Unit>
+  specs: Array<Specialization>
+  majors: Array<Major>
+}
+export interface OptionCardProps extends DefaultProps, Clickable {
+  title: string;
+  type: string;
+  description: string;
 }
 
 export interface Clickable {
@@ -36,6 +62,48 @@ export interface MajorProps {
   majorUnits? : string[];
   majorSpecAntiReqs? : string[];
   majorUnitAntiReqs? : string[];
+}
+
+export interface Specialization {
+  SpecializationCode: string
+	Name: string
+	Description: string
+	Credits: number
+	Internal: boolean
+	Units: string[]
+	UnitAntiReqs: string[][]
+	SpecAntiReqs: string[][]
+	MajorAntiReqs: string[][]
+}
+
+export interface Unit {
+  Credits: Number
+  Antirequistes: Array<Array<string>>
+  Prerequistes: Array<Array<string>>
+  Corequistes: Array<Array<string>>
+  Name: string
+  Delivery: string
+  UnitCode: string
+  Description: string
+}
+
+export interface Major {
+  MajorCode: string,
+	Name: string,
+	Description: string,
+	Credits: Number,
+	Units: string[],
+	UnitAntiReqs: Array<Array<string>>
+	SpecAntiReqs: Array<Array<string>>
+}
+
+export interface Career {
+  CareerId: string
+  Description: string
+  Industry: string
+  Name: string
+  Requirements: string[]
+  Traits: string[]
 }
 
 export interface EntryProps extends DefaultProps {
