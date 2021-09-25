@@ -37,7 +37,7 @@ function PlannerInitialPage(props: DefaultProps) {
 				<Grid item md={6} xs={12}>
 					<Box mb={isTablet ? 2 : 0}>
 						<CardPrompt
-							onClick={() => history.push('/CoursePlanner')}
+							onClick={() => history.push('/UnitsFirst')}
 							src={ClassesImage}
 							alt="A image of curtin university"
 							title={"Units First Approach"}
