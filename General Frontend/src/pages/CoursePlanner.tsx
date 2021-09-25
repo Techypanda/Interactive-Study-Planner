@@ -91,7 +91,6 @@ function CoursePlanner() {
 
     return (
 	<>
-	    <Navbar/>
 	    <DragDropContext
 		onDragUpdate={OnDragUpdate}
 		onDragEnd={OnDragEnd}>
