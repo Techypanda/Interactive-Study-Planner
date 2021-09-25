@@ -64,7 +64,6 @@ function ViewAllCareers(props: DefaultProps) {
 
     return (
 	<>
-	    <Navbar />
 		<br>
 		</br>
 	    <Container  >
