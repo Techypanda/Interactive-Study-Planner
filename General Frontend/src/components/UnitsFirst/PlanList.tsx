@@ -1,15 +1,37 @@
-import { Box, Typography } from "@material-ui/core";
+import { Box, MenuItem, Select, Typography } from "@material-ui/core";
 import styled from "styled-components";
 import { useRemainingHeight } from "../../api/hooks";
-import { DefaultProps } from "../../types";
-
-function PlanList(props: DefaultProps) {
+import { PlanProps } from "../../types";
+function titleCase(str: String) { // https://stackoverflow.com/questions/32589197/how-can-i-capitalize-the-first-letter-of-each-word-in-a-string-using-javascript
+  var splitStr = str.toLowerCase().split(' ');
+  for (var i = 0; i < splitStr.length; i++) {
+      splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);     
+  }
+  return splitStr.join(' '); 
+}
+function PlanList(props: PlanProps) {
+  const menuVal = props.mainMajor?.Name;
   const height = useRemainingHeight();
   return (
     <div className={props.className}>
       <Box className="planList" minHeight={height}>
         <Box pt={2}>
           <Typography variant="h5">Current Plan</Typography>
+          {menuVal ?
+            <Select 
+              variant="outlined"
+              fullWidth
+              value={menuVal}
+              renderValue={(_: any) => {return `Main Major: ${titleCase(menuVal)}`}}
+              onChange={(event) => {
+                props.updateMainMajor(props.majors[event.target.value as number])
+              }}
+            >
+              {props.majors.map((major, idx) => <MenuItem key={major.MajorCode} value={idx}>
+                {major.Name}
+              </MenuItem>)}
+            </Select> : <></>
+          }
         </Box>
       </Box>
     </div>

@@ -4,6 +4,16 @@ export interface DefaultProps {
   className?: string;
   style?: React.CSSProperties | undefined;
 }
+export interface WorkspaceProps extends DefaultProps {
+  units: Array<Unit>
+  specs: Array<Specialization>
+  majors: Array<Major>
+}
+export interface PlanProps extends DefaultProps {
+  mainMajor?: Major;
+  majors: Array<Major>;
+  updateMainMajor: (m: Major) => void;
+}
 export interface PlanExplainProps extends DefaultProps {
   title: string;
   explaination: string;

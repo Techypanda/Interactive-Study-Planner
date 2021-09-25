@@ -50,7 +50,7 @@ function Initial(props: InitialCareerSPAProps) {
             />
           }
         </Box>
-        <Box display="flex" justifyContent="center">
+        <Box display="flex" justifyContent="center" mt={2}>
           <Button variant="contained" color="primary" onClick={() => selectMajor()}>Select</Button>
         </Box>
         <Box display="flex" alignItems="center" justifyContent="center" mt={4}>

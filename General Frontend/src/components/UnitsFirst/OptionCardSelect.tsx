@@ -1,8 +1,8 @@
-import { Card, CardHeader, CardMedia, CardContent, Typography } from "@material-ui/core";
+import { Card, CardHeader, CardMedia, CardContent, Typography, CardActions, Button } from "@material-ui/core";
 import styled from "styled-components";
 import { OptionCardProps } from "../../types";
 
-function OptionCard(props: OptionCardProps) {
+function OptionCardSelect(props: OptionCardProps) {
   const styles = {
     height: "100%",
     ...props.style
@@ -24,7 +24,7 @@ function OptionCard(props: OptionCardProps) {
     </div>
   )
 }
-export default styled(OptionCard)`
+export default styled(OptionCardSelect)`
 .clickable {
   cursor: pointer;
 }

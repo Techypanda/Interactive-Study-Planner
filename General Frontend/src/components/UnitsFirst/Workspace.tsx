@@ -1,11 +1,38 @@
-import { Box, MenuItem, Select, Tooltip, Typography } from "@material-ui/core";
-import { useState } from "react";
+import { Box, MenuItem, Select, Typography } from "@material-ui/core";
+import { NavigateBefore, NavigateNext } from "@material-ui/icons";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { DefaultProps } from "../../types";
+import { Major, Specialization, WorkspaceProps, Unit } from "../../types";
+import OptionCardSelect from "./OptionCardSelect";
 import PlanExplain from "./PlanExplain";
 
-function Workspace(props: DefaultProps) {
+function sliceIntoPages(arr: Unit[] | Major[] | Specialization[], pageSize = 3): Map<number, Unit[] | Major[] | Specialization[]> {
+  let pageMap: Map<number, Unit[] | Major[] | Specialization[]> = new Map();
+  let pageNo = 0;
+  for (let i = 0; i < arr.length; i += 3) {
+    pageMap.set(pageNo, arr.slice(i, i + 3))
+    pageNo += 1;
+  }
+  return pageMap;
+}
+
+function Workspace(props: WorkspaceProps) {
   const [view, setView] = useState("Majors");
+  const [pages, setPages] = useState<Map<number, Unit[] | Major[] | Specialization[]>>(sliceIntoPages(props.majors));
+  const [page, setPage] = useState(0);
+  function navPrevious() {
+    console.log(pages);
+    console.log(pages.size)
+    const prevIDX = page - 1 < 0 ? pages.size - 1 : page - 1;
+    setPage(prevIDX);
+  }
+  function navNext() {
+    const nextIDX = page + 1 >= pages.size ? 0 : page + 1;
+    setPage(nextIDX);
+  }
+  useEffect(() => {
+    setPage(0);
+  }, [pages])
   return (
     <Box p={2} className={props.className}>
       <Box display="flex">
@@ -17,7 +44,20 @@ function Workspace(props: DefaultProps) {
             fullWidth
             variant="outlined"
             className="leftalign"
-            onChange={(e) => setView(e.target.value as string)}
+            onChange={(e) => {
+              setView(e.target.value as string)
+              switch (e.target.value) {
+                case "Majors":
+                  setPages(sliceIntoPages(props.majors));
+                  break;
+                case "Specializations":
+                  setPages(sliceIntoPages(props.specs));
+                  break;
+                case "Units":
+                  setPages(sliceIntoPages(props.units));
+                  break;
+              }
+            }}
           >
             <MenuItem value={"Majors"}>Majors</MenuItem>
             <MenuItem value={"Specializations"}>Specializations</MenuItem>
@@ -40,6 +80,52 @@ function Workspace(props: DefaultProps) {
           <PlanExplain title={"MAIN MAJOR + 1 INTERNAL SPECIALIZATION + 4 OPTIONAL UNITS"} explaination={"You can a main major then 4 optional units, this will give you the greatest flexibility but comes with the drawback of if you select bad electives you will have a less direct path to some careers"} />
         </Box>
       </Box>
+      <Box mt={8} display="flex" justifyContent="center">
+        {pages.get(page) &&
+          <>
+            {pages.get(page)!.length > 1 &&
+              <Box px={2}>
+                <OptionCardSelect
+                  title={pages.get(page)![0].Name}
+                  description={pages.get(page)![0].Description}
+                  type="Major"
+                />
+              </Box>
+            }
+            {pages.get(page)!.length > 1 && <Box px={2}>
+              <OptionCardSelect
+                title={pages.get(page)![1].Name}
+                description={pages.get(page)![1].Description}
+                type="Major"
+              />
+            </Box>}
+            {pages.get(page)!.length > 2 && <Box px={2}>
+              <OptionCardSelect
+                title={pages.get(page)![2].Name}
+                description={pages.get(page)![2].Description}
+                type="Major"
+              />
+            </Box>}
+          </>
+        }
+      </Box>
+      <Box mt={2}>
+        <Typography>Currently Viewing: {view}</Typography>
+      </Box>
+      <Box display="flex" alignItems="center" justifyContent="center" mt={4}>
+        <Box mr={2}>
+          <NavigateBefore className="navigationIcon" onClick={() => navPrevious()} />
+        </Box>
+        {Array(pages.size).fill(0).map((_, i) =>
+          <Box mx={0.2} key={i} className={`navIndicator ${i === page ? 'activewoopog' : ''}`} display="inline-block" height={15} width={15} borderRadius="100%" />
+        )}
+        <Box ml={2}>
+          <NavigateNext className="navigationIcon" onClick={() => navNext()} />
+        </Box>
+      </Box>
+      <Box>
+        <Typography>Page: {page + 1}/{pages.size}</Typography>
+      </Box>
     </Box>
   )
 }
@@ -49,5 +135,20 @@ export default styled(Workspace)`
 }
 .leftalign {
   text-align: left;
+}
+.navigationIcon {
+  background-color: #cc9900 !important;
+  color: #FFF !important;
+  font-size: 50px !important;
+  border-radius: 100%;
+  padding: 5px;
+  cursor: pointer;
+}
+.navIndicator {
+  background-color: #d9d9d9;
+  border: 2px solid #777777;
+}
+.activewoopog {
+  background-color: #777777;
 }
 `;
