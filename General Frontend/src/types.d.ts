@@ -4,6 +4,17 @@ export interface DefaultProps {
   className?: string;
 }
 
+export interface Clickable {
+  onClick?: React.MouseEventHandler<HTMLDivElement> | undefined
+}
+
+export interface CardPromptProps extends DefaultProps, Clickable {
+  title: string;
+  src: string;
+  alt: string;
+  description: string;
+}
+
 export interface TextSectionProps extends DefaultProps {
   sectionHeading: string;
   sectionContent?: string;
