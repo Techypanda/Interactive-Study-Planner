@@ -26,7 +26,6 @@ import axios from 'axios';
 import { MajorUnitListProps } from '../../types';
 import { RequiredUnitsList } from '../../types';
 import { useEffect } from 'react';
-import LoadingScreen from './Loading';
 
 const useStyles = makeStyles((theme) => ({
     root: { 

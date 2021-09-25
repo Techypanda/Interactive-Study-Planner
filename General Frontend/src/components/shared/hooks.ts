@@ -1,7 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { useQuery } from 'react-query'
 
-
 export function useUnits() {
   return useQuery('units', async (): Promise<AxiosResponse<Array<any>>> => {
     //return await axios.get(`${process.env.REACT_APP_UNIT_API}/getallunits`)
@@ -11,8 +10,6 @@ export function useUnits() {
     retry: false
   })
 }
-
-
 
 export function useCareers() {
   return useQuery("careers", async (): Promise<AxiosResponse<Array<any>>> => {
@@ -24,7 +21,6 @@ export function useCareers() {
   })
 }
 
-
 export function useMajors() {
   return useQuery('majors', async (): Promise<AxiosResponse<Array<any>>> => {
     //return await axios.get(`${process.env.REACT_APP_UNIT_API}/getallmajors`)
@@ -35,6 +31,12 @@ export function useMajors() {
   })
 }
 
+/*
+ * Author: Matthew Loe
+ * Student Id: 19452425
+ * Date Last Modified: 25/09/2021
+ * Description: Hook for getting a career
+ */
 export function useCareer(careerCode: string)
 {
     return useQuery(`career - ${careerCode}`, async (): Promise<AxiosResponse<any>> => {
@@ -50,6 +52,12 @@ export function useCareer(careerCode: string)
     });
 }
 
+/*
+ * Author: Matthew Loe
+ * Student Id: 19452425
+ * Date Last Modified: 25/09/2021
+ * Description: Hook for getting a major
+ */
 export function useMajor(majorCode: string)
 {
     return useQuery(`major - ${majorCode}`, async (): Promise<AxiosResponse<any>> => {
@@ -67,6 +75,12 @@ export function useMajor(majorCode: string)
     });
 }
 
+/*
+ * Author: Matthew Loe
+ * Student Id: 19452425
+ * Date Last Modified: 25/09/2021
+ * Description: Hook for getting a specialization
+ */
 export function useSpecialization(specCode: string)
 {
     return useQuery(`specialization - ${specCode}`, async (): Promise<AxiosResponse<any>> => {
