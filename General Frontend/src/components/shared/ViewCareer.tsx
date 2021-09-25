@@ -5,7 +5,6 @@ import NavListSection from "./NavListSection"
 import { CareerProps, DefaultProps } from "../../types";
 import styled from "styled-components";
 import { useHistory, useParams } from "react-router-dom";
-
 import { useCareer } from "./hooks";
 import { BounceLoader } from "react-spinners";
 import NotFound from "../../pages/NotFound";

@@ -4,7 +4,6 @@ import NavListSection from "./NavListSection"
 import { MajorProps, DefaultProps } from "../../types";
 import styled from "styled-components";
 import { useHistory, useParams } from "react-router-dom";
-
 import { useMajor } from "./hooks";
 import { BounceLoader } from "react-spinners";
 import NotFound from "../../pages/NotFound";
