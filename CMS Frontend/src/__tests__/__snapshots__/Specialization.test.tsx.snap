@@ -35,7 +35,7 @@ Object {
             <h4
               class="MuiTypography-root MuiTypography-h4 MuiTypography-alignCenter"
             >
-              Add A Specialization
+              Create Specialization
             </h4>
           </div>
           <div
@@ -505,7 +505,7 @@ Object {
           <h4
             class="MuiTypography-root MuiTypography-h4 MuiTypography-alignCenter"
           >
-            Add A Specialization
+            Create Specialization
           </h4>
         </div>
         <div
@@ -1128,7 +1128,7 @@ Object {
               <input
                 aria-invalid="false"
                 class="MuiInputBase-input MuiOutlinedInput-input"
-                placeholder="Search Units..."
+                placeholder="Search Specializations..."
                 type="text"
                 value=""
               />
@@ -1266,7 +1266,7 @@ Object {
             <input
               aria-invalid="false"
               class="MuiInputBase-input MuiOutlinedInput-input"
-              placeholder="Search Units..."
+              placeholder="Search Specializations..."
               type="text"
               value=""
             />

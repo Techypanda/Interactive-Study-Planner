@@ -35,7 +35,7 @@ Object {
             <h4
               class="MuiTypography-root MuiTypography-h4 MuiTypography-alignCenter"
             >
-              Add A Unit
+              Create Unit
             </h4>
           </div>
           <div
@@ -470,7 +470,7 @@ Object {
           <h4
             class="MuiTypography-root MuiTypography-h4 MuiTypography-alignCenter"
           >
-            Add A Unit
+            Create Unit
           </h4>
         </div>
         <div
