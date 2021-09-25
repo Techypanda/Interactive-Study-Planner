@@ -4,7 +4,7 @@ import ViewMajor from "../components/shared/ViewMajor";
 import ViewSpecialization from "../components/shared/ViewSpecialization";
 import ViewUnit from "../components/shared/ViewUnit";
 
-import { Fade, Button } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 
 /*
  * Author: Matthew Loe
