@@ -21,8 +21,6 @@ function Workspace(props: WorkspaceProps) {
   const [pages, setPages] = useState<Map<number, Unit[] | Major[] | Specialization[]>>(sliceIntoPages(props.majors));
   const [page, setPage] = useState(0);
   function navPrevious() {
-    console.log(pages);
-    console.log(pages.size)
     const prevIDX = page - 1 < 0 ? pages.size - 1 : page - 1;
     setPage(prevIDX);
   }
@@ -88,7 +86,8 @@ function Workspace(props: WorkspaceProps) {
                 <OptionCardSelect
                   title={pages.get(page)![0].Name}
                   description={pages.get(page)![0].Description}
-                  type="Major"
+                  type={view === "Majors" ? "Major" : view === "Specializations" ? "Specialization" : "Unit"}
+                  onClick={() => props.select(pages.get(page)![0])}
                 />
               </Box>
             }
@@ -96,14 +95,16 @@ function Workspace(props: WorkspaceProps) {
               <OptionCardSelect
                 title={pages.get(page)![1].Name}
                 description={pages.get(page)![1].Description}
-                type="Major"
+                type={view === "Majors" ? "Major" : view === "Specializations" ? "Specialization" : "Unit"}
+                onClick={() => props.select(pages.get(page)![1])}
               />
             </Box>}
             {pages.get(page)!.length > 2 && <Box px={2}>
               <OptionCardSelect
                 title={pages.get(page)![2].Name}
                 description={pages.get(page)![2].Description}
-                type="Major"
+                type={view === "Majors" ? "Major" : view === "Specializations" ? "Specialization" : "Unit"}
+                onClick={() => props.select(pages.get(page)![2])}
               />
             </Box>}
           </>

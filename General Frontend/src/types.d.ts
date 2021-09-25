@@ -8,11 +8,14 @@ export interface WorkspaceProps extends DefaultProps {
   units: Array<Unit>
   specs: Array<Specialization>
   majors: Array<Major>
+  select: (selected: Unit | Major | Specialization) => void
 }
 export interface PlanProps extends DefaultProps {
   mainMajor?: Major;
   majors: Array<Major>;
   updateMainMajor: (m: Major) => void;
+  plan: Plan
+  removeFromPlan: (i: Major | Unit | Specialization) => void;
 }
 export interface PlanExplainProps extends DefaultProps {
   title: string;
@@ -105,6 +108,13 @@ export interface Major {
 	Units: string[],
 	UnitAntiReqs: Array<Array<string>>
 	SpecAntiReqs: Array<Array<string>>
+}
+
+export interface Plan {
+  mainMajor?: Major;
+  optionalUnits?: Unit[];
+  specializations?: Specialization[];
+  doubleMajor?: Major;
 }
 
 export interface Career {
