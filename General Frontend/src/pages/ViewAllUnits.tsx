@@ -6,10 +6,8 @@ import styled from "styled-components";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 
-import Navbar from "../components/shared/Navbar";
 import { CareerProps, DefaultProps } from "../types";
 import { createStyles, makeStyles, Theme , useTheme} from '@material-ui/core/styles';
-import "../App.scss";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -60,7 +58,6 @@ function ViewAllUnits(props: DefaultProps) {
 
     return (
 	<>
-	    <Navbar/>
 	    <Container  >
 		<Box id="searchcontainer" display="flex">
 		    <TextField variant="outlined" id="standard-full-width" fullWidth  placeholder="Search units..." className="searchbar" />

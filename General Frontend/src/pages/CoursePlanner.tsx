@@ -1,5 +1,4 @@
 import EmptyCurrentPlan from "../components/shared/EmptyCurrentPlan";
-import Navbar from "../components/shared/Navbar";
 import PlansAvailable from "../components/shared/PlansAvailable";
 import { DefaultProps } from "../types";
 import Error from "../components/shared/Error";
@@ -90,7 +89,6 @@ function CoursePlanner() {
 
     return (
 	<>
-	    <Navbar/>
 	    <DragDropContext
 		onDragUpdate={OnDragUpdate}
 		onDragEnd={OnDragEnd}>
