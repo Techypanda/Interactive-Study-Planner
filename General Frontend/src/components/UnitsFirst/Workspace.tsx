@@ -86,7 +86,7 @@ function Workspace(props: WorkspaceProps) {
                 <OptionCardSelect
                   title={pages.get(page)![0].Name}
                   description={pages.get(page)![0].Description}
-                  type={view === "Majors" ? "Major" : view === "Specializations" ? "Specialization" : "Unit"}
+                  type={view === "Majors" ? "Major" : view === "Specializations" ? `${(pages.get(page)![0] as Specialization).Internal ? "Internal" : "External"} Specialization` : "Unit"}
                   onClick={() => props.select(pages.get(page)![0])}
                 />
               </Box>
@@ -95,7 +95,7 @@ function Workspace(props: WorkspaceProps) {
               <OptionCardSelect
                 title={pages.get(page)![1].Name}
                 description={pages.get(page)![1].Description}
-                type={view === "Majors" ? "Major" : view === "Specializations" ? "Specialization" : "Unit"}
+                type={view === "Majors" ? "Major" : view === "Specializations" ? `${(pages.get(page)![1] as Specialization).Internal ? "Internal" : "External"} Specialization` : "Unit"}
                 onClick={() => props.select(pages.get(page)![1])}
               />
             </Box>}
@@ -103,7 +103,7 @@ function Workspace(props: WorkspaceProps) {
               <OptionCardSelect
                 title={pages.get(page)![2].Name}
                 description={pages.get(page)![2].Description}
-                type={view === "Majors" ? "Major" : view === "Specializations" ? "Specialization" : "Unit"}
+                type={view === "Majors" ? "Major" : view === "Specializations" ? `${(pages.get(page)![2] as Specialization).Internal ? "Internal" : "External"} Specialization` : "Unit"}
                 onClick={() => props.select(pages.get(page)![2])}
               />
             </Box>}
