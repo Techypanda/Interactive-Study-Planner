@@ -13,6 +13,38 @@ enum UNITSFIRSTMODES {
   fullWorkspace
 }
 
+const HARD_CODED_FIRSTYEAR_UNITS = [ // These are required in first year for medical degree
+  "MEDI1000", "HUMB1000", "BIOL1004", "CHEM1007", "INDH1006", "EPID1000", "HUMB1001", "GENE1000"
+]
+
+// Check that specialization does not have a unit antireq path that is satisifed by unit array
+function specAntireqsCheckUnits(spec: Specialization, myUnits: Unit[]): [boolean, Unit[]?] {
+  spec.UnitAntiReqs.forEach((path) => {
+    const pathMet: Unit[] = [];
+    path.forEach((uCode) => {
+      myUnits.forEach((unit) => {
+        if (uCode === unit.UnitCode) {
+          pathMet.push(unit);
+        }
+      })
+    })
+    if (path.length === pathMet.length) {
+      return [true, pathMet];
+    }
+  })
+  return [false, undefined];
+}
+function specAntireqsCheckMajor(spec: Specialization, major: Major): boolean {
+  spec.MajorAntiReqs.forEach((path) => {
+    path.forEach((m) => {
+      if (m === major.MajorCode) {
+        return true;
+      }
+    })
+  })
+  return false;
+}
+
 function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
   const [stage, setStage] = useState<UNITSFIRSTMODES>(UNITSFIRSTMODES.initial)
   const [careers, setCareers] = useState<Array<Career>>(props.careers);
@@ -134,15 +166,73 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
             alert("You already have this specialization in your plan"); // switch to a material ui prompt
           } else {
             temp.specializations.push(spec);
-            setPlan(temp);
+            let antiCheck = false;
+            if (temp.optionalUnits) { // Check unit Anti reqs
+              let unitCheck = specAntireqsCheckUnits(spec, temp.optionalUnits);
+              antiCheck = unitCheck[0];
+              if (antiCheck) {
+                let errMsg = `${spec.Name} contains unit antireqs that you are taking as optionals: `;
+                unitCheck[1]?.forEach((u) => {
+                  errMsg += `${u.Name} `;
+                })
+                alert(errMsg); // switch to a material ui prompt
+              }
+            }
+            if (temp.specializations.length === 2) { // check spec anti reqs
+              spec.SpecAntiReqs.forEach((path) => {
+                path.forEach((sp) => {
+                  if (sp === temp.specializations![0].SpecializationCode) {
+                    antiCheck = true;
+                    alert(`${spec.Name} contains spec antireq that you are taking as a first spec: ${temp.specializations![0].Name}`) // switch to a material ui prompt
+                  }
+                })
+              })
+            }
+            let firstMajorCheck = specAntireqsCheckMajor(spec, temp.mainMajor!);
+            if (firstMajorCheck) {
+              antiCheck = true;
+              alert(`Your main major is a major anti requiste to specialization: ${spec.Name}`) // switch to a material ui prompt
+            }
+            if (!antiCheck) {
+              setPlan(temp);
+            }
           }
         } else {
           if (temp.specializations.length > 0 && temp.specializations[0].Internal) {
             if (temp.specializations[0].SpecializationCode === spec.SpecializationCode) {
               alert("You already have this specialization in your plan"); // switch to a material ui prompt
             } else {
+              let antiCheck = false;
               temp.specializations.push(spec);
-              setPlan(temp);
+              if (temp.optionalUnits) { // Check unit Anti reqs
+                let unitCheck = specAntireqsCheckUnits(spec, temp.optionalUnits);
+                antiCheck = unitCheck[0];
+                if (antiCheck) {
+                  let errMsg = `${spec.Name} contains unit antireqs that you are taking as optionals: `;
+                  unitCheck[1]?.forEach((u) => {
+                    errMsg += `${u.Name} `;
+                  })
+                  alert(errMsg); // switch to a material ui prompt
+                }
+              }
+              if (temp.specializations.length === 2) { // check spec anti reqs
+                spec.SpecAntiReqs.forEach((path) => {
+                  path.forEach((sp) => {
+                    if (sp === temp.specializations![0].SpecializationCode) {
+                      antiCheck = true;
+                      alert(`${spec.Name} contains spec antireq that you are taking as a first spec: ${temp.specializations![0].Name}`) // switch to a material ui prompt
+                    }
+                  })
+                })
+              }
+              let firstMajorCheck = specAntireqsCheckMajor(spec, temp.mainMajor!);
+              if (firstMajorCheck) {
+                antiCheck = true;
+                alert(`Your main major is a major anti requiste to specialization: ${spec.Name}`) // switch to a material ui prompt
+              }
+              if (!antiCheck) {
+                setPlan(temp);
+              }
             }
           } else {
             alert("You cannot have two external specializations"); // switch to a material ui prompt
@@ -150,7 +240,36 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
         }
       } else {
         temp.specializations = [spec];
-        setPlan(temp);
+        let antiCheck = false;
+        if (temp.optionalUnits) { // Check unit Anti reqs
+          let unitCheck = specAntireqsCheckUnits(spec, temp.optionalUnits);
+          antiCheck = unitCheck[0];
+          if (antiCheck) {
+            let errMsg = `${spec.Name} contains unit antireqs that you are taking as optionals: `;
+            unitCheck[1]?.forEach((u) => {
+              errMsg += `${u.Name} `;
+            })
+            alert(errMsg); // switch to a material ui prompt
+          }
+        }
+        if (temp.specializations.length === 2) { // check spec anti reqs
+          spec.SpecAntiReqs.forEach((path) => {
+            path.forEach((sp) => {
+              if (sp === temp.specializations![0].SpecializationCode) {
+                antiCheck = true;
+                alert(`${spec.Name} contains spec antireq that you are taking as a first spec: ${temp.specializations![0].Name}`) // switch to a material ui prompt
+              }
+            })
+          })
+        }
+        let firstMajorCheck = specAntireqsCheckMajor(spec, temp.mainMajor!);
+        if (firstMajorCheck) {
+          antiCheck = true;
+          alert(`Your main major is a major anti requiste to specialization: ${spec.Name}`) // switch to a material ui prompt
+        }
+        if (!antiCheck) {
+          setPlan(temp);
+        }
       }
     }
   }
