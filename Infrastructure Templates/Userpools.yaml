@@ -27,6 +27,8 @@ Resources:
       CallbackURLs:
         - http://localhost:3000
         - https://d2qox5jw8ub6rt.cloudfront.net
+        - https://www.dev.admin.courseplanner.tech
+        - https://dev.admin.courseplanner.tech
       AllowedOAuthFlows:
         - code
         - implicit
@@ -76,6 +78,8 @@ Resources:
       CallbackURLs:
         - http://localhost:3000
         - https://d2qox5jw8ub6rt.cloudfront.net
+        - https://www.dev.admin.courseplanner.tech
+        - https://dev.admin.courseplanner.tech
       AllowedOAuthFlows:
         - code
         - implicit
