@@ -116,6 +116,65 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
   const [specs, setSpecs] = useState<Array<Specialization>>(props.specs);
   const [mainMajor, setMMajor] = useState<Major>();
   const [plan, setPlan] = useState<Plan>({});
+  function filterCareersList() {
+    let careersCodesToPop: Career[] = [];
+    let allCareers = [...props.careers]; // copy the array
+    let myRemainingUnitCount = 16;
+    if (plan.mainMajor) { myRemainingUnitCount -= 8 }
+    if (plan.doubleMajor) { myRemainingUnitCount -= 8 }
+    if (plan.specializations) { plan.specializations.forEach(() => myRemainingUnitCount -= 4); }
+    if (plan.optionalUnits) { plan.optionalUnits.forEach(() => myRemainingUnitCount -= 4); }
+    allCareers.forEach((career) => {
+      let count = 0;
+      let unitsRequired = career.Requirements
+      unitsRequired.forEach((unit) => {
+        let isCounted = false;
+        plan.mainMajor?.Units.forEach((ux) => {
+          if (ux === unit) {
+            if (!isCounted) { count += 1; isCounted = true; }
+          }
+        })
+        plan.doubleMajor?.Units.forEach((ux) => {
+          if (ux === unit) {
+            if (!isCounted) { count += 1; isCounted = true; }
+          }
+        })
+        plan.specializations?.forEach((spec) => {
+          spec.Units.forEach((ux) => {
+            if (ux === unit) {
+              if (!isCounted) { count += 1; isCounted = true; }
+            }
+          })
+        })
+        plan.optionalUnits?.forEach((ux) => {
+          if (ux.UnitCode === unit) {
+            if (!isCounted) { count += 1; isCounted = true; }
+          }
+        })
+      })
+      if (unitsRequired.length === count) {
+        // I HAVE ALL UNITS
+      } else {
+        // I DONT HAVE ALL UNITS
+        const countRemaining = unitsRequired.length - count;
+        if (myRemainingUnitCount - countRemaining >= 0) {
+          // I CAN STILL GET IT
+        } else {
+          // POP THIS CAREER
+          careersCodesToPop.push(career)
+        }
+      }
+    })
+
+    careersCodesToPop.forEach((career) => {
+      allCareers.forEach((careerToPop, idx) => {
+        if (career.CareerId === careerToPop.CareerId) {
+          allCareers.splice(idx, 1);
+        }
+      })
+    })
+    setCareers(allCareers);
+  }
   function removeFromPlan(i: Major | Unit | Specialization) {
     const temp = { ...plan };
     if ('UnitCode' in i) {
@@ -245,7 +304,9 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
               let myUnits: string[] = [];
               myUnits = [...temp.mainMajor!.Units]
               if (temp.specializations) {
-                myUnits = [...myUnits, ...temp.specializations[0]!.Units]
+                if (temp.specializations[0]!) {
+                  myUnits = [...myUnits, ...temp.specializations[0]!.Units]
+                }
                 temp.optionalUnits.forEach((u) => {
                   if (u.UnitCode !== unit.UnitCode) {
                     myUnits.push(u.UnitCode);
@@ -435,7 +496,9 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
         setStage(UNITSFIRSTMODES.workspace);
       }
     }
-  }, [plan, stage]);
+    filterCareersList();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [plan]);
   return (
     <Box>
       <Grid container className="sameheight"> { /* this isnt going to work on mobile :/ */}
