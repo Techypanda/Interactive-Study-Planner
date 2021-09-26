@@ -217,7 +217,6 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
       setMMajor(major);
       temp.mainMajor = major;
       setPlan(temp);
-      setStage(UNITSFIRSTMODES.workspace);
     }
   }
   function select(s: Unit | Major | Specialization) {
@@ -484,8 +483,19 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
       }
     }
   }
+  useEffect(() => {
+    const planJSON = localStorage.getItem(`${process.env.DEVELOPMENT ? "dev-" : ""}courseplanner-plan`)
+    if (planJSON) {
+      setPlan(JSON.parse(planJSON));
+    }
+  }, [])
   useEffect(() => { // everytime plan is updated, check if you have a full knapsack
-    if (plan.mainMajor && plan.doubleMajor) { // victory paths.
+    if (plan.mainMajor !== mainMajor) {
+      const planJSON = localStorage.getItem(`${process.env.DEVELOPMENT ? "dev-" : ""}courseplanner-plan`)
+      if (planJSON) {
+        setMainMajor(JSON.parse(planJSON)["mainMajor"])
+      }
+    } else if (plan.mainMajor && plan.doubleMajor) { // victory paths.
       setStage(UNITSFIRSTMODES.fullWorkspace);
     } else if (plan.specializations && plan.specializations.length === 2) {
       setStage(UNITSFIRSTMODES.fullWorkspace);
@@ -495,6 +505,9 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
       if (stage === UNITSFIRSTMODES.fullWorkspace) { // its no longer full so direct back
         setStage(UNITSFIRSTMODES.workspace);
       }
+    }
+    if (plan && plan.mainMajor) { // only update if the plan exists
+      localStorage.setItem(`${process.env.DEVELOPMENT ? "dev-" : ""}courseplanner-plan`, JSON.stringify(plan));
     }
     filterCareersList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
