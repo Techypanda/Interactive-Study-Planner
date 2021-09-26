@@ -19,6 +19,7 @@ const HARD_CODED_FIRSTYEAR_UNITS = [ // These are required in first year for med
 
 // Check that specialization does not have a unit antireq path that is satisifed by unit array
 function specAntireqsCheckUnits(spec: Specialization, myUnits: Unit[]): [boolean, Unit[]?] {
+  let retVal: [boolean, Unit[]?] = [false, undefined];
   spec.UnitAntiReqs.forEach((path) => {
     const pathMet: Unit[] = [];
     path.forEach((uCode) => {
@@ -29,22 +30,84 @@ function specAntireqsCheckUnits(spec: Specialization, myUnits: Unit[]): [boolean
       })
     })
     if (path.length === pathMet.length) {
-      return [true, pathMet];
+      retVal = [true, pathMet];
     }
   })
-  return [false, undefined];
+  return retVal;
 }
+
 function specAntireqsCheckMajor(spec: Specialization, major: Major): boolean {
+  let retVal = false;
   spec.MajorAntiReqs.forEach((path) => {
     path.forEach((m) => {
       if (m === major.MajorCode) {
-        return true;
+        retVal = true;
       }
     })
   })
-  return false;
+  return retVal;
 }
 
+function checkUnitInMajor(major: Major, unit: Unit): boolean {
+  let retVal = false;
+  major.Units.forEach((u) => {
+    if (u === unit.UnitCode) {
+      retVal = true;
+    }
+  })
+  // Check against hardcoded units too
+  HARD_CODED_FIRSTYEAR_UNITS.forEach((u) => {
+    if (u === unit.UnitCode) {
+      retVal = true;
+    }
+  })
+  return retVal;
+}
+
+function checkIfHavePrereqs(unitsIAmTaking: string[], unit: Unit): [boolean, string[][]?] {
+  let retVal: [boolean, string[][]?] = [false, []];
+  if (unit.Prerequistes.length >= 1 && unit.Prerequistes[0].length >= 1 && unit.Prerequistes[0][0] !== "") {
+    retVal[0] = true;
+    unit.Prerequistes.forEach((path) => {
+      let pathMet: string[] = [];
+      path.forEach((i) => {
+        unitsIAmTaking.forEach((k) => {
+          if (i === k) {
+            pathMet.push(k);
+          }
+        })
+      })
+      if (pathMet.length === path.length && pathMet[0] !== "") {
+        retVal[0] = false;
+      } else {
+        retVal[1]?.push(path);
+      }
+    })
+  }
+  return retVal;
+}
+
+function checkIfHaveAntireqs(unitsIAmTaking: string[], unit: Unit): [boolean, string[]?] {
+  let retVal: [boolean, string[]?] = [false, undefined];
+  if (unit.Antirequistes.length >= 1 && unit.Antirequistes[0].length >= 1 && unit.Antirequistes[0][0] !== "") {
+    unit.Antirequistes.forEach((path) => {
+      let pathMet: string[] = [];
+      path.forEach((i) => {
+        unitsIAmTaking.forEach((k) => {
+          if (i === k) {
+            pathMet.push(k);
+          }
+        })
+      })
+      if (pathMet.length === path.length && pathMet[0] !== "") {
+        retVal = [true, path]
+      }
+    })
+  }
+  return retVal;
+}
+
+// TODO SORT THE PAGES ALPHABETICALLY
 function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
   const [stage, setStage] = useState<UNITSFIRSTMODES>(UNITSFIRSTMODES.initial)
   const [careers, setCareers] = useState<Array<Career>>(props.careers);
@@ -87,7 +150,7 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
       }
     }
   }
-  function setMainMajor(major: Major) {
+  function setMainMajor(major: Major) { // TODO: Handle switching main major, currently does not check if you have units/specs/double major you cant have in combination
     const temp = { ...plan };
     if (temp.doubleMajor && temp.doubleMajor.MajorCode === major.MajorCode) {
       alert("you cant select a major as your main that you have as your secondary"); // switch to a material ui prompt
@@ -100,7 +163,7 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
   }
   function select(s: Unit | Major | Specialization) {
     const temp = { ...plan };
-    if ('UnitCode' in s) {
+    if ('UnitCode' in s) { // TODO: OR you have antireqs
       const unit = s as Unit
       if (temp.optionalUnits) {
         if (temp.optionalUnits.length === 4) {
@@ -119,7 +182,47 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
               alert("You cannot take a external specialization and optional units") // switch to a material ui prompt
             } else {
               temp.optionalUnits.push(unit);
-              setPlan(temp);
+              let majorCheck = checkUnitInMajor(temp.mainMajor!, unit);
+              if (!majorCheck) {
+                let myUnits: string[] = [];
+                myUnits = [...temp.mainMajor!.Units]
+                if (temp.specializations) {
+                  myUnits = [...myUnits, ...temp.specializations[0]!.Units]
+                  temp.optionalUnits.forEach((u) => {
+                    if (u.UnitCode !== unit.UnitCode) {
+                      myUnits.push(u.UnitCode);
+                    }
+                  })
+                }
+                let preReqRet = checkIfHavePrereqs(myUnits, unit);
+                if (preReqRet[0]) {
+                  let err = `You do not have prerequistes for unit ${unit.Name}, you require: `
+                  preReqRet[1]!.forEach((path) => {
+                    path.forEach((u) => {
+                      err += `${u} and `
+                    })
+                    err = err.slice(0, -4);
+                    err += `OR `
+                  })
+                  err = err.slice(0, -3)
+                  temp.optionalUnits.pop();
+                  alert(err); // switch to a material ui prompt
+                } else {
+                  let antiReqRet = checkIfHaveAntireqs(myUnits, unit);
+                  if (antiReqRet[0]) {
+                    let err = `You have a antirequiste/s for unit ${unit.Name}: `
+                    antiReqRet[1]!.forEach((u) => {
+                      err += `${u}, `
+                    })
+                    temp.optionalUnits.pop();
+                    alert(err);
+                  } else {
+                    setPlan(temp);
+                  }
+                }
+              } else {
+                alert(`Main major: ${temp.mainMajor?.Name} already has unit: ${unit.Name}`) // switch to a material ui prompt
+              }
             }
           }
         }
@@ -137,11 +240,51 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
             alert("You cannot take a external specialization and optional units") // switch to a material ui prompt
           } else {
             temp.optionalUnits = [unit];
-            setPlan(temp);
+            let majorCheck = checkUnitInMajor(temp.mainMajor!, unit);
+            if (!majorCheck) {
+              let myUnits: string[] = [];
+              myUnits = [...temp.mainMajor!.Units]
+              if (temp.specializations) {
+                myUnits = [...myUnits, ...temp.specializations[0]!.Units]
+                temp.optionalUnits.forEach((u) => {
+                  if (u.UnitCode !== unit.UnitCode) {
+                    myUnits.push(u.UnitCode);
+                  }
+                })
+              }
+              let preReqRet = checkIfHavePrereqs(myUnits, unit);
+              if (preReqRet[0]) {
+                let err = `You do not have prerequistes for unit ${unit.Name}, you require: `
+                preReqRet[1]!.forEach((path) => {
+                  path.forEach((u) => {
+                    err += `${u} and `
+                  })
+                  err = err.slice(0, -4);
+                  err += `OR `
+                })
+                err = err.slice(0, -3)
+                temp.optionalUnits.pop();
+                alert(err); // switch to a material ui prompt
+              } else {
+                let antiReqRet = checkIfHaveAntireqs(myUnits, unit);
+                if (antiReqRet[0]) {
+                  let err = `You have a antirequiste/s for unit ${unit.Name}: `
+                  antiReqRet[1]!.forEach((u) => {
+                    err += `${u}, `
+                  })
+                  temp.optionalUnits.pop();
+                  alert(err);
+                } else {
+                  setPlan(temp);
+                }
+              }
+            } else {
+              alert(`Main major: ${temp.mainMajor?.Name} already has unit: ${unit.Name}`) // switch to a material ui prompt
+            }
           }
         }
       }
-    } else if ('MajorCode' in s) { // TODO: When you add a major, if a optional unit exists that is in the major, remove the optional unit as they now can select another optional unit
+    } else if ('MajorCode' in s) {
       const major = s as Major
       if (temp.optionalUnits && temp.optionalUnits.length > 0) {
         alert("You can't have optional units and a double major."); // switch to a material ui prompt
@@ -154,6 +297,7 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
       }
       else {
         temp.doubleMajor = major;
+        // no need to check antireqs as if you hit this path you are finished.
         setPlan(temp);
       }
     } else {
@@ -195,6 +339,8 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
             }
             if (!antiCheck) {
               setPlan(temp);
+            } else {
+              temp.specializations.pop();
             }
           }
         } else {
@@ -232,6 +378,8 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
               }
               if (!antiCheck) {
                 setPlan(temp);
+              } else {
+                temp.specializations.pop();
               }
             }
           } else {
@@ -269,6 +417,8 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
         }
         if (!antiCheck) {
           setPlan(temp);
+        } else {
+          temp.specializations.pop();
         }
       }
     }
