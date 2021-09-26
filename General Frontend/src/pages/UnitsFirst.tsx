@@ -2,7 +2,7 @@ import { Box } from "@material-ui/core";
 import styled from "styled-components";
 import { useSpecializations } from "../api/hooks";
 import { useCareers, useMajors, useUnits } from "../components/shared/hooks";
-import { DefaultProps } from "../types";
+import { Career, DefaultProps } from "../types";
 import { BounceLoader } from "react-spinners";
 import UnitsFirstSPAContext from "../components/UnitsFirst/UnitsFirstSPAContext";
 
@@ -19,7 +19,7 @@ function UnitsFirst(props: DefaultProps) { // Bootstrap component for SPA Contex
         <>
           {careers.isError || majors.isError || units.isError || specs.isError
             ? <h1>Error Has Occured</h1>
-            : <UnitsFirstSPAContext careers={careers.data?.data!} majors={majors.data?.data!} units={units.data?.data!} specs={specs.data?.data!} />
+            : <UnitsFirstSPAContext careers={careers.data?.data!} majors={majors.data?.data!.sort((a, b) => a.Name.localeCompare(b.Name))!} units={units.data?.data!.sort((a, b) => a.Name.localeCompare(b.Name))!} specs={specs.data?.data!.sort((a, b) => a.Name.localeCompare(b.Name))!} />
           }
         </>
       }
