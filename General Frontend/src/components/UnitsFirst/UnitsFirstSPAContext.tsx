@@ -1,7 +1,9 @@
 import { Box, Grid } from "@material-ui/core";
+import { platform } from "os";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Career, Major, Plan, Specialization, Unit, UnitFirstSPAContextProps } from "../../types";
+import { Career, Major, Plan, PromptData, Specialization, Unit, UnitFirstSPAContextProps } from "../../types";
+import Error from "../shared/Error";
 import CareerList from "./CareerList";
 import Initial from "./Initial";
 import PlanList from "./PlanList";
@@ -109,12 +111,12 @@ function checkIfHaveAntireqs(unitsIAmTaking: string[], unit: Unit): [boolean, st
 
 // TODO SORT THE PAGES ALPHABETICALLY
 function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
+  const [error, setError] = useState<PromptData>({ promptTitle: "", promptContent: "", showPrompt: false });
   const [stage, setStage] = useState<UNITSFIRSTMODES>(UNITSFIRSTMODES.initial)
   const [careers, setCareers] = useState<Array<Career>>(props.careers);
   const [units, setUnits] = useState<Array<Unit>>(props.units);
   const [majors, setMajors] = useState<Array<Major>>(props.majors);
   const [specs, setSpecs] = useState<Array<Specialization>>(props.specs);
-  const [mainMajor, setMMajor] = useState<Major>();
   const [plan, setPlan] = useState<Plan>({});
   function filterCareersList() {
     let careersCodesToPop: Career[] = [];
@@ -185,7 +187,7 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
         }
       })
       if (idx === -1) {
-        alert("FATAL EXCEPTION: Somehow I am removing a unit that isnt in my bag!"); // do something here I have no idea what to do if you reach here
+        setError({ promptTitle: "FATAL EXCEPTION", promptContent: "Somehow I am removing a unit that isnt in my bag!", showPrompt: true })
       } else {
         temp.optionalUnits?.splice(idx, 1);
         setPlan(temp);
@@ -202,7 +204,7 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
         }
       })
       if (idx === -1) {
-        alert("FATAL EXCEPTION: Somehow I am removing a specialization that isnt in my bag!"); // do something here I have no idea what to do if you reach here
+        setError({ promptTitle: "FATAL EXCEPTION", promptContent: "Somehow I am removing a unit that isnt in my bag!", showPrompt: true })
       } else {
         temp.specializations?.splice(idx, 1);
         setPlan(temp);
@@ -212,11 +214,11 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
   function setMainMajor(major: Major) { // TODO: Handle switching main major, currently does not check if you have units/specs/double major you cant have in combination
     const temp = { ...plan };
     if (temp.doubleMajor && temp.doubleMajor.MajorCode === major.MajorCode) {
-      alert("you cant select a major as your main that you have as your secondary"); // switch to a material ui prompt
+      setError({ promptTitle: "Major Selection Error", promptContent: "You cant select a major as your main that you have as your secondary", showPrompt: true })
     } else {
-      setMMajor(major);
       temp.mainMajor = major;
       setPlan(temp);
+      setStage(UNITSFIRSTMODES.workspace);
     }
   }
   function select(s: Unit | Major | Specialization) {
@@ -225,7 +227,7 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
       const unit = s as Unit
       if (temp.optionalUnits) {
         if (temp.optionalUnits.length === 4) {
-          alert("You can't have more than 4 optional units") // switch to a material ui prompt
+          setError({ promptTitle: "Unit Selection Error", promptContent: "You can't have more than 4 optional units", showPrompt: true })
         } else {
           let EXISTSINOPTIONALUNITS = false;
           temp.optionalUnits.forEach((u) => {
@@ -234,10 +236,10 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
             }
           })
           if (EXISTSINOPTIONALUNITS) {
-            alert("You cannot take a optional unit twice."); // switch to a material ui prompt
+            setError({ promptTitle: "Unit Selection Error", promptContent: "You cannot take a optional unit twice", showPrompt: true })
           } else {
             if (temp.specializations && temp.specializations.length > 0 && !(temp.specializations[0].Internal)) {
-              alert("You cannot take a external specialization and optional units") // switch to a material ui prompt
+              setError({ promptTitle: "Unit Selection Error", promptContent: "You cannot take a external specialization and optional units", showPrompt: true })
             } else {
               temp.optionalUnits.push(unit);
               let majorCheck = checkUnitInMajor(temp.mainMajor!, unit);
@@ -264,7 +266,7 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
                   })
                   err = err.slice(0, -3)
                   temp.optionalUnits.pop();
-                  alert(err); // switch to a material ui prompt
+                  setError({ promptTitle: "Unit Selection Error", promptContent: err, showPrompt: true })
                 } else {
                   let antiReqRet = checkIfHaveAntireqs(myUnits, unit);
                   if (antiReqRet[0]) {
@@ -273,13 +275,13 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
                       err += `${u}, `
                     })
                     temp.optionalUnits.pop();
-                    alert(err);
+                    setError({ promptTitle: "Unit Selection Error", promptContent: err, showPrompt: true })
                   } else {
                     setPlan(temp);
                   }
                 }
               } else {
-                alert(`Main major: ${temp.mainMajor?.Name} already has unit: ${unit.Name}`) // switch to a material ui prompt
+                setError({ promptTitle: "Unit Selection Error", promptContent: `Main major: ${temp.mainMajor?.Name} already has unit: ${unit.Name}`, showPrompt: true })
               }
             }
           }
@@ -292,10 +294,10 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
           }
         })
         if (EXISTSINMAJOR) {
-          alert("You are already taking this unit in your main major") // switch to a material ui prompt
+          setError({ promptTitle: "Unit Selection Error", promptContent: `You are already taking this unit in your main major`, showPrompt: true })
         } else {
           if (temp.specializations && temp.specializations.length > 0 && !(temp.specializations[0].Internal)) {
-            alert("You cannot take a external specialization and optional units") // switch to a material ui prompt
+            setError({ promptTitle: "Unit Selection Error", promptContent: "You cannot take a external specialization and optional units", showPrompt: true })
           } else {
             temp.optionalUnits = [unit];
             let majorCheck = checkUnitInMajor(temp.mainMajor!, unit);
@@ -324,7 +326,7 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
                 })
                 err = err.slice(0, -3)
                 temp.optionalUnits.pop();
-                alert(err); // switch to a material ui prompt
+                setError({ promptTitle: "Unit Selection Error", promptContent: err, showPrompt: true })
               } else {
                 let antiReqRet = checkIfHaveAntireqs(myUnits, unit);
                 if (antiReqRet[0]) {
@@ -333,13 +335,13 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
                     err += `${u}, `
                   })
                   temp.optionalUnits.pop();
-                  alert(err);
+                  setError({ promptTitle: "Unit Selection Error", promptContent: err, showPrompt: true })
                 } else {
                   setPlan(temp);
                 }
               }
             } else {
-              alert(`Main major: ${temp.mainMajor?.Name} already has unit: ${unit.Name}`) // switch to a material ui prompt
+              setError({ promptTitle: "Unit Selection Error", promptContent: `Main major: ${temp.mainMajor?.Name} already has unit: ${unit.Name}`, showPrompt: true })
             }
           }
         }
@@ -347,13 +349,13 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
     } else if ('MajorCode' in s) {
       const major = s as Major
       if (temp.optionalUnits && temp.optionalUnits.length > 0) {
-        alert("You can't have optional units and a double major."); // switch to a material ui prompt
+        setError({ promptTitle: "Major Selection Error", promptContent: `You can't have optional units and a double major.`, showPrompt: true })
       }
       else if (temp.specializations && temp.specializations.length > 0) {
-        alert("You can't have specializations and a double major."); // switch to a material ui prompt
+        setError({ promptTitle: "Major Selection Error", promptContent: `You can't have specializations and a double major.`, showPrompt: true })
       }
       else if (temp.mainMajor?.MajorCode === major.MajorCode) {
-        alert("You can't select the same double major as your main major"); // switch to a material ui prompt
+        setError({ promptTitle: "Major Selection Error", promptContent: `You can't select the same double major as your main major.`, showPrompt: true })
       }
       else {
         temp.doubleMajor = major;
@@ -363,11 +365,11 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
     } else {
       const spec = s as Specialization
       if (temp.optionalUnits && temp.optionalUnits.length > 0 && !spec.Internal) {
-        alert("You cannot take optional units and a external spec"); // switch to a material ui prompt
+        setError({ promptTitle: "Specialization Selection Error", promptContent: `You cannot take optional units and a external spec`, showPrompt: true })
       } else if (temp.specializations && temp.specializations.length > 0) {
         if (spec.Internal) {
           if (temp.specializations.length > 0 && temp.specializations[0].SpecializationCode === spec.SpecializationCode) {
-            alert("You already have this specialization in your plan"); // switch to a material ui prompt
+            setError({ promptTitle: "Specialization Selection Error", promptContent: "You already have this specialization in your plan", showPrompt: true })
           } else {
             temp.specializations.push(spec);
             let antiCheck = false;
@@ -379,7 +381,7 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
                 unitCheck[1]?.forEach((u) => {
                   errMsg += `${u.Name} `;
                 })
-                alert(errMsg); // switch to a material ui prompt
+                setError({ promptTitle: "Specialization Selection Error", promptContent: errMsg, showPrompt: true })
               }
             }
             if (temp.specializations.length === 2) { // check spec anti reqs
@@ -387,7 +389,7 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
                 path.forEach((sp) => {
                   if (sp === temp.specializations![0].SpecializationCode) {
                     antiCheck = true;
-                    alert(`${spec.Name} contains spec antireq that you are taking as a first spec: ${temp.specializations![0].Name}`) // switch to a material ui prompt
+                    setError({ promptTitle: "Specialization Selection Error", promptContent: `${spec.Name} contains spec antireq that you are taking as a first spec: ${temp.specializations![0].Name}`, showPrompt: true })
                   }
                 })
               })
@@ -395,7 +397,7 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
             let firstMajorCheck = specAntireqsCheckMajor(spec, temp.mainMajor!);
             if (firstMajorCheck) {
               antiCheck = true;
-              alert(`Your main major is a major anti requiste to specialization: ${spec.Name}`) // switch to a material ui prompt
+              setError({ promptTitle: "Specialization Selection Error", promptContent: `Your main major is a major anti requiste to specialization: ${spec.Name}`, showPrompt: true })
             }
             if (!antiCheck) {
               setPlan(temp);
@@ -406,7 +408,7 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
         } else {
           if (temp.specializations.length > 0 && temp.specializations[0].Internal) {
             if (temp.specializations[0].SpecializationCode === spec.SpecializationCode) {
-              alert("You already have this specialization in your plan"); // switch to a material ui prompt
+              setError({ promptTitle: "Specialization Selection Error", promptContent: "You already have this specialization in your plan", showPrompt: true })
             } else {
               let antiCheck = false;
               temp.specializations.push(spec);
@@ -418,7 +420,7 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
                   unitCheck[1]?.forEach((u) => {
                     errMsg += `${u.Name} `;
                   })
-                  alert(errMsg); // switch to a material ui prompt
+                  setError({ promptTitle: "Specialization Selection Error", promptContent: errMsg, showPrompt: true })
                 }
               }
               if (temp.specializations.length === 2) { // check spec anti reqs
@@ -426,7 +428,7 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
                   path.forEach((sp) => {
                     if (sp === temp.specializations![0].SpecializationCode) {
                       antiCheck = true;
-                      alert(`${spec.Name} contains spec antireq that you are taking as a first spec: ${temp.specializations![0].Name}`) // switch to a material ui prompt
+                      setError({ promptTitle: "Specialization Selection Error", promptContent: `${spec.Name} contains spec antireq that you are taking as a first spec: ${temp.specializations![0].Name}`, showPrompt: true })
                     }
                   })
                 })
@@ -434,7 +436,7 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
               let firstMajorCheck = specAntireqsCheckMajor(spec, temp.mainMajor!);
               if (firstMajorCheck) {
                 antiCheck = true;
-                alert(`Your main major is a major anti requiste to specialization: ${spec.Name}`) // switch to a material ui prompt
+                setError({ promptTitle: "Specialization Selection Error", promptContent: `Your main major is a major anti requiste to specialization: ${spec.Name}`, showPrompt: true })
               }
               if (!antiCheck) {
                 setPlan(temp);
@@ -443,7 +445,7 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
               }
             }
           } else {
-            alert("You cannot have two external specializations"); // switch to a material ui prompt
+            setError({ promptTitle: "Specialization Selection Error", promptContent: "You cannot have two external specializations", showPrompt: true })
           }
         }
       } else {
@@ -457,7 +459,7 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
             unitCheck[1]?.forEach((u) => {
               errMsg += `${u.Name} `;
             })
-            alert(errMsg); // switch to a material ui prompt
+            setError({ promptTitle: "Specialization Selection Error", promptContent: errMsg, showPrompt: true })
           }
         }
         if (temp.specializations.length === 2) { // check spec anti reqs
@@ -465,7 +467,7 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
             path.forEach((sp) => {
               if (sp === temp.specializations![0].SpecializationCode) {
                 antiCheck = true;
-                alert(`${spec.Name} contains spec antireq that you are taking as a first spec: ${temp.specializations![0].Name}`) // switch to a material ui prompt
+                setError({ promptTitle: "Specialization Selection Error", promptContent: `${spec.Name} contains spec antireq that you are taking as a first spec: ${temp.specializations![0].Name}`, showPrompt: true })
               }
             })
           })
@@ -473,7 +475,7 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
         let firstMajorCheck = specAntireqsCheckMajor(spec, temp.mainMajor!);
         if (firstMajorCheck) {
           antiCheck = true;
-          alert(`Your main major is a major anti requiste to specialization: ${spec.Name}`) // switch to a material ui prompt
+          setError({ promptTitle: "Specialization Selection Error", promptContent: `Your main major is a major anti requiste to specialization: ${spec.Name}`, showPrompt: true })
         }
         if (!antiCheck) {
           setPlan(temp);
@@ -487,15 +489,13 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
     const planJSON = localStorage.getItem(`${process.env.DEVELOPMENT ? "dev-" : ""}courseplanner-plan`)
     if (planJSON) {
       setPlan(JSON.parse(planJSON));
+      if ((JSON.parse(planJSON) as Plan).mainMajor) {
+        setStage(UNITSFIRSTMODES.workspace);
+      }
     }
   }, [])
   useEffect(() => { // everytime plan is updated, check if you have a full knapsack
-    if (plan.mainMajor !== mainMajor) {
-      const planJSON = localStorage.getItem(`${process.env.DEVELOPMENT ? "dev-" : ""}courseplanner-plan`)
-      if (planJSON) {
-        setMainMajor(JSON.parse(planJSON)["mainMajor"])
-      }
-    } else if (plan.mainMajor && plan.doubleMajor) { // victory paths.
+    if (plan.mainMajor && plan.doubleMajor) { // victory paths.
       setStage(UNITSFIRSTMODES.fullWorkspace);
     } else if (plan.specializations && plan.specializations.length === 2) {
       setStage(UNITSFIRSTMODES.fullWorkspace);
@@ -514,11 +514,12 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
   }, [plan]);
   return (
     <Box>
+      <Error onAccept={() => setError({ promptTitle: error.promptTitle, promptContent: error.promptContent, showPrompt: false })} promptTitle={error.promptTitle} promptContent={error.promptContent} showPrompt={error.showPrompt} />
       <Grid container className="sameheight"> { /* this isnt going to work on mobile :/ */}
         <Grid item xs={2} className="sameheight">
           <PlanList
             plan={plan}
-            mainMajor={mainMajor}
+            mainMajor={plan.mainMajor}
             majors={majors}
             updateMainMajor={setMainMajor}
             removeFromPlan={removeFromPlan}
