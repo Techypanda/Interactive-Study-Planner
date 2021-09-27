@@ -16,7 +16,6 @@ function ViewUnit(props: DefaultProps){
 	const getUnitData = () => {
 		axios.get('https://ilur318q9c.execute-api.ap-southeast-2.amazonaws.com/Prod/getunit?code='+id)
 				.then((response) => {
-                    console.log(response);
 					setUnitData(response.data);
 				})
 	}
