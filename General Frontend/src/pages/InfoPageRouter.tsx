@@ -9,7 +9,7 @@ import { Button } from "@material-ui/core";
 /*
  * Author: Matthew Loe
  * Student Id: 19452425
- * Date Last Modified: 11/09/2021
+ * Date Last Modified: 27/09/2021
  * Description: Routing page for information pages
  */
 //Notes - remove button, test function, test route and usehistory after testing concluded or comment out
@@ -18,9 +18,6 @@ import { Button } from "@material-ui/core";
 function InfoPageRouter() {
     return (
         <Switch>
-            <Route exact path="/InfoPage/Test">
-                <Test />
-            </Route>
             <Route exact path="/InfoPage/ViewCareer/:id">
                 <ViewCareer />
             </Route>
@@ -37,6 +34,11 @@ function InfoPageRouter() {
     );
 }
 
+/*
+<Route exact path="/InfoPage/Test">
+    <Test />
+</Route>
+
 function Test() {
     const history = useHistory();
     return (
@@ -50,6 +52,6 @@ function Test() {
             </Button>
         </div>
     )
-}
+}*/
 
 export default InfoPageRouter;
