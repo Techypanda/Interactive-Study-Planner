@@ -13,8 +13,6 @@ function ViewUnit(props: DefaultProps){
 
     const base = [{Delivery: "", Description : "", Name : "", UnitCreds: "", UnitCode: ""}]
 	const [unitData, setUnitData] = useState(base);
-    console.log('hi');
-    console.log(id);
 	const getUnitData = () => {
 		axios.get('https://ilur318q9c.execute-api.ap-southeast-2.amazonaws.com/Prod/getunit?code='+id)
 				.then((response) => {
