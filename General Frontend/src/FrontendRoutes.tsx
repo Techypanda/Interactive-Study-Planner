@@ -13,6 +13,7 @@ import {
   TransitionGroup
 } from "react-transition-group";
 import { Fade } from "@material-ui/core";
+import UnitsFirst from "./pages/UnitsFirst";
 
 function Router(props: DefaultProps) {
   const location = useLocation();
@@ -46,6 +47,12 @@ function Router(props: DefaultProps) {
             </Route>
             <Route exact path="/TopdownFilled">
               <TopdownFilled />
+            </Route>
+            <Route exact path="/unitsfirst">
+              <UnitsFirst />
+            </Route>
+            <Route exact path="/bottomup">
+              <UnitsFirst />
             </Route>
             <Route>
               <h1>Error 404 not found</h1>
