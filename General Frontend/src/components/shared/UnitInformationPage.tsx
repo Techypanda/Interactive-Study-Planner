@@ -11,7 +11,7 @@ function ViewUnit(props: DefaultProps){
     const history = useHistory();
     const { id } = useParams<{ id: string }>(); 
 
-    const base = [{Description : "", Name : "", UnitCreds: "", UnitCode: ""}]
+    const base = [{Delivery: "", Description : "", Name : "", UnitCreds: "", UnitCode: ""}]
 	const [unitData, setUnitData] = useState(base);
     console.log('hi');
     console.log(id);
