@@ -3,6 +3,7 @@ import ViewCareer from "../components/shared/ViewCareer";
 import ViewMajor from "../components/shared/ViewMajor";
 import ViewSpecialization from "../components/shared/ViewSpecialization";
 import ViewUnit from "../components/shared/ViewUnit";
+import UnitInformationPage from "../components/shared/UnitInformationPage";
 
 import { Button } from "@material-ui/core";
 
@@ -28,7 +29,7 @@ function InfoPageRouter() {
                 <ViewSpecialization />
             </Route>
             <Route exact path="/InfoPage/ViewUnit/:id">
-                <ViewUnit />
+                <UnitInformationPage />
             </Route>
         </Switch>
     );
