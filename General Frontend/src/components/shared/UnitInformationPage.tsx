@@ -9,21 +9,9 @@ import { useEffect, useState } from 'react';
 function ViewUnit(props: DefaultProps){
 
     const history = useHistory();
-    const { id } = useParams<{ id: string }>();     //Retreive id from url param
-    // const response = fetch('https://ilur318q9c.execute-api.ap-southeast-2.amazonaws.com/Prod/getunit?code='+id);
-    // const unitData = response.json();
-    // let UnitCreds = unitData[0].Credits;
-    // let code = unitData[0].UnitCode;
-    // let desc = unitData[0].Description;
-    // let name = unitData[0].Name;
-    // this.setState({
-    //     unitCredits: UnitCreds,
-    //     unitCode: code,
-    //     unitDescr: desc,
-    //     unitName: name
-    // });
+    const { id } = useParams<{ id: string }>(); 
 
-    const base = [{Description : "", Name : "", CareerId: "", UnitCreds: "", UnitCode: ""}]
+    const base = [{Description : "", Name : "", UnitCreds: "", UnitCode: ""}]
 	const [unitData, setUnitData] = useState(base);
     console.log('hi');
     console.log(id);
