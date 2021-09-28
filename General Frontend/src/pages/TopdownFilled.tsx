@@ -1,4 +1,4 @@
-* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { makeStyles } from '@material-ui/core/styles';
 import Navbar from "../components/shared/Navbar";
 import CareersImage from '../src/static/career.jpg'
