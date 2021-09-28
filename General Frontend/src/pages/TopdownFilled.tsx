@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+* eslint-disable @typescript-eslint/no-unused-vars */
 import { makeStyles } from '@material-ui/core/styles';
 import Navbar from "../components/shared/Navbar";
 import CareersImage from '../src/static/career.jpg'
@@ -27,8 +27,10 @@ import { Location } from 'history'
 import { useCallback } from 'react';
 //import { useCareers, useMajors, useUnits } from '../components/shared/hooks';
 //import { useCareer } from '../components/shared/hooks';
-import { useCareers, useMajors, useUnits } from '../components/shared/hooks'
+import { useCareers, useMajors, useUnits, useSpecializations } from '../components/shared/hooks'
 import { createPartiallyEmittedExpression } from 'typescript';
+import { SupervisedUserCircleSharp } from '@material-ui/icons';
+import { findByPlaceholderText } from '@testing-library/react';
 
 
 const useStyles = makeStyles((theme) => ({ 
@@ -53,8 +55,182 @@ const useStyles = makeStyles((theme) => ({
     },
 }))
 
+
 function backFunction() { 
     alert(1)
+}
+function updatePlanUnits(allUnits : string[], dataResp : any) { 
+    for(var i = 0; i < dataResp.Units.length; i++) { 
+        allUnits.push(dataResp.Units[i])
+    }
+}
+function areRemainingMatched(bestMajor : any, careerUnits : string[]) { 
+    var matchCount = 0;
+    for(var i = 0; i < careerUnits.length; i++) { 
+        if(bestMajor.Units.includes(careerUnits[i])) { 
+            matchCount++;
+        }
+    }
+    if(matchCount === careerUnits.length) { 
+        console.log('true inside of are remanming matched')
+        return true;
+    }
+    return false;
+}
+
+function findBestISpecESpec(specResp : any, careerUnits : string[], majorCode : string, specCode : string) { 
+    var maxLen = 0;
+    var bestISpecESpec;
+    var invalid = false;
+    for(var i = 0; i < specResp.length; i++) { 
+        let intersection = specResp[i].Units.filter((item : any) => careerUnits.includes((item)))
+        if(intersection.length != 0) { 
+            //check major anti reqs
+            for(var j = 0; j < specResp[i].MajorAntiReqs.length; j++) { 
+                if(specResp[i].MajorAntiReqs[j].includes(majorCode)) { 
+                    invalid = true;
+                }
+            }
+            //check spec anti req
+            for(var j = 0; j < specResp[i].SpecAntiReqs.length; j++) { 
+                if(specResp[i].SpecAntiReqs[j].includes(specCode)) { 
+                    invalid = true;
+                }
+            }
+
+            //check unit anti req
+            for(j = 0; j < specResp[i].UnitAntiReqs.length; j++) { 
+                if(careerUnits.includes(specResp[i].UnitAntiReqs[j])) { 
+                    invalid = true;
+                }
+            }
+            if(intersection.length > maxLen && !invalid) { 
+                maxLen = intersection.length;
+                bestISpecESpec = specResp[i]
+            }
+        }
+    }
+    return bestISpecESpec;
+}
+
+function updateCareerUnits(bestMajor : any, careerUnits : string[]) { 
+    for(var i = 0; i < careerUnits.length; i++) { 
+        if(bestMajor.Units.includes(careerUnits[i])) { 
+            careerUnits.splice(i, 1);
+            i--;
+        }
+    }
+}
+
+function findRandMajor(majorResp: any) { 
+    var min = 0;
+    var max = majorResp.length;
+    var randNum = Math.floor(Math.random() * (max - min) + min);
+    var randMajor = majorResp[randNum]
+    return randMajor
+}
+
+function findRandISpec(specResp : any) { 
+    var min = 0;
+    var max = specResp.length;
+    //TODO: MAKE SURE IT ACCOUNTS FOR ANTI REQS OF ALL KINDS
+    var randMajorInternal = false;
+    while(randMajorInternal === false) { 
+        var randNum = Math.floor(Math.random() * (max - min) + min);
+        if(specResp[randNum].Internal == true) { 
+            return specResp[randNum]
+        }
+    }
+}
+
+function findRandISpecESpec(specResp : any, specCode : string, majorCode : string, careerUnits : string []) { 
+    //TODO: Make sure it checks all major anti reqs and spec anti reqs and unit anti reqs
+    //make sure it works xD
+    var min = 0;
+    var max = specResp.length;
+    var invalid = false;
+    var antiReqsAccountedFor = false;
+    while(!antiReqsAccountedFor) { 
+        invalid = false;
+        var randNum = Math.floor(Math.random() *(max - min) + min);
+        //check spec anti reqs
+        for(var i = 0; i < specResp[randNum].SpecAntiReqs.length; i++) { 
+            if(specResp[randNum].SpecAntiReqs[i].includes(specCode)) { 
+                //invalid = false;
+                invalid = true;
+            }
+        }
+        //check major anti reqs
+        for(i = 0; i < specResp[randNum].MajorAntiReqs.length; i++) { 
+            if(majorCode.includes(specResp[randNum].MajorAntiReqs[i])) { 
+                invalid = true;
+            }
+        }
+        //check unit anti reqs
+        for(i = 0; i < specResp[randNum].UnitAntiReqs.length; i++){ 
+            if(careerUnits.includes(specResp[randNum].UnitAntiReqs[i])) { 
+                invalid = true;
+            }
+        }
+        if(!invalid) { 
+            return specResp[randNum]
+        }
+    }
+}
+
+function findISpec(specResp : any, careerUnits : string[], majorCode : string) { 
+
+    //TODO: make sure it checks all major anti reqs and spec anti reqs and unit anti reqs
+    console.log('inside findISpec')
+    console.log(majorCode)
+    console.log(specResp)
+    console.log(careerUnits)
+    var maxLen = 0;
+    var bestISpec
+    var invalid = false;
+    for(var i = 0; i < specResp.length; i++) { 
+        let intersection = specResp[i].Units.filter((item : any) => careerUnits.includes((item)))
+        if(intersection.length != 0 && specResp[i].Internal == true) { 
+            //check major anti req
+            for(var j = 0; j < specResp[i].MajorAntiReqs.length; j++) { 
+                if(specResp[i].MajorAntiReqs[j].includes(majorCode)) { 
+                    invalid = true;
+                }
+            }
+            //don't need to check spec anti req since this is the first spec
+            //check unit anti req
+            for(j = 0; j < specResp[i].UnitAntiReqs.length; j++) { 
+                if(careerUnits.includes(specResp[i].UnitAntiReqs[j])) { 
+                    invalid = true
+                }
+            }
+            if(intersection.length > maxLen && !invalid) { 
+                maxLen = intersection.length;
+                bestISpec = specResp[i]
+            }
+        }
+        invalid = false;
+    }
+    console.log('best ispec step 3 is')
+    console.log(bestISpec)
+    return bestISpec
+}
+function findMajor(majorResp : any, careerUnits : string[]) { 
+    let maxLen = 0;
+    var bestMajor;
+    for(var i = 0; i < majorResp.length; i++) { 
+        let intersection = majorResp[i].Units.filter((item : any) => careerUnits.includes(item))
+        if(intersection.length != 0) { 
+            if(intersection.length > maxLen) { 
+                maxLen = intersection.length;
+                bestMajor = majorResp[i]
+            }
+        }
+    }
+    if(bestMajor === undefined) { 
+        bestMajor = findRandMajor(majorResp)
+    }
+    return bestMajor;
 }
 
 export default function TopdownFilled(props: MajorProps) { 
@@ -65,6 +241,7 @@ export default function TopdownFilled(props: MajorProps) {
     const careers = useCareers();
     const majors = useMajors();
     const units = useUnits();
+    const specs = useSpecializations();
 
     const commonUnits = [ 
       "MEDI1000",
@@ -77,140 +254,144 @@ export default function TopdownFilled(props: MajorProps) {
       "GENE1000" 
     ]
 
-    if(careers.isLoading || majors.isLoading || units.isLoading) { 
+    if(careers.isLoading || majors.isLoading || units.isLoading || specs.isLoading) { 
         return (<LoadingScreen/>)
     }
 
     let careerResponseData = careers.data?.data!;
     let majorResponseData = majors.data?.data!;
     let unitResponseData = units.data?.data!;
+    let specResponseData = specs.data?.data!;
 
 
-    if(!careerResponseData || !majorResponseData || !unitResponseData) { 
+    if(!careerResponseData || !majorResponseData || !unitResponseData || !specResponseData) { 
         return <Error promptTitle="Request Error" promptContent={error as string} showPrompt={true} onAccept={() => backFunction() } />
     } else { 
+        /* TODO: 
+            * Check with all other careers manually to ensure above works as expected
+            * what if no ispec match at all during steps 3/4 <-- pick a rand spec ? 
+            * 
+            * Test scenarios:
+                * single major and that's all WORKS
+                * double major  WORKS
+                * major + 1ispec <-- clashing major anti req should NEVER make it through <-- for single anti req this seems to work, as the units will be removed from careerUnits, preventing it from matching  WORKS
+                                *<-- also major spec containing OR WORKS
+                    * i.e., major match will need to be the major anti req for the best ispec, forcing it to choose next best
+                * major + 1ispec <-- clashing unit anti req should NEVER make it through pretty sure this works
+                * major + 1ispec valid works
+                * major + 1 valid ispec + ispec <-- clashing major anti req - double check logic is identical to ispec. if it is, it works
+                * major + 1 valid ispec + ispec <-- clashing spec anti req - double check logic is identical to ispec. if it is, it works
+                * major + valid ispec + ispec <-- clashing unit anti req - double check logic is identical to ispec. if it is, it works
+                * major + 1 valid ispec + espec <-- clashing major anti req espec is same logic as ispec
+                * major + 1 valid ispec + espec <-- clashing spec anti req espec is same logic as ispec
+                * major + 1 valid ispec + espec <-- clashing unit anti req espec is same logic as ispec
+                * 
+                * 
+                * 
+                * major + 1 valid ispec + electives <-- elective pre reqs contain AND with OR, valid
+                * major + 1 valid ispec + electives <-- elective pre reqs contain AND, valid
+                * major + 1 valid ispec + electvies <-- elective pre reqs contain OR, valid
+                * major + 1 valid ispec + electives <-- above, with the old unit codes, valid
+                * major + 1 valid ispec + electives <-- elective pre reqs sum to > 24
+                * 
+        */
 
         
-        //Let us choose some arbitrary career for the time being, (2)
-        //As well as a random major
-        //Add all these units to 'majorPrereqs array
-
-        var someMajor = majorResponseData[0]
-        var majorPrereqs : string[] = [];
-        for(var i = 0; i < someMajor.Units.length; i++) { 
-            majorPrereqs.push(someMajor.Units[i])
-        }
-        for(i = 0; i < commonUnits.length; i++) {    
-            if(!(majorPrereqs.includes(commonUnits[i]))) {
-                majorPrereqs.push(commonUnits[i])
-            }
-        }
-
-        //Now we need to go through the pre requisites of these pre requisites
-        var count = 0;
-        while(count < 3) {  //will fix this - it works but is just ugly as hell. Basically adds pre requisites to majorPrereqs for each count increment. Typically only takes 2 iterations max
-            for(i = 0; i < majorPrereqs.length; i++) { 
-                for(var j = 0; j < unitResponseData.length; j++) { 
-                    if(unitResponseData[j].UnitCode === majorPrereqs[i]) { 
-                        if(unitResponseData[j].Prerequistes.length > 1) {  //ARRAY OF 'ANDS'
-                            for(var k = 0; k < unitResponseData[j].Prerequistes.length; k++) { 
-                                if(unitResponseData[j].Prerequistes[k].length > 1) {  //Array of ANDS with ORs
-                                    var combinedUnit = unitResponseData[j].Prerequistes[k][0] + " OR " + unitResponseData[j].Prerequistes[k][1]
-                                    if(!(majorPrereqs.includes(combinedUnit))) { 
-                                        majorPrereqs.push(combinedUnit)
-                                    }
-                                } else {  //Just ANDs, no ORs
-                                    if(!(majorPrereqs.includes(unitResponseData[j].Prerequistes[k][0]))) { 
-                                        let isnum = /^\d+$/.test(unitResponseData[j].Prerequistes[k][0]) //get rid of nasty old units, I don't think they are used at all anymore
-                                        if(!isnum) { 
-                                            majorPrereqs.push(unitResponseData[j].Prerequistes[k][0])
-                                        }
-                                    }
-                                }
-                            }
-                        } else {  //No ands at all 
-                            if(unitResponseData[j].Prerequistes[0].length > 1) {  //contains OR i.e., UNIT1 or UNIT2
-                                combinedUnit = unitResponseData[j].Prerequistes[0][0] + " OR " + unitResponseData[j].Prerequistes[0][1];
-                                if(!(majorPrereqs.includes(combinedUnit))) { 
-                                    majorPrereqs.push(combinedUnit);
-                                }
-                            } else { 
-                                if(!(majorPrereqs.includes(unitResponseData[j].Prerequistes[0][0]))) { 
-                                    if(unitResponseData[j].Prerequistes[0][0] !== "") {
-                                        majorPrereqs.push(unitResponseData[j].Prerequistes[0][0])
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            count++;
-        }
-
-
-        for(i = 0; i < majorPrereqs.length; i++) {
-            if(majorPrereqs[i].includes("CMHL1000")) {  //weird pre req despite being common unit in first year 
-                majorPrereqs.splice(i, 1)
-                i--;
-            }
-            if(majorPrereqs[i].includes("NURS1000")) {  //weird pre req despite being common unit in first year
-                majorPrereqs.splice(i, 1)
-                i--;
-            }
-        }
-
-
-        var unitsToDo : string[] = []; //This is the actual list of units provided to the student that will guide the student to the career
-
-
-
-        for(i = 0; i < majorPrereqs.length; i++) { 
-            if(!(majorPrereqs[i].includes("OR"))) { 
-                unitsToDo.push(majorPrereqs[i])
-            } else { 
-                var word1 = majorPrereqs[i].slice(0, 8);
-                var word2 = majorPrereqs[i].slice(12, 21)
-                for(j = 0; j < unitResponseData.length; j++) { 
-                    if(unitResponseData[j].UnitCode === word1) { 
-                        for(k = 0; k < unitResponseData[j].Prerequistes.length; k++) { 
-                            if(unitsToDo.includes(unitResponseData[j].Prerequistes[k][0])) { 
-                                if(!(unitsToDo.includes(word1))) { 
-                                    unitsToDo.push(word1)
-                                }
-                            }
-                        }
-                    } else if (unitResponseData[j].UnitCode === word2) { 
-                        for(k = 0; k < unitResponseData[j].Prerequistes.length; k++) { 
-                            if(unitsToDo.includes(unitResponseData[j].Prerequistes[k][0])) { 
-                                if(!(unitsToDo.includes(word2))) { 
-                                    unitsToDo.push(word2);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-
-
-
-
+        console.log(specResponseData)
+        var ourCareer = careerResponseData[0]
+        var allUnits : string[] = [];
         for(i = 0; i < commonUnits.length; i++) { 
-            if(!(unitsToDo.includes(commonUnits[i]))) { 
-                unitsToDo.push(commonUnits[i])
-            }
+            allUnits.push(commonUnits[i])
         }
 
 
-        
-        console.log(unitsToDo); //This is all major units with their pre reqs and the pre reqs pre reqs satisfied
-
-        //All that's left is to add career units and check for pre reqs
 
 
+        console.log('career units for testing: ')
+        //hardcoding for now to test =)
+        var careerUnits = ["BCCB2000","BIOL2001","BIOL3010","BIOL3011","GENE2001","GENE3000","GENE3002","MEDI2010", "HUMB3008"]
+        console.log(careerUnits)
+        var i;
+        var doubleMajorFound = true;
+        var bestMajor = findMajor(majorResponseData, careerUnits)
 
+        console.log('out side of findMajor. result is: ')
+        console.log(bestMajor)
+            var secondBestMajor;
+
+            console.log('career units before')
+            console.log(careerUnits)
+            updateCareerUnits(bestMajor, careerUnits)
+            console.log('career units after')
+            console.log(careerUnits)
+            console.log('all units before')
+            console.log(allUnits)
+            updatePlanUnits(allUnits, bestMajor)
+            console.log('all units after')
+            console.log(allUnits)
+            if(careerUnits.length == 0) { 
+                console.log(allUnits)
+                //alert('done on single major')
+                console.log('Finished on a single major lol')
+            } else {  //repeat and try find double major
+                secondBestMajor = findMajor(majorResponseData, careerUnits)
+                
+                //if true, we have perfectly matched all career units with 2 majors.
+                if(areRemainingMatched(secondBestMajor, careerUnits)) { 
+                        updatePlanUnits(allUnits, secondBestMajor)
+                } else { 
+                    console.log('move onto step 3')
+                    doubleMajorFound = false;
+                }
+            }
+        if(!doubleMajorFound){
+            var bestISpec;
+            console.log(allUnits)
+            console.log('in step 3: find best ispec')
+            bestISpec = findISpec(specResponseData, careerUnits, bestMajor.MajorCode) //get major code from FIRST major (IGNORE SEOCND)
+            if(bestISpec === undefined) {
+                bestISpec = findRandISpec(specResponseData)
+
+            }
+            console.log('before')
+            console.log(allUnits)
+            console.log(careerUnits)
+            updatePlanUnits(allUnits, bestISpec)
+            updateCareerUnits(bestISpec, careerUnits)
+            console.log('after')
+            console.log(allUnits)
+            console.log(careerUnits)
+            if(careerUnits.length === 0) { 
+                //alert('finished at step 3')
+                console.log('finished at step 3')
+            } else { 
+                //step 4 (find espec or ispec)
+                console.log('Starting step 4')
+                var bestISpecEspec;
+                bestISpecEspec = findBestISpecESpec(specResponseData, careerUnits, bestMajor.MajorCode, bestISpec.SpecializationCode)
+                console.log(bestISpecEspec)
+                if(bestISpecEspec === undefined) { 
+                    console.log('no suitable spec was found, i.e., returned default')
+                    bestISpecEspec = findRandISpecESpec(specResponseData, bestISpec.SpecializationCode, bestMajor.MajorCode, careerUnits)
+                    console.log(bestISpecEspec)
+                }
+                console.log('before')
+                console.log(allUnits)
+                console.log(careerUnits)
+                if(areRemainingMatched(bestISpecEspec, careerUnits)) { 
+                    console.log('finished at step 4')
+                    updatePlanUnits(allUnits, bestISpecEspec)
+                    console.log(allUnits)
+                } else { 
+                    console.log('Find electives, step 5')
+                    //step 5 - find matches based on electives
+                   
+                }
+            }
+
+        }
+        console.log(allUnits)
+   
 
         return ( 
             <>

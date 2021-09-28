@@ -35,6 +35,15 @@ export function useMajors() {
   })
 }
 
+export function useSpecializations() { 
+  return useQuery('specializations', async (): Promise<AxiosResponse<Array<any>>> => { 
+    return await axios.get("https://ilur318q9c.execute-api.ap-southeast-2.amazonaws.com/Prod/getallspecs")
+  }, { 
+    staleTime: Infinity,
+    retry: false
+  })
+}
+
 export function useCareer(careerCode: string)
 {
     return useQuery(`career - ${careerCode}`, async (): Promise<AxiosResponse<any>> => {
@@ -100,3 +109,4 @@ export function useUnit(unitCode: string)
       retry: false
     });
 }
+
