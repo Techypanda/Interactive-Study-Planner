@@ -79,6 +79,7 @@ function ViewCareer(props: DefaultProps)
             careerReqs : responseData["Requirements"],
             careerTraits : traits
         };
+        console.log(responseData);
 
         //Check for no name
         if (data.careerName === undefined)
