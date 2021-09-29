@@ -40,10 +40,6 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-// called on loading of this component
-// makes call to the careers API to get all careers so they can be rendered
-// props param is questionable atm but it's purpose is to take the form of the retrieved career
-// data which will be available to retreive once the CORS is figured out 
 function ViewAllCareers(props: DefaultProps) {
     const history = useHistory();
     const classes = useStyles();
@@ -54,7 +50,6 @@ function ViewAllCareers(props: DefaultProps) {
 	const getCareersData = () => {
 		axios.get("https://q02l9qoni6.execute-api.ap-southeast-2.amazonaws.com/Prod/events/event-get-all-careers")
 				.then((response) => {
-					console.log(response.data);
 					setCareersData(response.data);
 				})
 	}
