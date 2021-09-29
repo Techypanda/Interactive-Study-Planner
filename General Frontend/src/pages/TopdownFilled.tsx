@@ -232,7 +232,7 @@ export default function TopdownFilled(props: MajorProps) {
                     </Grid>
 
                     <Grid item xs={2}>
-                        <AvailableCareersList />
+                        <AvailableCareersList careerObj={ careerResponseData } />
                     </Grid>
                 </Grid>
                 <p>l</p>

@@ -66,18 +66,8 @@ export default function TopdownInitial() {
 
     async function fetchData() { 
         try { 
-            let careerArray : CareerProps[] = [];
-            //const {data} = await axios.get("https://ilur318q9c.execute-api.ap-southeast-2.amazonaws.com/Prod/getallmajors");
             const {data} = await axios.get("https://q02l9qoni6.execute-api.ap-southeast-2.amazonaws.com/Prod/events/event-get-all-careers");
-
-            let careerTitles2 : string[] = [];
-            for(let i = 0 ; i < data.length; i++) { 
-                careerTitles2[i] = data[i].Name;
-            }
-            let resp : CareerListProps = { 
-                careerList : careerTitles2,
-            }
-            setCareerList(resp);
+            setCareerList(data);
             setLoading(false);
         } catch(error) { 
             if(error && axios.isAxiosError(error)) { 
@@ -122,7 +112,7 @@ export default function TopdownInitial() {
                 </Grid>
 
                 <Grid item xs={2}>
-                    <AvailableCareersList careerList={careerList2.careerList} />
+                    <AvailableCareersList careerObj={careerList2} />
                 </Grid>
             </Grid>
         </>
