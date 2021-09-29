@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 // stock images
 import MedicalImage from "../static/doctor_teacher.jpg";
 import CareersImage from "../static/career.jpg";
+import TraitsImage from "../static/traits_image.jpg"
 import CardPrompt from "../components/Landing/CardPrompt";
 
 
@@ -24,7 +25,7 @@ function Landing() {
 						What Would You Like To Do?
 					</Typography>
 				</Box>
-				<Grid container>
+				<Grid container spacing={2} justify="center">
 					<Grid item md={6} xs={12}>
 						<Box mb={isTablet ? 2 : 0}>
 							<CardPrompt
@@ -47,41 +48,18 @@ function Landing() {
 							/>
 						</Box>
 					</Grid>
+					<Grid item md={6} xs={12}>
+						<Box mb={isTablet ? 2 : 0}>
+							<CardPrompt
+								onClick={() => history.push('/ViewAllUnits')}
+								src={TraitsImage}
+								alt="A Stock Image Declaring Units"
+								title={"See Available Units"}
+								description={"Discover all the courses that Curtin University offers in this program."}
+							/>
+						</Box>
+					</Grid>
 				</Grid>
-
-				{/* <Grid container spacing={4} justify="center">
-					<Grid item xs={12} sm={6}>
-						<div className="card-body">
-							<Card variant="outlined" onClick={() => history.push('./PlannerInitialPage')}>
-								<CardHeader title="Plan Your Medical Course" />
-								<Grid item>
-									<img src={MedicalImage} alt="medical stock image" />
-								</Grid>
-								<CardContent>
-									<Typography variant="body1" align="center">
-										See how Curtin's flexible course structure can be shaped to you advantage.
-									</Typography>
-								</CardContent>
-							</Card>
-						</div>
-					</Grid>
-
-					<Grid item xs={12} sm={6}>
-						<div className="card-body">
-							<Card variant="outlined" onClick={() => history.push('/ViewAllCareers')}>
-								<CardHeader title="See Careers" />
-								<Grid item>
-									<img src={CareersImage} alt="careers stock image" />
-								</Grid>
-								<CardContent>
-									<Typography variant="body1" align="center" >
-										See all the possible careers Curtin can lead to and their requirements.
-									</Typography>
-								</CardContent>
-							</Card>
-						</div>
-					</Grid>
-				</Grid> */}
 			</Container>
 		</>
 	);
