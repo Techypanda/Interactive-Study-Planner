@@ -1,4 +1,4 @@
-import {	Grid, Typography, Container, Box, useMediaQuery } from "@material-ui/core";
+import { Grid, Typography, Container, Box, useMediaQuery } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 
 // stock images
@@ -6,8 +6,6 @@ import MedicalImage from "../static/doctor_teacher.jpg";
 import CareersImage from "../static/career.jpg";
 import TraitsImage from "../static/traits_image.jpg"
 import CardPrompt from "../components/Landing/CardPrompt";
-
-
 
 function Landing() {
 	const history = useHistory();
