@@ -1,5 +1,4 @@
 import { Box, Grid } from "@material-ui/core";
-import { platform } from "os";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Career, Major, Plan, PromptData, Specialization, Unit, UnitFirstSPAContextProps } from "../../types";

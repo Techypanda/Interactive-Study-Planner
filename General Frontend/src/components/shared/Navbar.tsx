@@ -2,7 +2,6 @@ import { AppBar, Toolbar, Typography, Box } from "@material-ui/core";
 import { DefaultProps } from "../../types";
 import styled from 'styled-components';
 import CurtinLogo from "../../static/curtinlogo.png";
-import { useState } from "react";
 
 function Navbar(props: DefaultProps) {
   return (
