@@ -2,7 +2,7 @@ import { Typography } from "@material-ui/core";
 import styled from "styled-components";
 import { useHistory, useParams } from "react-router-dom";
 import { DefaultProps } from "../../types";
-import axios, {  } from "axios";
+import axios from "axios";
 import { useEffect, useState } from 'react';
 
 function ViewUnit(props: DefaultProps){

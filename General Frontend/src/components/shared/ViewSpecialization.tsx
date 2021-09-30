@@ -4,7 +4,7 @@ import NavListSection from "./NavListSection"
 import { SpecProps, DefaultProps } from "../../types";
 import styled from "styled-components";
 import { useHistory, useParams } from "react-router-dom";
-import { useSpecialization } from "./hooks";
+import { useSpecialization } from "../../api/hooks";
 import { BounceLoader } from "react-spinners";
 import NotFound from "../../pages/NotFound";
 
