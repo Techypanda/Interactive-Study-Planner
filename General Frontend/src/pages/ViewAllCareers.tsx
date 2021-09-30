@@ -44,55 +44,50 @@ function ViewAllCareers(props: DefaultProps) {
     const history = useHistory();
     const classes = useStyles();
 
-	const base = [{Description : "", Industry : "", CareerId: ""}]
-	const [careersList, setCareersData] = useState(base);
+    const base = [{Description : "", Industry : "", CareerId: ""}]
+    const [careersList, setCareersData] = useState(base);
 
-	const getCareersData = () => {
-		axios.get("https://q02l9qoni6.execute-api.ap-southeast-2.amazonaws.com/Prod/events/event-get-all-careers")
-				.then((response) => {
-					setCareersData(response.data);
-				})
-	}
-	useEffect(() => {
-		getCareersData();
-	  }, []);
+    const getCareersData = () => {
+	axios.get("https://q02l9qoni6.execute-api.ap-southeast-2.amazonaws.com/Prod/events/event-get-all-careers")
+	     .then((response) => {
+		 setCareersData(response.data);
+	     })
+    }
+    useEffect(() => {
+	getCareersData();
+    }, []);
 
     return (
 	<>
-		<br>
+	    <br>
 		</br>
-	    <Container  >
-			<Box id="searchcontainer" display="flex">
-					<Button className="backButton" variant="contained" onClick={() => history.goBack()} >
-						Back
-					</Button>
-
-				<TextField style={{padding: '0 10px'}} variant="outlined" id="standard-full-width" fullWidth  placeholder="Search careers..." className="searchbar" />
-				<Button variant='contained' className="searchbtn">Search</Button>
+		<Container  >
+		    <TextField style={{padding: '0 10px'}} variant="outlined" id="standard-full-width" fullWidth  placeholder="Search careers..." className="searchbar" />
+		    <Button variant='contained' className="searchbtn">Search</Button>
 			</Box>
 			<br/>
 			{careersList.map((x) => (
-				<div className="career-option">
+			    <div className="career-option">
 				<Card variant="outlined" className={classes.root}>
-					<div className={classes.details}>
+				    <div className={classes.details}>
 					<CardContent onClick={() => history.push(`/InfoPage/ViewCareer/${x.CareerId}`)} className={classes.content}>
-						<Typography className='values' component="h5" variant="h5" align="left">
-							{x.Industry}
-						</Typography>
-						<Typography variant="subtitle1" color="textSecondary">
-							{x.Description}
-						</Typography>
+					    <Typography className='values' component="h5" variant="h5" align="left">
+						{x.Industry}
+					    </Typography>
+					    <Typography variant="subtitle1" color="textSecondary">
+						{x.Description}
+					    </Typography>
 					</CardContent>
 					<div className={classes.controls}>
 					</div>
-					</div>
+				    </div>
 				</Card>
-				</div>
+			    </div>
 			))}
-	    </Container>
-	    <br/>
-	    
-	    <Button variant="contained" onClick={() => history.goBack()}>Back</Button>
+		</Container>
+		<br/>
+		
+		<Button variant="contained" onClick={() => history.goBack()}>Back</Button>
 	</>
     );
 }
