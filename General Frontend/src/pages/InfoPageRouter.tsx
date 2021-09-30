@@ -2,7 +2,6 @@ import { useHistory, Switch, Route } from "react-router-dom";
 import ViewCareer from "../components/shared/ViewCareer";
 import ViewMajor from "../components/shared/ViewMajor";
 import ViewSpecialization from "../components/shared/ViewSpecialization";
-import ViewUnit from "../components/shared/ViewUnit";
 import UnitInformationPage from "../components/shared/UnitInformationPage";
 
 import { Button } from "@material-ui/core";
@@ -10,7 +9,7 @@ import { Button } from "@material-ui/core";
 /*
  * Author: Matthew Loe
  * Student Id: 19452425
- * Date Last Modified: 27/09/2021
+ * Date Last Modified: 30/09/2021
  * Description: Routing page for information pages
  */
 //Notes - remove button, test function, test route and usehistory after testing concluded or comment out

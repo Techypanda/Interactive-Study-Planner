@@ -1,15 +1,9 @@
 import { useEffect, useState } from 'react';
-import { BrowserRouter as Router } from "react-router-dom";
-import { Box, Button, Container,Grid, Typography, Card, CardHeader, CardContent, TextField} from "@material-ui/core";
+import { Box, Button, Container,Typography, Card, CardContent, TextField} from "@material-ui/core";
 import { useHistory } from "react-router-dom";
-import { useQuery, useQueryClient } from "react-query";
-import styled from "styled-components";
-import axios, { AxiosError, AxiosResponse } from "axios";
-import {BrowserRouter, Switch, Route} from "react-router-dom";
-
-import Navbar from "../components/shared/Navbar";
-import { CareerProps, DefaultProps } from "../types";
-import { createStyles, makeStyles, Theme , useTheme} from '@material-ui/core/styles';
+import axios from "axios";
+import { DefaultProps } from "../types";
+import { createStyles, makeStyles, Theme} from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -89,10 +83,13 @@ function ViewAllCareers(props: DefaultProps) {
 				</Card>
 				</div>
 			))}
+			<br>
+			</br>
+			<Button variant="contained" onClick={() => history.goBack()}>Back</Button>
+			<br>
+			</br>
 	    </Container>
 	    <br/>
-	    
-	    <Button variant="contained" onClick={() => history.goBack()}>Back</Button>
 	</>
     );
 }

@@ -1,8 +1,7 @@
 import { Box } from "@material-ui/core";
 import styled from "styled-components";
-import { useSpecializations } from "../api/hooks";
-import { useCareers, useMajors, useUnits } from "../components/shared/hooks";
-import { Career, DefaultProps } from "../types";
+import { useCareers, useMajors, useSpecializations, useUnits } from "../api/hooks";
+import { DefaultProps } from "../types";
 import { BounceLoader } from "react-spinners";
 import UnitsFirstSPAContext from "../components/UnitsFirst/UnitsFirstSPAContext";
 

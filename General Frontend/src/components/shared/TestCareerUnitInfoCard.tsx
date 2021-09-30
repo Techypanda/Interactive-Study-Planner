@@ -1,26 +1,15 @@
 //Delete this later
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { AppBar, Toolbar, Typography, Box, List, Card, Grid, CardActions, CardActionArea, CardHeader, CardMedia, CardContent, Paper} from "@material-ui/core";
+import { Typography, Card, CardActions, CardHeader, CardMedia, CardContent} from "@material-ui/core";
 import Avatar from '@material-ui/core/Avatar';
-import PropTypes from 'prop-types';
-import { DefaultProps } from "../../types";
-import CareersImage from '../../../src/static/career.jpg';
-import settingImage from  '../../../src/sttatic/settings.jpg';
-import styled from 'styled-components';
 import IconButton from '@material-ui/core/IconButton';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import AppsIcon from '@material-ui/icons/Apps';
-import clsx from 'clsx';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
-import CheckIcon from '@material-ui/icons/Check'
-import CloseIcon from '@material-ui/icons/Close'
+import { makeStyles } from '@material-ui/core/styles';
 import Button from "@material-ui/core/Button";
-import { useHistory, Switch, Route } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import { red } from '@material-ui/core/colors'
 
-import { useState } from 'react';
-import { classes } from "istanbul-lib-coverage"; //??WTf is this
 import { InfoCardProps } from "../../types";
 
 
