@@ -78,6 +78,119 @@ function areRemainingMatched(bestMajor : any, careerUnits : string[]) {
     return false;
 }
 
+function getPreReqs(unitResp : any, careerUnits : string[], allUnits : string[]) { 
+    console.log('inside get pre reqs')
+    var currBestMaxLen = -1;
+    var currBestIndex = -1;
+    for(var i =0; i < unitResp.length; i++) { 
+        if(careerUnits.includes(unitResp[i].UnitCode)) { 
+            console.log(i)
+            console.log('match for ' + unitResp[i].UnitCode)
+            for(var j = 0; j < unitResp[i].Prerequistes.length; j++) { 
+                let intersection = unitResp[i].Prerequistes[j].filter((item : any) => allUnits.includes((item)))
+                console.log(intersection.length)
+                if(intersection.length > currBestMaxLen) { 
+                    currBestMaxLen = intersection.length
+                    currBestIndex = j;
+                }
+                //highest value here would be the 'closest' match
+                //if highest == pre req len, we found a perfect match, so just add the career unit into all unit
+                //if it equals 0, then we found no matches at all, pick a random pre req
+                //otherwise, we got a partial match
+                    //if highest = 0, we have no matches for any pre reqs
+                        //choose a random set of pre reqs i guess
+                    //if highest = 1, we pick the unit NOT in the intersection, add it to the list AND the unit
+                    //if highest == unitResp.prereq.length, we have a perfect match, we just add it to the list
+            }
+            if(currBestMaxLen == unitResp[i].Prerequistes[currBestIndex].length) { 
+                //This means we have a perfect match for the pre requisites already
+                console.log('perfect match?')
+                console.log('add ' + unitResp[i].UnitCode + ' to list of units')
+                //add careerUnit into allUnit
+                if(!(allUnits.includes(unitResp[i].UnitCode))) { //make sure we don't add duplicates
+                    allUnits.push(unitResp[i].UnitCode)
+                }
+                //break;
+            }
+            else if(currBestMaxLen == 0) { 
+                //This means we had no matches for ANY of the pre reqs
+                console.log('no matches for any of ' + unitResp[i].UnitCode + 's prereqs')
+                console.log('we could choose a random set of pre reqs here?')
+                console.log('adding some unit here xD')
+                let min = 0;
+                let max = unitResp[i].Prerequistes.length;
+                var found = false;
+                let randNum = 0;
+                var reset = false;
+                while(!found) {
+                    //randNum = Math.floor(Math.random() * (max - min) + min)
+                    if(reset) {randNum = Math.floor(Math.random() * (max - min) + min) }
+                    for(j = 0; j < unitResp[i].Prerequistes[randNum].length; j++) { 
+                        let isNum = /^\d+$/.test(unitResp[i].Prerequistes[randNum][j])
+                        if(isNum) { 
+                            console.log('element is a number')
+                            reset = true;
+                            continue;
+                        }
+                    }
+                    found = true;
+                }
+                console.log('we chose a random pre req. it was: ')
+                console.log(unitResp[i].Prerequistes[randNum])
+                for(j = 0; j < unitResp[i].Prerequistes[randNum].length; j++) { 
+                    if(!(allUnits.includes(unitResp[i].Prerequistes[randNum][j]))) {
+                        allUnits.push(unitResp[i].Prerequistes[randNum][j])
+                    } 
+                }
+                if(!(allUnits.includes(unitResp[i].UnitCode))) { 
+                    allUnits.push(unitResp[i].UnitCode)
+                }
+                //choose random unit
+                //make sure all elements in the set are not stupid numbers e.g., unit code = 12315
+                //add units, ensuring if it's a set of elements that you add them individually, not the whole set
+                //then add careerUnit in
+                //break;
+            //} else if(currBestMaxLen == 1) { 
+            } else {
+                //this means we had a partial match for at least ONE of the pre reqs (in the scenario it's units with OR)
+                let notIntersection = unitResp[i].Prerequistes[currBestIndex].filter((item : any) => !allUnits.includes((item)))
+
+                console.log('We have a partial match from ith unit, currBestIndexth pre req. add what is missing to allUnits, which is')
+                console.log(notIntersection)
+                console.log(unitResp[i].Prerequistes[currBestIndex])
+                console.log('and then add the career unit in')
+                for(j = 0; j < notIntersection.length; j++) {  //in case units require > 2 units with ORS between
+                    if(!(allUnits.includes(notIntersection[j]))) { 
+                        allUnits.push(notIntersection[j])
+                    }
+                }
+
+                if(!(allUnits.includes(unitResp[i].UnitCode))) { 
+                    allUnits.push(unitResp[i].UnitCode)
+                }
+                //break;
+            } 
+            currBestMaxLen = -1;
+            currBestIndex = -1;
+            //need to reset
+        }
+    }
+    /*for(var i = 0; i < unitResp.length; i++) { 
+        if(careerUnits.includes(unitResp[i].UnitCode)) { 
+            console.log(unitResp[i].UnitCode)
+            for(var j = 0; j < unitResp[i].Prerequistes.length; j++) { 
+                var intersection = unitResp[i].Prerequistes[j].filter((item : any) => allUnits.includes((item)))
+                //console.log(intersection);
+                if(intersection.length > 0) { 
+                    console.log('partial match')
+                } else { 
+                    console.log('no match at all.')
+                }
+            }
+        }
+    }*/
+}
+
 function findBestISpecESpec(specResp : any, careerUnits : string[], majorCode : string, specCode : string) { 
     var maxLen = 0;
     var bestISpecESpec;
@@ -215,6 +328,9 @@ function findISpec(specResp : any, careerUnits : string[], majorCode : string) {
     console.log(bestISpec)
     return bestISpec
 }
+
+
+
 function findMajor(majorResp : any, careerUnits : string[]) { 
     let maxLen = 0;
     var bestMajor;
@@ -306,10 +422,12 @@ export default function TopdownFilled(props: MajorProps) {
 
 
 
-
+        console.log('AT START : unit response data is: ')
+        console.log(unitResponseData)
+        
         console.log('career units for testing: ')
         //hardcoding for now to test =)
-        var careerUnits = ["BCCB2000","BIOL2001","BIOL3010","BIOL3011","GENE2001","GENE3000","GENE3002","MEDI2010", "HUMB3008"]
+        var careerUnits = ["BIOL3011","HUMB2014","GENE3000","GENE3002","MEDI2010", "HUMB3008", "MEDI2000"]
         console.log(careerUnits)
         var i;
         var doubleMajorFound = true;
@@ -390,7 +508,21 @@ export default function TopdownFilled(props: MajorProps) {
             }
 
         }
+
+        for(i = 0; i< unitResponseData.length; i++) { 
+            if(unitResponseData[i].UnitCode == "MEDI2000") { 
+                console.log(unitResponseData[i])
+            }
+        }
+        console.log('All units and career units before')
         console.log(allUnits)
+        console.log(careerUnits)
+        getPreReqs(unitResponseData, careerUnits, allUnits)
+        console.log('All units after')
+        console.log(allUnits)
+        if(allUnits.length > 24) { 
+            console.log('Career cannot be reached')
+        }
    
 
         return ( 
