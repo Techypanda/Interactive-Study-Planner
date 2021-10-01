@@ -1,37 +1,19 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { makeStyles } from '@material-ui/core/styles';
 import Navbar from "../components/shared/Navbar";
-import CareersImage from '../src/static/career.jpg'
-import { DefaultProps, MajorUnitListProps } from "../types";
-import styled from 'styled-components'
-import List from '@material-ui/core'
-import { ListItemSecondaryAction } from '@material-ui/core';
-import { ListItem } from '@material-ui/core';
-import { ListSubheader } from '@material-ui/core';
-import React, {useState, useEffect } from 'react';
-import  { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import { Box, Grid, Typography, Card, CardActions, CardActionArea, CardHeader, CardMedia, CardContent, Paper, ListItemText } from '@material-ui/core';
+import React, {useState } from 'react';
+import { Grid } from '@material-ui/core';
 import CurrentPlan from "../components/shared/CurrentPlan"
 import TopDownFilledMain from '../components/shared/TopDownFilledMain';
 import AvailableCareersList from '../components/shared/AvailableCareersList';
-import { MajorProps, CareerListProps } from "../types";
-import axios, { AxiosResponse } from 'axios';
+import { MajorProps } from "../types";
 import LoadingScreen from '../components/shared/Loading';
 import Error from '../components/shared/Error';
-import IconButton from '@material-ui/core/IconButton'
-import ClearIcon from '@material-ui/icons/Clear'
-import { common, red } from '@material-ui/core/colors'
 
-import { useLocation, useHistory } from 'react-router-dom';
-import { Location } from 'history'
-import { useCallback } from 'react';
-//import { useCareers, useMajors, useUnits } from '../components/shared/hooks';
-//import { useCareer } from '../components/shared/hooks';
+import { useHistory } from 'react-router-dom';
 import { useCareers, useMajors, useUnits, useSpecializations } from '../components/shared/hooks'
-import { createPartiallyEmittedExpression } from 'typescript';
-import { SupervisedUserCircleSharp } from '@material-ui/icons';
-import { findByPlaceholderText } from '@testing-library/react';
-
+import { Box } from '@material-ui/core'
+import { BounceLoader } from 'react-spinners'
+import UnitsFirstSPAContext from '../components/UnitsFirst/UnitsFirstSPAContext'
 
 const useStyles = makeStyles((theme) => ({ 
     careersList: { 
@@ -60,10 +42,12 @@ function backFunction() {
     alert(1)
 }
 function updatePlanUnits(allUnits : string[], dataResp : any) { 
-    for(var i = 0; i < dataResp.Units.length; i++) { 
-        allUnits.push(dataResp.Units[i])
-    }
+    dataResp.Units.forEach((unit : any) => { 
+        allUnits.push(unit)
+    })
 }
+
+
 function areRemainingMatched(bestMajor : any, careerUnits : string[]) { 
     var matchCount = 0;
     for(var i = 0; i < careerUnits.length; i++) { 
@@ -72,7 +56,6 @@ function areRemainingMatched(bestMajor : any, careerUnits : string[]) {
         }
     }
     if(matchCount === careerUnits.length) { 
-        console.log('true inside of are remanming matched')
         return true;
     }
     return false;
@@ -123,7 +106,6 @@ function getPreReqs(unitResp : any, careerUnits : string[], allUnits : string[])
                 let randNum = 0;
                 var reset = false;
                 while(!found) {
-                    //randNum = Math.floor(Math.random() * (max - min) + min)
                     if(reset) {randNum = Math.floor(Math.random() * (max - min) + min) }
                     for(j = 0; j < unitResp[i].Prerequistes[randNum].length; j++) { 
                         let isNum = /^\d+$/.test(unitResp[i].Prerequistes[randNum][j])
@@ -145,12 +127,6 @@ function getPreReqs(unitResp : any, careerUnits : string[], allUnits : string[])
                 if(!(allUnits.includes(unitResp[i].UnitCode))) { 
                     allUnits.push(unitResp[i].UnitCode)
                 }
-                //choose random unit
-                //make sure all elements in the set are not stupid numbers e.g., unit code = 12315
-                //add units, ensuring if it's a set of elements that you add them individually, not the whole set
-                //then add careerUnit in
-                //break;
-            //} else if(currBestMaxLen == 1) { 
             } else {
                 //this means we had a partial match for at least ONE of the pre reqs (in the scenario it's units with OR)
                 let notIntersection = unitResp[i].Prerequistes[currBestIndex].filter((item : any) => !allUnits.includes((item)))
@@ -168,27 +144,12 @@ function getPreReqs(unitResp : any, careerUnits : string[], allUnits : string[])
                 if(!(allUnits.includes(unitResp[i].UnitCode))) { 
                     allUnits.push(unitResp[i].UnitCode)
                 }
-                //break;
             } 
+            //reset for next unit (if it exists) in career units
             currBestMaxLen = -1;
             currBestIndex = -1;
-            //need to reset
         }
     }
-    /*for(var i = 0; i < unitResp.length; i++) { 
-        if(careerUnits.includes(unitResp[i].UnitCode)) { 
-            console.log(unitResp[i].UnitCode)
-            for(var j = 0; j < unitResp[i].Prerequistes.length; j++) { 
-                var intersection = unitResp[i].Prerequistes[j].filter((item : any) => allUnits.includes((item)))
-                //console.log(intersection);
-                if(intersection.length > 0) { 
-                    console.log('partial match')
-                } else { 
-                    console.log('no match at all.')
-                }
-            }
-        }
-    }*/
 }
 
 function findBestISpecESpec(specResp : any, careerUnits : string[], majorCode : string, specCode : string) { 
@@ -258,7 +219,6 @@ function findRandISpec(specResp : any) {
 
 function findRandISpecESpec(specResp : any, specCode : string, majorCode : string, careerUnits : string []) { 
     //TODO: Make sure it checks all major anti reqs and spec anti reqs and unit anti reqs
-    //make sure it works xD
     var min = 0;
     var max = specResp.length;
     var invalid = false;
@@ -412,13 +372,25 @@ export default function TopdownFilled(props: MajorProps) {
                 * 
         */
 
+
+        /* 
+        (1) look at main majors, check if any units are in them decide the best one. If we match all career units, stop here. Otherwise, try (2)
+        ->
+        (2) look at second majors, check if any units in them combine to make the career. If we can finish ALL the remaining career units with second major stop here. Otherwise, try (3)
+        ->
+        (3) look at ispecs, check if any units in them contain the units in my career select the best one. If we can finish all the remaining career units with this ISpec, stop here. Otherwise, try (4)
+        ->
+        (4) look at especs and/or ispecs. If we match all career units, stop here. Otherwise, pick a random spec and try fill the remaining career units with elective slots in (5)
+        ->
+        (5) Use elective slots to fill out career units and its pre requisites. If the remainder units AND pre reqs can be satisfied within 4 units, we have completed the plan. Otherwise, it's not possible to reach.
+         */
         
-        console.log(specResponseData)
-        var ourCareer = careerResponseData[0]
         var allUnits : string[] = [];
-        for(i = 0; i < commonUnits.length; i++) { 
+        //Add the common units to the plan since all students must do these units
+        for(var i = 0; i < commonUnits.length; i++) { 
             allUnits.push(commonUnits[i])
         }
+        var solved = false;
 
 
 
@@ -427,9 +399,9 @@ export default function TopdownFilled(props: MajorProps) {
         
         console.log('career units for testing: ')
         //hardcoding for now to test =)
-        var careerUnits = ["BIOL3011","HUMB2014","GENE3000","GENE3002","MEDI2010", "HUMB3008", "MEDI2000"]
+        //var careerUnits = ["BIOL3011","HUMB2014","GENE3000","GENE3002","MEDI2010", "HUMB3008", "MEDI2000"]
+        var careerUnits = ["BIOL3011", "HUMB2014", "GENE3000"]
         console.log(careerUnits)
-        var i;
         var doubleMajorFound = true;
         var bestMajor = findMajor(majorResponseData, careerUnits)
 
@@ -447,29 +419,32 @@ export default function TopdownFilled(props: MajorProps) {
             updatePlanUnits(allUnits, bestMajor)
             console.log('all units after')
             console.log(allUnits)
-            if(careerUnits.length == 0) { 
+            if(careerUnits.length === 0) { 
                 console.log(allUnits)
                 //alert('done on single major')
-                console.log('Finished on a single major lol')
+                console.log('Finished on a single major, stop here.')
+                solved = true;
             } else {  //repeat and try find double major
+                console.log('Attemping double major')
                 secondBestMajor = findMajor(majorResponseData, careerUnits)
                 
                 //if true, we have perfectly matched all career units with 2 majors.
                 if(areRemainingMatched(secondBestMajor, careerUnits)) { 
-                        updatePlanUnits(allUnits, secondBestMajor)
+                    console.log('Finished on double major, stop here.')
+                    updatePlanUnits(allUnits, secondBestMajor)
+                    solved = true;
                 } else { 
-                    console.log('move onto step 3')
+                    console.log('Double major will not work. Continue')
                     doubleMajorFound = false;
                 }
             }
-        if(!doubleMajorFound){
+        if(!doubleMajorFound && !solved){
             var bestISpec;
             console.log(allUnits)
             console.log('in step 3: find best ispec')
             bestISpec = findISpec(specResponseData, careerUnits, bestMajor.MajorCode) //get major code from FIRST major (IGNORE SEOCND)
             if(bestISpec === undefined) {
                 bestISpec = findRandISpec(specResponseData)
-
             }
             console.log('before')
             console.log(allUnits)
@@ -482,6 +457,7 @@ export default function TopdownFilled(props: MajorProps) {
             if(careerUnits.length === 0) { 
                 //alert('finished at step 3')
                 console.log('finished at step 3')
+                solved = true;
             } else { 
                 //step 4 (find espec or ispec)
                 console.log('Starting step 4')
@@ -489,7 +465,7 @@ export default function TopdownFilled(props: MajorProps) {
                 bestISpecEspec = findBestISpecESpec(specResponseData, careerUnits, bestMajor.MajorCode, bestISpec.SpecializationCode)
                 console.log(bestISpecEspec)
                 if(bestISpecEspec === undefined) { 
-                    console.log('no suitable spec was found, i.e., returned default')
+                    console.log('no suitable spec was found, i.e., returned undefined')
                     bestISpecEspec = findRandISpecESpec(specResponseData, bestISpec.SpecializationCode, bestMajor.MajorCode, careerUnits)
                     console.log(bestISpecEspec)
                 }
@@ -497,35 +473,50 @@ export default function TopdownFilled(props: MajorProps) {
                 console.log(allUnits)
                 console.log(careerUnits)
                 if(areRemainingMatched(bestISpecEspec, careerUnits)) { 
+                    solved = true;
                     console.log('finished at step 4')
                     updatePlanUnits(allUnits, bestISpecEspec)
                     console.log(allUnits)
                 } else { 
-                    console.log('Find electives, step 5')
-                    //step 5 - find matches based on electives
+                    if(!solved) {
+                        console.log('Find electives, step 5')
+                        console.log('All units and career units before')
+                        console.log(allUnits)
+                        console.log(careerUnits)
+                        getPreReqs(unitResponseData, careerUnits, allUnits);
+                        console.log('All units and career untis after')
+                        console.log(allUnits, careerUnits)
+                        if(allUnits.length <= 24) {
+                            console.log('great success hahaghagsfh')
+                            solved = true;
+                        }
+                    }
                    
                 }
             }
-
+        }
+        if(solved) { 
+            console.log('load into local storage, pass to bottom up')
+        } else { 
+            alert('career cannot be met')
         }
 
-        for(i = 0; i< unitResponseData.length; i++) { 
-            if(unitResponseData[i].UnitCode == "MEDI2000") { 
-                console.log(unitResponseData[i])
-            }
-        }
-        console.log('All units and career units before')
-        console.log(allUnits)
-        console.log(careerUnits)
-        getPreReqs(unitResponseData, careerUnits, allUnits)
-        console.log('All units after')
-        console.log(allUnits)
-        if(allUnits.length > 24) { 
-            console.log('Career cannot be reached')
-        }
-   
 
-        return ( 
+
+          return (
+    <Box className={props.className}> {/* Horrible Javascript Abuse TODO: Rework this */}
+      {careers.isLoading || majors.isLoading || units.isLoading || specs.isLoading
+        ? <Box my={2}><BounceLoader color="#1473AB" loading={true} size={150} /></Box>
+        :
+        <>
+          {careers.isError || majors.isError || units.isError || specs.isError
+            ? <h1>Error Has Occured</h1>
+            : <UnitsFirstSPAContext careers={careers.data?.data!} majors={majors.data?.data!.sort((a, b) => a.Name.localeCompare(b.Name))!} units={units.data?.data!.sort((a, b) => a.Name.localeCompare(b.Name))!} specs={specs.data?.data!.sort((a, b) => a.Name.localeCompare(b.Name))!} />
+          }
+        </>
+      }
+    </Box>
+        /*return ( 
             <>
                 <Navbar />
                 <Grid container 
@@ -550,6 +541,7 @@ export default function TopdownFilled(props: MajorProps) {
                 </Grid>
                 <p>l</p>
             </>
-        )
+        )*/
+
     }
 }
