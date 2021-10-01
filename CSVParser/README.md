@@ -15,6 +15,7 @@ AWS charged us $5 for having it in a VPC, so were just making it another API.
 - PREREQUISTES (entered as groups, to split into a new group (i.e OR path) use a semicolon else its comma seperated)
 - COREQUISTES (entered as groups, to split into a new group (i.e OR path) use a semicolon else its comma seperated)
 - ANTIREQUISTES (entered as groups, to split into a new group (i.e OR path) use a semicolon else its comma seperated)
+- SEMESTER (1 = Semester 1, 2 = Semester 2, 12 = Semester 1 & 2)
 ### Major Definition
 - MAJOR
 - MajorCode
