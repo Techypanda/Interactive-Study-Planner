@@ -98,6 +98,7 @@ export interface Unit {
   Delivery: string
   UnitCode: string
   Description: string
+  Semester: 1 | 2 | 12 // 1 = semester 1, 2 = semester 2, 12 == semester 1 & 2
 }
 
 export interface Major {
