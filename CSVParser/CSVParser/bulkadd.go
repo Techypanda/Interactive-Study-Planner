@@ -46,7 +46,7 @@ func bulkAddToDB(unitList []Unit, majorList []Major, specList []Specialization, 
 					S: aws.String(unit.Delivery),
 				},
 				"Semester": {
-					I: aws.Int(unit.Semester),
+					N: aws.String(fmt.Sprintf("%d", unit.Semester)),
 				},
 			}
 			attachRequistesToUnitAddition(&unitItem, unit)
@@ -541,7 +541,10 @@ func processUnit(scanner *bufio.Scanner, lineNumber *int) (Unit, error) {
 	}
 	semester, err := strconv.Atoi(scanner.Text())
 	if err != nil {
-		return unit, fmt.Errorf("Expected a int for semester, recieved: %d", scanner.Text())
+		return unit, fmt.Errorf("Expected a int for semester, recieved: %s", scanner.Text())
+	}
+	if semester != 1 && semester != 2 && semester != 12 {
+		return unit, fmt.Errorf("Expected 1, 2 or 12 for semester, recieved: %d", semester)
 	}
 	unit.Semester = semester
 	return unit, nil
