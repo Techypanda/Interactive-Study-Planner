@@ -76,10 +76,82 @@ function checkIfHavePrereqs(unitsIAmTaking: Unit[], unit: Unit): [boolean, strin
 }
 
 function doPagination(pageCount: number, plan: Plan): Array<Array<Unit[]>> {
-  let loops = 0
   const paginatedUnits: Array<Array<Unit[]>> = [];
   let unitCpy = [...(plan.allUnits!)]
-
+  let stillSorting = true
+  const extras = []
+  const fySemOne = []
+  const fySemTwo = []
+  while (stillSorting === true) {
+    stillSorting = false
+    for (let i = 0; i < unitCpy.length; i++) {
+      if (isFirstYearUnit(unitCpy[i])) {
+        if (unitCpy[i].UnitCode === "MEDI1000" || unitCpy[i].UnitCode === "HUMB1000" || unitCpy[i].UnitCode === "BIOL1004" || unitCpy[i].UnitCode === "CHEM1007") {
+          fySemOne.push(unitCpy[i])
+        } else {
+          fySemTwo.push(unitCpy[i])
+        }
+        unitCpy.splice(i, 1);
+        stillSorting = true
+        break
+      }
+    }
+  }
+  // eslint-disable-next-line no-loop-func
+  /* plan.doubleMajor?.Units.forEach((z) => {
+    if (z === unitCpy[i].UnitCode) {
+      if (FTOwner === "") { FTOwner = "DOUBLEMAJOR" }
+      unitCpy[i].Prerequistes.forEach((p) => {
+        p.forEach((u) => {
+          plan.mainMajor?.Units.forEach((k) => {
+            if (u === k) {
+              hasrelevantPrereq = true
+            }
+          })
+        })
+      })
+      if (FTOwner === "DOUBLE") {
+        if (hasrelevantPrereq) {
+          tySemTwoFT.push(unitCpy[i])
+          unitCpy.splice(i, 1)
+        } else {
+          if (sySemTwoFT.length > 2) {
+            sySemTwoFT.push(unitCpy[i])
+            unitCpy.splice(i, 1)
+          } else {
+            tySemTwoFT.push(unitCpy[i])
+            unitCpy.splice(i, 1)
+          }
+        }
+      } else {
+        if (hasrelevantPrereq) {
+          tySemTwoST.push(unitCpy[i])
+          unitCpy.splice(i, 1)
+        } else {
+          if (sySemTwoST.length > 2) {
+            tySemTwoST.push(unitCpy[i])
+            unitCpy.splice(i, 1)
+          } else {
+            sySemTwoST.push(unitCpy[i])
+            unitCpy.splice(i, 1)
+          }
+        }
+      }
+      needToBreak = true
+    }
+  })
+  if (needToBreak) {
+    break;
+  }
+  /*
+  plan.specializations?.forEach((z) => {
+ 
+  })
+  */
+  /* let loops = 0
+  const paginatedUnits: Array<Array<Unit[]>> = [];
+  let unitCpy = [...(plan.allUnits!)]
+  
   let fyUnit: Unit[] = []
   let dependencyGroups: Unit[][] = [];
   let stillSorting = true
@@ -153,7 +225,7 @@ function doPagination(pageCount: number, plan: Plan): Array<Array<Unit[]>> {
     }
   }
   console.log(dependencyGroups)
-  console.log(unitCpy)
+  console.log(unitCpy) */
   /* let done = false;
   while (!done) {
     let coll = false
