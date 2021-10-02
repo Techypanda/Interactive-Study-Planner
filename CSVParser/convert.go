@@ -1,4 +1,4 @@
-package main
+package UnitAdminAPI
 
 import (
 	"encoding/base64"
@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	b, err := ioutil.ReadFile("temp.csv")
+	b, err := ioutil.ReadFile("BiomedicalUnits.csv")
 	if err != nil {
 		fmt.Print(err)
 	} else {
