@@ -84,9 +84,9 @@ pipelines:
                 - pip install aws-sam-cli
                 - curl -sL https://deb.nodesource.com/setup_14.x | bash -
                 # - cat /etc/apt/sources.list.d/nodesource.list
-                - apt -y install nodejs
+                #- apt -y install nodejs
                 - apt-get -y install nodejs
-                - apt-get -y install npm
+                #- apt-get -y install npm
                 - chmod +x ./SetupAWSPipeline.sh
                 - ./SetupAWSPipeline.sh
                 - cd CareersApi
@@ -135,9 +135,9 @@ pipelines:
                 - pip install aws-sam-cli
                 - curl -sL https://deb.nodesource.com/setup_14.x | bash -
                 # - cat /etc/apt/sources.list.d/nodesource.list
-                - apt -y install nodejs
+                #- apt -y install nodejs
                 - apt-get -y install nodejs
-                - apt-get -y install npm
+                #- apt-get -y install npm
                 - npm install --global yarn
                 - chmod +x ./SetupAWSPipeline.sh
                 - ./SetupAWSPipeline.sh
