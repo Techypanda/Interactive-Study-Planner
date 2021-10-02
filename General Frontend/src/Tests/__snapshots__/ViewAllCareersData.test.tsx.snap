@@ -5,40 +5,17 @@ Object {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <header
-        class="MuiPaper-root MuiAppBar-root MuiAppBar-positionStatic MuiAppBar-colorPrimary sc-bdnxRM hKTgfL MuiPaper-elevation4"
-      >
-        <div
-          class="MuiToolbar-root MuiToolbar-regular flexit MuiToolbar-gutters"
-        >
-          <div
-            class="MuiBox-root MuiBox-root-19"
-            id="LogoSection"
-          >
-            <img
-              alt="curtin logo"
-              src="curtinlogo.png"
-            />
-          </div>
-          <h6
-            class="MuiTypography-root MuiTypography-h6"
-          >
-            <b>
-              Medical Course Planner  
-            </b>
-          </h6>
-        </div>
-      </header>
       <br />
       <div
         class="MuiContainer-root MuiContainer-maxWidthLg"
       >
         <div
-          class="MuiBox-root MuiBox-root-20"
+          class="MuiBox-root MuiBox-root-18"
           id="searchcontainer"
         >
           <div
             class="MuiFormControl-root MuiTextField-root searchbar MuiFormControl-fullWidth"
+            style="padding: 0px 10px;"
           >
             <div
               class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl"
@@ -53,11 +30,11 @@ Object {
               />
               <fieldset
                 aria-hidden="true"
-                class="PrivateNotchedOutline-root-21 MuiOutlinedInput-notchedOutline"
+                class="PrivateNotchedOutline-root-19 MuiOutlinedInput-notchedOutline"
                 style="padding-left: 8px;"
               >
                 <legend
-                  class="PrivateNotchedOutline-legend-22"
+                  class="PrivateNotchedOutline-legend-20"
                   style="width: 0.01px;"
                 >
                   <span>
@@ -87,23 +64,23 @@ Object {
           class="career-option"
         >
           <div
-            class="MuiPaper-root MuiCard-root makeStyles-root-13 MuiPaper-outlined MuiPaper-rounded"
+            class="MuiPaper-root MuiCard-root makeStyles-root-12 MuiPaper-outlined MuiPaper-rounded"
           >
             <div
-              class="makeStyles-details-14"
+              class="makeStyles-details-13"
             >
               <div
-                class="MuiCardContent-root makeStyles-content-15"
+                class="MuiCardContent-root makeStyles-content-14"
               >
                 <h5
-                  class="MuiTypography-root MuiTypography-h5 MuiTypography-alignLeft"
+                  class="MuiTypography-root values MuiTypography-h5 MuiTypography-alignLeft"
                 />
                 <h6
                   class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorTextSecondary"
                 />
               </div>
               <div
-                class="makeStyles-controls-17"
+                class="makeStyles-controls-16"
               />
             </div>
           </div>
@@ -127,40 +104,17 @@ Object {
     </div>
   </body>,
   "container": <div>
-    <header
-      class="MuiPaper-root MuiAppBar-root MuiAppBar-positionStatic MuiAppBar-colorPrimary sc-bdnxRM hKTgfL MuiPaper-elevation4"
-    >
-      <div
-        class="MuiToolbar-root MuiToolbar-regular flexit MuiToolbar-gutters"
-      >
-        <div
-          class="MuiBox-root MuiBox-root-19"
-          id="LogoSection"
-        >
-          <img
-            alt="curtin logo"
-            src="curtinlogo.png"
-          />
-        </div>
-        <h6
-          class="MuiTypography-root MuiTypography-h6"
-        >
-          <b>
-            Medical Course Planner  
-          </b>
-        </h6>
-      </div>
-    </header>
     <br />
     <div
       class="MuiContainer-root MuiContainer-maxWidthLg"
     >
       <div
-        class="MuiBox-root MuiBox-root-20"
+        class="MuiBox-root MuiBox-root-18"
         id="searchcontainer"
       >
         <div
           class="MuiFormControl-root MuiTextField-root searchbar MuiFormControl-fullWidth"
+          style="padding: 0px 10px;"
         >
           <div
             class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl"
@@ -175,11 +129,11 @@ Object {
             />
             <fieldset
               aria-hidden="true"
-              class="PrivateNotchedOutline-root-21 MuiOutlinedInput-notchedOutline"
+              class="PrivateNotchedOutline-root-19 MuiOutlinedInput-notchedOutline"
               style="padding-left: 8px;"
             >
               <legend
-                class="PrivateNotchedOutline-legend-22"
+                class="PrivateNotchedOutline-legend-20"
                 style="width: 0.01px;"
               >
                 <span>
@@ -209,23 +163,23 @@ Object {
         class="career-option"
       >
         <div
-          class="MuiPaper-root MuiCard-root makeStyles-root-13 MuiPaper-outlined MuiPaper-rounded"
+          class="MuiPaper-root MuiCard-root makeStyles-root-12 MuiPaper-outlined MuiPaper-rounded"
         >
           <div
-            class="makeStyles-details-14"
+            class="makeStyles-details-13"
           >
             <div
-              class="MuiCardContent-root makeStyles-content-15"
+              class="MuiCardContent-root makeStyles-content-14"
             >
               <h5
-                class="MuiTypography-root MuiTypography-h5 MuiTypography-alignLeft"
+                class="MuiTypography-root values MuiTypography-h5 MuiTypography-alignLeft"
               />
               <h6
                 class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorTextSecondary"
               />
             </div>
             <div
-              class="makeStyles-controls-17"
+              class="makeStyles-controls-16"
             />
           </div>
         </div>

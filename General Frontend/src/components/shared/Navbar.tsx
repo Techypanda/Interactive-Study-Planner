@@ -2,9 +2,7 @@ import { AppBar, Toolbar, Typography, Box } from "@material-ui/core";
 import { DefaultProps } from "../../types";
 import styled from 'styled-components';
 import CurtinLogo from "../../static/curtinlogo.png";
-import { useState } from "react";
-import { useHistory, withRouter } from "react-router-dom";
-import Landing from "../../pages/Landing";
+import { useHistory} from "react-router-dom";
 
 function Navbar(props: DefaultProps) {
     const history = useHistory();
