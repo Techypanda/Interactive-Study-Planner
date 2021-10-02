@@ -147,7 +147,7 @@ Biosciences Research Project
 In this unit students will be provided with an introduction to research within the Biosciences. The unit will focus on the philosophy of science, research design, ethical conduct, critical analysis of the relevant scientific literature to develop a literature review, hypothesis and aims, data collection and analysis and reporting.
 25
 Internal
-HUMB3009
+EPID1000,HUMB3009
 
 
 UNIT
@@ -191,7 +191,7 @@ Introduction to Bioinformatics
 In this unit students will learn to source and interpret genetic and genomic data using online databases and specialist software.
 25
 Internal
-GENE1000
+GENE2002,GENE1000
 
 
 UNIT
@@ -271,7 +271,7 @@ Pharmacology of Antimicrobial Agents
 This unit communicates the principles of antimicrobial action and treatment, its place in medicine, with considerations relevant to effective antimicrobial agent use and mechanisms of antimicrobial resistance. Students investigate mechanisms of action, spectrum, pharmacokinetics, adverse reactions and drug interactions of antimicrobial agents. The unit introduces students to the scope of antimicrobial chemotherapy and considers antimicrobial treatment to a range of local and globally relevant infections. Core unit concepts include classification of antibiotics, their drug action and principles of selective toxicity.
 25
 Fully Online
-PHRM2005;PHRM2005;MEDI2000,MEDI2009;MEDI2000,MICB2001
+PHRM2005,MEDI2009;PHRM2005,MICB2001;MEDI2000,MEDI2009;MEDI2000,MICB2001
 
 
 UNIT
