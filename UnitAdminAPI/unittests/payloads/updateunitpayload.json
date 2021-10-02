@@ -86,5 +86,5 @@
     "requestTimeEpoch": 1622457298,
     "apiId": "1234567890"
   },
-  "body": "{\"unitCode\": \"testunit\", \"unitName\": \"Test One With Real API\", \"unitDescription\": \"could be a description\", \"unitCredits\": 25.25, \"delivery\": \"22222223123 Online\", \"prerequistes\": [[\"one group of prereq\"], [\"two group of prereq\"]], \"corequistes\": [[\"one group of co req\"], [\"two group of coreq\"]], \"antirequistes\": [[\"one group of anti req\"], [\"one group of unit anti req\"]]}"
+  "body": "{\"unitCode\": \"testunit\", \"unitName\": \"Test One With Real API\", \"unitDescription\": \"could be a description\", \"unitCredits\": 25.25, \"delivery\": \"22222223123 Online\", \"prerequistes\": [[\"one group of prereq\"], [\"two group of prereq\"]], \"corequistes\": [[\"one group of co req\"], [\"two group of coreq\"]], \"antirequistes\": [[\"one group of anti req\"], [\"one group of unit anti req\"]], \"semester\": 12}"
 }
