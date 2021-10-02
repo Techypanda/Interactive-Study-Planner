@@ -135,5 +135,7 @@ pipelines:
                 - chmod +x ./SetupAWSPipeline.sh
                 - ./SetupAWSPipeline.sh
                 - cd "CMS Frontend"
+                - chmod +x ./InstallYarn.sh
+                - ./InstallYarn.sh
                 - chmod +x ./BuildTestDeploy.sh
                 - ./BuildTestDeploy.sh
