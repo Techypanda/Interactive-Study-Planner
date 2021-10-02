@@ -49,7 +49,7 @@ function ViewAllUnits(props: DefaultProps) {
 	axios.get("https://ilur318q9c.execute-api.ap-southeast-2.amazonaws.com/Prod/getallunits/")
 	.then((response) => {
 	    console.log(response.data);
-	    set_units_list(response.data);
+	    act(set_units_list(response.data)); // Prevents Jest warnings
 	});
     }
     useEffect(() => {
