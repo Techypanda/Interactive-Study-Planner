@@ -10,9 +10,11 @@ sam local invoke CSVParser --env-vars ./unittests/debug.json -e ./unittests/payl
 pid3=$!
 sam local invoke CSVParser --env-vars ./unittests/debug.json -e ./unittests/payloads/testaddunit.json > ./unittests/responses/actualaddunit.json &
 pid4=$!
+wait
 echo "Running A Bulk Add Of All Units Defined In Biomedical Science"
 sam local invoke CSVParser --env-vars ./unittests/debug.json -e ./unittests/payloads/testbulkadd.json > ./unittests/responses/actualbulkadd.json &
 pid5=$!
+wait
 echo "Running Bad Payloads"
 sam local invoke CSVParser --env-vars ./unittests/debug.json -e ./unittests/payloads/testbadbulk.json > ./unittests/responses/actualbadbulkadd.json &
 pid6=$!
@@ -24,15 +26,5 @@ sam local invoke CSVParser --env-vars ./unittests/debug.json -e ./unittests/payl
 pid9=$!
 sam local invoke CSVParser --env-vars ./unittests/debug.json -e ./unittests/payloads/testbadunit.json > ./unittests/responses/actualbadunit.json &
 pid10=$!
-echo "waiting on each PID"
-wait $pid1
-wait $pid2
-wait $pid3
-wait $pid4
-wait $pid5
-wait $pid6
-wait $pid7
-wait $pid8
-wait $pid9
-wait $pid10
+wait
 echo "SAM Tests Concluded"

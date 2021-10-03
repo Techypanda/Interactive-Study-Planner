@@ -339,7 +339,7 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
                   }
                 })
               }
-              let preReqRet = checkIfHavePrereqs(myUnits, unit);
+              let preReqRet = checkIfHavePrereqs([...myUnits, ...HARD_CODED_FIRSTYEAR_UNITS], unit);
               if (preReqRet[0]) {
                 let err = `You do not have prerequistes for unit ${unit.Name}, you require: `
                 preReqRet[1]!.forEach((path) => {
@@ -353,7 +353,7 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
                 temp.optionalUnits.pop();
                 setError({ promptTitle: "Unit Selection Error", promptContent: err, showPrompt: true })
               } else {
-                let antiReqRet = checkIfHaveAntireqs(myUnits, unit);
+                let antiReqRet = checkIfHaveAntireqs([...myUnits, ...HARD_CODED_FIRSTYEAR_UNITS], unit);
                 if (antiReqRet[0]) {
                   let err = `You have a antirequiste/s for unit ${unit.Name}: `
                   antiReqRet[1]!.forEach((u) => {

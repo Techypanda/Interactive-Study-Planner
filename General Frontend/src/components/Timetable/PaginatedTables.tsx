@@ -77,11 +77,15 @@ function checkIfHavePrereqs(unitsIAmTaking: Unit[], unit: Unit): [boolean, strin
 
 function doPagination(pageCount: number, plan: Plan): Array<Array<Unit[]>> {
   const paginatedUnits: Array<Array<Unit[]>> = [];
+  let sem = 1
   let unitCpy = [...(plan.allUnits!)]
   let stillSorting = true
-  const extras = []
-  const fySemOne = []
-  const fySemTwo = []
+
+
+  const depGroups = [] // Sem Group -> Sem Group -> Sem Group ...
+
+  let fySemOne = []
+  let fySemTwo = []
   while (stillSorting === true) {
     stillSorting = false
     for (let i = 0; i < unitCpy.length; i++) {
@@ -97,6 +101,7 @@ function doPagination(pageCount: number, plan: Plan): Array<Array<Unit[]>> {
       }
     }
   }
+  depGroups.push([...fySemOne],[...fySemTwo])
   // eslint-disable-next-line no-loop-func
   /* plan.doubleMajor?.Units.forEach((z) => {
     if (z === unitCpy[i].UnitCode) {
