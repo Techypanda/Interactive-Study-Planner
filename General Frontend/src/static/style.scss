@@ -4,7 +4,14 @@
   align-items: center;
 		   
 }
-
+::-webkit-scrollbar {
+  width: 0;  /* Remove scrollbar space */
+  background: transparent;  /* Optional: just make scrollbar invisible */
+}
+/* Optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+  background: rgba(204, 153, 0, .75);
+}
 .App-header {
   background-color: white;
   min-height: 100vh;

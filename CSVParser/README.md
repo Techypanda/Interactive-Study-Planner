@@ -1,6 +1,5 @@
 # CSV Parser
-## Why isnt it private like in the arch diagram
-AWS charged us $5 for having it in a VPC, so were just making it another API.
+## Please note ricky's data is now different to ours, as the Prereqs are incorrect in handbook.
 ## CSV Format
 - DATATYPE
 - PROPERTIES

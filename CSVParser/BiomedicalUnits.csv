@@ -162,7 +162,7 @@ Biosciences Research Project
 In this unit students will be provided with an introduction to research within the Biosciences. The unit will focus on the philosophy of science, research design, ethical conduct, critical analysis of the relevant scientific literature to develop a literature review, hypothesis and aims, data collection and analysis and reporting.
 25
 Internal
-EPID1000,HUMB3009
+HUMB3009;GENE3000
 
 
 2
@@ -210,7 +210,7 @@ Introduction to Bioinformatics
 In this unit students will learn to source and interpret genetic and genomic data using online databases and specialist software.
 25
 Internal
-GENE2002,GENE1000
+GENE1000
 
 
 2
@@ -298,7 +298,7 @@ Pharmacology of Antimicrobial Agents
 This unit communicates the principles of antimicrobial action and treatment, its place in medicine, with considerations relevant to effective antimicrobial agent use and mechanisms of antimicrobial resistance. Students investigate mechanisms of action, spectrum, pharmacokinetics, adverse reactions and drug interactions of antimicrobial agents. The unit introduces students to the scope of antimicrobial chemotherapy and considers antimicrobial treatment to a range of local and globally relevant infections. Core unit concepts include classification of antibiotics, their drug action and principles of selective toxicity.
 25
 Fully Online
-PHRM2005,MEDI2009;PHRM2005,MICB2001;MEDI2000,MEDI2009;MEDI2000,MICB2001
+PHRM2005;PHRM2005;MEDI2000,MEDI2009;MEDI2000,MICB2001
 
 
 1
@@ -1189,6 +1189,16 @@ This unit will explore human reproductive anatomy, physiology and histology. Stu
 25
 Internal
 HUMB1001;HUMB2001,BCCB2000,HUMB2003,HUMB2012,HUMB2013
+
+
+2
+UNIT
+HUMB2000
+Anatomy and Neuroscience
+Gross organisation of the human brain in relation to its embryological development; Function anatomy of the musculoskeletal structures, viscera and nerves of the cranium; Investigation of the neural systems that serve the senses and command voluntary movement; How changes to the internal and external environment influences the brain; Exploration of the neurobiology of human behaviour. HUMB2000 Anatomy and Neuroscience integrates the role of structures of the head with human development and survival. Neurovascular and musculoskeletal components of the head are explored, with reference to the functional control mechanisms.
+25
+Internal
+7689,313399;7689,1644;7689,HUMB1001;HUMB2002,313399;HUMB2002,1644;HUMB2002,HUMB1001
 
 
 2
