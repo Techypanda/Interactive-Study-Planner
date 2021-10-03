@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { DefaultProps } from "../types";
 import { createStyles, makeStyles, Theme} from '@material-ui/core/styles';
-import Datatable from "../components/shared/CareersDatatable"
+import CareersDatatable from "../components/shared/CareersDatatable"
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
 	root: {
@@ -55,7 +55,7 @@ function ViewAllCareers(props: DefaultProps) {
 	<>
 		<br/>
 	    <Container  >
-			<Datatable items={careersList}/>
+			<CareersDatatable items={careersList}/>
 	    </Container>
 	    <br/>
 	</>

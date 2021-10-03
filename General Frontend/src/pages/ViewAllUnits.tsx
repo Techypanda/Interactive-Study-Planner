@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { DefaultProps } from "../types";
 import { createStyles, makeStyles, Theme} from '@material-ui/core/styles';
-import Datatable from "../components/shared/UnitsDatatable"
+import UnitsDataTable from "../components/shared/UnitsDatatable"
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -56,7 +56,7 @@ function ViewAllUnits(props: DefaultProps) {
 	<>
 		<br/>
 	    <Container  >
-			<Datatable items={units_list}/>
+			<UnitsDataTable items={units_list}/>
 		</Container>
 	    <br/>
 
