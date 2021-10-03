@@ -53,24 +53,9 @@ function ViewAllCareers(props: DefaultProps) {
 
     return (
 	<>
-		<br>
-		</br>
+		<br/>
 	    <Container  >
-			<Box id="searchcontainer" display="flex">
-					<Button className="backButton" variant="contained" onClick={() => history.goBack()} >
-						Back
-					</Button>
-
-				<TextField style={{padding: '0 10px'}} variant="outlined" id="standard-full-width" fullWidth  placeholder="Search careers..." className="searchbar" />
-				<Button variant='contained' className="searchbtn">Search</Button>
-			</Box>
-			<br/>
-				<Datatable items={careersList}/>
-			<br>
-			</br>
-			<Button variant="contained" onClick={() => history.goBack()}>Back</Button>
-			<br>
-			</br>
+			<Datatable items={careersList}/>
 	    </Container>
 	    <br/>
 	</>
