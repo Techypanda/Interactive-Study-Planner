@@ -37,11 +37,11 @@ The login screen (shown below) is fairly simple and contains only a username and
 
 <p>&nbsp;</p>
 
-![Login Page](./imgs/Login.PNG)
+![Login Page](./imgs/Staff/Login.PNG)
 
 <p>&nbsp;</p>
 
-![Collapsible Navigation Bar](./imgs/NavBar.PNG)
+![Collapsible Navigation Bar](./imgs/Staff/NavBar.PNG)
 
 <p>&nbsp;</p>
 
@@ -49,11 +49,11 @@ After logging, the user will be shown the landing page which consists of several
 
 <p>&nbsp;</p>
 
-![Top Half of Landing Page](./imgs/LandingTop.PNG)
+![Top Half of Landing Page](./imgs/Staff/LandingTop.PNG)
 
 <p>&nbsp;</p>
 
-![Bottom Half of Landing Page](./imgs/LandingBottom.PNG)
+![Bottom Half of Landing Page](./imgs/Staff/LandingBottom.PNG)
 
 <p>&nbsp;</p>
 
@@ -65,7 +65,7 @@ From the landing page, the user may select one of four data management cards, ca
 
 <p>&nbsp;</p>
 
-![Unit Management Page](./imgs/UnitManagment.PNG)
+![Unit Management Page](./imgs/Staff/UnitManagement.PNG)
 
 <p>&nbsp;</p>
 
@@ -75,7 +75,7 @@ To view the detailed information of a unit, the unit entry can be clicked which 
 
 <p>&nbsp;</p>
 
-![Detailed Unit Informatino](./imgs/DetailedUnitInfo.PNG)
+![Detailed Unit Informatino](./imgs/Staff/DetailedUnitInfo.PNG)
 
 <p>&nbsp;</p>
 
@@ -83,7 +83,7 @@ To view the detailed information of a unit, the unit entry can be clicked which 
 
 <p>&nbsp;</p>
 
-![Create Unit](./imgs/CreateUnit.PNG)
+![Create Unit](./imgs/Staff/CreateUnit.PNG)
 
 <p>&nbsp;</p>
 
@@ -99,7 +99,7 @@ The Delivery of Unit field is used to indicate whether the unit is conducted onl
 
 <p>&nbsp;</p>
 
-![Prerequisite Path Units](./imgs/PrereqPath.PNG)
+![Prerequisite Path Units](./imgs/Staff/PrereqPath.PNG)
 
 <p>&nbsp;</p>
 
@@ -112,7 +112,7 @@ Additionally, if the unit has an alternative or multiple sets of requisites for 
 Finally the unit can be created by clicking the create unit button. Any errors will be indicated to the user via a popup.
 <p>&nbsp;</p>
 
-![Multiple Pathways](./imgs/MultiPath.PNG)
+![Multiple Pathways](./imgs/Staff/MultiPath.PNG)
 
 <p>&nbsp;</p>
 
@@ -124,7 +124,7 @@ After pressing the delete button, the user will be prompted to confirm the actio
 
 <p>&nbsp;</p>
 
-![Delete Confirmation](./imgs/DeleteConfirm.PNG)
+![Delete Confirmation](./imgs/Staff/DeleteConfirm.PNG)
 
 <p>&nbsp;</p>
 
@@ -136,7 +136,7 @@ After pressing the edit button, the user will be directed to a page showing all 
 
 <p>&nbsp;</p>
 
-![Edit Page](./imgs/EditPage.png)
+![Edit Page](./imgs/Staff/EditPage.png)
 
 <p>&nbsp;</p>
 
@@ -148,7 +148,7 @@ From the Landing page, the CSV Upload card should be selected, which will direct
 
 <p>&nbsp;</p>
 
-![CSV Upload Page](RackMultipart20211003-4-1y4mka4_html_18ada9e422f941bb.png)
+![CSV Upload Page](./imgs/Staff/CSVUpload.PNG)
 
 <p>&nbsp;</p>
 
@@ -164,7 +164,7 @@ Then you will need to logon to the [AWS Web Console](https://console.aws.amazon.
 
 <p>&nbsp;</p>
 
-![AWS Management Console Login](./imgs/AWSLogin.PNG)
+![AWS Management Console Login](./imgs/Staff/AWSLogin.PNG)
 
 <p>&nbsp;</p>
 
@@ -172,7 +172,7 @@ Then navigate to AWS Cognito either by searching it and selecting the red image 
 
 <p>&nbsp;</p>
 
-![](RackMultipart20211003-4-1y4mka4_html_c5638cf1286938d7.png)
+![Cognito Service](./imgs/Staff/CognitoService.PNG)
 
 <p>&nbsp;</p>
 

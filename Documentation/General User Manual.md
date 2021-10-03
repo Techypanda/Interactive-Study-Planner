@@ -27,7 +27,7 @@ The General Frontend starts on the landing page which consists of three navigati
 
 <p>&nbsp;</p>
 
-![](RackMultipart20211003-4-11jfs3r_html_b73777745f40068d.png)
+![Landing Pange](./imgs/General/Landing.PNG)
 
 <p>&nbsp;</p>
 
@@ -35,7 +35,7 @@ After selecting the Plan My Medical Course navigation card, the user will see tw
 
 <p>&nbsp;</p>
 
-![](RackMultipart20211003-4-11jfs3r_html_b678d76a0d57369.png)
+![Two Approaches](./imgs/General/TwoApproaches.PNG)
 
 <p>&nbsp;</p>
 
@@ -45,7 +45,7 @@ The bottom up approach is the more traditional method where the user selects maj
 
 <p>&nbsp;</p>
 
-![](RackMultipart20211003-4-11jfs3r_html_f075b668744989a7.png)
+![Bottom Up Initial Page](./imgs/General/BottomUpInitial.PNG)
 
 <p>&nbsp;</p>
 
@@ -55,7 +55,7 @@ The user will need to select one major to begin and the selected major will part
 
 <p>&nbsp;</p>
 
-![](RackMultipart20211003-4-11jfs3r_html_809c21b1b319767.png)
+![Planner Selection Page](./imgs/General/BottomUpSelection.PNG)
 
 <p>&nbsp;</p>
 
@@ -63,7 +63,7 @@ To switch between viewing majors, specializations and units, the drop down box l
 
 <p>&nbsp;</p>
 
-![](RackMultipart20211003-4-11jfs3r_html_7e3990a242da715b.png)
+![View Switch and Study Plan Types](./imgs/General/ViewSwitchAndTypes.PNG)
 
 <p>&nbsp;</p>
 
@@ -71,7 +71,7 @@ When selecting majors, specializations and/or units, some of these may have inco
 
 <p>&nbsp;</p>
 
-![](RackMultipart20211003-4-11jfs3r_html_3bc9ab74ef34a7c7.png)
+![Example Error Alert](./imgs/General/BottomUpError.PNG)
 
 <p>&nbsp;</p>
 
@@ -81,7 +81,7 @@ The top down approach has the user choose one career from a list of careers whic
 
 <p>&nbsp;</p>
 
-![](RackMultipart20211003-4-11jfs3r_html_f9adf3fcd61aab2e.png)
+![Intial Page of Top Down Approach](./imgs/General/TopDownInitial.PNG)
 
 <p>&nbsp;</p>
 
@@ -95,11 +95,11 @@ The view all careers page shows a list of all careers which when selected lead t
 
 <p>&nbsp;</p>
 
-![](RackMultipart20211003-4-11jfs3r_html_307ed4c3888422f6.png)
+![List of Careers](./imgs/General/CareersAll.PNG)
 
 <p>&nbsp;</p>
 
-![](RackMultipart20211003-4-11jfs3r_html_f8edbefa91d12815.png)
+![Career Information Page](./imgs/General/CareerInfo.PNG)
 
 <p>&nbsp;</p>
 
@@ -109,8 +109,8 @@ The view all units page shows a list of all possible units which when selected l
 
 <p>&nbsp;</p>
 
-![](RackMultipart20211003-4-11jfs3r_html_c0d7ce9872943aaa.png)
+![List of Units](./imgs/General/UnitsAll.PNG)
 
 <p>&nbsp;</p>
 
-![](RackMultipart20211003-4-11jfs3r_html_94cf5fd7df0b8155.png)
+![Unit Information Page](./imgs/General/UnitInfo.PNG)
