@@ -1163,15 +1163,35 @@ Internal,Online
 
 12
 UNIT
-HUMB2014
-Vital Physiology
-Physiology is the study of the functions of an organism. This unit looks at the physiological underpinning of the supply and removal of oxygen, water and waste products to and from tissues, and the mechanisms that regulate these within homeostatic limits.
+BIOL3009
+Advanced Molecular Techniques
+This unit addresses the principles and applications of emerging and best-practice advanced biomolecular techniques.  In a series of case-studies involving both hands-on and theoretical involvement, students will learn the appropriate utilisation of methods for studying cells and molecules. This will include, but not be limited to methods used in: tissue culture and cell based assays; protein expression; and genetic analyses and genetic manipulation.
 25
 Internal
-HUMB1001
+GENE3000
 
 
 1
+UNIT
+BIOL3008
+Advanced Bioinformatics
+In this unit, students will use the command line to undertake the analysis of sequence data and then derive biological inference and interpretation from those data, using diverse programs and scripting.  Topics include sequence quality control, mapping, variant calling, differential expression and visualisation; as applied to the whole genome, the epigenome and the transcriptome.  The rapid and large-scale acquisition of data renders bioinformatics an essential skill for modern Biologists.
+25
+Online
+BIOL2001
+
+
+12
+UNIT
+MEDS3005
+Human Reproductive Science
+This unit will explore human reproductive anatomy, physiology and histology. Students will be introduced to modern contraceptive methods, pregnancy and early human development, birth and lactation, and reproductive pathologies. Assisted reproductive technology (ART) and its associated ethics, will be explored in detail, with an industry site visit. Students will be required to research and communicate their findings on a contemporary topic in human reproductive health.
+25
+Internal
+HUMB1001;HUMB2001,BCCB2000,HUMB2003,HUMB2012,HUMB2013
+
+
+2
 UNIT
 HUMB2000
 Anatomy and Neuroscience
