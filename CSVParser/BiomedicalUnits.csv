@@ -162,7 +162,7 @@ Biosciences Research Project
 In this unit students will be provided with an introduction to research within the Biosciences. The unit will focus on the philosophy of science, research design, ethical conduct, critical analysis of the relevant scientific literature to develop a literature review, hypothesis and aims, data collection and analysis and reporting.
 25
 Internal
-EPID1000,HUMB3009
+HUMB3009;GENE3000
 
 
 2
@@ -210,7 +210,7 @@ Introduction to Bioinformatics
 In this unit students will learn to source and interpret genetic and genomic data using online databases and specialist software.
 25
 Internal
-GENE2002,GENE1000
+GENE1000
 
 
 2
@@ -298,7 +298,7 @@ Pharmacology of Antimicrobial Agents
 This unit communicates the principles of antimicrobial action and treatment, its place in medicine, with considerations relevant to effective antimicrobial agent use and mechanisms of antimicrobial resistance. Students investigate mechanisms of action, spectrum, pharmacokinetics, adverse reactions and drug interactions of antimicrobial agents. The unit introduces students to the scope of antimicrobial chemotherapy and considers antimicrobial treatment to a range of local and globally relevant infections. Core unit concepts include classification of antibiotics, their drug action and principles of selective toxicity.
 25
 Fully Online
-PHRM2005,MEDI2009;PHRM2005,MICB2001;MEDI2000,MEDI2009;MEDI2000,MICB2001
+PHRM2005;PHRM2005;MEDI2000,MEDI2009;MEDI2000,MICB2001
 
 
 1
@@ -1152,3 +1152,33 @@ Internal
 
 COMP1001;COMP1007;COMP5005
 12
+UNIT
+BIOL2004
+Research Skills for Biomedical Sciences
+In this unit, students will continue their journey to becoming biomedical science researchers gaining introductory skills and practical experience enabling them to understand how to apply research methods to evaluate the body of evidence in biomedicine. The unit will commence with an introduction to scientific methods, where practical experience in the development of research questions, research ethics, regulatory consideration, and risk management will be undertaken. This will be complemented by further development of skills in scientific reading and writing, where students will learn how to identify and critically review literature and write scientifically for disparate audience. The art of critical thinking, data analysis and presentation skills will also be introduced.  Students will be exposed to authentic research activities and will begin to develop leadership and entrepreneurial skills.
+25
+Internal,Online
+
+
+
+12
+UNIT
+HUMB2014
+Vital Physiology
+Physiology is the study of the functions of an organism. This unit looks at the physiological underpinning of the supply and removal of oxygen, water and waste products to and from tissues, and the mechanisms that regulate these within homeostatic limits.
+25
+Internal
+HUMB1001
+
+
+1
+UNIT
+HUMB2000
+Anatomy and Neuroscience
+Gross organisation of the human brain in relation to its embryological development; Function anatomy of the musculoskeletal structures, viscera and nerves of the cranium; Investigation of the neural systems that serve the senses and command voluntary movement; How changes to the internal and external environment influences the brain; Exploration of the neurobiology of human behaviour. HUMB2000 Anatomy and Neuroscience integrates the role of structures of the head with human development and survival. Neurovascular and musculoskeletal components of the head are explored, with reference to the functional control mechanisms.
+25
+Internal
+7689,313399;7689,1644;7689,HUMB1001;HUMB2002,313399;HUMB2002,1644;HUMB2002,HUMB1001
+
+
+2
