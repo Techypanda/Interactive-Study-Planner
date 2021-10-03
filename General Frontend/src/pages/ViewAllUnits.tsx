@@ -60,7 +60,7 @@ function ViewAllUnits(props: DefaultProps) {
 			<Button className="backButton" variant="contained" onClick={() => history.goBack()} >
 				Back
 			</Button>
-		    <TextField style={{padding: '0 10px'}} variant="outlined" id="standard-full-width" fullWidth  placeholder="Search careers..." className="searchbar" />
+		    <TextField style={{padding: '0 10px'}} variant="outlined" id="standard-full-width" fullWidth  placeholder="Search units..." className="searchbar" />
 			<Button variant='contained' className="searchbtn">Search</Button>
 		</Box>
 		<br/>
