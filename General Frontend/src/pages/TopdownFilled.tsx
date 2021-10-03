@@ -1,34 +1,18 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { makeStyles } from '@material-ui/core/styles';
 import Navbar from "../components/shared/Navbar";
-import CareersImage from '../src/static/career.jpg'
-import { DefaultProps, MajorUnitListProps } from "../types";
-import styled from 'styled-components'
-import List from '@material-ui/core'
-import { ListItemSecondaryAction } from '@material-ui/core';
-import { ListItem } from '@material-ui/core';
-import { ListSubheader } from '@material-ui/core';
-import React, {useState, useEffect } from 'react';
-import  { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import { Box, Grid, Typography, Card, CardActions, CardActionArea, CardHeader, CardMedia, CardContent, Paper, ListItemText } from '@material-ui/core';
+import {useState } from 'react';
+import { Grid } from '@material-ui/core';
 import CurrentPlan from "../components/shared/CurrentPlan"
 import TopDownFilledMain from '../components/shared/TopDownFilledMain';
 import AvailableCareersList from '../components/shared/AvailableCareersList';
-import { MajorProps, CareerListProps } from "../types";
-import axios, { AxiosResponse } from 'axios';
+import { MajorProps } from "../types";
 import Error from '../components/shared/Error';
-import IconButton from '@material-ui/core/IconButton'
-import ClearIcon from '@material-ui/icons/Clear'
-import { common, red } from '@material-ui/core/colors'
 import { BounceLoader } from "react-spinners";
-
-import { useLocation, useHistory } from 'react-router-dom';
-import { Location } from 'history'
-import { useCallback } from 'react';
+import { useHistory } from 'react-router-dom';
 //import { useCareers, useMajors, useUnits } from '../components/shared/hooks';
 //import { useCareer } from '../components/shared/hooks';
-import { useCareers, useMajors, useUnits } from '../components/shared/hooks'
-import { createPartiallyEmittedExpression } from 'typescript';
+import { useCareers, useMajors, useUnits } from '../api/hooks'
 
 
 const useStyles = makeStyles((theme) => ({ 

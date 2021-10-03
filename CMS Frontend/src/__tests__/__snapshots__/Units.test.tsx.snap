@@ -12,7 +12,7 @@ Object {
           class="sc-iCoGMd hvfnEz"
         >
           <div
-            class="MuiBox-root MuiBox-root-39 background"
+            class="MuiBox-root MuiBox-root-40 background"
           >
             <div
               class="loader"
@@ -30,7 +30,7 @@ Object {
             </div>
           </div>
           <div
-            class="MuiBox-root MuiBox-root-40"
+            class="MuiBox-root MuiBox-root-41"
           >
             <h4
               class="MuiTypography-root MuiTypography-h4 MuiTypography-alignCenter"
@@ -45,7 +45,7 @@ Object {
               class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6"
             >
               <div
-                class="MuiBox-root MuiBox-root-41"
+                class="MuiBox-root MuiBox-root-42"
               >
                 <div
                   class="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
@@ -76,10 +76,10 @@ Object {
                     />
                     <fieldset
                       aria-hidden="true"
-                      class="PrivateNotchedOutline-root-42 MuiOutlinedInput-notchedOutline"
+                      class="PrivateNotchedOutline-root-43 MuiOutlinedInput-notchedOutline"
                     >
                       <legend
-                        class="PrivateNotchedOutline-legendLabelled-44"
+                        class="PrivateNotchedOutline-legendLabelled-45"
                       >
                         <span>
                           Unitcode Of Unit - Required
@@ -95,7 +95,7 @@ Object {
               class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6"
             >
               <div
-                class="MuiBox-root MuiBox-root-46"
+                class="MuiBox-root MuiBox-root-47"
               >
                 <div
                   class="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
@@ -126,10 +126,10 @@ Object {
                     />
                     <fieldset
                       aria-hidden="true"
-                      class="PrivateNotchedOutline-root-42 MuiOutlinedInput-notchedOutline"
+                      class="PrivateNotchedOutline-root-43 MuiOutlinedInput-notchedOutline"
                     >
                       <legend
-                        class="PrivateNotchedOutline-legendLabelled-44"
+                        class="PrivateNotchedOutline-legendLabelled-45"
                       >
                         <span>
                           Name Of Unit - Required
@@ -149,7 +149,7 @@ Object {
               class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6"
             >
               <div
-                class="MuiBox-root MuiBox-root-47"
+                class="MuiBox-root MuiBox-root-48"
               >
                 <div
                   class="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
@@ -180,10 +180,10 @@ Object {
                     />
                     <fieldset
                       aria-hidden="true"
-                      class="PrivateNotchedOutline-root-42 MuiOutlinedInput-notchedOutline"
+                      class="PrivateNotchedOutline-root-43 MuiOutlinedInput-notchedOutline"
                     >
                       <legend
-                        class="PrivateNotchedOutline-legendLabelled-44"
+                        class="PrivateNotchedOutline-legendLabelled-45"
                       >
                         <span>
                           Description Of Unit - Required
@@ -199,7 +199,7 @@ Object {
               class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6"
             >
               <div
-                class="MuiBox-root MuiBox-root-48"
+                class="MuiBox-root MuiBox-root-49"
               >
                 <div
                   class="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
@@ -230,10 +230,10 @@ Object {
                     />
                     <fieldset
                       aria-hidden="true"
-                      class="PrivateNotchedOutline-root-42 MuiOutlinedInput-notchedOutline"
+                      class="PrivateNotchedOutline-root-43 MuiOutlinedInput-notchedOutline"
                     >
                       <legend
-                        class="PrivateNotchedOutline-legendLabelled-44 PrivateNotchedOutline-legendNotched-45"
+                        class="PrivateNotchedOutline-legendLabelled-45 PrivateNotchedOutline-legendNotched-46"
                       >
                         <span>
                           Credits Of Unit - Required
@@ -247,7 +247,7 @@ Object {
             </div>
           </div>
           <div
-            class="MuiBox-root MuiBox-root-49"
+            class="MuiBox-root MuiBox-root-50"
           >
             <h6
               class="MuiTypography-root bold MuiTypography-subtitle1"
@@ -255,11 +255,11 @@ Object {
               Delivery Of Unit
             </h6>
             <div
-              class="MuiBox-root MuiBox-root-50"
+              class="MuiBox-root MuiBox-root-51"
               id="delivery-list"
             />
             <div
-              class="MuiBox-root MuiBox-root-51"
+              class="MuiBox-root MuiBox-root-52"
             >
               <div
                 class="MuiInputBase-root MuiOutlinedInput-root"
@@ -292,11 +292,11 @@ Object {
                 </svg>
                 <fieldset
                   aria-hidden="true"
-                  class="PrivateNotchedOutline-root-42 MuiOutlinedInput-notchedOutline"
+                  class="PrivateNotchedOutline-root-43 MuiOutlinedInput-notchedOutline"
                   style="padding-left: 8px;"
                 >
                   <legend
-                    class="PrivateNotchedOutline-legend-43"
+                    class="PrivateNotchedOutline-legend-44"
                     style="width: 0.01px;"
                   >
                     <span>
@@ -306,7 +306,7 @@ Object {
                 </fieldset>
               </div>
               <div
-                class="MuiBox-root MuiBox-root-52"
+                class="MuiBox-root MuiBox-root-53"
               >
                 <button
                   class="MuiButtonBase-root MuiFab-root MuiFab-sizeSmall MuiFab-primary"
@@ -335,7 +335,58 @@ Object {
             </div>
           </div>
           <div
-            class="MuiBox-root MuiBox-root-53"
+            class="MuiBox-root MuiBox-root-54"
+          >
+            <h6
+              class="MuiTypography-root bold MuiTypography-subtitle1"
+            >
+              Semester Unit Runs
+            </h6>
+            <div
+              class="MuiInputBase-root MuiOutlinedInput-root"
+            >
+              <div
+                aria-haspopup="listbox"
+                class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input"
+                role="button"
+                tabindex="0"
+              >
+                Semester 1
+              </div>
+              <input
+                aria-hidden="true"
+                class="MuiSelect-nativeInput"
+                tabindex="-1"
+                value="1"
+              />
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSelect-icon MuiSelect-iconOutlined"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M7 10l5 5 5-5z"
+                />
+              </svg>
+              <fieldset
+                aria-hidden="true"
+                class="PrivateNotchedOutline-root-43 MuiOutlinedInput-notchedOutline"
+                style="padding-left: 8px;"
+              >
+                <legend
+                  class="PrivateNotchedOutline-legend-44"
+                  style="width: 0.01px;"
+                >
+                  <span>
+                    ​
+                  </span>
+                </legend>
+              </fieldset>
+            </div>
+          </div>
+          <div
+            class="MuiBox-root MuiBox-root-55"
           >
             <h6
               class="MuiTypography-root bold MuiTypography-subtitle1"
@@ -358,7 +409,7 @@ Object {
             </button>
           </div>
           <div
-            class="MuiBox-root MuiBox-root-54"
+            class="MuiBox-root MuiBox-root-56"
           >
             <h6
               class="MuiTypography-root bold MuiTypography-subtitle1"
@@ -381,7 +432,7 @@ Object {
             </button>
           </div>
           <div
-            class="MuiBox-root MuiBox-root-55"
+            class="MuiBox-root MuiBox-root-57"
           >
             <h6
               class="MuiTypography-root bold MuiTypography-subtitle1"
@@ -404,7 +455,7 @@ Object {
             </button>
           </div>
           <div
-            class="MuiBox-root MuiBox-root-56"
+            class="MuiBox-root MuiBox-root-58"
           >
             <button
               class="MuiButtonBase-root MuiButton-root MuiButton-contained mb-1 MuiButton-containedSecondary"
@@ -447,7 +498,7 @@ Object {
         class="sc-iCoGMd hvfnEz"
       >
         <div
-          class="MuiBox-root MuiBox-root-39 background"
+          class="MuiBox-root MuiBox-root-40 background"
         >
           <div
             class="loader"
@@ -465,7 +516,7 @@ Object {
           </div>
         </div>
         <div
-          class="MuiBox-root MuiBox-root-40"
+          class="MuiBox-root MuiBox-root-41"
         >
           <h4
             class="MuiTypography-root MuiTypography-h4 MuiTypography-alignCenter"
@@ -480,7 +531,7 @@ Object {
             class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6"
           >
             <div
-              class="MuiBox-root MuiBox-root-41"
+              class="MuiBox-root MuiBox-root-42"
             >
               <div
                 class="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
@@ -511,10 +562,10 @@ Object {
                   />
                   <fieldset
                     aria-hidden="true"
-                    class="PrivateNotchedOutline-root-42 MuiOutlinedInput-notchedOutline"
+                    class="PrivateNotchedOutline-root-43 MuiOutlinedInput-notchedOutline"
                   >
                     <legend
-                      class="PrivateNotchedOutline-legendLabelled-44"
+                      class="PrivateNotchedOutline-legendLabelled-45"
                     >
                       <span>
                         Unitcode Of Unit - Required
@@ -530,7 +581,7 @@ Object {
             class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6"
           >
             <div
-              class="MuiBox-root MuiBox-root-46"
+              class="MuiBox-root MuiBox-root-47"
             >
               <div
                 class="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
@@ -561,10 +612,10 @@ Object {
                   />
                   <fieldset
                     aria-hidden="true"
-                    class="PrivateNotchedOutline-root-42 MuiOutlinedInput-notchedOutline"
+                    class="PrivateNotchedOutline-root-43 MuiOutlinedInput-notchedOutline"
                   >
                     <legend
-                      class="PrivateNotchedOutline-legendLabelled-44"
+                      class="PrivateNotchedOutline-legendLabelled-45"
                     >
                       <span>
                         Name Of Unit - Required
@@ -584,7 +635,7 @@ Object {
             class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6"
           >
             <div
-              class="MuiBox-root MuiBox-root-47"
+              class="MuiBox-root MuiBox-root-48"
             >
               <div
                 class="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
@@ -615,10 +666,10 @@ Object {
                   />
                   <fieldset
                     aria-hidden="true"
-                    class="PrivateNotchedOutline-root-42 MuiOutlinedInput-notchedOutline"
+                    class="PrivateNotchedOutline-root-43 MuiOutlinedInput-notchedOutline"
                   >
                     <legend
-                      class="PrivateNotchedOutline-legendLabelled-44"
+                      class="PrivateNotchedOutline-legendLabelled-45"
                     >
                       <span>
                         Description Of Unit - Required
@@ -634,7 +685,7 @@ Object {
             class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6"
           >
             <div
-              class="MuiBox-root MuiBox-root-48"
+              class="MuiBox-root MuiBox-root-49"
             >
               <div
                 class="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
@@ -665,10 +716,10 @@ Object {
                   />
                   <fieldset
                     aria-hidden="true"
-                    class="PrivateNotchedOutline-root-42 MuiOutlinedInput-notchedOutline"
+                    class="PrivateNotchedOutline-root-43 MuiOutlinedInput-notchedOutline"
                   >
                     <legend
-                      class="PrivateNotchedOutline-legendLabelled-44 PrivateNotchedOutline-legendNotched-45"
+                      class="PrivateNotchedOutline-legendLabelled-45 PrivateNotchedOutline-legendNotched-46"
                     >
                       <span>
                         Credits Of Unit - Required
@@ -682,7 +733,7 @@ Object {
           </div>
         </div>
         <div
-          class="MuiBox-root MuiBox-root-49"
+          class="MuiBox-root MuiBox-root-50"
         >
           <h6
             class="MuiTypography-root bold MuiTypography-subtitle1"
@@ -690,11 +741,11 @@ Object {
             Delivery Of Unit
           </h6>
           <div
-            class="MuiBox-root MuiBox-root-50"
+            class="MuiBox-root MuiBox-root-51"
             id="delivery-list"
           />
           <div
-            class="MuiBox-root MuiBox-root-51"
+            class="MuiBox-root MuiBox-root-52"
           >
             <div
               class="MuiInputBase-root MuiOutlinedInput-root"
@@ -727,11 +778,11 @@ Object {
               </svg>
               <fieldset
                 aria-hidden="true"
-                class="PrivateNotchedOutline-root-42 MuiOutlinedInput-notchedOutline"
+                class="PrivateNotchedOutline-root-43 MuiOutlinedInput-notchedOutline"
                 style="padding-left: 8px;"
               >
                 <legend
-                  class="PrivateNotchedOutline-legend-43"
+                  class="PrivateNotchedOutline-legend-44"
                   style="width: 0.01px;"
                 >
                   <span>
@@ -741,7 +792,7 @@ Object {
               </fieldset>
             </div>
             <div
-              class="MuiBox-root MuiBox-root-52"
+              class="MuiBox-root MuiBox-root-53"
             >
               <button
                 class="MuiButtonBase-root MuiFab-root MuiFab-sizeSmall MuiFab-primary"
@@ -770,7 +821,58 @@ Object {
           </div>
         </div>
         <div
-          class="MuiBox-root MuiBox-root-53"
+          class="MuiBox-root MuiBox-root-54"
+        >
+          <h6
+            class="MuiTypography-root bold MuiTypography-subtitle1"
+          >
+            Semester Unit Runs
+          </h6>
+          <div
+            class="MuiInputBase-root MuiOutlinedInput-root"
+          >
+            <div
+              aria-haspopup="listbox"
+              class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input"
+              role="button"
+              tabindex="0"
+            >
+              Semester 1
+            </div>
+            <input
+              aria-hidden="true"
+              class="MuiSelect-nativeInput"
+              tabindex="-1"
+              value="1"
+            />
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSelect-icon MuiSelect-iconOutlined"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M7 10l5 5 5-5z"
+              />
+            </svg>
+            <fieldset
+              aria-hidden="true"
+              class="PrivateNotchedOutline-root-43 MuiOutlinedInput-notchedOutline"
+              style="padding-left: 8px;"
+            >
+              <legend
+                class="PrivateNotchedOutline-legend-44"
+                style="width: 0.01px;"
+              >
+                <span>
+                  ​
+                </span>
+              </legend>
+            </fieldset>
+          </div>
+        </div>
+        <div
+          class="MuiBox-root MuiBox-root-55"
         >
           <h6
             class="MuiTypography-root bold MuiTypography-subtitle1"
@@ -793,7 +895,7 @@ Object {
           </button>
         </div>
         <div
-          class="MuiBox-root MuiBox-root-54"
+          class="MuiBox-root MuiBox-root-56"
         >
           <h6
             class="MuiTypography-root bold MuiTypography-subtitle1"
@@ -816,7 +918,7 @@ Object {
           </button>
         </div>
         <div
-          class="MuiBox-root MuiBox-root-55"
+          class="MuiBox-root MuiBox-root-57"
         >
           <h6
             class="MuiTypography-root bold MuiTypography-subtitle1"
@@ -839,7 +941,7 @@ Object {
           </button>
         </div>
         <div
-          class="MuiBox-root MuiBox-root-56"
+          class="MuiBox-root MuiBox-root-58"
         >
           <button
             class="MuiButtonBase-root MuiButton-root MuiButton-contained mb-1 MuiButton-containedSecondary"

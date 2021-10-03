@@ -3,8 +3,7 @@
 // first page that is seen when the general user opens the site, prompting a choice
 // between top down and bottom up course planner buildilng.
 
-import { Box, Grid, Typography, Card, CardActions, CardActionArea, CardHeader, CardMedia, CardContent, Paper, Button, Container, useMediaQuery } from "@material-ui/core";
-import { makeStyles } from '@material-ui/core/styles';
+import { Box, Grid, Typography, Container, useMediaQuery } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { DefaultProps } from "../types";
 
