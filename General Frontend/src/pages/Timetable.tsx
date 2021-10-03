@@ -74,7 +74,7 @@ function Timetable(props: DefaultProps) {
         for (let i = 0; i < plan.allUnits!.length; i++) {
           if (plan.allUnits![i].UnitCode === "BCCB2000") {
             // @ts-ignore
-            plan.allUnits![i] = map["BCCB2000"]
+            plan.allUnits![i] = map["BIOL2004"]
             break
           }
         }

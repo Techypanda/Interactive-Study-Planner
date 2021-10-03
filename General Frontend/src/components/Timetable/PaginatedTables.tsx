@@ -1,9 +1,12 @@
-import { Box, Button } from "@material-ui/core";
+import { Box, Button, Grid } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { PaginatedTablesProps, PromptData, Unit, Plan } from "../../types";
 import Error from "../shared/Error";
 import SemesterTable from "./SemesterTable";
+import CurtinLogo from "../../static/curtinbase.jpg";
+import CareerTable from "./CareerTable";
+import { useHistory } from "react-router";
 
 const HARD_CODED_FIRSTYEAR_UNITS = [ // These are required in first year for medical degree
   "MEDI1000", "HUMB1000", "BIOL1004", "CHEM1007", "INDH1006", "EPID1000", "HUMB1001", "GENE1000"
@@ -52,29 +55,6 @@ function isFirstYearUnit(u: Unit) {
   return retVal;
 }
 
-function checkIfHavePrereqs(unitsIAmTaking: Unit[], unit: Unit): [boolean, string[][]?] {
-  let retVal: [boolean, string[][]?] = [false, []];
-  if (unit.Prerequistes.length >= 1 && unit.Prerequistes[0].length >= 1 && unit.Prerequistes[0][0] !== "") {
-    retVal[0] = true;
-    unit.Prerequistes.forEach((path) => {
-      let pathMet: string[] = [];
-      path.forEach((i) => {
-        unitsIAmTaking.forEach((k) => {
-          if (i === k.UnitCode) {
-            pathMet.push(k.UnitCode);
-          }
-        })
-      })
-      if (pathMet.length === path.length && pathMet[0] !== "") {
-        retVal[0] = false;
-      } else {
-        retVal[1]?.push(path);
-      }
-    })
-  }
-  return retVal;
-}
-
 function doPagination(pageCount: number, plan: Plan): Array<Array<Unit[]>> {
   const paginatedUnits: Array<Array<Unit[]>> = [];
   let sem = 1
@@ -82,7 +62,7 @@ function doPagination(pageCount: number, plan: Plan): Array<Array<Unit[]>> {
   let stillSorting = true
 
 
-  const depGroups = [] // Sem Group -> Sem Group -> Sem Group ...
+  const depGroups: Unit[][] = [] // Sem Group -> Sem Group -> Sem Group ...
 
   let fySemOne = []
   let fySemTwo = []
@@ -101,166 +81,154 @@ function doPagination(pageCount: number, plan: Plan): Array<Array<Unit[]>> {
       }
     }
   }
-  depGroups.push([...fySemOne],[...fySemTwo])
-  // eslint-disable-next-line no-loop-func
-  /* plan.doubleMajor?.Units.forEach((z) => {
-    if (z === unitCpy[i].UnitCode) {
-      if (FTOwner === "") { FTOwner = "DOUBLEMAJOR" }
-      unitCpy[i].Prerequistes.forEach((p) => {
-        p.forEach((u) => {
-          plan.mainMajor?.Units.forEach((k) => {
-            if (u === k) {
-              hasrelevantPrereq = true
-            }
-          })
-        })
-      })
-      if (FTOwner === "DOUBLE") {
-        if (hasrelevantPrereq) {
-          tySemTwoFT.push(unitCpy[i])
-          unitCpy.splice(i, 1)
-        } else {
-          if (sySemTwoFT.length > 2) {
-            sySemTwoFT.push(unitCpy[i])
-            unitCpy.splice(i, 1)
-          } else {
-            tySemTwoFT.push(unitCpy[i])
-            unitCpy.splice(i, 1)
-          }
+  depGroups.push([...fySemOne], [...fySemTwo])
+
+  let iterations = 0;
+  let len = unitCpy.length;
+  let earlyBreak = false
+  while (len !== 0 && iterations < 24 && !earlyBreak) { // more then 24 iterations is probably something wrong with data
+    let end = false
+    let newGroup = []
+    while (!end) {
+      end = true
+      // 100% a graph is the correct approach here but i'm not sure how you would apply it here...
+      for (let i = 0; i < unitCpy.length; i++) { // cant use foreach as you cant break and it is a unsafe context...
+        let satisifiedPrereq = false
+        const currUnit = unitCpy[i]
+        if ((currUnit.Prerequistes.length === 1 || currUnit.Prerequistes[0] === [] || currUnit.Prerequistes[0] === ['']) && (currUnit.Semester === sem || currUnit.Semester === 12)) {
+          satisifiedPrereq = true
         }
-      } else {
-        if (hasrelevantPrereq) {
-          tySemTwoST.push(unitCpy[i])
-          unitCpy.splice(i, 1)
-        } else {
-          if (sySemTwoST.length > 2) {
-            tySemTwoST.push(unitCpy[i])
-            unitCpy.splice(i, 1)
-          } else {
-            sySemTwoST.push(unitCpy[i])
-            unitCpy.splice(i, 1)
-          }
-        }
-      }
-      needToBreak = true
-    }
-  })
-  if (needToBreak) {
-    break;
-  }
-  /*
-  plan.specializations?.forEach((z) => {
- 
-  })
-  */
-  /* let loops = 0
-  const paginatedUnits: Array<Array<Unit[]>> = [];
-  let unitCpy = [...(plan.allUnits!)]
-  
-  let fyUnit: Unit[] = []
-  let dependencyGroups: Unit[][] = [];
-  let stillSorting = true
-  while (stillSorting === true) {
-    stillSorting = false
-    for (let i = 0; i < unitCpy.length; i++) {
-      if (isFirstYearUnit(unitCpy[i])) {
-        fyUnit.push(unitCpy[i])
-        unitCpy.splice(i, 1);
-        stillSorting = true
-        break
-      }
-    }
-  }
-  fyUnit.forEach((e) => console.log(e.UnitCode))
-  unitCpy.forEach((e) => console.log(e.UnitCode))
-  dependencyGroups.push(fyUnit) // First Dependency group is all the first year units
-  while (unitCpy.length > 0 && loops < 999) {
-    let allMyUnitsSoFarFromDependency: Unit[] = []
-    dependencyGroups.forEach((group) => {
-      group.forEach((u) => {
-        allMyUnitsSoFarFromDependency.push(u)
-      })
-    })
-    let newDependencyGroup: Unit[] = []
-    let stillGoing = true
-    while (stillGoing === true && loops < 999) {
-      console.log('looping')
-      stillGoing = false
-      for (let i = 0; i < unitCpy.length; i++) {
-        let ret = checkIfHavePrereqs([...allMyUnitsSoFarFromDependency, ...newDependencyGroup], unitCpy[i])
-        if (!ret[0]) { // false === you have the unit prereqs.
-          let semOneCountInGroup = 0;
-          let semTwoCountInGroup = 0;
-          let optionalCount = 0;
-          let isOptional = false;
-          newDependencyGroup.forEach((c) => {
-            if (c.Semester === 1) {
-              semOneCountInGroup += 1
-            } else if (c.Semester === 2) {
-              semTwoCountInGroup += 1
-            }
-            plan.optionalUnits?.forEach((u) => {
-              if (u.UnitCode === c.UnitCode) {
-                optionalCount += 1
-                isOptional = true
+        for (let ii = 0; ii < currUnit.Prerequistes.length; ii++) {
+          let hits = 0
+          const preReqGroup = currUnit.Prerequistes[ii]
+          if (preReqGroup[0] !== "") {
+            for (let iii = 0; iii < preReqGroup.length; iii++) {
+              const prereq = preReqGroup[iii]
+              for (let iiii = 0; iiii < depGroups.length; iiii++) {
+                const g = depGroups[iiii]
+                for (let iiiii = 0; iiiii < g.length; iiiii++) {
+                  const u = g[iiiii]
+                  if (u.UnitCode === prereq) {
+                    hits += 1
+                  }
+                }
               }
-            })
-          }) // i am in hell
-          if (!isOptional || (isOptional && optionalCount < 4)) { // each group should have at most 4 optionals
-            if ((unitCpy[i].Semester === 1 && semOneCountInGroup < 2) || (unitCpy[i].Semester === 2 && semTwoCountInGroup < 2) || (unitCpy[i].Semester === 12 && (semOneCountInGroup < 2 || semTwoCountInGroup < 2))) {
-              newDependencyGroup.push(unitCpy[i])
-              unitCpy.splice(i, 1);
-              stillGoing = true
-              console.log(dependencyGroups)
-              console.log(newDependencyGroup)
-              console.log(unitCpy)
+            }
+          }
+          if (hits === preReqGroup.length && (currUnit.Semester === sem || currUnit.Semester === 12)) {
+            satisifiedPrereq = true
+            break
+          }
+        }
+        if (satisifiedPrereq) {
+          end = false
+        }
+        if (!end) {
+          // Add and Break to repeat from start
+          newGroup.push(currUnit)
+          unitCpy.splice(i, 1) // remove it
+          break // end the for loop
+        }
+      }
+    }
+    // I have a semester group now add it to dependency group, switch to next sem, repeat until you no longer have units in unitCpy
+    iterations += 1
+    if (newGroup.length !== 0) {
+      depGroups.push(newGroup)
+    }
+    sem = sem === 1 ? 2 : 1
+  }
+  console.log(depGroups)
+  console.log(unitCpy)
+
+  paginatedUnits[0] = [[...depGroups[0]], [...depGroups[1]]]
+  depGroups.splice(0, 1)
+  depGroups.splice(0, 1)
+
+  const semOneY1 = []
+  const semTwoY1 = []
+  const semOneY2 = []
+  const semTwoY2 = []
+  len = semOneY1.length
+  while (len < 4) {
+    let needOverflow = true
+    for (let i = 0; i < depGroups[0].length; i++) {
+      const u = depGroups[0][i]
+      if (semOneY1.length < 4) {
+        if (u.Semester === 1) {
+          semOneY1.push(u)
+          depGroups[0].splice(i, 1)
+          needOverflow = false
+          break
+        }
+      }
+    }
+    if (needOverflow) {
+      for (let i = 0; i < depGroups[0].length; i++) {
+        const u = depGroups[0][i]
+        if (semOneY1.length < 4) {
+          if (u.Semester === 12) {
+            semOneY1.push(u)
+            depGroups[0].splice(i, 1)
+            needOverflow = false
+            break
+          }
+        }
+      }
+    }
+    len = semOneY1.length
+  }
+  len = semTwoY1.length
+  while (len < 4) {
+    let needOverflow = true
+    for (let i = 0; i < depGroups[1].length; i++) {
+      const u = depGroups[1][i]
+      if (semTwoY1.length < 4) {
+        if (u.Semester === 2) {
+          semTwoY1.push(u)
+          depGroups[1].splice(i, 1)
+          needOverflow = false
+          break
+        }
+      }
+    }
+    if (needOverflow) {
+      for (let i = 0; i < depGroups[0].length; i++) { // first grab from the group before me
+        const u = depGroups[0][i]
+        if (semOneY2.length < 4) {
+          if (u.Semester === 12) {
+            semOneY2.push(u)
+            depGroups[0].splice(i, 1)
+            needOverflow = false
+            break
+          }
+        }
+      }
+      if (needOverflow) { // then grab from my group
+        for (let i = 0; i < depGroups[1].length; i++) {
+          const u = depGroups[1][i]
+          if (semTwoY1.length < 4) {
+            if (u.Semester === 12) {
+              semTwoY2.push(u)
+              depGroups[1].splice(i, 1)
+              needOverflow = false
               break
             }
           }
         }
       }
-      loops += 1
-      if (loops > 998) {
-        console.error('end loop failed')
-        //alert("failed to find prereqs talk to admin")
-      }
     }
-    if (newDependencyGroup.length > 1) {
-      dependencyGroups.push(newDependencyGroup)
-    }
+    len = semTwoY1.length
   }
-  console.log(dependencyGroups)
-  console.log(unitCpy) */
-  /* let done = false;
-  while (!done) {
-    let coll = false
-    for (let i = 0; i < semOneUnits.length; i++) {
-      let prereqs = semOneUnits[i].Prerequistes
-      if (i !== 0) { // check all units before me if ive done the prereqs
-        
-      } else { // move me to the next year
-        
-      }
-    }
-    if (!coll) {
-      done = true
-    }
-  } */
+  paginatedUnits.push([[...semOneY1], [...semTwoY1]]) // this approach doesnt work at all
 
 
-  /* const unitsInAYear = spread(units, pageCount)
-  unitsInAYear.forEach((x, i) => {
-    const semesterOneCount = x.length - Math.floor(x.length / 2)
-    // const semesterTwoCount = Math.floor(x.length / 2)
-    const tmp = []
-    tmp.push(x.slice(0, semesterOneCount))
-    tmp.push(x.slice(semesterOneCount, x.length))
-    paginatedUnits.push(tmp)
-  }) */
+  paginatedUnits.push([[], []])
   return paginatedUnits
 }
 
 function PaginatedTables(props: PaginatedTablesProps) {
+  const history = useHistory();
   const [yearCount, setYearCount] = useState(3);
   const [error, setError] = useState<PromptData>({ promptTitle: "", promptContent: "", showPrompt: false });
   const [paginatedUnits, setPaginatedUnits] = useState(doPagination(yearCount, props.plan));
@@ -290,14 +258,26 @@ function PaginatedTables(props: PaginatedTablesProps) {
             <SemesterTable key={idx} className="semesterTable" year={idx + 1} semesterOneUnits={year[0]} semesterTwoUnits={year[1]} />
           )}
         </Box>
-        <Box textAlign="left" mt={3}>
-          <Box display="inline" mr={3}>
-            <Button variant="contained" className="curtinBtn" onClick={() => removeYear()}>Remove A Year</Button>
-          </Box>
-          <Box display="inline">
-            <Button variant="contained" className="curtinBtn" onClick={() => addYear()}>Add A Year</Button>
-          </Box>
-        </Box>
+        <Grid container spacing={2}>
+          <Grid item sm={5}>
+            <Box display="flex" justifyContent="space-between" mt={3}>
+              <Box mr={3}>
+                <Button variant="contained" className="curtinBtn" onClick={() => history.push('/UnitsFirst')}>Back To Course Planner</Button>
+              </Box>
+              <Box>
+                <Button variant="contained" className="curtinBtn" onClick={() => history.push('/')}>Return To Main Menu</Button>
+              </Box>
+            </Box>
+            <Box mt={4}>
+              <img src={CurtinLogo} height={200} width={200} alt="curtin logo" />
+            </Box>
+          </Grid>
+          <Grid item xs={7}>
+            <Box mt={3}>
+              <CareerTable />
+            </Box>
+          </Grid>
+        </Grid>
       </Box>
     </>
   )
