@@ -2,7 +2,7 @@ import React from 'react';
 import { DataGrid, GridRowsProp, GridColDef } from '@material-ui/data-grid';
 import { useHistory, useParams } from "react-router-dom";
 
-export default function Datatable(props: any) {
+export default function CareersDatatable(props: any) {
   const rows: any = [];
   const history = useHistory();
 

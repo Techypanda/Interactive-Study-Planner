@@ -3,7 +3,7 @@ import { DataGrid, GridRowsProp, GridColDef } from '@material-ui/data-grid';
 import { useHistory, useParams } from "react-router-dom";
 import { stringify } from 'querystring';
 
-export default function Datatable(props: any) {
+export default function UnitsDataTable(props: any) {
   const rows: any = [];
   const history = useHistory();
   console.log(props.items);
