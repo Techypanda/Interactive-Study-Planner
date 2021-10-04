@@ -1,7 +1,13 @@
 import React from 'react';
 import { DataGrid, GridRowsProp, GridColDef } from '@material-ui/data-grid';
 import { useHistory, useParams } from "react-router-dom";
-import { stringify } from 'querystring';
+
+const columns: GridColDef[] = [
+  { field: 'col1', headerName: 'Unit Code', flex:0.75},
+  { field: 'col2', headerName: 'Career Name', flex:2 },
+  { field: 'col3', headerName: 'Semester', flex:1 },
+  { field: 'col4', headerName: 'Delivery', flex:1 },
+];
 
 export default function UnitsDataTable(props: any) {
   const rows: any = [];
@@ -20,14 +26,6 @@ export default function UnitsDataTable(props: any) {
       const tableData = { id: id, col1: id, col2: name, col3: semester, col4: delivery};
       rows.push(tableData);
   });
-
-  const columns: GridColDef[] = [
-    { field: 'col1', headerName: 'Unit Code', flex:0.75},
-    { field: 'col2', headerName: 'Career Name', flex:2 },
-    { field: 'col3', headerName: 'Semester', flex:1 },
-    { field: 'col4', headerName: 'Delivery', flex:1 },
-  ];
-
 
   return (
     <div style={{ height: '75vh', width: '100%' }}>

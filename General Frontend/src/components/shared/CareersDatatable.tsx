@@ -2,6 +2,12 @@ import React from 'react';
 import { DataGrid, GridRowsProp, GridColDef } from '@material-ui/data-grid';
 import { useHistory, useParams } from "react-router-dom";
 
+const columns: GridColDef[] = [
+  { field: 'col1', headerName: 'Industry', flex:1},
+  { field: 'col2', headerName: 'Career Name', flex:1 },
+  { field: 'col3', headerName: 'Description', flex:5 },
+];
+
 export default function CareersDatatable(props: any) {
   const rows: any = [];
   const history = useHistory();
@@ -15,14 +21,6 @@ export default function CareersDatatable(props: any) {
       const tableData = { id: id, col1: industry, col2: name, col3: description };
       rows.push(tableData);
   });
-
-  const columns: GridColDef[] = [
-    { field: 'col1', headerName: 'Industry', flex:1},
-    { field: 'col2', headerName: 'Career Name', flex:1 },
-    { field: 'col3', headerName: 'Description', flex:5 },
-
-  ];
-
 
   return (
     <div style={{ height: '75vh', width: '100%' }}>
