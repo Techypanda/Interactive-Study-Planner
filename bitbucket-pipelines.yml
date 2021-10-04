@@ -43,6 +43,14 @@ pipelines:
                 - ./SetupAWSPipeline.sh
                 - echo "Deploying CMS Bucket and Cloudformation"
                 - aws cloudformation deploy --template-file "./Infrastructure Templates/CMSStaticSite.yaml" --stack-name CMSStaticSite --no-fail-on-empty-changeset
+          - step:
+              name: "Deploy General Frontend Bucket & CloudFormation"
+              image: atlassian/pipelines-awscli
+              script:
+                - chmod +x ./SetupAWSPipeline.sh
+                - ./SetupAWSPipeline.sh
+                - echo "Deploying General Frontend Bucket and Cloudformation"
+                - aws cloudformation deploy --template-file "./Infrastructure Templates/GeneralStaticSite.yaml" --stack-name GeneralStaticSite --no-fail-on-empty-changeset
       - parallel:   # TESTING/BUILDING/DEPLOY STAGES
           - step: 
               name: "Build, Test, Deploy Unit Admin API"
@@ -134,5 +142,18 @@ pipelines:
                 - chmod +x ./SetupAWSPipeline.sh
                 - ./SetupAWSPipeline.sh
                 - cd "CMS Frontend"
+                - chmod +x ./BuildTestDeploy.sh
+                - ./BuildTestDeploy.sh
+          - step:
+              name: "Build, Test, Deploy General Static Site"
+              image: node:14
+              script:
+                - apt-get -y update
+                - apt-get -y install python3
+                - apt-get -y install python3-pip
+                - python3 -m pip install awscli # sam isnt needed
+                - chmod +x ./SetupAWSPipeline.sh
+                - ./SetupAWSPipeline.sh
+                - cd "General Frontend"
                 - chmod +x ./BuildTestDeploy.sh
                 - ./BuildTestDeploy.sh

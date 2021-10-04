@@ -1,8 +1,10 @@
 import { Table, TableBody, TableCell, TableHead, TableRow, Typography } from "@material-ui/core";
+import { useHistory } from "react-router";
 import styled from "styled-components";
-import { DefaultProps } from "../../types";
+import { CareerTableProps } from "../../types";
 
-function CareerTable(props: DefaultProps) {
+function CareerTable(props: CareerTableProps) {
+  const history = useHistory()
   return (
     <div className={props.className}>
       <Table>
@@ -17,12 +19,14 @@ function CareerTable(props: DefaultProps) {
           </TableRow>
         </TableHead>
         <TableBody>
-          <TableRow>
-            <TableCell className="br">
-              <Typography variant="h6" className="careerTitle">Career Title</Typography>
-            </TableCell>
-            <TableCell>Career description</TableCell>
-          </TableRow>
+          {props.careers.map((career) =>
+            <TableRow key={career.CareerId}>
+              <TableCell className="br">
+                <Typography variant="h6" className="careerTitle" onClick={() => history.push(`/InfoPage/ViewCareer/${career.CareerId}`)}>{career.Name}</Typography>
+              </TableCell>
+              <TableCell>{career.Description}</TableCell>
+            </TableRow>
+          )}
         </TableBody>
       </Table>
     </div>

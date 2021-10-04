@@ -133,9 +133,9 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
   const [error, setError] = useState<PromptData>({ promptTitle: "", promptContent: "", showPrompt: false });
   const [stage, setStage] = useState<UNITSFIRSTMODES>(UNITSFIRSTMODES.initial)
   const [careers, setCareers] = useState<Array<Career>>(props.careers);
-  const [units, setUnits] = useState<Array<Unit>>(props.units);
-  const [majors, setMajors] = useState<Array<Major>>(props.majors);
-  const [specs, setSpecs] = useState<Array<Specialization>>(props.specs);
+  const [units] = useState<Array<Unit>>(props.units);
+  const [majors] = useState<Array<Major>>(props.majors);
+  const [specs] = useState<Array<Specialization>>(props.specs);
   const [plan, setPlan] = useState<Plan>({});
   function filterCareersList() {
     let careersCodesToPop: Career[] = [];
@@ -195,6 +195,7 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
       })
     })
     setCareers(allCareers);
+    localStorage.setItem(`${process.env.REACT_APP_DEVELOPMENT ? "dev-" : ""}careers`, JSON.stringify(allCareers))
   }
   function removeFromPlan(i: Major | Unit | Specialization) {
     const temp = { ...plan };
@@ -511,7 +512,7 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
     }
   }
   useEffect(() => {
-    const planJSON = localStorage.getItem(`${process.env.DEVELOPMENT ? "dev-" : ""}courseplanner-plan`)
+    const planJSON = localStorage.getItem(`${process.env.REACT_APP_DEVELOPMENT ? "dev-" : ""}courseplanner-plan`)
     if (planJSON) {
       setPlan(JSON.parse(planJSON));
       if ((JSON.parse(planJSON) as Plan).mainMajor) {
@@ -532,7 +533,7 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
       }
     }
     if (plan && plan.mainMajor) { // only update if the plan exists
-      localStorage.setItem(`${process.env.DEVELOPMENT ? "dev-" : ""}courseplanner-plan`, JSON.stringify(plan));
+      localStorage.setItem(`${process.env.REACT_APP_DEVELOPMENT ? "dev-" : ""}courseplanner-plan`, JSON.stringify(plan));
     }
     filterCareersList();
     // eslint-disable-next-line react-hooks/exhaustive-deps

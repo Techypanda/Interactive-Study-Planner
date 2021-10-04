@@ -2,7 +2,7 @@ import { Button, Container, Typography, Box } from "@material-ui/core";
 import { useHistory } from "react-router";
 import styled from "styled-components";
 import { useUnits } from "../api/hooks";
-import { DefaultProps, Plan, Unit } from "../types";
+import { Career, DefaultProps, Plan, Unit } from "../types";
 import { BounceLoader } from "react-spinners";
 import PaginatedTables from "../components/Timetable/PaginatedTables";
 
@@ -61,8 +61,9 @@ function Timetable(props: DefaultProps) {
   const unitDB = useUnits()
   const history = useHistory();
   if (!unitDB.isLoading) {
-    if (localStorage.getItem(`${process.env.DEVELOPMENT ? "dev-" : ""}courseplanner-plan`)) {
+    if (localStorage.getItem(`${process.env.REACT_APP_DEVELOPMENT ? "dev-" : ""}courseplanner-plan`) && localStorage.getItem(`${process.env.REACT_APP_DEVELOPMENT ? "dev-" : ""}careers`)) {
       const plan = getUnits(JSON.parse(localStorage.getItem(`${process.env.DEVELOPMENT ? "dev-" : ""}courseplanner-plan`)!) as Plan, unitDB.data?.data!.sort((a, b) => a.Name.localeCompare(b.Name))!)
+      const careers = JSON.parse(localStorage.getItem(`${process.env.REACT_APP_DEVELOPMENT ? "dev-" : ""}careers`)!) as Career[]
       /* EDGE CASES */
       const map = unitDB.data?.data!.reduce((map, u) => {
         // @ts-ignore
@@ -82,7 +83,7 @@ function Timetable(props: DefaultProps) {
       /* EDGE CASES ^^ */
       return (
         <Container className={props.className} maxWidth="xl">
-          <PaginatedTables plan={plan} />
+          <PaginatedTables plan={plan} careers={careers} />
         </Container>
       )
     } else {

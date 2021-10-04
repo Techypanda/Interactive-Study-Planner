@@ -14,8 +14,8 @@ function PlanList(props: PlanProps) {
   const menuVal = props.mainMajor?.Name;
   const height = useRemainingHeight();
   return (
-    <div className={props.className}>
-      <Box className="planList" minHeight={height}>
+    <div className={`${props.className} fh`}>
+      <Box className="planList" minHeight={height} height="100%">
         <Box pt={2}>
           <Typography variant="h5">Current Plan</Typography>
           {menuVal ?
