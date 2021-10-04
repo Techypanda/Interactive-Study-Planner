@@ -2,7 +2,9 @@
 
 ## Purpose
 
-The unit admin api will perform CUD (Create Update Delete) operations for Majors, Specializations and Units it does this with authentication from JWT from AWS Cognito.
+The career admin api will perform CUD (Create Update Delete) operations for Careers and Traits it does this with authentication from JWT from AWS Cognito.
+
+Note: Trait functions are commented out from deployment at the moment.
 
 ## Requirements
 The following are required to run:
