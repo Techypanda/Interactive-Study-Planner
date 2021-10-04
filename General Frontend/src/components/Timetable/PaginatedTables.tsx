@@ -35,39 +35,6 @@ function checkIfHavePrereqs(unitsIAmTaking: Unit[], unit: Unit): [boolean, strin
   return retVal;
 }
 
-// https://stackoverflow.com/questions/8188548/splitting-a-js-array-into-n-arrays
-function spread(array: any, pageCount: number, balanced = true) {
-  if (pageCount < 2)
-    return [array];
-  var len = array.length,
-    out = [],
-    i = 0,
-    size;
-  if (len % pageCount === 0) {
-    size = Math.floor(len / pageCount);
-    while (i < len) {
-      out.push(array.slice(i, i += size));
-    }
-  }
-  else if (balanced) {
-    while (i < len) {
-      size = Math.ceil((len - i) / pageCount--);
-      out.push(array.slice(i, i += size));
-    }
-  }
-  else {
-    pageCount--;
-    size = Math.floor(len / pageCount);
-    if (len % size === 0)
-      size--;
-    while (i < size * pageCount) {
-      out.push(array.slice(i, i += size));
-    }
-    out.push(array.slice(size * pageCount));
-  }
-  return out;
-}
-
 function isFirstYearUnit(u: Unit) {
   let retVal = false;
   HARD_CODED_FIRSTYEAR_UNITS.forEach((h) => {
@@ -80,7 +47,6 @@ function isFirstYearUnit(u: Unit) {
 
 function doPagination(pageCount: number, plan: Plan): Array<Array<Unit[]>> {
   const paginatedUnits: Array<Array<Unit[]>> = [];
-  let sem = 1
   let unitCpy = [...(plan.allUnits!)]
   let stillSorting = true
 
@@ -112,7 +78,7 @@ function PaginatedTables(props: PaginatedTablesProps) {
     return map
   }, {})
   const history = useHistory();
-  const [yearCount, setYearCount] = useState(3);
+  const [yearCount] = useState(3);
   const [error, setError] = useState<PromptData>({ promptTitle: "", promptContent: "", showPrompt: false });
   const [paginatedUnits, setPaginatedUnits] = useState(doPagination(yearCount, props.plan));
   const [selectedY2SemOne, setSelectedY2SemOne] = useState<Unit[]>([])
@@ -123,6 +89,7 @@ function PaginatedTables(props: PaginatedTablesProps) {
   const [availableS2Units, setAvailableS2Units] = useState<Unit[]>(computeAvailableS2())
   useEffect(() => {
     setPaginatedUnits(doPagination(yearCount, props.plan))
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [yearCount])
 
   function computeAvailableS1(): Unit[] {
@@ -323,6 +290,7 @@ function PaginatedTables(props: PaginatedTablesProps) {
       setAvailableS1Units(computeAvailableS1())
       setAvailableS2Units(computeAvailableS2())
     }, 3000)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedY2SemOne, selectedY2SemTwo, selectedY3SemOne, selectedY3SemTwo])
 
   function setY3(sem: 1 | 2, pos: 0 | 1 | 2 | 3, val: string) {

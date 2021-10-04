@@ -133,9 +133,9 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
   const [error, setError] = useState<PromptData>({ promptTitle: "", promptContent: "", showPrompt: false });
   const [stage, setStage] = useState<UNITSFIRSTMODES>(UNITSFIRSTMODES.initial)
   const [careers, setCareers] = useState<Array<Career>>(props.careers);
-  const [units, setUnits] = useState<Array<Unit>>(props.units);
-  const [majors, setMajors] = useState<Array<Major>>(props.majors);
-  const [specs, setSpecs] = useState<Array<Specialization>>(props.specs);
+  const [units] = useState<Array<Unit>>(props.units);
+  const [majors] = useState<Array<Major>>(props.majors);
+  const [specs] = useState<Array<Specialization>>(props.specs);
   const [plan, setPlan] = useState<Plan>({});
   function filterCareersList() {
     let careersCodesToPop: Career[] = [];

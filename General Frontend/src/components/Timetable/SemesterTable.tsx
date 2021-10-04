@@ -1,5 +1,5 @@
 import { SemesterOptionsTableProps, SemesterTableProps } from "../../types";
-import { InputLabel, MenuItem, Select, Table, TableBody, TableCell, TableHead, TableRow, TextField, Typography } from "@material-ui/core";
+import { MenuItem, Table, TableBody, TableCell, TableHead, TableRow, TextField, Typography } from "@material-ui/core";
 import styled from "styled-components";
 
 
