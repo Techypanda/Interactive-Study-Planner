@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { DefaultProps } from "../types";
 import { createStyles, makeStyles, Theme} from '@material-ui/core/styles';
+import UnitsDataTable from "../components/shared/UnitsDatatable"
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -53,40 +54,9 @@ function ViewAllUnits(props: DefaultProps) {
 
     return (
 	<>
-		<br>
-		</br>
-	    <Container  >
-		<Box id="searchcontainer" display="flex">
-			<Button className="backButton" variant="contained" onClick={() => history.goBack()} >
-				Back
-			</Button>
-		    <TextField style={{padding: '0 10px'}} variant="outlined" id="standard-full-width" fullWidth  placeholder="Search careers..." className="searchbar" />
-			<Button variant='contained' className="searchbtn">Search</Button>
-		</Box>
 		<br/>
-		{units_list.map((x) => (
-		    <div className="unit-option">
-			<Card variant="outlined" className={classes.root}>
-			    <div className={classes.details}>
-				<CardContent onClick={() => history.push(`/InfoPage/ViewUnit/${x.UnitCode}`)} className={classes.content}>
-				    <Typography className='values' component="h5" variant="h5" align="left">
-					{x.Name}
-				    </Typography>
-				    <Typography variant="subtitle1" color="textSecondary">
-					{x.Description}
-				    </Typography>
-				</CardContent>
-				<div className={classes.controls}>
-				</div>
-			    </div>
-			</Card>
-		    </div>
-		    ))}
-			<br>
-			</br>
-			<Button variant="contained" onClick={() => history.goBack()}>Back</Button>
-			<br>
-			</br>
+	    <Container  >
+			<UnitsDataTable items={units_list}/>
 		</Container>
 	    <br/>
 
