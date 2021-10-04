@@ -1,9 +1,9 @@
 import { Box, Button, Grid } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { PaginatedTablesProps, PromptData, Unit, Plan } from "../../types";
+import { PaginatedTablesProps, PromptData, Unit, Plan, } from "../../types";
 import Error from "../shared/Error";
-import SemesterTable from "./SemesterTable";
+import SemesterTable, { SemTable } from "./SemesterTable";
 import CurtinLogo from "../../static/curtinbase.jpg";
 import CareerTable from "./CareerTable";
 import { useHistory } from "react-router";
@@ -11,6 +11,29 @@ import { useHistory } from "react-router";
 const HARD_CODED_FIRSTYEAR_UNITS = [ // These are required in first year for medical degree
   "MEDI1000", "HUMB1000", "BIOL1004", "CHEM1007", "INDH1006", "EPID1000", "HUMB1001", "GENE1000"
 ]
+
+function checkIfHavePrereqs(unitsIAmTaking: Unit[], unit: Unit): [boolean, string[][]?] {
+  let retVal: [boolean, string[][]?] = [false, []];
+  if (unit.Prerequistes.length >= 1 && unit.Prerequistes[0].length >= 1 && unit.Prerequistes[0][0] !== "") {
+    retVal[0] = true;
+    unit.Prerequistes.forEach((path) => {
+      let pathMet: string[] = [];
+      path.forEach((i) => {
+        unitsIAmTaking.forEach((k) => {
+          if (i === k.UnitCode) {
+            pathMet.push(k.UnitCode);
+          }
+        })
+      })
+      if (pathMet.length === path.length && pathMet[0] !== "") {
+        retVal[0] = false;
+      } else {
+        retVal[1]?.push(path);
+      }
+    })
+  }
+  return retVal;
+}
 
 // https://stackoverflow.com/questions/8188548/splitting-a-js-array-into-n-arrays
 function spread(array: any, pageCount: number, balanced = true) {
@@ -61,9 +84,6 @@ function doPagination(pageCount: number, plan: Plan): Array<Array<Unit[]>> {
   let unitCpy = [...(plan.allUnits!)]
   let stillSorting = true
 
-
-  const depGroups: Unit[][] = [] // Sem Group -> Sem Group -> Sem Group ...
-
   let fySemOne = []
   let fySemTwo = []
   while (stillSorting === true) {
@@ -81,182 +101,331 @@ function doPagination(pageCount: number, plan: Plan): Array<Array<Unit[]>> {
       }
     }
   }
-  depGroups.push([...fySemOne], [...fySemTwo])
-
-  let iterations = 0;
-  let len = unitCpy.length;
-  let earlyBreak = false
-  while (len !== 0 && iterations < 24 && !earlyBreak) { // more then 24 iterations is probably something wrong with data
-    let end = false
-    let newGroup = []
-    while (!end) {
-      end = true
-      // 100% a graph is the correct approach here but i'm not sure how you would apply it here...
-      for (let i = 0; i < unitCpy.length; i++) { // cant use foreach as you cant break and it is a unsafe context...
-        let satisifiedPrereq = false
-        const currUnit = unitCpy[i]
-        if ((currUnit.Prerequistes.length === 1 || currUnit.Prerequistes[0] === [] || currUnit.Prerequistes[0] === ['']) && (currUnit.Semester === sem || currUnit.Semester === 12)) {
-          satisifiedPrereq = true
-        }
-        for (let ii = 0; ii < currUnit.Prerequistes.length; ii++) {
-          let hits = 0
-          const preReqGroup = currUnit.Prerequistes[ii]
-          if (preReqGroup[0] !== "") {
-            for (let iii = 0; iii < preReqGroup.length; iii++) {
-              const prereq = preReqGroup[iii]
-              for (let iiii = 0; iiii < depGroups.length; iiii++) {
-                const g = depGroups[iiii]
-                for (let iiiii = 0; iiiii < g.length; iiiii++) {
-                  const u = g[iiiii]
-                  if (u.UnitCode === prereq) {
-                    hits += 1
-                  }
-                }
-              }
-            }
-          }
-          if (hits === preReqGroup.length && (currUnit.Semester === sem || currUnit.Semester === 12)) {
-            satisifiedPrereq = true
-            break
-          }
-        }
-        if (satisifiedPrereq) {
-          end = false
-        }
-        if (!end) {
-          // Add and Break to repeat from start
-          newGroup.push(currUnit)
-          unitCpy.splice(i, 1) // remove it
-          break // end the for loop
-        }
-      }
-    }
-    // I have a semester group now add it to dependency group, switch to next sem, repeat until you no longer have units in unitCpy
-    iterations += 1
-    if (newGroup.length !== 0) {
-      depGroups.push(newGroup)
-    }
-    sem = sem === 1 ? 2 : 1
-  }
-  console.log(depGroups)
-  console.log(unitCpy)
-
-  paginatedUnits[0] = [[...depGroups[0]], [...depGroups[1]]]
-  depGroups.splice(0, 1)
-  depGroups.splice(0, 1)
-
-  const semOneY1 = []
-  const semTwoY1 = []
-  const semOneY2 = []
-  const semTwoY2 = []
-  len = semOneY1.length
-  while (len < 4) {
-    let needOverflow = true
-    for (let i = 0; i < depGroups[0].length; i++) {
-      const u = depGroups[0][i]
-      if (semOneY1.length < 4) {
-        if (u.Semester === 1) {
-          semOneY1.push(u)
-          depGroups[0].splice(i, 1)
-          needOverflow = false
-          break
-        }
-      }
-    }
-    if (needOverflow) {
-      for (let i = 0; i < depGroups[0].length; i++) {
-        const u = depGroups[0][i]
-        if (semOneY1.length < 4) {
-          if (u.Semester === 12) {
-            semOneY1.push(u)
-            depGroups[0].splice(i, 1)
-            needOverflow = false
-            break
-          }
-        }
-      }
-    }
-    len = semOneY1.length
-  }
-  len = semTwoY1.length
-  while (len < 4) {
-    let needOverflow = true
-    for (let i = 0; i < depGroups[1].length; i++) {
-      const u = depGroups[1][i]
-      if (semTwoY1.length < 4) {
-        if (u.Semester === 2) {
-          semTwoY1.push(u)
-          depGroups[1].splice(i, 1)
-          needOverflow = false
-          break
-        }
-      }
-    }
-    if (needOverflow) {
-      for (let i = 0; i < depGroups[0].length; i++) { // first grab from the group before me
-        const u = depGroups[0][i]
-        if (semOneY2.length < 4) {
-          if (u.Semester === 12) {
-            semOneY2.push(u)
-            depGroups[0].splice(i, 1)
-            needOverflow = false
-            break
-          }
-        }
-      }
-      if (needOverflow) { // then grab from my group
-        for (let i = 0; i < depGroups[1].length; i++) {
-          const u = depGroups[1][i]
-          if (semTwoY1.length < 4) {
-            if (u.Semester === 12) {
-              semTwoY2.push(u)
-              depGroups[1].splice(i, 1)
-              needOverflow = false
-              break
-            }
-          }
-        }
-      }
-    }
-    len = semTwoY1.length
-  }
-  paginatedUnits.push([[...semOneY1], [...semTwoY1]]) // this approach doesnt work at all
-
-
-  paginatedUnits.push([[], []])
+  paginatedUnits.push([[...fySemOne], [...fySemTwo]])
   return paginatedUnits
 }
 
 function PaginatedTables(props: PaginatedTablesProps) {
+  const hashmapOfUnits: any = props.plan.allUnits!.reduce((map, u) => {
+    // @ts-ignore
+    map[u.UnitCode] = u
+    return map
+  }, {})
   const history = useHistory();
   const [yearCount, setYearCount] = useState(3);
   const [error, setError] = useState<PromptData>({ promptTitle: "", promptContent: "", showPrompt: false });
   const [paginatedUnits, setPaginatedUnits] = useState(doPagination(yearCount, props.plan));
+  const [selectedY2SemOne, setSelectedY2SemOne] = useState<Unit[]>([])
+  const [selectedY2SemTwo, setSelectedY2SemTwo] = useState<Unit[]>([])
+  const [selectedY3SemOne, setSelectedY3SemOne] = useState<Unit[]>([])
+  const [selectedY3SemTwo, setSelectedY3SemTwo] = useState<Unit[]>([])
+  const [availableS1Units, setAvailableS1Units] = useState<Unit[]>(computeAvailableS1())
+  const [availableS2Units, setAvailableS2Units] = useState<Unit[]>(computeAvailableS2())
   useEffect(() => {
     setPaginatedUnits(doPagination(yearCount, props.plan))
   }, [yearCount])
-  function addYear() {
-    if ((yearCount * 2) < 24) {
-      setYearCount(yearCount + 1)
+
+  function computeAvailableS1(): Unit[] {
+    const units = [...props.plan.allUnits!]
+    let filtered = false;
+    while (!filtered) {
+      let collOccured = false
+      for (let i = 0; i < units.length; i++) {
+        const u = units[i]
+        if (u.UnitCode === "MEDI1000" || u.UnitCode === "HUMB1000" || u.UnitCode === "BIOL1004" || u.UnitCode === "CHEM1007") {
+          units.splice(i, 1)
+          collOccured = true
+          break
+        }
+      }
+      if (!collOccured) {
+        filtered = true
+      }
+    }
+    while (true) {
+      let collOccured = false
+      for (let i = 0; i < units.length; i++) {
+        const u = units[i]
+        if (u.Semester !== 1 && u.Semester !== 12) {
+          units.splice(i, 1)
+          collOccured = true
+          break
+        }
+      }
+      if (!collOccured) {
+        break
+      }
+    }
+    while (true) {
+      let collOccured = false
+      for (let i = 0; i < units.length; i++) {
+        const u = units[i]
+        for (let ii = 0; ii < selectedY2SemOne.length; ii++) {
+          const u2 = selectedY2SemOne[ii]
+          if (u2 != null) {
+            if (u.UnitCode === u2.UnitCode && !u2.disabled) {
+              const removed = units.splice(i, 1)
+              removed[0].disabled = true
+              units.push(removed[0])
+              collOccured = true
+              break
+            }
+          }
+        }
+        if (collOccured) { break }
+        for (let ii = 0; ii < selectedY2SemTwo.length; ii++) {
+          const u2 = selectedY2SemTwo[ii]
+          if (u2 != null) {
+            if (u.UnitCode === u2.UnitCode && !u2.disabled) {
+              const removed = units.splice(i, 1)
+              removed[0].disabled = true
+              units.push(removed[0])
+              collOccured = true
+              break
+            }
+          }
+        }
+        if (collOccured) { break }
+        for (let ii = 0; ii < selectedY3SemOne.length; ii++) {
+          const u2 = selectedY3SemOne[ii]
+          if (u2 != null) {
+            if (u.UnitCode === u2.UnitCode && !u2.disabled) {
+              const removed = units.splice(i, 1)
+              removed[0].disabled = true
+              units.push(removed[0])
+              collOccured = true
+              break
+            }
+          }
+        }
+        if (collOccured) { break }
+        for (let ii = 0; ii < selectedY3SemTwo.length; ii++) {
+          const u2 = selectedY3SemTwo[ii]
+          if (u2 != null) {
+            if (u.UnitCode === u2.UnitCode && !u2.disabled) {
+              const removed = units.splice(i, 1)
+              removed[0].disabled = true
+              units.push(removed[0])
+              collOccured = true
+              break
+            }
+          }
+        }
+        if (collOccured) { break }
+      }
+      if (!collOccured) {
+        break
+      }
+    }
+    return units
+  }
+  function computeAvailableS2(): Unit[] {
+    const units = [...props.plan.allUnits!]
+    let filtered = false;
+    while (!filtered) {
+      let collOccured = false
+      for (let i = 0; i < units.length; i++) {
+        const u = units[i]
+        if (u.UnitCode === "EPID1000" || u.UnitCode === "GENE1000" || u.UnitCode === "HUMB1001" || u.UnitCode === "INDH1006") {
+          units.splice(i, 1)
+          collOccured = true
+          break
+        }
+      }
+      if (!collOccured) {
+        filtered = true
+      }
+    }
+    while (true) {
+      let collOccured = false
+      for (let i = 0; i < units.length; i++) {
+        const u = units[i]
+        if (u.Semester !== 2 && u.Semester !== 12) {
+          units.splice(i, 1)
+          collOccured = true
+          break
+        }
+      }
+      if (!collOccured) {
+        break
+      }
+    }
+    while (true) {
+      let collOccured = false
+      for (let i = 0; i < units.length; i++) {
+        const u = units[i]
+        for (let ii = 0; ii < selectedY2SemOne.length; ii++) {
+          const u2 = selectedY2SemOne[ii]
+          if (u2 != null) {
+            if (u.UnitCode === u2.UnitCode && !u2.disabled) {
+              const removed = units.splice(i, 1)
+              removed[0].disabled = true
+              units.push(removed[0])
+              collOccured = true
+              break
+            }
+          }
+        }
+        if (collOccured) { break }
+        for (let ii = 0; ii < selectedY2SemTwo.length; ii++) {
+          const u2 = selectedY2SemTwo[ii]
+          if (u2 != null) {
+            if (u.UnitCode === u2.UnitCode && !u2.disabled) {
+              const removed = units.splice(i, 1)
+              removed[0].disabled = true
+              units.push(removed[0])
+              collOccured = true
+              break
+            }
+          }
+        }
+        if (collOccured) { break }
+        for (let ii = 0; ii < selectedY3SemOne.length; ii++) {
+          const u2 = selectedY3SemOne[ii]
+          if (u2 != null) {
+            if (u.UnitCode === u2.UnitCode && !u2.disabled) {
+              const removed = units.splice(i, 1)
+              removed[0].disabled = true
+              units.push(removed[0])
+              collOccured = true
+              break
+            }
+          }
+        }
+        if (collOccured) { break }
+        for (let ii = 0; ii < selectedY3SemTwo.length; ii++) {
+          const u2 = selectedY3SemTwo[ii]
+          if (u2 != null) {
+            if (u.UnitCode === u2.UnitCode && !u2.disabled) {
+              const removed = units.splice(i, 1)
+              removed[0].disabled = true
+              units.push(removed[0])
+              collOccured = true
+              break
+            }
+          }
+        }
+        if (collOccured) { break }
+      }
+      if (!collOccured) {
+        break
+      }
+    }
+    return units
+  }
+
+  useEffect(() => {
+    window.setTimeout(() => {
+      /* localStorage.setItem(`${process.env.DEVELOPMENT ? "dev-" : ""}y2semOne`, JSON.stringify(selectedY2SemOne))
+      localStorage.setItem(`${process.env.DEVELOPMENT ? "dev-" : ""}y2semTwo`, JSON.stringify(selectedY2SemTwo))
+      localStorage.setItem(`${process.env.DEVELOPMENT ? "dev-" : ""}y3semOne`, JSON.stringify(selectedY3SemOne)) Annoying amount of work to persist these
+      localStorage.setItem(`${process.env.DEVELOPMENT ? "dev-" : ""}y3semTwo`, JSON.stringify(selectedY3SemTwo)) */
+      setAvailableS1Units(computeAvailableS1())
+      setAvailableS2Units(computeAvailableS2())
+    }, 3000)
+  }, [selectedY2SemOne, selectedY2SemTwo, selectedY3SemOne, selectedY3SemTwo])
+
+  function setY3(sem: 1 | 2, pos: 0 | 1 | 2 | 3, val: string) {
+    if (sem === 1) {
+      const cpy = [...selectedY3SemOne]
+      const allPrevUnits = [hashmapOfUnits["MEDI1000"], hashmapOfUnits["HUMB1000"], hashmapOfUnits["BIOL1004"],
+      hashmapOfUnits["CHEM1007"], hashmapOfUnits["EPID1000"], hashmapOfUnits["GENE1000"], hashmapOfUnits["HUMB1001"],
+      hashmapOfUnits["INDH1006"], ...selectedY2SemOne, ...selectedY2SemTwo]
+      const ret = checkIfHavePrereqs(allPrevUnits, hashmapOfUnits[val])
+      if (!ret[0]) {
+        cpy[pos] = hashmapOfUnits[val]
+      } else {
+        let err = `You do not have prerequistes for unit ${hashmapOfUnits[val].Name}, you require: `
+        ret[1]!.forEach((path) => {
+          path.forEach((u) => {
+            err += `${u} and `
+          })
+          err = err.slice(0, -4);
+          err += `OR `
+        })
+        err = err.slice(0, -3)
+        setError({ promptTitle: "Failed To Select", promptContent: err, showPrompt: true })
+      }
+      setSelectedY3SemOne(cpy)
     } else {
-      setError({ promptTitle: "You Cannot Possibly Do Another Year", promptContent: "You can't add another year as it would mean taking 0 units in a year.", showPrompt: true })
+      const cpy = [...selectedY3SemTwo]
+      const allPrevUnits = [hashmapOfUnits["MEDI1000"], hashmapOfUnits["HUMB1000"], hashmapOfUnits["BIOL1004"],
+      hashmapOfUnits["CHEM1007"], hashmapOfUnits["EPID1000"], hashmapOfUnits["GENE1000"], hashmapOfUnits["HUMB1001"],
+      hashmapOfUnits["INDH1006"], ...selectedY2SemOne, ...selectedY2SemTwo, ...selectedY3SemOne]
+      const ret = checkIfHavePrereqs(allPrevUnits, hashmapOfUnits[val])
+      if (!ret[0]) {
+        cpy[pos] = hashmapOfUnits[val]
+      } else {
+        let err = `You do not have prerequistes for unit ${hashmapOfUnits[val].Name}, you require: `
+        ret[1]!.forEach((path) => {
+          path.forEach((u) => {
+            err += `${u} and `
+          })
+          err = err.slice(0, -4);
+          err += `OR `
+        })
+        err = err.slice(0, -3)
+        setError({ promptTitle: "Failed To Select", promptContent: err, showPrompt: true })
+      }
+      setSelectedY3SemTwo(cpy)
     }
   }
-  function removeYear() {
-    if (yearCount > 3) {
-      setYearCount(yearCount - 1)
+  function setY2(sem: 1 | 2, pos: 0 | 1 | 2 | 3, val: string) {
+    if (sem === 1) {
+      const cpy = [...selectedY2SemOne]
+      const allPrevUnits = [hashmapOfUnits["MEDI1000"], hashmapOfUnits["HUMB1000"], hashmapOfUnits["BIOL1004"],
+      hashmapOfUnits["CHEM1007"], hashmapOfUnits["EPID1000"], hashmapOfUnits["GENE1000"], hashmapOfUnits["HUMB1001"],
+      hashmapOfUnits["INDH1006"]]
+      const ret = checkIfHavePrereqs(allPrevUnits, hashmapOfUnits[val])
+      if (!ret[0]) {
+        cpy[pos] = hashmapOfUnits[val]
+      } else {
+        let err = `You do not have prerequistes for unit ${hashmapOfUnits[val].Name}, you require: `
+        ret[1]!.forEach((path) => {
+          path.forEach((u) => {
+            err += `${u} and `
+          })
+          err = err.slice(0, -4);
+          err += `OR `
+        })
+        err = err.slice(0, -3)
+        setError({ promptTitle: "Failed To Select", promptContent: err, showPrompt: true })
+      }
+      setSelectedY2SemOne(cpy)
     } else {
-      setError({ promptTitle: "You Cannot Remove Another Year", promptContent: "If you wish to overload please talk to a unit coordinator, we do not support overloading unless you have high grades at Curtin.", showPrompt: true })
+      const cpy = [...selectedY2SemTwo]
+      const allPrevUnits = [hashmapOfUnits["MEDI1000"], hashmapOfUnits["HUMB1000"], hashmapOfUnits["BIOL1004"],
+      hashmapOfUnits["CHEM1007"], hashmapOfUnits["EPID1000"], hashmapOfUnits["GENE1000"], hashmapOfUnits["HUMB1001"],
+      hashmapOfUnits["INDH1006"], ...selectedY2SemOne]
+      const ret = checkIfHavePrereqs(allPrevUnits, hashmapOfUnits[val])
+      if (!ret[0]) {
+        cpy[pos] = hashmapOfUnits[val]
+      } else {
+        let err = `You do not have prerequistes for unit ${hashmapOfUnits[val].Name}, you require: `
+        ret[1]!.forEach((path) => {
+          path.forEach((u) => {
+            err += `${u} and `
+          })
+          err = err.slice(0, -4);
+          err += `OR `
+        })
+        err = err.slice(0, -3)
+        setError({ promptTitle: "Failed To Select", promptContent: err, showPrompt: true })
+      }
+      setSelectedY2SemTwo(cpy)
     }
   }
+
   return (
     <>
       <Error onAccept={() => setError({ promptTitle: error.promptTitle, promptContent: error.promptContent, showPrompt: false })} promptTitle={error.promptTitle} promptContent={error.promptContent} showPrompt={error.showPrompt} />
       <Box className={props.className} mt={2}>
         <Box display="flex" className="semesterTableContainer">
           {paginatedUnits.map((year, idx) =>
-            <SemesterTable key={idx} className="semesterTable" year={idx + 1} semesterOneUnits={year[0]} semesterTwoUnits={year[1]} />
+            <SemTable key={idx} className="semesterTable" year={idx + 1} semesterOneUnits={year[0]} semesterTwoUnits={year[1]} />
           )}
+          <SemesterTable onChange={setY2} semSelectedOne={selectedY2SemOne} semSelectedTwo={selectedY2SemTwo} year={2} semOne={availableS1Units} semTwo={availableS2Units} />
+          <SemesterTable onChange={setY3} semSelectedOne={selectedY3SemOne} semSelectedTwo={selectedY3SemTwo} year={2} semOne={availableS1Units} semTwo={availableS2Units} />
         </Box>
         <Grid container spacing={2}>
           <Grid item sm={5}>
@@ -274,7 +443,7 @@ function PaginatedTables(props: PaginatedTablesProps) {
           </Grid>
           <Grid item xs={7}>
             <Box mt={3}>
-              <CareerTable />
+              <CareerTable careers={props.careers} />
             </Box>
           </Grid>
         </Grid>

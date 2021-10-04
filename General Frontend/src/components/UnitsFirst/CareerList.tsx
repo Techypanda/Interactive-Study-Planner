@@ -1,12 +1,13 @@
 import { Box, Paper, Typography } from "@material-ui/core";
 import { Work } from "@material-ui/icons";
+import { useHistory } from "react-router";
 import styled from "styled-components";
 import { useRemainingHeight } from "../../api/hooks";
 import { CareerListEntryProps, CareerListSPAProps } from "../../types";
 
 function CareerListEntry(props: CareerListEntryProps) {
   return (
-    <Paper className={props.className}>
+    <Paper className={props.className} onClick={props.onClick}>
       <Box display="flex" className={props.className} py={2}>
         <Box marginLeft={2}>
           <Typography variant="subtitle1" className="careername">{props.title}</Typography>
@@ -21,13 +22,14 @@ function CareerListEntry(props: CareerListEntryProps) {
 }
 
 function CareerList(props: CareerListSPAProps) {
+  const history = useHistory()
   const height = useRemainingHeight();
   return (
-    <div className={props.className}>
-      <Box className="careerList" minHeight={height}>
+    <div className={`${props.className} fh`}>
+      <Box className="careerList" minHeight={height} height="100%">
         <Box pt={2}>
           <Typography variant="h5">Available Careers</Typography>
-          {props.careers.map((career) => <CareerListEntry className="stylethetext clickable" title={career.Name} key={career.CareerId} />)}
+          {props.careers.map((career) => <CareerListEntry className="stylethetext clickable" onClick={() => history.push(`/InfoPage/ViewCareer/${career.CareerId}`)} title={career.Name} key={career.CareerId} />)}
         </Box>
       </Box>
     </div>
