@@ -1,4 +1,4 @@
-import { Box, Typography, TextField, Button, Grid } from "@material-ui/core";
+import { Box, Typography, TextField, Button, Grid, MenuItem, Select } from "@material-ui/core";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
@@ -31,7 +31,7 @@ function UnitForm(props: UnitFormProps) {
   const [prereq, setPrereq] = useState<Array<Array<string>>>(comprehendCursedArrays("Prerequistes", props.unit))
   const [coreq, setCoreq] = useState<Array<Array<string>>>(comprehendCursedArrays("Corequistes", props.unit))
   const [antireq, setAntireq] = useState<Array<Array<string>>>(comprehendCursedArrays("Antirequistes", props.unit))
-
+  const [semester, setSemester] = useState(props.unit?.Semester ? props.unit?.Semester : 1)
   const [deliverys, setDeliverys] = useState<Array<string>>(props.unit?.Delivery ? props.unit?.Delivery.split(",") : []);
 
   const mutation = useMutation(() => {
@@ -49,7 +49,8 @@ function UnitForm(props: UnitFormProps) {
       delivery: deliveryString,
       corequistes: coreq,
       prerequistes: prereq,
-      antirequistes: antireq
+      antirequistes: antireq,
+      semester: semester as number
     };
     setLoading(true);
     
@@ -189,6 +190,15 @@ function UnitForm(props: UnitFormProps) {
         <Box mt={1}>
           <DeliveryAddition add={addDelivery} />
         </Box>
+      </Box>
+
+      <Box mt={2}>
+        <Typography className="bold" variant="subtitle1">Semester Unit Runs</Typography>
+        <Select variant="outlined" value={semester} onChange={(e) => setSemester(e.target.value as number)}>
+          <MenuItem value={1}>Semester 1</MenuItem>
+          <MenuItem value={2}>Semester 2</MenuItem>
+          <MenuItem value={12}>Semester 1 &amp; 2</MenuItem>
+        </Select>
       </Box>
 
       <Box mt={2}>

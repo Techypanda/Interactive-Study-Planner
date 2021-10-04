@@ -86,7 +86,8 @@ function Workspace(props: WorkspaceProps) {
                 <OptionCardSelect
                   title={pages.get(page)![0].Name}
                   description={pages.get(page)![0].Description}
-                  type={view === "Majors" ? "Major" : view === "Specializations" ? `${(pages.get(page)![0] as Specialization).Internal ? "Internal" : "External"} Specialization` : "Unit"}
+                  type={view === "Majors" ? "Major" : view === "Specializations" ? `${(pages.get(page)![0] as Specialization).Internal ? "Internal" : "External"} Specialization` : `Semester 
+                  ${(pages.get(page)![0] as Unit).Semester === 12 ? "1 & 2" : (pages.get(page)![0] as Unit).Semester} - Unit`}
                   onClick={() => props.select(pages.get(page)![0])}
                 />
               </Box>
@@ -95,7 +96,8 @@ function Workspace(props: WorkspaceProps) {
               <OptionCardSelect
                 title={pages.get(page)![1].Name}
                 description={pages.get(page)![1].Description}
-                type={view === "Majors" ? "Major" : view === "Specializations" ? `${(pages.get(page)![1] as Specialization).Internal ? "Internal" : "External"} Specialization` : "Unit"}
+                type={view === "Majors" ? "Major" : view === "Specializations" ? `${(pages.get(page)![1] as Specialization).Internal ? "Internal" : "External"} Specialization` : `Semester 
+                ${(pages.get(page)![1] as Unit).Semester === 12 ? "1 & 2" : (pages.get(page)![1] as Unit).Semester} - Unit`}
                 onClick={() => props.select(pages.get(page)![1])}
               />
             </Box>}
@@ -103,7 +105,8 @@ function Workspace(props: WorkspaceProps) {
               <OptionCardSelect
                 title={pages.get(page)![2].Name}
                 description={pages.get(page)![2].Description}
-                type={view === "Majors" ? "Major" : view === "Specializations" ? `${(pages.get(page)![2] as Specialization).Internal ? "Internal" : "External"} Specialization` : "Unit"}
+                type={view === "Majors" ? "Major" : view === "Specializations" ? `${(pages.get(page)![2] as Specialization).Internal ? "Internal" : "External"} Specialization` : `Semester 
+                ${(pages.get(page)![2] as Unit).Semester === 12 ? "1 & 2" : (pages.get(page)![2] as Unit).Semester} - Unit`}
                 onClick={() => props.select(pages.get(page)![2])}
               />
             </Box>}
@@ -118,7 +121,7 @@ function Workspace(props: WorkspaceProps) {
           <NavigateBefore className="navigationIcon" onClick={() => navPrevious()} />
         </Box>
         {Array(pages.size).fill(0).map((_, i) =>
-          <Box mx={0.2} key={i} className={`navIndicator ${i === page ? 'activewoopog' : ''}`} display="inline-block" height={15} width={15} borderRadius="100%" />
+          <Box mx={0.2} key={i} className={`navIndicator ${i === page ? 'activewoopog' : ''}`} display="inline-block" height={15} width={15} borderRadius="100%" onClick={() => setPage(i)} />
         )}
         <Box ml={2}>
           <NavigateNext className="navigationIcon" onClick={() => navNext()} />
@@ -148,6 +151,7 @@ export default styled(Workspace)`
 .navIndicator {
   background-color: #d9d9d9;
   border: 2px solid #777777;
+  cursor: pointer;
 }
 .activewoopog {
   background-color: #777777;

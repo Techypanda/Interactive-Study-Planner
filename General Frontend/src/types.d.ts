@@ -4,6 +4,14 @@ export interface DefaultProps {
   className?: string;
   style?: React.CSSProperties | undefined;
 }
+export interface PaginatedTablesProps extends DefaultProps {
+  plan: Plan
+}
+export interface SemesterTableProps extends DefaultProps {
+  year: number;
+  semesterOneUnits?: Unit[]
+  semesterTwoUnits?: Unit[]
+}
 export interface WorkspaceProps extends DefaultProps {
   units: Array<Unit>
   specs: Array<Specialization>
@@ -98,6 +106,7 @@ export interface Unit {
   Delivery: string
   UnitCode: string
   Description: string
+  Semester: 1 | 2 | 12 // 1 = semester 1, 2 = semester 2, 12 == semester 1 & 2
 }
 
 export interface Major {
@@ -115,6 +124,7 @@ export interface Plan {
   optionalUnits?: Unit[];
   specializations?: Specialization[];
   doubleMajor?: Major;
+  allUnits?: Unit[] // chuck EVERYTHING into this at the end
 }
 
 export interface Career {

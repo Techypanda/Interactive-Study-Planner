@@ -14,6 +14,7 @@ import {
 } from "react-transition-group";
 import { Fade } from "@material-ui/core";
 import UnitsFirst from "./pages/UnitsFirst";
+import Timetable from "./pages/Timetable";
 
 function Router(props: DefaultProps) {
   const location = useLocation();
@@ -54,8 +55,11 @@ function Router(props: DefaultProps) {
             <Route exact path="/bottomup">
               <UnitsFirst />
             </Route>
+            <Route exact path="/timetable">
+              <Timetable />
+            </Route>
             <Route>
-              <h1>Error 404 not found</h1>
+              <h1>Error 404 not found</h1> {/* TODO: Make a 404 Page */}
             </Route>
           </Switch>
         </TransitionGroup>

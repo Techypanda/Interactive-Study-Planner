@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { Career, Major, Plan, PromptData, Specialization, Unit, UnitFirstSPAContextProps } from "../../types";
 import Error from "../shared/Error";
 import CareerList from "./CareerList";
+import FilledPlan from "./FilledPlan";
 import Initial from "./Initial";
 import PlanList from "./PlanList";
 import Workspace from "./Workspace";
@@ -17,6 +18,25 @@ enum UNITSFIRSTMODES {
 const HARD_CODED_FIRSTYEAR_UNITS = [ // These are required in first year for medical degree
   "MEDI1000", "HUMB1000", "BIOL1004", "CHEM1007", "INDH1006", "EPID1000", "HUMB1001", "GENE1000"
 ]
+
+// Check that you dont have >2 semester 2 or >2 semester 1
+function checkSemesterValid(unit: Unit, currentOptionals: Unit[]): [boolean, string] {
+  let semesterOneCount = 0
+  let semesterTwoCount = 0
+  currentOptionals.forEach((u) => {
+    if (u.Semester === 1) {
+      semesterOneCount += 1
+    } else if (u.Semester === 2) {
+      semesterTwoCount += 1
+    }
+  })
+  if (semesterOneCount >= 2 && unit.Semester === 1) {
+    return [false, `You already have two semester one units, ${unit.UnitCode} is only a semester one unit`]
+  } else if (semesterTwoCount >= 2 && unit.Semester === 2) {
+    return [false, `You already have two semester two units, ${unit.UnitCode} is only a semester two unit`]
+  }
+  return [true, ""]
+}
 
 // Check that specialization does not have a unit antireq path that is satisifed by unit array
 function specAntireqsCheckUnits(spec: Specialization, myUnits: Unit[]): [boolean, Unit[]?] {
@@ -240,47 +260,53 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
             if (temp.specializations && temp.specializations.length > 0 && !(temp.specializations[0].Internal)) {
               setError({ promptTitle: "Unit Selection Error", promptContent: "You cannot take a external specialization and optional units", showPrompt: true })
             } else {
-              temp.optionalUnits.push(unit);
-              let majorCheck = checkUnitInMajor(temp.mainMajor!, unit);
-              if (!majorCheck) {
-                let myUnits: string[] = [];
-                myUnits = [...temp.mainMajor!.Units]
-                if (temp.specializations) {
-                  myUnits = [...myUnits, ...temp.specializations[0]!.Units]
-                  temp.optionalUnits.forEach((u) => {
-                    if (u.UnitCode !== unit.UnitCode) {
-                      myUnits.push(u.UnitCode);
-                    }
-                  })
-                }
-                let preReqRet = checkIfHavePrereqs(myUnits, unit);
-                if (preReqRet[0]) {
-                  let err = `You do not have prerequistes for unit ${unit.Name}, you require: `
-                  preReqRet[1]!.forEach((path) => {
-                    path.forEach((u) => {
-                      err += `${u} and `
+              const check = checkSemesterValid(unit, temp.optionalUnits)
+              if (check[0]) {
+                temp.optionalUnits.push(unit);
+                let majorCheck = checkUnitInMajor(temp.mainMajor!, unit);
+                if (!majorCheck) {
+                  let myUnits: string[] = [];
+                  myUnits = [...temp.mainMajor!.Units]
+                  if (temp.specializations) {
+                    myUnits = [...myUnits, ...temp.specializations[0]!.Units]
+                    temp.optionalUnits.forEach((u) => {
+                      if (u.UnitCode !== unit.UnitCode) {
+                        myUnits.push(u.UnitCode);
+                      }
                     })
-                    err = err.slice(0, -4);
-                    err += `OR `
-                  })
-                  err = err.slice(0, -3)
-                  temp.optionalUnits.pop();
-                  setError({ promptTitle: "Unit Selection Error", promptContent: err, showPrompt: true })
-                } else {
-                  let antiReqRet = checkIfHaveAntireqs(myUnits, unit);
-                  if (antiReqRet[0]) {
-                    let err = `You have a antirequiste/s for unit ${unit.Name}: `
-                    antiReqRet[1]!.forEach((u) => {
-                      err += `${u}, `
+                  }
+                  let preReqRet = checkIfHavePrereqs(myUnits, unit);
+                  if (preReqRet[0]) {
+                    let err = `You do not have prerequistes for unit ${unit.Name}, you require: `
+                    preReqRet[1]!.forEach((path) => {
+                      path.forEach((u) => {
+                        err += `${u} and `
+                      })
+                      err = err.slice(0, -4);
+                      err += `OR `
                     })
+                    err = err.slice(0, -3)
                     temp.optionalUnits.pop();
                     setError({ promptTitle: "Unit Selection Error", promptContent: err, showPrompt: true })
                   } else {
-                    setPlan(temp);
+                    let antiReqRet = checkIfHaveAntireqs(myUnits, unit);
+                    if (antiReqRet[0]) {
+                      let err = `You have a antirequiste/s for unit ${unit.Name}: `
+                      antiReqRet[1]!.forEach((u) => {
+                        err += `${u}, `
+                      })
+                      temp.optionalUnits.pop();
+                      setError({ promptTitle: "Unit Selection Error", promptContent: err, showPrompt: true })
+                    } else {
+                      setPlan(temp);
+                    }
                   }
+                } else {
+                  setError({ promptTitle: "Unit Selection Error", promptContent: `Main major: ${temp.mainMajor?.Name} already has unit: ${unit.Name}`, showPrompt: true })
+                  temp.optionalUnits.pop();
                 }
               } else {
-                setError({ promptTitle: "Unit Selection Error", promptContent: `Main major: ${temp.mainMajor?.Name} already has unit: ${unit.Name}`, showPrompt: true })
+                setError({ promptTitle: "Unit Selection Error", promptContent: check[1], showPrompt: true })
               }
             }
           }
@@ -313,7 +339,7 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
                   }
                 })
               }
-              let preReqRet = checkIfHavePrereqs(myUnits, unit);
+              let preReqRet = checkIfHavePrereqs([...myUnits, ...HARD_CODED_FIRSTYEAR_UNITS], unit);
               if (preReqRet[0]) {
                 let err = `You do not have prerequistes for unit ${unit.Name}, you require: `
                 preReqRet[1]!.forEach((path) => {
@@ -327,7 +353,7 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
                 temp.optionalUnits.pop();
                 setError({ promptTitle: "Unit Selection Error", promptContent: err, showPrompt: true })
               } else {
-                let antiReqRet = checkIfHaveAntireqs(myUnits, unit);
+                let antiReqRet = checkIfHaveAntireqs([...myUnits, ...HARD_CODED_FIRSTYEAR_UNITS], unit);
                 if (antiReqRet[0]) {
                   let err = `You have a antirequiste/s for unit ${unit.Name}: `
                   antiReqRet[1]!.forEach((u) => {
@@ -527,7 +553,7 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
         <Grid item xs={8} className="sameheight">
           {stage === UNITSFIRSTMODES.initial ? <Initial majors={majors} selectMajor={setMainMajor} />
             : stage === UNITSFIRSTMODES.workspace ? <Workspace majors={majors} units={units} specs={specs} select={select} />
-              : stage === UNITSFIRSTMODES.fullWorkspace ? <h1>Your plan is now full</h1>
+              : stage === UNITSFIRSTMODES.fullWorkspace ? <FilledPlan />
                 : <h1>Unknown Stage</h1>
           }
         </Grid>
