@@ -46,8 +46,8 @@ sam build --parallel >> UnitTestOutput.txt
 # badinputdeletetrait=$!
 
 #Testing Career api and functions
-echo "Running Career Events"
-echo "Add Career Api" >> UnitTestOutput.txt
+echo "Running Career Events" >> UnitTestOutput.txt
+echo "Add Career" >> UnitTestOutput.txt
 #Executing
 sam local invoke --env-vars unittests/debug.json AddCareerFunction -e unittests/payloads/career/AddCareerEvent.json > unittests/responses/career/AddCareerResponse.json &
 addcareer=$!
@@ -78,7 +78,7 @@ sam local invoke --env-vars unittests/debug.json DeleteCareerFunction -e unittes
 deletecareerbad=$!
 
 # WAITS
-echo "Waiting all all seeding data"
+echo "Waiting all seeding data"
 wait
 # #Comparing expected response to actual response
 # diff unittests/responses/trait/AddTraitResponse.json unittests/expectedResponses/trait/AddTraitExpectedResponse.json >> UnitTestOutput.txt
@@ -99,21 +99,27 @@ wait
 # diff unittests/responses/trait/DeleteBadInputResponse.json unittests/expectedResponses/trait/BadInputExpectedResponse.json >> UnitTestOutput.txt
 
 #Comparing expected response to actual response
+echo "Add Career" >> UnitTestOutput.txt
 diff unittests/responses/career/AddCareerResponse.json unittests/expectedResponses/career/AddCareerExpectedResponse.json >> UnitTestOutput.txt
 
 #Comparing expected response to actual response
+echo "Update Non-existant" >> UnitTestOutput.txt
 diff unittests/responses/career/UpdateNonExistResponse.json unittests/expectedResponses/career/NonExistExpectedResponse.json >> UnitTestOutput.txt
 
 #Comparing expected response to actual response
+echo "Delete Non-existant" >> UnitTestOutput.txt
 diff unittests/responses/career/DeleteNonExistResponse.json unittests/expectedResponses/career/NonExistExpectedResponse.json >> UnitTestOutput.txt
 
 #Comparing expected response to actual response
+echo "Add Bad Input" >> UnitTestOutput.txt
 diff unittests/responses/career/AddBadInputResponse.json unittests/expectedResponses/career/BadInputExpectedResponse.json >> UnitTestOutput.txt
 
 #Comparing expected response to actual response
+echo "Update Bad Input" >> UnitTestOutput.txt
 diff unittests/responses/career/UpdateBadInputResponse.json unittests/expectedResponses/career/BadInputExpectedResponse.json >> UnitTestOutput.txt
 
 #Comparing expected response to actual response
+echo "Delete Bad Input" >> UnitTestOutput.txt
 diff unittests/responses/career/DeleteBadInputResponse.json unittests/expectedResponses/career/BadInputExpectedResponse.json >> UnitTestOutput.txt
 
 echo "Running Add Event That Relied On Data since adds are done"
@@ -127,15 +133,16 @@ echo "Add Career Already Existing Item" >> UnitTestOutput.txt
 sam local invoke --env-vars unittests/debug.json AddCareerFunction -e unittests/payloads/career/AddCareerEvent.json > unittests/responses/career/AlreadyExistsResponse.json &
 addcareerexists=$!
 
-# wait
+wait
 # #Comparing expected response to actual response
 # diff unittests/responses/trait/AlreadyExistsResponse.json unittests/expectedResponses/trait/AlreadyExistsExpectedResponse.json >> UnitTestOutput.txt
 
 #Comparing expected response to actual response
+echo "Already Exists" >> UnitTestOutput.txt
 diff unittests/responses/career/AlreadyExistsResponse.json unittests/expectedResponses/career/AlreadyExistsExpectedResponse.json >> UnitTestOutput.txt
 
 echo "Running Updates now that all the adds are done"
-echo "Update Career Api" >> UnitTestOutput.txt
+echo "Update Career" >> UnitTestOutput.txt
 #Executing
 sam local invoke --env-vars unittests/debug.json UpdateCareerFunction -e unittests/payloads/career/UpdateCareerEvent.json > unittests/responses/career/UpdateCareerResponse.json &
 updatecareer=$!
@@ -147,6 +154,7 @@ updatecareer=$!
 
 wait
 #Comparing expected response to actual response
+echo "Update Career" >> UnitTestOutput.txt
 diff unittests/responses/career/UpdateCareerResponse.json unittests/expectedResponses/career/UpdateCareerExpectedResponse.json >> UnitTestOutput.txt
 
 # #Comparing expected response to actual response
@@ -165,6 +173,7 @@ deletecareer=$!
 
 wait
 #Comparing expected response to actual response
+echo "Delete Career" >> UnitTestOutput.txt
 diff unittests/responses/career/DeleteCareerResponse.json unittests/expectedResponses/career/DeleteCareerExpectedResponse.json >> UnitTestOutput.txt
 
 # #Comparing expected response to actual response
