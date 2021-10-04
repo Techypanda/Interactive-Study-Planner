@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardMedia, CardContent, Typography, CardActions, Button } from "@material-ui/core";
+import { Card, CardHeader, CardMedia, CardContent, Typography } from "@material-ui/core";
 import styled from "styled-components";
 import { OptionCardProps } from "../../types";
 

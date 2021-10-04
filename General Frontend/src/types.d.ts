@@ -6,11 +6,23 @@ export interface DefaultProps {
 }
 export interface PaginatedTablesProps extends DefaultProps {
   plan: Plan
+  careers: Career[]
+}
+export interface CareerTableProps extends DefaultProps {
+  careers: Career[]
 }
 export interface SemesterTableProps extends DefaultProps {
   year: number;
   semesterOneUnits?: Unit[]
   semesterTwoUnits?: Unit[]
+}
+export interface SemesterOptionsTableProps extends DefaultProps {
+  year: number;
+  semOne: Unit[]
+  semTwo: Unit[]
+  semSelectedOne: Unit[]
+  semSelectedTwo: Unit[]
+  onChange: (sem: 1 | 2, pos: 0 | 1 | 2 | 3, val: string) => void;
 }
 export interface WorkspaceProps extends DefaultProps {
   units: Array<Unit>
@@ -36,7 +48,7 @@ export interface InitialCareerSPAProps extends DefaultProps {
   majors: Array<Major>
   selectMajor: (m: Major) => void;
 }
-export interface CareerListEntryProps extends DefaultProps {
+export interface CareerListEntryProps extends DefaultProps, Clickable {
   title: string;
 }
 export interface UnitFirstSPAContextProps {
@@ -107,6 +119,7 @@ export interface Unit {
   UnitCode: string
   Description: string
   Semester: 1 | 2 | 12 // 1 = semester 1, 2 = semester 2, 12 == semester 1 & 2
+  disabled?: boolean // hacky fix for timetable
 }
 
 export interface Major {
