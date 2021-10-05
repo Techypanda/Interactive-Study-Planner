@@ -1,24 +1,15 @@
 import { Box, Button, makeStyles, Typography } from "@material-ui/core";
-import {
-  ImportantDevices,
-  NavigateBefore,
-  NavigateNext,
-} from "@material-ui/icons";
+import { NavigateBefore, NavigateNext } from "@material-ui/icons";
 import { useState } from "react";
 import { useHistory } from "react-router";
-import styled from "styled-components";
 import {
-  careerListTopdown,
   Plan,
   Specialization,
   Unit,
   UnitFirstSPAContextProps,
 } from "../../types";
-//import OptionCard from "../OptionCard";
 import OptionCard from "../UnitsFirst/OptionCard";
 
-// Viewport height - element.offset.top - desired bottom margin
-//function Initial(props: InitialCareerSPAProps) {
 export default function TopDownInitialMain(props: UnitFirstSPAContextProps) {
   const useStyles = makeStyles((theme) => ({
     innerCardOuterLeft: {
@@ -353,8 +344,8 @@ export default function TopDownInitialMain(props: UnitFirstSPAContextProps) {
       }
       count++;
     }
-    console.log('Career units inside find optionals:')
-    console.log(careerUnits)
+    console.log("Career units inside find optionals:");
+    console.log(careerUnits);
     return careerUnits;
   };
 
