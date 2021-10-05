@@ -125,8 +125,11 @@ function findBestMajor(majorResp : any, careerUnits : string[]) {
        then we need to pick a random major. This is because ANY valid Biomedicine plan MUST 
        contain a major */
     if(bestMajor === undefined) { 
+        console.log('inside undefined check')
         bestMajor = findRandMajor(majorResp)
     }
+    console.log('Best major is: ')
+    console.log(bestMajor)
     return bestMajor
 }
 
@@ -361,8 +364,15 @@ export default function TopdownFilled2() {
         })
 
 
-        console.log('We will set career units to other units for the time being, since career data now is lacking')
-        var careerUnits = ["BCCB2000","BIOL2001","BIOL3010","BIOL3011","GENE2001","GENE3000","GENE3002","MEDI2010", "MEDI3016", "HUMB3008"];
+        //console.log('We will set career units to other units for the time being, since career data now is lacking')
+        //var careerUnits = ["BCCB2000","BIOL2001","BIOL3010","BIOL3011","GENE2001","GENE3000","GENE3002","MEDI2010", "MEDI3016", "HUMB3008"];
+        var careerUnits = careerResponseData.Item.Requirements;
+
+        console.log('printing career selected from page prio')
+        console.log(careerResponseData)
+
+        console.log('printing career units hopefully')
+        console.log(careerUnits)
 
         /* 
             (1) We attempt to find the best major.
@@ -373,6 +383,8 @@ export default function TopdownFilled2() {
                 This is because ANY valid study plan MUST contain a major
         */
         var bestMajor = findBestMajor(majorResponseData, careerUnits)
+        console.log('best major outside of function is: ')
+        console.log(bestMajor)
         //Update career units so we know what is remaining to be found
         updateCareerUnits(bestMajor, careerUnits)
         //Update units the student is taking (At this stage it will be the 8 common units + the 8 major units)

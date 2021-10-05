@@ -24,8 +24,7 @@ export interface PlanExplainProps extends DefaultProps {
 export interface CareerListSPAProps extends DefaultProps {
   careers: Array<Career>
 }
-
-export interface idkwhatimdoing extends DefaultProps { 
+export interface careerListTopdown extends DefaultProps { 
   careers: Array<Career>
   selectCareer: (c : Career) => void;
 }
