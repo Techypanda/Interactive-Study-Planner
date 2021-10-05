@@ -8,8 +8,6 @@ import PlannerInitialPage from './pages/PlannerInitialPage';
 import CoursePlanner from './pages/CoursePlanner';
 import InfoPageRouter from './pages/InfoPageRouter';
 import TopdownInitial from './pages/TopdownInitial';
-import TopdownFilled from './pages/TopdownFilled';
-import TopdownFilled2 from "./pages/TopdownFilled2";
 import {
   TransitionGroup
 } from "react-transition-group";
@@ -46,9 +44,6 @@ function Router(props: DefaultProps) {
             </Route>
             <Route exact path="/TopdownInitial">
               <TopdownInitial />
-            </Route>
-            <Route exact path="/TopdownFilled2">
-              <TopdownFilled2 />
             </Route>
             <Route exact path="/unitsfirst">
               <UnitsFirst />

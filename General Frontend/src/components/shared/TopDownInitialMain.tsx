@@ -11,6 +11,7 @@ import {
   careerListTopdown,
   Plan,
   Specialization,
+  Unit,
   UnitFirstSPAContextProps,
 } from "../../types";
 //import OptionCard from "../OptionCard";
@@ -219,6 +220,144 @@ export default function TopDownInitialMain(props: UnitFirstSPAContextProps) {
     return false;
   };
 
+  const findOptionalUnits = (
+    unitResp: any,
+    careerUnits: string[],
+    unitsIAmTaking: string[]
+  ) => {
+    const commonUnits = [
+      "MEDI1000",
+      "HUMB1000",
+      "BIOL1004",
+      "CHEM1007",
+      "INDH1006",
+      "EPID1000",
+      "HUMB1001",
+      "GENE1000",
+    ];
+    console.log("units i am taking beofre we begin");
+    console.log(unitsIAmTaking);
+    console.log("career units before we begin: ");
+    console.log(careerUnits);
+    var count = 0;
+    while (count < 3) {
+      for (var i = 0; i < unitResp.length; i++) {
+        if (careerUnits.includes(unitResp[i].UnitCode)) {
+          var validPaths = [];
+          var allIntersectionLen: number[] = [];
+          var allIntersectionIndex: number[] = [];
+          for (var j = 0; j < unitResp[i].Prerequistes.length; j++) {
+            var valid = true;
+            var unitExistInDb = 0;
+            for (var k = 0; k < unitResp[i].Prerequistes[j].length; k++) {
+              let isNum = /^\d+$/.test(unitResp[i].Prerequistes[j][k]);
+              if (isNum) {
+                valid = false;
+              }
+              for (var l = 0; l < unitResp.length; l++) {
+                if (unitResp[l].UnitCode == unitResp[i].Prerequistes[j][k]) {
+                  unitExistInDb++;
+                  for (var m = 0; m < unitsIAmTaking.length; m++) {
+                    if (unitResp[l].Antirequistes.includes(unitsIAmTaking[m])) {
+                      valid = false;
+                    }
+                  }
+                }
+              }
+              if (commonUnits.includes(unitResp[i].Prerequistes[j][k])) {
+                unitExistInDb++;
+              }
+            }
+            if (valid && unitExistInDb >= unitResp[i].Prerequistes[j].length) {
+              validPaths.push(unitResp[i].Prerequistes[j]);
+            }
+            valid = true;
+            unitExistInDb = 0;
+          }
+          //below is the list of valid paths for unitResp[i]
+          //now that we have the valid paths, we choose the best.
+          for (j = 0; j < validPaths.length; j++) {
+            let intersection = validPaths[j].filter((item: any) =>
+              unitsIAmTaking.includes(item)
+            );
+            allIntersectionIndex.push(j);
+            allIntersectionLen.push(intersection.length);
+          }
+          var currBestLen = -1;
+          var currBestIndex = -1;
+          for (j = 0; j < allIntersectionLen.length; j++) {
+            if (allIntersectionLen[j] > currBestLen) {
+              currBestLen = allIntersectionLen[j];
+              currBestIndex = allIntersectionIndex[j];
+            }
+          }
+          if (currBestLen == validPaths[currBestIndex].length) {
+            if (!careerUnits.includes(unitResp[i].UnitCode)) {
+              careerUnits.push(unitResp[i].UnitCode);
+            }
+            if (!unitsIAmTaking.includes(unitResp[i].UnitCode)) {
+              unitsIAmTaking.push(unitResp[i].UnitCode);
+            }
+          } else if (currBestLen == 0) {
+            var min = 0;
+            var max = validPaths.length;
+            var randNum = Math.floor(Math.random() * (max - min) + min);
+            for (j = 0; j < validPaths[randNum].length; j++) {
+              if (
+                !careerUnits.includes(validPaths[randNum][j]) &&
+                !commonUnits.includes(validPaths[randNum][j])
+              ) {
+                careerUnits.push(validPaths[randNum][j]);
+              }
+              if (!unitsIAmTaking.includes(validPaths[randNum][j])) {
+                unitsIAmTaking.push(validPaths[randNum][j]);
+              }
+            }
+          } else {
+            var notIntersection = validPaths[currBestIndex].filter(
+              (item: any) => !unitsIAmTaking.includes(item)
+            );
+            var intersection = validPaths[currBestIndex].filter((item: any) =>
+              unitsIAmTaking.includes(item)
+            );
+            console.log(notIntersection);
+            for (j = 0; j < notIntersection.length; j++) {
+              if (
+                !careerUnits.includes(notIntersection[j]) &&
+                !commonUnits.includes(notIntersection[j])
+              ) {
+                careerUnits.push(notIntersection[j]);
+              }
+              if (!unitsIAmTaking.includes(notIntersection[j])) {
+                unitsIAmTaking.push(notIntersection[j]);
+              }
+            }
+            for (j = 0; j < intersection.length; j++) {
+              if (
+                !careerUnits.includes(intersection[j]) &&
+                !commonUnits.includes(intersection[j])
+              ) {
+                careerUnits.push(intersection[j]);
+              }
+              if (!unitsIAmTaking.includes(intersection[j])) {
+                unitsIAmTaking.push(intersection[j]);
+              }
+            }
+          }
+          currBestIndex = -1;
+          currBestLen = -1;
+          allIntersectionIndex = [];
+          allIntersectionLen = [];
+          validPaths = [];
+        }
+      }
+      count++;
+    }
+    console.log('Career units inside find optionals:')
+    console.log(careerUnits)
+    return careerUnits;
+  };
+
   const doLogic = (careerId: string) => {
     //var bestMajor = findBestMajor()
     const careerResponseData = props.careers;
@@ -334,6 +473,35 @@ export default function TopDownInitialMain(props: UnitFirstSPAContextProps) {
           JSON.stringify(temp)
         );
         planFinished = true;
+      }
+    }
+
+    if (!planFinished) {
+      //call optional units and other stuff
+      var optionalUnits: String[] = [];
+      optionalUnits = findOptionalUnits(
+        unitResponseData,
+        careerUnits,
+        unitsIAmTaking
+      );
+      var optionalUnitsBottomUp: Unit[] = [];
+
+      //double check this works as expected =)
+      if (optionalUnits.length > 4) {
+        console.log("Show alert here to indicate failure");
+      } else {
+        for (var j = 0; j < unitResponseData.length; j++) {
+          if (optionalUnits.includes(unitResponseData[j].UnitCode)) {
+            optionalUnitsBottomUp.push(unitResponseData[j]);
+          }
+        }
+        temp.optionalUnits = optionalUnitsBottomUp;
+        localStorage.setItem(
+          `${
+            process.env.REACT_APP_DEVELOPMENT ? "dev-" : ""
+          }courseplanner-plan`,
+          JSON.stringify(temp)
+        );
       }
     }
   };
