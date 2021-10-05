@@ -7,6 +7,7 @@ Internal
 
 
 
+12
 UNIT
 HUMB1000
 Human Structure and Function
@@ -16,6 +17,7 @@ Fully Online,Internal
 
 
 1643
+12
 UNIT
 BIOL1004
 Foundations of Bioscience Practice
@@ -25,6 +27,7 @@ Internal
 
 
 
+1
 UNIT
 CHEM1007
 Fundamental Chemistry for Biosciences
@@ -34,6 +37,7 @@ Internal
 BIOL1004
 BIOL1004
 CHEM1001,CHEM1005
+1
 UNIT
 INDH1006
 Indigenous Cultures and Health Behaviours
@@ -43,6 +47,7 @@ Internal,Fully Online
 BIOL1004;CMHL1000;NURS1000;313026;313394
 
 INDH1000
+12
 UNIT
 EPID1000
 Foundations of Biostatistics and Epidemiology
@@ -52,6 +57,7 @@ Internal,Fully Online
 
 
 
+12
 UNIT
 HUMB1001
 Integrated Systems Anatomy and Physiology
@@ -61,6 +67,7 @@ Internal,Fully Online
 HUMB1000;313391;1643;303149;311022
 
 1644
+12
 UNIT
 GENE1000
 Molecular Genetics and Cell Biology
@@ -70,6 +77,7 @@ Internal
 MEDI1000
 
 
+2
 MAJOR
 MJRU-HUMBM
 Human Biomedicine
@@ -87,6 +95,7 @@ Internal
 HUMB1005;HUMB1002;HUMB1001;HUMB1004
 
 
+1
 UNIT
 HUMB2014
 Vital Physiology
@@ -96,6 +105,7 @@ Internal
 HUMB1001
 
 
+1
 UNIT
 HUMB2011
 Limb Anatomy and Biomechanics
@@ -105,6 +115,7 @@ Internal
 HUMB1005;HUMB1002;HUMB1001;HUMB1004
 
 
+2
 UNIT
 HUMB2012
 Physiological Processes
@@ -114,6 +125,7 @@ Internal
 HUMB1001
 
 
+2
 UNIT
 ECEV3004
 Human Evolution
@@ -123,6 +135,7 @@ Internal
 HUMB2002;HUMB2011;HUMB2013
 
 
+1
 UNIT
 HUMB2002
 Anatomy of the Limbs
@@ -132,6 +145,7 @@ Internal
 HUMB1002;HUMB1001;1644;313401;313399
 
 
+1
 UNIT
 HUMB3009
 Neuroanatomy
@@ -141,15 +155,17 @@ Internal
 HUMB1005;HUMB1002;HUMB1001;HUMB1004
 
 
+2
 UNIT
 BIOL3010
 Biosciences Research Project
 In this unit students will be provided with an introduction to research within the Biosciences. The unit will focus on the philosophy of science, research design, ethical conduct, critical analysis of the relevant scientific literature to develop a literature review, hypothesis and aims, data collection and analysis and reporting.
 25
 Internal
-EPID1000,HUMB3009
+HUMB3009;GENE3000
 
 
+2
 UNIT
 HUMB3003
 Neuroscience
@@ -159,10 +175,11 @@ Internal
 HUMB2000;HUMB3009;314236
 
 
+12
 MAJOR
 MJRU-MOLGN
 Molecular Genetics
-Molecular Genetics is a rapidly advancing and exciting discipline for the 21st century. In this major, students will learn about universal principles and new advances in genetics and genomics, and how these can be applied to improve health outcomes. Areas of study will include molecular biology, human genetic disease, bioinformatics and genetic engineering. Students will also be introduced to cutting-edge technology for molecular and genetic analyses. Through a combination of theoretical and practical laboratory training, students will acquire a thorough understanding of molecular genetics and also develop skills in critical thinking and scientific communication. This course will prepare students for a career or further study in the biomedical sciences. 
+Molecular Genetics is a rapidly advancing and exciting discipline for the 21st century. In this major, students will learn about universal principles and new advances in genetics and genomics, and how these can be applied to improve health outcomes. Areas of study will include molecular biology, human genetic disease, bioinformatics and genetic engineering. Students will also be introduced to cutting-edge technology for molecular and genetic analyses. Through a combination of theoretical and practical laboratory training, students will acquire a thorough understanding of molecular genetics and also develop skills in critical thinking and scientific communication. This course will prepare students for a career or further study in the biomedical sciences.
 200
 BCCB2000,MEDI2010,BIOL2001,GENE2001,GENE3000,GENE3002,BIOL3010,BIOL3011
 
@@ -176,6 +193,7 @@ Internal
 CHEM1001;CHEM1007;CHEM1003;CHEM1002
 
 
+1
 UNIT
 MEDI2010
 Molecular Cytogenetics and Diagnostics
@@ -185,15 +203,17 @@ Internal
 MEDI1000,HUMB1001
 
 
+1
 UNIT
 BIOL2001
 Introduction to Bioinformatics
 In this unit students will learn to source and interpret genetic and genomic data using online databases and specialist software.
 25
 Internal
-GENE2002,GENE1000
+GENE1000
 
 
+2
 UNIT
 GENE2001
 Population Genetics and Molecular Evolution
@@ -203,6 +223,7 @@ Internal
 GENE2000;GENE1000;311420;GENE2002;314000
 
 
+2
 UNIT
 GENE3000
 Genetic Engineering
@@ -212,6 +233,7 @@ Internal
 GENE2000;GENE1000;302488;311420
 
 
+1
 UNIT
 GENE3002
 Human Genetic Disease
@@ -221,6 +243,7 @@ Fully Online
 GENE1000
 
 
+1
 UNIT
 BIOL3011
 Protein Structure and Interactions
@@ -230,10 +253,11 @@ Internal
 BCCB2000,BIOL2001
 
 
+2
 MAJOR
 MJRU-PHCOL
 Pharmacology
-Pharmacology explores the effects of drugs on living organisms. An in-depth understanding of pharmacological principles is essential to the safe and effective application of medicines aimed to prevent or treat disease. It is the cornerstone for a career in drug discovery and development, and is highly complementary to those planning on a career in biomedical sciences. In this major, students will learn how drugs target specific receptors in tissues and explore the major biochemical pathways that are activated. Other topics include dose-response relationship, toxicity, drug metabolism and elimination, drug design and development, and how genetic variation between populations influences drug response. With the increased global challenge to develop new drugs against infectious agents, an emphasis is placed on the understanding of drug action against microorganisms. Theoretical knowledge is underpinned through computer-based simulations and hands-on laboratories covering molecular, cellular and physiological responses, and modern drug analysis techniques. 
+Pharmacology explores the effects of drugs on living organisms. An in-depth understanding of pharmacological principles is essential to the safe and effective application of medicines aimed to prevent or treat disease. It is the cornerstone for a career in drug discovery and development, and is highly complementary to those planning on a career in biomedical sciences. In this major, students will learn how drugs target specific receptors in tissues and explore the major biochemical pathways that are activated. Other topics include dose-response relationship, toxicity, drug metabolism and elimination, drug design and development, and how genetic variation between populations influences drug response. With the increased global challenge to develop new drugs against infectious agents, an emphasis is placed on the understanding of drug action against microorganisms. Theoretical knowledge is underpinned through computer-based simulations and hands-on laboratories covering molecular, cellular and physiological responses, and modern drug analysis techniques.
 200
 BCCB2000,PHRM2005,CHEM1006,PHRM2006,IMED3009,IMED3010,IMED3008,PHRM3005
 
@@ -247,6 +271,7 @@ Internal
 MEDI1000
 
 
+1
 UNIT
 CHEM1006
 Pharmaceutical Chemistry
@@ -256,6 +281,7 @@ Internal
 BCCB2000
 
 
+2
 UNIT
 PHRM2006
 Pharmacology Principles
@@ -265,15 +291,17 @@ Internal
 PHRM2005
 
 
+2
 UNIT
 IMED3009
 Pharmacology of Antimicrobial Agents
 This unit communicates the principles of antimicrobial action and treatment, its place in medicine, with considerations relevant to effective antimicrobial agent use and mechanisms of antimicrobial resistance. Students investigate mechanisms of action, spectrum, pharmacokinetics, adverse reactions and drug interactions of antimicrobial agents. The unit introduces students to the scope of antimicrobial chemotherapy and considers antimicrobial treatment to a range of local and globally relevant infections. Core unit concepts include classification of antibiotics, their drug action and principles of selective toxicity.
 25
 Fully Online
-PHRM2005,MEDI2009;PHRM2005,MICB2001;MEDI2000,MEDI2009;MEDI2000,MICB2001
+PHRM2005;PHRM2005;MEDI2000,MEDI2009;MEDI2000,MICB2001
 
 
+1
 UNIT
 IMED3010
 Systems Pharmacology
@@ -283,15 +311,17 @@ Fully Online
 PHRM2006
 
 
+1
 UNIT
 IMED3008
 Advanced Pharmacology
-In this unit students will compare and contrast the pharmacology of drugs acting on the autonomic nervous system (ANS), cardiovascular, renal, and central nervous system (CNS). This unit of learning will investigate drugs affecting lipoprotein metabolism, diuretics, vasodilators, calcium channel blockers and antithrombotics, including drugs affecting heart rhythm. Psychostimulants and drugs of abuse are also discussed, including drugs for Parkinson’s and other neurodegenerative disorders, epilepsy, and drugs used to treat behavioural disorders. The unit includes discussions on the chloride ion-GABA receptor complex, benzodiazepine receptor agonists and antagonists. Cancer progression will be investigated with the antineoplastic drugs currently used to treat cancers in multiple organ systems. Absorption, distribution, metabolism and excretion (ADME), mechanisms of action, adverse effects and detailed drug interaction potential including drugs covered in all previous pharmacology units will be examined.
+In this unit students will compare and contrast the pharmacology of drugs acting on the autonomic nervous system (ANS), cardiovascular, renal, and central nervous system (CNS). This unit of learning will investigate drugs affecting lipoprotein metabolism, diuretics, vasodilators, calcium channel blockers and antithrombotics, including drugs affecting heart rhythm. Psychostimulants and drugs of abuse are also discussed, including drugs for Parkinsonâ€™s and other neurodegenerative disorders, epilepsy, and drugs used to treat behavioural disorders. The unit includes discussions on the chloride ion-GABA receptor complex, benzodiazepine receptor agonists and antagonists. Cancer progression will be investigated with the antineoplastic drugs currently used to treat cancers in multiple organ systems. Absorption, distribution, metabolism and excretion (ADME), mechanisms of action, adverse effects and detailed drug interaction potential including drugs covered in all previous pharmacology units will be examined.
 25
 Internal
 IMED3010
 
 
+2
 UNIT
 PHRM3005
 Advanced Pharmacokinetics and Drug Bioanalysis
@@ -301,10 +331,11 @@ Internal
 CHEM1006,PHRM2006
 
 
+2
 SPECIALIZATION
 SPUC-HUMPT
 Human Pathology
-This specialisation will allow students to pursue their interest in biology of human health and disease and more broadly prepares them for a career in clinical health services. This specialisation consists of four pathology and physiology units such as Histopathology, Immunobiology, Clinical Pathophysiology and Neurophysiology, 
+This specialisation will allow students to pursue their interest in biology of human health and disease and more broadly prepares them for a career in clinical health services. This specialisation consists of four pathology and physiology units such as Histopathology, Immunobiology, Clinical Pathophysiology and Neurophysiology,
 100
 TRUE
 PATH2000,MEDI2000,MEDI3017,HUMB3008
@@ -320,6 +351,7 @@ Internal
 1644,313400;1644,7842;1644,MEDI1000;313399,313400;313399,7842;313399,MEDI1000;HUMB1001,313400;HUMB1001,7842;HUMB1001,MEDI1000
 
 
+1
 UNIT
 MEDI2000
 Foundations of Immunobiology
@@ -329,6 +361,7 @@ Internal
 MEDI1000,HUMB1001;MEDI1000,313399;MEDI1000,1644;7842,HUMB1001;7842,313399;7842,1644;313400,HUMB1001;313400,313399;313400,1644
 
 
+2
 UNIT
 MEDI3017
 Medical Pathophysiology
@@ -338,6 +371,7 @@ Internal
 HUMB2003,HUMB2014;HUMB2003,HUMB2004;HUMB2012,HUMB2014;HUMB2012,HUMB2004
 
 
+1
 UNIT
 HUMB3008
 Clinical Neurophysiology
@@ -347,10 +381,11 @@ Internal
 HUMB2014,HUMB2000;HUMB2014,HUMB3009;HUMB2004,HUMB2000;HUMB2004,HUMB3009
 
 
+2
 SPECIALIZATION
 SPUC-ICBIO
 Immunology and Cell Biology
-This specialisation will allow students to pursue their interest in immunology and cell biology. In this specialisation, students will explore cell biology concepts such as membrane transport, protein sorting and maturation, protein degradation, vesicle trafficking and fundamental concepts of cell signalling. Students will learn the structure and functions of the immune system, antibody structure and function, autoimmune diseases, viral and parasitic infectious diseases, and carcinomas. Students will explore current advances in immunology and cell biology concepts and techniques. 
+This specialisation will allow students to pursue their interest in immunology and cell biology. In this specialisation, students will explore cell biology concepts such as membrane transport, protein sorting and maturation, protein degradation, vesicle trafficking and fundamental concepts of cell signalling. Students will learn the structure and functions of the immune system, antibody structure and function, autoimmune diseases, viral and parasitic infectious diseases, and carcinomas. Students will explore current advances in immunology and cell biology concepts and techniques.
 100
 TRUE
 BCCB2004,MEDI2000,MEDI3016,BCCB3001
@@ -366,15 +401,17 @@ Internal
 GENE1000
 
 
+1
 UNIT
 MEDI3016
 Frontiers in Immunology
-In this unit students will explore fundamental concepts and current advances in immunology. This may include (but not be limited to) cancer immunotherapeutic strategies, how ageing impacts immune function, and vaccines. Practical work will involve designing and conducting immunology-based assays. Students will undertake a directed research component in order to apply fundamental knowledge to “real-life scenarios”.
+In this unit students will explore fundamental concepts and current advances in immunology. This may include (but not be limited to) cancer immunotherapeutic strategies, how ageing impacts immune function, and vaccines. Practical work will involve designing and conducting immunology-based assays. Students will undertake a directed research component in order to apply fundamental knowledge to â€œreal-life scenariosâ€.
 25
 Internal
 MEDI2000
 
 
+1
 UNIT
 BCCB3001
 Frontiers in Cell Biology
@@ -384,6 +421,7 @@ Internal
 BCCB2004
 
 
+2
 SPECIALIZATION
 SPUC-MICRO
 Microbiology
@@ -397,12 +435,13 @@ MEDI2009,MICB2001,MICB3000,MICB3002
 UNIT
 MEDI2009
 Investigations in Infectious Microbiology
-This unit studies microbiological cell structures and functions, and works on identifying and highlighting the virulent aspects of bacteria to understand how these factors can influence the pathogenesis of infectious disease. The dynamic interrelationship between a human host’s defense mechanisms  and how the immune system deals with pathogens, and how the pathogens deal with the host’s immune system is examined. The developing pathogenesis of an infectious disease is examined and understood by exploring clinically relevant case studies using bacteria and viruses in a laboratory setting. The clinical diagnostic cycle for describing, classifying and diagnosing microbial pathogens includes the collection of relevant human clinical specimens, laboratory processing of collected specimens, cultivation and taxonomic identification of pathogens and possible treatment avenues (antibiotic susceptibility testing). This unit also covers the important topic of antibiotic therapy as well as an introduction to epidemiology covering disease distribution, causality, monitoring disease of outbreaks and the control of infectious diseases within the framework of health.
+This unit studies microbiological cell structures and functions, and works on identifying and highlighting the virulent aspects of bacteria to understand how these factors can influence the pathogenesis of infectious disease. The dynamic interrelationship between a human hostâ€™s defense mechanisms  and how the immune system deals with pathogens, and how the pathogens deal with the hostâ€™s immune system is examined. The developing pathogenesis of an infectious disease is examined and understood by exploring clinically relevant case studies using bacteria and viruses in a laboratory setting. The clinical diagnostic cycle for describing, classifying and diagnosing microbial pathogens includes the collection of relevant human clinical specimens, laboratory processing of collected specimens, cultivation and taxonomic identification of pathogens and possible treatment avenues (antibiotic susceptibility testing). This unit also covers the important topic of antibiotic therapy as well as an introduction to epidemiology covering disease distribution, causality, monitoring disease of outbreaks and the control of infectious diseases within the framework of health.
 25
 Internal
 BCCB1000;MEDI1000
 
 
+1
 UNIT
 MICB2001
 Translational Microbiology
@@ -412,6 +451,7 @@ Internal
 MEDI1000
 
 
+2
 UNIT
 MICB3000
 Molecular Virology
@@ -421,6 +461,7 @@ Internal
 MEDI2003;MEDI2009;311405;302466
 
 
+1
 UNIT
 MICB3002
 Advances in Molecular Microbiology
@@ -430,6 +471,7 @@ Internal
 MEDI2003;MEDI2009
 
 
+2
 SPECIALIZATION
 SPUC-HUMGN
 Human Genetics and Genomics
@@ -469,6 +511,7 @@ Internal
 
 
 
+12
 UNIT
 GRDE2017
 Illustration Concepts and Processes
@@ -478,6 +521,7 @@ Internal
 GRDE1015;GRDE1002;310131
 
 
+12
 UNIT
 GRDE2031
 Digital Illustration Production
@@ -487,6 +531,7 @@ Internal
 
 
 
+12
 UNIT
 GRDE3018
 Illustration and Visual Development
@@ -496,6 +541,7 @@ Internal
 GRDE2019;GRDE2017;313306
 
 
+12
 SPECIALIZATION
 SPUC-ASIAN
 Asian Studies
@@ -515,6 +561,7 @@ Internal
 
 
 
+2
 UNIT
 ASIA3001
 Asian Century Issues and Perspectives
@@ -524,6 +571,7 @@ Internal
 
 
 
+1
 UNIT
 CHIN1000
 Beginning Chinese
@@ -533,6 +581,7 @@ Internal,Fully Online
 
 
 12321
+12
 UNIT
 JAPN1000
 Beginning Japanese
@@ -542,6 +591,7 @@ Internal,Fully Online
 
 
 11265
+12
 SPECIALIZATION
 SPUC-CHNSE
 Chinese Language
@@ -561,6 +611,7 @@ Internal,Fully Online
 
 
 12322
+2
 UNIT
 CHIN2001
 Pre-Intermediate Chinese
@@ -570,6 +621,7 @@ Internal
 
 
 
+1
 UNIT
 CHIN2002
 Pre-Intermediate Chinese Developing
@@ -579,6 +631,7 @@ Internal
 12309;CHIN2001
 
 12324
+2
 SPECIALIZATION
 SPUC-JAPAN
 Japanese Language
@@ -598,6 +651,7 @@ Internal
 
 
 
+1
 UNIT
 JAPN2002
 Intermediate Japanese: Extending Everyday Contexts
@@ -607,6 +661,7 @@ Internal
 
 
 
+2
 UNIT
 JAPN3000
 Intermediate Japanese
@@ -616,6 +671,7 @@ Internal
 
 
 
+12
 UNIT
 JAPN3001
 Intermediate Japanese Developing
@@ -625,6 +681,7 @@ Internal
 
 
 
+2
 SPECIALIZATION
 SPUC-CORPG
 Corporate Governance
@@ -644,6 +701,7 @@ Internal,Fully Online
 
 
 2844
+12
 UNIT
 BLAW2011
 Safety and Environmental Health Law
@@ -653,6 +711,7 @@ Internal,Fully Online
 
 
 
+1
 UNIT
 BLAW1006
 Introduction to Business Law
@@ -662,6 +721,7 @@ Internal,Fully Online
 
 
 
+2
 UNIT
 BLAW3004
 Business Intellectual Property
@@ -671,6 +731,7 @@ Internal,Fully Online
 BLAW2006;BLAW1006;BLAW1004
 
 
+1
 SPECIALIZATION
 SPUC-INENT
 Innovation and Entrepreneurship
@@ -684,12 +745,13 @@ MGMT3007,MGMT3004,MGMT2004,MGMT3002
 UNIT
 MGMT3007
 Management of Innovation
-This unit focuses on the management of innovation.  The fundamental ideas underlying this unit are that (1) innovation is the driving force in establishing a firm’s competitive advantage, (2) innovation is managed by leaders and teams with multiple competencies, and (3) a firm’s innovation strategy emerges from its competencies and capabilities. These fundamentals are then applied to new venture creation through first hand interaction with innovative entrepreneurs developing new innovations and technologies from the business community as well as university developed inventions with intent to commercialise their Intellectual Property. This allows the real world of the innovative entrepreneur to reinforce and sometimes challenge accepted theories of innovation and entrepreneurship.
+This unit focuses on the management of innovation.  The fundamental ideas underlying this unit are that (1) innovation is the driving force in establishing a firmâ€™s competitive advantage, (2) innovation is managed by leaders and teams with multiple competencies, and (3) a firmâ€™s innovation strategy emerges from its competencies and capabilities. These fundamentals are then applied to new venture creation through first hand interaction with innovative entrepreneurs developing new innovations and technologies from the business community as well as university developed inventions with intent to commercialise their Intellectual Property. This allows the real world of the innovative entrepreneur to reinforce and sometimes challenge accepted theories of innovation and entrepreneurship.
 25
 Internal
 
 
 
+1
 UNIT
 MGMT3004
 Entrepreneurship
@@ -699,15 +761,17 @@ Internal
 
 
 
+12
 UNIT
 MGMT2004
 Business and Sustainable Development
-This is an introduction to contemporary environmental issues relevant to managers of today’s and tomorrow’s business organisations. It surveys current environmental problems, resultant business responsibilities and possible responses. The unit sheds light on the interdependencies that exist between the economy, society and nature, highlighting ecological needs and realities and comparing those to the needs of communities, business operators, governments and business stakeholders. You will be shown how to identify and understand environmental problems and to develop an understanding of the roles of, and opportunities for, business within the context of growing environmental constraints.
+This is an introduction to contemporary environmental issues relevant to managers of todayâ€™s and tomorrowâ€™s business organisations. It surveys current environmental problems, resultant business responsibilities and possible responses. The unit sheds light on the interdependencies that exist between the economy, society and nature, highlighting ecological needs and realities and comparing those to the needs of communities, business operators, governments and business stakeholders. You will be shown how to identify and understand environmental problems and to develop an understanding of the roles of, and opportunities for, business within the context of growing environmental constraints.
 25
 Internal,Fully Online
 
 
 
+12
 UNIT
 MGMT3002
 Managing Change
@@ -717,6 +781,7 @@ Internal,Fully Online
 
 
 
+12
 SPECIALIZATION
 SPUC-SMBUS
 Small Business Start-Up
@@ -736,6 +801,7 @@ Internal
 
 
 
+2
 UNIT
 MGMT2001
 Start-Up Business Planning
@@ -745,6 +811,7 @@ Internal
 
 
 
+12
 SPECIALIZATION
 SPUC-ADVRT
 The Business of Advertising
@@ -764,6 +831,7 @@ Internal,Fully Online
 
 
 
+12
 UNIT
 MKTG2001
 Brand Management
@@ -773,6 +841,7 @@ Internal
 
 
 
+12
 UNIT
 MKTG3002
 Account Management
@@ -782,6 +851,7 @@ Internal
 11016;MKTG2000
 
 
+12
 UNIT
 MKTG2006
 Managing Social Media Platforms
@@ -791,6 +861,7 @@ Internal,Fully Online
 
 
 
+12
 SPECIALIZATION
 SPUC-MRKTG
 Marketing Foundations
@@ -810,6 +881,7 @@ Fully Online,Internal
 
 
 
+12
 UNIT
 MKTG2004
 Consumer Behaviour
@@ -819,6 +891,7 @@ Fully Online,Internal
 
 
 
+12
 UNIT
 MKTG3003
 Digital Marketing Strategy
@@ -828,6 +901,7 @@ Fully Online,Internal
 
 
 
+12
 UNIT
 MKTG1000
 Discovering Marketing
@@ -837,6 +911,7 @@ Internal,Fully Online
 
 
 
+12
 SPECIALIZATION
 SPUC-JOURL
 Journalism
@@ -856,6 +931,7 @@ Internal
 
 
 JOUR5013
+12
 UNIT
 JOUR2000
 Radio News
@@ -865,6 +941,7 @@ Internal
 JOUR1001;1564
 
 JOUR5002
+1
 UNIT
 JOUR2002
 Video News
@@ -874,15 +951,17 @@ Internal
 JOUR1001;1564
 
 JOUR5005
+12
 UNIT
 JOUR2003
 News Writing and Reporting
-An introduction to news writing and reporting for publication, whereby students develop news gathering, writing and research skills and an awareness of different styles and genres within print and online journalism.  Students learn how to generate ideas, undertake research, conduct interviews and write in news style to tight deadlines.  The highly practical nature of the unit provides students the opportunity to experience work-integrated learning through acting as reporters for the Department of Journalism’s online publication.
+An introduction to news writing and reporting for publication, whereby students develop news gathering, writing and research skills and an awareness of different styles and genres within print and online journalism.  Students learn how to generate ideas, undertake research, conduct interviews and write in news style to tight deadlines.  The highly practical nature of the unit provides students the opportunity to experience work-integrated learning through acting as reporters for the Department of Journalismâ€™s online publication.
 25
 Internal
 JOUR1001
 
 JOUR5003
+2
 SPECIALIZATION
 SPUC-PRWRI
 Professional Writing
@@ -902,6 +981,7 @@ Internal
 
 
 PWRP5021
+1
 UNIT
 PWRP1003
 Writing, Rhetoric and Persuasion
@@ -911,15 +991,17 @@ Internal
 
 
 PWRP5022
+2
 UNIT
 PWRP2001
 Writing, Editing and Publishing
-This unit provides a practical introduction to editing. Students learn about the editor’s role and profession, the publishing process, and editorial project management; and they learn and practice the skills needed for professional proofreading and copyediting, including language skills, on the page and the screen. Student learning is graduated through a series of successively higher-level editing tasks, which students practice thoroughly in workshops, and are assessed in before moving to a higher level.
+This unit provides a practical introduction to editing. Students learn about the editorâ€™s role and profession, the publishing process, and editorial project management; and they learn and practice the skills needed for professional proofreading and copyediting, including language skills, on the page and the screen. Student learning is graduated through a series of successively higher-level editing tasks, which students practice thoroughly in workshops, and are assessed in before moving to a higher level.
 25
 Internal
 
 
 PWRP5003
+1
 UNIT
 PWRP2000
 Tricks of Truth and Authenticity
@@ -929,6 +1011,7 @@ Internal
 
 
 PWRP5001
+2
 SPECIALIZATION
 SPUC-HLTDA
 Health Data
@@ -948,6 +1031,7 @@ Fully Online,Internal
 
 
 
+1
 UNIT
 SPAT1007
 Fundamentals of Geographic Information Systems
@@ -957,6 +1041,7 @@ Fully Online,Internal
 
 
 SPAT5006,SPAT2011
+1
 UNIT
 PUBH2006
 Privacy and Cyber Security: Health Data Governance
@@ -966,6 +1051,7 @@ Internal,Fully Online
 
 
 
+1
 UNIT
 PUBH3006
 Introduction to Artificial Intelligence, Machine Learning and Health
@@ -975,6 +1061,7 @@ Internal
 PUBH2005
 
 
+2
 UNIT
 FORS1005
 Foundations of Forensic Science
@@ -984,6 +1071,7 @@ Internal
 
 
 
+1
 UNIT
 PSYC1000
 Introduction to Psychology
@@ -993,6 +1081,7 @@ Internal,Fully Online
 
 
 
+12
 UNIT
 CHEM1006
 Pharmaceutical Chemistry
@@ -1002,6 +1091,7 @@ Internal
 BCCB2000
 
 
+2
 UNIT
 PHAR2000
 Foundations of Pharmaceutics
@@ -1011,6 +1101,7 @@ Internal
 CHEM1006
 
 
+1
 UNIT
 PHAR2001
 Pharmaceutical Formulation
@@ -1020,6 +1111,7 @@ Internal
 PHAR2000;310384
 
 
+2
 UNIT
 PUBH1001
 Introduction to Health, Safety and Environment
@@ -1029,6 +1121,7 @@ Internal,Fully Online
 
 
 
+1
 UNIT
 STAT1003
 Introduction to Data Science
@@ -1038,6 +1131,7 @@ Internal
 
 
 
+1
 UNIT
 ISEC2001
 Fundamental Concepts of Data Security
@@ -1047,6 +1141,7 @@ Internal
 
 
 
+1
 UNIT
 COMP1005
 Fundamentals of Programming
@@ -1056,3 +1151,54 @@ Internal
 
 
 COMP1001;COMP1007;COMP5005
+12
+UNIT
+BIOL2004
+Research Skills for Biomedical Sciences
+In this unit, students will continue their journey to becoming biomedical science researchers gaining introductory skills and practical experience enabling them to understand how to apply research methods to evaluate the body of evidence in biomedicine. The unit will commence with an introduction to scientific methods, where practical experience in the development of research questions, research ethics, regulatory consideration, and risk management will be undertaken. This will be complemented by further development of skills in scientific reading and writing, where students will learn how to identify and critically review literature and write scientifically for disparate audience. The art of critical thinking, data analysis and presentation skills will also be introduced.  Students will be exposed to authentic research activities and will begin to develop leadership and entrepreneurial skills.
+25
+Internal,Online
+
+
+
+12
+UNIT
+BIOL3009
+Advanced Molecular Techniques
+This unit addresses the principles and applications of emerging and best-practice advanced biomolecular techniques.  In a series of case-studies involving both hands-on and theoretical involvement, students will learn the appropriate utilisation of methods for studying cells and molecules. This will include, but not be limited to methods used in: tissue culture and cell based assays; protein expression; and genetic analyses and genetic manipulation.
+25
+Internal
+GENE3000
+
+
+1
+UNIT
+BIOL3008
+Advanced Bioinformatics
+In this unit, students will use the command line to undertake the analysis of sequence data and then derive biological inference and interpretation from those data, using diverse programs and scripting.  Topics include sequence quality control, mapping, variant calling, differential expression and visualisation; as applied to the whole genome, the epigenome and the transcriptome.  The rapid and large-scale acquisition of data renders bioinformatics an essential skill for modern Biologists.
+25
+Online
+BIOL2001
+
+
+12
+UNIT
+MEDS3005
+Human Reproductive Science
+This unit will explore human reproductive anatomy, physiology and histology. Students will be introduced to modern contraceptive methods, pregnancy and early human development, birth and lactation, and reproductive pathologies. Assisted reproductive technology (ART) and its associated ethics, will be explored in detail, with an industry site visit. Students will be required to research and communicate their findings on a contemporary topic in human reproductive health.
+25
+Internal
+HUMB1001;HUMB2001,BCCB2000,HUMB2003,HUMB2012,HUMB2013
+
+
+2
+UNIT
+HUMB2000
+Anatomy and Neuroscience
+Gross organisation of the human brain in relation to its embryological development; Function anatomy of the musculoskeletal structures, viscera and nerves of the cranium; Investigation of the neural systems that serve the senses and command voluntary movement; How changes to the internal and external environment influences the brain; Exploration of the neurobiology of human behaviour. HUMB2000 Anatomy and Neuroscience integrates the role of structures of the head with human development and survival. Neurovascular and musculoskeletal components of the head are explored, with reference to the functional control mechanisms.
+25
+Internal
+7689,313399;7689,1644;7689,HUMB1001;HUMB2002,313399;HUMB2002,1644;HUMB2002,HUMB1001
+
+
+2

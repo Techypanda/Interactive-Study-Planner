@@ -1,16 +1,9 @@
 import { useEffect, useState } from 'react';
-import { BrowserRouter as Router } from "react-router-dom";
-import { Box, Button, Container,Grid, Typography, Card, CardHeader, CardContent, TextField} from "@material-ui/core";
+import { Box, Button, Container,Typography, Card, CardContent, TextField} from "@material-ui/core";
 import { useHistory } from "react-router-dom";
-import { useQuery, useQueryClient } from "react-query";
-import styled from "styled-components";
-import axios, { AxiosError, AxiosResponse } from "axios";
-import {BrowserRouter, Switch, Route} from "react-router-dom";
-
-import Navbar from "../components/shared/Navbar";
-import { CareerProps, DefaultProps } from "../types";
-import { createStyles, makeStyles, Theme , useTheme} from '@material-ui/core/styles';
-import "../App.scss";
+import axios from "axios";
+import { DefaultProps } from "../types";
+import { createStyles, makeStyles, Theme} from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -41,10 +34,6 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-// called on loading of this component
-// makes call to the careers API to get all careers so they can be rendered
-// props param is questionable atm but it's purpose is to take the form of the retrieved career
-// data which will be available to retreive once the CORS is figured out 
 function ViewAllCareers(props: DefaultProps) {
     const history = useHistory();
     const classes = useStyles();
@@ -55,7 +44,6 @@ function ViewAllCareers(props: DefaultProps) {
 	const getCareersData = () => {
 		axios.get("https://q02l9qoni6.execute-api.ap-southeast-2.amazonaws.com/Prod/events/event-get-all-careers")
 				.then((response) => {
-					console.log(response.data);
 					setCareersData(response.data);
 				})
 	}
@@ -65,7 +53,6 @@ function ViewAllCareers(props: DefaultProps) {
 
     return (
 	<>
-	    <Navbar />
 		<br>
 		</br>
 	    <Container  >
@@ -96,10 +83,13 @@ function ViewAllCareers(props: DefaultProps) {
 				</Card>
 				</div>
 			))}
+			<br>
+			</br>
+			<Button variant="contained" onClick={() => history.goBack()}>Back</Button>
+			<br>
+			</br>
 	    </Container>
 	    <br/>
-	    
-	    <Button variant="contained" onClick={() => history.goBack()}>Back</Button>
 	</>
     );
 }

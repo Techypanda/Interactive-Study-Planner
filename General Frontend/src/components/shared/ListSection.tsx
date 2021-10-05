@@ -3,7 +3,6 @@ import { ListDataProps }  from "../../types";
 import styled from "styled-components";
 import BulletPointIcon from "./BulletPointIcon";
 
-
 /*
  * Author: Matthew Loe
  * Student Id: 19452425

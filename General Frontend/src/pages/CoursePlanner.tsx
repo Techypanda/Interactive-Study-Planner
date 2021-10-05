@@ -1,17 +1,13 @@
 import EmptyCurrentPlan from "../components/shared/EmptyCurrentPlan";
-import LoadingScreen from "../components/shared/Loading";
-import Navbar from "../components/shared/Navbar";
 import PlansAvailable from "../components/shared/PlansAvailable";
-import { DefaultProps } from "../types";
 import Error from "../components/shared/Error";
 import { Typography, List, ListItem, ListItemText, ListItemSecondaryAction, ListSubheader, Grid } from "@material-ui/core";
 import BookOutlined from '@material-ui/icons/BookOutlined';
 import IconButton from '@material-ui/core/IconButton';
-import { useQuery, useMutation } from "react-query";
-import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
 /* import { UnitProps } from '../types'; */
 import { makeStyles } from '@material-ui/core/styles';
-import axios, { AxiosResponse, AxiosError } from "axios";
+import axios, { AxiosResponse } from "axios";
 import { useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 
@@ -91,7 +87,6 @@ function CoursePlanner() {
 
     return (
 	<>
-	    <Navbar/>
 	    <DragDropContext
 		onDragUpdate={OnDragUpdate}
 		onDragEnd={OnDragEnd}>

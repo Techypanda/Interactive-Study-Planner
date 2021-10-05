@@ -1,15 +1,9 @@
 import { useEffect, useState } from 'react';
-import { BrowserRouter as Router } from "react-router-dom";
-import { Box, Button, Container,Grid, Typography, Card, CardHeader, CardContent, TextField} from "@material-ui/core";
+import { Box, Button, Container,Typography, Card, CardContent, TextField} from "@material-ui/core";
 import { useHistory } from "react-router-dom";
-import styled from "styled-components";
-import axios, { AxiosError, AxiosResponse } from "axios";
-import {BrowserRouter, Switch, Route} from "react-router-dom";
-
-import Navbar from "../components/shared/Navbar";
-import { CareerProps, DefaultProps } from "../types";
-import { createStyles, makeStyles, Theme , useTheme} from '@material-ui/core/styles';
-import "../App.scss";
+import axios from "axios";
+import { DefaultProps } from "../types";
+import { createStyles, makeStyles, Theme} from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -50,7 +44,6 @@ function ViewAllUnits(props: DefaultProps) {
     const GetAllUnits = () => {
 	axios.get("https://ilur318q9c.execute-api.ap-southeast-2.amazonaws.com/Prod/getallunits/")
 	.then((response) => {
-	    console.log(response.data);
 	    set_units_list(response.data);
 	});
     }
@@ -60,19 +53,23 @@ function ViewAllUnits(props: DefaultProps) {
 
     return (
 	<>
-	    <Navbar/>
+		<br>
+		</br>
 	    <Container  >
 		<Box id="searchcontainer" display="flex">
-		    <TextField variant="outlined" id="standard-full-width" fullWidth  placeholder="Search units..." className="searchbar" />
-		    <Button variant='contained' className="searchbtn">Search</Button>
+			<Button className="backButton" variant="contained" onClick={() => history.goBack()} >
+				Back
+			</Button>
+		    <TextField style={{padding: '0 10px'}} variant="outlined" id="standard-full-width" fullWidth  placeholder="Search careers..." className="searchbar" />
+			<Button variant='contained' className="searchbtn">Search</Button>
 		</Box>
 		<br/>
 		{units_list.map((x) => (
-		    <div className="card-body">
+		    <div className="unit-option">
 			<Card variant="outlined" className={classes.root}>
 			    <div className={classes.details}>
-				<CardContent className={classes.content}>
-				    <Typography component="h5" variant="h5" align="left">
+				<CardContent onClick={() => history.push(`/InfoPage/ViewUnit/${x.UnitCode}`)} className={classes.content}>
+				    <Typography className='values' component="h5" variant="h5" align="left">
 					{x.Name}
 				    </Typography>
 				    <Typography variant="subtitle1" color="textSecondary">
@@ -85,9 +82,14 @@ function ViewAllUnits(props: DefaultProps) {
 			</Card>
 		    </div>
 		    ))}
-	    </Container>
+			<br>
+			</br>
+			<Button variant="contained" onClick={() => history.goBack()}>Back</Button>
+			<br>
+			</br>
+		</Container>
 	    <br/>
-	    <Button variant="contained" onClick={() => history.goBack()}>Back</Button>
+
 	</>
     );
 }

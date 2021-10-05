@@ -1,27 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { CardContent , Grid, CardActions, ListSubheader, AppBar, Toolbar, Typography, Box, List, CardHeader, Avatar, Card, CardMedia, Switch, Checkbox } from '@material-ui/core';
-import { DefaultProps } from '../../types';
-import { borders, positions } from '@material-ui/system';
-import styled from 'styled-components';
-import { useState } from 'react';
+/*import { Grid, Typography } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import { red } from '@material-ui/core/colors';
-import IconButton from '@material-ui/core/IconButton';
-import ClearIcon from '@material-ui/icons/Clear';
-import BookOutlined from '@material-ui/icons/BookOutlined';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
-import { CheckBox } from '@material-ui/icons';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
-import WifiIcon from '@material-ui/icons/Wifi'
-import ListItemText from '@material-ui/core/ListItemText';
-import CommentIcon from '@material-ui/icons/Comment';
-import React from 'react';
-import CareerUnitInfoCard from './CareerUnitInfoCard'
 import TestCareerUnitInfoCard from './TestCareerUnitInfoCard';
 
 
@@ -39,17 +19,9 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 
-    //DevCareer 1y22 i.e., left card requires:
-        //ECEV3004, HUMB3009, BIOL3010, HUMB3003
-    //Guessed best match is MJRU-HUMBM, requires:
-        //BIOL3010, ECEV3004, HUMB2011, HUMB2012, HUMB2013, HUMB2014, HUMB3003, HUMB3009
-    //Since closest match was MJRU-HUMBM
-        //By selecting dev career 1y22, we are left with:
-        //HUMB2012, HUMB2013, HUMB2014, HUMB3009
 export default function TopDownInitialMain() { 
     const classes = useStyles();
     const history = useHistory();
-    return (
         <>
             <Typography variant='h3' align='center'>
                 Please Select A Career You Are Interested In
@@ -77,4 +49,79 @@ export default function TopDownInitialMain() {
 
         </>
     )
+    )
+}*/
+import { Box, Button, Typography } from "@material-ui/core";
+import { NavigateBefore, NavigateNext } from "@material-ui/icons";
+import { useState } from "react";
+import { useHistory } from "react-router";
+import styled from "styled-components";
+import { idkwhatimdoing} from "../../types";
+//import OptionCard from "../OptionCard";
+import OptionCard from "../UnitsFirst/OptionCard";
+
+// Viewport height - element.offset.top - desired bottom margin
+//function Initial(props: InitialCareerSPAProps) {
+export default function TopDownInitialMain(props: idkwhatimdoing) {
+  const history = useHistory();
+  const [currentSelection, setCurrentSelection] = useState(0);
+  const navPrevious = () => {
+    const prevIDX = currentSelection - 1 < 0 ? props.careers.length - 1 : currentSelection - 1;
+    setCurrentSelection(prevIDX);
+  }
+  const navNext = () => {
+    const nextIDX = currentSelection + 1 >= props.careers.length ? 0 : currentSelection + 1;
+    setCurrentSelection(nextIDX);
+  }
+  const selectMajor = () => {
+    const careerToPass = props.careers[currentSelection].CareerId;
+    localStorage.setItem('careerSelect', careerToPass)
+    history.push('/TopdownFilled2')
+  }
+  return (
+    <Box className={props.className} minHeight="100%" minWidth="100%" display="flex" alignItems="center" justifyContent="center">
+      <Box pt={2}>
+        <Typography variant="h4">Please Select Your First Major</Typography>
+        <Box display="flex" justifyContent="center" mt={8}> {/* TODO: Make these slide around like pokemon starter selector */}
+          {props.careers.length >= 3 &&
+            <OptionCard
+              className="inner card-outer-left"
+              style={{ transform: "translate(50px, -50px)" }}
+              title="3"
+              description="First couple words of career desc?"
+              type="Career"
+            />
+          }
+          <OptionCard
+            className="inner card-center"
+            title={props.careers[currentSelection].Name}
+            description={props.careers[currentSelection].Description}
+            type="Career"
+            onClick={() => selectMajor()}
+          />
+          {props.careers.length >= 2 &&
+            <OptionCard
+              className="inner card-outer-right"
+              style={{ transform: "translate(-50px, -50px)" }}
+              title="I'm a really cool blurred 2nd major"
+              description="First couple words of career desc?"
+              type="Career"
+            />
+          }
+        </Box>
+        <Box display="flex" justifyContent="center" mt={2}>
+          <Button variant="contained" color="primary" onClick={() => selectMajor()}>Select</Button>
+        </Box>
+        <Box display="flex" alignItems="center" justifyContent="center" mt={4}>
+          <Box mr={2}>
+            <NavigateBefore className="navigationIcon" onClick={() => navPrevious()} />
+          </Box>
+          {props.careers.map((_, idx) => <Box mx={1} key={idx} className={`navIndicator ${idx === currentSelection ? 'activewoopog' : ''}`} display="inline-block" height={15} width={15} borderRadius="100%" />)}
+          <Box ml={2}>
+            <NavigateNext className="navigationIcon" onClick={() => navNext()} />
+          </Box>
+        </Box>
+      </Box>
+    </Box>
+  )
 }

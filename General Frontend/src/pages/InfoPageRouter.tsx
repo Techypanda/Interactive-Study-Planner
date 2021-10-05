@@ -1,47 +1,45 @@
-import {useHistory, Switch, Route} from "react-router-dom";
+import { useHistory, Switch, Route } from "react-router-dom";
 import ViewCareer from "../components/shared/ViewCareer";
 import ViewMajor from "../components/shared/ViewMajor";
 import ViewSpecialization from "../components/shared/ViewSpecialization";
-import ViewUnit from "../components/shared/ViewUnit";
+import UnitInformationPage from "../components/shared/UnitInformationPage";
 
-import { Fade, Button } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 
 /*
  * Author: Matthew Loe
  * Student Id: 19452425
- * Date Last Modified: 11/09/2021
+ * Date Last Modified: 30/09/2021
  * Description: Routing page for information pages
  */
 //Notes - remove button, test function, test route and usehistory after testing concluded or comment out
 
 //Information page router
-function InfoPageRouter()
-{
-    return(
-        <Fade in={true} timeout={2000}>
-            <Switch>
-                <Route exact path="/InfoPage/Test">
-                    <Test/>
-                </Route>
-                <Route exact path="/InfoPage/ViewCareer/:id">
-                    <ViewCareer/>
-                </Route>
-                <Route exact path="/InfoPage/ViewMajor/:id">
-                    <ViewMajor/>
-                </Route>
-                <Route exact path="/InfoPage/ViewSpecialization/:id">
-                    <ViewSpecialization/>
-                </Route>
-                <Route exact path="/InfoPage/ViewUnit/:id">
-                    <ViewUnit/>
-                </Route>
-            </Switch>
-        </Fade>  
+function InfoPageRouter() {
+    return (
+        <Switch>
+            <Route exact path="/InfoPage/ViewCareer/:id">
+                <ViewCareer />
+            </Route>
+            <Route exact path="/InfoPage/ViewMajor/:id">
+                <ViewMajor />
+            </Route>
+            <Route exact path="/InfoPage/ViewSpecialization/:id">
+                <ViewSpecialization />
+            </Route>
+            <Route exact path="/InfoPage/ViewUnit/:id">
+                <UnitInformationPage />
+            </Route>
+        </Switch>
     );
 }
 
-function Test()
-{
+/*
+<Route exact path="/InfoPage/Test">
+    <Test />
+</Route>
+
+function Test() {
     const history = useHistory();
     return (
         <div>
@@ -54,6 +52,6 @@ function Test()
             </Button>
         </div>
     )
-}
+}*/
 
 export default InfoPageRouter;

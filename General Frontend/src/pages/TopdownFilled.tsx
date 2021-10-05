@@ -1,16 +1,16 @@
 import { makeStyles } from '@material-ui/core/styles';
-import Navbar from "../components/shared/Navbar";
+//import Navbar from "../components/shared/Navbar";
 import React, {useState } from 'react';
-import { Grid } from '@material-ui/core';
-import CurrentPlan from "../components/shared/CurrentPlan"
-import TopDownFilledMain from '../components/shared/TopDownFilledMain';
-import AvailableCareersList from '../components/shared/AvailableCareersList';
-import { MajorProps } from "../types";
-import LoadingScreen from '../components/shared/Loading';
+//import { Grid } from '@material-ui/core';
+//import CurrentPlan from "../components/shared/CurrentPlan"
+//import TopDownFilledMain from '../components/shared/TopDownFilledMain';
+//import AvailableCareersList from '../components/shared/AvailableCareersList';
+import { Career, CareerProps, MajorProps, Plan, Specialization, Unit, UnitFirstSPAContextProps } from "../types";
+//import LoadingScreen from '../components/shared/Loading';
 import Error from '../components/shared/Error';
 
 import { useHistory } from 'react-router-dom';
-import { useCareers, useMajors, useUnits, useSpecializations } from '../components/shared/hooks'
+import { useCareers, useMajors, useUnits, useSpecializations, useCareer } from '../api/hooks'
 import { Box } from '@material-ui/core'
 import { BounceLoader } from 'react-spinners'
 import UnitsFirstSPAContext from '../components/UnitsFirst/UnitsFirstSPAContext'
@@ -63,28 +63,60 @@ function areRemainingMatched(bestMajor : any, careerUnits : string[]) {
 
 function getPreReqs(unitResp : any, careerUnits : string[], allUnits : string[]) { 
     console.log('inside get pre reqs')
+    const optionalUnits : Unit[] = [];
     var currBestMaxLen = -1;
     var currBestIndex = -1;
+    var allIntersectionLen : number[] = [];
+    var allIntersectionIndex : number[] = [];
+    console.log(unitResp.includes('HUMB2014'))
+var totalIter = 0;
+while(totalIter < 3) {
     for(var i =0; i < unitResp.length; i++) { 
         if(careerUnits.includes(unitResp[i].UnitCode)) { 
             console.log(i)
             console.log('match for ' + unitResp[i].UnitCode)
             for(var j = 0; j < unitResp[i].Prerequistes.length; j++) { 
                 let intersection = unitResp[i].Prerequistes[j].filter((item : any) => allUnits.includes((item)))
-                console.log(intersection.length)
-                if(intersection.length > currBestMaxLen) { 
-                    currBestMaxLen = intersection.length
-                    currBestIndex = j;
-                }
-                //highest value here would be the 'closest' match
-                //if highest == pre req len, we found a perfect match, so just add the career unit into all unit
-                //if it equals 0, then we found no matches at all, pick a random pre req
-                //otherwise, we got a partial match
-                    //if highest = 0, we have no matches for any pre reqs
-                        //choose a random set of pre reqs i guess
-                    //if highest = 1, we pick the unit NOT in the intersection, add it to the list AND the unit
-                    //if highest == unitResp.prereq.length, we have a perfect match, we just add it to the list
+                allIntersectionLen.push(intersection.length)
+                allIntersectionIndex.push(j)
             }
+            for(j = 0; j < allIntersectionLen.length; j++) { 
+                if(allIntersectionLen[j] > currBestMaxLen) { 
+                    currBestMaxLen = allIntersectionLen[j]
+                    currBestIndex = allIntersectionIndex[j];
+                }
+            }
+            var isInDb = false;
+            var matchCount = 0;
+            while(!isInDb){
+                for(j = 0; j < unitResp[i].Prerequistes[currBestIndex].length; j++) { 
+                    for(var k = 0; k < unitResp.length; k++) { 
+                        if(unitResp[k].UnitCode == unitResp[i].Prerequistes[currBestIndex][j]) { 
+                            matchCount++;
+                        }
+                    }
+                }
+                //maybe move this up a loop? I am not sure :monocle: 
+                if(matchCount == unitResp[i].Prerequistes[currBestIndex].length) { 
+                    console.log('All pre reqs exist in db. continue')
+                    isInDb = true;
+                } else  {
+                    console.log('Find a new set of pre reqs bud')
+                    currBestMaxLen = -1;
+                    var oldBestIndex = currBestIndex
+                    matchCount = 0;
+                    for(j = 0; j < allIntersectionLen.length; j++) { 
+                        if(allIntersectionLen[j] > currBestMaxLen && allIntersectionIndex[j] != oldBestIndex) { 
+                            currBestMaxLen = allIntersectionLen[j]
+                            currBestIndex = allIntersectionIndex[j]
+                        }
+                    }
+                }
+            }
+            console.log('passed getting best intersection len')
+            //if(allIntersect)
+            
+            console.log('curr best index = ' + currBestIndex)
             if(currBestMaxLen == unitResp[i].Prerequistes[currBestIndex].length) { 
                 //This means we have a perfect match for the pre requisites already
                 console.log('perfect match?')
@@ -92,6 +124,9 @@ function getPreReqs(unitResp : any, careerUnits : string[], allUnits : string[])
                 //add careerUnit into allUnit
                 if(!(allUnits.includes(unitResp[i].UnitCode))) { //make sure we don't add duplicates
                     allUnits.push(unitResp[i].UnitCode)
+                }
+                if(!(careerUnits.includes(unitResp[i].UnitCode))) { 
+                    careerUnits.push(unitResp[i].UnitCode)
                 }
                 //break;
             }
@@ -131,25 +166,64 @@ function getPreReqs(unitResp : any, careerUnits : string[], allUnits : string[])
                 //this means we had a partial match for at least ONE of the pre reqs (in the scenario it's units with OR)
                 let notIntersection = unitResp[i].Prerequistes[currBestIndex].filter((item : any) => !allUnits.includes((item)))
 
-                console.log('We have a partial match from ith unit, currBestIndexth pre req. add what is missing to allUnits, which is')
-                console.log(notIntersection)
-                console.log(unitResp[i].Prerequistes[currBestIndex])
+                console.log('Partial match for: ' + unitResp[i].UnitCode)
+                console.log('We are missing ' + notIntersection)
+                //console.log(unitResp[i].Prerequistes[currBestIndex])
                 console.log('and then add the career unit in')
+                console.log('This is for ' + unitResp[i].UnitCode)
+                //while not fin
+                    //if we can't find it in db
+                    //repeat with next best maxCurrIndex
+                    //if we can
+                    //fin = true
                 for(j = 0; j < notIntersection.length; j++) {  //in case units require > 2 units with ORS between
                     if(!(allUnits.includes(notIntersection[j]))) { 
                         allUnits.push(notIntersection[j])
+                    }
+                    if(!(careerUnits.includes(notIntersection[j]))) { 
+                        careerUnits.push(notIntersection[j])
                     }
                 }
 
                 if(!(allUnits.includes(unitResp[i].UnitCode))) { 
                     allUnits.push(unitResp[i].UnitCode)
                 }
+                if(!(careerUnits.includes(unitResp[i].UnitCode))) { 
+                    careerUnits.push(unitResp[i].UnitCode)
+                }
             } 
             //reset for next unit (if it exists) in career units
+            allIntersectionIndex = []
+            allIntersectionLen = [];
             currBestMaxLen = -1;
             currBestIndex = -1;
         }
     }
+    /*for(i = 0; i < unitResp.length; i++) { 
+        if(careerUnits.includes(unitResp[i].UnitCode) && !(optionalUnits.includes(unitResp[i].UnitCode))) { 
+            console.log('match : ')
+            console.log(unitResp[i])
+            optionalUnits.push(unitResp[i])
+        }
+    }*/
+    for(i = 0; i < unitResp.length; i++) { 
+        if(careerUnits.includes(unitResp[i].UnitCode)) { 
+            console.log('matched career unit :')
+            console.log(unitResp[i].UnitCode)
+            if(!optionalUnits.includes(unitResp[i])) { 
+                optionalUnits.push(unitResp[i])
+            }
+        }
+    }
+    totalIter++;
+}
+    console.log('career units contains')
+    console.log(careerUnits)
+    console.log('all units contains')
+    console.log(allUnits)
+    console.log('optional units contains')
+    console.log(optionalUnits)
+    return optionalUnits;
 }
 
 function findBestISpecESpec(specResp : any, careerUnits : string[], majorCode : string, specCode : string) { 
@@ -309,15 +383,26 @@ function findMajor(majorResp : any, careerUnits : string[]) {
     return bestMajor;
 }
 
-export default function TopdownFilled(props: MajorProps) { 
+export default function TopdownFilled() { 
+    //console.log(props.match.params.id)
     const classes = useStyles();
-    const history = useHistory();
-    const id = history.location.state as string;
+    //const id = history.location.state as string;
     const [error, setErrorContent] = useState<string>();
-    const careers = useCareers();
+    //const careers = useCareers();
     const majors = useMajors();
     const units = useUnits();
     const specs = useSpecializations();
+    const [plan, setPlan] = useState<Plan>({})
+    const temp = { ...plan}
+    const specArr : Specialization[] = [];
+
+    //con
+    console.log('printing local storage item')
+    const selectedCareerId = localStorage.getItem('careerSelect') as string;
+    //const selectedCareerIdTest = JSON.parse(localStorage.getItem('careerSelect')!)
+    //then, call useCareer to get the specific career
+    console.log(selectedCareerId)
+    const careers = useCareer(selectedCareerId)
 
     const commonUnits = [ 
       "MEDI1000",
@@ -330,14 +415,16 @@ export default function TopdownFilled(props: MajorProps) {
       "GENE1000" 
     ]
 
-    if(careers.isLoading || majors.isLoading || units.isLoading || specs.isLoading) { 
-        return (<LoadingScreen/>)
+    if(careers.isLoading || majors.isLoading || units.isLoading) { 
+        return (<BounceLoader color="#1473AB" loading={true} size={150}/>)
     }
 
     let careerResponseData = careers.data?.data!;
     let majorResponseData = majors.data?.data!;
     let unitResponseData = units.data?.data!;
     let specResponseData = specs.data?.data!;
+
+
 
 
     if(!careerResponseData || !majorResponseData || !unitResponseData || !specResponseData) { 
@@ -399,12 +486,13 @@ export default function TopdownFilled(props: MajorProps) {
         
         console.log('career units for testing: ')
         //hardcoding for now to test =)
-        //var careerUnits = ["BIOL3011","HUMB2014","GENE3000","GENE3002","MEDI2010", "HUMB3008", "MEDI2000"]
-        var careerUnits = ["BIOL3011", "HUMB2014", "GENE3000"]
+        var careerUnits = ["BIOL3011","HUMB2014","GENE3000","GENE3002","MEDI2010", "HUMB3008", "MEDI2000"]
+        //var careerUnits = ["BIOL3011"]
         console.log(careerUnits)
         var doubleMajorFound = true;
         var bestMajor = findMajor(majorResponseData, careerUnits)
 
+        var optionalUnits : Unit[] = [];
         console.log('out side of findMajor. result is: ')
         console.log(bestMajor)
             var secondBestMajor;
@@ -419,6 +507,7 @@ export default function TopdownFilled(props: MajorProps) {
             updatePlanUnits(allUnits, bestMajor)
             console.log('all units after')
             console.log(allUnits)
+            plan.mainMajor = bestMajor
             if(careerUnits.length === 0) { 
                 console.log(allUnits)
                 //alert('done on single major')
@@ -432,6 +521,7 @@ export default function TopdownFilled(props: MajorProps) {
                 if(areRemainingMatched(secondBestMajor, careerUnits)) { 
                     console.log('Finished on double major, stop here.')
                     updatePlanUnits(allUnits, secondBestMajor)
+                    plan.doubleMajor = secondBestMajor
                     solved = true;
                 } else { 
                     console.log('Double major will not work. Continue')
@@ -454,9 +544,12 @@ export default function TopdownFilled(props: MajorProps) {
             console.log('after')
             console.log(allUnits)
             console.log(careerUnits)
+            //plan.specializations = bestISpec
+            specArr.push(bestISpec)
             if(careerUnits.length === 0) { 
                 //alert('finished at step 3')
                 console.log('finished at step 3')
+                plan.specializations = specArr;
                 solved = true;
             } else { 
                 //step 4 (find espec or ispec)
@@ -474,20 +567,30 @@ export default function TopdownFilled(props: MajorProps) {
                 console.log(careerUnits)
                 if(areRemainingMatched(bestISpecEspec, careerUnits)) { 
                     solved = true;
+                    specArr.push(bestISpecEspec)
                     console.log('finished at step 4')
                     updatePlanUnits(allUnits, bestISpecEspec)
+                    plan.specializations = specArr;
                     console.log(allUnits)
                 } else { 
                     if(!solved) {
+                        plan.specializations = specArr;
                         console.log('Find electives, step 5')
                         console.log('All units and career units before')
                         console.log(allUnits)
                         console.log(careerUnits)
-                        getPreReqs(unitResponseData, careerUnits, allUnits);
+                        //var optionalUnits : Unit[] = [];
+                        optionalUnits = getPreReqs(unitResponseData, careerUnits, allUnits);
                         console.log('All units and career untis after')
                         console.log(allUnits, careerUnits)
-                        if(allUnits.length <= 24) {
+                        console.log('optionalUnits inside !solved = ')
+                        console.log(optionalUnits)
+                        if(optionalUnits.length <= 4) {
                             console.log('great success hahaghagsfh')
+                            //optionalUnit
+                            console.log('inside great success')
+                            console.log(optionalUnits)
+                            plan.optionalUnits = optionalUnits;
                             solved = true;
                         }
                     }
@@ -497,25 +600,24 @@ export default function TopdownFilled(props: MajorProps) {
         }
         if(solved) { 
             console.log('load into local storage, pass to bottom up')
+            console.log(plan);
+            console.log('inside setItem')
+            console.log(optionalUnits)
+            plan.optionalUnits = optionalUnits;
+            localStorage.setItem("courseplanner-plan", JSON.stringify(plan))
         } else { 
             alert('career cannot be met')
         }
-
-
+        //    "courseplanner-plan": "{\"mainMajor\":{\"Credits\":200,\"MajorCode\":\"MJRU-MOLGN\",\"UnitAntiReqs\":[[\"\"]],\"SpecAntiReqs\":[[\"SPUC-HUMGN\"]],\"Units\":[\"BIOL3011\",\"GENE3000\",\"MEDI2010\",\"GENE2001\",\"BIOL3010\",\"BCCB2000\",\"GENE3002\",\"BIOL2001\"],\"Description\":\"Molecular Genetics is a rapidly advancing and exciting discipline for the 21st century. In this major, students will learn about universal principles and new advances in genetics and genomics, and how these can be applied to improve health outcomes. Areas of study will include molecular biology, human genetic disease, bioinformatics and genetic engineering. Students will also be introduced to cutting-edge technology for molecular and genetic analyses. Through a combination of theoretical and practical laboratory training, students will acquire a thorough understanding of molecular genetics and also develop skills in critical thinking and scientific communication. This course will prepare students for a career or further study in the biomedical sciences. \",\"Name\":\"molecular genetics\"}}",
+        //    "courseplanner-plan": "{\"mainMajor\":{\"Credits\":200,\"MajorCode\":\"MJRU-MOLGN\",\"UnitAntiReqs\":[[\"\"]],\"SpecAntiReqs\":[[\"SPUC-HUMGN\"]],\"Units\":[\"BIOL3011\",\"GENE3000\",\"MEDI2010\",\"GENE2001\",\"BIOL3010\",\"BCCB2000\",\"GENE3002\",\"BIOL2001\"],\"Description\":\"Molecular Genetics is a rapidly advancing and exciting discipline for the 21st century. In this major, students will learn about universal principles and new advances in genetics and genomics, and how these can be applied to improve health outcomes. Areas of study will include molecular biology, human genetic disease, bioinformatics and genetic engineering. Students will also be introduced to cutting-edge technology for molecular and genetic analyses. Through a combination of theoretical and practical laboratory training, students will acquire a thorough understanding of molecular genetics and also develop skills in critical thinking and scientific communication. This course will prepare students for a career or further study in the biomedical sciences. \",\"Name\":\"molecular genetics\"}}",
 
           return (
-    <Box className={props.className}> {/* Horrible Javascript Abuse TODO: Rework this */}
-      {careers.isLoading || majors.isLoading || units.isLoading || specs.isLoading
-        ? <Box my={2}><BounceLoader color="#1473AB" loading={true} size={150} /></Box>
-        :
+    <Box> {/* Horrible Javascript Abuse TODO: Rework this */}
         <>
-          {careers.isError || majors.isError || units.isError || specs.isError
-            ? <h1>Error Has Occured</h1>
-            : <UnitsFirstSPAContext careers={careers.data?.data!} majors={majors.data?.data!.sort((a, b) => a.Name.localeCompare(b.Name))!} units={units.data?.data!.sort((a, b) => a.Name.localeCompare(b.Name))!} specs={specs.data?.data!.sort((a, b) => a.Name.localeCompare(b.Name))!} />
-          }
+            <UnitsFirstSPAContext careers={careers.data?.data!} majors={majors.data?.data!.sort((a, b) => a.Name.localeCompare(b.Name))!} units={units.data?.data!.sort((a, b) => a.Name.localeCompare(b.Name))!} specs={specs.data?.data!.sort((a, b) => a.Name.localeCompare(b.Name))!} />
         </>
-      }
     </Box>
+          )}
         /*return ( 
             <>
                 <Navbar />
@@ -536,7 +638,7 @@ export default function TopdownFilled(props: MajorProps) {
                     </Grid>
 
                     <Grid item xs={2}>
-                        <AvailableCareersList />
+                        <AvailableCareersList careerObj={ careerResponseData } />
                     </Grid>
                 </Grid>
                 <p>l</p>
@@ -544,4 +646,3 @@ export default function TopdownFilled(props: MajorProps) {
         )*/
 
     }
-}

@@ -1,26 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { CardContent, CardActions, ListSubheader, AppBar, Toolbar, Typography, Box, List, CardHeader, Avatar, Card, CardMedia, Switch, Checkbox } from '@material-ui/core';
-import { CareerListProps, DefaultProps } from '../../types';
-import { borders, positions } from '@material-ui/system';
-import styled from 'styled-components';
-import { useState } from 'react';
+import { List } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import { red } from '@material-ui/core/colors';
 import IconButton from '@material-ui/core/IconButton';
-import ClearIcon from '@material-ui/icons/Clear';
 import BookOutlined from '@material-ui/icons/BookOutlined';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
-import { CheckBox } from '@material-ui/icons';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
-import WifiIcon from '@material-ui/icons/Wifi'
 import ListItemText from '@material-ui/core/ListItemText';
-import CommentIcon from '@material-ui/icons/Comment';
-import React from 'react';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -33,27 +19,22 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 
-export default function AvailableCareersList(props: CareerListProps) { 
+export default function AvailableCareersList(props: any) { 
     const history = useHistory();
     const classes = useStyles();
-    let careerTitles= props.careerList
+    let careerObj = props.careerObj || [];
 
     function goToCareerInfoPage(value:any) { 
-    //For now this function will simply navigate to general 
-        //career info page, rather than the page for the specific career
-        //This should not take much to tweak however
-        history.push('./ViewAllCareers');
+        history.push(`./InfoPage/ViewCareer/${value.CareerId}`);
     }
-    if(careerTitles === undefined) { 
-        careerTitles = [];
-    }
+
     return ( 
         <List className={classes.root}>
-            {careerTitles.map((value) => {
+            {careerObj.map((value: any) => {
                 const labelId = `checkbox-list-label-${value}`;
                 return (
                     <ListItem key={value} role={undefined} dense button onClick={() => goToCareerInfoPage(value)}>
-                        <ListItemText id={labelId} primary={`${value}`} />
+                        <ListItemText id={labelId} primary={`${value.Name}`} />
                         <ListItemSecondaryAction>
                             <IconButton edge='end' aria-label='comments'>
                                 <BookOutlined />
