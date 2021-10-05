@@ -604,7 +604,6 @@ export default function TopdownFilled() {
             console.log('inside setItem')
             console.log(optionalUnits)
             plan.optionalUnits = optionalUnits;
-            localStorage.setItem("courseplanner-plan", JSON.stringify(plan))
         } else { 
             alert('career cannot be met')
         }

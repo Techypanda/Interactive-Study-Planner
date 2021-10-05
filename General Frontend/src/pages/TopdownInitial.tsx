@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Grid } from '@material-ui/core';
+import { Box, Grid } from '@material-ui/core';
 //import { DefaultProps } from '../../types';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -10,10 +10,11 @@ import TopDownInitialMain from '../components/shared/TopDownInitialMain';
 import EmptyCurrentPlan from '../components/shared/EmptyCurrentPlan';
 import axios, { AxiosResponse } from 'axios'
 import Error from '../components/shared/Error';
-import { Career, CareerListProps, Major} from "../types";
+import { Career, CareerListProps, DefaultProps, Major} from "../types";
 import {useState, useEffect } from 'react';
 import { BounceLoader } from "react-spinners";
-import { useCareers } from '../api/hooks';
+import { useCareers, useMajors, useSpecializations, useUnits } from '../api/hooks';
+import { CameraRearSharp, PinDropSharp } from '@material-ui/icons';
 
 
 const useStyles = makeStyles((theme) => ({ 
@@ -33,16 +34,32 @@ const useStyles = makeStyles((theme) => ({
 //Going to need to load career API
     //Pass that down to top down initial
         //Pass that down to TestCareerUnitInfoCard
-function SetMainCareer(career: Career) { 
-    //console.log('testes')
-    // eslint-disable-next-line no-restricted-globals
-    var history = useHistory();
-    history.push('/')
+function setMainCareer(career: Career) { 
+    console.log('test')
 }
 
 
-export default function TopdownInitial() { 
-    const classes = useStyles();
+export default function TopdownInitial(props : DefaultProps) { 
+    const careers = useCareers();
+    const majors = useMajors();
+    const units = useUnits();
+    const specs = useSpecializations();
+    return(
+        <Box> 
+            {careers.isLoading || majors.isLoading || units.isLoading || specs.isLoading 
+                ? <Box my={2}><BounceLoader color="#1473AB" loading={true} size={150}/></Box>
+                :
+                <>
+                    {careers.isError || majors.isError || units.isError || specs.isError
+                        ? <h1>Error occurred</h1>
+                        : <TopDownInitialMain careers={careers.data?.data!} majors={majors.data?.data!} units={units.data?.data!} specs={specs.data?.data!}/>
+                    }
+                </>
+            }
+        </Box>
+    )
+}
+    /*const classes = useStyles();
     const base : CareerListProps = {};
     const history = useHistory();
     const [careerList2, setCareerList] = useState<CareerListProps>(base);
@@ -95,7 +112,7 @@ export default function TopdownInitial() {
                 </Grid>
 
                 <Grid item xs={8} className={classes.test}>
-                    <TopDownInitialMain careers={careers.data?.data!} selectCareer={SetMainCareer}/>
+                    <TopDownInitialMain careers={careers.data?.data!} selectCareer={setMainCareer}/>
                 </Grid>
 
                 <Grid item xs={2}>
@@ -104,4 +121,4 @@ export default function TopdownInitial() {
             </Grid>
         </>
     )
-}
+}*/

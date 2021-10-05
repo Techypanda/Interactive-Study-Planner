@@ -324,6 +324,8 @@ export default function TopdownFilled2() {
     const [plan, setPlan] = useState<Plan>({})
     const specArr : Specialization[] = [];
 
+    const history = useHistory();
+
 
     const commonUnits = [
         "MEDI1000",
@@ -366,13 +368,13 @@ export default function TopdownFilled2() {
 
         //console.log('We will set career units to other units for the time being, since career data now is lacking')
         //var careerUnits = ["BCCB2000","BIOL2001","BIOL3010","BIOL3011","GENE2001","GENE3000","GENE3002","MEDI2010", "MEDI3016", "HUMB3008"];
-        var careerUnits = careerResponseData.Item.Requirements;
+        console.log('printing career')
+        console.log(careerResponseData.Item)
 
-        console.log('printing career selected from page prio')
-        console.log(careerResponseData)
+        console.log('printing career units?')
+        console.log(careerResponseData.Item.Requirements)
 
-        console.log('printing career units hopefully')
-        console.log(careerUnits)
+        var careerUnits = careerResponseData.Item.Requirements
 
         /* 
             (1) We attempt to find the best major.
@@ -390,6 +392,7 @@ export default function TopdownFilled2() {
         //Update units the student is taking (At this stage it will be the 8 common units + the 8 major units)
         updateUnitsIAmTaking(bestMajor, unitsIAmTaking)
         plan.mainMajor = bestMajor
+
         if(careerUnits.length === 0) { 
             //finished after 1 major
             planFinished = true;
@@ -473,12 +476,18 @@ export default function TopdownFilled2() {
 
 
     //Pass study plan onto bottom up for display
-    localStorage.setItem('courseplanner-plan', JSON.stringify(plan))
-    return (
-        <Box> 
-        <>
-            <UnitsFirstSPAContext careers={careers.data?.data!} majors={majors.data?.data!.sort((a, b) => a.Name.localeCompare(b.Name))!} units={units.data?.data!.sort((a, b) => a.Name.localeCompare(b.Name))!} specs={specs.data?.data!.sort((a, b) => a.Name.localeCompare(b.Name))!} />
-        </>
-    </Box>
-    )}
+    console.log('main major before setting local storage printing from plan')
+    console.log(plan.mainMajor)
+    localStorage.setItem(`${process.env.REACT_APP_DEVELOPMENT ? "dev-" : ""}courseplanner-plan`, JSON.stringify(plan))
+    localStorage.setItem(`${process.env.REACT_APP_DEVELOPMENT ? "dev-" : ""}123`, JSON.stringify(plan))
+    const temp = JSON.parse(JSON.stringify(plan));
+    console.log('before timeout - printing temp')
+    console.log(temp)
+    localStorage.setItem(`${process.env.REACT_APP_DEVELOPMENT ? "dev-" : ""}courseplanner-plan`, JSON.stringify(temp))
+    console.log('printing temp after set item')
+    console.log(temp)
+    return( 
+        <></>
+    )
+}
 }

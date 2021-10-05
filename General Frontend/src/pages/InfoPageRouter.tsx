@@ -1,11 +1,8 @@
-import { useHistory, Switch, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import ViewCareer from "../components/shared/ViewCareer";
 import ViewMajor from "../components/shared/ViewMajor";
 import ViewSpecialization from "../components/shared/ViewSpecialization";
 import UnitInformationPage from "../components/shared/UnitInformationPage";
-
-import { Button } from "@material-ui/core";
-
 /*
  * Author: Matthew Loe
  * Student Id: 19452425

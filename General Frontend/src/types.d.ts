@@ -4,6 +4,26 @@ export interface DefaultProps {
   className?: string;
   style?: React.CSSProperties | undefined;
 }
+export interface PaginatedTablesProps extends DefaultProps {
+  plan: Plan
+  careers: Career[]
+}
+export interface CareerTableProps extends DefaultProps {
+  careers: Career[]
+}
+export interface SemesterTableProps extends DefaultProps {
+  year: number;
+  semesterOneUnits?: Unit[]
+  semesterTwoUnits?: Unit[]
+}
+export interface SemesterOptionsTableProps extends DefaultProps {
+  year: number;
+  semOne: Unit[]
+  semTwo: Unit[]
+  semSelectedOne: Unit[]
+  semSelectedTwo: Unit[]
+  onChange: (sem: 1 | 2, pos: 0 | 1 | 2 | 3, val: string) => void;
+}
 export interface WorkspaceProps extends DefaultProps {
   units: Array<Unit>
   specs: Array<Specialization>
@@ -32,7 +52,7 @@ export interface InitialCareerSPAProps extends DefaultProps {
   majors: Array<Major>
   selectMajor: (m: Major) => void;
 }
-export interface CareerListEntryProps extends DefaultProps {
+export interface CareerListEntryProps extends DefaultProps, Clickable {
   title: string;
 }
 export interface UnitFirstSPAContextProps {
@@ -102,6 +122,8 @@ export interface Unit {
   Delivery: string
   UnitCode: string
   Description: string
+  Semester: 1 | 2 | 12 // 1 = semester 1, 2 = semester 2, 12 == semester 1 & 2
+  disabled?: boolean // hacky fix for timetable
 }
 
 export interface Major {
@@ -119,6 +141,7 @@ export interface Plan {
   optionalUnits?: Unit[];
   specializations?: Specialization[];
   doubleMajor?: Major;
+  allUnits?: Unit[] // chuck EVERYTHING into this at the end
 }
 
 export interface Career {

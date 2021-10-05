@@ -1,13 +1,11 @@
 import { Typography } from "@material-ui/core";
 import styled from "styled-components";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { DefaultProps } from "../../types";
 import axios from "axios";
 import { useEffect, useState } from 'react';
 
 function ViewUnit(props: DefaultProps){
-
-    const history = useHistory();
     const { id } = useParams<{ id: string }>(); 
 
     const base = [{Delivery: "", Description : "", Name : "", UnitCreds: "", UnitCode: ""}]
@@ -20,6 +18,7 @@ function ViewUnit(props: DefaultProps){
 	}
 	useEffect(() => {
 		getUnitData();
+	  // eslint-disable-next-line react-hooks/exhaustive-deps
 	  }, []);
 
 
