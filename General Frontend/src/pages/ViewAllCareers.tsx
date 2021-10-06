@@ -5,8 +5,8 @@ import styled from "styled-components";
 import axios, { AxiosError, AxiosResponse } from "axios";
 
 import { DefaultProps } from "../types";
-import { createStyles, makeStyles, Theme , useTheme} from '@material-ui/core/styles';
-
+import { createStyles, makeStyles, Theme} from '@material-ui/core/styles';
+import CareersDatatable from "../components/shared/CareersDatatable"
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
 	root: {
@@ -55,34 +55,11 @@ function ViewAllCareers(props: DefaultProps) {
 
     return (
 	<>
-	    <br>
-		</br>
-		<Container>
-		    <Box id="searchcontainer" display="flex">
-			<TextField style={{padding: '0 10px'}} variant="outlined" id="standard-full-width" fullWidth  placeholder="Search careers..." className="searchbar" />
-			<Button variant='contained' className="searchbtn">Search</Button>
-		    </Box>
-		    <br/>
-		    {careersList.map((x) => (
-			<div className="career-option">
-			    <Card variant="outlined" className={classes.root}>
-				<div className={classes.details}>
-				    <CardContent onClick={() => history.push(`/InfoPage/ViewCareer/${x.CareerId}`)} className={classes.content}>
-					<Typography className='values' component="h5" variant="h5" align="left">
-					    {x.Industry}
-					</Typography>
-					<Typography variant="subtitle1" color="textSecondary">
-					    {x.Description}
-					</Typography>
-				    </CardContent>
-				    <div className={classes.controls}>
-				    </div>
-				</div>
-			    </Card>
-			</div>
-		    ))}
-		</Container>
 		<br/>
+	    <Container  >
+			<CareersDatatable items={careersList}/>
+	    </Container>
+	    <br/>
 	</>
     );
 }
