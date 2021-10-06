@@ -10,4 +10,11 @@ describe('View All Careers is working which happens When', () => {
         const x = render(<ViewAllCareers />)
         expect(x).toMatchSnapshot();
     })
+     it('Renders corresponding career info pages', () => {
+	jest.mock('react-router-dom', () => {
+	    useHistory: () => {
+		push: jest.fn();
+	    }
+	})
+     })
 })

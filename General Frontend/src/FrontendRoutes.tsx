@@ -5,7 +5,6 @@ import Landing from './pages/Landing';
 import ViewAllCareers from './pages/ViewAllCareers';
 import ViewAllUnits from './pages/ViewAllUnits';
 import PlannerInitialPage from './pages/PlannerInitialPage';
-import CoursePlanner from './pages/CoursePlanner';
 import InfoPageRouter from './pages/InfoPageRouter';
 import TopdownInitial from './pages/TopdownInitial';
 import TopdownFilled from './pages/TopdownFilled';
@@ -33,9 +32,6 @@ function Router(props: DefaultProps) {
             </Route>
             <Route exact path="/PlannerInitialPage">
               <PlannerInitialPage />
-            </Route>
-            <Route exact path="/CoursePlanner">
-              <CoursePlanner />
             </Route>
             <Route path="/InfoPage">
               <InfoPageRouter />

@@ -7,9 +7,9 @@ import FrontendRoutes from './FrontendRoutes';
 function App() {
     return (
 	<div className="App">
-			<Navbar />
 	    <BrowserRouter>
-				<FrontendRoutes />
+		<Navbar />
+		<FrontendRoutes />
 	    </BrowserRouter>
 	</div>
     );
