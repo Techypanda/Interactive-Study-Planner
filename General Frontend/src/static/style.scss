@@ -23,6 +23,7 @@
   color: white;
 }
 
+// global css helpers
 .fh {
   height: 100%
 }
@@ -30,8 +31,16 @@
   max-height: calc(100vh - 64px);
   overflow-y: scroll;
 }
+@media (max-width: 1730px) {
+  .mh {
+    max-height: 100%;
+  }
+}
 .br {
   border-left: 2px solid #cc9900;
+}
+.hr {
+  overflow-x: hidden;
 }
 
 .App-link {

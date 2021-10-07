@@ -62,7 +62,7 @@ function Timetable(props: DefaultProps) {
   const history = useHistory();
   if (!unitDB.isLoading) {
     if (localStorage.getItem(`${process.env.REACT_APP_DEVELOPMENT ? "dev-" : ""}courseplanner-plan`) && localStorage.getItem(`${process.env.REACT_APP_DEVELOPMENT ? "dev-" : ""}careers`)) {
-      const plan = getUnits(JSON.parse(localStorage.getItem(`${process.env.DEVELOPMENT ? "dev-" : ""}courseplanner-plan`)!) as Plan, unitDB.data?.data!.sort((a, b) => a.Name.localeCompare(b.Name))!)
+      const plan = getUnits(JSON.parse(localStorage.getItem(`${process.env.REACT_APP_DEVELOPMENT ? "dev-" : ""}courseplanner-plan`)!) as Plan, unitDB.data?.data!.sort((a, b) => a.Name.localeCompare(b.Name))!)
       const careers = JSON.parse(localStorage.getItem(`${process.env.REACT_APP_DEVELOPMENT ? "dev-" : ""}careers`)!) as Career[]
       /* EDGE CASES */
       const map = unitDB.data?.data!.reduce((map, u) => {
