@@ -14,6 +14,7 @@ import {
 import { Fade } from "@material-ui/core";
 import UnitsFirst from "./pages/UnitsFirst";
 import Timetable from "./pages/Timetable";
+import NotFound from "./pages/NotFound";
 
 function Router(props: DefaultProps) {
   const location = useLocation();
@@ -55,7 +56,7 @@ function Router(props: DefaultProps) {
               <Timetable />
             </Route>
             <Route>
-              <h1>Error 404 not found</h1> {/* TODO: Make a 404 Page */}
+              <NotFound />
             </Route>
           </Switch>
         </TransitionGroup>
