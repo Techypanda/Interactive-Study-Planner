@@ -32,6 +32,8 @@ const useStyles = makeStyles((theme) => ({
     },
 }))
 
+
+
 export default function TopdownInitial(props : DefaultProps) { 
     const careers = useCareers();
     const majors = useMajors();
@@ -40,54 +42,29 @@ export default function TopdownInitial(props : DefaultProps) {
     const classes = useStyles();
     const phone = useMediaQuery("(max-width: 488px)")
     const [error, setError] = useState<PromptData>({ promptTitle: "", promptContent: "", showPrompt: false})
-    return ( 
+    return (
         <Box>
-            <Error onAccept={() => setError({ promptTitle: error.promptTitle, promptContent: error.promptContent, showPrompt: false})} promptTitle={error.promptTitle} promptContent={error.promptContent} showPrompt={error.showPrompt} />
-                <Grid container className='sameHeight'> 
-                    <Grid item xs={2} className='sameHeight'>
-                        <EmptyCurrentPlan />
+            {careers.isLoading || majors.isLoading || units.isLoading || specs.isLoading
+            ? <Box my={2}><BounceLoader color='#1473AB' loading={true} size={150}/></Box>
+            :
+            <>
+                {careers.isError || majors.isError || units.isError || specs.isError 
+                    ? <h1>Error Has Occurred</h1>
+                    : <Grid container className='sameHeight'>
+                        <Grid item xs={2} className='sameHeight'>
+                            <EmptyCurrentPlan />
+                        </Grid>
+                        <Grid item xs={8} className='sameHeight'>
+                            <TopDownInitialMain careers={careers.data?.data!} majors={majors.data?.data!} units={units.data?.data!} specs={specs.data?.data!} />
+                        </Grid>
+                        <Grid item xs={2} className='sameHeight'>
+                            <CareerList careers={careers.data?.data!}/>     
+                        </Grid>
                     </Grid>
-                    <Grid item xs={8} className='sameHeight'>
-                        {careers.isLoading || majors.isLoading || units.isLoading || specs.isLoading
-                        ? <Box my={2}><BounceLoader color='#1473AB' loading={true} size={150}/></Box>
-                        :
-                        <>
-                            {careers.isError || majors.isError || units.isError || specs.isError
-                                ? <h1>Error occurred</h1>
-                                : <TopDownInitialMain careers={careers.data?.data!} majors={majors.data?.data!} units={units.data?.data!} specs={specs.data?.data!} />
-                            }
-                        </>
-                    }
-                    </Grid>
-                    <Grid item xs={2} className='sameHeight'>
-                        <CareerList careers={careers.data?.data!} />
-                    </Grid>
-                </Grid>
+                }
+            </>
+            }
         </Box>
     )
+  
 }
-    /*return ( 
-        <>
-            <Grid container justify={'space-between'} alignItems={'stretch'} className={classes.nonNavBar}>
-                <Grid item xs={2}>
-                    <EmptyCurrentPlan />
-                </Grid>
-                <Box>
-                    {careers.isLoading || majors.isLoading || units.isLoading || specs.isLoading
-                    ? <Box my={2}><BounceLoader color='#1473AB' loading={true} size={150}/></Box>
-                    :
-                    <>
-                        {careers.isError || majors.isError || units.isError || specs.isError
-                            ? <h1>Error occurred</h1>
-                            : <TopDownInitialMain careers={careers.data?.data!} majors={majors.data?.data!} units={units.data?.data!} specs={specs.data?.data!}/>
-                        }
-                    </>
-                }
-                </Box>
-                <Grid item xs={2}>
-                    <AvailableCareersList careerObj={careers.data?.data!}/>
-                </Grid>
-            </Grid>
-        </>
-    )
-}*/
