@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Container } from "@material-ui/core";
-import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { DefaultProps } from "../types";
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import UnitsDataTable from "../components/shared/UnitsDatatable"
 
-const useStyles = makeStyles((theme: Theme) =>
+/* const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		root: {
 			display: 'flex',
@@ -33,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 
 	}),
-);
+); */
 
 
 function ViewAllUnits(props: DefaultProps) {

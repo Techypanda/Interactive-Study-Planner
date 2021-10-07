@@ -1,13 +1,10 @@
 import { useEffect, useState } from 'react';
-import { Box, Button, Container, Typography, Card, CardContent, TextField} from "@material-ui/core";
-import { useHistory } from "react-router-dom";
-import styled from "styled-components";
-import axios, { AxiosError, AxiosResponse } from "axios";
+import { Container } from "@material-ui/core";
+import axios from "axios";
 
 import { DefaultProps } from "../types";
-import { createStyles, makeStyles, Theme} from '@material-ui/core/styles';
 import CareersDatatable from "../components/shared/CareersDatatable"
-const useStyles = makeStyles((theme: Theme) =>
+/* const useStyles = makeStyles((theme: Theme) =>
     createStyles({
 	root: {
 	    display: 'flex',
@@ -34,11 +31,9 @@ const useStyles = makeStyles((theme: Theme) =>
 	},
 	
     }),
-);
+); */
 
 function ViewAllCareers(props: DefaultProps) {
-    const history = useHistory();
-    const classes = useStyles();
 
     const base = [{Description : "", Industry : "", CareerId: ""}]
     const [careersList, setCareersData] = useState(base);
