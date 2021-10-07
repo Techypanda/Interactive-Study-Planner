@@ -4,7 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 
 const columns: GridColDef[] = [
   { field: 'col1', headerName: 'Unit Code', flex:0.75},
-  { field: 'col2', headerName: 'Career Name', flex:2 },
+  { field: 'col2', headerName: 'Unit Name', flex:2 },
   { field: 'col3', headerName: 'Semester', flex:1 },
   { field: 'col4', headerName: 'Delivery', flex:1 },
 ];
