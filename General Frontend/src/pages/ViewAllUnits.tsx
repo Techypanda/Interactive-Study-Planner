@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
 import { Container } from "@material-ui/core";
-import axios from "axios";
 import { DefaultProps } from "../types";
 import UnitsDataTable from "../components/shared/UnitsDatatable"
+import { BounceLoader } from "react-spinners";
+import { useUnits } from '../api/hooks';
 
 /* const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -36,23 +36,13 @@ import UnitsDataTable from "../components/shared/UnitsDatatable"
 
 function ViewAllUnits(props: DefaultProps) {
 	const base = [{ Credits: "", Antirequisites: "", Prerequisites: "", Delivery: "", UnitCode: "", Description: "", Corequisites: "", Name: "" }];
-	const [units_list, set_units_list] = useState(base);
-
-	const GetAllUnits = () => {
-		axios.get("https://ilur318q9c.execute-api.ap-southeast-2.amazonaws.com/Prod/getallunits/")
-			.then((response) => {
-				set_units_list(response.data);
-			});
-	}
-	useEffect(() => {
-		GetAllUnits();
-	}, []);
+	const units = useUnits();
 
 	return (
 		<>
 			<br />
-			<Container  >
-				<UnitsDataTable items={units_list} />
+			<Container>
+				{units.isLoading ? <BounceLoader color="#1473AB" loading={true} size={150} /> : <UnitsDataTable items={units.data?.data} />}
 			</Container>
 			<br />
 
