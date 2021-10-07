@@ -37,9 +37,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 function ViewAllUnits(props: DefaultProps) {
-	const history = useHistory();
-	const classes = useStyles();
-
 	const base = [{ Credits: "", Antirequisites: "", Prerequisites: "", Delivery: "", UnitCode: "", Description: "", Corequisites: "", Name: "" }];
 	const [units_list, set_units_list] = useState(base);
 
