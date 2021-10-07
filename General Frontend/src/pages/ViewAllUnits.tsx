@@ -35,7 +35,6 @@ import { useUnits } from '../api/hooks';
 
 
 function ViewAllUnits(props: DefaultProps) {
-	const base = [{ Credits: "", Antirequisites: "", Prerequisites: "", Delivery: "", UnitCode: "", Description: "", Corequisites: "", Name: "" }];
 	const units = useUnits();
 
 	return (
