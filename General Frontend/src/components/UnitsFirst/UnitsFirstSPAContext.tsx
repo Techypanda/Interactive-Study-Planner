@@ -1,4 +1,4 @@
-import { Box, Grid } from "@material-ui/core";
+import { Box, Grid, useMediaQuery } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Career, Major, Plan, PromptData, Specialization, Unit, UnitFirstSPAContextProps } from "../../types";
@@ -130,6 +130,7 @@ function checkIfHaveAntireqs(unitsIAmTaking: string[], unit: Unit): [boolean, st
 
 // TODO SORT THE PAGES ALPHABETICALLY
 function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
+  const phone = useMediaQuery("(max-width: 488px)")
   const [error, setError] = useState<PromptData>({ promptTitle: "", promptContent: "", showPrompt: false });
   const [stage, setStage] = useState<UNITSFIRSTMODES>(UNITSFIRSTMODES.initial)
   const [careers, setCareers] = useState<Array<Career>>(props.careers);
@@ -541,27 +542,37 @@ function UnitsFirstSPAContext(props: UnitFirstSPAContextProps) {
   return (
     <Box>
       <Error onAccept={() => setError({ promptTitle: error.promptTitle, promptContent: error.promptContent, showPrompt: false })} promptTitle={error.promptTitle} promptContent={error.promptContent} showPrompt={error.showPrompt} />
-      <Grid container className="sameheight"> { /* this isnt going to work on mobile :/ */}
-        <Grid item xs={2} className="sameheight">
-          <PlanList
-            plan={plan}
-            mainMajor={plan.mainMajor}
-            majors={majors}
-            updateMainMajor={setMainMajor}
-            removeFromPlan={removeFromPlan}
-          />
+      {!phone ?
+        <Grid container className="sameheight"> { /* Desktop/Tablet View */}
+          <Grid item xs={2} className="sameheight">
+            <PlanList
+              plan={plan}
+              mainMajor={plan.mainMajor}
+              majors={majors}
+              updateMainMajor={setMainMajor}
+              removeFromPlan={removeFromPlan}
+            />
+          </Grid>
+          <Grid item xs={8} className="sameheight">
+            {stage === UNITSFIRSTMODES.initial ? <Initial majors={majors} selectMajor={setMainMajor} />
+              : stage === UNITSFIRSTMODES.workspace ? <Workspace majors={majors} units={units} specs={specs} select={select} />
+                : stage === UNITSFIRSTMODES.fullWorkspace ? <FilledPlan />
+                  : <h1>Unknown Stage</h1>
+            }
+          </Grid>
+          <Grid item xs={2} className="sameheight">
+            <CareerList careers={careers} />
+          </Grid>
         </Grid>
-        <Grid item xs={8} className="sameheight">
-          {stage === UNITSFIRSTMODES.initial ? <Initial majors={majors} selectMajor={setMainMajor} />
-            : stage === UNITSFIRSTMODES.workspace ? <Workspace majors={majors} units={units} specs={specs} select={select} />
-              : stage === UNITSFIRSTMODES.fullWorkspace ? <FilledPlan />
-                : <h1>Unknown Stage</h1>
-          }
-        </Grid>
-        <Grid item xs={2} className="sameheight">
-          <CareerList careers={careers} />
-        </Grid>
-      </Grid>
+        : <> {/* Mobile View */}
+          <Box>
+            {stage === UNITSFIRSTMODES.initial ? <Initial majors={majors} selectMajor={setMainMajor} />
+              : stage === UNITSFIRSTMODES.workspace ? <Workspace majors={majors} units={units} specs={specs} select={select} />
+                : stage === UNITSFIRSTMODES.fullWorkspace ? <FilledPlan />
+                  : <h1>Unknown Stage</h1>
+            }
+          </Box>
+        </>}
     </Box >
   )
 }

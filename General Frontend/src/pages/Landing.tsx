@@ -2,9 +2,9 @@ import { Grid, Typography, Container, Box, useMediaQuery } from "@material-ui/co
 import { useHistory } from "react-router-dom";
 
 // stock images
-import MedicalImage from "../static/doctor_teacher.jpg";
-import CareersImage from "../static/career.jpg";
-import TraitsImage from "../static/traits_image.jpg"
+import MedicalImage from "../static/doctor_teacher.webp";
+import CareersImage from "../static/career.webp";
+import TraitsImage from "../static/traits_image.webp"
 import CardPrompt from "../components/Landing/CardPrompt";
 
 function Landing() {
