@@ -362,7 +362,6 @@ export default function TopDownInitialMain(props: UnitFirstSPAContextProps) {
     }
 
     var careerUnits = individualCareer?.Requirements!;
-    careerUnits.push("MICB3002", "XD");
     var unitsIAmTaking: string[] = [];
     var commonUnits = [
       "MEDI1000",
@@ -478,8 +477,8 @@ export default function TopDownInitialMain(props: UnitFirstSPAContextProps) {
       var optionalUnitsBottomUp: Unit[] = [];
 
       //double check this works as expected =)
-      if (optionalUnits.length > 4) {
-        console.log("Show alert here to indicate failure");
+      if (optionalUnits.length > 4 || optionalUnits.length > 0) {
+        console.log('failed to find a valid path')
       } else {
         for (var j = 0; j < unitResponseData.length; j++) {
           if (optionalUnits.includes(unitResponseData[j].UnitCode)) {

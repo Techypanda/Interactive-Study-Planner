@@ -14,7 +14,7 @@ import { Career, CareerListProps, DefaultProps, Major} from "../types";
 import {useState, useEffect } from 'react';
 import { BounceLoader } from "react-spinners";
 import { useCareers, useMajors, useSpecializations, useUnits } from '../api/hooks';
-import { CameraRearSharp, PinDropSharp } from '@material-ui/icons';
+import { AcUnitSharp, CameraRearSharp, PinDropSharp } from '@material-ui/icons';
 
 
 const useStyles = makeStyles((theme) => ({ 
@@ -44,7 +44,8 @@ export default function TopdownInitial(props : DefaultProps) {
     const majors = useMajors();
     const units = useUnits();
     const specs = useSpecializations();
-    return(
+    const classes = useStyles();
+    /*return(
         <Box> 
             {careers.isLoading || majors.isLoading || units.isLoading || specs.isLoading 
                 ? <Box my={2}><BounceLoader color="#1473AB" loading={true} size={150}/></Box>
@@ -57,6 +58,30 @@ export default function TopdownInitial(props : DefaultProps) {
                 </>
             }
         </Box>
+    )*/
+    return ( 
+        <>
+            <Grid container justify={'space-between'} alignItems={'stretch'} className={classes.nonNavBar}>
+                <Grid item xs={2}>
+                    <EmptyCurrentPlan />
+                </Grid>
+                <Box>
+                    {careers.isLoading || majors.isLoading || units.isLoading || specs.isLoading
+                    ? <Box my={2}><BounceLoader color='#1473AB' loading={true} size={150}/></Box>
+                    :
+                    <>
+                        {careers.isError || majors.isError || units.isError || specs.isError
+                            ? <h1>Error occurred</h1>
+                            : <TopDownInitialMain careers={careers.data?.data!} majors={majors.data?.data!} units={units.data?.data!} specs={specs.data?.data!}/>
+                        }
+                    </>
+                }
+                </Box>
+                <Grid item xs={2}>
+                    <AvailableCareersList careerObj={careers.data?.data!}/>
+                </Grid>
+            </Grid>
+        </>
     )
 }
     /*const classes = useStyles();
