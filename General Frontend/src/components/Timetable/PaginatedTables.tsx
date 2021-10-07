@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { PaginatedTablesProps, PromptData, Unit, Plan, } from "../../types";
 import Error from "../shared/Error";
 import SemesterTable, { SemTable } from "./SemesterTable";
-import CurtinLogo from "../../static/curtinbase.jpg";
+import CurtinLogo from "../../static/curtinbase.webp"
 import CareerTable from "./CareerTable";
 import { useHistory } from "react-router";
 

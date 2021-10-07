@@ -9,8 +9,8 @@ import { DefaultProps } from "../types";
 
 import ListCareers from "./ViewAllCareers";
 import TopdownInitial from "./TopdownInitial";
-import CareersImage from "../static/career.jpg";
-import ClassesImage from "../static/classes.jpg";
+import CareersImage from "../static/career.webp";
+import ClassesImage from "../static/classes.webp";
 import CardPrompt from "../components/Landing/CardPrompt";
 
 function PlannerInitialPage(props: DefaultProps) {
