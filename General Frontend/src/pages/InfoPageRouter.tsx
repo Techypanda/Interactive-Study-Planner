@@ -1,8 +1,5 @@
 import { Switch, Route } from "react-router-dom";
-import ViewCareer from "../components/shared/ViewCareer";
-import ViewMajor from "../components/shared/ViewMajor";
-import ViewSpecialization from "../components/shared/ViewSpecialization";
-import UnitInformationPage from "../components/shared/UnitInformationPage";
+import { lazy } from "react";
 /*
  * Author: Matthew Loe
  * Student Id: 19452425
@@ -10,6 +7,12 @@ import UnitInformationPage from "../components/shared/UnitInformationPage";
  * Description: Routing page for information pages
  */
 //Notes - remove button, test function, test route and usehistory after testing concluded or comment out
+
+// Lazy Loading
+const ViewCareer = lazy(() => import("../components/shared/ViewCareer"));
+const ViewMajor = lazy(() => import("../components/shared/ViewMajor"));
+const ViewSpecialization = lazy(() => import("../components/shared/ViewSpecialization"));
+const UnitInformationPage = lazy(() => import("../components/shared/UnitInformationPage"));
 
 //Information page router
 function InfoPageRouter() {

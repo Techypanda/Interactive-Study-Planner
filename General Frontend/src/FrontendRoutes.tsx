@@ -1,19 +1,22 @@
 import styled from "styled-components";
+import { lazy } from "react";
 import { DefaultProps } from "./types";
 import { Switch, Route, useLocation } from "react-router-dom";
-import Landing from './pages/Landing';
-import ViewAllCareers from './pages/ViewAllCareers';
-import ViewAllUnits from './pages/ViewAllUnits';
-import PlannerInitialPage from './pages/PlannerInitialPage';
-import CoursePlanner from './pages/CoursePlanner';
-import InfoPageRouter from './pages/InfoPageRouter';
-import TopdownInitial from './pages/TopdownInitial';
 import {
   TransitionGroup
 } from "react-transition-group";
 import { Fade } from "@material-ui/core";
-import UnitsFirst from "./pages/UnitsFirst";
-import Timetable from "./pages/Timetable";
+
+// Lazy Loaded Pages
+const UnitsFirst = lazy(() => import("./pages/UnitsFirst"));
+const Timetable = lazy(() => import("./pages/Timetable"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const Landing = lazy(() => import('./pages/Landing'));
+const ViewAllCareers = lazy(() => import('./pages/ViewAllCareers'));
+const ViewAllUnits = lazy(() => import('./pages/ViewAllUnits'));
+const PlannerInitialPage = lazy(() => import('./pages/PlannerInitialPage'));
+const InfoPageRouter = lazy(() => import('./pages/InfoPageRouter'));
+const TopdownInitial = lazy(() => import('./pages/TopdownInitial'));
 
 function Router(props: DefaultProps) {
   const location = useLocation();
@@ -32,9 +35,6 @@ function Router(props: DefaultProps) {
             </Route>
             <Route exact path="/PlannerInitialPage">
               <PlannerInitialPage />
-            </Route>
-            <Route exact path="/CoursePlanner">
-              <CoursePlanner />
             </Route>
             <Route path="/InfoPage">
               <InfoPageRouter />
@@ -55,7 +55,7 @@ function Router(props: DefaultProps) {
               <Timetable />
             </Route>
             <Route>
-              <h1>Error 404 not found</h1> {/* TODO: Make a 404 Page */}
+              <NotFound />
             </Route>
           </Switch>
         </TransitionGroup>

@@ -1,10 +1,10 @@
-import { Box, Button, Grid } from "@material-ui/core";
+import { Box, Button, Grid, useMediaQuery } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { PaginatedTablesProps, PromptData, Unit, Plan, } from "../../types";
 import Error from "../shared/Error";
 import SemesterTable, { SemTable } from "./SemesterTable";
-import CurtinLogo from "../../static/curtinbase.jpg";
+import CurtinLogo from "../../static/curtinbase.webp"
 import CareerTable from "./CareerTable";
 import { useHistory } from "react-router";
 
@@ -384,6 +384,8 @@ function PaginatedTables(props: PaginatedTablesProps) {
     }
   }
 
+  const tablet = useMediaQuery("(max-width: 1000px)") // break at nice round number
+
   return (
     <>
       <Error onAccept={() => setError({ promptTitle: error.promptTitle, promptContent: error.promptContent, showPrompt: false })} promptTitle={error.promptTitle} promptContent={error.promptContent} showPrompt={error.showPrompt} />
@@ -393,10 +395,10 @@ function PaginatedTables(props: PaginatedTablesProps) {
             <SemTable key={idx} className="semesterTable" year={idx + 1} semesterOneUnits={year[0]} semesterTwoUnits={year[1]} />
           )}
           <SemesterTable onChange={setY2} semSelectedOne={selectedY2SemOne} semSelectedTwo={selectedY2SemTwo} year={2} semOne={availableS1Units} semTwo={availableS2Units} />
-          <SemesterTable onChange={setY3} semSelectedOne={selectedY3SemOne} semSelectedTwo={selectedY3SemTwo} year={2} semOne={availableS1Units} semTwo={availableS2Units} />
+          <SemesterTable onChange={setY3} semSelectedOne={selectedY3SemOne} semSelectedTwo={selectedY3SemTwo} year={3} semOne={availableS1Units} semTwo={availableS2Units} />
         </Box>
         <Grid container spacing={2}>
-          <Grid item sm={5}>
+          <Grid item md={5} xs={12}>
             <Box display="flex" justifyContent="space-between" mt={3}>
               <Box mr={3}>
                 <Button variant="contained" className="curtinBtn" onClick={() => history.push('/UnitsFirst')}>Back To Course Planner</Button>
@@ -405,11 +407,11 @@ function PaginatedTables(props: PaginatedTablesProps) {
                 <Button variant="contained" className="curtinBtn" onClick={() => history.push('/')}>Return To Main Menu</Button>
               </Box>
             </Box>
-            <Box mt={4}>
+            <Box mt={4} display={tablet ? "none" : "block"}>
               <img src={CurtinLogo} height={200} width={200} alt="curtin logo" />
             </Box>
           </Grid>
-          <Grid item xs={7}>
+          <Grid item md={7} xs={12}>
             <Box mt={3}>
               <CareerTable careers={props.careers} />
             </Box>
