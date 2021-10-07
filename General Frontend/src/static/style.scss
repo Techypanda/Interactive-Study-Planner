@@ -26,6 +26,13 @@
 .fh {
   height: 100%
 }
+.mh {
+  max-height: calc(100vh - 64px);
+  overflow-y: scroll;
+}
+.br {
+  border-left: 2px solid #cc9900;
+}
 
 .App-link {
     color: #61dafb;
