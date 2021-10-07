@@ -1,72 +1,25 @@
-//This is a redundant component - will make 'CurrentPlan' be a little more generic later
-    //This only exists so I can quickly ensure intitial page works
-        //Again, I will remove this later :)
-
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ListSubheader, Typography, List } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-
+import { Typography, Box } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import { useRemainingHeight } from "../../api/hooks";
+import { DefaultProps } from "../../types";
 
 const useStyles = makeStyles((theme) => ({
-    root: { 
-        width:'100%',
-        maxWidth: 360,
-        backgroundColor: theme.palette.background.paper,
-        outline: '1px solid #d9b362',
-        height: '100%'
-    },
-    listHeader: {
-      //'text-align': 'center',
-      color: 'black',
-    }
-}))
+  classList: {
+    "border-right": "2px solid #cc9900",
+  },
+}));
 
-
-export default function EmptyCurrentPlan() { 
-    const classes = useStyles();
-
-    function handleToggle() { 
-        console.log('This would remove the entry from the list ?');
-    }
-
-
-    const testCareerJson = [
-      {
-        "Requirements": [
-          "CMHL1000",
-          "HUMB1000"
-        ],
-        "Traits": [
-          "critical thinker",
-          "hardworking"
-        ],
-        "Name": "Pharmacology",
-      },
-    ];
-    /*const testMajorJson = [
-      {
-        "majorCode": "CACA1000",
-        "majorName": "Pharmacology",
-        "majorDescription": "yeah yeah hey yeah a ha aaaa",
-        "majorCredits": 25,
-        "majorUnits": [
-          "BIOL3010",
-          "ECEV3004",
-          "HUMB2011",
-          "HUMB2012",
-          "HUMB2014",
-          "HUMB3003",
-          "HUMB3009"
-        ]
-      }
-    ]*/
-
-    return ( 
-      <List subheader={<ListSubheader className={classes.listHeader}>
-          <Typography variant='h6' align='center'>
-              Current Plan
-           </Typography>
-           </ListSubheader>} className={classes.root}>
-      </List>
-    )
+export default function EmptyCurrentPlan(props: DefaultProps) {
+  const classes = useStyles();
+  const height = useRemainingHeight();
+  return (
+    <div className={`${props.className} fh mh hr`}>
+      <Box className={classes.classList} minHeight={height} height="100%">
+        <Box pt={2}>
+          <Typography variant="h5">Current Plan</Typography>
+        </Box>
+      </Box>
+    </div>
+  );
 }
