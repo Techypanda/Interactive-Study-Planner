@@ -393,7 +393,7 @@ function PaginatedTables(props: PaginatedTablesProps) {
             <SemTable key={idx} className="semesterTable" year={idx + 1} semesterOneUnits={year[0]} semesterTwoUnits={year[1]} />
           )}
           <SemesterTable onChange={setY2} semSelectedOne={selectedY2SemOne} semSelectedTwo={selectedY2SemTwo} year={2} semOne={availableS1Units} semTwo={availableS2Units} />
-          <SemesterTable onChange={setY3} semSelectedOne={selectedY3SemOne} semSelectedTwo={selectedY3SemTwo} year={2} semOne={availableS1Units} semTwo={availableS2Units} />
+          <SemesterTable onChange={setY3} semSelectedOne={selectedY3SemOne} semSelectedTwo={selectedY3SemTwo} year={3} semOne={availableS1Units} semTwo={availableS2Units} />
         </Box>
         <Grid container spacing={2}>
           <Grid item sm={5}>
