@@ -94,12 +94,12 @@ export default function TopDownInitialMain(props: UnitFirstSPAContextProps) {
       );
       if (spec.Internal === true) {
         spec.MajorAntiReqs[0].forEach((majorAntiReq: any) => {
-          if (majorAntiReq == bestMajor.MajorCode) {
+          if (majorAntiReq === bestMajor.MajorCode) {
             invalid = true;
           }
         });
         if (!invalid) {
-          if (intersection.length != 0 && intersection.length > bestMatchLen) {
+          if (intersection.length !== 0 && intersection.length > bestMatchLen) {
             bestMatchLen = intersection.length;
             bestInternalSpec = spec;
           }
@@ -121,11 +121,12 @@ export default function TopDownInitialMain(props: UnitFirstSPAContextProps) {
     while (!found) {
       var randSpec = Math.floor(Math.random() * (max - min) + min);
       if (specResp[randSpec].Internal === true) {
-        specResp[randSpec].MajorAntiReqs[0].forEach((majorAntiReq: string) => {
-          if (majorAntiReq == bestMajor.MajorCode) {
+        for (let i = 0; i < specResp[randSpec].MajorAntiReqs[0]; i++) {
+          const majorAntiReq: string = specResp[randSpec].MajorAntiReqs[0][i]
+          if (majorAntiReq === bestMajor.MajorCode) {
             invalid = true;
           }
-        });
+        }
         if (!invalid) {
           return specResp[randSpec];
         }
@@ -134,14 +135,13 @@ export default function TopDownInitialMain(props: UnitFirstSPAContextProps) {
     }
   };
   const findBestMajor = (majorResp: any, careerUnits: string[]) => {
-    const temp = { ...plan };
     var bestMatchLen = -1;
     var bestMajor;
     majorResp.forEach((major: any) => {
       let intersection = major.Units.filter((item: any) =>
         careerUnits.includes(item)
       );
-      if (intersection.length != 0 && intersection.length > bestMatchLen) {
+      if (intersection.length !== 0 && intersection.length > bestMatchLen) {
         bestMatchLen = intersection.length;
         bestMajor = major;
       }
@@ -170,7 +170,7 @@ export default function TopDownInitialMain(props: UnitFirstSPAContextProps) {
       );
       //Check for major anti req clash
       spec.MajorAntiReqs[0].forEach((majorAntiReq: any) => {
-        if (majorAntiReq == bestMajor.MajorCode) {
+        if (majorAntiReq === bestMajor.MajorCode) {
           invalid = true;
         }
       });
@@ -180,7 +180,7 @@ export default function TopDownInitialMain(props: UnitFirstSPAContextProps) {
         }
       });
       spec.SpecAntiReqs[0].forEach((specAntiReq: any) => {
-        if (bestInternalSpec.SpecializationCode == specAntiReq) {
+        if (bestInternalSpec.SpecializationCode === specAntiReq) {
           invalid = true;
         }
       });
@@ -246,7 +246,7 @@ export default function TopDownInitialMain(props: UnitFirstSPAContextProps) {
                 valid = false;
               }
               for (var l = 0; l < unitResp.length; l++) {
-                if (unitResp[l].UnitCode == unitResp[i].Prerequistes[j][k]) {
+                if (unitResp[l].UnitCode === unitResp[i].Prerequistes[j][k]) {
                   unitExistInDb++;
                   for (var m = 0; m < unitsIAmTaking.length; m++) {
                     if (unitResp[l].Antirequistes.includes(unitsIAmTaking[m])) {
@@ -282,14 +282,14 @@ export default function TopDownInitialMain(props: UnitFirstSPAContextProps) {
               currBestIndex = allIntersectionIndex[j];
             }
           }
-          if (currBestLen == validPaths[currBestIndex].length) {
+          if (currBestLen === validPaths[currBestIndex].length) {
             if (!careerUnits.includes(unitResp[i].UnitCode)) {
               careerUnits.push(unitResp[i].UnitCode);
             }
             if (!unitsIAmTaking.includes(unitResp[i].UnitCode)) {
               unitsIAmTaking.push(unitResp[i].UnitCode);
             }
-          } else if (currBestLen == 0) {
+          } else if (currBestLen === 0) {
             var min = 0;
             var max = validPaths.length;
             var randNum = Math.floor(Math.random() * (max - min) + min);
@@ -355,7 +355,7 @@ export default function TopDownInitialMain(props: UnitFirstSPAContextProps) {
     var planFinished = false;
     var individualCareer;
     for (var i = 0; i < careerResponseData.length; i++) {
-      if (careerResponseData[i].CareerId == careerId) {
+      if (careerResponseData[i].CareerId === careerId) {
         console.log("matched career");
         individualCareer = careerResponseData[i];
       }
@@ -452,7 +452,7 @@ export default function TopDownInitialMain(props: UnitFirstSPAContextProps) {
         bestMajor,
         bestInternalSpec
       );
-      if (bestSpec != undefined) {
+      if (bestSpec !== undefined) {
         updateUnitsIAmTaking(bestSpec, unitsIAmTaking);
         specArr.push(bestSpec);
         temp.specializations = specArr;
