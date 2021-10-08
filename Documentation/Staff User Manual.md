@@ -95,6 +95,10 @@ For the credits field, the number cannot be less than zero or an error will be r
 
 The Delivery of Unit field is used to indicate whether the unit is conducted online or in person on the campus, with both options able to be selected at the same time. They can be added using the plus button and removed by clicking the cross next to the target item.
 
+The Semester Unit Runs fields refers to the semester the unit is available to students in and may be either semester 1, 2 or both.
+
+The Year Usually Taken field refers to when the unit should be taken in a student's study plan, this is mainly for specialization units which should typically be taken in a specific order but don't them listed as prerequisites.
+
 **Note: The Internal field check box from the Specialization create page refers instead to whether the specialization is internal to the course/school/department or not.**
 
 <p>&nbsp;</p>
