@@ -1,5 +1,3 @@
-import internal from "stream";
-
 export interface DefaultProps {
   className?: string;
   style?: React.CSSProperties | undefined;
