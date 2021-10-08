@@ -17,7 +17,6 @@ const ViewAllUnits = lazy(() => import('./pages/ViewAllUnits'));
 const PlannerInitialPage = lazy(() => import('./pages/PlannerInitialPage'));
 const InfoPageRouter = lazy(() => import('./pages/InfoPageRouter'));
 const TopdownInitial = lazy(() => import('./pages/TopdownInitial'));
-const TopdownFilled = lazy(() => import('./pages/TopdownFilled'));
 
 function Router(props: DefaultProps) {
   const location = useLocation();
@@ -45,9 +44,6 @@ function Router(props: DefaultProps) {
             </Route>
             <Route exact path="/TopdownInitial">
               <TopdownInitial />
-            </Route>
-            <Route exact path="/TopdownFilled">
-              <TopdownFilled />
             </Route>
             <Route exact path="/unitsfirst">
               <UnitsFirst />
