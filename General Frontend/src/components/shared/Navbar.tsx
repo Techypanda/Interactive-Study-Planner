@@ -38,7 +38,7 @@ export default styled(Navbar)`
     font-weight: 400 !important;
   }
   h6:hover {
-    text-decoration: underline;
+    cursor: pointer;
   }
   .flexit {
     display: flex;
