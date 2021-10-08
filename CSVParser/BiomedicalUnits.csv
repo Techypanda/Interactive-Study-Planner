@@ -181,7 +181,7 @@ HUMB3009;GENE3000
 
 
 2
-
+3
 UNIT
 HUMB3003
 Neuroscience
@@ -211,7 +211,7 @@ CHEM1001;CHEM1007;CHEM1003;CHEM1002
 
 
 1
-
+2
 UNIT
 MEDI2010
 Molecular Cytogenetics and Diagnostics
@@ -222,7 +222,7 @@ MEDI1000,HUMB1001
 
 
 1
-
+2
 UNIT
 BIOL2001
 Introduction to Bioinformatics
@@ -233,7 +233,7 @@ GENE1000
 
 
 2
-
+3
 UNIT
 GENE2001
 Population Genetics and Molecular Evolution
@@ -244,7 +244,7 @@ GENE2000;GENE1000;311420;GENE2002;314000
 
 
 2
-
+2
 UNIT
 GENE3000
 Genetic Engineering
@@ -255,7 +255,7 @@ GENE2000;GENE1000;302488;311420
 
 
 1
-
+3
 UNIT
 GENE3002
 Human Genetic Disease
@@ -266,7 +266,7 @@ GENE1000
 
 
 1
-
+3
 UNIT
 BIOL3011
 Protein Structure and Interactions
@@ -277,7 +277,7 @@ BCCB2000,BIOL2001
 
 
 2
-
+3
 MAJOR
 MJRU-PHCOL
 Pharmacology
@@ -296,7 +296,7 @@ MEDI1000
 
 
 1
-
+2
 UNIT
 CHEM1006
 Pharmaceutical Chemistry
@@ -307,7 +307,7 @@ BCCB2000
 
 
 2
-
+2
 UNIT
 PHRM2006
 Pharmacology Principles
@@ -318,7 +318,7 @@ PHRM2005
 
 
 2
-
+2
 UNIT
 IMED3009
 Pharmacology of Antimicrobial Agents
@@ -329,7 +329,7 @@ PHRM2005;PHRM2005;MEDI2000,MEDI2009;MEDI2000,MICB2001
 
 
 1
-
+3
 UNIT
 IMED3010
 Systems Pharmacology
@@ -340,7 +340,7 @@ PHRM2006
 
 
 1
-
+3
 UNIT
 IMED3008
 Advanced Pharmacology
@@ -351,7 +351,7 @@ IMED3010
 
 
 2
-
+3
 UNIT
 PHRM3005
 Advanced Pharmacokinetics and Drug Bioanalysis
@@ -362,7 +362,7 @@ CHEM1006,PHRM2006
 
 
 2
-
+3
 SPECIALIZATION
 SPUC-HUMPT
 Human Pathology
@@ -383,7 +383,7 @@ Internal
 
 
 1
-
+2
 UNIT
 MEDI2000
 Foundations of Immunobiology
@@ -394,7 +394,7 @@ MEDI1000,HUMB1001;MEDI1000,313399;MEDI1000,1644;7842,HUMB1001;7842,313399;7842,1
 
 
 2
-
+2
 UNIT
 MEDI3017
 Medical Pathophysiology
@@ -405,7 +405,7 @@ HUMB2003,HUMB2014;HUMB2003,HUMB2004;HUMB2012,HUMB2014;HUMB2012,HUMB2004
 
 
 1
-
+3
 UNIT
 HUMB3008
 Clinical Neurophysiology
@@ -416,7 +416,7 @@ HUMB2014,HUMB2000;HUMB2014,HUMB3009;HUMB2004,HUMB2000;HUMB2004,HUMB3009
 
 
 2
-
+3
 SPECIALIZATION
 SPUC-ICBIO
 Immunology and Cell Biology
@@ -437,7 +437,7 @@ GENE1000
 
 
 1
-
+2
 UNIT
 MEDI3016
 Frontiers in Immunology
@@ -448,7 +448,7 @@ MEDI2000
 
 
 1
-
+3
 UNIT
 BCCB3001
 Frontiers in Cell Biology
@@ -459,7 +459,7 @@ BCCB2004
 
 
 2
-
+3
 SPECIALIZATION
 SPUC-MICRO
 Microbiology
@@ -480,7 +480,7 @@ BCCB1000;MEDI1000
 
 
 1
-
+2
 UNIT
 MICB2001
 Translational Microbiology
@@ -491,7 +491,7 @@ MEDI1000
 
 
 2
-
+2
 UNIT
 MICB3000
 Molecular Virology
@@ -502,7 +502,7 @@ MEDI2003;MEDI2009;311405;302466
 
 
 1
-
+3
 UNIT
 MICB3002
 Advances in Molecular Microbiology
@@ -513,7 +513,7 @@ MEDI2003;MEDI2009
 
 
 2
-
+3
 SPECIALIZATION
 SPUC-HUMGN
 Human Genetics and Genomics
@@ -553,8 +553,8 @@ Internal
 
 
 
-12
-
+1
+2
 UNIT
 GRDE2017
 Illustration Concepts and Processes
@@ -564,8 +564,8 @@ Internal
 GRDE1015;GRDE1002;310131
 
 
-12
-
+2
+2
 UNIT
 GRDE2031
 Digital Illustration Production
@@ -575,8 +575,8 @@ Internal
 
 
 
-12
-
+1
+3
 UNIT
 GRDE3018
 Illustration and Visual Development
@@ -586,8 +586,8 @@ Internal
 GRDE2019;GRDE2017;313306
 
 
-12
-
+2
+3
 SPECIALIZATION
 SPUC-ASIAN
 Asian Studies
@@ -608,7 +608,7 @@ Internal
 
 
 2
-
+3
 UNIT
 ASIA3001
 Asian Century Issues and Perspectives
@@ -619,7 +619,7 @@ Internal
 
 
 1
-
+3
 UNIT
 CHIN1000
 Beginning Chinese
@@ -629,8 +629,8 @@ Internal,Fully Online
 
 
 12321
-12
-
+1
+2
 UNIT
 JAPN1000
 Beginning Japanese
@@ -640,8 +640,8 @@ Internal,Fully Online
 
 
 11265
-12
-
+2
+2
 SPECIALIZATION
 SPUC-CHNSE
 Chinese Language
@@ -662,7 +662,7 @@ Internal,Fully Online
 
 12322
 2
-
+2
 UNIT
 CHIN2001
 Pre-Intermediate Chinese
@@ -673,7 +673,7 @@ Internal
 
 
 1
-
+3
 UNIT
 CHIN2002
 Pre-Intermediate Chinese Developing
@@ -684,7 +684,7 @@ Internal
 
 12324
 2
-
+3
 SPECIALIZATION
 SPUC-JAPAN
 Japanese Language
@@ -705,7 +705,7 @@ Internal
 
 
 1
-
+2
 UNIT
 JAPN2002
 Intermediate Japanese: Extending Everyday Contexts
@@ -716,7 +716,7 @@ Internal
 
 
 2
-
+2
 UNIT
 JAPN3000
 Intermediate Japanese
@@ -726,8 +726,8 @@ Internal
 
 
 
-12
-
+1
+3
 UNIT
 JAPN3001
 Intermediate Japanese Developing
@@ -738,7 +738,7 @@ Internal
 
 
 2
-
+3
 SPECIALIZATION
 SPUC-CORPG
 Corporate Governance
@@ -758,8 +758,8 @@ Internal,Fully Online
 
 
 2844
-12
-
+2
+3
 UNIT
 BLAW2011
 Safety and Environmental Health Law
@@ -770,7 +770,7 @@ Internal,Fully Online
 
 
 1
-
+2
 UNIT
 BLAW1006
 Introduction to Business Law
@@ -781,7 +781,7 @@ Internal,Fully Online
 
 
 2
-
+2
 UNIT
 BLAW3004
 Business Intellectual Property
@@ -792,7 +792,7 @@ BLAW2006;BLAW1006;BLAW1004
 
 
 1
-
+3
 SPECIALIZATION
 SPUC-INENT
 Innovation and Entrepreneurship
@@ -813,7 +813,7 @@ Internal
 
 
 1
-
+2
 UNIT
 MGMT3004
 Entrepreneurship
@@ -824,7 +824,7 @@ Internal
 
 
 12
-
+2
 UNIT
 MGMT2004
 Business and Sustainable Development
@@ -834,8 +834,8 @@ Internal,Fully Online
 
 
 
-12
-
+1
+3
 UNIT
 MGMT3002
 Managing Change
@@ -845,18 +845,8 @@ Internal,Fully Online
 
 
 
-12
-
-SPECIALIZATION
-SPUC-SMBUS
-Small Business Start-Up
-This specialisation is designed for enterprising individuals who want to start their own business, or work as internal corporate entrepreneurs.
-100
-FALSE
-MGMT3004,MGMT3003,MGMT3007,MGMT2001
-
-
-
+2
+3
 UNIT
 MGMT3003
 Small Business Growth
@@ -867,7 +857,7 @@ Internal
 
 
 2
-
+2
 UNIT
 MGMT2001
 Start-Up Business Planning
@@ -898,8 +888,8 @@ Internal,Fully Online
 
 
 
-12
-
+1
+2
 UNIT
 MKTG2001
 Brand Management
@@ -909,8 +899,8 @@ Internal
 
 
 
-12
-
+2
+2
 UNIT
 MKTG3002
 Account Management
@@ -920,8 +910,8 @@ Internal
 11016;MKTG2000
 
 
-12
-
+1
+3
 UNIT
 MKTG2006
 Managing Social Media Platforms
@@ -931,8 +921,8 @@ Internal,Fully Online
 
 
 
-12
-
+2
+3
 SPECIALIZATION
 SPUC-MRKTG
 Marketing Foundations
@@ -952,8 +942,8 @@ Fully Online,Internal
 
 
 
-12
-
+2
+2
 UNIT
 MKTG2004
 Consumer Behaviour
@@ -963,8 +953,8 @@ Fully Online,Internal
 
 
 
-12
-
+1
+2
 UNIT
 MKTG3003
 Digital Marketing Strategy
@@ -974,8 +964,8 @@ Fully Online,Internal
 
 
 
-12
-
+1
+3
 UNIT
 MKTG1000
 Discovering Marketing
@@ -985,8 +975,8 @@ Internal,Fully Online
 
 
 
-12
-
+2
+3
 SPECIALIZATION
 SPUC-JOURL
 Journalism
@@ -1006,8 +996,8 @@ Internal
 
 
 JOUR5013
-12
-
+1
+2
 UNIT
 JOUR2000
 Radio News
@@ -1018,7 +1008,7 @@ JOUR1001;1564
 
 JOUR5002
 1
-
+3
 UNIT
 JOUR2002
 Video News
@@ -1028,8 +1018,8 @@ Internal
 JOUR1001;1564
 
 JOUR5005
-12
-
+2
+3
 UNIT
 JOUR2003
 News Writing and Reporting
@@ -1040,7 +1030,7 @@ JOUR1001
 
 JOUR5003
 2
-
+2
 SPECIALIZATION
 SPUC-PRWRI
 Professional Writing
@@ -1061,7 +1051,7 @@ Internal
 
 PWRP5021
 1
-
+2
 UNIT
 PWRP1003
 Writing, Rhetoric and Persuasion
@@ -1072,7 +1062,7 @@ Internal
 
 PWRP5022
 2
-
+2
 UNIT
 PWRP2001
 Writing, Editing and Publishing
@@ -1083,7 +1073,7 @@ Internal
 
 PWRP5003
 1
-
+3
 UNIT
 PWRP2000
 Tricks of Truth and Authenticity
@@ -1094,7 +1084,7 @@ Internal
 
 PWRP5001
 2
-
+3
 SPECIALIZATION
 SPUC-HLTDA
 Health Data
@@ -1115,7 +1105,7 @@ Fully Online,Internal
 
 
 1
-
+2
 UNIT
 SPAT1007
 Fundamentals of Geographic Information Systems
@@ -1125,8 +1115,8 @@ Fully Online,Internal
 
 
 SPAT5006,SPAT2011
-1
-
+2
+2
 UNIT
 PUBH2006
 Privacy and Cyber Security: Health Data Governance
@@ -1137,7 +1127,7 @@ Internal,Fully Online
 
 
 1
-
+3
 UNIT
 PUBH3006
 Introduction to Artificial Intelligence, Machine Learning and Health
@@ -1148,7 +1138,7 @@ PUBH2005
 
 
 2
-
+3
 UNIT
 FORS1005
 Foundations of Forensic Science
@@ -1181,7 +1171,7 @@ BCCB2000
 
 
 2
-
+2
 UNIT
 PHAR2000
 Foundations of Pharmaceutics
@@ -1280,7 +1270,7 @@ BIOL2001
 
 
 12
-
+2
 UNIT
 MEDS3005
 Human Reproductive Science
