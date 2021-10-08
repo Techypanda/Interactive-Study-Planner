@@ -13,7 +13,7 @@ function Navbar(props: DefaultProps) {
 		    <Box id="LogoSection" mr={2}>
 			<img src={CurtinLogo} alt="curtin logo" />
 		    </Box>
-		    <Typography variant="h6" onClick={() => history.push('/')}>
+		    <Typography id="Title" variant="h6" onClick={() => history.push('/')}>
 			Medical Course Planner
 		    </Typography>
 		    <Box id="spacer:)" display="flex" flexGrow={1} />
@@ -37,12 +37,12 @@ export default styled(Navbar)`
     margin-left: 10px;
     font-weight: 400 !important;
   }
-  h6:hover {
-    cursor: pointer;
-  }
   .flexit {
     display: flex;
     justify-content: flex-start;
+  }
+  #Title:hover  {
+    cursor: pointer;
   }
   #LogoSection {
     align-items: center;
