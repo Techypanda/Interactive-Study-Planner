@@ -90,8 +90,8 @@ During this sprint, the Bottom Up and Top Down components were completed and the
 
 Some minor appearance and design edits/updates were also made to the both the General and CMS Frontends to make them more appealing and to fix some minor mistakes.
 
-After a client meeting a week prior to the handover, the client raised issues with the timetable page that appeared after users has selected their study plan. The issues required the page to replace the drop down selection of units into timetable slots into a automatically filled table except when users were undertaking optional units. These issues were not easy to fix due to the lack of time and also problems with the current state of the data given and method of storage.
+After a client meeting a week prior to the handover, the client raised issues with the timetable page that appeared after users had selected their study plan. The issues required the page to replace the drop down selection of units into timetable slots into an automatically filled table except when users were undertaking optional units. These issues were not easy to fix due to the lack of time and also problems with the current state of the data given and method of storage.
 
-Whilst the timetable page was successfully replace and redeployed, the quality of the work was however not up to the same standard of work as the rest of the product. 
+Whilst the timetable page was successfully replaced and redeployed, the quality of the work was however not up to the same standard of work as the rest of the product. 
 
 The product was at that stage completed and was handed over to the client.
