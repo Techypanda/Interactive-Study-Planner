@@ -1,0 +1,74 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'CSVParser
+
+  Parse CSV to effect DB
+
+  '
+Globals:
+  Function:
+    Timeout: 180
+Parameters:
+  Authentication:
+    Type: String
+    Description: Disable Authentication (True) or Leave It (False)
+    Default: 'true'
+Resources:
+  CSVParsingAPI:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: Dev
+      Cors:
+        AllowMethods: '''POST, OPTIONS'''
+        AllowHeaders: '''Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'''
+        AllowOrigin: '''*'''
+      GatewayResponses:
+        DEFAULT_4XX:
+          ResponseParameters:
+            Headers:
+              Access-Control-Allow-Origin: '''*'''
+              Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'''
+              Access-Control-Allow-Methods: '''OPTIONS,POST'''
+        DEFAULT_5XX:
+          ResponseParameters:
+            Headers:
+              Access-Control-Allow-Origin: '''*'''
+              Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'''
+              Access-Control-Allow-Methods: '''OPTIONS,POST'''
+  CSVParser:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Events:
+        CatchAll:
+          Type: Api
+          Properties:
+            Path: /{operation+}
+            Method: ANY
+            RestApiId:
+              Ref: CSVParsingAPI
+      Environment:
+        Variables:
+          DisableAuthentication:
+            Ref: Authentication
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName: DevUnits
+      - DynamoDBCrudPolicy:
+          TableName: DevMajors
+      - DynamoDBCrudPolicy:
+          TableName: DevSpecializations
+      - DynamoDBCrudPolicy:
+          TableName: DevCareers
+      ImageUri: csvparser:go1.x-v1
+    Metadata:
+      DockerTag: go1.x-v1
+      DockerContext: ./CSVParser
+      Dockerfile: Dockerfile
+Outputs:
+  CSVParserFunction:
+    Description: CSV Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+      - CSVParser
+      - Arn
