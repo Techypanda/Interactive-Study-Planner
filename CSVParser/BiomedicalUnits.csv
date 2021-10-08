@@ -104,7 +104,7 @@ HUMB1005;HUMB1002;HUMB1001;HUMB1004
 
 
 1
-
+2
 UNIT
 HUMB2014
 Vital Physiology
@@ -115,7 +115,7 @@ HUMB1001
 
 
 1
-
+2
 UNIT
 HUMB2011
 Limb Anatomy and Biomechanics
@@ -126,7 +126,7 @@ HUMB1005;HUMB1002;HUMB1001;HUMB1004
 
 
 2
-
+2
 UNIT
 HUMB2012
 Physiological Processes
@@ -137,7 +137,7 @@ HUMB1001
 
 
 2
-
+2
 UNIT
 ECEV3004
 Human Evolution
@@ -148,7 +148,7 @@ HUMB2002;HUMB2011;HUMB2013
 
 
 1
-
+3
 UNIT
 HUMB2002
 Anatomy of the Limbs
@@ -170,7 +170,7 @@ HUMB1005;HUMB1002;HUMB1001;HUMB1004
 
 
 2
-
+3
 UNIT
 BIOL3010
 Biosciences Research Project
@@ -192,7 +192,7 @@ HUMB2000;HUMB3009;314236
 
 
 12
-
+3
 MAJOR
 MJRU-MOLGN
 Molecular Genetics
@@ -225,6 +225,17 @@ MEDI1000,HUMB1001
 2
 UNIT
 BIOL2001
+Introduction to Bioinformatics
+In this unit students will learn to source and interpret genetic and genomic data using online databases and specialist software.
+25
+Internal
+GENE1000
+
+
+2
+2
+UNIT
+BIOL2001*
 Introduction to Bioinformatics
 In this unit students will learn to source and interpret genetic and genomic data using online databases and specialist software.
 25
@@ -520,7 +531,7 @@ Human Genetics and Genomics
 This specialisation will allow students to pursue their interest in human genetics and genomics. In this specialisation, students will learn the basic identification of all chromosomes in the human genome and understand the characteristics of, and molecular basis for, human genetic diseases and traits. Students will also learn to source and interpret genetic and genomic data using online databases and specialist software.
 100
 TRUE
-MEDI2010,GENE2001,GENE3002,BIOL2001
+MEDI2010,GENE2001,GENE3002,BIOL2001*
 
 
 MJRU-MOLGN
@@ -1259,7 +1270,7 @@ GENE3000
 
 
 1
-
+3
 UNIT
 BIOL3008
 Advanced Bioinformatics

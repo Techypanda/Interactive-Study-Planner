@@ -1,9 +1,9 @@
 import { Box, Button, Grid, useMediaQuery } from "@material-ui/core";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import { PaginatedTablesProps, PromptData, Unit, Plan, } from "../../types";
 import Error from "../shared/Error";
-import SemesterTable, { SemTable } from "./SemesterTable";
+import { OptionalTable, SemTable } from "./SemesterTable";
 import CurtinLogo from "../../static/curtinbase.webp"
 import CareerTable from "./CareerTable";
 import { useHistory } from "react-router";
@@ -11,6 +11,327 @@ import { useHistory } from "react-router";
 const HARD_CODED_FIRSTYEAR_UNITS = [ // These are required in first year for medical degree
   "MEDI1000", "HUMB1000", "BIOL1004", "CHEM1007", "INDH1006", "EPID1000", "HUMB1001", "GENE1000"
 ]
+
+function getMajorUnits(unitMap: any, plan: Plan) {
+  const out: any[][][] = [[[null, null], [null, null]], [[null, null], [null, null]]]
+  const extraYearTwos: any = []
+  const extraYearThrees: any = []
+  plan.mainMajor!.Units.forEach((unitCode) => {
+    if ((unitMap[unitCode] as Unit).Year !== 2 && (unitMap[unitCode] as Unit).Year !== 3) {
+      alert(`bad data, year is not 2 or 3 for unit: ${unitCode}`)
+      // @ts-ignore
+      throw Error(`bad data, year is not 2 or 3 for unit: ${unitCode}`)
+    }
+    if ((unitMap[unitCode] as Unit).Year! === 2) {
+      if ((unitMap[unitCode] as Unit).Semester === 1) {
+        if (out[0][0][0] == null) {
+          out[0][0][0] = unitMap[unitCode]
+        } else {
+          out[0][0][1] = unitMap[unitCode]
+        }
+      } else if ((unitMap[unitCode] as Unit).Semester === 2) {
+        if (out[0][1][0] == null) {
+          out[0][1][0] = unitMap[unitCode]
+        } else {
+          out[0][1][1] = unitMap[unitCode]
+        }
+      } else {
+        extraYearTwos.push(unitMap[unitCode])
+      }
+    } else {
+      if ((unitMap[unitCode] as Unit).Semester === 1) {
+        if (out[1][0][0] == null) {
+          out[1][0][0] = unitMap[unitCode]
+        } else {
+          out[1][0][1] = unitMap[unitCode]
+        }
+      } else if ((unitMap[unitCode] as Unit).Semester === 2) {
+        if (out[1][1][0] == null) {
+          out[1][1][0] = unitMap[unitCode]
+        } else {
+          out[1][1][1] = unitMap[unitCode]
+        }
+      } else {
+        extraYearThrees.push(unitMap[unitCode])
+      }
+    }
+  })
+  /* console.log(out)
+  console.log(extraYearTwos)
+  console.log(extraYearThrees) */
+  let iterations = 0
+  console.log(extraYearTwos)
+  while (extraYearTwos.length >= 1 && iterations <= 10) {
+    iterations += 1
+    if (iterations > 10) {
+      // alert('infinite loop - bad data')
+      // @ts-ignore
+      throw new Error('infinite loop - bad data')
+    }
+    console.warn('bad data, theres extra year twos.')
+    let filled = false
+    for (let i = 0; i < out[0][0].length; i++) {
+      const v = out[0][0][i]
+      if (v === null) {
+        out[0][0][i] = extraYearTwos.pop()
+        filled = true
+        break
+      }
+    }
+    if (!filled) {
+      for (let i = 0; i < out[0][1].length; i++) {
+        const v = out[0][1][i]
+        if (v === null) {
+          out[0][1][i] = extraYearTwos.pop()
+          filled = true
+          break
+        }
+      }
+    }
+  }
+  iterations = 0
+  while (extraYearThrees.length >= 1 && iterations <= 10) {
+    iterations += 1
+    if (iterations > 10) {
+      // alert('infinite loop - bad data')
+      // @ts-ignore
+      throw new Error('infinite loop - bad data')
+    }
+    console.warn('bad data, theres extra year threes.')
+    let filled = false
+    for (let i = 0; i < out[1][0].length; i++) {
+      const v = out[1][0][i]
+      if (v === null) {
+        out[1][0][i] = extraYearThrees.pop()
+        filled = true
+        break
+      }
+    }
+    if (!filled) {
+      for (let i = 0; i < out[1][1].length; i++) {
+        const v = out[1][1][i]
+        if (v === null) {
+          out[1][1][i] = extraYearThrees.pop()
+          filled = true
+          break
+        }
+      }
+    }
+  }
+  return out
+}
+
+// Biomedical has cursed exceptions althroughout its degree, this function will do the swaps
+function doCursedBiomedicalExceptions() {
+  /*
+    For double major of Molecular Genetics and Pharmacology - for the Pharmacology major, Y2S1, swap 'BCCB Foundations in Biochemistry' for 'BIOL2004 Research Skills for Biomedical Sciences'  
+    For double major in Human Biomedicine and Molecular Genetics: for the Molecular Genetics major, in Y3S2, swap 'BIOL3010 Bioscience Reserch Project' for BIOL3009 Advanced Bioinformatics' 
+    Human Biomedicine major students - if choose Human Pathology and Immunology and Cell Biology Specialisations, due to duplication, need to substitute MEDI2000 Foundations of Immunobiology for an Optional unit for the Immunology and Cell Biology Specialisation  
+    For Human Biomedicine major students - need to substitute BCCB Foundations in Biochemistry for PHRM2005 Foundations in Pharmacology
+    Mol Gen Major students cannot choose Human Genetics and Genomics Spec
+    Pharmacology Spec students if they don't have BCCB2000 on their study plan must do BCCB2000 (check with Ricky)
+    MG and HB majors - BIOL3010 duplicated - add alternate core BIOL3008 and MEDS3005
+    MG and Pharmacology majors - BCCB2000 duplicated - add alternate core BIOL2004
+    Human Path and Immuno and Cell Bio Specialisation - remove from drop-down if HumBiomed major is chosen
+  */
+
+}
+
+function getOtherUnits(unitMap: any, plan: Plan) {
+  const out: any[][][] = [[[null, null], [null, null]], [[null, null], [null, null]]]
+  const extraYearTwos: any = []
+  const extraYearThrees: any = []
+  if (plan.doubleMajor) { // double major
+    plan.doubleMajor!.Units.forEach((unitCode) => {
+      if ((unitMap[unitCode] as Unit).Year !== 2 && (unitMap[unitCode] as Unit).Year !== 3) {
+        alert(`bad data, year is not 2 or 3 for unit: ${unitCode}`)
+        // @ts-ignore
+        throw Error(`bad data, year is not 2 or 3 for unit: ${unitCode}`)
+      }
+      if ((unitMap[unitCode] as Unit).Year! === 2) {
+        if ((unitMap[unitCode] as Unit).Semester === 1) {
+          if (out[0][0][0] == null) {
+            out[0][0][0] = unitMap[unitCode]
+          } else {
+            out[0][0][1] = unitMap[unitCode]
+          }
+        } else if ((unitMap[unitCode] as Unit).Semester === 2) {
+          if (out[0][1][0] == null) {
+            out[0][1][0] = unitMap[unitCode]
+          } else {
+            out[0][1][1] = unitMap[unitCode]
+          }
+        } else {
+          extraYearTwos.push(unitMap[unitCode])
+        }
+      } else {
+        if ((unitMap[unitCode] as Unit).Semester === 1) {
+          if (out[1][0][0] == null) {
+            out[1][0][0] = unitMap[unitCode]
+          } else {
+            out[1][0][1] = unitMap[unitCode]
+          }
+        } else if ((unitMap[unitCode] as Unit).Semester === 2) {
+          if (out[1][1][0] == null) {
+            out[1][1][0] = unitMap[unitCode]
+          } else {
+            out[1][1][1] = unitMap[unitCode]
+          }
+        } else {
+          extraYearThrees.push(unitMap[unitCode])
+        }
+      }
+    })
+  } else {
+    if (plan.optionalUnits) { // 1 ispec + 4 optionals
+      plan.specializations!.forEach((spec) => {
+        spec.Units.forEach((unitCode) => {
+          if ((unitMap[unitCode] as Unit).Year === 2) {
+            if ((unitMap[unitCode] as Unit).Semester === 1) {
+              for (let i = 0; i < out[0][0].length; i++) {
+                if (out[0][0][i] === null) {
+                  out[0][0][i] = (unitMap[unitCode] as Unit)
+                  break
+                }
+              }
+            } else if ((unitMap[unitCode] as Unit).Semester === 2) {
+              for (let i = 0; i < out[0][1].length; i++) {
+                if (out[0][1][i] === null) {
+                  out[0][1][i] = (unitMap[unitCode] as Unit)
+                  break
+                }
+              }
+            } else {
+              extraYearTwos.push((unitMap[unitCode] as Unit))
+            }
+          } else {
+            if ((unitMap[unitCode] as Unit).Semester === 1) {
+              for (let i = 0; i < out[1][0].length; i++) {
+                if (out[1][0][i] === null) {
+                  out[1][0][i] = (unitMap[unitCode] as Unit)
+                  break
+                }
+              }
+            } else if ((unitMap[unitCode] as Unit).Semester === 2) {
+              for (let i = 0; i < out[1][1].length; i++) {
+                if (out[1][1][i] === null) {
+                  out[1][1][i] = (unitMap[unitCode] as Unit)
+                  break
+                }
+              }
+            } else {
+              extraYearThrees.push((unitMap[unitCode] as Unit))
+            }
+          }
+        })
+      })
+      // then do optionals
+
+    } else { // 2 ispecs or 1 ispec + 1 espec
+      plan.specializations!.forEach((spec) => {
+        spec.Units.forEach((unitCode) => {
+          if ((unitMap[unitCode] as Unit).Year === 2) {
+            if ((unitMap[unitCode] as Unit).Semester === 1) {
+              for (let i = 0; i < out[0][0].length; i++) {
+                if (out[0][0][i] === null) {
+                  out[0][0][i] = (unitMap[unitCode] as Unit)
+                  break
+                }
+              }
+            } else if ((unitMap[unitCode] as Unit).Semester === 2) {
+              for (let i = 0; i < out[0][1].length; i++) {
+                if (out[0][1][i] === null) {
+                  out[0][1][i] = (unitMap[unitCode] as Unit)
+                  break
+                }
+              }
+            } else {
+              extraYearTwos.push((unitMap[unitCode] as Unit))
+            }
+          } else {
+            if ((unitMap[unitCode] as Unit).Semester === 1) {
+              for (let i = 0; i < out[1][0].length; i++) {
+                if (out[1][0][i] === null) {
+                  out[1][0][i] = (unitMap[unitCode] as Unit)
+                  break
+                }
+              }
+            } else if ((unitMap[unitCode] as Unit).Semester === 2) {
+              for (let i = 0; i < out[1][1].length; i++) {
+                if (out[1][1][i] === null) {
+                  out[1][1][i] = (unitMap[unitCode] as Unit)
+                  break
+                }
+              }
+            } else {
+              extraYearThrees.push((unitMap[unitCode] as Unit))
+            }
+          }
+        })
+      })
+    }
+  }
+
+  let iterations = 0
+  while (extraYearTwos.length >= 1 && iterations <= 10) {
+    iterations += 1
+    if (iterations > 10) {
+      // alert('infinite loop - bad data')
+      // @ts-ignore
+      throw new Error('infinite loop - bad data')
+    }
+    console.warn('bad data, theres extra year twos.')
+    let filled = false
+    for (let i = 0; i < out[0][0].length; i++) {
+      const v = out[0][0][i]
+      if (v === null) {
+        out[0][0][i] = extraYearTwos.pop()
+        filled = true
+        break
+      }
+    }
+    if (!filled) {
+      for (let i = 0; i < out[0][1].length; i++) {
+        const v = out[0][1][i]
+        if (v === null) {
+          out[0][1][i] = extraYearTwos.pop()
+          filled = true
+          break
+        }
+      }
+    }
+  }
+  iterations = 0
+  while (extraYearThrees.length >= 1 && iterations <= 10) {
+    iterations += 1
+    if (iterations > 10) {
+      // alert('infinite loop - bad data')
+      // @ts-ignore
+      throw new Error('infinite loop - bad data')
+    }
+    console.warn('bad data, theres extra year threes.')
+    let filled = false
+    for (let i = 0; i < out[1][0].length; i++) {
+      const v = out[1][0][i]
+      if (v === null) {
+        out[1][0][i] = extraYearThrees.pop()
+        filled = true
+        break
+      }
+    }
+    if (!filled) {
+      for (let i = 0; i < out[1][1].length; i++) {
+        const v = out[1][1][i]
+        if (v === null) {
+          out[1][1][i] = extraYearThrees.pop()
+          filled = true
+          break
+        }
+      }
+    }
+  }
+  return out
+}
 
 function checkIfHavePrereqs(unitsIAmTaking: Unit[], unit: Unit): [boolean, string[][]?] {
   let retVal: [boolean, string[][]?] = [false, []];
@@ -81,308 +402,105 @@ function PaginatedTables(props: PaginatedTablesProps) {
   const [yearCount] = useState(3);
   const [error, setError] = useState<PromptData>({ promptTitle: "", promptContent: "", showPrompt: false });
   const [paginatedUnits, setPaginatedUnits] = useState(doPagination(yearCount, props.plan));
-  const [selectedY2SemOne, setSelectedY2SemOne] = useState<Unit[]>([])
-  const [selectedY2SemTwo, setSelectedY2SemTwo] = useState<Unit[]>([])
-  const [selectedY3SemOne, setSelectedY3SemOne] = useState<Unit[]>([])
-  const [selectedY3SemTwo, setSelectedY3SemTwo] = useState<Unit[]>([])
-  const [availableS1Units, setAvailableS1Units] = useState<Unit[]>(computeAvailableS1())
-  const [availableS2Units, setAvailableS2Units] = useState<Unit[]>(computeAvailableS2())
+
+  const units = useMemo(() => {
+    const mUnits = getMajorUnits(hashmapOfUnits, props.plan)
+    const eUnits = getOtherUnits(hashmapOfUnits, props.plan)
+    return [[[...mUnits[0][0], ...eUnits[0][0]], [...mUnits[0][1], ...eUnits[0][1]]], [[...mUnits[1][0], ...eUnits[1][0]], [...mUnits[1][1], ...eUnits[1][1]]]]
+  }, [hashmapOfUnits, props.plan])
+  const semOneOptions = useMemo(() => props.plan.optionalUnits?.filter(u => u.Semester === 1 || u.Semester === 12), [props.plan.optionalUnits])
+  const semTwoOptions = useMemo(() => props.plan.optionalUnits?.filter(u => u.Semester === 2 || u.Semester === 12), [props.plan.optionalUnits])
+  doCursedBiomedicalExceptions() // do swaps
+
+  const selectOptional = (slot: number, sem: number, unitCode: string) => { // slot === year
+    if (slot === 2) {
+      if (sem === 1) {
+        const allPrevUnits = [hashmapOfUnits["MEDI1000"], hashmapOfUnits["HUMB1000"], hashmapOfUnits["BIOL1004"],
+        hashmapOfUnits["CHEM1007"], hashmapOfUnits["EPID1000"], hashmapOfUnits["GENE1000"], hashmapOfUnits["HUMB1001"],
+        hashmapOfUnits["INDH1006"]]
+        const resp = checkIfHavePrereqs(allPrevUnits, hashmapOfUnits[unitCode])
+        if (!resp[0]) {
+          return true
+        } else {
+          let err = `You do not have prerequistes for unit ${hashmapOfUnits[unitCode].Name}, you require: `
+          resp[1]!.forEach((path) => {
+            path.forEach((u) => {
+              err += `${u} and `
+            })
+            err = err.slice(0, -4);
+            err += `OR `
+          })
+          err = err.slice(0, -3)
+          setError({ promptTitle: 'Unit Selection Error', promptContent: err, showPrompt: false })
+        }
+      } else {
+        const allPrevUnits = [hashmapOfUnits["MEDI1000"], hashmapOfUnits["HUMB1000"], hashmapOfUnits["BIOL1004"],
+        hashmapOfUnits["CHEM1007"], hashmapOfUnits["EPID1000"], hashmapOfUnits["GENE1000"], hashmapOfUnits["HUMB1001"],
+        hashmapOfUnits["INDH1006"], ...units[0][0]].filter(u => u != null)
+        const resp = checkIfHavePrereqs(allPrevUnits, hashmapOfUnits[unitCode])
+        if (!resp[0]) {
+          return true
+        } else {
+          let err = `You do not have prerequistes for unit ${hashmapOfUnits[unitCode].Name}, you require: `
+          resp[1]!.forEach((path) => {
+            path.forEach((u) => {
+              err += `${u} and `
+            })
+            err = err.slice(0, -4);
+            err += `OR `
+          })
+          err = err.slice(0, -3)
+          setError({ promptTitle: 'Unit Selection Error', promptContent: err, showPrompt: false })
+        }
+      }
+    } else {
+      if (sem === 1) {
+        const allPrevUnits = [hashmapOfUnits["MEDI1000"], hashmapOfUnits["HUMB1000"], hashmapOfUnits["BIOL1004"],
+        hashmapOfUnits["CHEM1007"], hashmapOfUnits["EPID1000"], hashmapOfUnits["GENE1000"], hashmapOfUnits["HUMB1001"],
+        hashmapOfUnits["INDH1006"], ...units[0][0], ...units[0][1]].filter(u => u != null)
+        const resp = checkIfHavePrereqs(allPrevUnits, hashmapOfUnits[unitCode])
+        if (!resp[0]) {
+          return true
+        } else {
+          let err = `You do not have prerequistes for unit ${hashmapOfUnits[unitCode].Name}, you require: `
+          resp[1]!.forEach((path) => {
+            path.forEach((u) => {
+              err += `${u} and `
+            })
+            err = err.slice(0, -4);
+            err += `OR `
+          })
+          err = err.slice(0, -3)
+          setError({ promptTitle: 'Unit Selection Error', promptContent: err, showPrompt: false })
+        }
+      } else {
+        const allPrevUnits = [hashmapOfUnits["MEDI1000"], hashmapOfUnits["HUMB1000"], hashmapOfUnits["BIOL1004"],
+        hashmapOfUnits["CHEM1007"], hashmapOfUnits["EPID1000"], hashmapOfUnits["GENE1000"], hashmapOfUnits["HUMB1001"],
+        hashmapOfUnits["INDH1006"], ...units[0][0], ...units[0][1], ...units[1][0]].filter(u => u != null)
+        const resp = checkIfHavePrereqs(allPrevUnits, hashmapOfUnits[unitCode])
+        if (!resp[0]) {
+          return true
+        } else {
+          let err = `You do not have prerequistes for unit ${hashmapOfUnits[unitCode].Name}, you require: `
+          resp[1]!.forEach((path) => {
+            path.forEach((u) => {
+              err += `${u} and `
+            })
+            err = err.slice(0, -4);
+            err += `OR `
+          })
+          err = err.slice(0, -3)
+          setError({ promptTitle: 'Unit Selection Error', promptContent: err, showPrompt: false })
+        }
+      }
+    }
+    return false
+  }
+
   useEffect(() => {
     setPaginatedUnits(doPagination(yearCount, props.plan))
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [yearCount])
-
-  function computeAvailableS1(): Unit[] {
-    const units = [...props.plan.allUnits!]
-    let filtered = false;
-    while (!filtered) {
-      let collOccured = false
-      for (let i = 0; i < units.length; i++) {
-        const u = units[i]
-        if (u.UnitCode === "MEDI1000" || u.UnitCode === "HUMB1000" || u.UnitCode === "BIOL1004" || u.UnitCode === "CHEM1007") {
-          units.splice(i, 1)
-          collOccured = true
-          break
-        }
-      }
-      if (!collOccured) {
-        filtered = true
-      }
-    }
-    while (true) {
-      let collOccured = false
-      for (let i = 0; i < units.length; i++) {
-        const u = units[i]
-        if (u.Semester !== 1 && u.Semester !== 12) {
-          units.splice(i, 1)
-          collOccured = true
-          break
-        }
-      }
-      if (!collOccured) {
-        break
-      }
-    }
-    while (true) {
-      let collOccured = false
-      for (let i = 0; i < units.length; i++) {
-        const u = units[i]
-        for (let ii = 0; ii < selectedY2SemOne.length; ii++) {
-          const u2 = selectedY2SemOne[ii]
-          if (u2 != null) {
-            if (u.UnitCode === u2.UnitCode && !u2.disabled) {
-              const removed = units.splice(i, 1)
-              removed[0].disabled = true
-              units.push(removed[0])
-              collOccured = true
-              break
-            }
-          }
-        }
-        if (collOccured) { break }
-        for (let ii = 0; ii < selectedY2SemTwo.length; ii++) {
-          const u2 = selectedY2SemTwo[ii]
-          if (u2 != null) {
-            if (u.UnitCode === u2.UnitCode && !u2.disabled) {
-              const removed = units.splice(i, 1)
-              removed[0].disabled = true
-              units.push(removed[0])
-              collOccured = true
-              break
-            }
-          }
-        }
-        if (collOccured) { break }
-        for (let ii = 0; ii < selectedY3SemOne.length; ii++) {
-          const u2 = selectedY3SemOne[ii]
-          if (u2 != null) {
-            if (u.UnitCode === u2.UnitCode && !u2.disabled) {
-              const removed = units.splice(i, 1)
-              removed[0].disabled = true
-              units.push(removed[0])
-              collOccured = true
-              break
-            }
-          }
-        }
-        if (collOccured) { break }
-        for (let ii = 0; ii < selectedY3SemTwo.length; ii++) {
-          const u2 = selectedY3SemTwo[ii]
-          if (u2 != null) {
-            if (u.UnitCode === u2.UnitCode && !u2.disabled) {
-              const removed = units.splice(i, 1)
-              removed[0].disabled = true
-              units.push(removed[0])
-              collOccured = true
-              break
-            }
-          }
-        }
-        if (collOccured) { break }
-      }
-      if (!collOccured) {
-        break
-      }
-    }
-    return units
-  }
-  function computeAvailableS2(): Unit[] {
-    const units = [...props.plan.allUnits!]
-    let filtered = false;
-    while (!filtered) {
-      let collOccured = false
-      for (let i = 0; i < units.length; i++) {
-        const u = units[i]
-        if (u.UnitCode === "EPID1000" || u.UnitCode === "GENE1000" || u.UnitCode === "HUMB1001" || u.UnitCode === "INDH1006") {
-          units.splice(i, 1)
-          collOccured = true
-          break
-        }
-      }
-      if (!collOccured) {
-        filtered = true
-      }
-    }
-    while (true) {
-      let collOccured = false
-      for (let i = 0; i < units.length; i++) {
-        const u = units[i]
-        if (u.Semester !== 2 && u.Semester !== 12) {
-          units.splice(i, 1)
-          collOccured = true
-          break
-        }
-      }
-      if (!collOccured) {
-        break
-      }
-    }
-    while (true) {
-      let collOccured = false
-      for (let i = 0; i < units.length; i++) {
-        const u = units[i]
-        for (let ii = 0; ii < selectedY2SemOne.length; ii++) {
-          const u2 = selectedY2SemOne[ii]
-          if (u2 != null) {
-            if (u.UnitCode === u2.UnitCode && !u2.disabled) {
-              const removed = units.splice(i, 1)
-              removed[0].disabled = true
-              units.push(removed[0])
-              collOccured = true
-              break
-            }
-          }
-        }
-        if (collOccured) { break }
-        for (let ii = 0; ii < selectedY2SemTwo.length; ii++) {
-          const u2 = selectedY2SemTwo[ii]
-          if (u2 != null) {
-            if (u.UnitCode === u2.UnitCode && !u2.disabled) {
-              const removed = units.splice(i, 1)
-              removed[0].disabled = true
-              units.push(removed[0])
-              collOccured = true
-              break
-            }
-          }
-        }
-        if (collOccured) { break }
-        for (let ii = 0; ii < selectedY3SemOne.length; ii++) {
-          const u2 = selectedY3SemOne[ii]
-          if (u2 != null) {
-            if (u.UnitCode === u2.UnitCode && !u2.disabled) {
-              const removed = units.splice(i, 1)
-              removed[0].disabled = true
-              units.push(removed[0])
-              collOccured = true
-              break
-            }
-          }
-        }
-        if (collOccured) { break }
-        for (let ii = 0; ii < selectedY3SemTwo.length; ii++) {
-          const u2 = selectedY3SemTwo[ii]
-          if (u2 != null) {
-            if (u.UnitCode === u2.UnitCode && !u2.disabled) {
-              const removed = units.splice(i, 1)
-              removed[0].disabled = true
-              units.push(removed[0])
-              collOccured = true
-              break
-            }
-          }
-        }
-        if (collOccured) { break }
-      }
-      if (!collOccured) {
-        break
-      }
-    }
-    return units
-  }
-
-  useEffect(() => {
-    window.setTimeout(() => {
-      /* localStorage.setItem(`${process.env.DEVELOPMENT ? "dev-" : ""}y2semOne`, JSON.stringify(selectedY2SemOne))
-      localStorage.setItem(`${process.env.DEVELOPMENT ? "dev-" : ""}y2semTwo`, JSON.stringify(selectedY2SemTwo))
-      localStorage.setItem(`${process.env.DEVELOPMENT ? "dev-" : ""}y3semOne`, JSON.stringify(selectedY3SemOne)) Annoying amount of work to persist these
-      localStorage.setItem(`${process.env.DEVELOPMENT ? "dev-" : ""}y3semTwo`, JSON.stringify(selectedY3SemTwo)) */
-      setAvailableS1Units(computeAvailableS1())
-      setAvailableS2Units(computeAvailableS2())
-    }, 3000)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedY2SemOne, selectedY2SemTwo, selectedY3SemOne, selectedY3SemTwo])
-
-  function setY3(sem: 1 | 2, pos: 0 | 1 | 2 | 3, val: string) {
-    if (sem === 1) {
-      const cpy = [...selectedY3SemOne]
-      const allPrevUnits = [hashmapOfUnits["MEDI1000"], hashmapOfUnits["HUMB1000"], hashmapOfUnits["BIOL1004"],
-      hashmapOfUnits["CHEM1007"], hashmapOfUnits["EPID1000"], hashmapOfUnits["GENE1000"], hashmapOfUnits["HUMB1001"],
-      hashmapOfUnits["INDH1006"], ...selectedY2SemOne, ...selectedY2SemTwo]
-      const ret = checkIfHavePrereqs(allPrevUnits, hashmapOfUnits[val])
-      if (!ret[0]) {
-        cpy[pos] = hashmapOfUnits[val]
-      } else {
-        let err = `You do not have prerequistes for unit ${hashmapOfUnits[val].Name}, you require: `
-        ret[1]!.forEach((path) => {
-          path.forEach((u) => {
-            err += `${u} and `
-          })
-          err = err.slice(0, -4);
-          err += `OR `
-        })
-        err = err.slice(0, -3)
-        setError({ promptTitle: "Failed To Select", promptContent: err, showPrompt: true })
-      }
-      setSelectedY3SemOne(cpy)
-    } else {
-      const cpy = [...selectedY3SemTwo]
-      const allPrevUnits = [hashmapOfUnits["MEDI1000"], hashmapOfUnits["HUMB1000"], hashmapOfUnits["BIOL1004"],
-      hashmapOfUnits["CHEM1007"], hashmapOfUnits["EPID1000"], hashmapOfUnits["GENE1000"], hashmapOfUnits["HUMB1001"],
-      hashmapOfUnits["INDH1006"], ...selectedY2SemOne, ...selectedY2SemTwo, ...selectedY3SemOne]
-      const ret = checkIfHavePrereqs(allPrevUnits, hashmapOfUnits[val])
-      if (!ret[0]) {
-        cpy[pos] = hashmapOfUnits[val]
-      } else {
-        let err = `You do not have prerequistes for unit ${hashmapOfUnits[val].Name}, you require: `
-        ret[1]!.forEach((path) => {
-          path.forEach((u) => {
-            err += `${u} and `
-          })
-          err = err.slice(0, -4);
-          err += `OR `
-        })
-        err = err.slice(0, -3)
-        setError({ promptTitle: "Failed To Select", promptContent: err, showPrompt: true })
-      }
-      setSelectedY3SemTwo(cpy)
-    }
-  }
-  function setY2(sem: 1 | 2, pos: 0 | 1 | 2 | 3, val: string) {
-    if (sem === 1) {
-      const cpy = [...selectedY2SemOne]
-      const allPrevUnits = [hashmapOfUnits["MEDI1000"], hashmapOfUnits["HUMB1000"], hashmapOfUnits["BIOL1004"],
-      hashmapOfUnits["CHEM1007"], hashmapOfUnits["EPID1000"], hashmapOfUnits["GENE1000"], hashmapOfUnits["HUMB1001"],
-      hashmapOfUnits["INDH1006"]]
-      const ret = checkIfHavePrereqs(allPrevUnits, hashmapOfUnits[val])
-      if (!ret[0]) {
-        cpy[pos] = hashmapOfUnits[val]
-      } else {
-        let err = `You do not have prerequistes for unit ${hashmapOfUnits[val].Name}, you require: `
-        ret[1]!.forEach((path) => {
-          path.forEach((u) => {
-            err += `${u} and `
-          })
-          err = err.slice(0, -4);
-          err += `OR `
-        })
-        err = err.slice(0, -3)
-        setError({ promptTitle: "Failed To Select", promptContent: err, showPrompt: true })
-      }
-      setSelectedY2SemOne(cpy)
-    } else {
-      const cpy = [...selectedY2SemTwo]
-      const allPrevUnits = [hashmapOfUnits["MEDI1000"], hashmapOfUnits["HUMB1000"], hashmapOfUnits["BIOL1004"],
-      hashmapOfUnits["CHEM1007"], hashmapOfUnits["EPID1000"], hashmapOfUnits["GENE1000"], hashmapOfUnits["HUMB1001"],
-      hashmapOfUnits["INDH1006"], ...selectedY2SemOne]
-      const ret = checkIfHavePrereqs(allPrevUnits, hashmapOfUnits[val])
-      if (!ret[0]) {
-        cpy[pos] = hashmapOfUnits[val]
-      } else {
-        let err = `You do not have prerequistes for unit ${hashmapOfUnits[val].Name}, you require: `
-        ret[1]!.forEach((path) => {
-          path.forEach((u) => {
-            err += `${u} and `
-          })
-          err = err.slice(0, -4);
-          err += `OR `
-        })
-        err = err.slice(0, -3)
-        setError({ promptTitle: "Failed To Select", promptContent: err, showPrompt: true })
-      }
-      setSelectedY2SemTwo(cpy)
-    }
-  }
 
   const tablet = useMediaQuery("(max-width: 1000px)") // break at nice round number
 
@@ -394,8 +512,18 @@ function PaginatedTables(props: PaginatedTablesProps) {
           {paginatedUnits.map((year, idx) =>
             <SemTable key={idx} className="semesterTable" year={idx + 1} semesterOneUnits={year[0]} semesterTwoUnits={year[1]} />
           )}
-          <SemesterTable onChange={setY2} semSelectedOne={selectedY2SemOne} semSelectedTwo={selectedY2SemTwo} year={2} semOne={availableS1Units} semTwo={availableS2Units} />
-          <SemesterTable onChange={setY3} semSelectedOne={selectedY3SemOne} semSelectedTwo={selectedY3SemTwo} year={3} semOne={availableS1Units} semTwo={availableS2Units} />
+          {!units[0][0][3] && !units[0][1][3] && !units[1][1][3] && !units[1][0][3] ?
+            <>
+              <OptionalTable selected={selectOptional} className="semesterTable" semOneChoices={semOneOptions!} semTwoChoices={semTwoOptions!} year={2} semesterOneUnits={units[0][0]} semesterTwoUnits={units[0][1]} />
+              <OptionalTable selected={selectOptional} className="semesterTable" semOneChoices={semOneOptions!} semTwoChoices={semTwoOptions!} year={3} semesterOneUnits={units[1][0]} semesterTwoUnits={units[1][1]} />
+            </>
+            : <>
+              <SemTable className="semesterTable" year={2} semesterOneUnits={units[0][0]} semesterTwoUnits={units[0][1]} />
+              <SemTable className="semesterTable" year={3} semesterOneUnits={units[1][0]} semesterTwoUnits={units[1][1]} />
+            </>
+          }
+          {/* <SemesterTable onChange={setY2} semSelectedOne={selectedY2SemOne} semSelectedTwo={selectedY2SemTwo} year={2} semOne={availableS1Units} semTwo={availableS2Units} />
+          <SemesterTable onChange={setY3} semSelectedOne={selectedY3SemOne} semSelectedTwo={selectedY3SemTwo} year={3} semOne={availableS1Units} semTwo={availableS2Units} /> */ }
         </Box>
         <Grid container spacing={2}>
           <Grid item md={5} xs={12}>
