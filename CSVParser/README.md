@@ -15,6 +15,7 @@
 - COREQUISTES (entered as groups, to split into a new group (i.e OR path) use a semicolon else its comma seperated)
 - ANTIREQUISTES (entered as groups, to split into a new group (i.e OR path) use a semicolon else its comma seperated)
 - SEMESTER (1 = Semester 1, 2 = Semester 2, 12 = Semester 1 & 2)
+- YEAR_TAKEN_IN (Only for majors/spec units just leave it blank otherwise)
 ### Major Definition
 - MAJOR
 - MajorCode

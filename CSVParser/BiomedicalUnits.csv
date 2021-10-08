@@ -7,6 +7,7 @@ Internal
 
 
 
+
 12
 UNIT
 HUMB1000
@@ -14,6 +15,7 @@ Human Structure and Function
 Anatomical organisation of the body and the relationships between body systems and cells. Human requirements for metabolism and life. The structure and function of the body from cells to the whole organism. Basic control and interactions of the circulatory, respiratory, digestive and excretory systems for homeostasis. Primary defence against microorganisms. Mechanisms for growth, repair and reproduction.
 25
 Fully Online,Internal
+
 
 
 1643
@@ -24,6 +26,7 @@ Foundations of Bioscience Practice
 In this unit students will be introduced to the application of academic standards and development of skills required for studying at university. Introduction to requirements for professional, safe and accurate laboratory practice. Students will learn laboratory techniques to apply introductory Chemistry knowledge, and practise as emerging scientists capable of working individually and in teams. Introduction to ethics in the context of human and animal research. Introduction to careers for health scientists.
 25
 Internal
+
 
 
 
@@ -38,6 +41,7 @@ BIOL1004
 BIOL1004
 CHEM1001,CHEM1005
 1
+
 UNIT
 INDH1006
 Indigenous Cultures and Health Behaviours
@@ -48,6 +52,7 @@ BIOL1004;CMHL1000;NURS1000;313026;313394
 
 INDH1000
 12
+
 UNIT
 EPID1000
 Foundations of Biostatistics and Epidemiology
@@ -58,6 +63,7 @@ Internal,Fully Online
 
 
 12
+
 UNIT
 HUMB1001
 Integrated Systems Anatomy and Physiology
@@ -68,6 +74,7 @@ HUMB1000;313391;1643;303149;311022
 
 1644
 12
+
 UNIT
 GENE1000
 Molecular Genetics and Cell Biology
@@ -78,6 +85,7 @@ MEDI1000
 
 
 2
+
 MAJOR
 MJRU-HUMBM
 Human Biomedicine
@@ -96,6 +104,7 @@ HUMB1005;HUMB1002;HUMB1001;HUMB1004
 
 
 1
+
 UNIT
 HUMB2014
 Vital Physiology
@@ -106,6 +115,7 @@ HUMB1001
 
 
 1
+
 UNIT
 HUMB2011
 Limb Anatomy and Biomechanics
@@ -116,6 +126,7 @@ HUMB1005;HUMB1002;HUMB1001;HUMB1004
 
 
 2
+
 UNIT
 HUMB2012
 Physiological Processes
@@ -126,6 +137,7 @@ HUMB1001
 
 
 2
+
 UNIT
 ECEV3004
 Human Evolution
@@ -136,6 +148,7 @@ HUMB2002;HUMB2011;HUMB2013
 
 
 1
+
 UNIT
 HUMB2002
 Anatomy of the Limbs
@@ -146,6 +159,7 @@ HUMB1002;HUMB1001;1644;313401;313399
 
 
 1
+
 UNIT
 HUMB3009
 Neuroanatomy
@@ -156,6 +170,7 @@ HUMB1005;HUMB1002;HUMB1001;HUMB1004
 
 
 2
+
 UNIT
 BIOL3010
 Biosciences Research Project
@@ -166,6 +181,7 @@ HUMB3009;GENE3000
 
 
 2
+
 UNIT
 HUMB3003
 Neuroscience
@@ -176,6 +192,7 @@ HUMB2000;HUMB3009;314236
 
 
 12
+
 MAJOR
 MJRU-MOLGN
 Molecular Genetics
@@ -194,6 +211,7 @@ CHEM1001;CHEM1007;CHEM1003;CHEM1002
 
 
 1
+
 UNIT
 MEDI2010
 Molecular Cytogenetics and Diagnostics
@@ -204,6 +222,7 @@ MEDI1000,HUMB1001
 
 
 1
+
 UNIT
 BIOL2001
 Introduction to Bioinformatics
@@ -214,6 +233,7 @@ GENE1000
 
 
 2
+
 UNIT
 GENE2001
 Population Genetics and Molecular Evolution
@@ -224,6 +244,7 @@ GENE2000;GENE1000;311420;GENE2002;314000
 
 
 2
+
 UNIT
 GENE3000
 Genetic Engineering
@@ -234,6 +255,7 @@ GENE2000;GENE1000;302488;311420
 
 
 1
+
 UNIT
 GENE3002
 Human Genetic Disease
@@ -244,6 +266,7 @@ GENE1000
 
 
 1
+
 UNIT
 BIOL3011
 Protein Structure and Interactions
@@ -254,6 +277,7 @@ BCCB2000,BIOL2001
 
 
 2
+
 MAJOR
 MJRU-PHCOL
 Pharmacology
@@ -272,6 +296,7 @@ MEDI1000
 
 
 1
+
 UNIT
 CHEM1006
 Pharmaceutical Chemistry
@@ -282,6 +307,7 @@ BCCB2000
 
 
 2
+
 UNIT
 PHRM2006
 Pharmacology Principles
@@ -292,6 +318,7 @@ PHRM2005
 
 
 2
+
 UNIT
 IMED3009
 Pharmacology of Antimicrobial Agents
@@ -302,6 +329,7 @@ PHRM2005;PHRM2005;MEDI2000,MEDI2009;MEDI2000,MICB2001
 
 
 1
+
 UNIT
 IMED3010
 Systems Pharmacology
@@ -312,6 +340,7 @@ PHRM2006
 
 
 1
+
 UNIT
 IMED3008
 Advanced Pharmacology
@@ -322,6 +351,7 @@ IMED3010
 
 
 2
+
 UNIT
 PHRM3005
 Advanced Pharmacokinetics and Drug Bioanalysis
@@ -332,6 +362,7 @@ CHEM1006,PHRM2006
 
 
 2
+
 SPECIALIZATION
 SPUC-HUMPT
 Human Pathology
@@ -352,6 +383,7 @@ Internal
 
 
 1
+
 UNIT
 MEDI2000
 Foundations of Immunobiology
@@ -362,6 +394,7 @@ MEDI1000,HUMB1001;MEDI1000,313399;MEDI1000,1644;7842,HUMB1001;7842,313399;7842,1
 
 
 2
+
 UNIT
 MEDI3017
 Medical Pathophysiology
@@ -372,6 +405,7 @@ HUMB2003,HUMB2014;HUMB2003,HUMB2004;HUMB2012,HUMB2014;HUMB2012,HUMB2004
 
 
 1
+
 UNIT
 HUMB3008
 Clinical Neurophysiology
@@ -382,6 +416,7 @@ HUMB2014,HUMB2000;HUMB2014,HUMB3009;HUMB2004,HUMB2000;HUMB2004,HUMB3009
 
 
 2
+
 SPECIALIZATION
 SPUC-ICBIO
 Immunology and Cell Biology
@@ -402,6 +437,7 @@ GENE1000
 
 
 1
+
 UNIT
 MEDI3016
 Frontiers in Immunology
@@ -412,6 +448,7 @@ MEDI2000
 
 
 1
+
 UNIT
 BCCB3001
 Frontiers in Cell Biology
@@ -422,6 +459,7 @@ BCCB2004
 
 
 2
+
 SPECIALIZATION
 SPUC-MICRO
 Microbiology
@@ -442,6 +480,7 @@ BCCB1000;MEDI1000
 
 
 1
+
 UNIT
 MICB2001
 Translational Microbiology
@@ -452,6 +491,7 @@ MEDI1000
 
 
 2
+
 UNIT
 MICB3000
 Molecular Virology
@@ -462,6 +502,7 @@ MEDI2003;MEDI2009;311405;302466
 
 
 1
+
 UNIT
 MICB3002
 Advances in Molecular Microbiology
@@ -472,6 +513,7 @@ MEDI2003;MEDI2009
 
 
 2
+
 SPECIALIZATION
 SPUC-HUMGN
 Human Genetics and Genomics
@@ -512,6 +554,7 @@ Internal
 
 
 12
+
 UNIT
 GRDE2017
 Illustration Concepts and Processes
@@ -522,6 +565,7 @@ GRDE1015;GRDE1002;310131
 
 
 12
+
 UNIT
 GRDE2031
 Digital Illustration Production
@@ -532,6 +576,7 @@ Internal
 
 
 12
+
 UNIT
 GRDE3018
 Illustration and Visual Development
@@ -542,6 +587,7 @@ GRDE2019;GRDE2017;313306
 
 
 12
+
 SPECIALIZATION
 SPUC-ASIAN
 Asian Studies
@@ -562,6 +608,7 @@ Internal
 
 
 2
+
 UNIT
 ASIA3001
 Asian Century Issues and Perspectives
@@ -572,6 +619,7 @@ Internal
 
 
 1
+
 UNIT
 CHIN1000
 Beginning Chinese
@@ -582,6 +630,7 @@ Internal,Fully Online
 
 12321
 12
+
 UNIT
 JAPN1000
 Beginning Japanese
@@ -592,6 +641,7 @@ Internal,Fully Online
 
 11265
 12
+
 SPECIALIZATION
 SPUC-CHNSE
 Chinese Language
@@ -612,6 +662,7 @@ Internal,Fully Online
 
 12322
 2
+
 UNIT
 CHIN2001
 Pre-Intermediate Chinese
@@ -622,6 +673,7 @@ Internal
 
 
 1
+
 UNIT
 CHIN2002
 Pre-Intermediate Chinese Developing
@@ -632,6 +684,7 @@ Internal
 
 12324
 2
+
 SPECIALIZATION
 SPUC-JAPAN
 Japanese Language
@@ -652,6 +705,7 @@ Internal
 
 
 1
+
 UNIT
 JAPN2002
 Intermediate Japanese: Extending Everyday Contexts
@@ -662,6 +716,7 @@ Internal
 
 
 2
+
 UNIT
 JAPN3000
 Intermediate Japanese
@@ -672,6 +727,7 @@ Internal
 
 
 12
+
 UNIT
 JAPN3001
 Intermediate Japanese Developing
@@ -682,6 +738,7 @@ Internal
 
 
 2
+
 SPECIALIZATION
 SPUC-CORPG
 Corporate Governance
@@ -702,6 +759,7 @@ Internal,Fully Online
 
 2844
 12
+
 UNIT
 BLAW2011
 Safety and Environmental Health Law
@@ -712,6 +770,7 @@ Internal,Fully Online
 
 
 1
+
 UNIT
 BLAW1006
 Introduction to Business Law
@@ -722,6 +781,7 @@ Internal,Fully Online
 
 
 2
+
 UNIT
 BLAW3004
 Business Intellectual Property
@@ -732,6 +792,7 @@ BLAW2006;BLAW1006;BLAW1004
 
 
 1
+
 SPECIALIZATION
 SPUC-INENT
 Innovation and Entrepreneurship
@@ -752,6 +813,7 @@ Internal
 
 
 1
+
 UNIT
 MGMT3004
 Entrepreneurship
@@ -762,6 +824,7 @@ Internal
 
 
 12
+
 UNIT
 MGMT2004
 Business and Sustainable Development
@@ -772,6 +835,7 @@ Internal,Fully Online
 
 
 12
+
 UNIT
 MGMT3002
 Managing Change
@@ -782,6 +846,7 @@ Internal,Fully Online
 
 
 12
+
 SPECIALIZATION
 SPUC-SMBUS
 Small Business Start-Up
@@ -802,6 +867,7 @@ Internal
 
 
 2
+
 UNIT
 MGMT2001
 Start-Up Business Planning
@@ -812,6 +878,7 @@ Internal
 
 
 12
+
 SPECIALIZATION
 SPUC-ADVRT
 The Business of Advertising
@@ -832,6 +899,7 @@ Internal,Fully Online
 
 
 12
+
 UNIT
 MKTG2001
 Brand Management
@@ -842,6 +910,7 @@ Internal
 
 
 12
+
 UNIT
 MKTG3002
 Account Management
@@ -852,6 +921,7 @@ Internal
 
 
 12
+
 UNIT
 MKTG2006
 Managing Social Media Platforms
@@ -862,6 +932,7 @@ Internal,Fully Online
 
 
 12
+
 SPECIALIZATION
 SPUC-MRKTG
 Marketing Foundations
@@ -882,6 +953,7 @@ Fully Online,Internal
 
 
 12
+
 UNIT
 MKTG2004
 Consumer Behaviour
@@ -892,6 +964,7 @@ Fully Online,Internal
 
 
 12
+
 UNIT
 MKTG3003
 Digital Marketing Strategy
@@ -902,6 +975,7 @@ Fully Online,Internal
 
 
 12
+
 UNIT
 MKTG1000
 Discovering Marketing
@@ -912,6 +986,7 @@ Internal,Fully Online
 
 
 12
+
 SPECIALIZATION
 SPUC-JOURL
 Journalism
@@ -932,6 +1007,7 @@ Internal
 
 JOUR5013
 12
+
 UNIT
 JOUR2000
 Radio News
@@ -942,6 +1018,7 @@ JOUR1001;1564
 
 JOUR5002
 1
+
 UNIT
 JOUR2002
 Video News
@@ -952,6 +1029,7 @@ JOUR1001;1564
 
 JOUR5005
 12
+
 UNIT
 JOUR2003
 News Writing and Reporting
@@ -962,6 +1040,7 @@ JOUR1001
 
 JOUR5003
 2
+
 SPECIALIZATION
 SPUC-PRWRI
 Professional Writing
@@ -982,6 +1061,7 @@ Internal
 
 PWRP5021
 1
+
 UNIT
 PWRP1003
 Writing, Rhetoric and Persuasion
@@ -992,6 +1072,7 @@ Internal
 
 PWRP5022
 2
+
 UNIT
 PWRP2001
 Writing, Editing and Publishing
@@ -1002,6 +1083,7 @@ Internal
 
 PWRP5003
 1
+
 UNIT
 PWRP2000
 Tricks of Truth and Authenticity
@@ -1012,6 +1094,7 @@ Internal
 
 PWRP5001
 2
+
 SPECIALIZATION
 SPUC-HLTDA
 Health Data
@@ -1032,6 +1115,7 @@ Fully Online,Internal
 
 
 1
+
 UNIT
 SPAT1007
 Fundamentals of Geographic Information Systems
@@ -1042,6 +1126,7 @@ Fully Online,Internal
 
 SPAT5006,SPAT2011
 1
+
 UNIT
 PUBH2006
 Privacy and Cyber Security: Health Data Governance
@@ -1052,6 +1137,7 @@ Internal,Fully Online
 
 
 1
+
 UNIT
 PUBH3006
 Introduction to Artificial Intelligence, Machine Learning and Health
@@ -1062,6 +1148,7 @@ PUBH2005
 
 
 2
+
 UNIT
 FORS1005
 Foundations of Forensic Science
@@ -1072,6 +1159,7 @@ Internal
 
 
 1
+
 UNIT
 PSYC1000
 Introduction to Psychology
@@ -1082,6 +1170,7 @@ Internal,Fully Online
 
 
 12
+
 UNIT
 CHEM1006
 Pharmaceutical Chemistry
@@ -1092,6 +1181,7 @@ BCCB2000
 
 
 2
+
 UNIT
 PHAR2000
 Foundations of Pharmaceutics
@@ -1102,6 +1192,7 @@ CHEM1006
 
 
 1
+
 UNIT
 PHAR2001
 Pharmaceutical Formulation
@@ -1112,6 +1203,7 @@ PHAR2000;310384
 
 
 2
+
 UNIT
 PUBH1001
 Introduction to Health, Safety and Environment
@@ -1122,6 +1214,7 @@ Internal,Fully Online
 
 
 1
+
 UNIT
 STAT1003
 Introduction to Data Science
@@ -1132,6 +1225,7 @@ Internal
 
 
 1
+
 UNIT
 ISEC2001
 Fundamental Concepts of Data Security
@@ -1142,6 +1236,7 @@ Internal
 
 
 1
+
 UNIT
 COMP1005
 Fundamentals of Programming
@@ -1152,6 +1247,7 @@ Internal
 
 COMP1001;COMP1007;COMP5005
 12
+
 UNIT
 BIOL2004
 Research Skills for Biomedical Sciences
@@ -1162,6 +1258,7 @@ Internal,Online
 
 
 12
+
 UNIT
 BIOL3009
 Advanced Molecular Techniques
@@ -1172,6 +1269,7 @@ GENE3000
 
 
 1
+
 UNIT
 BIOL3008
 Advanced Bioinformatics
@@ -1182,6 +1280,7 @@ BIOL2001
 
 
 12
+
 UNIT
 MEDS3005
 Human Reproductive Science
@@ -1192,6 +1291,7 @@ HUMB1001;HUMB2001,BCCB2000,HUMB2003,HUMB2012,HUMB2013
 
 
 2
+
 UNIT
 HUMB2000
 Anatomy and Neuroscience
@@ -1202,3 +1302,4 @@ Internal
 
 
 2
+
