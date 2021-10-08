@@ -555,11 +555,15 @@ func processUnit(scanner *bufio.Scanner, lineNumber *int) (Unit, error) {
 	if !read {
 		return unit, fmt.Errorf("expected year on line: %d, recieved either error or eof", *lineNumber)
 	}
-	year, err := strconv.Atoi(scanner.Text())
-	if err != nil {
-		return unit, fmt.Errorf("Expected a int for year, recieved: %s", scanner.Text())
+	if len(scanner.Text()) == 0 {
+		unit.Year = 0
+	} else {
+		year, err := strconv.Atoi(scanner.Text())
+		if err != nil {
+			return unit, fmt.Errorf("Expected a int for year, recieved: %s", scanner.Text())
+		}
+		unit.Year = year
 	}
-	unit.Year = year
 	return unit, nil
 }
 

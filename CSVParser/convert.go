@@ -1,4 +1,4 @@
-package UnitAdminAPI
+package main
 
 import (
 	"encoding/base64"
