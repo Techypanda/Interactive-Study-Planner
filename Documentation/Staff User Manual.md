@@ -110,6 +110,9 @@ Additionally, if the unit has an alternative or multiple sets of requisites for 
 **Note: Multiple paths represent OR case. E.g a student must satisfy or have completed prerequisite path A or prerequisite path B in order to take the unit.**
 
 Finally the unit can be created by clicking the create unit button. Any errors will be indicated to the user via a popup.
+
+The process for the careers, specializations and majors is highly similar, however please note that units should be listed in the order they should be done in for specializations and majors, and for careers to ensure a specific major or specialization is added during the top down approach be specific when listing units.
+
 <p>&nbsp;</p>
 
 ![Multiple Pathways](./imgs/Staff/MultiPath.PNG)

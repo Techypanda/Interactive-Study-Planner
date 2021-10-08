@@ -80,7 +80,7 @@ When selecting majors, specializations and/or units, some of these may have inco
 
 <p>&nbsp;</p>
 
-The next step in the process is completing the timetable, where the user may plan what units to take during semester 1 and 2 of their second and third years. Available careers are shown in a table below the timetable with descriptions and links to more detailed information pages on click. When selecting units, an error popup will be shown should prerequisites not be satisfied. 
+The next step in the process is completing the timetable, where the user may plan what units to take during semester 1 and 2 of their second and third years if they have optional units. Available careers are shown in a table below the timetable with descriptions and links to more detailed information pages on click. When selecting units, an error popup will be shown should prerequisites not be satisfied. 
 
 <p>&nbsp;</p>
 
@@ -96,7 +96,7 @@ The top down approach has the user choose one career from a list of careers whic
 
 After clicking the top down navigation card, the user will be directed to a page displaying a list of careers as shown above. The user may select a career which will allow them to see more information about it or navigate back to the list of careers. After deciding on their chosen career, the user can proceed to the next step where the system will pre-populate their study plan with the career&#39;s suggested units and then allow them to choose other majors, specializations and/or units as needed to complete their study plan.
 
-After completing the study plan, the user can move onto the next step, which is completing the timetable or return to the main menu. On the timetable page the user may plan what units to take during semester 1 and 2 of their second and third years. Available careers are shown in a table below the timetable with descriptions and links to more detailed information pages on click. When selecting units, an error popup will be shown should prerequisites not be satisfied. 
+After completing the study plan, the user can move onto the next step, which is completing the timetable or return to the main menu. On the timetable page the user may plan what units to take during semester 1 and 2 of their second and third years if they have optional units. Available careers are shown in a table below the timetable with descriptions and links to more detailed information pages on click. When selecting units, an error popup will be shown should prerequisites not be satisfied. 
 
 <p>&nbsp;</p>
 
