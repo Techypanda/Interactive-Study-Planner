@@ -1,9 +1,24 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import App from './App';
+import { BrowserRouter as Router } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from 'react-query';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});
+const client = new QueryClient();
+
+describe('App starts up successfully when ', () => {
+    it('Renders without crashing', () => {
+	render( <QueryClientProvider client={client}>
+            <Router>
+                <App />
+            </Router>
+        </QueryClientProvider> )
+    })
+    it('Renders and matches snapshot', () => {
+	render( <QueryClientProvider client={client}>
+            <Router>
+                <App />
+            </Router>
+        </QueryClientProvider> )
+    })
+})

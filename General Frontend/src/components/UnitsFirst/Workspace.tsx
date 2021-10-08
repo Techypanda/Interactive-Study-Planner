@@ -1,4 +1,4 @@
-import { Box, MenuItem, Select, Typography } from "@material-ui/core";
+import { Box, MenuItem, Select, Typography, useMediaQuery } from "@material-ui/core";
 import { NavigateBefore, NavigateNext } from "@material-ui/icons";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
@@ -13,10 +13,13 @@ function sliceIntoPages(arr: Unit[] | Major[] | Specialization[], pageSize = 3):
     pageMap.set(pageNo, arr.slice(i, i + 3))
     pageNo += 1;
   }
+  console.log(pageMap)
   return pageMap;
 }
 
 function Workspace(props: WorkspaceProps) {
+  const laptop = useMediaQuery("(min-width: 1251px) and (max-width: 1730px)")
+  const tablet = useMediaQuery("(max-width: 1250px)")
   const [view, setView] = useState("Majors");
   const [pages, setPages] = useState<Map<number, Unit[] | Major[] | Specialization[]>>(sliceIntoPages(props.majors));
   const [page, setPage] = useState(0);
@@ -33,7 +36,7 @@ function Workspace(props: WorkspaceProps) {
   }, [pages])
   return (
     <Box p={2} className={props.className}>
-      <Box display="flex">
+      <Box display={(!tablet) ? "flex" : "block"}>
         <Box width="250px" display="inline-block" textAlign="left">
           <Typography align="left">Currently Viewing</Typography>
           <Select
@@ -62,7 +65,7 @@ function Workspace(props: WorkspaceProps) {
             <MenuItem value={"Units"}>Units</MenuItem>
           </Select>
         </Box>
-        <Box flexGrow={1} />
+        {(!tablet) ? <Box flexGrow={1} /> : <></>}
         <Box display="inline">
           <Typography align="left">What Plans Are Available?</Typography>
           <Typography align="left">At Curtin Medical we support the following type of plans</Typography>
@@ -78,40 +81,45 @@ function Workspace(props: WorkspaceProps) {
           <PlanExplain title={"MAIN MAJOR + 1 INTERNAL SPECIALIZATION + 4 OPTIONAL UNITS"} explaination={"You can a main major then 4 optional units, this will give you the greatest flexibility but comes with the drawback of if you select bad electives you will have a less direct path to some careers"} />
         </Box>
       </Box>
-      <Box mt={8} display="flex" justifyContent="center">
-        {pages.get(page) &&
+      <Box mt={8} display={(!laptop && !tablet) ? "flex" : "block"} justifyContent="center">
+        {(/*!laptop && !tablet*/ true) ?
           <>
-            {pages.get(page)!.length > 1 &&
-              <Box px={2}>
-                <OptionCardSelect
-                  title={pages.get(page)![0].Name}
-                  description={pages.get(page)![0].Description}
-                  type={view === "Majors" ? "Major" : view === "Specializations" ? `${(pages.get(page)![0] as Specialization).Internal ? "Internal" : "External"} Specialization` : `Semester 
+            {pages.get(page) && // Desktop View
+              <>
+                {pages.get(page)!.length >= 1 &&
+                  <Box px={2} display={(!laptop && !tablet) ? "block" : "flex"} justifyContent="center" mb={1}>
+                    <OptionCardSelect
+                      title={pages.get(page)![0].Name}
+                      description={pages.get(page)![0].Description}
+                      type={view === "Majors" ? "Major" : view === "Specializations" ? `${(pages.get(page)![0] as Specialization).Internal ? "Internal" : "External"} Specialization` : `Semester 
                   ${(pages.get(page)![0] as Unit).Semester === 12 ? "1 & 2" : (pages.get(page)![0] as Unit).Semester} - Unit`}
-                  onClick={() => props.select(pages.get(page)![0])}
-                />
-              </Box>
-            }
-            {pages.get(page)!.length > 1 && <Box px={2}>
-              <OptionCardSelect
-                title={pages.get(page)![1].Name}
-                description={pages.get(page)![1].Description}
-                type={view === "Majors" ? "Major" : view === "Specializations" ? `${(pages.get(page)![1] as Specialization).Internal ? "Internal" : "External"} Specialization` : `Semester 
+                      onClick={() => props.select(pages.get(page)![0])}
+                    />
+                  </Box>}
+                {pages.get(page)!.length > 1 && <Box px={2} display={(!laptop && !tablet) ? "block" : "flex"} justifyContent="center" mb={1}>
+                  <OptionCardSelect
+                    title={pages.get(page)![1].Name}
+                    description={pages.get(page)![1].Description}
+                    type={view === "Majors" ? "Major" : view === "Specializations" ? `${(pages.get(page)![1] as Specialization).Internal ? "Internal" : "External"} Specialization` : `Semester 
                 ${(pages.get(page)![1] as Unit).Semester === 12 ? "1 & 2" : (pages.get(page)![1] as Unit).Semester} - Unit`}
-                onClick={() => props.select(pages.get(page)![1])}
-              />
-            </Box>}
-            {pages.get(page)!.length > 2 && <Box px={2}>
-              <OptionCardSelect
-                title={pages.get(page)![2].Name}
-                description={pages.get(page)![2].Description}
-                type={view === "Majors" ? "Major" : view === "Specializations" ? `${(pages.get(page)![2] as Specialization).Internal ? "Internal" : "External"} Specialization` : `Semester 
+                    onClick={() => props.select(pages.get(page)![1])}
+                  />
+                </Box>}
+                {pages.get(page)!.length > 2 && <Box px={2} display={(!laptop && !tablet) ? "block" : "flex"} justifyContent="center">
+                  <OptionCardSelect
+                    title={pages.get(page)![2].Name}
+                    description={pages.get(page)![2].Description}
+                    type={view === "Majors" ? "Major" : view === "Specializations" ? `${(pages.get(page)![2] as Specialization).Internal ? "Internal" : "External"} Specialization` : `Semester 
                 ${(pages.get(page)![2] as Unit).Semester === 12 ? "1 & 2" : (pages.get(page)![2] as Unit).Semester} - Unit`}
-                onClick={() => props.select(pages.get(page)![2])}
-              />
-            </Box>}
+                    onClick={() => props.select(pages.get(page)![2])}
+                  />
+                </Box>}
+              </>
+            }
           </>
-        }
+          : /* Laptop / Phone */ <>
+
+          </>}
       </Box>
       <Box mt={2}>
         <Typography>Currently Viewing: {view}</Typography>

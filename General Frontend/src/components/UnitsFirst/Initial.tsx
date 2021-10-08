@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from "@material-ui/core";
+import { Box, Button, Typography, useMediaQuery } from "@material-ui/core";
 import { NavigateBefore, NavigateNext } from "@material-ui/icons";
 import { useState } from "react";
 import styled from "styled-components";
@@ -7,6 +7,7 @@ import OptionCard from "./OptionCard";
 
 // Viewport height - element.offset.top - desired bottom margin
 function Initial(props: InitialCareerSPAProps) {
+  const switchToOneCard = useMediaQuery('(max-width: 1500px)');
   const [currentSelection, setCurrentSelection] = useState(0);
   const navPrevious = () => {
     const prevIDX = currentSelection - 1 < 0 ? props.majors.length - 1 : currentSelection - 1;
@@ -24,7 +25,7 @@ function Initial(props: InitialCareerSPAProps) {
       <Box pt={2}>
         <Typography variant="h4">Please Select Your First Major</Typography>
         <Box display="flex" justifyContent="center" mt={8}> {/* TODO: Make these slide around like pokemon starter selector */}
-          {props.majors.length >= 3 &&
+          {(props.majors.length >= 3 && !switchToOneCard) &&
             <OptionCard
               className="inner card-outer-left"
               style={{ transform: "translate(50px, -50px)" }}
@@ -40,7 +41,7 @@ function Initial(props: InitialCareerSPAProps) {
             type="Major"
             onClick={() => selectMajor()}
           />
-          {props.majors.length >= 2 &&
+          {(props.majors.length >= 2 && !switchToOneCard) &&
             <OptionCard
               className="inner card-outer-right"
               style={{ transform: "translate(-50px, -50px)" }}

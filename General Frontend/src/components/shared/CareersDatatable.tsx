@@ -1,6 +1,6 @@
 import React from 'react';
-import { DataGrid, GridRowsProp, GridColDef } from '@material-ui/data-grid';
-import { useHistory, useParams } from "react-router-dom";
+import { DataGrid, GridColDef } from '@material-ui/data-grid';
+import { useHistory } from "react-router-dom";
 
 const columns: GridColDef[] = [
   { field: 'col1', headerName: 'Industry', flex:1},

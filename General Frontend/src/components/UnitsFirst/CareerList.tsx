@@ -25,8 +25,8 @@ function CareerList(props: CareerListSPAProps) {
   const history = useHistory()
   const height = useRemainingHeight();
   return (
-    <div className={`${props.className} fh`}>
-      <Box className="careerList" minHeight={height} height="100%">
+    <div className={`${props.className} fh mh br`}>
+      <Box minHeight={height} height="100%">
         <Box pt={2}>
           <Typography variant="h5">Available Careers</Typography>
           {props.careers.map((career) => <CareerListEntry className="stylethetext clickable" onClick={() => history.push(`/InfoPage/ViewCareer/${career.CareerId}`)} title={career.Name} key={career.CareerId} />)}
@@ -36,9 +36,6 @@ function CareerList(props: CareerListSPAProps) {
   )
 }
 export default styled(CareerList)`
-.careerList {
-  border-left: 2px solid #cc9900;
-}
 .careername {
   display: inline-block;
 }

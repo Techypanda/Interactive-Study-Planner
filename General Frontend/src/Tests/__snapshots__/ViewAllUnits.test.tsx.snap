@@ -1,11 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`View All Careers is working which happens When Renders And Matches Snapshot 1`] = `
+exports[`View All Units is working when Renders and matches snapshot 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <br />
       <div
         class="MuiContainer-root MuiContainer-maxWidthLg"
       >
@@ -15,7 +14,6 @@ Object {
         >
           <div
             class="MuiFormControl-root MuiTextField-root searchbar MuiFormControl-fullWidth"
-            style="padding: 0px 10px;"
           >
             <div
               class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl"
@@ -24,7 +22,7 @@ Object {
                 aria-invalid="false"
                 class="MuiInputBase-input MuiOutlinedInput-input"
                 id="standard-full-width"
-                placeholder="Search careers..."
+                placeholder="Search units..."
                 type="text"
                 value=""
               />
@@ -61,7 +59,7 @@ Object {
         </div>
         <br />
         <div
-          class="career-option"
+          class="card-body"
         >
           <div
             class="MuiPaper-root MuiCard-root makeStyles-root-12 MuiPaper-outlined MuiPaper-rounded"
@@ -73,7 +71,7 @@ Object {
                 class="MuiCardContent-root makeStyles-content-14"
               >
                 <h5
-                  class="MuiTypography-root values MuiTypography-h5 MuiTypography-alignLeft"
+                  class="MuiTypography-root MuiTypography-h5 MuiTypography-alignLeft"
                 />
                 <h6
                   class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorTextSecondary"
@@ -87,10 +85,23 @@ Object {
         </div>
       </div>
       <br />
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiButton-label"
+        >
+          Back
+        </span>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
     </div>
   </body>,
   "container": <div>
-    <br />
     <div
       class="MuiContainer-root MuiContainer-maxWidthLg"
     >
@@ -100,7 +111,6 @@ Object {
       >
         <div
           class="MuiFormControl-root MuiTextField-root searchbar MuiFormControl-fullWidth"
-          style="padding: 0px 10px;"
         >
           <div
             class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl"
@@ -109,7 +119,7 @@ Object {
               aria-invalid="false"
               class="MuiInputBase-input MuiOutlinedInput-input"
               id="standard-full-width"
-              placeholder="Search careers..."
+              placeholder="Search units..."
               type="text"
               value=""
             />
@@ -146,7 +156,7 @@ Object {
       </div>
       <br />
       <div
-        class="career-option"
+        class="card-body"
       >
         <div
           class="MuiPaper-root MuiCard-root makeStyles-root-12 MuiPaper-outlined MuiPaper-rounded"
@@ -158,7 +168,7 @@ Object {
               class="MuiCardContent-root makeStyles-content-14"
             >
               <h5
-                class="MuiTypography-root values MuiTypography-h5 MuiTypography-alignLeft"
+                class="MuiTypography-root MuiTypography-h5 MuiTypography-alignLeft"
               />
               <h6
                 class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorTextSecondary"
@@ -172,6 +182,20 @@ Object {
       </div>
     </div>
     <br />
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-contained"
+      tabindex="0"
+      type="button"
+    >
+      <span
+        class="MuiButton-label"
+      >
+        Back
+      </span>
+      <span
+        class="MuiTouchRipple-root"
+      />
+    </button>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],
