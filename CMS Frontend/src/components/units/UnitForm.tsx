@@ -33,6 +33,7 @@ function UnitForm(props: UnitFormProps) {
   const [antireq, setAntireq] = useState<Array<Array<string>>>(comprehendCursedArrays("Antirequistes", props.unit))
   const [semester, setSemester] = useState(props.unit?.Semester ? props.unit?.Semester : 1)
   const [deliverys, setDeliverys] = useState<Array<string>>(props.unit?.Delivery ? props.unit?.Delivery.split(",") : []);
+  const [year, setYear] = useState(props.unit?.Year)
 
   const mutation = useMutation(() => {
     let deliveryString = ""
@@ -50,10 +51,11 @@ function UnitForm(props: UnitFormProps) {
       corequistes: coreq,
       prerequistes: prereq,
       antirequistes: antireq,
-      semester: semester as number
+      semester: semester as number,
+      year: year
     };
     setLoading(true);
-    
+
     if (props.unit) {
       return axios.post(`${process.env.REACT_APP_UNIT_ADMIN_API}/updateunit`, JSON.stringify(payload), {
         headers: {
@@ -200,6 +202,13 @@ function UnitForm(props: UnitFormProps) {
           <MenuItem value={12}>Semester 1 &amp; 2</MenuItem>
         </Select>
       </Box>
+      <Grid container>
+        <Grid item md={6} xs={12}>
+          <Box marginTop={2}>
+            <TextField fullWidth label="Year Unit Is Usually Taken - Optional" placeholder="Enter Year Unit Is Usually Taken - Optional" variant="outlined" onChange={(e) => setYear(Number.parseInt(e.target.value))} value={year} type="number" />
+          </Box>
+        </Grid>
+      </Grid>
 
       <Box mt={2}>
         <Typography className="bold" variant="subtitle1">Prerequistes</Typography>
@@ -208,7 +217,7 @@ function UnitForm(props: UnitFormProps) {
             <RequistePath idx={i} key={i} path={path} delete={deletePrePath} updatePath={updatePrePath} />
           </Box>
         )}
-        <Button className="mb-1"  variant="contained" color="primary" onClick={() => { const copy = [...prereq]; copy.push([]); setPrereq(copy) }}>Add Requiste Path</Button>
+        <Button className="mb-1" variant="contained" color="primary" onClick={() => { const copy = [...prereq]; copy.push([]); setPrereq(copy) }}>Add Requiste Path</Button>
       </Box>
 
       <Box mt={2}>
@@ -218,7 +227,7 @@ function UnitForm(props: UnitFormProps) {
             <RequistePath idx={i} key={i} path={path} delete={deleteCoPath} updatePath={updateCoPath} />
           </Box>
         )}
-        <Button className="mb-1"  variant="contained" color="primary" onClick={() => { const copy = [...coreq]; copy.push([]); setCoreq(copy) }}>Add Requiste Path</Button>
+        <Button className="mb-1" variant="contained" color="primary" onClick={() => { const copy = [...coreq]; copy.push([]); setCoreq(copy) }}>Add Requiste Path</Button>
       </Box>
 
       <Box mt={2}>
@@ -228,13 +237,13 @@ function UnitForm(props: UnitFormProps) {
             <RequistePath idx={i} key={i} path={path} delete={deleteAntiPath} updatePath={updateAntiPath} />
           </Box>
         )}
-        <Button className="mb-1"  variant="contained" color="primary" onClick={() => { const copy = [...antireq]; copy.push([]); setAntireq(copy) }}>Add Requiste Path</Button>
+        <Button className="mb-1" variant="contained" color="primary" onClick={() => { const copy = [...antireq]; copy.push([]); setAntireq(copy) }}>Add Requiste Path</Button>
       </Box>
 
       <Box display="flex" justifyContent="space-between" mt={2}>
-        <Button className="mb-1"  variant="contained" color="secondary" id="backbtn" onClick={() => history.push("/units")}>Back</Button>
+        <Button className="mb-1" variant="contained" color="secondary" id="backbtn" onClick={() => history.push("/units")}>Back</Button>
         <Button
-          className="mb-1" 
+          className="mb-1"
           variant="contained"
           color="primary"
           id="createbtn"

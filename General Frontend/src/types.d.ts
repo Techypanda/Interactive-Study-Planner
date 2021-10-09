@@ -1,5 +1,3 @@
-import internal from "stream";
-
 export interface DefaultProps {
   className?: string;
   style?: React.CSSProperties | undefined;
@@ -10,6 +8,11 @@ export interface PaginatedTablesProps extends DefaultProps {
 }
 export interface CareerTableProps extends DefaultProps {
   careers: Career[]
+}
+export interface CursedTableProps extends SemesterTableProps {
+  semOneChoices: Unit[]
+  semTwoChoices: Unit[]
+  selected: (slot: number, sem: number, unitcode: string) => boolean;
 }
 export interface SemesterTableProps extends DefaultProps {
   year: number;
@@ -123,6 +126,7 @@ export interface Unit {
   UnitCode: string
   Description: string
   Semester: 1 | 2 | 12 // 1 = semester 1, 2 = semester 2, 12 == semester 1 & 2
+  Year?: number
   disabled?: boolean // hacky fix for timetable
 }
 

@@ -245,6 +245,9 @@ func addUnitToDatabase(unit Unit, db *dynamodb.DynamoDB) error {
 		"Semester": {
 			N: aws.String(fmt.Sprintf("%d", unit.Semester)),
 		},
+		"Year": {
+			N: aws.String(fmt.Sprintf("%d", unit.Year)),
+		},
 	}
 	attachRequistesToUnitAddition(&putItemInput, unit) // pass it by reference
 	input := &dynamodb.PutItemInput{
