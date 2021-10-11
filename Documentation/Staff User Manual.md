@@ -95,10 +95,6 @@ For the credits field, the number cannot be less than zero or an error will be r
 
 The Delivery of Unit field is used to indicate whether the unit is conducted online or in person on the campus, with both options able to be selected at the same time. They can be added using the plus button and removed by clicking the cross next to the target item.
 
-The Semester Unit Runs fields refers to the semester the unit is available to students in and may be either semester 1, 2 or both.
-
-The Year Usually Taken field refers to when the unit should be taken in a student's study plan, this is mainly for specialization units which should typically be taken in a specific order but don't them listed as prerequisites.
-
 **Note: The Internal field check box from the Specialization create page refers instead to whether the specialization is internal to the course/school/department or not.**
 
 <p>&nbsp;</p>
@@ -114,9 +110,6 @@ Additionally, if the unit has an alternative or multiple sets of requisites for 
 **Note: Multiple paths represent OR case. E.g a student must satisfy or have completed prerequisite path A or prerequisite path B in order to take the unit.**
 
 Finally the unit can be created by clicking the create unit button. Any errors will be indicated to the user via a popup.
-
-The process for the careers, specializations and majors is highly similar, however please note that units should be listed in the order they should be done in for specializations and majors, and for careers to ensure a specific major or specialization is added during the top down approach be specific when listing units.
-
 <p>&nbsp;</p>
 
 ![Multiple Pathways](./imgs/Staff/MultiPath.PNG)
