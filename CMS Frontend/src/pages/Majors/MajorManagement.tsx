@@ -29,7 +29,7 @@ function MajorManagement(props: DefaultProps) {
         <Typography display="inline" variant="h4">{props.username} - Major Management</Typography>
       </Box>
       <Box id="searchcontainer" display="flex">
-        <TextField variant="outlined" placeholder="Search Units..." className="searchbar" onChange={(e) => filter(e.target.value, searchMode)} />
+        <TextField variant="outlined" placeholder="Search Majors..." className="searchbar" onChange={(e) => filter(e.target.value, searchMode)} />
         <Box marginLeft={2}>
           <Select
             id="select-searchmode"

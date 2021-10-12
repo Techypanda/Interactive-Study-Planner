@@ -9,6 +9,8 @@ type Unit struct {
 	Prerequistes  [][]string `json:"prerequistes"`
 	Corequistes   [][]string `json:"corequistes"`
 	Antirequistes [][]string `json:"antirequistes"`
+	Semester      int        `json:"semester"`
+	Year          int        `json:"year"`
 }
 
 type DelUnit struct {

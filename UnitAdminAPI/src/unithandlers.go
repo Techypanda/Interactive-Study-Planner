@@ -108,8 +108,8 @@ func parseUnitAddBody(body string) (Unit, error) {
 	if unit.Delivery == "" {
 		return unit, errors.New("delivery is empty")
 	}
-	// unit.Corequistes = append(unit.Corequistes, "")
-	// unit.Prerequistes = append(unit.Prerequistes, "")
-	// unit.Antirequistes = append(unit.Antirequistes, "")
+	if unit.Semester != 1 && unit.Semester != 2 && unit.Semester != 12 {
+		return unit, errors.New("expected semester with value 1, 2 or 12")
+	}
 	return unit, nil
 }

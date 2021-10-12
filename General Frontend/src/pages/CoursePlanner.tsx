@@ -1,17 +1,13 @@
 import EmptyCurrentPlan from "../components/shared/EmptyCurrentPlan";
-import LoadingScreen from "../components/shared/Loading";
-import Navbar from "../components/shared/Navbar";
 import PlansAvailable from "../components/shared/PlansAvailable";
-import { DefaultProps } from "../types";
 import Error from "../components/shared/Error";
 import { Typography, List, ListItem, ListItemText, ListItemSecondaryAction, ListSubheader, Grid } from "@material-ui/core";
 import BookOutlined from '@material-ui/icons/BookOutlined';
 import IconButton from '@material-ui/core/IconButton';
-import { useQuery, useMutation } from "react-query";
-import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd';
+import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 /* import { UnitProps } from '../types'; */
 import { makeStyles } from '@material-ui/core/styles';
-import axios, { AxiosResponse, AxiosError } from "axios";
+import axios, { AxiosResponse } from "axios";
 import { useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 
@@ -45,7 +41,6 @@ const useStyles = makeStyles((theme) => ({
 
 // differentiate drag and drop zones as they are functionally identical sans side-effects
 // i.e. prerequisite based filtering on drop.
-const dnd_lists: String[] = ["Plan So Far", "Available Units"];
 
 function CoursePlanner() {
 
@@ -60,7 +55,6 @@ function CoursePlanner() {
 
     
     // updated as units are selected so that available units can be filtered out
-    const [prereqs_list, set_prereqs_list] = useState();
 
     const GetAllUnits = () => {
 	try {
@@ -91,7 +85,6 @@ function CoursePlanner() {
 
     return (
 	<>
-	    <Navbar/>
 	    <DragDropContext
 		onDragUpdate={OnDragUpdate}
 		onDragEnd={OnDragEnd}>
@@ -170,23 +163,6 @@ function AvailableUnitsDisplay({units_list} : {units_list : any}) {
 
 // displays selected courses drag and dropped
 // divided into semesters
-function SelectedUnitsDisplay() {
-    return (
-	<Droppable droppableId="droppable">
-	    {(provided, snapshot) =>(
-		<div
-		    {...provided.droppableProps}
-		    ref={provided.innerRef}>
-		    
-
-		    {provided.placeholder}
-		    
-		</div>
-	    )}
-
-	</Droppable> 
-    )
-}
 
 // trigger re-shuffling of any list
 // OnDragStart is not necessary
@@ -207,16 +183,5 @@ function OnDragUpdate(result: DropResult) {
 // they are called by both list components through their onDragEnd properties.
 // As those calls are implemented by the previous two functions there is no need to call these two directly
 // these are necessary with more than one droppable list
-function RemoveFromList(list: any, index: number) {
-    const result = Array.from(list);
-    const [removed] = result.splice(index, 1);
-    return [removed, result];
-}
-
-function AddToList(list: any, index: number, element: any) {
-    const result = Array.from(list);
-    result.splice(index, 0, element);
-    return result;
-}
 
 export default CoursePlanner;

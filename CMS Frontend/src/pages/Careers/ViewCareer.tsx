@@ -45,11 +45,11 @@ function ViewCareer(props: DefaultProps) {
                 <CareerDisplay career={((career.data?.data! as any).Item as Career)} />
                 <Box mt={1}>
                   <Box mr={1} display="inline-block">
-                    <Button variant="contained" color="primary" className="fixright" onClick={() => history.push(`/careers/edit/${((career.data?.data! as any).Item as Career).CareerId}`)}>
+                    <Button variant="contained" color="primary" className="fixright mb-1" onClick={() => history.push(`/careers/edit/${((career.data?.data! as any).Item as Career).CareerId}`)}>
                       <EditIcon /> - Edit
                     </Button>
                   </Box>
-                  <Button variant="contained" color="secondary" className="fixright" onClick={() => setDisplayDel(true)}>
+                  <Button variant="contained" color="secondary" className="fixright mb-1" onClick={() => setDisplayDel(true)}>
                     <DeleteIcon /> - Delete
                   </Button>
                 </Box>

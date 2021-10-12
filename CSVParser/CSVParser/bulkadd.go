@@ -45,6 +45,12 @@ func bulkAddToDB(unitList []Unit, majorList []Major, specList []Specialization, 
 				"Delivery": {
 					S: aws.String(unit.Delivery),
 				},
+				"Semester": {
+					N: aws.String(fmt.Sprintf("%d", unit.Semester)),
+				},
+				"Year": {
+					N: aws.String(fmt.Sprintf("%d", unit.Year)),
+				},
 			}
 			attachRequistesToUnitAddition(&unitItem, unit)
 			unitWriteRequests = append(unitWriteRequests, &dynamodb.WriteRequest{
@@ -531,6 +537,33 @@ func processUnit(scanner *bufio.Scanner, lineNumber *int) (Unit, error) {
 		}
 	}
 	unit.Antirequistes = antiReqs
+	*lineNumber += 1
+	read = scanner.Scan()
+	if !read {
+		return unit, fmt.Errorf("expected semester on line: %d, recieved either error or eof", *lineNumber)
+	}
+	semester, err := strconv.Atoi(scanner.Text())
+	if err != nil {
+		return unit, fmt.Errorf("Expected a int for semester, recieved: %s", scanner.Text())
+	}
+	if semester != 1 && semester != 2 && semester != 12 {
+		return unit, fmt.Errorf("Expected 1, 2 or 12 for semester, recieved: %d", semester)
+	}
+	unit.Semester = semester
+	*lineNumber += 1
+	read = scanner.Scan()
+	if !read {
+		return unit, fmt.Errorf("expected year on line: %d, recieved either error or eof", *lineNumber)
+	}
+	if len(scanner.Text()) == 0 {
+		unit.Year = 0
+	} else {
+		year, err := strconv.Atoi(scanner.Text())
+		if err != nil {
+			return unit, fmt.Errorf("Expected a int for year, recieved: %s", scanner.Text())
+		}
+		unit.Year = year
+	}
 	return unit, nil
 }
 

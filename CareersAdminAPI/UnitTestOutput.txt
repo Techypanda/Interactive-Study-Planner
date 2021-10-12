@@ -10,22 +10,22 @@ Commands you can use next
 [*] Invoke Function: sam local invoke
 [*] Deploy: sam deploy --guided
     
-Running Trait Api Events
-Add Trait Api
-Update Trait Non-Existing Item
-Delete Trait Non-Existing Item
-Attempt Add Trait with Bad Input
-Attempt Update Trait with Bad Input
-Attempt Delete Trait with Bad Input
-Add Career Api
+Running Career Events
+Add Career
 Update Career Non-Existing Item
 Delete Career Non-Existing Item
 Attempt Add Career with Bad Input
 Attempt Update Career with Bad Input
 Attempt Delete Career with Bad Input
-Add Trait Already Existing Item
+Add Career
+Update Non-existant
+Delete Non-existant
+Add Bad Input
+Update Bad Input
+Delete Bad Input
 Add Career Already Existing Item
-Update Career Api
-Update Trait Api
-Delete Trait Api
+Already Exists
+Update Career
+Update Career
 Delete Career Api
+Delete Career

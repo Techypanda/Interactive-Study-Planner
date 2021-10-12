@@ -1,6 +1,4 @@
-import React from 'react';
 import { render } from '@testing-library/react';
-import * as enzyme from 'enzyme';
 import Landing from '../pages/Landing';
 
 describe('Landing General Frontend is working which happens When', () => {

@@ -4,14 +4,14 @@ import NavListSection from "./NavListSection"
 import { MajorProps, DefaultProps } from "../../types";
 import styled from "styled-components";
 import { useHistory, useParams } from "react-router-dom";
-import LoadingScreen from "./Loading";
-import { useMajor } from "./hooks";
+import { useMajor } from "../../api/hooks";
+import { BounceLoader } from "react-spinners";
 import NotFound from "../../pages/NotFound";
 
 /*
  * Author: Matthew Loe
  * Student Id: 19452425
- * Date Last Modified: 12/09/2021
+ * Date Last Modified: 25/09/2021
  * Description: Page for viewing the detailed information on a major
  */
 
@@ -30,7 +30,7 @@ function ViewMajor(props: DefaultProps)
     //Check if still loading/getting data
     if (major.isLoading)
     {
-        return (<LoadingScreen/>);
+        return (<BounceLoader color="#1473AB" loading={true} size={150}/>);
     }
     //END IF
 

@@ -29,6 +29,8 @@ function UnitDisplay(props: UnitEntryProps) {
             <Typography variant="body1"><span className="bold">Description: </span>{props.unit.Description}</Typography>
             <Typography variant="body1"><span className="bold">Unit Code: </span>{props.unit.UnitCode}</Typography>
             <Typography variant="body1"><span className="bold">Delivery: </span>{props.unit.Delivery}</Typography>
+            <Typography variant="body1"><span className="bold">Semester It Runs In: </span>{props.unit.Semester === 12 ? "1 & 2" : props.unit.Semester}</Typography>
+            <Typography variant="body1"><span className="bold">Year It Usually Runs In: </span>{props.unit.Year === 0 ? "any" : props.unit.Year}</Typography>
             <Typography variant="body1"><span className="bold">Credits: </span>{props.unit.Credits}</Typography>
             <span className="bold">Prerequistes: </span>
             <Box>
