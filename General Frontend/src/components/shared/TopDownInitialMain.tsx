@@ -1,4 +1,10 @@
-import { Box, Button, makeStyles, Typography, useMediaQuery } from "@material-ui/core";
+import {
+  Box,
+  Button,
+  makeStyles,
+  Typography,
+  useMediaQuery,
+} from "@material-ui/core";
 import { NavigateBefore, NavigateNext } from "@material-ui/icons";
 import { useState } from "react";
 import { useHistory } from "react-router";
@@ -58,6 +64,9 @@ function TopDownInitialMain(props: UnitFirstSPAContextProps) {
   };
 
   const updateCareerUnits = (bestMajor: any, careerUnits: string[]) => {
+    /* If the best major has a unit that matches our career units, remove it from career units
+       We decrement i by 1 to prevent us skipping over the i+th element after using .splice()
+    */
     for (var i = 0; i < careerUnits.length; i++) {
       if (bestMajor.Units.includes(careerUnits[i])) {
         careerUnits.splice(i, 1);
@@ -65,7 +74,7 @@ function TopDownInitialMain(props: UnitFirstSPAContextProps) {
       }
     }
   };
-
+  //If the major unit does not already exist inside of units i am taking, we push it to the students current plan 
   const updateUnitsIAmTaking = (bestMajor: any, unitsIAmTaking: string[]) => {
     bestMajor.Units.forEach((majorUnit: any) => {
       if (!unitsIAmTaking.includes(majorUnit)) {
@@ -73,7 +82,7 @@ function TopDownInitialMain(props: UnitFirstSPAContextProps) {
       }
     });
   };
-
+  //Pick any major between 0 and the amount of majors that exist-1. As of now, this means choosing between 0 and 2 (3 majors)
   const findRandMajor = (majorResp: any) => {
     var min = 0;
     var max = majorResp.length;
@@ -95,27 +104,32 @@ function TopDownInitialMain(props: UnitFirstSPAContextProps) {
       let intersection = spec.Units.filter((item: any) =>
         careerUnits.includes(item)
       );
+      //Check that the specialization is internal (IT MUST BE AT THIS POINT)
       if (spec.Internal === true) {
         spec.MajorAntiReqs[0].forEach((majorAntiReq: any) => {
+          //check the specialization does not clash against the major selected
           if (majorAntiReq === bestMajor.MajorCode) {
             invalid = true;
           }
         });
         if (!invalid) {
+          //if the length of this intersection is greater than the current best, update it (This means we have a new best match)
           if (intersection.length !== 0 && intersection.length > bestMatchLen) {
             bestMatchLen = intersection.length;
             bestInternalSpec = spec;
           }
         }
+        //reset for next iteration (start by assuming each spec is valid by default)
         invalid = false;
       }
     });
+    //If the best intersection length means we never update it (i.e., length 0 for all, meaning no matches at all), we find a random internal spec
     if (bestInternalSpec === undefined) {
       bestInternalSpec = findRandInternalSpec(specResp, bestMajor);
     }
     return bestInternalSpec;
   };
-
+  //Find a random internal spec between 0 and the number of internal specializations that exist - 1
   const findRandInternalSpec = (specResp: any, bestMajor: any) => {
     var min = 0;
     var max = specResp.length;
@@ -123,16 +137,20 @@ function TopDownInitialMain(props: UnitFirstSPAContextProps) {
     var invalid = false;
     while (!found) {
       var randSpec = Math.floor(Math.random() * (max - min) + min);
+      //Ensure it is an internal spec (MUST BE AT THIS POINT)
       if (specResp[randSpec].Internal === true) {
         for (let i = 0; i < specResp[randSpec].MajorAntiReqs[0]; i++) {
-          const majorAntiReq: string = specResp[randSpec].MajorAntiReqs[0][i]
+          const majorAntiReq: string = specResp[randSpec].MajorAntiReqs[0][i];
+          //Check it does not clash with our major
           if (majorAntiReq === bestMajor.MajorCode) {
             invalid = true;
           }
         }
+        //if it passes all these tests, return
         if (!invalid) {
           return specResp[randSpec];
         }
+        //otherwise, start again with a new spec, once again assuming it's valid by default.
         invalid = false;
       }
     }
@@ -144,17 +162,16 @@ function TopDownInitialMain(props: UnitFirstSPAContextProps) {
       let intersection = major.Units.filter((item: any) =>
         careerUnits.includes(item)
       );
+      //If the number of matched units exceeds the current best, update current best to match this. i.e., we have a new best major
       if (intersection.length !== 0 && intersection.length > bestMatchLen) {
         bestMatchLen = intersection.length;
         bestMajor = major;
       }
     });
-
+    //However, should all intersections = 0, then we need to find a random major (since a student MUST be enrolled in a major)
     if (bestMajor === undefined) {
       bestMajor = findRandMajor(majorResp);
     }
-    console.log("best major in findbestMajor()");
-    console.log(bestMajor);
     return bestMajor;
   };
 
@@ -177,11 +194,13 @@ function TopDownInitialMain(props: UnitFirstSPAContextProps) {
           invalid = true;
         }
       });
+      //check for unit anti req clash
       spec.UnitAntiReqs[0].forEach((unitAntiReq: any) => {
         if (bestMajor.Units.includes(unitAntiReq)) {
           invalid = true;
         }
       });
+      //check for spec anti req clash
       spec.SpecAntiReqs[0].forEach((specAntiReq: any) => {
         if (bestInternalSpec.SpecializationCode === specAntiReq) {
           invalid = true;
@@ -200,7 +219,7 @@ function TopDownInitialMain(props: UnitFirstSPAContextProps) {
     });
     return bestSpec;
   };
-
+  //If the units matching from the second major are equal to the remaining career units, we know we have a perfect match for a double major, 
   const remainingMatched = (majorResp: any, careerUnits: string[]) => {
     var matchCount = 0;
     careerUnits.forEach((careerUnit: any) => {
@@ -214,156 +233,22 @@ function TopDownInitialMain(props: UnitFirstSPAContextProps) {
     return false;
   };
 
-  const findOptionalUnits = (
-    unitResp: any,
-    careerUnits: string[],
-    unitsIAmTaking: string[]
-  ) => {
-    const commonUnits = [
-      "MEDI1000",
-      "HUMB1000",
-      "BIOL1004",
-      "CHEM1007",
-      "INDH1006",
-      "EPID1000",
-      "HUMB1001",
-      "GENE1000",
-    ];
-    console.log("units i am taking beofre we begin");
-    console.log(unitsIAmTaking);
-    console.log("career units before we begin: ");
-    console.log(careerUnits);
-    var count = 0;
-    while (count < 3) {
-      for (var i = 0; i < unitResp.length; i++) {
-        if (careerUnits.includes(unitResp[i].UnitCode)) {
-          var validPaths = [];
-          var allIntersectionLen: number[] = [];
-          var allIntersectionIndex: number[] = [];
-          for (var j = 0; j < unitResp[i].Prerequistes.length; j++) {
-            var valid = true;
-            var unitExistInDb = 0;
-            for (var k = 0; k < unitResp[i].Prerequistes[j].length; k++) {
-              let isNum = /^\d+$/.test(unitResp[i].Prerequistes[j][k]);
-              if (isNum) {
-                valid = false;
-              }
-              for (var l = 0; l < unitResp.length; l++) {
-                if (unitResp[l].UnitCode === unitResp[i].Prerequistes[j][k]) {
-                  unitExistInDb++;
-                  for (var m = 0; m < unitsIAmTaking.length; m++) {
-                    if (unitResp[l].Antirequistes.includes(unitsIAmTaking[m])) {
-                      valid = false;
-                    }
-                  }
-                }
-              }
-              if (commonUnits.includes(unitResp[i].Prerequistes[j][k])) {
-                unitExistInDb++;
-              }
-            }
-            if (valid && unitExistInDb >= unitResp[i].Prerequistes[j].length) {
-              validPaths.push(unitResp[i].Prerequistes[j]);
-            }
-            valid = true;
-            unitExistInDb = 0;
-          }
-          //below is the list of valid paths for unitResp[i]
-          //now that we have the valid paths, we choose the best.
-          for (j = 0; j < validPaths.length; j++) {
-            let intersection = validPaths[j].filter((item: any) =>
-              unitsIAmTaking.includes(item)
-            );
-            allIntersectionIndex.push(j);
-            allIntersectionLen.push(intersection.length);
-          }
-          var currBestLen = -1;
-          var currBestIndex = -1;
-          for (j = 0; j < allIntersectionLen.length; j++) {
-            if (allIntersectionLen[j] > currBestLen) {
-              currBestLen = allIntersectionLen[j];
-              currBestIndex = allIntersectionIndex[j];
-            }
-          }
-          if (currBestLen === validPaths[currBestIndex].length) {
-            if (!careerUnits.includes(unitResp[i].UnitCode)) {
-              careerUnits.push(unitResp[i].UnitCode);
-            }
-            if (!unitsIAmTaking.includes(unitResp[i].UnitCode)) {
-              unitsIAmTaking.push(unitResp[i].UnitCode);
-            }
-          } else if (currBestLen === 0) {
-            var min = 0;
-            var max = validPaths.length;
-            var randNum = Math.floor(Math.random() * (max - min) + min);
-            for (j = 0; j < validPaths[randNum].length; j++) {
-              if (
-                !careerUnits.includes(validPaths[randNum][j]) &&
-                !commonUnits.includes(validPaths[randNum][j])
-              ) {
-                careerUnits.push(validPaths[randNum][j]);
-              }
-              if (!unitsIAmTaking.includes(validPaths[randNum][j])) {
-                unitsIAmTaking.push(validPaths[randNum][j]);
-              }
-            }
-          } else {
-            var notIntersection = validPaths[currBestIndex].filter(
-              (item: any) => !unitsIAmTaking.includes(item)
-            );
-            var intersection = validPaths[currBestIndex].filter((item: any) =>
-              unitsIAmTaking.includes(item)
-            );
-            console.log(notIntersection);
-            for (j = 0; j < notIntersection.length; j++) {
-              if (
-                !careerUnits.includes(notIntersection[j]) &&
-                !commonUnits.includes(notIntersection[j])
-              ) {
-                careerUnits.push(notIntersection[j]);
-              }
-              if (!unitsIAmTaking.includes(notIntersection[j])) {
-                unitsIAmTaking.push(notIntersection[j]);
-              }
-            }
-            for (j = 0; j < intersection.length; j++) {
-              if (
-                !careerUnits.includes(intersection[j]) &&
-                !commonUnits.includes(intersection[j])
-              ) {
-                careerUnits.push(intersection[j]);
-              }
-              if (!unitsIAmTaking.includes(intersection[j])) {
-                unitsIAmTaking.push(intersection[j]);
-              }
-            }
-          }
-          currBestIndex = -1;
-          currBestLen = -1;
-          allIntersectionIndex = [];
-          allIntersectionLen = [];
-          validPaths = [];
-        }
-      }
-      count++;
-    }
-    console.log("Career units inside find optionals:");
-    console.log(careerUnits);
-    return careerUnits;
-  };
-
+  /*This is where all of the logic for finding best pathway is
+  Namely, best major and specializations.
+  Should a best major and/or specialization not exist, we will select a random major/specialization 
+  */
   const doLogic = (careerId: string) => {
-    //var bestMajor = findBestMajor()
     const careerResponseData = props.careers;
     var planFinished = false;
     var individualCareer;
+
+    //Find the major that they had selected
     for (var i = 0; i < careerResponseData.length; i++) {
       if (careerResponseData[i].CareerId === careerId) {
-        console.log("matched career");
         individualCareer = careerResponseData[i];
       }
     }
-
+    //The units from the selected career for us to work through
     var careerUnits = individualCareer?.Requirements!;
     var unitsIAmTaking: string[] = [];
     var commonUnits = [
@@ -376,18 +261,20 @@ function TopDownInitialMain(props: UnitFirstSPAContextProps) {
       "HUMB1001",
       "GENE1000",
     ];
-    console.log("units im taking content before");
-    console.log(unitsIAmTaking);
+
+    //Push the 8 common units all students do straight away (This accounts for their entire first 2 semesters)
     commonUnits.forEach((unit: string) => {
       unitsIAmTaking.push(unit);
     });
-    console.log(unitsIAmTaking);
 
     const unitResponseData = props.units;
     const specResponseData = props.specs;
     const majorResponseData = props.majors;
     const specArr: Specialization[] = [];
+
+    //Attempt to find best major
     var bestMajor = findBestMajor(majorResponseData, careerUnits);
+    //Need this to setLocalStorage so that units first can utilize it
     const temp = { ...plan };
     temp.mainMajor = bestMajor;
     setPlan(temp);
@@ -395,24 +282,20 @@ function TopDownInitialMain(props: UnitFirstSPAContextProps) {
       `${process.env.REACT_APP_DEVELOPMENT ? "dev-" : ""}courseplanner-plan`,
       JSON.stringify(temp)
     );
-
-    //update career units
-    console.log("career units updated: ");
+    //Update career units to reflect those found, which we remove. This is so we never consider them again in future steps, as they've already been taken care of
     updateCareerUnits(bestMajor, careerUnits);
-    console.log(careerUnits);
-    //update unitsIamtaking
-    console.log("units i am taking updated: ");
+    //Update the units the student will take. At the moment the student will have 16 units so far. 8 common units + 8 units from the major selected
     updateUnitsIAmTaking(bestMajor, unitsIAmTaking);
-    console.log(unitsIAmTaking);
-
+    //If career units is empty, then we know we have found all the units the career needed in the major selected, thus there's no need to search further
     if (careerUnits.length === 0) {
-      console.log("finished at step 1");
       planFinished = true;
     }
 
+
+    //However, if we do not find all units from the single major, we first attempt to see if the rest can be found from the student taking a second major.
     if (!planFinished) {
-      //find second major if possible
       var secondBestMajor = findBestMajor(majorResponseData, careerUnits);
+      //Check if the 'hits' from second best major matches the length of career units, thus meaning we can stop here
       if (remainingMatched(secondBestMajor, careerUnits)) {
         temp.doubleMajor = secondBestMajor;
         localStorage.setItem(
@@ -423,13 +306,14 @@ function TopDownInitialMain(props: UnitFirstSPAContextProps) {
         planFinished = true;
       }
     }
-
+    //If we were unable to find all units from the second major, then we need to select ONE internal specialization. All students MUST complete at least one internal specialization with the exception of them doing a double major
     if (!planFinished) {
       var bestInternalSpec = findBestInternalSpec(
         specResponseData,
         careerUnits,
         bestMajor
       );
+      //Since our plan may have 2 specs (We don't know yet), we push it to the specialization array for the units first page to use
       specArr.push(bestInternalSpec);
 
       temp.specializations = specArr;
@@ -438,15 +322,18 @@ function TopDownInitialMain(props: UnitFirstSPAContextProps) {
         `${process.env.REACT_APP_DEVELOPMENT ? "dev-" : ""}courseplanner-plan`,
         JSON.stringify(temp)
       );
-
+      //Update career units to reflect those career units found, which we remove. This is so we never consider them again in future steps, as they've already been taken care of
       updateUnitsIAmTaking(bestInternalSpec, unitsIAmTaking);
+      //Update the units the student will take. At the moment the student will have 20 units so far: 8 common units, 8 major units, and the 4 units for the internal specialization selected
       updateCareerUnits(bestInternalSpec, careerUnits);
+
+      //Check if we can stop here (i.e., the career units were satisfied with 1 major and 1 internal spec)
       if (careerUnits.length === 0) {
         console.log("finished at ispec step 3");
         planFinished = true;
       }
     }
-
+    //However, if we were unable to stop, we check if we are able to satisfy the remaining units with a second specialization. This specialization can either be an internal specialization or external.
     if (!planFinished) {
       var bestSpec = findBestSpec(
         specResponseData,
@@ -454,6 +341,10 @@ function TopDownInitialMain(props: UnitFirstSPAContextProps) {
         bestMajor,
         bestInternalSpec
       );
+
+      /*Best spec will return defined if it doesn't find a perfect match (meaning we need to move onto optional units)
+        Thus, if it didn't return undefined, we can be certain it returned a perfect match and thus all the career units have been satisifed by a major, and 2 specializations
+      */
       if (bestSpec !== undefined) {
         updateUnitsIAmTaking(bestSpec, unitsIAmTaking);
         specArr.push(bestSpec);
@@ -466,27 +357,16 @@ function TopDownInitialMain(props: UnitFirstSPAContextProps) {
         planFinished = true;
       }
     }
-
+    //Final step. If the above steps did not work, and there's less than 5 (i.e., 4 units max) units remaining, we put the remaining units into the optional units for units first to use
     if (!planFinished) {
-      //call optional units and other stuff
-      var optionalUnits: String[] = [];
-      optionalUnits = findOptionalUnits(
-        unitResponseData,
-        careerUnits,
-        unitsIAmTaking
-      );
-      var optionalUnitsBottomUp: Unit[] = [];
-
-      //double check this works as expected =)
-      if (optionalUnits.length > 4 || optionalUnits.length > 0) {
-        console.log('failed to find a valid path')
-      } else {
-        for (var j = 0; j < unitResponseData.length; j++) {
-          if (optionalUnits.includes(unitResponseData[j].UnitCode)) {
-            optionalUnitsBottomUp.push(unitResponseData[j]);
+      var optionalUnits: Unit[] = [];
+      if (careerUnits.length < 5) {
+        for (i = 0; i < unitResponseData.length; i++) {
+          if (careerUnits.includes(unitResponseData[i].UnitCode)) {
+            optionalUnits.push(unitResponseData[i]);
           }
         }
-        temp.optionalUnits = optionalUnitsBottomUp;
+        temp.optionalUnits = optionalUnits;
         localStorage.setItem(
           `${process.env.REACT_APP_DEVELOPMENT ? "dev-" : ""
           }courseplanner-plan`,
