@@ -74,6 +74,7 @@ interface CreateUnitForm {
 	corequistes: string[][]
 	antirequistes: string[][]
   semester: number
+  year?: Number
 }
 interface CreateSpecForm {
   SpecCode: string
@@ -105,6 +106,7 @@ interface Unit {
   UnitCode: string
   Description: string
   Semester?: Number
+  Year?: Number
 }
 interface Major {
   MajorCode: string,

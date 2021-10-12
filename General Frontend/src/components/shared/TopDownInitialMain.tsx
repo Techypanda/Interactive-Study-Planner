@@ -18,8 +18,8 @@ import {
 import OptionCard from "../UnitsFirst/OptionCard";
 
 function TopDownInitialMain(props: UnitFirstSPAContextProps) {
-  const hidePagenav = useMediaQuery("(max-width: 755px)");
-  const switchToOneCard = useMediaQuery("(max-width: 1500px)");
+  const hidePagenav = useMediaQuery("(max-width: 755px)")
+  const switchToOneCard = useMediaQuery('(max-width: 1500px)');
   const useStyles = makeStyles((theme) => ({
     innerCardOuterLeft: {
       filter: "blur(4px)",
@@ -299,8 +299,7 @@ function TopDownInitialMain(props: UnitFirstSPAContextProps) {
       if (remainingMatched(secondBestMajor, careerUnits)) {
         temp.doubleMajor = secondBestMajor;
         localStorage.setItem(
-          `${
-            process.env.REACT_APP_DEVELOPMENT ? "dev-" : ""
+          `${process.env.REACT_APP_DEVELOPMENT ? "dev-" : ""
           }courseplanner-plan`,
           JSON.stringify(temp)
         );
@@ -351,8 +350,7 @@ function TopDownInitialMain(props: UnitFirstSPAContextProps) {
         specArr.push(bestSpec);
         temp.specializations = specArr;
         localStorage.setItem(
-          `${
-            process.env.REACT_APP_DEVELOPMENT ? "dev-" : ""
+          `${process.env.REACT_APP_DEVELOPMENT ? "dev-" : ""
           }courseplanner-plan`,
           JSON.stringify(temp)
         );
@@ -370,8 +368,7 @@ function TopDownInitialMain(props: UnitFirstSPAContextProps) {
         }
         temp.optionalUnits = optionalUnits;
         localStorage.setItem(
-          `${
-            process.env.REACT_APP_DEVELOPMENT ? "dev-" : ""
+          `${process.env.REACT_APP_DEVELOPMENT ? "dev-" : ""
           }courseplanner-plan`,
           JSON.stringify(temp)
         );
@@ -402,7 +399,7 @@ function TopDownInitialMain(props: UnitFirstSPAContextProps) {
         <Box display="flex" justifyContent="center" mt={8}>
           {" "}
           {/* TODO: Make these slide around like pokemon starter selector */}
-          {props.careers.length >= 3 && !switchToOneCard && (
+          {(props.careers.length >= 3 && !switchToOneCard) && (
             <OptionCard
               className={classes.innerCardOuterLeft}
               style={{ transform: "translate(50px, -50px)" }}
@@ -418,7 +415,7 @@ function TopDownInitialMain(props: UnitFirstSPAContextProps) {
             type="Career"
             onClick={() => selectMajor()}
           />
-          {props.careers.length >= 2 && !switchToOneCard && (
+          {(props.careers.length >= 2 && !switchToOneCard) && (
             <OptionCard
               className={classes.innerCardOuterRight}
               style={{ transform: "translate(-50px, -50px)" }}
@@ -444,25 +441,21 @@ function TopDownInitialMain(props: UnitFirstSPAContextProps) {
               onClick={() => navPrevious()}
             />
           </Box>
-          {!hidePagenav /* Just hide it on mobile */ ? (
+          {!hidePagenav ? /* Just hide it on mobile */
             <>
               {props.careers.map((_, idx) => (
                 <Box
                   mx={1}
                   key={idx}
-                  className={`classes.navIndicator navIndicator ${
-                    idx === currentSelection ? "active" : ""
-                  }`}
+                  className={`classes.navIndicator navIndicator ${idx === currentSelection ? "active" : ""
+                    }`}
                   display="inline-block"
                   height={15}
                   width={15}
                   borderRadius="100%"
                 />
               ))}
-            </>
-          ) : (
-            <></>
-          )}
+            </> : <></>}
           <Box ml={2}>
             <NavigateNext
               className={classes.navigationIcon}
@@ -475,11 +468,11 @@ function TopDownInitialMain(props: UnitFirstSPAContextProps) {
   );
 }
 export default styled(TopDownInitialMain)`
-  .navIndicator {
-    background-color: #d9d9d9;
-    border: 2px solid #777777;
-  }
-  .active {
-    background-color: #777777;
-  }
+.navIndicator {
+  background-color: #d9d9d9;
+  border: 2px solid #777777;
+}
+.active {
+  background-color: #777777;
+}
 `;

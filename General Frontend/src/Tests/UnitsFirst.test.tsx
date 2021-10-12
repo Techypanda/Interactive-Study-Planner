@@ -4,32 +4,48 @@ import UnitsFirst from '../pages/UnitsFirst';
 import Initial from '../components/UnitsFirst/Initial';
 import { BrowserRouter as Router } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { Major } from '../types';
 
-const client = new QueryClient();
-
-describe('Units First works when ', () => {
+describe('Units First works when', () => {
+    const client = new QueryClient();
     it('Renders without crashing', () => {
-	render( <QueryClientProvider client={client}>
+        render(<QueryClientProvider client={client}>
             <Router>
                 <UnitsFirst />
             </Router>
-        </QueryClientProvider> );
+        </QueryClientProvider>);
     })
     it('Renders and matches snapshot', () => {
-	render( <QueryClientProvider client={client}>
+        const x = render(<QueryClientProvider client={client}>
             <Router>
                 <UnitsFirst />
             </Router>
-        </QueryClientProvider> );
+        </QueryClientProvider>);
+        expect(x).toMatchSnapshot()
     })
 })
 
-describe('Initial bottom up component works when ', () => {
+describe('Initial bottom up component works when', () => {
+    const client = new QueryClient();
+    const mockMajors: Array<Major> = [{
+        MajorCode: "",
+        Name: "string",
+        Description: "string",
+        Credits: 2,
+        Units: ["", ""],
+        UnitAntiReqs: [[""], ["a"]],
+        SpecAntiReqs: [[""], ["a"]]
+    }]
+    const mockSelectMajor = (m: Major) => { }
     it('Renders without crashing', () => {
-	render(<Initial/>)
+        render(<QueryClientProvider client={client}>
+            <Initial majors={mockMajors} selectMajor={mockSelectMajor} />
+        </QueryClientProvider>)
     })
     it('Renders and matches snapshot', () => {
-	const x = render(<Initial/>);
-	expect(x).toMatchSnapshot();
+        const x = render(<QueryClientProvider client={client}>
+            <Initial majors={mockMajors} selectMajor={mockSelectMajor} />
+        </QueryClientProvider>);
+        expect(x).toMatchSnapshot();
     })
 })

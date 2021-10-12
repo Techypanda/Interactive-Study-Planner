@@ -3,7 +3,7 @@ set -e # stop on error
 echo "Installing Dependencies..."
 yarn install
 echo "Running Tests..."
-# CI=true yarn test
+CI=true yarn test
 echo "Building CMS Site..."
 yarn build
 echo "Deploying CMS Site..."
