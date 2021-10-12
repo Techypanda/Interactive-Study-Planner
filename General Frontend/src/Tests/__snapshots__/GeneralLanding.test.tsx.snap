@@ -59,7 +59,7 @@ Object {
                       <img
                         alt="A Doctor Pointing At A Whiteboard"
                         class="responsive-img"
-                        src="doctor_teacher.jpg"
+                        src="doctor_teacher.webp"
                       />
                       <p
                         class="MuiTypography-root MuiTypography-body1 MuiTypography-alignCenter"
@@ -102,7 +102,7 @@ Object {
                       <img
                         alt="A Stock Image Declaring Keywords Around Dream Jobs"
                         class="responsive-img"
-                        src="career.jpg"
+                        src="career.webp"
                       />
                       <p
                         class="MuiTypography-root MuiTypography-body1 MuiTypography-alignCenter"
@@ -145,7 +145,7 @@ Object {
                       <img
                         alt="A Stock Image Declaring Units"
                         class="responsive-img"
-                        src="traits_image.jpg"
+                        src="traits_image.webp"
                       />
                       <p
                         class="MuiTypography-root MuiTypography-body1 MuiTypography-alignCenter"
@@ -217,7 +217,7 @@ Object {
                     <img
                       alt="A Doctor Pointing At A Whiteboard"
                       class="responsive-img"
-                      src="doctor_teacher.jpg"
+                      src="doctor_teacher.webp"
                     />
                     <p
                       class="MuiTypography-root MuiTypography-body1 MuiTypography-alignCenter"
@@ -260,7 +260,7 @@ Object {
                     <img
                       alt="A Stock Image Declaring Keywords Around Dream Jobs"
                       class="responsive-img"
-                      src="career.jpg"
+                      src="career.webp"
                     />
                     <p
                       class="MuiTypography-root MuiTypography-body1 MuiTypography-alignCenter"
@@ -303,7 +303,7 @@ Object {
                     <img
                       alt="A Stock Image Declaring Units"
                       class="responsive-img"
-                      src="traits_image.jpg"
+                      src="traits_image.webp"
                     />
                     <p
                       class="MuiTypography-root MuiTypography-body1 MuiTypography-alignCenter"

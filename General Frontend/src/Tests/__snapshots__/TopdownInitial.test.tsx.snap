@@ -5,29 +5,45 @@ Object {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <span
-        class="css-kt6w9b"
+      <div
+        class="MuiBox-root MuiBox-root-3"
       >
-        <span
-          class="css-102m2hb"
-        />
-        <span
-          class="css-1hljjer"
-        />
-      </span>
+        <div
+          class="MuiBox-root MuiBox-root-4"
+        >
+          <span
+            class="css-kt6w9b"
+          >
+            <span
+              class="css-102m2hb"
+            />
+            <span
+              class="css-1hljjer"
+            />
+          </span>
+        </div>
+      </div>
     </div>
   </body>,
   "container": <div>
-    <span
-      class="css-kt6w9b"
+    <div
+      class="MuiBox-root MuiBox-root-3"
     >
-      <span
-        class="css-102m2hb"
-      />
-      <span
-        class="css-1hljjer"
-      />
-    </span>
+      <div
+        class="MuiBox-root MuiBox-root-4"
+      >
+        <span
+          class="css-kt6w9b"
+        >
+          <span
+            class="css-102m2hb"
+          />
+          <span
+            class="css-1hljjer"
+          />
+        </span>
+      </div>
+    </div>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],
