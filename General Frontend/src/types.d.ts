@@ -58,7 +58,7 @@ export interface InitialCareerSPAProps extends DefaultProps {
 export interface CareerListEntryProps extends DefaultProps, Clickable {
   title: string;
 }
-export interface UnitFirstSPAContextProps {
+export interface UnitFirstSPAContextProps extends DefaultProps {
   careers: Array<Career>
   units: Array<Unit>
   specs: Array<Specialization>

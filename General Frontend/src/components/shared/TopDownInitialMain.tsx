@@ -1,7 +1,8 @@
-import { Box, Button, makeStyles, Typography } from "@material-ui/core";
+import { Box, Button, makeStyles, Typography, useMediaQuery } from "@material-ui/core";
 import { NavigateBefore, NavigateNext } from "@material-ui/icons";
 import { useState } from "react";
 import { useHistory } from "react-router";
+import styled from "styled-components";
 import {
   Plan,
   Specialization,
@@ -10,7 +11,9 @@ import {
 } from "../../types";
 import OptionCard from "../UnitsFirst/OptionCard";
 
-export default function TopDownInitialMain(props: UnitFirstSPAContextProps) {
+function TopDownInitialMain(props: UnitFirstSPAContextProps) {
+  const hidePagenav = useMediaQuery("(max-width: 755px)")
+  const switchToOneCard = useMediaQuery('(max-width: 1500px)');
   const useStyles = makeStyles((theme) => ({
     innerCardOuterLeft: {
       filter: "blur(4px)",
@@ -29,7 +32,7 @@ export default function TopDownInitialMain(props: UnitFirstSPAContextProps) {
       "font-size": "50px !important",
       "border-radius": "100%",
       padding: "5px",
-      cursor: "pointer,",
+      cursor: "pointer",
     },
     inner: {
       position: "relative",
@@ -413,8 +416,7 @@ export default function TopDownInitialMain(props: UnitFirstSPAContextProps) {
       if (remainingMatched(secondBestMajor, careerUnits)) {
         temp.doubleMajor = secondBestMajor;
         localStorage.setItem(
-          `${
-            process.env.REACT_APP_DEVELOPMENT ? "dev-" : ""
+          `${process.env.REACT_APP_DEVELOPMENT ? "dev-" : ""
           }courseplanner-plan`,
           JSON.stringify(temp)
         );
@@ -457,8 +459,7 @@ export default function TopDownInitialMain(props: UnitFirstSPAContextProps) {
         specArr.push(bestSpec);
         temp.specializations = specArr;
         localStorage.setItem(
-          `${
-            process.env.REACT_APP_DEVELOPMENT ? "dev-" : ""
+          `${process.env.REACT_APP_DEVELOPMENT ? "dev-" : ""
           }courseplanner-plan`,
           JSON.stringify(temp)
         );
@@ -487,8 +488,7 @@ export default function TopDownInitialMain(props: UnitFirstSPAContextProps) {
         }
         temp.optionalUnits = optionalUnitsBottomUp;
         localStorage.setItem(
-          `${
-            process.env.REACT_APP_DEVELOPMENT ? "dev-" : ""
+          `${process.env.REACT_APP_DEVELOPMENT ? "dev-" : ""
           }courseplanner-plan`,
           JSON.stringify(temp)
         );
@@ -507,6 +507,7 @@ export default function TopDownInitialMain(props: UnitFirstSPAContextProps) {
   };
   return (
     <Box
+      className={props.className}
       minHeight="100%"
       minWidth="100%"
       display="flex"
@@ -518,7 +519,7 @@ export default function TopDownInitialMain(props: UnitFirstSPAContextProps) {
         <Box display="flex" justifyContent="center" mt={8}>
           {" "}
           {/* TODO: Make these slide around like pokemon starter selector */}
-          {props.careers.length >= 3 && (
+          {(props.careers.length >= 3 && !switchToOneCard) && (
             <OptionCard
               className={classes.innerCardOuterLeft}
               style={{ transform: "translate(50px, -50px)" }}
@@ -534,7 +535,7 @@ export default function TopDownInitialMain(props: UnitFirstSPAContextProps) {
             type="Career"
             onClick={() => selectMajor()}
           />
-          {props.careers.length >= 2 && (
+          {(props.careers.length >= 2 && !switchToOneCard) && (
             <OptionCard
               className={classes.innerCardOuterRight}
               style={{ transform: "translate(-50px, -50px)" }}
@@ -560,20 +561,21 @@ export default function TopDownInitialMain(props: UnitFirstSPAContextProps) {
               onClick={() => navPrevious()}
             />
           </Box>
-          {/*{props.careers.map((_, idx) => <Box mx={1} key={idx} className={`navIndicator ${idx === currentSelection ? 'activewoopog' : ''}`} display="inline-block" height={15} width={15} borderRadius="100%" />)} */}
-          {props.careers.map((_, idx) => (
-            <Box
-              mx={1}
-              key={idx}
-              className={`classes.navIndicator ${
-                idx === currentSelection ? "active" : ""
-              }`}
-              display="inline-block"
-              height={15}
-              width={15}
-              borderRadius="100%"
-            />
-          ))}
+          {!hidePagenav ? /* Just hide it on mobile */
+            <>
+              {props.careers.map((_, idx) => (
+                <Box
+                  mx={1}
+                  key={idx}
+                  className={`classes.navIndicator navIndicator ${idx === currentSelection ? "active" : ""
+                    }`}
+                  display="inline-block"
+                  height={15}
+                  width={15}
+                  borderRadius="100%"
+                />
+              ))}
+            </> : <></>}
           <Box ml={2}>
             <NavigateNext
               className={classes.navigationIcon}
@@ -585,3 +587,12 @@ export default function TopDownInitialMain(props: UnitFirstSPAContextProps) {
     </Box>
   );
 }
+export default styled(TopDownInitialMain)`
+.navIndicator {
+  background-color: #d9d9d9;
+  border: 2px solid #777777;
+}
+.active {
+  background-color: #777777;
+}
+`;

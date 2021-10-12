@@ -9,82 +9,16 @@ Object {
       <div
         class="MuiContainer-root MuiContainer-maxWidthLg"
       >
-        <div
-          class="MuiBox-root MuiBox-root-18"
-          id="searchcontainer"
+        <span
+          class="css-kt6w9b"
         >
-          <div
-            class="MuiFormControl-root MuiTextField-root searchbar MuiFormControl-fullWidth"
-            style="padding: 0px 10px;"
-          >
-            <div
-              class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl"
-            >
-              <input
-                aria-invalid="false"
-                class="MuiInputBase-input MuiOutlinedInput-input"
-                id="standard-full-width"
-                placeholder="Search careers..."
-                type="text"
-                value=""
-              />
-              <fieldset
-                aria-hidden="true"
-                class="PrivateNotchedOutline-root-19 MuiOutlinedInput-notchedOutline"
-                style="padding-left: 8px;"
-              >
-                <legend
-                  class="PrivateNotchedOutline-legend-20"
-                  style="width: 0.01px;"
-                >
-                  <span>
-                    ​
-                  </span>
-                </legend>
-              </fieldset>
-            </div>
-          </div>
-          <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-contained searchbtn"
-            tabindex="0"
-            type="button"
-          >
-            <span
-              class="MuiButton-label"
-            >
-              Search
-            </span>
-            <span
-              class="MuiTouchRipple-root"
-            />
-          </button>
-        </div>
-        <br />
-        <div
-          class="career-option"
-        >
-          <div
-            class="MuiPaper-root MuiCard-root makeStyles-root-12 MuiPaper-outlined MuiPaper-rounded"
-          >
-            <div
-              class="makeStyles-details-13"
-            >
-              <div
-                class="MuiCardContent-root makeStyles-content-14"
-              >
-                <h5
-                  class="MuiTypography-root values MuiTypography-h5 MuiTypography-alignLeft"
-                />
-                <h6
-                  class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorTextSecondary"
-                />
-              </div>
-              <div
-                class="makeStyles-controls-16"
-              />
-            </div>
-          </div>
-        </div>
+          <span
+            class="css-102m2hb"
+          />
+          <span
+            class="css-1hljjer"
+          />
+        </span>
       </div>
       <br />
     </div>
@@ -94,82 +28,16 @@ Object {
     <div
       class="MuiContainer-root MuiContainer-maxWidthLg"
     >
-      <div
-        class="MuiBox-root MuiBox-root-18"
-        id="searchcontainer"
+      <span
+        class="css-kt6w9b"
       >
-        <div
-          class="MuiFormControl-root MuiTextField-root searchbar MuiFormControl-fullWidth"
-          style="padding: 0px 10px;"
-        >
-          <div
-            class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl"
-          >
-            <input
-              aria-invalid="false"
-              class="MuiInputBase-input MuiOutlinedInput-input"
-              id="standard-full-width"
-              placeholder="Search careers..."
-              type="text"
-              value=""
-            />
-            <fieldset
-              aria-hidden="true"
-              class="PrivateNotchedOutline-root-19 MuiOutlinedInput-notchedOutline"
-              style="padding-left: 8px;"
-            >
-              <legend
-                class="PrivateNotchedOutline-legend-20"
-                style="width: 0.01px;"
-              >
-                <span>
-                  ​
-                </span>
-              </legend>
-            </fieldset>
-          </div>
-        </div>
-        <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-contained searchbtn"
-          tabindex="0"
-          type="button"
-        >
-          <span
-            class="MuiButton-label"
-          >
-            Search
-          </span>
-          <span
-            class="MuiTouchRipple-root"
-          />
-        </button>
-      </div>
-      <br />
-      <div
-        class="career-option"
-      >
-        <div
-          class="MuiPaper-root MuiCard-root makeStyles-root-12 MuiPaper-outlined MuiPaper-rounded"
-        >
-          <div
-            class="makeStyles-details-13"
-          >
-            <div
-              class="MuiCardContent-root makeStyles-content-14"
-            >
-              <h5
-                class="MuiTypography-root values MuiTypography-h5 MuiTypography-alignLeft"
-              />
-              <h6
-                class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorTextSecondary"
-              />
-            </div>
-            <div
-              class="makeStyles-controls-16"
-            />
-          </div>
-        </div>
-      </div>
+        <span
+          class="css-102m2hb"
+        />
+        <span
+          class="css-1hljjer"
+        />
+      </span>
     </div>
     <br />
   </div>,

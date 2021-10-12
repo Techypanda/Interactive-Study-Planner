@@ -1,0 +1,391 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Initial bottom up component works when Renders and matches snapshot 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="MuiBox-root MuiBox-root-13 sc-eCstlR bBUCGc"
+      >
+        <div
+          class="MuiBox-root MuiBox-root-14"
+        >
+          <h4
+            class="MuiTypography-root MuiTypography-h4"
+          >
+            Please Select Your First Major
+          </h4>
+          <div
+            class="MuiBox-root MuiBox-root-15"
+          >
+             
+            <div
+              class="sc-hKgJUU bfONkU inner card-center"
+              style="height: 100%;"
+            >
+              <div
+                class="MuiPaper-root MuiCard-root cardselection clickable MuiPaper-elevation1 MuiPaper-rounded"
+              >
+                <div
+                  class="MuiCardHeader-root capit"
+                >
+                  <div
+                    class="MuiCardHeader-content"
+                  >
+                    <span
+                      class="MuiTypography-root MuiCardHeader-title MuiTypography-h5 MuiTypography-displayBlock"
+                    >
+                      string
+                    </span>
+                    <span
+                      class="MuiTypography-root MuiCardHeader-subheader MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-displayBlock"
+                    >
+                      Major
+                    </span>
+                  </div>
+                </div>
+                <img
+                  alt="Major Card"
+                  class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img"
+                  height="194"
+                  src="https://images.squarespace-cdn.com/content/v1/5e408d9d0b0aed2f2768b9aa/1585703579456-3UVMWL3XQM0XIIUHHQS8/faq-temp-img.png"
+                />
+                <div
+                  class="MuiCardContent-root"
+                >
+                  <p
+                    class="MuiTypography-root maxHeight MuiTypography-body1"
+                  >
+                    string
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="MuiBox-root MuiBox-root-16"
+          >
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-label"
+              >
+                Select
+              </span>
+              <span
+                class="MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+          <div
+            class="MuiBox-root MuiBox-root-17"
+          >
+            <div
+              class="MuiBox-root MuiBox-root-18"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root navigationIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"
+                />
+              </svg>
+            </div>
+            <div
+              class="MuiBox-root MuiBox-root-19 navIndicator activewoopog"
+            />
+            <div
+              class="MuiBox-root MuiBox-root-20"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root navigationIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="MuiBox-root MuiBox-root-13 sc-eCstlR bBUCGc"
+    >
+      <div
+        class="MuiBox-root MuiBox-root-14"
+      >
+        <h4
+          class="MuiTypography-root MuiTypography-h4"
+        >
+          Please Select Your First Major
+        </h4>
+        <div
+          class="MuiBox-root MuiBox-root-15"
+        >
+           
+          <div
+            class="sc-hKgJUU bfONkU inner card-center"
+            style="height: 100%;"
+          >
+            <div
+              class="MuiPaper-root MuiCard-root cardselection clickable MuiPaper-elevation1 MuiPaper-rounded"
+            >
+              <div
+                class="MuiCardHeader-root capit"
+              >
+                <div
+                  class="MuiCardHeader-content"
+                >
+                  <span
+                    class="MuiTypography-root MuiCardHeader-title MuiTypography-h5 MuiTypography-displayBlock"
+                  >
+                    string
+                  </span>
+                  <span
+                    class="MuiTypography-root MuiCardHeader-subheader MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-displayBlock"
+                  >
+                    Major
+                  </span>
+                </div>
+              </div>
+              <img
+                alt="Major Card"
+                class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img"
+                height="194"
+                src="https://images.squarespace-cdn.com/content/v1/5e408d9d0b0aed2f2768b9aa/1585703579456-3UVMWL3XQM0XIIUHHQS8/faq-temp-img.png"
+              />
+              <div
+                class="MuiCardContent-root"
+              >
+                <p
+                  class="MuiTypography-root maxHeight MuiTypography-body1"
+                >
+                  string
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="MuiBox-root MuiBox-root-16"
+        >
+          <button
+            class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+            tabindex="0"
+            type="button"
+          >
+            <span
+              class="MuiButton-label"
+            >
+              Select
+            </span>
+            <span
+              class="MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+        <div
+          class="MuiBox-root MuiBox-root-17"
+        >
+          <div
+            class="MuiBox-root MuiBox-root-18"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root navigationIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"
+              />
+            </svg>
+          </div>
+          <div
+            class="MuiBox-root MuiBox-root-19 navIndicator activewoopog"
+          />
+          <div
+            class="MuiBox-root MuiBox-root-20"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root navigationIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Units First works when Renders and matches snapshot 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="MuiBox-root MuiBox-root-3 sc-jrAFXE gWuEVR"
+      >
+         
+        <div
+          class="MuiBox-root MuiBox-root-4"
+        >
+          <span
+            class="css-kt6w9b"
+          >
+            <span
+              class="css-102m2hb"
+            />
+            <span
+              class="css-1hljjer"
+            />
+          </span>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="MuiBox-root MuiBox-root-3 sc-jrAFXE gWuEVR"
+    >
+       
+      <div
+        class="MuiBox-root MuiBox-root-4"
+      >
+        <span
+          class="css-kt6w9b"
+        >
+          <span
+            class="css-102m2hb"
+          />
+          <span
+            class="css-1hljjer"
+          />
+        </span>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
