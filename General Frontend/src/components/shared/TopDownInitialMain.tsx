@@ -2,6 +2,7 @@ import { Box, Button, makeStyles, Typography, useMediaQuery } from "@material-ui
 import { NavigateBefore, NavigateNext } from "@material-ui/icons";
 import { useState } from "react";
 import { useHistory } from "react-router";
+import styled from "styled-components";
 import {
   Plan,
   Specialization,
@@ -10,9 +11,8 @@ import {
 } from "../../types";
 import OptionCard from "../UnitsFirst/OptionCard";
 
-export default function TopDownInitialMain(props: UnitFirstSPAContextProps) {
+function TopDownInitialMain(props: UnitFirstSPAContextProps) {
   const switchToOneCard = useMediaQuery('(max-width: 1500px)');
-  const phone = useMediaQuery("(max-width: 488px)")
   const useStyles = makeStyles((theme) => ({
     innerCardOuterLeft: {
       filter: "blur(4px)",
@@ -31,7 +31,7 @@ export default function TopDownInitialMain(props: UnitFirstSPAContextProps) {
       "font-size": "50px !important",
       "border-radius": "100%",
       padding: "5px",
-      cursor: "pointer,",
+      cursor: "pointer",
     },
     inner: {
       position: "relative",
@@ -509,6 +509,7 @@ export default function TopDownInitialMain(props: UnitFirstSPAContextProps) {
   };
   return (
     <Box
+      className={props.className}
       minHeight="100%"
       minWidth="100%"
       display="flex"
@@ -567,7 +568,7 @@ export default function TopDownInitialMain(props: UnitFirstSPAContextProps) {
             <Box
               mx={1}
               key={idx}
-              className={`classes.navIndicator ${
+              className={`classes.navIndicator navIndicator ${
                 idx === currentSelection ? "active" : ""
               }`}
               display="inline-block"
@@ -587,3 +588,12 @@ export default function TopDownInitialMain(props: UnitFirstSPAContextProps) {
     </Box>
   );
 }
+export default styled(TopDownInitialMain)`
+.navIndicator {
+  background-color: #d9d9d9;
+  border: 2px solid #777777;
+}
+.active {
+  background-color: #777777;
+}
+`;
