@@ -12,6 +12,7 @@ import {
 import OptionCard from "../UnitsFirst/OptionCard";
 
 function TopDownInitialMain(props: UnitFirstSPAContextProps) {
+  const hidePagenav = useMediaQuery("(max-width: 755px)")
   const switchToOneCard = useMediaQuery('(max-width: 1500px)');
   const useStyles = makeStyles((theme) => ({
     innerCardOuterLeft: {
@@ -415,8 +416,7 @@ function TopDownInitialMain(props: UnitFirstSPAContextProps) {
       if (remainingMatched(secondBestMajor, careerUnits)) {
         temp.doubleMajor = secondBestMajor;
         localStorage.setItem(
-          `${
-            process.env.REACT_APP_DEVELOPMENT ? "dev-" : ""
+          `${process.env.REACT_APP_DEVELOPMENT ? "dev-" : ""
           }courseplanner-plan`,
           JSON.stringify(temp)
         );
@@ -459,8 +459,7 @@ function TopDownInitialMain(props: UnitFirstSPAContextProps) {
         specArr.push(bestSpec);
         temp.specializations = specArr;
         localStorage.setItem(
-          `${
-            process.env.REACT_APP_DEVELOPMENT ? "dev-" : ""
+          `${process.env.REACT_APP_DEVELOPMENT ? "dev-" : ""
           }courseplanner-plan`,
           JSON.stringify(temp)
         );
@@ -489,8 +488,7 @@ function TopDownInitialMain(props: UnitFirstSPAContextProps) {
         }
         temp.optionalUnits = optionalUnitsBottomUp;
         localStorage.setItem(
-          `${
-            process.env.REACT_APP_DEVELOPMENT ? "dev-" : ""
+          `${process.env.REACT_APP_DEVELOPMENT ? "dev-" : ""
           }courseplanner-plan`,
           JSON.stringify(temp)
         );
@@ -563,20 +561,21 @@ function TopDownInitialMain(props: UnitFirstSPAContextProps) {
               onClick={() => navPrevious()}
             />
           </Box>
-          {/*{props.careers.map((_, idx) => <Box mx={1} key={idx} className={`navIndicator ${idx === currentSelection ? 'activewoopog' : ''}`} display="inline-block" height={15} width={15} borderRadius="100%" />)} */}
-          {props.careers.map((_, idx) => (
-            <Box
-              mx={1}
-              key={idx}
-              className={`classes.navIndicator navIndicator ${
-                idx === currentSelection ? "active" : ""
-              }`}
-              display="inline-block"
-              height={15}
-              width={15}
-              borderRadius="100%"
-            />
-          ))}
+          {!hidePagenav ? /* Just hide it on mobile */
+            <>
+              {props.careers.map((_, idx) => (
+                <Box
+                  mx={1}
+                  key={idx}
+                  className={`classes.navIndicator navIndicator ${idx === currentSelection ? "active" : ""
+                    }`}
+                  display="inline-block"
+                  height={15}
+                  width={15}
+                  borderRadius="100%"
+                />
+              ))}
+            </> : <></>}
           <Box ml={2}>
             <NavigateNext
               className={classes.navigationIcon}
