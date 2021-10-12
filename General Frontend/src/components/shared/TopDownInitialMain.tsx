@@ -1,4 +1,4 @@
-import { Box, Button, makeStyles, Typography } from "@material-ui/core";
+import { Box, Button, makeStyles, Typography, useMediaQuery } from "@material-ui/core";
 import { NavigateBefore, NavigateNext } from "@material-ui/icons";
 import { useState } from "react";
 import { useHistory } from "react-router";
@@ -11,6 +11,8 @@ import {
 import OptionCard from "../UnitsFirst/OptionCard";
 
 export default function TopDownInitialMain(props: UnitFirstSPAContextProps) {
+  const switchToOneCard = useMediaQuery('(max-width: 1500px)');
+  const phone = useMediaQuery("(max-width: 488px)")
   const useStyles = makeStyles((theme) => ({
     innerCardOuterLeft: {
       filter: "blur(4px)",
@@ -518,7 +520,7 @@ export default function TopDownInitialMain(props: UnitFirstSPAContextProps) {
         <Box display="flex" justifyContent="center" mt={8}>
           {" "}
           {/* TODO: Make these slide around like pokemon starter selector */}
-          {props.careers.length >= 3 && (
+          {(props.careers.length >= 3 && !switchToOneCard) && (
             <OptionCard
               className={classes.innerCardOuterLeft}
               style={{ transform: "translate(50px, -50px)" }}
@@ -534,7 +536,7 @@ export default function TopDownInitialMain(props: UnitFirstSPAContextProps) {
             type="Career"
             onClick={() => selectMajor()}
           />
-          {props.careers.length >= 2 && (
+          {(props.careers.length >= 2 && !switchToOneCard) && (
             <OptionCard
               className={classes.innerCardOuterRight}
               style={{ transform: "translate(-50px, -50px)" }}
